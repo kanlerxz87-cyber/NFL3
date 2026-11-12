@@ -1,6 +1,6 @@
 {
-  "html_pages": 109,
-  "table_rows": 5694,
+  "html_pages": 110,
+  "table_rows": 5989,
   "rows_missing_official_source": 615,
   "rows_community_only": 112,
   "rows_with_internal_audit_source": 8,
@@ -462,6 +462,14 @@
     {
       "path": "index.html",
       "rows": 36,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "injury-verification/index.html",
+      "rows": 295,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
