@@ -619,13 +619,43 @@ order; F-09 no leg-level outcome data; F-10 'Questionable' calibration unmeasure
 
 | Task | Status | Owner | File scope |
 |---|---|---|---|
-| V1 Live re-verification of the official injury snapshot, line by line | in progress | arena/771f5797-nfl3 | `scripts/verify_live.py`, `decision-lab/data/verification.json` |
-| V2 Live re-verification of club depth rows + documented parse failures | in progress | arena/771f5797-nfl3 | same as V1 |
-| V3 New "Verification & integrity" site section (per-family coverage, method, match counts, irregularities) | in progress | arena/771f5797-nfl3 | `decision-lab/scripts/build.py`, `decision-lab/verification.html` |
-| V4 Suggestions register upgrade (path comparison, review + export, findings-driven additions) | in progress | arena/771f5797-nfl3 | `decision-lab/data/catalog.json`, `decision-lab/suggestions.html` |
-| V5 Findings-driven additions to questions/flags register | in progress | arena/771f5797-nfl3 | `decision-lab/data/catalog.json` |
-| V6 Final integration: build, validate links, PR, merge, Pages deploy verification | in progress | arena/771f5797-nfl3 | `COORDINATION.md`, `README.md`, `index.html`, `.github/workflows/pages.yml` |
+| V1 Line-by-line verification of the official injury snapshot | done — record published on `decision-lab/verification.html` | arena/771f5797-nfl3 | `decision-lab/scripts/verify_live.py`, `decision-lab/data/verification.json` |
+| V2 Club depth re-verification + documented parse failures | done — 30/32 clubs compared (live), 2 documented | arena/771f5797-nfl3 | same as V1 |
+| V3 "Verification & integrity" section | done | arena/771f5797-nfl3 | `decision-lab/scripts/pages_extra.py`, `decision-lab/verification.html` |
+| V4 Suggestions register upgrade (path comparison, review + export, success metrics) | done | arena/771f5797-nfl3 | `decision-lab/data/catalog.json`, `decision-lab/suggestions.html`, `decision-lab/decisions.html` |
+| V5 Findings-driven additions to questions/flags/requirements | done (6 questions, 8 flags, 9 requirements added) | arena/771f5797-nfl3 | `decision-lab/data/catalog.json` |
+| V6 Final integration: build, link validation, PR, merge, Pages verification | in progress | arena/771f5797-nfl3 | `COORDINATION.md`, `README.md`, root overview, `.github/workflows/pages.yml` |
 
-- Claim method: this session works on the fixed Arena branch `arena/771f5797-nfl3` (cannot create session-named branches). Scope deliberately avoids `dashboard/`, `line-lab/`, `decision-hub/`, `research-desk/`, `research-workspace/`, `engine/`, `pipeline/` and `decision-lab/scripts/capture_official.py`, all owned by earlier sessions. Shared root navigation/`README.md` are edited only in the final integration step below, after re-fetching the board.
-- Baseline re-run before any edit: `scripts/validate_site.py` PASS (12 root pages), `tests/check_site.py` PASS, `tests/test_decision_lab.py` PASS (15 tests), `decision-lab/scripts/build.py` PASS (13 pages, audit findings=2, lab gate PASS). No baseline breakage found.
-- Environment note: this sandbox blocks outbound TLS to nfl.com/club sites from `bash`/Python (verified: `urllib` fails with TLS EOF; `curl` returns 000), so `capture_official.py` cannot run here. Live verification below is done by opening the official pages directly through the page-fetch tool, and the reproducible automated re-check is committed as `scripts/verify_live.py` for the GitHub Actions runner, which does have egress.
+- Claim method: this session works on the fixed Arena branch `arena/771f5797-nfl3` (Arena cannot create session-named branches). Scope avoided `dashboard/`, `line-lab/`, `decision-hub/`, `research-desk/`, `research-workspace/`, `engine/`, `pipeline/` and `decision-lab/scripts/capture_official.py`. Root `README.md` and the root overview are only touched in V6.
+- Baseline re-run before any edit: `scripts/validate_site.py` PASS (12 root pages), `tests/check_site.py` PASS, `tests/test_decision_lab.py` PASS (15 tests), `decision-lab/scripts/build.py` PASS (13 pages, 2 findings, lab gate PASS). No baseline breakage was found, so nothing was "fixed" without evidence.
+- Overlap and conflict: while this session worked, `main` advanced 59 commits. `git pull --rebase origin main` produced an add/add conflict in this append-only board and a content conflict in `decision-lab/sources.html`, and `decision-lab/data/catalog.json` had also been edited by arena/ec4298ba-nfl3. Resolution: kept every prior entry and both logs; took main's catalog as the base so its provenance-citation corrections survive; re-applied only this session's new records; renamed this session's colliding source ids `S18→S19 … S24→S25` so main's `S18` (NFL player statistics) keeps its identity; regenerated all HTML from the merged scripts. No other session's work was dropped.
+
+### What was verified in this pass (sources opened directly, 2026-11-12 UTC)
+
+- [NFL Week 10 injury report](https://www.nfl.com/injuries/) and [the week-specific URL](https://www.nfl.com/injuries/league/2026/REG10): 254 rows across 14 matchups, plus 4 explicit "No Injuries Reported" sections; 6 rows carry a game designation (5 Out, 1 Questionable); only 6 rows carry any injury text.
+- Line-by-line manual read of all 20 Commanders/Giants rows against the captured snapshot: 20/20 fields identical, 0 differences.
+- [Commanders](https://www.commanders.com/team/depth-chart), [Giants](https://www.giants.com/team/depth-chart) and [Packers](https://www.packers.com/team/depth-chart) depth charts and the [Colts Week 10 unofficial release](https://www.colts.com/news/colts-release-unofficial-depth-chart-for-week-10).
+- [Texans depth chart](https://www.houstontexans.com/team/depth-chart): headed "Unofficial Depth Chart", published as an **image** — no table exists to parse.
+- [NFL scores, Week 10](https://www.nfl.com/scores/2026/week-10): 14 matchups, with the Patriots–Lions game labelled **International Game** (Munich).
+- [NFL injury-report policy revision](https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693): a player certain to play is not listed in the game-status report, so a blank designation is not evidence of health.
+- [NFL odds-widget FAQ](https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL): odds widgets are supplied by partner bookmakers; this is not a data-licence grant.
+
+### Measurement results (all reproducible from the committed snapshot)
+
+- `decision-lab/scripts/availability.py`: 254 report rows → **185** joined to a club depth page by exact (club, player) name, **69** unmatched with a stated per-club reason, **117** replacement leads, **147** depth slots linked to the report, **19** slots with 2+ listed players (3 with 3+).
+- Largest unmatched sources: Packers 16, Texans 13 — i.e. 29 of 69 come from two clubs whose charts cannot be parsed, not from missing data.
+- **149** club/unit/position slots publish more than one rank-1 player (three receivers or three inside linebackers all at rank 1), so "rank 1" means "first column", not "the starter".
+- 28 of 28 expected club sections captured for 14 matchups → the report is structurally complete this week; the gaps above are parsing gaps.
+- `decision-lab/scripts/verify_live.py --offline`: F4 28/28 match, F7 185/254 join coverage consistent, F8 30/32 clubs (Texans and Packers flagged). The live run re-fetches every source and is wired into the Pages deployment; unreachable sources are recorded as unreachable, never as passes.
+
+### Verification performed
+
+- `python3 tests/test_decision_lab.py`: **30 tests OK** (15 new: join logic, unmatched reasons, replacement leads never inventing a name, duplicate rank-1 detection, blank-vs-value comparison, drift reporting, offline runs never claiming "verified", artifact reproducibility).
+- `python3 decision-lab/scripts/build.py`: 16 pages, lab gate **PASS** (the gate caught two of this session's own uncited table rows, which were fixed rather than exempted).
+- `python3 decision-lab/scripts/audit.py`: 80 pages, 3,919 table rows, 2 findings, lab gate PASS. `python3 scripts/validate_site.py` and `python3 tests/check_site.py` PASS.
+- The two remaining audit findings are unchanged, other-session items: AUD-01 (seven preserved `engine/`/`research-desk/` files) and AUD-03 (531 rows elsewhere without an official link, 106 community-only). They are published on the flagged and audit pages and do not block publication.
+
+### Irregularities recorded for review (published, non-blocking)
+
+F13 Texans depth is an image (13 rows unjoinable); F14 Packers jersey-number prefixes break joins (16 of 17 rows); F15 149 ambiguous rank-1 slots; F16 designation is sparse so blanks are not health; F17 single capture is not a point-in-time archive; F18 the position-family mapping is editorial; F19 Colts "AJ Haulcy" vs report "A.J. Haulcy"; F20 roster turnover (two starting-receiver trades) invalidates depth on publication.
+- Environment note: this sandbox blocks outbound TLS to nfl.com and club sites from `bash`/Python (`urllib` → TLS EOF, `curl` → 000), so the live re-fetch could not be run here; official pages were opened directly through the page-fetch tool and read line by line, and the automated live re-check is committed and wired into the deploy workflow, which does have egress.

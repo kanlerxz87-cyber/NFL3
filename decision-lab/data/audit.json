@@ -1,6 +1,6 @@
 {
   "html_pages": 80,
-  "table_rows": 3919,
+  "table_rows": 3922,
   "rows_missing_official_source": 531,
   "rows_community_only": 106,
   "rows_with_internal_audit_source": 7,
@@ -353,7 +353,7 @@
     },
     {
       "path": "index.html",
-      "rows": 12,
+      "rows": 15,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
