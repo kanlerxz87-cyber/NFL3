@@ -47,7 +47,7 @@ def build_availability() -> str:
             [td("1 · Capture"), td("Official NFL report plus each club's published depth page, hashed at capture time."), td(source_link("S01"))],
             [td("2 · Join"), td(e(A["method"]["join_key"])), td(source_link("S05"))],
             [td("3 · Families"), td(e(A["method"]["position_families"])), td(source_link("S29"))],
-            [td("3b · Non-tabular charts"), td("Two clubs do not publish a parseable table: the Texans publish an image, the Packers prepend jersey numbers."), td(source_link("S28") + "<br>" + source_link("S29"))],
+            [td("3b · Two clubs are not parsed yet"), td("The Texans publish their chart as an image and the Packers page uses a layout the parser does not read (jersey numbers inside cells, one player repeated across slots). Neither is a confirmed absence of data."), td(source_link("S28") + "<br>" + source_link("S29"))],
             [td("4 · Replacement lead"), td(e(A["method"]["replacement_rule"])), td(source_link("S06"))],
             [td("5 · Blanks"), td("A blank game designation is not 'active': the policy says a player certain to play is not listed in the game-status report."), td(source_link("S03"))],
         ])
@@ -111,9 +111,9 @@ def build_integrity() -> str:
     totals = doc["row_totals"]
     metrics = "".join([
         metric("Run mode", doc.get("mode", "live"), "live re-fetches; offline is structure only"),
-        metric("Status", doc.get("status", ""), "verified / drift / partial / structural-only"),
+        metric("Status", doc.get("status", ""), "verified / drift / row-set-differs / partial / structural-only"),
         metric("Checks run", str(doc["checks_run"]), f'{doc["checks_compared"]} comparable'),
-        metric("Rows compared", str(totals["rows_checked"]), f'{totals["mismatched"]} mismatched'),
+        metric("Rows compared", str(totals["rows_checked"]), f'{totals["mismatched"]} field mismatch(es)'),
         metric("Sources unreachable", str(doc["checks_unreachable"]), "never counted as a pass"),
     ])
     content = (
@@ -132,7 +132,7 @@ def build_integrity() -> str:
             td(str(f["mismatched"])), td(e(f["note"])),
             td(raw_source(f["source_url"], "Official source") if f["source_url"] else "—")]
            for f in doc["families"]]
-    content += table("Verification families. Each family is an independent claim about the data.",
+    content += table("Verification families. Each family is an independent claim about the data; catch-all rows exist so the families are visible even when a live fetch fails.",
                      ["ID", "Check", "Status", "Method", "Match", "Mismatch", "Note", "Source"], fam)
     if doc.get("skipped_offline"):
         content += (f'<div class="notice warn"><strong>Skipped in this run ({e(doc.get("mode"))}):</strong> '
@@ -150,7 +150,15 @@ def build_integrity() -> str:
         content += (f'<h2>Unreachable sources ({len(doc["unreachable"])})</h2>'
                     '<p>An unreachable source proves nothing about the data. These checks are recorded as not comparable.</p>')
         content += table("Sources that could not be fetched during this run.", ["Family", "URL", "Error", "Source"], rows)
-    content += table("What each status means.", ["Status", "Meaning", "Action", "Source"], [
+    content += table("What each status means, and why a row difference is not a value error.",
+                     ["Status", "Meaning", "Action", "Source"], [
+        [td("match"), td("Every compared field equals the official source, and the row set is unchanged."), td("Verified for this moment only."), td(B.source_link("S01"))],
+        [td("row-set-differs"), td("No published value changed, but the live page lists a different set of rows (for example it moved on to the next week)."), td("Re-capture and re-version; do not describe this as a data error."), td(B.source_link("S01"))],
+        [td("drift"), td("A value that exists in both published and live data differs."), td("Treat as a real discrepancy; the official source wins."), td(B.source_link("S01"))],
+        [td("unreachable"), td("The source could not be fetched, so nothing was compared."), td("Do not treat the published value as verified."), td(B.source_link("S01"))],
+        [td("structural-only"), td("Offline run: joins and coverage were checked, live fields were not."), td("Wait for the scheduled live run."), td(B.source_link("S16"))],
+    ])
+    content += table("Superseded status wording (kept only so older runs are readable).", ["Status", "Meaning", "Action", "Source"], [
         [td("match"), td("Every compared field equals the official source at run time."), td("Verified for this moment only."), td(B.source_link("S01"))],
         [td("drift"), td("At least one published value differs from the live official source."), td("Open the mismatch table; the official source wins."), td(B.source_link("S01"))],
         [td("unreachable"), td("The official source could not be fetched. Nothing was compared."), td("Do not treat the published value as verified."), td(B.source_link("S01"))],

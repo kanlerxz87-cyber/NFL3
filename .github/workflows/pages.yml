@@ -83,11 +83,8 @@ jobs:
         id: verification
         continue-on-error: true
         run: python3 decision-lab/scripts/verify_live.py
-      - name: Rebuild pages with the live verification result
-        run: |
-          python3 decision-lab/scripts/build.py
-          python3 decision-lab/scripts/audit.py
-          python3 -c "import json;d=json.load(open('decision-lab/data/verification.json'));print('verification mode:',d.get('mode'),'status:',d.get('status'));[print('  ',f['id'],f['status'],str(f['matched'])+'/'+str(f['rows_checked']),'mismatched='+str(f['mismatched'])) for f in d['families']];print('::warning::live verification could not compare every family; unreachable sources are recorded on the verification page') if d.get('status')=='partial' else None"
+      - name: Rebuild pages and fail closed on an unusable capture
+        run: python3 decision-lab/scripts/publish_prepare.py
       - name: Upload verification artifact
         if: always()
         uses: actions/upload-artifact@v4

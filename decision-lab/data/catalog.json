@@ -753,7 +753,7 @@
       "id": "Q24",
       "area": "Depth extraction",
       "question": "Should jersey-number prefixes be stripped before name matching on club depth pages?",
-      "known": "The Packers chart places jersey numbers before names (for example '9 Christian Watson'), which breaks exact-name joins for 16 of 17 Packers report rows.",
+      "known": "The Packers chart places jersey numbers before names (for example '9 Christian Watson') and repeats a player across slots (Kitan Oladapo at both safeties). The live check fetched the page but extracted 0 rows, so the parser \u2014 not the published data \u2014 is the blocker.",
       "answer": "",
       "missing": "A documented, reversible rule plus a stored original string for audit.",
       "discovery": "Add number-stripping with the raw published string preserved, and unit-test both forms.",
@@ -803,6 +803,17 @@
       "discovery": "Subscribe to official transaction and inactive sources; version each depth capture against the last roster event and re-verify on change.",
       "blocking": true,
       "source": "S08"
+    },
+    {
+      "id": "Q29",
+      "area": "Verification semantics",
+      "question": "When the live official page has moved on to a later week, is a row difference drift, staleness or an extraction error?",
+      "known": "A live run compared a Week 10 capture against a page that had advanced, producing 41 apparent row differences that the data does not actually explain.",
+      "answer": "",
+      "missing": "An agreed definition of each category and a rule for when a capture must be re-versioned instead of compared.",
+      "discovery": "Classify every difference as capture-time, source-time or extraction-time; only extraction errors fail a gate, and all three are published.",
+      "blocking": false,
+      "source": "S01"
     }
   ],
   "suggestions": [
@@ -1513,16 +1524,16 @@
       "id": "F15",
       "severity": "High",
       "title": "Texans depth chart is an image, so 13 report rows cannot be joined",
-      "finding": "The Houston Texans publish 'Unofficial Depth Chart' as a rendered image with no player/rank table. 13 Texans report rows therefore have no captured depth evidence, and 29 of the 69 unmatched rows come from the Texans and Packers alone.",
+      "finding": "The Houston Texans publish their depth page as a rendered image headed 'Unofficial Depth Chart', with no player/rank table in the HTML. The live automated check therefore cannot read it, and the current capture holds no parsed Texans depth rows, so the club's report rows cannot be joined.",
       "action": "Keep those rows unmatched and visibly flagged. Request a structured feed; add image transcription only with an authorized, auditable process.",
       "source": "S28"
     },
     {
       "id": "F16",
       "severity": "High",
-      "title": "Packers depth chart breaks name matching with jersey-number prefixes",
-      "finding": "The Packers chart lists '9 Christian Watson', and includes duplicated players across slots (for example Kitan Oladapo at both safety slots). Exact-name joins fail for 16 of 17 Packers report rows.",
-      "action": "Implement reversible number stripping that stores the raw published string, then re-run the join and re-verify.",
+      "title": "Packers depth page is published in a layout the parser does not read",
+      "finding": "The live re-check fetched https://www.packers.com/team/depth-chart successfully but extracted 0 depth rows, and the current capture holds no parsed Packers rows for 17 report players (for example '9 Christian Watson' with jersey numbers inside the cell, plus duplicated players across two slots such as Kitan Oladapo at both safety positions). The parser gap, not the existence of the data, is what leaves the club unjoined.",
+      "action": "Fix the parser for this layout, store the raw published string alongside the parsed name, and re-run the join; do not transcribe by eye.",
       "source": "S29"
     },
     {
@@ -1560,9 +1571,9 @@
     {
       "id": "F21",
       "severity": "Medium",
-      "title": "Colts depth names use a different name format than the NFL report",
-      "finding": "The Colts article lists 'AJ Haulcy' while the NFL report lists 'A.J. Haulcy'; the two Colts rows that fail the join are name-format differences, not missing players.",
-      "action": "Add a documented normalization step that keeps the raw string and is unit-tested; do not fuzzy-match across clubs.",
+      "title": "Colts publish depth two ways, and name formats differ from the NFL report",
+      "finding": "The Colts publish a tabular chart at /team/depth-chart and an unofficial list in a news article. The live check initially compared the article rows against the page URL and reported 50 false mismatches; the verifier now dispatches the correct parser per source. Separately, the article writes 'AJ Haulcy' where the NFL report writes 'A.J. Haulcy', and the Chiefs write 'Chig Okonkwo' where the report writes 'Chigoziem Okonkwo' \u2014 real name-format differences that break exact joins.",
+      "action": "Use one documented normalization step that keeps both raw strings, unit-tested, and never fuzzy-match across clubs.",
       "source": "S08"
     },
     {
@@ -1572,6 +1583,14 @@
       "finding": "The same Colts release that publishes the Week 10 depth chart states the club traded two starting wide receivers (Keenan Allen to the 49ers, Josh Downs to the Chiefs) and signed a receiver from the practice squad. A captured depth page is therefore stale relative to roster moves and cannot be assumed current.",
       "action": "Capture the official transaction/inactive trail with timestamps and version depth evidence per roster event; never treat a depth snapshot as durable.",
       "source": "S08"
+    },
+    {
+      "id": "F23",
+      "severity": "High",
+      "title": "A verification tool reported false drift in production",
+      "finding": "The first live run of the automated integrity check compared Colts depth rows parsed from a news article against the club's tabular page, reporting 50 mismatches that were an artefact of the check, not of the data. The run also showed 41 report rows on the live page versus 254 in the capture, because the live NFL report had moved on to the next week.",
+      "action": "The verifier now dispatches a parser per source and a test pins that dispatch. Timeline differences are separated from extraction errors and published as their own category rather than as data drift.",
+      "source": "S01"
     }
   ],
   "paths": [
