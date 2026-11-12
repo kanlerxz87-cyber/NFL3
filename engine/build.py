@@ -1,6 +1,6 @@
 """Build every page of the research desk from verified data + computed studies.
 
-Run:  python3 engine/build.py     (writes site/ - published to GitHub Pages by CI)
+Run:  python3 engine/build.py     (writes research-desk/ - published to GitHub Pages by CI)
 If a data file is missing the page says so explicitly instead of inventing numbers.
 """
 from __future__ import annotations
@@ -25,7 +25,7 @@ from report import fmt, pct, table, esc, link, badge, unverified
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-OUT = os.path.join(ROOT, "site")
+OUT = os.path.join(ROOT, "research-desk")
 ASSETS = os.path.join(ROOT, "lab", "assets")
 RESULTS = os.path.join(ROOT, "lab", "results")
 

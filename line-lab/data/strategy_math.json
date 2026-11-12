@@ -1,0 +1,459 @@
+{
+ "meta": {
+  "title": "Gate mathematics (illustrative, not empirical)",
+  "generated": "2026-11-12",
+  "generator": "scripts/parlay_math.py",
+  "warning": "Every table below is computed from declared parameters. None of it is an empirical result from NFL data. No observed bets, no observed lines and no observed leg outcomes exist in this repository (F-04, F-09).",
+  "synthetic": true
+ },
+ "sample_size": {
+  "method": "Win-probability test: n = (z_{1-a/2}*sqrt(p0(1-p0)) + z_power*sqrt(p1(1-p1)))^2 / (p1-p0)^2 with alpha=0.05 two-sided and power=0.80. ROI test: n = ((z_a+z_b)*sd/edge)^2 with sd=1.0 per-bet ROI, i.e. the fully conservative case.",
+  "note": "0.524 is the break-even win rate at -110 (1.10 / 2.10). Rounded up to whole bets.",
+  "rows": [
+   {
+    "target_edge": 0.005,
+    "break_even_win_rate": 0.524,
+    "required_bets_winprob_test": 78283,
+    "required_bets_roi_test": 313956
+   },
+   {
+    "target_edge": 0.005,
+    "break_even_win_rate": 0.5,
+    "required_bets_winprob_test": 78487,
+    "required_bets_roi_test": 313956
+   },
+   {
+    "target_edge": 0.01,
+    "break_even_win_rate": 0.524,
+    "required_bets_winprob_test": 19564,
+    "required_bets_roi_test": 78489
+   },
+   {
+    "target_edge": 0.01,
+    "break_even_win_rate": 0.5,
+    "required_bets_winprob_test": 19620,
+    "required_bets_roi_test": 78489
+   },
+   {
+    "target_edge": 0.02,
+    "break_even_win_rate": 0.524,
+    "required_bets_winprob_test": 4887,
+    "required_bets_roi_test": 19623
+   },
+   {
+    "target_edge": 0.02,
+    "break_even_win_rate": 0.5,
+    "required_bets_winprob_test": 4904,
+    "required_bets_roi_test": 19623
+   },
+   {
+    "target_edge": 0.03,
+    "break_even_win_rate": 0.524,
+    "required_bets_winprob_test": 2170,
+    "required_bets_roi_test": 8721
+   },
+   {
+    "target_edge": 0.03,
+    "break_even_win_rate": 0.5,
+    "required_bets_winprob_test": 2178,
+    "required_bets_roi_test": 8721
+   },
+   {
+    "target_edge": 0.05,
+    "break_even_win_rate": 0.524,
+    "required_bets_winprob_test": 779,
+    "required_bets_roi_test": 3140
+   },
+   {
+    "target_edge": 0.05,
+    "break_even_win_rate": 0.5,
+    "required_bets_winprob_test": 783,
+    "required_bets_roi_test": 3140
+   }
+  ],
+  "headline": "Detecting a 2-point edge over break-even at 80% power needs roughly 4,887 graded bets on the win/loss test and 19,623 on the ROI test. A 40-bet hot streak cannot clear it."
+ },
+ "deflated_sharpe": {
+  "method": "Bailey & Lopez de Prado (2014); e_max is the expected maximum Sharpe from `trials` tries under the null.",
+  "note": "A Sharpe that looks good alone dies as the trial count rises. This is the price of searching.",
+  "rows": [
+   {
+    "trials": 1,
+    "observed_sharpe": 0.05,
+    "n": 500,
+    "expected_max_sharpe_under_null": 0.0232,
+    "deflated_sharpe_ratio": 0.7248,
+    "passes_G5": false
+   },
+   {
+    "trials": 1,
+    "observed_sharpe": 0.1,
+    "n": 500,
+    "expected_max_sharpe_under_null": 0.0232,
+    "deflated_sharpe_ratio": 0.9564,
+    "passes_G5": true
+   },
+   {
+    "trials": 1,
+    "observed_sharpe": 0.2,
+    "n": 500,
+    "expected_max_sharpe_under_null": 0.0232,
+    "deflated_sharpe_ratio": 1.0,
+    "passes_G5": true
+   },
+   {
+    "trials": 10,
+    "observed_sharpe": 0.05,
+    "n": 500,
+    "expected_max_sharpe_under_null": 0.0704,
+    "deflated_sharpe_ratio": 0.3243,
+    "passes_G5": false
+   },
+   {
+    "trials": 10,
+    "observed_sharpe": 0.1,
+    "n": 500,
+    "expected_max_sharpe_under_null": 0.0704,
+    "deflated_sharpe_ratio": 0.7451,
+    "passes_G5": false
+   },
+   {
+    "trials": 10,
+    "observed_sharpe": 0.2,
+    "n": 500,
+    "expected_max_sharpe_under_null": 0.0704,
+    "deflated_sharpe_ratio": 0.9979,
+    "passes_G5": true
+   },
+   {
+    "trials": 50,
+    "observed_sharpe": 0.05,
+    "n": 500,
+    "expected_max_sharpe_under_null": 0.1018,
+    "deflated_sharpe_ratio": 0.1238,
+    "passes_G5": false
+   },
+   {
+    "trials": 50,
+    "observed_sharpe": 0.1,
+    "n": 500,
+    "expected_max_sharpe_under_null": 0.1018,
+    "deflated_sharpe_ratio": 0.484,
+    "passes_G5": false
+   },
+   {
+    "trials": 50,
+    "observed_sharpe": 0.2,
+    "n": 500,
+    "expected_max_sharpe_under_null": 0.1018,
+    "deflated_sharpe_ratio": 0.9851,
+    "passes_G5": true
+   },
+   {
+    "trials": 200,
+    "observed_sharpe": 0.05,
+    "n": 500,
+    "expected_max_sharpe_under_null": 0.1237,
+    "deflated_sharpe_ratio": 0.05,
+    "passes_G5": false
+   },
+   {
+    "trials": 200,
+    "observed_sharpe": 0.1,
+    "n": 500,
+    "expected_max_sharpe_under_null": 0.1237,
+    "deflated_sharpe_ratio": 0.2989,
+    "passes_G5": false
+   },
+   {
+    "trials": 200,
+    "observed_sharpe": 0.2,
+    "n": 500,
+    "expected_max_sharpe_under_null": 0.1237,
+    "deflated_sharpe_ratio": 0.9543,
+    "passes_G5": true
+   },
+   {
+    "trials": 1000,
+    "observed_sharpe": 0.05,
+    "n": 500,
+    "expected_max_sharpe_under_null": 0.1456,
+    "deflated_sharpe_ratio": 0.0164,
+    "passes_G5": false
+   },
+   {
+    "trials": 1000,
+    "observed_sharpe": 0.1,
+    "n": 500,
+    "expected_max_sharpe_under_null": 0.1456,
+    "deflated_sharpe_ratio": 0.1549,
+    "passes_G5": false
+   },
+   {
+    "trials": 1000,
+    "observed_sharpe": 0.2,
+    "n": 500,
+    "expected_max_sharpe_under_null": 0.1456,
+    "deflated_sharpe_ratio": 0.8857,
+    "passes_G5": false
+   }
+  ]
+ },
+ "multiplicity": {
+  "method": "Bonferroni: evaluate each strategy at alpha/m for m logged trials.",
+  "rows": [
+   {
+    "trials": 1,
+    "alpha": 0.05,
+    "alpha_per_test": 0.05,
+    "t_threshold": 1.96
+   },
+   {
+    "trials": 5,
+    "alpha": 0.05,
+    "alpha_per_test": 0.01,
+    "t_threshold": 2.576
+   },
+   {
+    "trials": 20,
+    "alpha": 0.05,
+    "alpha_per_test": 0.0025,
+    "t_threshold": 3.023
+   },
+   {
+    "trials": 100,
+    "alpha": 0.05,
+    "alpha_per_test": 0.0005,
+    "t_threshold": 3.481
+   },
+   {
+    "trials": 500,
+    "alpha": 0.05,
+    "alpha_per_test": 0.0001,
+    "t_threshold": 3.891
+   }
+  ]
+ },
+ "parlay_two_leg": {
+  "inputs": {
+   "p_leg1": 0.55,
+   "p_leg2": 0.55,
+   "assumed_book_price": 3.306,
+   "why_this_price": "The price a book would post if it treated the legs as independent."
+  },
+  "method": "Gaussian copula: P(both) = Phi2(Phi^-1(p1), Phi^-1(p2); rho). A positive rho means the legs tend to hit together, which RAISES the joint probability and therefore lowers the fair price. A negative rho does the opposite.",
+  "why_it_matters": "Two same-game legs that move together are systematically under-priced by an independent-leg model, so the EV column is the SIZE of that pricing error, not a claim that such a price is on offer. Most books apply a correlation adjustment to same-game parlays; whether that adjustment is right is an empirical question and is exactly what Q-14 has to answer.",
+  "rows": [
+   {
+    "rho": 0.0,
+    "p_joint": 0.3025,
+    "p_joint_if_independent": 0.3025,
+    "error_from_independence_pct": 0.0,
+    "fair_decimal_odds": 3.306,
+    "ev_per_unit_at_offered_price": 0.0001,
+    "kelly_fraction_at_offered_price": 0.0
+   },
+   {
+    "rho": 0.2,
+    "p_joint": 0.3341,
+    "p_joint_if_independent": 0.3025,
+    "error_from_independence_pct": 10.44,
+    "fair_decimal_odds": 2.993,
+    "ev_per_unit_at_offered_price": 0.1045,
+    "kelly_fraction_at_offered_price": 0.0453
+   },
+   {
+    "rho": 0.4,
+    "p_joint": 0.3671,
+    "p_joint_if_independent": 0.3025,
+    "error_from_independence_pct": 21.37,
+    "fair_decimal_odds": 2.724,
+    "ev_per_unit_at_offered_price": 0.2137,
+    "kelly_fraction_at_offered_price": 0.0927
+   },
+   {
+    "rho": 0.6,
+    "p_joint": 0.4037,
+    "p_joint_if_independent": 0.3025,
+    "error_from_independence_pct": 33.44,
+    "fair_decimal_odds": 2.477,
+    "ev_per_unit_at_offered_price": 0.3345,
+    "kelly_fraction_at_offered_price": 0.1451
+   },
+   {
+    "rho": 0.8,
+    "p_joint": 0.4484,
+    "p_joint_if_independent": 0.3025,
+    "error_from_independence_pct": 48.24,
+    "fair_decimal_odds": 2.23,
+    "ev_per_unit_at_offered_price": 0.4825,
+    "kelly_fraction_at_offered_price": 0.2092
+   }
+  ]
+ },
+ "parlay_three_leg": {
+  "inputs": {
+   "p_leg1": 0.55,
+   "p_leg2": 0.55,
+   "p_leg3": 0.6,
+   "assumed_book_price": 5.51,
+   "why_this_price": "The price a book would post if it treated all three legs as independent."
+  },
+  "method": "Equicorrelated Gaussian factor model: a single common factor drives all three legs with loading sqrt(rho); P(all) = E_x[ prod_i Phi((z_i - sqrt(rho) x)/sqrt(1-rho)) ].",
+  "rows": [
+   {
+    "rho": 0.0,
+    "p_joint": 0.1815,
+    "p_joint_if_independent": 0.1815,
+    "fair_decimal_odds": 5.51,
+    "ev_per_unit_at_offered_price": 0.0001
+   },
+   {
+    "rho": 0.3,
+    "p_joint": 0.2594,
+    "p_joint_if_independent": 0.1815,
+    "fair_decimal_odds": 3.855,
+    "ev_per_unit_at_offered_price": 0.4295
+   },
+   {
+    "rho": 0.6,
+    "p_joint": 0.3431,
+    "p_joint_if_independent": 0.1815,
+    "fair_decimal_odds": 2.915,
+    "ev_per_unit_at_offered_price": 0.8903
+   }
+  ]
+ },
+ "kelly": {
+  "method": "f* = (p*d - 1)/(d - 1). Quarter Kelly shown because a mis-estimated p makes full Kelly dangerous.",
+  "warning": "Kelly assumes p is known. Here p would be estimated, so the output is an upper bound.",
+  "rows": [
+   {
+    "win_prob": 0.5,
+    "american_price": -110,
+    "decimal_odds": 1.9091,
+    "edge_vs_fair": -0.0455,
+    "full_kelly_fraction": 0.0,
+    "quarter_kelly_fraction": 0.0
+   },
+   {
+    "win_prob": 0.5,
+    "american_price": -120,
+    "decimal_odds": 1.8333,
+    "edge_vs_fair": -0.0833,
+    "full_kelly_fraction": 0.0,
+    "quarter_kelly_fraction": 0.0
+   },
+   {
+    "win_prob": 0.52,
+    "american_price": -110,
+    "decimal_odds": 1.9091,
+    "edge_vs_fair": -0.0073,
+    "full_kelly_fraction": 0.0,
+    "quarter_kelly_fraction": 0.0
+   },
+   {
+    "win_prob": 0.52,
+    "american_price": -120,
+    "decimal_odds": 1.8333,
+    "edge_vs_fair": -0.0467,
+    "full_kelly_fraction": 0.0,
+    "quarter_kelly_fraction": 0.0
+   },
+   {
+    "win_prob": 0.55,
+    "american_price": -110,
+    "decimal_odds": 1.9091,
+    "edge_vs_fair": 0.05,
+    "full_kelly_fraction": 0.055,
+    "quarter_kelly_fraction": 0.0138
+   },
+   {
+    "win_prob": 0.55,
+    "american_price": -120,
+    "decimal_odds": 1.8333,
+    "edge_vs_fair": 0.0083,
+    "full_kelly_fraction": 0.01,
+    "quarter_kelly_fraction": 0.0025
+   },
+   {
+    "win_prob": 0.58,
+    "american_price": -110,
+    "decimal_odds": 1.9091,
+    "edge_vs_fair": 0.1073,
+    "full_kelly_fraction": 0.118,
+    "quarter_kelly_fraction": 0.0295
+   },
+   {
+    "win_prob": 0.58,
+    "american_price": -120,
+    "decimal_odds": 1.8333,
+    "edge_vs_fair": 0.0633,
+    "full_kelly_fraction": 0.076,
+    "quarter_kelly_fraction": 0.019
+   },
+   {
+    "win_prob": 0.6,
+    "american_price": -110,
+    "decimal_odds": 1.9091,
+    "edge_vs_fair": 0.1455,
+    "full_kelly_fraction": 0.16,
+    "quarter_kelly_fraction": 0.04
+   },
+   {
+    "win_prob": 0.6,
+    "american_price": -120,
+    "decimal_odds": 1.8333,
+    "edge_vs_fair": 0.1,
+    "full_kelly_fraction": 0.12,
+    "quarter_kelly_fraction": 0.03
+   }
+  ]
+ },
+ "confidence_intervals": {
+  "method": "Wilson score interval, 95%.",
+  "note": "This is the tool that answers 'is this skill or luck'. A 12-3 start cannot exclude break-even.",
+  "rows": [
+   {
+    "record": "12-3",
+    "n": 15,
+    "observed_win_rate": 0.8,
+    "wilson_95_ci": [
+     0.5481,
+     0.9295
+    ],
+    "includes_break_even_524": false
+   },
+   {
+    "record": "55-45",
+    "n": 100,
+    "observed_win_rate": 0.55,
+    "wilson_95_ci": [
+     0.4524,
+     0.6439
+    ],
+    "includes_break_even_524": true
+   },
+   {
+    "record": "110-90",
+    "n": 200,
+    "observed_win_rate": 0.55,
+    "wilson_95_ci": [
+     0.4808,
+     0.6174
+    ],
+    "includes_break_even_524": true
+   },
+   {
+    "record": "300-200",
+    "n": 500,
+    "observed_win_rate": 0.6,
+    "wilson_95_ci": [
+     0.5565,
+     0.642
+    ],
+    "includes_break_even_524": false
+   }
+  ]
+ }
+}

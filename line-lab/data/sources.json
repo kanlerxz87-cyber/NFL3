@@ -1,0 +1,217 @@
+{
+ "meta": {
+  "title": "Verification source registry",
+  "retrieved_at": "2026-11-12",
+  "policy": "Only pages published by the National Football League or its official properties (nfl.com, operations.nfl.com) count as OFFICIAL. Every other source is recorded with official=false and can never be used to fill a table value; it may only be cited as an unverified lead.",
+  "http_status_note": "HTTP status recorded from the live fetch performed during this session.",
+  "coverage": "2026 NFL regular season, through Week 10."
+ },
+ "sources": [
+  {
+   "id": "S01",
+   "title": "2026 NFL Division Standings",
+   "publisher": "NFL.com",
+   "url": "https://www.nfl.com/standings/",
+   "official": true,
+   "http_status": 200,
+   "verified_at": "2026-11-12",
+   "supports": [
+    "standings: W-L-T, PCT, PF, PA, home/road/division/conference records, streak, last five"
+   ],
+   "check": "Page rendered all 32 clubs split across 8 divisions; W+L+T reconciled against home+road records for every club; PF-PA reconciled against the published NET PTS column for every club."
+  },
+  {
+   "id": "S02",
+   "title": "2026 NFL Rulebook (official rulebook landing page, incl. 2026 rule changes)",
+   "publisher": "NFL Football Operations (operations.nfl.com)",
+   "url": "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook",
+   "official": true,
+   "http_status": 200,
+   "verified_at": "2026-11-12",
+   "supports": [
+    "game rules context",
+    "2026 rule change list",
+    "Rule 5 players/substitutions structure"
+   ],
+   "check": "Confirmed the page identifies itself as the 2026 NFL RULEBOOK and lists four 2026 rule changes (6-1-3, 6-1-5, 6-1-6, 19-2)."
+  },
+  {
+   "id": "S03",
+   "title": "Competition Committee approves revisions to Injury Report",
+   "publisher": "NFL.com (league news release)",
+   "url": "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693",
+   "official": true,
+   "http_status": 200,
+   "verified_at": "2026-11-12",
+   "supports": [
+    "injury report: practice categories",
+    "injury report: game-status definitions",
+    "removal of 'Probable'"
+   ],
+   "check": "Quoted the release verbatim: practice report = Did Not Participate / Limited Participation / Full Participation; game status = Out (will not play), Doubtful (unlikely), Questionable (uncertain); Probable eliminated because ~95% of Probable players played."
+  },
+  {
+   "id": "S04",
+   "title": "Players now eligible to return from injured reserve after four games; practice squads increased to 16 players",
+   "publisher": "NFL.com (league news)",
+   "url": "https://www.nfl.com/news/players-now-eligible-to-return-from-injured-reserve-after-four-games",
+   "official": true,
+   "http_status": 200,
+   "verified_at": "2026-11-12",
+   "supports": [
+    "IR return eligibility (4 games)",
+    "8 return designations per season",
+    "player can return from IR twice",
+    "practice squad 16",
+    "3 practice-squad elevations"
+   ],
+   "check": "Quoted: return eligible after 'four games have elapsed'; eight players may return from IR/NFI per season; individual player twice per season; practice squads 16 players (up from 14); elevations max three per season (up from two)."
+  },
+  {
+   "id": "S05",
+   "title": "Official NFL Injury Report \u2014 Week 10 of the 2026 Season",
+   "publisher": "NFL.com",
+   "url": "https://www.nfl.com/injuries/",
+   "official": true,
+   "http_status": 200,
+   "verified_at": "2026-11-12",
+   "supports": [
+    "per-player practice status",
+    "per-player game status",
+    "injury description"
+   ],
+   "check": "Every row in data/injuries.json was read from this page; each player name links to the official nfl.com player page recorded in the row."
+  },
+  {
+   "id": "S06",
+   "title": "2026 NFL Schedule & Week 1 results",
+   "publisher": "NFL.com",
+   "url": "https://www.nfl.com/schedules/2026/REG/",
+   "official": true,
+   "http_status": 200,
+   "verified_at": "2026-11-12",
+   "supports": [
+    "game dates, kickoff times, broadcasters, venues",
+    "matchups"
+   ],
+   "check": "Week 10 slate headers (dates, times, networks) cross-checked against https://www.nfl.com/injuries/ for the same games."
+  },
+  {
+   "id": "S07",
+   "title": "Washington Commanders 2026 Player Roster",
+   "publisher": "NFL.com",
+   "url": "https://www.nfl.com/teams/washington-commanders/roster",
+   "official": true,
+   "http_status": 200,
+   "verified_at": "2026-11-12",
+   "supports": [
+    "roster composition by position",
+    "per-player roster status flag (e.g. ACT)",
+    "height/weight/experience"
+   ],
+   "check": "Confirmed the roster table exposes a status column with value ACT; confirmed no depth-order (1st/2nd/3rd string) column is present."
+  },
+  {
+   "id": "S08",
+   "title": "Washington Commanders club profile",
+   "publisher": "NFL.com",
+   "url": "https://www.nfl.com/teams/washington-commanders/",
+   "official": true,
+   "http_status": 200,
+   "verified_at": "2026-11-12",
+   "supports": [
+    "club record as displayed on club page",
+    "links to club official website"
+   ],
+   "check": "Club page displayed 2-5-1 and '3rd NFC East', matching S01."
+  },
+  {
+   "id": "S09",
+   "title": "NFL.com odds page (probe)",
+   "publisher": "NFL.com",
+   "url": "https://www.nfl.com/odds/",
+   "official": true,
+   "http_status": 404,
+   "verified_at": "2026-11-12",
+   "supports": [],
+   "check": "Returned '404 - Flag on the Play'. Recorded as evidence that NFL.com does not host a standalone odds page at this path. Not evidence that odds are absent from NFL surfaces: S13 confirms NFL widgets display partner-bookmaker odds.",
+   "irregularity": "I-04"
+  },
+  {
+   "id": "S10",
+   "title": "NFL Operations injury-report page (probed URL)",
+   "publisher": "NFL Football Operations",
+   "url": "https://operations.nfl.com/inside-football-ops/nfl-injury-report/",
+   "official": true,
+   "http_status": 404,
+   "verified_at": "2026-11-12",
+   "supports": [],
+   "check": "Returned '404 - FLAG ON THE PLAY'. Guessed URL; recorded as broken so it is never cited.",
+   "irregularity": "I-05"
+  },
+  {
+   "id": "S11",
+   "title": "NFL rulebook URL variant (probed)",
+   "publisher": "NFL Football Operations",
+   "url": "https://operations.nfl.com/the-rules/2026-nfl-rulebook/",
+   "official": true,
+   "http_status": 404,
+   "verified_at": "2026-11-12",
+   "supports": [],
+   "check": "Returned '404 - FLAG ON THE PLAY'. The live path is S02.",
+   "irregularity": "I-05"
+  },
+  {
+   "id": "S12",
+   "title": "AP: From IR and PUP to practice squads \u2014 what NFL roster designations mean",
+   "publisher": "Associated Press",
+   "url": "https://apnews.com/article/nfl-roster-ir-pup-waivers-06af6d081e7fd7630202be3133851179",
+   "official": false,
+   "http_status": "not_fetched_directly",
+   "verified_at": "2026-11-12",
+   "supports": [],
+   "check": "Appeared in search results only; page body not fetched and compared. Cited ONLY as a lead that practice squads may now be 17, which conflicts with S04 (16). Unresolved -> F-02.",
+   "irregularity": "I-06"
+  },
+  {
+   "id": "S13",
+   "title": "If I place a bet on NFL.com or the NFL app, am I betting with the NFL?",
+   "publisher": "NFL Support (support.nfl.com)",
+   "url": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL",
+   "official": true,
+   "http_status": 200,
+   "verified_at": "2026-11-12",
+   "supports": [
+    "who supplies the odds shown in NFL surfaces",
+    "no NFL-operated sportsbook"
+   ],
+   "check": "Quoted verbatim: 'the NFL widgets show odds, spreads, and over/under number provided by official bookmaker partners of the NFL (FanDuel, Caesars, and DraftKings)... any bets placed would be through a redirect to the bookmaker's online sportsbook.'"
+  }
+ ],
+ "irregularities": [
+  {
+   "id": "I-04",
+   "severity": "high",
+   "title": "No NFL-authored betting lines; odds on NFL surfaces are partner-supplied",
+   "detail": "nfl.com/odds/ returns 404. NFL Support (S13) states that NFL widgets display odds, spreads and over/unders 'provided by official bookmaker partners of the NFL (FanDuel, Caesars, and DraftKings)', with bets placed through a redirect to the bookmaker. So odds do appear on NFL surfaces, but they are a licensed third-party feed, not an NFL product, and no historical, machine-readable line archive is published there.",
+   "impact": "Blocks every market-relative metric (CLV, ATS record, beating the close) from an official source. Model outputs are published as model-implied numbers, not as market lines.",
+   "action": "Q-04 in the decision register."
+  },
+  {
+   "id": "I-05",
+   "severity": "low",
+   "title": "Guessed NFL Operations URLs return 404",
+   "detail": "Two plausible operations.nfl.com paths returned 'FLAG ON THE PLAY' 404s. Only the paths in S02 resolve.",
+   "impact": "None on data; recorded so no future session cites a dead link.",
+   "action": "Use S02 only."
+  },
+  {
+   "id": "I-06",
+   "severity": "medium",
+   "title": "Conflicting practice-squad size (16 vs 17)",
+   "detail": "S04 (nfl.com, official) states practice squads were increased to 16. A 2026 AP article surfaced in search describes 17 practice-squad players and 'six of the 17 can be veterans'. The AP page was not fetched directly, so its exact wording is unconfirmed.",
+   "impact": "Practice-squad size is left blank on the Rules page and marked unverified rather than guessed.",
+   "action": "F-02; requires an official 2026 league page (e.g. an NFL Football Operations roster-rules page or the 2026 CBA rules summary)."
+  }
+ ]
+}

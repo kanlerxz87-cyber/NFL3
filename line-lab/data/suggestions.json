@@ -1,0 +1,414 @@
+{
+ "meta": {
+  "title": "Suggestions register",
+  "generated": "2026-11-12",
+  "purpose": "Every proposed change to the project, scored so the operator can compare paths and choose before anything is built. Nothing here is implemented by default; implementation status is tracked separately from the recommendation.",
+  "scoring": {
+   "impact": "1-5. How much a correct implementation improves decision quality.",
+   "confidence": "1-5. How sure we are that the proposal works, given the evidence in this repo.",
+   "effort": "1-5. 1 = one sitting of scripted work, 5 = weeks or a purchase.",
+   "risk": "1-5. 1 = cannot lose money or mislead, 5 = can produce confident wrong signals or legal exposure.",
+   "priority_score": "round(impact * confidence / (effort * (1 + 0.25 * risk)), 2) \u2014 a RICE-style ratio. Higher is better; it is a sorting aid, not a verdict.",
+   "review_states": [
+    "proposed",
+    "under review",
+    "accepted",
+    "rejected",
+    "deferred",
+    "implemented"
+   ],
+   "critical_path": "Two suggestions are flagged critical path. The ratio score deliberately does not encode sequencing or blocking, so items that unblock everything else are called out separately instead of being allowed to sink to the bottom."
+  },
+  "decision_protocol": [
+   "1. Anyone can add a suggestion in state 'proposed'. It must name the problem, the evidence and what would make it wrong.",
+   "2. 'under review' means the operator has read it and requested missing information; the open questions are linked by id.",
+   "3. A suggestion is 'accepted' only when its decision criteria are written down and the blocking questions are answered or explicitly waived.",
+   "4. 'rejected' and 'deferred' keep their reason. Nothing is deleted \u2014 a rejected idea that returns is a signal about the process.",
+   "5. 'implemented' requires the verification gate to pass on the build that ships it.",
+   "6. Only one P0-scope change may be in flight at a time, because the P0 items are all data-layer changes that collide."
+  ]
+ },
+ "suggestions": [
+  {
+   "id": "SG-01",
+   "title": "Buy an odds archive before building anything else",
+   "category": "Data",
+   "problem": "Not one strategy can be validated. There is no line, no price and no closing line anywhere in this build (F-04). Every downstream number is unfalsifiable without one.",
+   "proposal": "Purchase a historical odds archive that includes closing lines and, ideally, player-prop prices. Define 'closing line' as a single book and a single snapshot rule, in writing, before the first backtest.",
+   "rationale": "This is the only item that converts the entire project from description into measurement. Closing-line value is the most reliable skill proxy available because it prices in the market's information at kickoff.",
+   "impact": 5,
+   "confidence": 5,
+   "effort": 3,
+   "risk": 1,
+   "dependencies": [
+    "Q-04"
+   ],
+   "decision_criteria": "Cost per season is acceptable AND the archive states its book coverage and snapshot times AND props are included or explicitly out of scope.",
+   "recommendation": "Adopt now",
+   "state": "proposed",
+   "blocks_if_skipped": "G2-G12, the leaderboard, all three bet types",
+   "source_ids": [
+    "S09"
+   ],
+   "critical_path": true,
+   "critical_path_note": "Blocks the critical path. The ratio score ignores dependency chains, so this item ranks low on cost-efficiency while being the first thing that must happen."
+  },
+  {
+   "id": "SG-02",
+   "title": "Ingest game-level results to make the ratings opponent-aware",
+   "category": "Model",
+   "problem": "The current rating is a season-to-date net-points average. It credits a club for beating weak opponents and it has no home-field or neutral-site estimate.",
+   "proposal": "Ingest weekly final scores from the official schedule/game pages, then fit an opponent-adjusted rating (least-squares or Elo-style) with home-field advantage and margin variance estimated from the data instead of assumed.",
+   "rationale": "Turns three declared assumptions (A-01, A-02, and the absence of opponent adjustment) into estimated parameters. Weekly game pages are official and already reachable (S06).",
+   "impact": 5,
+   "confidence": 4,
+   "effort": 3,
+   "risk": 1,
+   "dependencies": [
+    "Q-08",
+    "Q-17"
+   ],
+   "decision_criteria": "The new ratings beat the current net-points baseline on walk-forward margin error, out of sample.",
+   "recommendation": "Adopt now",
+   "state": "proposed",
+   "blocks_if_skipped": "Any claim that the model is a signal rather than an average",
+   "source_ids": [
+    "S06",
+    "S01"
+   ],
+   "critical_path": true,
+   "critical_path_note": "Blocks the critical path. The ratio score ignores dependency chains, so this item ranks low on cost-efficiency while being the first thing that must happen."
+  },
+  {
+   "id": "SG-03",
+   "title": "Make closing-line value the headline metric, not ROI",
+   "category": "Measurement",
+   "problem": "ROI over a few hundred bets is dominated by variance. Ranking on it rewards luck, which is exactly what was asked to be removed.",
+   "proposal": "Rank primarily on mean CLV in probability units with a confidence interval; treat realised ROI as a secondary diagnostic only.",
+   "rationale": "CLV has far higher signal-to-noise per bet than win/loss, so it reaches a usable t-statistic in a fraction of the sample. It is also the metric that a lucky streak cannot fake.",
+   "impact": 5,
+   "confidence": 4,
+   "effort": 1,
+   "risk": 1,
+   "dependencies": [
+    "SG-01",
+    "Q-07"
+   ],
+   "decision_criteria": "The archive supports beat-the-close scoring for the chosen book.",
+   "recommendation": "Adopt now",
+   "state": "proposed",
+   "blocks_if_skipped": "Honest leaderboard",
+   "source_ids": []
+  },
+  {
+   "id": "SG-04",
+   "title": "Publish every model total twice until one wins",
+   "category": "Model",
+   "problem": "The two totals estimators disagree by up to 12.2 points on the same game (MIN@GB 39.0 vs 51.2). Publishing one silently would hide a known structural bias.",
+   "proposal": "Keep both estimators visible with the gap column, and only collapse to one after a walk-forward comparison.",
+   "rationale": "A visible disagreement is a research prompt; a hidden one is a landmine. This is cheap and it is already implemented in the engine output.",
+   "impact": 3,
+   "confidence": 5,
+   "effort": 1,
+   "risk": 1,
+   "dependencies": [
+    "SG-02"
+   ],
+   "decision_criteria": "One estimator wins on out-of-sample absolute error with a clear margin.",
+   "recommendation": "Adopt now",
+   "state": "implemented",
+   "blocks_if_skipped": "Nothing; improves honesty",
+   "source_ids": [
+    "S01"
+   ]
+  },
+  {
+   "id": "SG-05",
+   "title": "Resolve the depth-order source before building the backup-deficiency feature",
+   "category": "Injuries & depth",
+   "problem": "The stated requirement \u2014 knowing when a 2nd/3rd/4th string player replaces a starter \u2014 needs a depth order. The official NFL.com roster feed has none (R14).",
+   "proposal": "Evaluate two routes in order: (a) per-club official depth chart pages, verified club by club; (b) derive depth from snap counts if an official snap-count source exists. Do not build the feature until one route is verified for all 32 clubs.",
+   "rationale": "Without it, any 'backup' label would be an invented fact. That is precisely the failure mode the operator asked to avoid.",
+   "impact": 5,
+   "confidence": 3,
+   "effort": 4,
+   "risk": 2,
+   "dependencies": [
+    "Q-09",
+    "Q-10"
+   ],
+   "decision_criteria": "A verified depth source exists for >= 30 of 32 clubs, with a documented update cadence.",
+   "recommendation": "Pilot",
+   "state": "under review",
+   "blocks_if_skipped": "The entire depth/backup requirement",
+   "source_ids": [
+    "S07"
+   ]
+  },
+  {
+   "id": "SG-06",
+   "title": "Score injury-designation reliability before using it as a feature",
+   "category": "Injuries & depth",
+   "problem": "'Questionable' is defined as 'uncertain' (R02). Whether the label carries predictive information is unmeasured here.",
+   "proposal": "Join several seasons of designations to the official inactive lists and measure the play rate per designation with confidence intervals. Only then decide whether the label becomes a model feature.",
+   "rationale": "If Questionable players play 85% of the time, the label is mostly noise and a model that treats it as a 50/50 availability hit will systematically misprice.",
+   "impact": 4,
+   "confidence": 4,
+   "effort": 4,
+   "risk": 2,
+   "dependencies": [
+    "Q-20",
+    "Q-21"
+   ],
+   "decision_criteria": "At least three seasons of joined designation/participation data, with per-season stability.",
+   "recommendation": "Pilot",
+   "state": "proposed",
+   "blocks_if_skipped": "Injury-adjusted lines",
+   "source_ids": [
+    "S03",
+    "S05"
+   ]
+  },
+  {
+   "id": "SG-07",
+   "title": "Keep a written record of every rejected idea and every trial count",
+   "category": "Process",
+   "problem": "Multiple-testing correction (G5) is only valid if the number of variants actually tried is honest. Memory is not an audit trail.",
+   "proposal": "Log every strategy variant, including failures, with its timestamp, in a file that is append-only and committed.",
+   "rationale": "This is the cheapest possible defence against the most expensive failure: a false discovery that gets funded.",
+   "impact": 4,
+   "confidence": 5,
+   "effort": 1,
+   "risk": 1,
+   "dependencies": [
+    "Q-15"
+   ],
+   "decision_criteria": "Every admitted strategy cites a trial-log line.",
+   "recommendation": "Adopt now",
+   "state": "proposed",
+   "blocks_if_skipped": "Validity of G5",
+   "source_ids": []
+  },
+  {
+   "id": "SG-08",
+   "title": "Freeze a rule before it sees data (pre-registration)",
+   "category": "Process",
+   "problem": "A ranking that can be tuned is a fitting target, and a strategy tuned against its own leaderboard cannot fail honestly.",
+   "proposal": "Commit the rule text, the sample window and the gates to git before the evaluation window opens. The commit hash is the registration.",
+   "rationale": "Turns the leaderboard from a scoreboard into an experiment.",
+   "impact": 4,
+   "confidence": 5,
+   "effort": 1,
+   "risk": 1,
+   "dependencies": [
+    "Q-24"
+   ],
+   "decision_criteria": "Commit precedes first graded bet, verifiably.",
+   "recommendation": "Adopt now",
+   "state": "proposed",
+   "blocks_if_skipped": "Credibility of any result",
+   "source_ids": []
+  },
+  {
+   "id": "SG-09",
+   "title": "Split the site into a public analysis layer and a private data layer",
+   "category": "Compliance",
+   "problem": "Redistribution rights for raw league data are unverified (Q-01). The site is public today.",
+   "proposal": "Keep the public site to derived analysis (indices, ratios, model output, links to the official page) and hold raw row-level data in a private store until the terms are read.",
+   "rationale": "Derived analysis is far safer to publish than bulk raw rows, and it costs one build flag to implement.",
+   "impact": 3,
+   "confidence": 3,
+   "effort": 2,
+   "risk": 3,
+   "dependencies": [
+    "Q-01"
+   ],
+   "decision_criteria": "Terms of use read and quoted, or a legal opinion obtained.",
+   "recommendation": "Pilot",
+   "state": "under review",
+   "blocks_if_skipped": "Nothing today; everything if a takedown arrives",
+   "source_ids": []
+  },
+  {
+   "id": "SG-10",
+   "title": "Add a drift alarm to every scraper",
+   "category": "Engineering",
+   "problem": "The injury extract was hand-transcribed from rendered HTML. That does not survive a page redesign and cannot be called 'no manual input'.",
+   "proposal": "Pin each parser to expected row counts and required fields; fail the build loudly when a field goes missing rather than publishing a blank.",
+   "rationale": "A silent blank is worse than a red build, because the blank looks like data.",
+   "impact": 4,
+   "confidence": 5,
+   "effort": 2,
+   "risk": 1,
+   "dependencies": [
+    "Q-02"
+   ],
+   "decision_criteria": "Build fails on any schema deviation.",
+   "recommendation": "Adopt now",
+   "state": "implemented",
+   "blocks_if_skipped": "Automation",
+   "source_ids": []
+  },
+  {
+   "id": "SG-11",
+   "title": "Do not price parlays or props until leg-level correlation is estimated",
+   "category": "Model",
+   "problem": "Independent-leg pricing of correlated legs manufactures apparent edge. This is the classic way a parlay strategy 'wins' in backtest and loses in practice.",
+   "proposal": "Block ST-04 to ST-10 at gate G0 until a leg-level dataset exists and pairwise rho is estimated per market cluster.",
+   "rationale": "A refusal to price is a feature here. The math is implemented and ready; the data is not.",
+   "impact": 5,
+   "confidence": 5,
+   "effort": 1,
+   "risk": 1,
+   "dependencies": [
+    "Q-14"
+   ],
+   "decision_criteria": "rho estimated from >= 2 seasons of leg outcomes, per cluster.",
+   "recommendation": "Adopt now",
+   "state": "implemented",
+   "blocks_if_skipped": "Parlays and props (correctly)",
+   "source_ids": []
+  },
+  {
+   "id": "SG-12",
+   "title": "Publish a weekly 'what changed' diff instead of a static snapshot",
+   "category": "Product",
+   "problem": "Every number on the site has a timestamp, but there is no view of what moved since last week. A static table hides the most decision-relevant information: the change.",
+   "proposal": "Store each weekly snapshot and render a diff column (rank change, rating change, availability change).",
+   "rationale": "Movement is the signal; level is the context. Cheap to add once snapshots are archived.",
+   "impact": 3,
+   "confidence": 4,
+   "effort": 3,
+   "risk": 1,
+   "dependencies": [
+    "SG-10"
+   ],
+   "decision_criteria": "At least four consecutive snapshots archived.",
+   "recommendation": "Defer",
+   "state": "deferred",
+   "blocks_if_skipped": "Convenience, not correctness",
+   "source_ids": []
+  },
+  {
+   "id": "SG-13",
+   "title": "Reject: ranking strategies by season-long ROI",
+   "category": "Measurement",
+   "problem": "",
+   "proposal": "Proposed alternative to SG-03: rank purely on realised return over the season.",
+   "rationale": "Rejected. At ~50-55% win rates the standard deviation of ROI over a season swamps any realistic edge, so the winner is dominated by who ran hottest. This is the exact failure the operator asked to design out.",
+   "impact": 1,
+   "confidence": 5,
+   "effort": 1,
+   "risk": 5,
+   "dependencies": [],
+   "decision_criteria": "Would require a sample large enough that luck cannot dominate \u2014 which is the same requirement SG-03 meets more efficiently.",
+   "recommendation": "Reject",
+   "state": "rejected",
+   "blocks_if_skipped": "",
+   "source_ids": []
+  },
+  {
+   "id": "SG-14",
+   "title": "Reject: deriving depth order from jersey number, experience or salary",
+   "category": "Injuries & depth",
+   "problem": "",
+   "proposal": "Proposed shortcut for SG-05: infer starters from roster attributes on the official roster page.",
+   "rationale": "Rejected. Jersey number and experience do not encode depth order; salary is not published there either. Any inference would be indistinguishable from a guess, and it would be published as fact.",
+   "impact": 1,
+   "confidence": 5,
+   "effort": 1,
+   "risk": 5,
+   "dependencies": [],
+   "decision_criteria": "Fails the repo's core rule: never infer to fill a value.",
+   "recommendation": "Reject",
+   "state": "rejected",
+   "blocks_if_skipped": "",
+   "source_ids": [
+    "S07"
+   ]
+  },
+  {
+   "id": "SG-15",
+   "title": "Cap position-value weights at what can be defended",
+   "category": "Injuries & depth",
+   "problem": "The availability index multiplies injuries by position weights that are assumed, not measured (A-04).",
+   "proposal": "Publish the weights as an editable parameter table, show the index under a low/high weight set, and label every index value as assumption-driven.",
+   "rationale": "Sensitivity beats false precision. If the ranking survives both weight sets, the ordering is robust to the assumption.",
+   "impact": 3,
+   "confidence": 4,
+   "effort": 2,
+   "risk": 1,
+   "dependencies": [
+    "Q-10"
+   ],
+   "decision_criteria": "Rank correlation between low and high weight sets is reported.",
+   "recommendation": "Pilot",
+   "state": "proposed",
+   "blocks_if_skipped": "Interpretation of the index",
+   "source_ids": [
+    "S05"
+   ]
+  },
+  {
+   "id": "SG-16",
+   "title": "Add a suggestion-review page with a comparison view",
+   "category": "Process",
+   "problem": "The operator asked to review suggestions and choose a path before anything is implemented. A list is not a decision aid.",
+   "proposal": "Ship a review page that shows every suggestion with its score, its blocking questions, what happens if it is skipped, and a side-by-side comparison of any two selected items.",
+   "rationale": "Directly requested, and it makes the trade-off explicit instead of implied by ordering.",
+   "impact": 3,
+   "confidence": 5,
+   "effort": 2,
+   "risk": 1,
+   "dependencies": [],
+   "decision_criteria": "Every suggestion shows score, state, blocker and skip-consequence.",
+   "recommendation": "Adopt now",
+   "state": "implemented",
+   "blocks_if_skipped": "Nothing, but the review requirement is unmet",
+   "source_ids": []
+  },
+  {
+   "id": "SG-17",
+   "title": "Treat the injury report as a timestamped series, not a weekly snapshot",
+   "category": "Injuries & depth",
+   "problem": "One Thursday snapshot had game status for only 6 of 108 players (F-03). The information arrives later in the week; a single snapshot per week cannot show that.",
+   "proposal": "Capture the report daily from Wednesday to kickoff with the fetch timestamp, then measure how designations evolve.",
+   "rationale": "The evolution is the tradable information. It also answers Q-11 empirically instead of relying on a secondary description of the deadline.",
+   "impact": 4,
+   "confidence": 4,
+   "effort": 3,
+   "risk": 1,
+   "dependencies": [
+    "Q-11",
+    "SG-10"
+   ],
+   "decision_criteria": "Daily captures for four consecutive weeks with complete timestamps.",
+   "recommendation": "Pilot",
+   "state": "proposed",
+   "blocks_if_skipped": "Timing-based strategies",
+   "source_ids": [
+    "S05"
+   ]
+  },
+  {
+   "id": "SG-18",
+   "title": "Publish the unverified items as a first-class page, not a footnote",
+   "category": "Verification",
+   "problem": "The operator asked for blanks and flags to be visible for manual review. A footnote buries them.",
+   "proposal": "A dedicated Flagged for Review page listing every unverified value, every irregularity, the source links, and what would clear it.",
+   "rationale": "Requested explicitly. It also makes the repo's honesty auditable at a glance.",
+   "impact": 4,
+   "confidence": 5,
+   "effort": 1,
+   "risk": 1,
+   "dependencies": [
+    "Q-18"
+   ],
+   "decision_criteria": "Every flag has an id, a source and a closure condition.",
+   "recommendation": "Adopt now",
+   "state": "implemented",
+   "blocks_if_skipped": "Manual review workflow",
+   "source_ids": []
+  }
+ ]
+}

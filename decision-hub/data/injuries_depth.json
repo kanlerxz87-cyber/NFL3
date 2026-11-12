@@ -1,0 +1,315 @@
+{
+  "roster_rules": [
+    {
+      "rule_id": "RUL-01",
+      "rule_name": "53-Man Active/Inactive Roster Limit",
+      "verified_specification": "Club Active/Inactive List is capped at 53 players in regular season and playoffs, expandable to 54 or 55 players solely via Practice Squad Standard Elevations.",
+      "lineup_deficiency_relevance": "Caps how many healthy backups a club can carry when multiple starters are Questionable without placing players on multi-week IR.",
+      "source_label": "NFL Contract Language",
+      "source_url": "https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language"
+    },
+    {
+      "rule_id": "RUL-02",
+      "rule_name": "48-Player Game-Day Active List & 8-OL Minimum",
+      "verified_specification": "Maximum game-day Active List is 48 players ONLY if the club dresses >=8 offensive linemen (primary position C, G, or OT); otherwise the cap drops to 47 players.",
+      "lineup_deficiency_relevance": "Forces clubs to dress 2nd/3rd-string swing offensive linemen on game day, directly shaping trench backup availability.",
+      "source_label": "NFL Contract Language",
+      "source_url": "https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language"
+    },
+    {
+      "rule_id": "RUL-03",
+      "rule_name": "Practice Squad Capacity (2026 Season)",
+      "verified_specification": "16 players standard in 2026, expandable to 17 players if one qualifies via the International Player Pathway (IPP) Program.",
+      "lineup_deficiency_relevance": "Primary reservoir of 3rd- and 4th-string emergency replacements when starters and primary backups are Out.",
+      "source_label": "NFL International Pathway",
+      "source_url": "https://operations.nfl.com/programs-initiatives/international-growth/international-player-pathway"
+    },
+    {
+      "rule_id": "RUL-04",
+      "rule_name": "90-Minute Pregame Inactive List & C2P Helmet Cutoff",
+      "verified_specification": "Exactly 90 minutes before scheduled kickoff, club PR delivers the Game Day Administration Report (official Inactive List + primary/backup C2P helmet players + roof status) to the Referee.",
+      "lineup_deficiency_relevance": "Hard pre-kickoff timestamp when Questionable/Doubtful ambiguity resolves into confirmed starter vs. 2nd/3rd/4th-string active status.",
+      "source_label": "NFL Game & Stadium Prep",
+      "source_url": "https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep"
+    },
+    {
+      "rule_id": "RUL-05",
+      "rule_name": "Injury Report Practice & Game-Status Definitions",
+      "verified_specification": "Practice: DNP, Limited (<100% normal reps), Full (100% normal reps). Game Status: Out (will not play), Doubtful (unlikely), Questionable (uncertain); Probable eliminated; players certain to play carry blank Game Status.",
+      "lineup_deficiency_relevance": "Explains why Full Participation starters carry blank Game Status on game-week reports while mid-week Sunday statuses remain blank until Friday.",
+      "source_label": "NFL Injury Report Policy",
+      "source_url": "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693"
+    },
+    {
+      "rule_id": "RUL-06",
+      "rule_name": "AT Booth Spotters & Mandatory Concussion Evaluation",
+      "verified_specification": "Two league-assigned certified AT spotters monitor broadcast feeds and alert club medical/UNC staff; removed players must sit at least one play (unless timeout/period/2-min warning/foul).",
+      "lineup_deficiency_relevance": "Drives sudden in-game backup snaps for 2nd/3rd-string QBs, OL, and DBs during live concussion checks.",
+      "source_label": "NFL AT Spotters",
+      "source_url": "https://operations.nfl.com/gameday/behind-the-scenes/at-spotters"
+    }
+  ],
+  "depth_deficiencies": [
+    {
+      "chain_id": "DEP-01",
+      "side": "Offense",
+      "club_week": "Baltimore Ravens · 2026 Wk 9",
+      "position": "QB",
+      "string_1": "Lamar Jackson (Thumb · DNP · Out; later IR)",
+      "string_2": "Tyler Huntley (Toe · DNP · Out)",
+      "string_3": "Joe Fagnano (FP · Promoted Starter)",
+      "string_4": "",
+      "deficiency_classification": "Critical · 3rd-String QB Forced Into Starting Role",
+      "epa_dropoff": "",
+      "source_label": "Ravens Depth Chart + Wk 9 Report",
+      "source_url": "https://www.baltimoreravens.com/team/depth-chart"
+    },
+    {
+      "chain_id": "DEP-02",
+      "side": "Offense",
+      "club_week": "New England Patriots · 2026 Wk 10",
+      "position": "RB",
+      "string_1": "Rhamondre Stevenson (DNP · Status Blank)",
+      "string_2": "TreVeyon Henderson (Illness · DNP · Out)",
+      "string_3": "Corey Kiner",
+      "string_4": "Lan Larison",
+      "deficiency_classification": "High · RB2 Ruled Out + RB1 DNP Elevates 3rd & 4th String RBs",
+      "epa_dropoff": "",
+      "source_label": "Patriots Depth Chart (2026)",
+      "source_url": "https://www.patriots.com/team/depth-chart"
+    },
+    {
+      "chain_id": "DEP-03",
+      "side": "Offense",
+      "club_week": "New England Patriots · 2026 Wk 10",
+      "position": "LG / C Cascade",
+      "string_1": "Ben Brown (1st LG / 2nd C · Knee · DNP · Out)",
+      "string_2": "Walter Rouse (2nd LG & 2nd RG · DNP · Blank)",
+      "string_3": "",
+      "string_4": "",
+      "deficiency_classification": "High · Starter LG & Swing C Out + Primary Guard Backup DNP",
+      "epa_dropoff": "",
+      "source_label": "NFL Week 10 Injury Report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "chain_id": "DEP-04",
+      "side": "Offense",
+      "club_week": "New England Patriots · 2026 Wk 10",
+      "position": "TE",
+      "string_1": "Hunter Henry (LP · Status Blank)",
+      "string_2": "Eli Raridon",
+      "string_3": "Cameron Latu (DNP · Status Blank)",
+      "string_4": "",
+      "deficiency_classification": "Moderate · TE1 Limited + TE3 DNP Compresses 12-Personnel Depth",
+      "epa_dropoff": "",
+      "source_label": "Patriots Depth Chart (2026)",
+      "source_url": "https://www.patriots.com/team/depth-chart"
+    },
+    {
+      "chain_id": "DEP-05",
+      "side": "Offense",
+      "club_week": "Washington Commanders · 2026 Wk 10",
+      "position": "TE (2nd Slot) & C",
+      "string_1": "John Bates (TE · FP) / Nick Allegretti (C)",
+      "string_2": "Colson Yankoff (TE · Knee · DNP · Out) / Matt Gulbin (C · FP)",
+      "string_3": "",
+      "string_4": "",
+      "deficiency_classification": "Verified · Backup TE Yankoff Out; C Lucas Patrick Out (omitted from 2-deep)",
+      "epa_dropoff": "",
+      "source_label": "Commanders Depth Chart (2026)",
+      "source_url": "https://www.commanders.com/team/depth-chart"
+    },
+    {
+      "chain_id": "DEP-06",
+      "side": "Offense",
+      "club_week": "Washington Commanders · 2026 Wk 10",
+      "position": "WR (X) & QB",
+      "string_1": "Terry McLaurin (WR) / Jayden Daniels (QB · FP)",
+      "string_2": "Treylon Burks (WR · DNP · Blank) / Marcus Mariota (QB)",
+      "string_3": "Athan Kaliakmanis (QB)",
+      "string_4": "",
+      "deficiency_classification": "Low-Moderate · QB1 Full Participation; 2nd-String X-WR Burks DNP",
+      "epa_dropoff": "",
+      "source_label": "Commanders Depth Chart (2026)",
+      "source_url": "https://www.commanders.com/team/depth-chart"
+    },
+    {
+      "chain_id": "DEP-07",
+      "side": "Offense",
+      "club_week": "Detroit Lions · 2026 Wk 10",
+      "position": "RB & C",
+      "string_1": "Jahmyr Gibbs (RB) / Cade Mays (C · DNP · Blank)",
+      "string_2": "Sione Vaki (RB · DNP · Blank) / Juice Scruggs (C)",
+      "string_3": "Jacob Saylors (RB · FP)",
+      "string_4": "",
+      "deficiency_classification": "Monitor · Starting C Cade Mays DNP (-> Juice Scruggs); RB2 Sione Vaki DNP (-> RB3 Saylors)",
+      "epa_dropoff": "",
+      "source_label": "Lions Depth Chart (2026)",
+      "source_url": "https://www.detroitlions.com/team/depth-chart"
+    },
+    {
+      "chain_id": "DEP-08",
+      "side": "Offense",
+      "club_week": "Detroit Lions · 2026 Wk 10",
+      "position": "TE (Full 4-Deep)",
+      "string_1": "Sam LaPorta",
+      "string_2": "Brock Wright",
+      "string_3": "Tyler Conklin",
+      "string_4": "Jackson Meeks",
+      "deficiency_classification": "Healthy 4-String Baseline · Full 1st–4th String Offense Chain Verified",
+      "epa_dropoff": "",
+      "source_label": "Lions Depth Chart (2026)",
+      "source_url": "https://www.detroitlions.com/team/depth-chart"
+    },
+    {
+      "chain_id": "DEP-09",
+      "side": "Offense",
+      "club_week": "New York Giants · 2026 Wk 10",
+      "position": "TE (Full 4-Deep)",
+      "string_1": "Isaiah Likely",
+      "string_2": "Theo Johnson (FP · Status Blank)",
+      "string_3": "Chris Manhertz",
+      "string_4": "Thomas Fidone II",
+      "deficiency_classification": "Healthy 4-String Baseline · TE2 Full Participation Verified",
+      "epa_dropoff": "",
+      "source_label": "Giants Depth Chart (2026)",
+      "source_url": "https://www.giants.com/team/depth-chart"
+    },
+    {
+      "chain_id": "DEP-10",
+      "side": "Offense",
+      "club_week": "Seattle Seahawks · 2026 Wk 10",
+      "position": "QB & RB (Full 4-Deep RB)",
+      "string_1": "Sam Darnold (QB) / Zach Charbonnet (RB)",
+      "string_2": "Drew Lock (QB) / Jadarian Price (RB)",
+      "string_3": "Jalen Milroe (QB) / Emanuel Wilson (RB)",
+      "string_4": "George Holani (RB)",
+      "deficiency_classification": "Flagged Discrepancy · Club Chart Lists Darnold 1st vs. NFL.com News Naming Lock Starter",
+      "epa_dropoff": "",
+      "source_label": "Seahawks Depth Chart (2026)",
+      "source_url": "https://www.seahawks.com/team/depth-chart/"
+    },
+    {
+      "chain_id": "DEP-11",
+      "side": "Offense",
+      "club_week": "Denver Broncos · 2026 Wk 10",
+      "position": "TE (Full 4-Deep) & QB",
+      "string_1": "Evan Engram (TE) / Bo Nix (QB)",
+      "string_2": "Adam Trautman (TE) / Jarrett Stidham (QB)",
+      "string_3": "Nate Adkins (TE) / Sam Ehlinger (QB)",
+      "string_4": "Dallen Bentley (TE)",
+      "deficiency_classification": "Verified Official Club Chart · Resolves Prior Session 404 Flag on nfl.com",
+      "epa_dropoff": "",
+      "source_label": "Broncos Depth Chart (2026)",
+      "source_url": "https://www.denverbroncos.com/team/depth-chart/"
+    },
+    {
+      "chain_id": "DEP-12",
+      "side": "Defense",
+      "club_week": "New England Patriots · 2026 Wk 10",
+      "position": "CB (Boundary & Slot)",
+      "string_1": "Carlton Davis III (Knee · DNP · Out) / Marcus Jones",
+      "string_2": "Channing Canada (Promoted) / Charles Woods (LP · Blank)",
+      "string_3": "",
+      "string_4": "",
+      "deficiency_classification": "High Defensive Deficiency · Starting CB1 Carlton Davis III Out + Backup CB Woods LP",
+      "epa_dropoff": "",
+      "source_label": "Patriots Depth Chart (2026)",
+      "source_url": "https://www.patriots.com/team/depth-chart"
+    },
+    {
+      "chain_id": "DEP-13",
+      "side": "Defense",
+      "club_week": "Detroit Lions · 2026 Wk 10",
+      "position": "CB (Full 4-Deep)",
+      "string_1": "D.J. Reed (DNP · Status Blank)",
+      "string_2": "Rock Ya-Sin",
+      "string_3": "Khalil Dorsey",
+      "string_4": "Nick Whiteside",
+      "deficiency_classification": "High Monitor · Starting CB1 D.J. Reed DNP Exposes 2nd–4th String CB Ladder",
+      "epa_dropoff": "",
+      "source_label": "Lions Depth Chart (2026)",
+      "source_url": "https://www.detroitlions.com/team/depth-chart"
+    },
+    {
+      "chain_id": "DEP-14",
+      "side": "Defense",
+      "club_week": "Baltimore Ravens · 2026 Wk 9",
+      "position": "SS & CB",
+      "string_1": "Jaylinn Hawkins (SS · Knee · DNP · Out) / Nate Wiggins (CB · DNP · Q)",
+      "string_2": "Keondre Jackson (SS Promoted) / T.J. Tampa Jr. (CB)",
+      "string_3": "",
+      "string_4": "",
+      "deficiency_classification": "High Defensive Secondary Stress · Starting SS Out + Starting CB Questionable",
+      "epa_dropoff": "",
+      "source_label": "Ravens Depth Chart + Wk 9 Report",
+      "source_url": "https://www.baltimoreravens.com/team/depth-chart"
+    },
+    {
+      "chain_id": "DEP-15",
+      "side": "Defense",
+      "club_week": "New England Patriots · 2026 Wk 10",
+      "position": "S (3-Deep)",
+      "string_1": "Kevin Byard III (LP · Status Blank)",
+      "string_2": "Jaylen Reed",
+      "string_3": "Brenden Schooler (DNP · Status Blank)",
+      "string_4": "",
+      "deficiency_classification": "Moderate · S1 Limited + S3 DNP Narrows Safety Rotation & Special Teams",
+      "epa_dropoff": "",
+      "source_label": "Patriots Depth Chart (2026)",
+      "source_url": "https://www.patriots.com/team/depth-chart"
+    },
+    {
+      "chain_id": "DEP-16",
+      "side": "Defense",
+      "club_week": "Washington Commanders · 2026 Wk 10",
+      "position": "CB & FS (3-Deep FS)",
+      "string_1": "Amik Robertson (CB · LP) / Jeremy Reaves (FS)",
+      "string_2": "Rasul Douglas (CB) / Quan Martin (FS)",
+      "string_3": "Percy Butler (FS)",
+      "string_4": "",
+      "deficiency_classification": "Low-Moderate · Starting CB1 Amik Robertson Limited; Rasul Douglas Ready as CB2",
+      "epa_dropoff": "",
+      "source_label": "Commanders Depth Chart (2026)",
+      "source_url": "https://www.commanders.com/team/depth-chart"
+    }
+  ],
+  "deficiency_engine_schema": [
+    {
+      "stage": "1 · Multi-Source Roster & IR Sync",
+      "inputs": "Club 53-man active roster + Reserve/Injured list + Practice Squad elevations.",
+      "output_signal": "Removes multi-week IR starters (like Lamar Jackson in Wk 10) who disappear from weekly practice injury tables.",
+      "source_label": "NFL Contract Language",
+      "source_url": "https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language"
+    },
+    {
+      "stage": "2 · Club 1st–4th String Graph Parser",
+      "inputs": "Official club /team/depth-chart Offense & Defense tables, handling co-starters (e.g., SEA Kupp/Shaheed) and cross-slot players (e.g., NE Ben Brown at 1st LG & 2nd C).",
+      "output_signal": "Directed acyclic replacement graph mapping every position slot to 1st, 2nd, 3rd, and 4th string player IDs.",
+      "source_label": "Seahawks Depth Chart (2026)",
+      "source_url": "https://www.seahawks.com/team/depth-chart/"
+    },
+    {
+      "stage": "3 · Practice & Game-Status Overlay",
+      "inputs": "Wednesday/Thursday/Friday nfl.com/injuries/ DNP/LP/FP and Out/Doubtful/Questionable designations.",
+      "output_signal": "Probabilistic active-snap weights pre-Friday; deterministic Out exclusion once ruled Out.",
+      "source_label": "NFL Week 10 Injury Report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "stage": "4 · T-90m Game Day Inactive Reconciliation",
+      "inputs": "Official 90-minute pre-kickoff Inactive List & C2P helmet designations.",
+      "output_signal": "Confirms exact dressed 48-man (or 47-man) lineup and promotes active 2nd/3rd/4th-string backups.",
+      "source_label": "NFL Game & Stadium Prep",
+      "source_url": "https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep"
+    },
+    {
+      "stage": "5 · Unit Cohesion & Matchup Mismatch Scorer",
+      "inputs": "Active string-tier vector on Offense (QB, 5 OL, WR/TE/RB) vs. opposing Defense (EDGE/DL, LB, CB1–CB4, S).",
+      "output_signal": "Generates trench pressure alerts (>=2 backup OL vs. starter EDGE) and coverage mismatch alerts (WR1 vs. 2nd/3rd/4th-string CB).",
+      "source_label": "NFL Next Gen Stats Glossary",
+      "source_url": "https://nextgenstats.nfl.com/glossary"
+    }
+  ]
+}

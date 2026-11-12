@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard · NFL3</title>
+<meta name="description" content="NFL3 — verified NFL data, a line-origination model, validation gates and a decision register. Every value sourced, unverified values flagged.">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site">
+  <div class="wrap">
+    <div class="brand">
+      <div class="brand-mark">N3</div>
+      <div>
+        <h1>NFL3 — strategy &amp; line origination</h1>
+        <p class="tag">Verified inputs · model-implied outputs · explicit gaps</p>
+      </div>
+      <div class="status-strip">
+        <span>line-lab · session arena-e5e2b753</span>
+        <span>2026 season · through Week 10</span>
+        <span>0 scored strategies</span>
+      </div>
+    </div>
+  </div>
+</header>
+<nav class="site" aria-label="Sections"><div class="wrap"><a href="index.html" class="active">Dashboard</a><a href="pages/executive-summary.html">Executive summary</a><a href="pages/methodology.html">Methodology</a><span class="sep"></span><a href="pages/standings.html">Standings</a><a href="pages/lines.html">Model lines</a><a href="pages/correlations.html">Correlations</a><a href="pages/luck.html">Luck &amp; regression</a><span class="sep"></span><a href="pages/injuries.html">Injuries</a><a href="pages/depth.html">Depth &amp; availability</a><a href="pages/rules.html">Rules</a><span class="sep"></span><a href="pages/questions.html">Questions &amp; gaps</a><a href="pages/suggestions.html">Suggestions</a><a href="pages/strategies.html">Strategy leaderboard</a><a href="pages/gates.html">Validation gates</a><span class="sep"></span><a href="pages/flagged.html">Flagged for review</a><a href="pages/sources.html">Sources</a><a href="pages/coordination.html">Coordination</a></div></nav>
+<main id="main"><div class="wrap">
+<div class="page-head"><div class="eyebrow">Overview</div><h2>Dashboard</h2><p>A decision-support build for originating NFL lines: verified inputs, an explicit model, and a register of everything that must be answered before a choice is made.</p></div>
+
+<div class="callout bad">
+  <h4>State of the project, stated plainly</h4>
+  <p>Every data value on this site traces to an official NFL page. Every analytical number is produced by a script in the repository. <strong>And nothing here can be scored as a strategy yet</strong>, because the NFL does not publish its own lines — <code>nfl.com/odds/</code> returns 404, and the odds shown in NFL widgets come from partner bookmakers with no archive — and no odds archive has been purchased. The leaderboard is empty because the evidence is absent, not because the work is unfinished.</p>
+</div>
+
+<section>
+<h3>At a glance</h3>
+
+<div class="grid k4">
+  <div class="card accent"><div class="k">Official sources</div><div class="v">13</div><div class="s">9 resolving · 3 recorded broken · 1 not fetched</div></div>
+  <div class="card accent"><div class="k">Clubs verified</div><div class="v">32<span style="font-size:14px;color:var(--muted)">/32</span></div><div class="s">2026 REG, all four integrity checks pass</div></div>
+  <div class="card accent"><div class="k">Injury rows</div><div class="v">108</div><div class="s">6 carry a game status · 10 complete club reports</div></div>
+  <div class="card bad"><div class="k">Scored strategies</div><div class="v">0</div><div class="s">blocked at gate G0 — no odds source</div></div>
+</div>
+<div class="grid k4" style="margin-top:14px">
+  <div class="card"><div class="k">Decision questions</div><div class="v">25</div><div class="s">6 answered · 8 partial · 6 unknown · 5 blocked</div></div>
+  <div class="card"><div class="k">Suggestions</div><div class="v">18</div><div class="s">10 adopt now · 5 pilot · 3 defer/reject</div></div>
+  <div class="card"><div class="k">Flagged items</div><div class="v">10</div><div class="s">6 high or critical severity</div></div>
+  <div class="card"><div class="k">Model matchups</div><div class="v">8</div><div class="s">of 16 Week 10 games verified</div></div>
+</div>
+
+</section>
+
+<section>
+<h3>Hard blockers — open priority P0 items</h3>
+<p class="tbl-note" style="margin-bottom:10px">A P0 item invalidates everything downstream. These are the questions that must close before a product decision means anything. Full register on <a href="pages/questions.html">Questions &amp; gaps</a>.</p>
+<div class="tablewrap"><table id="t-blockers" data-source="register"><thead><tr><th class="">ID</th><th class="wrap">Question</th><th class="">Domain</th><th class="">Status</th><th class="wrap">What it blocks</th></tr></thead><tbody><tr class=""><td class=""><strong>Q-01</strong></td><td class="wrap">Under what terms may this project store and display NFL data, and does a public GitHub Pages site fall inside those terms?</td><td class="">Data &amp; licensing</td><td class=""><span class="badge bad">blocked</span></td><td class="wrap">Any public publication; the entire hosting decision.</td></tr><tr class=""><td class=""><strong>Q-03</strong></td><td class="wrap">Which official source is authoritative for player-level performance (snaps, routes, targets, carries)?</td><td class="">Data &amp; licensing</td><td class=""><span class="badge bad">unknown</span></td><td class="wrap">Every player-prop strategy (ST-07..ST-10).</td></tr><tr class=""><td class=""><strong>Q-04</strong></td><td class="wrap">Where does a historical archive of closing lines and prices come from?</td><td class="">Market &amp; odds</td><td class=""><span class="badge bad">blocked</span></td><td class="wrap">Every validation gate from G2 onward. The entire leaderboard.</td></tr><tr class=""><td class=""><strong>Q-05</strong></td><td class="wrap">Is betting on NFL markets legal for the operator in the jurisdiction of residence?</td><td class="">Market &amp; odds</td><td class=""><span class="badge bad">blocked</span></td><td class="wrap">Reward design, staking, and any real-money linkage.</td></tr><tr class=""><td class=""><strong>Q-08</strong></td><td class="wrap">Does the baseline rating beat a naive benchmark out of sample?</td><td class="">Model</td><td class=""><span class="badge bad">blocked</span></td><td class="wrap">Any promotion of the model to a strategy.</td></tr><tr class=""><td class=""><strong>Q-09</strong></td><td class="wrap">Where does the official depth order (1st / 2nd / 3rd string) come from?</td><td class="">Injuries &amp; depth</td><td class=""><span class="badge warn">partial</span></td><td class="wrap">The entire backup-deficiency feature, on both offence and defence.</td></tr><tr class=""><td class=""><strong>Q-14</strong></td><td class="wrap">What are the real correlations between legs, rather than assumed ones?</td><td class="">Correlation &amp; parlays</td><td class=""><span class="badge bad">unknown</span></td><td class="wrap">All parlay and combo strategies (ST-04..ST-06).</td></tr></tbody></table></div>
+</section>
+
+<section>
+<h3>Critical path — do these first, whatever the score</h3>
+<p class="tbl-note" style="margin-bottom:10px">The ratio score ranks cost-efficiency, not sequencing, so the two items that unblock everything else score low. They are called out here so the ranking cannot hide them.</p>
+<div class="grid k2">
+  <div class="card bad"><div class="k">SG-01 · unblocks everything</div><h4 style="margin:4px 0 6px;text-transform:none;letter-spacing:0;font-size:14.5px;color:var(--ink)">Buy an odds archive before building anything else</h4><p style="font-size:13px;margin:0">Without a price there is no closing line, no CLV and no score. Every gate from G2 onward is dead until this happens. Score 6.67 — last on the table, first in importance.</p></div>
+  <div class="card warn"><div class="k">SG-02 · makes the model a model</div><h4 style="margin:4px 0 6px;text-transform:none;letter-spacing:0;font-size:14.5px;color:var(--ink)">Ingest game-level results for opponent-aware ratings</h4><p style="font-size:13px;margin:0">Converts three declared assumptions into estimated parameters. Until then the rating is a season-average, not a signal.</p></div>
+</div>
+</section>
+
+<section>
+<h3>Highest-ranked suggestions</h3>
+<p class="tbl-note" style="margin-bottom:10px">Scored as <code>impact × confidence ÷ (effort × (1 + 0.25 × risk))</code>. A sorting aid, not a verdict — the trade-offs are on <a href="pages/suggestions.html">Suggestions</a>.</p>
+<div class="tablewrap"><table id="t-top-sug" data-source="register"><thead><tr><th class="">ID</th><th class="wrap">Suggestion</th><th class="">State</th><th class="">Call</th><th class="num">Score</th></tr></thead><tbody><tr class=""><td class="" data-sort="SG-11"><strong>SG-11</strong></td><td class="wrap">Do not price parlays or props until leg-level correlation is estimated</td><td class=""><span class="badge ok">implemented</span></td><td class=""><span class="badge info">Adopt now</span></td><td class="num" data-sort="20.0">20.00</td></tr><tr class=""><td class="" data-sort="SG-03"><strong>SG-03</strong></td><td class="wrap">Make closing-line value the headline metric, not ROI</td><td class=""><span class="badge info">proposed</span></td><td class=""><span class="badge info">Adopt now</span></td><td class="num" data-sort="16.0">16.00</td></tr><tr class=""><td class="" data-sort="SG-07"><strong>SG-07</strong></td><td class="wrap">Keep a written record of every rejected idea and every trial count</td><td class=""><span class="badge info">proposed</span></td><td class=""><span class="badge info">Adopt now</span></td><td class="num" data-sort="16.0">16.00</td></tr><tr class=""><td class="" data-sort="SG-08"><strong>SG-08</strong></td><td class="wrap">Freeze a rule before it sees data (pre-registration)</td><td class=""><span class="badge info">proposed</span></td><td class=""><span class="badge info">Adopt now</span></td><td class="num" data-sort="16.0">16.00</td></tr><tr class=""><td class="" data-sort="SG-18"><strong>SG-18</strong></td><td class="wrap">Publish the unverified items as a first-class page, not a footnote</td><td class=""><span class="badge ok">implemented</span></td><td class=""><span class="badge info">Adopt now</span></td><td class="num" data-sort="16.0">16.00</td></tr><tr class=""><td class="" data-sort="SG-04"><strong>SG-04</strong></td><td class="wrap">Publish every model total twice until one wins</td><td class=""><span class="badge ok">implemented</span></td><td class=""><span class="badge info">Adopt now</span></td><td class="num" data-sort="12.0">12.00</td></tr><tr class=""><td class="" data-sort="SG-10"><strong>SG-10</strong></td><td class="wrap">Add a drift alarm to every scraper</td><td class=""><span class="badge ok">implemented</span></td><td class=""><span class="badge info">Adopt now</span></td><td class="num" data-sort="8.0">8.00</td></tr><tr class=""><td class="" data-sort="SG-01"><strong>SG-01</strong></td><td class="wrap">Buy an odds archive before building anything else</td><td class=""><span class="badge info">proposed</span></td><td class=""><span class="badge info">Adopt now</span></td><td class="num" data-sort="6.666666666666667">6.67</td></tr></tbody></table></div>
+</section>
+
+<section>
+<h3>Where to go next</h3>
+<div class="grid k3">
+  <div class="card"><div class="k">If you have two minutes</div><p style="margin:6px 0 0;font-size:13.5px">Read the <a href="pages/executive-summary.html">executive summary</a>, then the <a href="pages/flagged.html">10 flagged items</a>.</p></div>
+  <div class="card"><div class="k">If you want to decide</div><p style="margin:6px 0 0;font-size:13.5px">Start at <a href="pages/questions.html">Questions &amp; gaps</a>. P0 items first; each names the cheapest action that closes it.</p></div>
+  <div class="card"><div class="k">If you want the analysis</div><p style="margin:6px 0 0;font-size:13.5px">See <a href="pages/lines.html">model lines</a>, <a href="pages/correlations.html">correlations</a> and <a href="pages/luck.html">luck &amp; regression</a>.</p></div>
+</div>
+</section>
+
+<section>
+<h3>Verification status</h3>
+<div class="grid k2">
+  <div class="callout ok"><h4>What is verified</h4>
+  <ul style="margin-bottom:0">
+    <li>32 club records, with four independent arithmetic checks passing</li>
+    <li>108 injury rows read verbatim, each linked to its official player page</li>
+    <li>12 rules quoted from NFL.com / NFL Football Operations; 3 left blank rather than guessed</li>
+    <li>8 Week 10 matchups with date, kickoff time and network</li>
+  </ul></div>
+  <div class="callout warn"><h4>What is not</h4>
+  <ul style="margin-bottom:0">
+    <li>Any market line, price or closing line — none exists officially (F-04)</li>
+    <li>Depth order for any club (F-08)</li>
+    <li>Active-roster, game-day and practice-squad sizes (F-02)</li>
+    <li>Player-level usage data (F-06)</li>
+  </ul></div>
+</div>
+</section>
+
+</div></main>
+<footer class="site"><div class="wrap">
+  <div>Built from official NFL sources only. Unverified values are left blank, never inferred.</div>
+  <div><a href="pages/flagged.html">Flagged for review</a> · <a href="pages/sources.html">Sources</a> · <a href="https://github.com/kanlerxz87-cyber/NFL3/blob/main/COORDINATION.md">COORDINATION.md</a> · <a href="../index.html">← Main NFL3 site</a></div>
+</div></footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NFL3 Decision &amp; Line Origination Hub — Source-Verified NFL Analytics">
+  <title>NFL Line Origination, Validation Gates &amp; Skill Leaderboard | NFL3 Decision Hub</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="index.html">
+        <span class="brand-badge">N3</span>
+        <span>
+          <span class="brand-title">NFL3 Decision Hub</span>
+          <span class="brand-sub">Origination &amp; Depth Lab</span>
+        </span>
+      </a>
+      <div class="nav-group-label">Decision Hub Categories</div>
+      <nav class="nav-list" aria-label="Primary categories">
+        <a class="nav-link" href="index.html"><span class="nav-num">01</span><span>Overview &amp; Requirements</span></a><a class="nav-link" href="executive-summary.html"><span class="nav-num">02</span><span>Executive Summary</span></a><a class="nav-link" href="suggestions.html"><span class="nav-num">03</span><span>Suggestions Review</span></a><a class="nav-link" href="questions.html"><span class="nav-num">04</span><span>Pre-Decision Q&amp;A</span></a><a class="nav-link" aria-current="page" href="origination.html"><span class="nav-num">05</span><span>Line Origination &amp; Lab</span></a><a class="nav-link" href="depth-injuries.html"><span class="nav-num">06</span><span>Depth &amp; Injury Tracker</span></a><a class="nav-link" href="repo-audit.html"><span class="nav-num">07</span><span>Repo Audit &amp; Sources</span></a><a class="nav-link" href="flagged.html"><span class="nav-num">08</span><span>Flagged for Review</span></a>
+      </nav>
+      <div class="nav-group-label">Repository Workspaces</div>
+      <nav class="nav-list" aria-label="Sibling repository workspaces">
+        <a class="nav-link" href="../index.html"><span class="nav-num">R1</span><span>Root NFL3 Site</span></a><a class="nav-link" href="../dashboard/index.html"><span class="nav-num">R2</span><span>Week 10 Dashboard</span></a><a class="nav-link" href="../line-lab/index.html"><span class="nav-num">R3</span><span>Quantitative Line Lab</span></a><a class="nav-link" href="../research-workspace/index.html"><span class="nav-num">R4</span><span>Research Workspace</span></a>
+      </nav>
+      <div class="sidebar-footer">
+        <strong>Zero-Hallucination Mode</strong>
+        Verified 2026-11-12 UTC (2026 Wk 10). Unconfirmed values remain strictly blank.
+      </div>
+    </aside>
+    <div class="main-area">
+      <header class="topbar">
+        <div class="breadcrumb">NFL3 HUB / <strong>Line Origination &amp; Leaderboard</strong></div>
+        <div class="topbar-controls">
+          <span id="filter-row-count" class="section-note" aria-live="polite"></span>
+          <input id="global-table-search" class="search-input" type="search" placeholder="Filter table rows on this page..." aria-label="Filter table rows on this page">
+          <span class="verified-pill">Verified 2026-11-12 UTC</span>
+        </div>
+      </header>
+      <main id="main-content" class="page-container">
+        <section class="page-hero">
+          <div class="eyebrow">05 · Origination, Signals, Gates, Correlations &amp; Rewards</div>
+          <h1>NFL Line Origination, Validation Gates &amp; Skill Leaderboard</h1>
+          <p class="hero-lede">Research framework for originating independent NFL lines and evaluating single bets, parlays, and player prop combos through 8 validation gates designed to reward repeatable forecasting skill over luck.</p>
+        </section>
+        
+    <div class="alert-banner">
+      <strong>Selective Skill vs. Variance Note:</strong> Aleatoric in-game variance (fumble bounces, tipped interceptions, overtime coin tosses) cannot be deleted from single NFL contests, but <strong>luck in strategy ranking and reward allocation is systematically stripped out</strong> by enforcing Gates G1–G8, vig-free Closing Line Value (CLV), Murphy Brier decomposition, multiple-testing FDR haircuts, and 8-week prospective shadow lockouts. All empirical score, correlation (<code>rho</code>), and rank cells remain strictly blank (<code>""</code>) until licensed historical play-by-play and closing-odds feeds are connected.
+    </div>
+
+    <div class="formula-strip">
+      <div class="formula-box">
+        <div class="eyebrow">Fair Line Origination</div>
+        <strong>Marginal Fair Decimal Price</strong>
+        <code>O_fair = (1 - p_push) / p_win</code>
+        <span class="section-note">Explicitly models push mass on NFL key numbers (3, 7, 10) before comparing against vig-stripped market consensus.</span>
+      </div>
+      <div class="formula-box">
+        <div class="eyebrow">2-Leg Correlated Parlay / Combo</div>
+        <strong>Exact Binary Joint Probability</strong>
+        <code>P(A &amp; B) = P(A)P(B) + rho_AB * sqrt(P(A)(1-P(A))P(B)(1-P(B)))</code>
+        <span class="section-note">Originate parlay/combo only if P(A &amp; B) at the lower 95% CI bound of rho_AB exceeds implied bookmaker SGP probability.</span>
+      </div>
+      <div class="formula-box">
+        <div class="eyebrow">Skill Separation Gate</div>
+        <strong>Brier Skill Score &amp; Cluster t-Stat</strong>
+        <code>BSS = 1 - (BS_model / BS_market_vigfree),  t = mean(d_g) / (sd(d_g)/sqrt(G))</code>
+        <span class="section-note">Clustered by independent game G so correlated same-game props never inflate sample size N_eff.</span>
+      </div>
+    </div>
+
+    <section class="section-block">
+      <div class="section-header">
+        <div>
+          <div class="eyebrow">01 · Official Regulatory Hold Reality</div>
+          <h2>Nevada Gaming Control Board Benchmarks: Straight Football vs. Parlay Cards</h2>
+        </div>
+        <p class="section-note">Verified verbatim from NGCB September 2025 Monthly Revenue Report (Form NGC-31, Statewide Nonrestricted).</p>
+      </div>
+      <div class="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">NGCB Reporting Unit</th>
+              <th scope="col">Sep 2025 Locs</th>
+              <th scope="col">Sep 2025 Win</th>
+              <th scope="col">Sep 2025 Win %</th>
+              <th scope="col">3-Mo Win %</th>
+              <th scope="col">12-Mo Win %</th>
+              <th scope="col">Line Origination &amp; Strategy Implication</th>
+              <th scope="col">Official Source</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Sports - Football (Statewide Nonrestricted)</td><td>180</td><td>$32,851k</td><td>6.70%</td><td>8.11%</td><td>5.05%</td><td>Baseline straight-bet football hold (~5.05% annual) sets minimum vig hurdle a single-bet fair line must beat consistently.</td><td><a class="source-link" href="https://www.gaming.nv.gov/contentassets/a7958398526e4e309d248ea35a2a20dd/september-2025-monthly-revenue-report.pdf" target="_blank" rel="noopener noreferrer">NGCB Sep 2025 Report (p. 1) ↗</a></td></tr><tr><td>Sports Parlay Cards (Statewide Nonrestricted)</td><td>153</td><td>$1,207k</td><td>27.79%</td><td>29.97%</td><td>8.31%</td><td>Compound parlay margin is ~1.6x–4.1x straight football hold; parlays require verified positive unpriced joint correlation to be viable.</td><td><a class="source-link" href="https://www.gaming.nv.gov/contentassets/a7958398526e4e309d248ea35a2a20dd/september-2025-monthly-revenue-report.pdf" target="_blank" rel="noopener noreferrer">NGCB Sep 2025 Report (p. 1) ↗</a></td></tr><tr><td>Sports Pool Total (Statewide Nonrestricted)</td><td>182</td><td>$54,305k</td><td>6.86%</td><td>8.06%</td><td>6.35%</td><td>Aggregate sportsbook hold benchmark across all sports counters and pools.</td><td><a class="source-link" href="https://www.gaming.nv.gov/contentassets/a7958398526e4e309d248ea35a2a20dd/september-2025-monthly-revenue-report.pdf" target="_blank" rel="noopener noreferrer">NGCB Sep 2025 Report (p. 1) ↗</a></td></tr><tr><td>Sports - Mobile All Sports (Statewide Nonrestricted)</td><td>65</td><td>$32,598k</td><td>6.13%</td><td>7.78%</td><td>5.99%</td><td>Reflects blended mobile straight + SGP hold; underscores need for vig-stripped closing-line evaluation.</td><td><a class="source-link" href="https://www.gaming.nv.gov/contentassets/a7958398526e4e309d248ea35a2a20dd/september-2025-monthly-revenue-report.pdf" target="_blank" rel="noopener noreferrer">NGCB Sep 2025 Report (p. 1) ↗</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-header">
+        <div>
+          <div class="eyebrow">02 · Strategy Competition Leaderboard</div>
+          <h2>Candidate Line-Origination &amp; Signal Strategies (Singles, Parlays &amp; Prop Combos)</h2>
+        </div>
+        <p class="section-note">Filter by bet structure; empirical metrics &amp; ranks are intentionally blank until Gates G1–G8 execute on licensed data.</p>
+      </div>
+      <div class="filter-bar">
+        <button class="filter-btn active" type="button" data-filter="all">All Candidates (8)</button>
+        <button class="filter-btn" type="button" data-filter="single">Single Bets &amp; Single Props (5)</button>
+        <button class="filter-btn" type="button" data-filter="parlay">Parlays (1)</button>
+        <button class="filter-btn" type="button" data-filter="combo">Player Prop Combos (2)</button>
+      </div>
+      <div class="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Bet Structure</th>
+              <th scope="col">Strategy &amp; Signal Hypothesis</th>
+              <th scope="col">Gate Status</th>
+              <th scope="col">N_eff</th>
+              <th scope="col">OOS Brier Skill</th>
+              <th scope="col">CLV (bps)</th>
+              <th scope="col">Rank</th>
+              <th scope="col">Reward Eligibility</th>
+              <th scope="col">Official Source</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-tag="single bet (spread / moneyline)"><td>STR-01</td><td>Single Bet (Spread / Moneyline)</td><td><strong>Opponent-Adjusted Trench &amp; QB Availability Fair-Spread Originator</strong><br><span class="section-note">Originate fair point margin from play-level success rate, CPOE, Time-to-Throw, and verified T-90m starter/2nd/3rd-string QB &amp; OL availability.</span></td><td><span class="badge badge-amber">0/8 Passed · Pending Data</span></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td>Locked (Requires Gates G1–G8)</td><td><a class="source-link" href="https://nextgenstats.nfl.com/glossary" target="_blank" rel="noopener noreferrer">NFL Next Gen Stats Glossary ↗</a></td></tr><tr data-tag="single bet (game total)"><td>STR-02</td><td>Single Bet (Game Total)</td><td><strong>2026 Kickoff-Regime &amp; NWS Weather-Adjusted Total Originator</strong><br><span class="section-note">Model drive count and expected points under 2026 Rulebook kickoff/touchback rules (6-1-3, 6-1-5) conditioned on 60-min stadium roof lock &amp; NWS wind/precip.</span></td><td><span class="badge badge-amber">0/8 Passed · Pending Data</span></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td>Locked (Requires Gates G1–G8)</td><td><a class="source-link" href="https://operations.nfl.com/rules-officiating/2026-nfl-rulebook" target="_blank" rel="noopener noreferrer">2026 NFL Rulebook ↗</a></td></tr><tr data-tag="single bet (spread / team total)"><td>STR-03</td><td>Single Bet (Spread / Team Total)</td><td><strong>Multi-Slot Offensive Line Cascade Deficiency Signal</strong><br><span class="section-note">Trigger downward offensive efficiency adjustment when &gt;=2 adjacent OL starters/swing backups are Out/DNP (modeled on verified NE LG/C Ben Brown Out + T Walter Rouse DNP pattern).</span></td><td><span class="badge badge-amber">0/8 Passed · Pending Data</span></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td>Locked (Requires Gates G1–G8)</td><td><a class="source-link" href="https://www.patriots.com/team/depth-chart" target="_blank" rel="noopener noreferrer">Patriots Depth Chart (2026) ↗</a></td></tr><tr data-tag="single player prop"><td>STR-04</td><td>Single Player Prop</td><td><strong>Boundary WR Separation vs. Promoted 2nd/3rd/4th-String CB Mismatch</strong><br><span class="section-note">Originate WR receiving-yard &amp; target distributions when opposing CB1 is Out (e.g., NE Carlton Davis III Out -&gt; CB2 Channing Canada; DET D.J. Reed DNP -&gt; CB2–CB4 chain) using NGS Average Separation &amp; Targeted Air Yards Share.</span></td><td><span class="badge badge-amber">0/8 Passed · Pending Data</span></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td>Locked (Requires Gates G1–G8)</td><td><a class="source-link" href="https://nextgenstats.nfl.com/glossary" target="_blank" rel="noopener noreferrer">NFL Next Gen Stats Glossary ↗</a></td></tr><tr data-tag="single player prop"><td>STR-05</td><td>Single Player Prop</td><td><strong>3rd/4th-String RB Promotion Opportunity &amp; Box-Count Share Model</strong><br><span class="section-note">Re-allocate rushing attempts &amp; receiving checkdowns when RB1/RB2 are Out/DNP (e.g., NE RB2 TreVeyon Henderson Out + RB1 Rhamondre Stevenson DNP -&gt; RB3 Corey Kiner / RB4 Lan Larison) adjusted for NGS 8+ Defenders in Box %.</span></td><td><span class="badge badge-amber">0/8 Passed · Pending Data</span></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td>Locked (Requires Gates G1–G8)</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer">NFL Week 10 Injury Report ↗</a></td></tr><tr data-tag="parlay (2-leg correlated game state)"><td>STR-06</td><td>Parlay (2-Leg Correlated Game State)</td><td><strong>Bivariate Copula Spread + Total Regime Parlay Pricer</strong><br><span class="section-note">Originate joint probability P(Spread &amp; Total) via regime-conditioned simulation (underdog + Under in high-wind/backup-QB games; favorite + Over in indoor high-pace mismatches) and filter strictly against SGP vig.</span></td><td><span class="badge badge-amber">0/8 Passed · Pending Data</span></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td>Locked (Requires Gates G1–G8)</td><td><a class="source-link" href="https://www.gaming.nv.gov/contentassets/a7958398526e4e309d248ea35a2a20dd/september-2025-monthly-revenue-report.pdf" target="_blank" rel="noopener noreferrer">NGCB Sep 2025 Report (p. 1) ↗</a></td></tr><tr data-tag="player prop combo (same-team stack)"><td>STR-07</td><td>Player Prop Combo (Same-Team Stack)</td><td><strong>QB Passing Yards + Primary WR/TE Air-Yards Share Joint Simulator</strong><br><span class="section-note">Jointly simulate team dropbacks, NGS Completion Probability (xCOMP), and receiver TAY% + xYAC to price QB Over + WR1 Over combos only when bookmaker implied correlation understates empirical lower-95% CI.</span></td><td><span class="badge badge-amber">0/8 Passed · Pending Data</span></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td>Locked (Requires Gates G1–G8)</td><td><a class="source-link" href="https://nextgenstats.nfl.com/glossary" target="_blank" rel="noopener noreferrer">NFL Next Gen Stats Glossary ↗</a></td></tr><tr data-tag="player prop combo (game-script pair)"><td>STR-08</td><td>Player Prop Combo (Game-Script Pair)</td><td><strong>Trailing-Script Opposing Pass Volume + Favorite RB Carry Combo</strong><br><span class="section-note">Condition 2nd-half rush/pass play-calling splits on simulated halftime win probability when a 2nd/3rd-string QB (e.g., BAL 3rd-string QB Joe Fagnano) forces run-heavy or trailing-script asymmetries.</span></td><td><span class="badge badge-amber">0/8 Passed · Pending Data</span></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td>Locked (Requires Gates G1–G8)</td><td><a class="source-link" href="https://www.baltimoreravens.com/team/depth-chart" target="_blank" rel="noopener noreferrer">Ravens Depth Chart (2026) ↗</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-header">
+        <div>
+          <div class="eyebrow">03 · Qualification Protocol</div>
+          <h2>Mandatory 8-Gate Validation Pipeline (G1–G8)</h2>
+        </div>
+        <p class="section-note">Every single, parlay, and player-prop combo strategy must clear all 8 sequential gates before ranking.</p>
+      </div>
+      <div class="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Validation Gate</th>
+              <th scope="col">Core Objective</th>
+              <th scope="col">Strict Pass Criteria</th>
+              <th scope="col">Current Status</th>
+              <th scope="col">Official Source</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>G1 · Provenance &amp; T-90m Cutoff</td><td>Eliminate lookahead bias and unverified inputs.</td><td>100% of features carry immutable retrieval timestamps strictly prior to decision lock (e.g., T-85m post-Inactive List release); zero retroactive injury or roster overwrites.</td><td><span class="badge badge-amber">Not Run · Feed Pending</span></td><td><a class="source-link" href="https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep" target="_blank" rel="noopener noreferrer">NFL Game &amp; Stadium Prep ↗</a></td></tr><tr><td>G2 · Game-Clustered Walk-Forward CV</td><td>Prevent temporal and cross-bet leakage.</td><td>Strict chronological expanding-window splits by NFL week/season with GroupKFold grouping on game_id so singles, parlays, and props from the same game never span train/test.</td><td><span class="badge badge-amber">Not Run · Feed Pending</span></td><td><a class="source-link" href="https://scikit-learn.org/stable/modules/cross_validation.html" target="_blank" rel="noopener noreferrer">scikit-learn Cross-Validation ↗</a></td></tr><tr><td>G3 · Proper Score &amp; Murphy Calibration</td><td>Prove probabilistic accuracy independent of payout luck.</td><td>Out-of-sample Log Loss and Brier Score beat vig-stripped market consensus, verified via reliability curves and Murphy resolution-minus-reliability decomposition.</td><td><span class="badge badge-amber">Not Run · Feed Pending</span></td><td><a class="source-link" href="https://scikit-learn.org/stable/modules/calibration.html" target="_blank" rel="noopener noreferrer">scikit-learn Calibration ↗</a></td></tr><tr><td>G4 · Closing Line Value (CLV) &amp; Vig Hurdle</td><td>Verify originated fair price beats sharp closing efficiency.</td><td>Statistically positive mean CLV (in vig-free probability bps) after accounting for exact push rates on key numbers (3, 7, 10) and bookmaker DNP/void settlement.</td><td><span class="badge badge-amber">Not Run · Feed Pending</span></td><td><a class="source-link" href="https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL" target="_blank" rel="noopener noreferrer">NFL Odds Widget FAQ ↗</a></td></tr><tr><td>G5 · Sample Power &amp; Effective N</td><td>Filter small-sample hot streaks.</td><td>Minimum effective independent game clusters N_eff &gt;= pre-registered power threshold; two-sided t-interval / bootstrap 95% CI for skill score excludes zero.</td><td><span class="badge badge-amber">Not Run · Threshold Open</span></td><td><a class="source-link" href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm" target="_blank" rel="noopener noreferrer">NIST Confidence Limits ↗</a></td></tr><tr><td>G6 · Multiple-Testing &amp; Search Haircut</td><td>Eliminate data-snooping across candidate sweeps.</td><td>Log every tested signal variant M; p-values must survive Benjamini-Hochberg FDR / Holm-Bonferroni correction across total trial count M.</td><td><span class="badge badge-amber">Not Run · Registry Ready</span></td><td><a class="source-link" href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm" target="_blank" rel="noopener noreferrer">NIST Hypothesis Testing ↗</a></td></tr><tr><td>G7 · Joint Correlation CI &amp; Exposure Cap</td><td>Prevent parlay/combo ruin from misestimated rho.</td><td>Parlay and prop-combo strategies must remain positive-EV evaluated at the conservative lower 95% bootstrap bound of leg correlation and obey per-game exposure caps.</td><td><span class="badge badge-amber">Not Run · Feed Pending</span></td><td><a class="source-link" href="https://www.gaming.nv.gov/contentassets/a7958398526e4e309d248ea35a2a20dd/september-2025-monthly-revenue-report.pdf" target="_blank" rel="noopener noreferrer">NGCB Sep 2025 Report (p. 1) ↗</a></td></tr><tr><td>G8 · Prospective Shadow Lockout</td><td>Confirm live operational skill with zero hindsight.</td><td>Minimum 8 consecutive live NFL weeks of cryptographically hashed pre-kickoff predictions matching backtest calibration before leaderboard reward unlock.</td><td><span class="badge badge-amber">Not Run · Prospective</span></td><td><a class="source-link" href="https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages" target="_blank" rel="noopener noreferrer">GitHub Actions Pages Docs ↗</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-header">
+        <div>
+          <div class="eyebrow">04 · Joint Outcome Structure</div>
+          <h2>Pairwise Leg Correlation Matrix &amp; Estimation Protocol</h2>
+        </div>
+        <p class="section-note">Empirical rho and 95% CI cells are left blank rather than guessed from folklore; structural drivers and estimators are specified.</p>
+      </div>
+      <div class="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Pair ID</th>
+              <th scope="col">Leg A</th>
+              <th scope="col">Leg B</th>
+              <th scope="col">Structural Mechanism</th>
+              <th scope="col">Empirical rho</th>
+              <th scope="col">95% CI</th>
+              <th scope="col">Statistical Estimator</th>
+              <th scope="col">Status</th>
+              <th scope="col">Official Source</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>COR-01</td><td>Team Point Spread Cover (Favorite)</td><td>Full-Game Total Over</td><td>Shared offensive efficiency, indoor/wind regime, and overtime scoring; non-linear across low vs. high total regimes.</td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td>Phi / tetrachoric correlation stratified by closing spread &amp; total buckets with game-block bootstrap.</td><td><span class="badge badge-amber">Unverified · Blank</span></td><td><a class="source-link" href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm" target="_blank" rel="noopener noreferrer">NIST Confidence Limits ↗</a></td></tr><tr><td>COR-02</td><td>QB Passing Yards Over</td><td>Same-Team WR1 Receiving Yards Over</td><td>Direct accounting identity: WR1 yards are a subset of team passing yards weighted by Target Air Yards Share (TAY%) and xYAC.</td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td>Bivariate empirical copula on settled player prop residuals relative to pregame lines.</td><td><span class="badge badge-amber">Unverified · Blank</span></td><td><a class="source-link" href="https://nextgenstats.nfl.com/glossary" target="_blank" rel="noopener noreferrer">NFL Next Gen Stats Glossary ↗</a></td></tr><tr><td>COR-03</td><td>QB Passing Touchdowns Over</td><td>Team Moneyline Win</td><td>Passing TDs directly add 6+ points to team margin, elevating win probability.</td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td>Joint Bernoulli contingency table P(A &amp; B) vs. P(A)P(B) across matched regular-season games.</td><td><span class="badge badge-amber">Unverified · Blank</span></td><td><a class="source-link" href="https://www.nfl.com/stats/player-stats/" target="_blank" rel="noopener noreferrer">NFL.com Player Stats ↗</a></td></tr><tr><td>COR-04</td><td>RB Rushing Attempts Over</td><td>Same-Team Point Spread Cover</td><td>4th-quarter clock-killing game script when leading inflates RB carry share while suppressing dropbacks.</td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td>Conditional expectation E[RushAtt | Margin_Q3] and binary leg phi coefficient.</td><td><span class="badge badge-amber">Unverified · Blank</span></td><td><a class="source-link" href="https://nextgenstats.nfl.com/glossary" target="_blank" rel="noopener noreferrer">NFL Next Gen Stats Glossary ↗</a></td></tr><tr><td>COR-05</td><td>Team A QB Passing Attempts Over</td><td>Opposing Team B Points / WR1 Yards Over</td><td>Bidirectional shootout / trailing-script feedback loop increasing total play volume and neutral-to-negative pass rate.</td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td>Within-game residual Pearson correlation controlling for pregame total.</td><td><span class="badge badge-amber">Unverified · Blank</span></td><td><a class="source-link" href="https://www.nfl.com/stats/player-stats/" target="_blank" rel="noopener noreferrer">NFL.com Player Stats ↗</a></td></tr><tr><td>COR-06</td><td>Opposing CB1 Ruled Out (2nd/3rd-String Backup Active)</td><td>Offense WR1/WR2 Receiving Yards &amp; TD Over</td><td>Coverage drop-off in Average Cushion/Separation when boundary starter (e.g., Carlton Davis III) is replaced by backup.</td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td>Difference-in-differences on receiver target share &amp; yards/route in CB1-Out vs. CB1-Active weeks.</td><td><span class="badge badge-amber">Unverified · Blank</span></td><td><a class="source-link" href="https://www.patriots.com/team/depth-chart" target="_blank" rel="noopener noreferrer">Patriots Depth Chart (2026) ↗</a></td></tr><tr><td>COR-07</td><td>Offense &gt;=2 OL Starters Out (2nd/3rd-String OL Active)</td><td>Opposing Defense Sacks Over &amp; QB Time-to-Throw Under</td><td>Pass-protection communication breakdowns force quicker releases (lower TT) or elevated sack rate.</td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td>Clustered regression of NGS Time-to-Throw &amp; sack rate on active OL string-sum index.</td><td><span class="badge badge-amber">Unverified · Blank</span></td><td><a class="source-link" href="https://nextgenstats.nfl.com/glossary" target="_blank" rel="noopener noreferrer">NFL Next Gen Stats Glossary ↗</a></td></tr><tr><td>COR-08</td><td>1st &amp; 2nd String QB Out (3rd-String QB Starting)</td><td>Full-Game Total Under &amp; Same-Team WR1 Yards Under</td><td>Severe drop in CPOE/air-yards aggressiveness and conservative run-heavy play calling (modeled on BAL Week 9 QB chain).</td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td class="cell-blank" title="Unverified — intentionally left blank (no inference)"></td><td>Stratified event study on 3rd-string QB starts vs. closing market adjustments.</td><td><span class="badge badge-amber">Unverified · Blank</span></td><td><a class="source-link" href="https://www.nfl.com/injuries/league/2026/REG9" target="_blank" rel="noopener noreferrer">NFL Week 9 Injury Report ↗</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-header">
+        <div>
+          <div class="eyebrow">05 · Competition Incentives</div>
+          <h2>Anti-Luck Leaderboard &amp; Escrowed Reward Governance</h2>
+        </div>
+        <p class="section-note">Rules preventing variance-seeking entries or multi-account trial mining from capturing competition rewards.</p>
+      </div>
+      <div class="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Rule ID</th>
+              <th scope="col">Governance Mechanism</th>
+              <th scope="col">How It Removes Luck From Strategy Selection</th>
+              <th scope="col">Status</th>
+              <th scope="col">Official Source</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>GOV-01</td><td>Primary Ranking Metric: Proper Skill Score + CLV (Never Raw ROI)</td><td>A lucky 6-leg parlay hit inflates short-term ROI by +500% with zero skill; Brier Skill Score and vig-free Closing Line Value weight every probability forecast equally and penalize overconfident misses.</td><td><span class="badge badge-blue">Specified · Pre-Launch</span></td><td><a class="source-link" href="https://scikit-learn.org/stable/modules/calibration.html" target="_blank" rel="noopener noreferrer">scikit-learn Calibration ↗</a></td></tr><tr><td>GOV-02</td><td>Market-Cohort Separation (Singles vs. Parlays vs. Prop Combos)</td><td>Prevents high-kurtosis multi-leg combos (facing up to 27.79% NGCB parlay card hold) from distorting rankings of low-variance single-line originators.</td><td><span class="badge badge-blue">Specified · Pre-Launch</span></td><td><a class="source-link" href="https://www.gaming.nv.gov/contentassets/a7958398526e4e309d248ea35a2a20dd/september-2025-monthly-revenue-report.pdf" target="_blank" rel="noopener noreferrer">NGCB Sep 2025 Report (p. 1) ↗</a></td></tr><tr><td>GOV-03</td><td>Mandatory Trial-Count Denominator (Anti-Sybil Submission Cap)</td><td>Every parameter sweep and rejected model version per researcher increments M in the Benjamini-Hochberg FDR adjustment so brute-force luck mining cannot pass Gate G6.</td><td><span class="badge badge-blue">Specified · Pre-Launch</span></td><td><a class="source-link" href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm" target="_blank" rel="noopener noreferrer">NIST Confidence Limits ↗</a></td></tr><tr><td>GOV-04</td><td>8-Week Prospective Shadow Escrow Before Reward Vesting</td><td>Backtest winners earn $0 / 0 credits at submission; rewards vest strictly after 8+ prospective live NFL weeks with pre-kickoff SHA-256 prediction hashes.</td><td><span class="badge badge-blue">Specified · Pre-Launch</span></td><td><a class="source-link" href="https://scikit-learn.org/stable/modules/cross_validation.html" target="_blank" rel="noopener noreferrer">scikit-learn Cross-Validation ↗</a></td></tr><tr><td>GOV-05</td><td>Confidence-Interval Tie Rule</td><td>Strategies whose 95% game-clustered skill confidence intervals overlap share tier credit rather than crowning noise-driven #1 winners.</td><td><span class="badge badge-blue">Specified · Pre-Launch</span></td><td><a class="source-link" href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm" target="_blank" rel="noopener noreferrer">NIST Confidence Limits ↗</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    
+        <footer class="site-footer">
+          <span>NFL3 Decision &amp; Line Origination Hub · Session <code>arena-40c7529f</code></span>
+          <span>Every table row cites a verified official source · <a href="flagged.html">Open Flagged for Review →</a></span>
+        </footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

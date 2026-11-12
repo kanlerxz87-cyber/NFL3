@@ -1,0 +1,368 @@
+{
+  "regulatory_benchmarks": [
+    {
+      "category": "Sports - Football (Statewide Nonrestricted)",
+      "locations_sep_2025": "180",
+      "win_amount_sep_2025_usd_k": "$32,851k",
+      "win_pct_sep_2025": "6.70%",
+      "win_pct_3m_jul_sep_2025": "8.11%",
+      "win_pct_12m_oct24_sep25": "5.05%",
+      "origination_implication": "Baseline straight-bet football hold (~5.05% annual) sets minimum vig hurdle a single-bet fair line must beat consistently.",
+      "source_label": "NGCB Sep 2025 Report (p. 1)",
+      "source_url": "https://www.gaming.nv.gov/contentassets/a7958398526e4e309d248ea35a2a20dd/september-2025-monthly-revenue-report.pdf"
+    },
+    {
+      "category": "Sports Parlay Cards (Statewide Nonrestricted)",
+      "locations_sep_2025": "153",
+      "win_amount_sep_2025_usd_k": "$1,207k",
+      "win_pct_sep_2025": "27.79%",
+      "win_pct_3m_jul_sep_2025": "29.97%",
+      "win_pct_12m_oct24_sep25": "8.31%",
+      "origination_implication": "Compound parlay margin is ~1.6x–4.1x straight football hold; parlays require verified positive unpriced joint correlation to be viable.",
+      "source_label": "NGCB Sep 2025 Report (p. 1)",
+      "source_url": "https://www.gaming.nv.gov/contentassets/a7958398526e4e309d248ea35a2a20dd/september-2025-monthly-revenue-report.pdf"
+    },
+    {
+      "category": "Sports Pool Total (Statewide Nonrestricted)",
+      "locations_sep_2025": "182",
+      "win_amount_sep_2025_usd_k": "$54,305k",
+      "win_pct_sep_2025": "6.86%",
+      "win_pct_3m_jul_sep_2025": "8.06%",
+      "win_pct_12m_oct24_sep25": "6.35%",
+      "origination_implication": "Aggregate sportsbook hold benchmark across all sports counters and pools.",
+      "source_label": "NGCB Sep 2025 Report (p. 1)",
+      "source_url": "https://www.gaming.nv.gov/contentassets/a7958398526e4e309d248ea35a2a20dd/september-2025-monthly-revenue-report.pdf"
+    },
+    {
+      "category": "Sports - Mobile All Sports (Statewide Nonrestricted)",
+      "locations_sep_2025": "65",
+      "win_amount_sep_2025_usd_k": "$32,598k",
+      "win_pct_sep_2025": "6.13%",
+      "win_pct_3m_jul_sep_2025": "7.78%",
+      "win_pct_12m_oct24_sep25": "5.99%",
+      "origination_implication": "Reflects blended mobile straight + SGP hold; underscores need for vig-stripped closing-line evaluation.",
+      "source_label": "NGCB Sep 2025 Report (p. 1)",
+      "source_url": "https://www.gaming.nv.gov/contentassets/a7958398526e4e309d248ea35a2a20dd/september-2025-monthly-revenue-report.pdf"
+    }
+  ],
+  "strategies": [
+    {
+      "strat_id": "STR-01",
+      "bet_structure": "Single Bet (Spread / Moneyline)",
+      "name": "Opponent-Adjusted Trench & QB Availability Fair-Spread Originator",
+      "signal_mechanism": "Originate fair point margin from play-level success rate, CPOE, Time-to-Throw, and verified T-90m starter/2nd/3rd-string QB & OL availability.",
+      "gate_status": "0/8 Passed · Pending Data",
+      "effective_n": "",
+      "oos_brier_skill": "",
+      "clv_bps": "",
+      "leaderboard_rank": "",
+      "reward_tier": "Locked (Requires Gates G1–G8)",
+      "source_label": "NFL Next Gen Stats Glossary",
+      "source_url": "https://nextgenstats.nfl.com/glossary"
+    },
+    {
+      "strat_id": "STR-02",
+      "bet_structure": "Single Bet (Game Total)",
+      "name": "2026 Kickoff-Regime & NWS Weather-Adjusted Total Originator",
+      "signal_mechanism": "Model drive count and expected points under 2026 Rulebook kickoff/touchback rules (6-1-3, 6-1-5) conditioned on 60-min stadium roof lock & NWS wind/precip.",
+      "gate_status": "0/8 Passed · Pending Data",
+      "effective_n": "",
+      "oos_brier_skill": "",
+      "clv_bps": "",
+      "leaderboard_rank": "",
+      "reward_tier": "Locked (Requires Gates G1–G8)",
+      "source_label": "2026 NFL Rulebook",
+      "source_url": "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook"
+    },
+    {
+      "strat_id": "STR-03",
+      "bet_structure": "Single Bet (Spread / Team Total)",
+      "name": "Multi-Slot Offensive Line Cascade Deficiency Signal",
+      "signal_mechanism": "Trigger downward offensive efficiency adjustment when >=2 adjacent OL starters/swing backups are Out/DNP (modeled on verified NE LG/C Ben Brown Out + T Walter Rouse DNP pattern).",
+      "gate_status": "0/8 Passed · Pending Data",
+      "effective_n": "",
+      "oos_brier_skill": "",
+      "clv_bps": "",
+      "leaderboard_rank": "",
+      "reward_tier": "Locked (Requires Gates G1–G8)",
+      "source_label": "Patriots Depth Chart (2026)",
+      "source_url": "https://www.patriots.com/team/depth-chart"
+    },
+    {
+      "strat_id": "STR-04",
+      "bet_structure": "Single Player Prop",
+      "name": "Boundary WR Separation vs. Promoted 2nd/3rd/4th-String CB Mismatch",
+      "signal_mechanism": "Originate WR receiving-yard & target distributions when opposing CB1 is Out (e.g., NE Carlton Davis III Out -> CB2 Channing Canada; DET D.J. Reed DNP -> CB2–CB4 chain) using NGS Average Separation & Targeted Air Yards Share.",
+      "gate_status": "0/8 Passed · Pending Data",
+      "effective_n": "",
+      "oos_brier_skill": "",
+      "clv_bps": "",
+      "leaderboard_rank": "",
+      "reward_tier": "Locked (Requires Gates G1–G8)",
+      "source_label": "NFL Next Gen Stats Glossary",
+      "source_url": "https://nextgenstats.nfl.com/glossary"
+    },
+    {
+      "strat_id": "STR-05",
+      "bet_structure": "Single Player Prop",
+      "name": "3rd/4th-String RB Promotion Opportunity & Box-Count Share Model",
+      "signal_mechanism": "Re-allocate rushing attempts & receiving checkdowns when RB1/RB2 are Out/DNP (e.g., NE RB2 TreVeyon Henderson Out + RB1 Rhamondre Stevenson DNP -> RB3 Corey Kiner / RB4 Lan Larison) adjusted for NGS 8+ Defenders in Box %.",
+      "gate_status": "0/8 Passed · Pending Data",
+      "effective_n": "",
+      "oos_brier_skill": "",
+      "clv_bps": "",
+      "leaderboard_rank": "",
+      "reward_tier": "Locked (Requires Gates G1–G8)",
+      "source_label": "NFL Week 10 Injury Report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "strat_id": "STR-06",
+      "bet_structure": "Parlay (2-Leg Correlated Game State)",
+      "name": "Bivariate Copula Spread + Total Regime Parlay Pricer",
+      "signal_mechanism": "Originate joint probability P(Spread & Total) via regime-conditioned simulation (underdog + Under in high-wind/backup-QB games; favorite + Over in indoor high-pace mismatches) and filter strictly against SGP vig.",
+      "gate_status": "0/8 Passed · Pending Data",
+      "effective_n": "",
+      "oos_brier_skill": "",
+      "clv_bps": "",
+      "leaderboard_rank": "",
+      "reward_tier": "Locked (Requires Gates G1–G8)",
+      "source_label": "NGCB Sep 2025 Report (p. 1)",
+      "source_url": "https://www.gaming.nv.gov/contentassets/a7958398526e4e309d248ea35a2a20dd/september-2025-monthly-revenue-report.pdf"
+    },
+    {
+      "strat_id": "STR-07",
+      "bet_structure": "Player Prop Combo (Same-Team Stack)",
+      "name": "QB Passing Yards + Primary WR/TE Air-Yards Share Joint Simulator",
+      "signal_mechanism": "Jointly simulate team dropbacks, NGS Completion Probability (xCOMP), and receiver TAY% + xYAC to price QB Over + WR1 Over combos only when bookmaker implied correlation understates empirical lower-95% CI.",
+      "gate_status": "0/8 Passed · Pending Data",
+      "effective_n": "",
+      "oos_brier_skill": "",
+      "clv_bps": "",
+      "leaderboard_rank": "",
+      "reward_tier": "Locked (Requires Gates G1–G8)",
+      "source_label": "NFL Next Gen Stats Glossary",
+      "source_url": "https://nextgenstats.nfl.com/glossary"
+    },
+    {
+      "strat_id": "STR-08",
+      "bet_structure": "Player Prop Combo (Game-Script Pair)",
+      "name": "Trailing-Script Opposing Pass Volume + Favorite RB Carry Combo",
+      "signal_mechanism": "Condition 2nd-half rush/pass play-calling splits on simulated halftime win probability when a 2nd/3rd-string QB (e.g., BAL 3rd-string QB Joe Fagnano) forces run-heavy or trailing-script asymmetries.",
+      "gate_status": "0/8 Passed · Pending Data",
+      "effective_n": "",
+      "oos_brier_skill": "",
+      "clv_bps": "",
+      "leaderboard_rank": "",
+      "reward_tier": "Locked (Requires Gates G1–G8)",
+      "source_label": "Ravens Depth Chart (2026)",
+      "source_url": "https://www.baltimoreravens.com/team/depth-chart"
+    }
+  ],
+  "validation_gates": [
+    {
+      "gate_id": "G1 · Provenance & T-90m Cutoff",
+      "objective": "Eliminate lookahead bias and unverified inputs.",
+      "pass_criteria": "100% of features carry immutable retrieval timestamps strictly prior to decision lock (e.g., T-85m post-Inactive List release); zero retroactive injury or roster overwrites.",
+      "current_status": "Not Run · Feed Pending",
+      "source_label": "NFL Game & Stadium Prep",
+      "source_url": "https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep"
+    },
+    {
+      "gate_id": "G2 · Game-Clustered Walk-Forward CV",
+      "objective": "Prevent temporal and cross-bet leakage.",
+      "pass_criteria": "Strict chronological expanding-window splits by NFL week/season with GroupKFold grouping on game_id so singles, parlays, and props from the same game never span train/test.",
+      "current_status": "Not Run · Feed Pending",
+      "source_label": "scikit-learn Cross-Validation",
+      "source_url": "https://scikit-learn.org/stable/modules/cross_validation.html"
+    },
+    {
+      "gate_id": "G3 · Proper Score & Murphy Calibration",
+      "objective": "Prove probabilistic accuracy independent of payout luck.",
+      "pass_criteria": "Out-of-sample Log Loss and Brier Score beat vig-stripped market consensus, verified via reliability curves and Murphy resolution-minus-reliability decomposition.",
+      "current_status": "Not Run · Feed Pending",
+      "source_label": "scikit-learn Calibration",
+      "source_url": "https://scikit-learn.org/stable/modules/calibration.html"
+    },
+    {
+      "gate_id": "G4 · Closing Line Value (CLV) & Vig Hurdle",
+      "objective": "Verify originated fair price beats sharp closing efficiency.",
+      "pass_criteria": "Statistically positive mean CLV (in vig-free probability bps) after accounting for exact push rates on key numbers (3, 7, 10) and bookmaker DNP/void settlement.",
+      "current_status": "Not Run · Feed Pending",
+      "source_label": "NFL Odds Widget FAQ",
+      "source_url": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL"
+    },
+    {
+      "gate_id": "G5 · Sample Power & Effective N",
+      "objective": "Filter small-sample hot streaks.",
+      "pass_criteria": "Minimum effective independent game clusters N_eff >= pre-registered power threshold; two-sided t-interval / bootstrap 95% CI for skill score excludes zero.",
+      "current_status": "Not Run · Threshold Open",
+      "source_label": "NIST Confidence Limits",
+      "source_url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm"
+    },
+    {
+      "gate_id": "G6 · Multiple-Testing & Search Haircut",
+      "objective": "Eliminate data-snooping across candidate sweeps.",
+      "pass_criteria": "Log every tested signal variant M; p-values must survive Benjamini-Hochberg FDR / Holm-Bonferroni correction across total trial count M.",
+      "current_status": "Not Run · Registry Ready",
+      "source_label": "NIST Hypothesis Testing",
+      "source_url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm"
+    },
+    {
+      "gate_id": "G7 · Joint Correlation CI & Exposure Cap",
+      "objective": "Prevent parlay/combo ruin from misestimated rho.",
+      "pass_criteria": "Parlay and prop-combo strategies must remain positive-EV evaluated at the conservative lower 95% bootstrap bound of leg correlation and obey per-game exposure caps.",
+      "current_status": "Not Run · Feed Pending",
+      "source_label": "NGCB Sep 2025 Report (p. 1)",
+      "source_url": "https://www.gaming.nv.gov/contentassets/a7958398526e4e309d248ea35a2a20dd/september-2025-monthly-revenue-report.pdf"
+    },
+    {
+      "gate_id": "G8 · Prospective Shadow Lockout",
+      "objective": "Confirm live operational skill with zero hindsight.",
+      "pass_criteria": "Minimum 8 consecutive live NFL weeks of cryptographically hashed pre-kickoff predictions matching backtest calibration before leaderboard reward unlock.",
+      "current_status": "Not Run · Prospective",
+      "source_label": "GitHub Actions Pages Docs",
+      "source_url": "https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages"
+    }
+  ],
+  "correlations": [
+    {
+      "pair_id": "COR-01",
+      "leg_a": "Team Point Spread Cover (Favorite)",
+      "leg_b": "Full-Game Total Over",
+      "structural_driver": "Shared offensive efficiency, indoor/wind regime, and overtime scoring; non-linear across low vs. high total regimes.",
+      "empirical_rho": "",
+      "ci_95": "",
+      "estimator": "Phi / tetrachoric correlation stratified by closing spread & total buckets with game-block bootstrap.",
+      "status": "Unverified · Blank",
+      "source_label": "NIST Confidence Limits",
+      "source_url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm"
+    },
+    {
+      "pair_id": "COR-02",
+      "leg_a": "QB Passing Yards Over",
+      "leg_b": "Same-Team WR1 Receiving Yards Over",
+      "structural_driver": "Direct accounting identity: WR1 yards are a subset of team passing yards weighted by Target Air Yards Share (TAY%) and xYAC.",
+      "empirical_rho": "",
+      "ci_95": "",
+      "estimator": "Bivariate empirical copula on settled player prop residuals relative to pregame lines.",
+      "status": "Unverified · Blank",
+      "source_label": "NFL Next Gen Stats Glossary",
+      "source_url": "https://nextgenstats.nfl.com/glossary"
+    },
+    {
+      "pair_id": "COR-03",
+      "leg_a": "QB Passing Touchdowns Over",
+      "leg_b": "Team Moneyline Win",
+      "structural_driver": "Passing TDs directly add 6+ points to team margin, elevating win probability.",
+      "empirical_rho": "",
+      "ci_95": "",
+      "estimator": "Joint Bernoulli contingency table P(A & B) vs. P(A)P(B) across matched regular-season games.",
+      "status": "Unverified · Blank",
+      "source_label": "NFL.com Player Stats",
+      "source_url": "https://www.nfl.com/stats/player-stats/"
+    },
+    {
+      "pair_id": "COR-04",
+      "leg_a": "RB Rushing Attempts Over",
+      "leg_b": "Same-Team Point Spread Cover",
+      "structural_driver": "4th-quarter clock-killing game script when leading inflates RB carry share while suppressing dropbacks.",
+      "empirical_rho": "",
+      "ci_95": "",
+      "estimator": "Conditional expectation E[RushAtt | Margin_Q3] and binary leg phi coefficient.",
+      "status": "Unverified · Blank",
+      "source_label": "NFL Next Gen Stats Glossary",
+      "source_url": "https://nextgenstats.nfl.com/glossary"
+    },
+    {
+      "pair_id": "COR-05",
+      "leg_a": "Team A QB Passing Attempts Over",
+      "leg_b": "Opposing Team B Points / WR1 Yards Over",
+      "structural_driver": "Bidirectional shootout / trailing-script feedback loop increasing total play volume and neutral-to-negative pass rate.",
+      "empirical_rho": "",
+      "ci_95": "",
+      "estimator": "Within-game residual Pearson correlation controlling for pregame total.",
+      "status": "Unverified · Blank",
+      "source_label": "NFL.com Player Stats",
+      "source_url": "https://www.nfl.com/stats/player-stats/"
+    },
+    {
+      "pair_id": "COR-06",
+      "leg_a": "Opposing CB1 Ruled Out (2nd/3rd-String Backup Active)",
+      "leg_b": "Offense WR1/WR2 Receiving Yards & TD Over",
+      "structural_driver": "Coverage drop-off in Average Cushion/Separation when boundary starter (e.g., Carlton Davis III) is replaced by backup.",
+      "empirical_rho": "",
+      "ci_95": "",
+      "estimator": "Difference-in-differences on receiver target share & yards/route in CB1-Out vs. CB1-Active weeks.",
+      "status": "Unverified · Blank",
+      "source_label": "Patriots Depth Chart (2026)",
+      "source_url": "https://www.patriots.com/team/depth-chart"
+    },
+    {
+      "pair_id": "COR-07",
+      "leg_a": "Offense >=2 OL Starters Out (2nd/3rd-String OL Active)",
+      "leg_b": "Opposing Defense Sacks Over & QB Time-to-Throw Under",
+      "structural_driver": "Pass-protection communication breakdowns force quicker releases (lower TT) or elevated sack rate.",
+      "empirical_rho": "",
+      "ci_95": "",
+      "estimator": "Clustered regression of NGS Time-to-Throw & sack rate on active OL string-sum index.",
+      "status": "Unverified · Blank",
+      "source_label": "NFL Next Gen Stats Glossary",
+      "source_url": "https://nextgenstats.nfl.com/glossary"
+    },
+    {
+      "pair_id": "COR-08",
+      "leg_a": "1st & 2nd String QB Out (3rd-String QB Starting)",
+      "leg_b": "Full-Game Total Under & Same-Team WR1 Yards Under",
+      "structural_driver": "Severe drop in CPOE/air-yards aggressiveness and conservative run-heavy play calling (modeled on BAL Week 9 QB chain).",
+      "empirical_rho": "",
+      "ci_95": "",
+      "estimator": "Stratified event study on 3rd-string QB starts vs. closing market adjustments.",
+      "status": "Unverified · Blank",
+      "source_label": "NFL Week 9 Injury Report",
+      "source_url": "https://www.nfl.com/injuries/league/2026/REG9"
+    }
+  ],
+  "reward_governance": [
+    {
+      "rule_id": "GOV-01",
+      "mechanism": "Primary Ranking Metric: Proper Skill Score + CLV (Never Raw ROI)",
+      "anti_luck_effect": "A lucky 6-leg parlay hit inflates short-term ROI by +500% with zero skill; Brier Skill Score and vig-free Closing Line Value weight every probability forecast equally and penalize overconfident misses.",
+      "status": "Specified · Pre-Launch",
+      "source_label": "scikit-learn Calibration",
+      "source_url": "https://scikit-learn.org/stable/modules/calibration.html"
+    },
+    {
+      "rule_id": "GOV-02",
+      "mechanism": "Market-Cohort Separation (Singles vs. Parlays vs. Prop Combos)",
+      "anti_luck_effect": "Prevents high-kurtosis multi-leg combos (facing up to 27.79% NGCB parlay card hold) from distorting rankings of low-variance single-line originators.",
+      "status": "Specified · Pre-Launch",
+      "source_label": "NGCB Sep 2025 Report (p. 1)",
+      "source_url": "https://www.gaming.nv.gov/contentassets/a7958398526e4e309d248ea35a2a20dd/september-2025-monthly-revenue-report.pdf"
+    },
+    {
+      "rule_id": "GOV-03",
+      "mechanism": "Mandatory Trial-Count Denominator (Anti-Sybil Submission Cap)",
+      "anti_luck_effect": "Every parameter sweep and rejected model version per researcher increments M in the Benjamini-Hochberg FDR adjustment so brute-force luck mining cannot pass Gate G6.",
+      "status": "Specified · Pre-Launch",
+      "source_label": "NIST Confidence Limits",
+      "source_url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm"
+    },
+    {
+      "rule_id": "GOV-04",
+      "mechanism": "8-Week Prospective Shadow Escrow Before Reward Vesting",
+      "anti_luck_effect": "Backtest winners earn $0 / 0 credits at submission; rewards vest strictly after 8+ prospective live NFL weeks with pre-kickoff SHA-256 prediction hashes.",
+      "status": "Specified · Pre-Launch",
+      "source_label": "scikit-learn Cross-Validation",
+      "source_url": "https://scikit-learn.org/stable/modules/cross_validation.html"
+    },
+    {
+      "rule_id": "GOV-05",
+      "mechanism": "Confidence-Interval Tie Rule",
+      "anti_luck_effect": "Strategies whose 95% game-clustered skill confidence intervals overlap share tier credit rather than crowning noise-driven #1 winners.",
+      "status": "Specified · Pre-Launch",
+      "source_label": "NIST Confidence Limits",
+      "source_url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm"
+    }
+  ]
+}

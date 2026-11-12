@@ -60,7 +60,7 @@ jobs:
         run: |
           git config user.name "nfl3-bot"
           git config user.email "nfl3-bot@users.noreply.github.com"
-          git add -A data lab/results site
+          git add -A data lab/results research-desk
           if git diff --cached --quiet; then
             echo "no changes to commit"
           else
@@ -71,7 +71,7 @@ jobs:
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: site
+          path: research-desk
 
   deploy:
     needs: build
