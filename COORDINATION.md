@@ -38,6 +38,7 @@ The Arena-provided branch is fixed as `arena/4fd6bbbb-nfl3`; this session cannot
 - Added supplementary requirements/questions, signal hypotheses, lineup/injury evidence schema, validation gates, prioritized suggestions and extended flagged items. The previously published landing and source register were preserved; a research-deep-dives table links the additions from the overview. Official NFL injury, player-stat, team-stat, team-directory and 2026 rulebook pages were opened on 2026-11-12 UTC. No live values were copied; unknowns remain flagged.
 - Verification: `python3 scripts/validate_site.py` passed across 12 HTML pages (local links/assets and citation links); `python3 tests/check_site.py` passed for the existing dashboard; `git diff --check` passed. These checks do not crawl external links or guarantee future source content.
 - Unresolved market-feed/rights, historical price, depth-chart, model, correlation, automated ingestion and leaderboard policy gaps remain visible on Flagged for Review. No verified strategy or automated injury pipeline was produced by this session.
+- Final integration follow-up: added root Overview links to both `dashboard/` and `line-lab/`. `node dashboard/scripts/check.mjs` passed (254 injury rows, 14 games, 19 headlines; rows sourced or flagged); `python3 line-lab/scripts/verify.py` passed (13 checks, 17 pages); root validation scripts also passed. Both nested dashboards explicitly label unverified items and avoid claiming validated betting performance. External content is not continuously crawled.
 
 ## Dashboard — arena/f445c027-nfl3 (session f445c027), 2026-11-12 UTC
 
@@ -125,9 +126,7 @@ visible on NFL surfaces: NFL Support (S13) states the widgets show odds "provide
 the NFL (FanDuel, Caesars, and DraftKings)" with bets placed through a redirect. Earlier sessions correctly flagged
 the rights/feed gap; this session narrows the claim to "no NFL-authored, historical, machine-readable line archive".
 
-**Integration request to the root-site owner (not actioned here):** add a link to `line-lab/index.html`
-(live: https://kanlerxz87-cyber.github.io/NFL3/line-lab/) from the root navigation. This session did not edit the
-owner's files.
+**Integration request (addressed by the final root-site integration):** the root Overview's "Research deep dives" table links to `line-lab/index.html` (https://kanlerxz87-cyber.github.io/NFL3/line-lab/), with an official NFL standings source link. The destination labels its figures as model-implied, not market lines.
 
 **Sources (all fetched 2026-11-12):** `nfl.com/standings/`, `nfl.com/injuries/`, `nfl.com/schedules/2026/REG/`,
 `nfl.com/teams/washington-commanders/roster`, `nfl.com/teams/washington-commanders/`,
@@ -159,4 +158,4 @@ order; F-09 no leg-level outcome data; F-10 'Questionable' calibration unmeasure
 - **PR #10** (follow-up fixes) — **merged** as `1b713ce76866ca5e4eaffeb43d3d764c6fdfa75d` (merge commit). Its first Pages run was cancelled by a newer `main` push (PR #11, another session); the run on the following commit `94b0518` completed **success** (`pages build and deployment` 43156630277; `Validate and deploy GitHub Pages` 43156630287).
 - **Live verification (fetched 2026-11-12):** https://kanlerxz87-cyber.github.io/NFL3/dashboard/ shows R-06 corrected, R-16 marked UNVERIFIED, and the Flagged count (27).
 - **Dashboard status:** 10 pages, 254 injury rows, 14 games, 19 headlines, 0 of 12 strategies validated, 13 proposals awaiting decision, 27 flagged items. Checks: `dashboard/scripts/check.mjs` OK; root `tests/check_site.py` and `scripts/validate_site.py` OK.
-- **Still open (for owner review):** second line-by-line pass on the 254 injury rows; Seattle/Darnold reconciliation (Q09); Rams Garrett/McDuffie labels (Q10); DEN/CHI/PHI/TB Week 10 status (Q11); official depth-chart source (Q02); odds and historical results (Q04/Q05); NFL primary prop-bet memo (Q13); Ksa licence rules (Q12); root navigation link to `dashboard/` (integration request).
+- **Still open (for owner review):** second line-by-line pass on the 254 injury rows; Seattle/Darnold reconciliation (Q09); Rams Garrett/McDuffie labels (Q10); DEN/CHI/PHI/TB Week 10 status (Q11); official depth-chart source (Q02); odds and historical results (Q04/Q05); NFL primary prop-bet memo (Q13); Ksa licence rules (Q12). Root links to `dashboard/` and `line-lab/` were added by the final integration.
