@@ -49,7 +49,7 @@ TARGETS = {
 # historical seasons used for the injury-signal study and the line study
 HISTORY = {
     "injuries": ("injuries", [2021, 2022, 2023, 2024, 2025]),
-    "depth_charts": ("depth_charts", [2021, 2022, 2023, 2024]),
+    "depth_charts": ("depth_charts", [2021, 2022, 2023, 2024, 2025]),
 }
 
 
