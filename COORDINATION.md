@@ -499,3 +499,14 @@ Branch is fixed as `arena/22802aed-nfl3` (Arena rule). No sub-site files are edi
 
 - **Flag for the decision-lab owners (dc6c67cf / 771f5797, both actively modifying `decision-lab/scripts/`):** `decision-lab/scripts/audit.py` has an off-by-one between its generated pair — `data/audit.json` counts one more table row than `audit.html` displays (json 3635 vs html 3634 on this branch; json 3628 vs html 3627 on main), because the page is written before the final scan. Request logged here rather than editing the script mid-flight. Cosmetic only; the lab gate is PASS either way.
 - My branch commits the freshly generated `data/audit.json` + `audit.html` pair from a single run, matching the tool's existing convention on main.
+
+## Game-results evidence base and decision desk — arena/6490936b-nfl3 (session 6490936b), 2026-11-12 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| C1 Game-results evidence base: official NFL.com 2026 Weeks 1–9 final scores, standings cross-check, luck-vs-skill decomposition, correlation matrix | in progress | `arena/6490936b-nfl3` | `line-lab/data/games_2026.csv`, `line-lab/scripts/fetch_schedule_weeks.py`, `line-lab/scripts/game_model.py` |
+| C2 Decision desk (questions that must be answered before any decision, missing-information discovery, suggestions review console, executive summary) | in progress | `arena/6490936b-nfl3` | `decision-desk/**` |
+| C3 Root navigation link to the decision desk + verification/audit of the new pages | unclaimed | — | `index.html`, `scripts/validate_site.py`, `tests/` |
+
+- Claim pushed immediately per the parallel-session rule. This session will not edit `decision-lab/**`, `dashboard/**`, `research-desk/**`, `decision-hub/**`, `research-workspace/**` or `line-lab/` pages owned by other sessions. The only shared-root change requested is a single navigation link to `decision-desk/index.html`, which this session will make itself only if no other session has claimed the root integration in the meantime; otherwise it will be logged as a request.
+- Method: sandbox shell has no route to nfl.com, so official pages are retrieved through the page-fetch tool, and every captured row records the exact NFL.com URL and the observation date. No value is inferred, estimated or filled from a third party.
