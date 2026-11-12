@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Correlations · NFL3</title>
+<meta name="description" content="NFL3 — verified NFL data, a line-origination model, validation gates and a decision register. Every value sourced, unverified values flagged.">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site">
+  <div class="wrap">
+    <div class="brand">
+      <div class="brand-mark">N3</div>
+      <div>
+        <h1>NFL3 — strategy &amp; line origination</h1>
+        <p class="tag">Verified inputs · model-implied outputs · explicit gaps</p>
+      </div>
+      <div class="status-strip">
+        <span>line-lab · session arena-e5e2b753</span>
+        <span>2026 season · through Week 10</span>
+        <span>0 scored strategies</span>
+      </div>
+    </div>
+  </div>
+</header>
+<nav class="site" aria-label="Sections"><div class="wrap"><a href="../index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="methodology.html">Methodology</a><span class="sep"></span><a href="standings.html">Standings</a><a href="lines.html">Model lines</a><a href="correlations.html" class="active">Correlations</a><a href="luck.html">Luck &amp; regression</a><span class="sep"></span><a href="injuries.html">Injuries</a><a href="depth.html">Depth &amp; availability</a><a href="rules.html">Rules</a><span class="sep"></span><a href="questions.html">Questions &amp; gaps</a><a href="suggestions.html">Suggestions</a><a href="strategies.html">Strategy leaderboard</a><a href="gates.html">Validation gates</a><span class="sep"></span><a href="flagged.html">Flagged for review</a><a href="sources.html">Sources</a><a href="coordination.html">Coordination</a></div></nav>
+<main id="main"><div class="wrap">
+<div class="page-head"><div class="eyebrow">League</div><h2>Correlations</h2><p>What actually moves together in the verified 2026 data — including the two correlations that are shown only to expose an artefact.</p></div>
+
+<div class="callout">
+  <h4>The variance decomposition — the number the whole project rests on</h4>
+  <p>Scoring margin explains <strong>76.7%</strong> of between-club win-pct variance (r = 0.876, r² = 0.767). The remaining <strong>23.3%</strong> is the pool that contains one-score games, opponent quality and chance.</p>
+  <p style="margin-bottom:0">The share of between-club win-pct variance that scoring margin explains. The complement is what one-score games, opponent quality and chance left over — i.e. the size of the luck pool that any strategy must avoid claiming.</p>
+</div>
+<div class="tablewrap"><table id="t-corr" data-source="S01"><thead><tr><th class="">ID</th><th class="">X</th><th class="">Y</th><th class="num">r</th><th class="num">r²</th><th class="num">p</th><th class="">Strength</th><th class="">Warning</th><th class="wrap">Interpretation</th><th class="">Src</th></tr></thead><tbody><tr class=""><td class="" data-sort="C1"><strong>C1</strong></td><td class="">net points per game</td><td class="">win pct</td><td class="num" data-sort="0.8758">+0.876</td><td class="num" data-sort="0.7671">0.767</td><td class="num" data-sort="0.0">&lt;0.0001</td><td class="" data-sort="very strong"><span class="badge ok">very strong</span></td><td class=""></td><td class="wrap">The core skill signal: how much of a club&#x27;s record its scoring margin explains.</td><td class=""><span class="src"><a href="sources.html#S01" title="2026 NFL Division Standings">S01</a></span> <span class="badge derived" title="computed by a script in this repo from the cited source">derived</span></td></tr><tr class=""><td class="" data-sort="C2"><strong>C2</strong></td><td class="">points for per game</td><td class="">win pct</td><td class="num" data-sort="0.694">+0.694</td><td class="num" data-sort="0.4816">0.482</td><td class="num" data-sort="4e-06">&lt;0.0001</td><td class="" data-sort="strong"><span class="badge ok">strong</span></td><td class=""></td><td class="wrap">Offence-only signal strength.</td><td class=""><span class="src"><a href="sources.html#S01" title="2026 NFL Division Standings">S01</a></span> <span class="badge derived" title="computed by a script in this repo from the cited source">derived</span></td></tr><tr class=""><td class="" data-sort="C3"><strong>C3</strong></td><td class="">points against per game</td><td class="">win pct</td><td class="num" data-sort="-0.6663">-0.666</td><td class="num" data-sort="0.444">0.444</td><td class="num" data-sort="1.5e-05">&lt;0.0001</td><td class="" data-sort="strong"><span class="badge ok">strong</span></td><td class=""></td><td class="wrap">Defence-only signal strength.</td><td class=""><span class="src"><a href="sources.html#S01" title="2026 NFL Division Standings">S01</a></span> <span class="badge derived" title="computed by a script in this repo from the cited source">derived</span></td></tr><tr class=""><td class="" data-sort="C4"><strong>C4</strong></td><td class="">points for per game</td><td class="">points against per game</td><td class="num" data-sort="-0.2063">-0.206</td><td class="num" data-sort="0.0426">0.043</td><td class="num" data-sort="0.259731">0.2597</td><td class="" data-sort="weak"><span class="badge muted">weak</span></td><td class=""></td><td class="wrap">Cross-sectional pairing of offence and defence; near-zero means a club&#x27;s offence and defence are unrelated, so scoring margin carries both.</td><td class=""><span class="src"><a href="sources.html#S01" title="2026 NFL Division Standings">S01</a></span> <span class="badge derived" title="computed by a script in this repo from the cited source">derived</span></td></tr><tr class=""><td class="" data-sort="C5"><strong>C5</strong></td><td class="">Pythagorean win pct (fitted)</td><td class="">actual win pct</td><td class="num" data-sort="0.8784">+0.878</td><td class="num" data-sort="0.7715">0.771</td><td class="num" data-sort="0.0">&lt;0.0001</td><td class="" data-sort="very strong"><span class="badge ok">very strong</span></td><td class=""></td><td class="wrap">Model calibration: how much of the table the scoring model reproduces.</td><td class=""><span class="src"><a href="sources.html#S01" title="2026 NFL Division Standings">S01</a></span> <span class="badge derived" title="computed by a script in this repo from the cited source">derived</span></td></tr><tr class=""><td class="" data-sort="C6"><strong>C6</strong></td><td class="">division win pct</td><td class="">overall win pct</td><td class="num" data-sort="0.3284">+0.328</td><td class="num" data-sort="0.1079">0.108</td><td class="num" data-sort="0.066262">0.0663</td><td class="" data-sort="weak"><span class="badge muted">weak</span></td><td class=""></td><td class="wrap">Does intra-division form track overall form? Low values argue against &#x27;division form&#x27; as a standalone signal.</td><td class=""><span class="src"><a href="sources.html#S01" title="2026 NFL Division Standings">S01</a></span> <span class="badge derived" title="computed by a script in this repo from the cited source">derived</span></td></tr><tr class=""><td class="" data-sort="C7"><strong>C7</strong></td><td class="">last five games win pct</td><td class="">season win pct</td><td class="num" data-sort="0.8795">+0.879</td><td class="num" data-sort="0.7735">0.773</td><td class="num" data-sort="0.0">&lt;0.0001</td><td class="" data-sort="very strong"><span class="badge ok">very strong</span></td><td class=""><span class="badge bad">mechanical</span></td><td class="wrap">PART-WHOLE CAUTION: the last five games are a subset of the season record, so this r is mechanically inflated and is NOT evidence of momentum. Reported only to show the size of the artefact; use C8 for the real test.</td><td class=""><span class="src"><a href="sources.html#S01" title="2026 NFL Division Standings">S01</a></span> <span class="badge derived" title="computed by a script in this repo from the cited source">derived</span></td></tr><tr class=""><td class="" data-sort="C8"><strong>C8</strong></td><td class="">win pct in games before the last five</td><td class="">win pct in the last five</td><td class="num" data-sort="0.4244">+0.424</td><td class="num" data-sort="0.1801">0.180</td><td class="num" data-sort="0.014691">0.0147</td><td class="" data-sort="moderate"><span class="badge warn">moderate</span></td><td class=""></td><td class="wrap">Split-half reliability, NOT a momentum effect. Two disjoint blocks of the same season, but both measure the same underlying club quality, so a positive r is expected even with zero momentum. Read it as an upper bound on how much a 3-4 game block is worth; a true momentum test must control for quality (needs a game log, F-04).</td><td class=""><span class="src"><a href="sources.html#S01" title="2026 NFL Division Standings">S01</a></span> <span class="badge derived" title="computed by a script in this repo from the cited source">derived</span></td></tr></tbody></table></div>
+<p class="tbl-note">n = 32 clubs. Pearson r with two-sided p via Fisher z. At this n a p-value is suggestive, not decisive.</p>
+
+<h3>Reading these honestly</h3>
+<ul>
+  <li><strong>C1 is the skill signal.</strong> It is high because margin and wins share the same scoring events — that is the point, not an artefact. It sets the ceiling on how much of a record is explainable at all.</li>
+  <li><strong>C4 is the interesting one.</strong> Offence and defence are close to independent across clubs (r = −0.206, p = 0.26), so neither alone predicts the other. That is why a single net-points rating carries more information than two separate rankings.</li>
+  <li><strong>C7 is flagged mechanical.</strong> Last-five form is a subset of the season record, so the correlation is inflated by construction. It is shown to make the size of that artefact visible, not as evidence.</li>
+  <li><strong>C8 is reliability, not momentum.</strong> Two disjoint blocks of the same season correlate at +0.424, but both blocks measure the same club quality. Calling that momentum would be a category error.</li>
+  <li><strong>What is missing.</strong> No leg-level correlation exists, so nothing here prices a parlay (F-09). These are cross-sectional team correlations, which are a different object entirely.</li>
+</ul>
+
+</div></main>
+<footer class="site"><div class="wrap">
+  <div>Built from official NFL sources only. Unverified values are left blank, never inferred.</div>
+  <div><a href="../pages/flagged.html">Flagged for review</a> · <a href="../pages/sources.html">Sources</a> · <a href="https://github.com/kanlerxz87-cyber/NFL3/blob/main/COORDINATION.md">COORDINATION.md</a> · <a href="../../index.html">← Main NFL3 site</a></div>
+</div></footer>
+<script src="../assets/app.js"></script>
+</body>
+</html>

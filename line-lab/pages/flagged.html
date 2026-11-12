@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flagged for review · NFL3</title>
+<meta name="description" content="NFL3 — verified NFL data, a line-origination model, validation gates and a decision register. Every value sourced, unverified values flagged.">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site">
+  <div class="wrap">
+    <div class="brand">
+      <div class="brand-mark">N3</div>
+      <div>
+        <h1>NFL3 — strategy &amp; line origination</h1>
+        <p class="tag">Verified inputs · model-implied outputs · explicit gaps</p>
+      </div>
+      <div class="status-strip">
+        <span>line-lab · session arena-e5e2b753</span>
+        <span>2026 season · through Week 10</span>
+        <span>0 scored strategies</span>
+      </div>
+    </div>
+  </div>
+</header>
+<nav class="site" aria-label="Sections"><div class="wrap"><a href="../index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="methodology.html">Methodology</a><span class="sep"></span><a href="standings.html">Standings</a><a href="lines.html">Model lines</a><a href="correlations.html">Correlations</a><a href="luck.html">Luck &amp; regression</a><span class="sep"></span><a href="injuries.html">Injuries</a><a href="depth.html">Depth &amp; availability</a><a href="rules.html">Rules</a><span class="sep"></span><a href="questions.html">Questions &amp; gaps</a><a href="suggestions.html">Suggestions</a><a href="strategies.html">Strategy leaderboard</a><a href="gates.html">Validation gates</a><span class="sep"></span><a href="flagged.html" class="active">Flagged for review</a><a href="sources.html">Sources</a><a href="coordination.html">Coordination</a></div></nav>
+<main id="main"><div class="wrap">
+<div class="page-head"><div class="eyebrow">Trust</div><h2>Flagged for review</h2><p>Ten items that could not be confirmed, could not be met, or contradict each other — each with its source links and closure condition.</p></div>
+
+<div class="callout">
+  <h4>The rule this page enforces</h4>
+  <p>If a value could not be confirmed against an official NFL page, it was left blank and listed here. No value was inferred, estimated, or recalled from memory to fill a table cell. That is why some cells read <span class="null">—</span> and why the pages that would normally look most authoritative are the ones with gaps in them.</p>
+</div>
+
+<div class="grid k3" style="margin-bottom:18px">
+  <div class="card bad"><div class="k">Critical</div><div class="v">2</div><div class="s">block a core requirement</div></div>
+  <div class="card warn"><div class="k">High / medium</div><div class="v">6</div><div class="s">degrade a specific feature</div></div>
+  <div class="card"><div class="k">Low</div><div class="v">2</div><div class="s">documented for completeness</div></div>
+</div>
+
+
+<div class="flag critical">
+  <h4>F-04 · No NFL-authored odds archive, so nothing can be validated</h4>
+  <div class="meta"><span class="badge bad">critical</span> <span class="badge muted">missing information</span> · appears on Lines, Strategy Leaderboard, Validation Gates, Executive Summary</div>
+  <dl>
+    <dt>What was found</dt><dd>nfl.com/odds/ returns 404. NFL Support confirms that NFL widgets show odds &#x27;provided by official bookmaker partners of the NFL (FanDuel, Caesars, and DraftKings)&#x27; and that bets are placed through a redirect to the bookmaker. So odds are visible on NFL surfaces, but they are a partner feed, not an NFL product, and no historical archive is published. Consequently no closing line, CLV, ATS record, backtest or leaderboard score exists anywhere in this project.</dd>
+    <dt>Why it matters</dt><dd>Lines are supplied by licensed sportsbooks, not authored by the league. This is a structural fact about the source landscape, not a limitation of effort. Anything extracted from a partner widget would be a snapshot of a third party&#x27;s price, with no guarantee of history or continuity.</dd>
+    <dt>How it is handled</dt><dd>Every model output is labelled a model-implied number, never a line. The leaderboard publishes zero scored strategies rather than fabricated ones.</dd>
+    <dt>To clear it</dt><dd>Purchase a historical odds archive (SG-01) and define the closing-line snapshot rule in writing (Q-04).</dd>
+    <dt>Sources</dt><dd><span class="src"><a href="sources.html#S09" title="NFL.com odds page (probe)">S09</a><a href="sources.html#S13" title="If I place a bet on NFL.com or the NFL app, am I betting with the NFL?">S13</a></span></dd>
+  </dl>
+</div>
+<div class="flag critical">
+  <h4>F-08 · Depth order (1st/2nd/3rd string) is not in the official roster feed</h4>
+  <div class="meta"><span class="badge bad">critical</span> <span class="badge muted">missing information</span> · appears on Depth &amp; Availability, Strategy Leaderboard</div>
+  <dl>
+    <dt>What was found</dt><dd>The official NFL.com roster page exposes player, number, position, roster status, height, weight, experience and college. It has no depth-rank column. It was read in full to confirm this.</dd>
+    <dt>Why it matters</dt><dd>The central requirement — detecting when a 2nd, 3rd or 4th string player must replace a starter — is a depth-order question. Without an order, any &#x27;backup&#x27; label would be an invention.</dd>
+    <dt>How it is handled</dt><dd>The DepthStress index measures verified availability degradation by position group. It explicitly does not claim who replaces whom, and says so in its own definition.</dd>
+    <dt>To clear it</dt><dd>Q-09 / SG-05: verify per-club official depth charts, or derive order from an official snap-count source, for at least 30 of 32 clubs.</dd>
+    <dt>Sources</dt><dd><span class="src"><a href="sources.html#S07" title="Washington Commanders 2026 Player Roster">S07</a></span></dd>
+  </dl>
+</div>
+<div class="flag high">
+  <h4>F-02 · Core roster numbers could not be confirmed on an official page</h4>
+  <div class="meta"><span class="badge bad">high</span> <span class="badge muted">unverified values</span> · appears on Rules, Depth &amp; Availability</div>
+  <dl>
+    <dt>What was found</dt><dd>Active-roster size, game-day active size, the game-status publication deadline, and the current practice-squad size are all left blank or marked unverified. An Associated Press article surfaced in search describing a 17-man practice squad, which conflicts with the NFL.com report of 16.</dd>
+    <dt>Why it matters</dt><dd>These numbers set the frame for every availability calculation. Publishing a remembered number as a verified one would be exactly the failure mode this project forbids.</dd>
+    <dt>How it is handled</dt><dd>Rules R05, R09, R11 and R12 are marked unverified. R09 carries the conflict note.</dd>
+    <dt>To clear it</dt><dd>Find an official 2026 NFL Football Operations roster-rules page (or the current CBA summary) and quote the four figures directly.</dd>
+    <dt>Sources</dt><dd><span class="src"><a href="sources.html#S04" title="Players now eligible to return from injured reserve after four games; practice squads increased to 16 players">S04</a><a href="sources.html#S12" title="AP: From IR and PUP to practice squads — what NFL roster designations mean">S12</a></span></dd>
+  </dl>
+</div>
+<div class="flag high">
+  <h4>F-06 · Player-level usage source unverified</h4>
+  <div class="meta"><span class="badge bad">high</span> <span class="badge muted">missing information</span> · appears on Strategy Leaderboard, Validation Gates</div>
+  <dl>
+    <dt>What was found</dt><dd>No official stats surface was fetched, so no claim is made about whether snaps, routes, targets and carries are published there, or at what cost.</dd>
+    <dt>Why it matters</dt><dd>Every player-prop strategy depends on usage data. Without it, props cannot be originated at all.</dd>
+    <dt>How it is handled</dt><dd>All prop strategies are marked BLOCKED at G0 and G10. No prop line is published.</dd>
+    <dt>To clear it</dt><dd>Q-03: fetch and document the official stats surfaces field by field.</dd>
+    <dt>Sources</dt><dd><span class="unverified" title="no source">—</span></dd>
+  </dl>
+</div>
+<div class="flag high">
+  <h4>F-07 · Legal status of the reward structure unverified</h4>
+  <div class="meta"><span class="badge bad">high</span> <span class="badge muted">missing information</span> · appears on Executive Summary, Suggestions</div>
+  <dl>
+    <dt>What was found</dt><dd>No regulatory source was consulted. Whether betting and paying performance rewards is lawful for the operator&#x27;s jurisdiction is unknown.</dd>
+    <dt>Why it matters</dt><dd>The project is designed to pay rewards for top-performing strategies. If the underlying activity is not lawful where the operator lives, the reward structure must not be built.</dd>
+    <dt>How it is handled</dt><dd>No stakes, no money, and no real-money linkage are implemented anywhere in this build. The site is analysis only.</dd>
+    <dt>To clear it</dt><dd>Q-05: written legal opinion, not a forum post.</dd>
+    <dt>Sources</dt><dd><span class="unverified" title="no source">—</span></dd>
+  </dl>
+</div>
+<div class="flag high">
+  <h4>F-09 · No leg-level outcomes, so no correlation coefficient is estimated</h4>
+  <div class="meta"><span class="badge bad">high</span> <span class="badge muted">missing information</span> · appears on Strategy Leaderboard, Validation Gates</div>
+  <dl>
+    <dt>What was found</dt><dd>The only correlations computed in this project are cross-sectional team correlations (C1-C8) from season aggregates. No pairwise leg correlation for parlays or props exists.</dd>
+    <dt>Why it matters</dt><dd>Parlay and combo pricing depends entirely on the joint distribution. Any rho used would be an assumption dressed as a measurement.</dd>
+    <dt>How it is handled</dt><dd>The copula mathematics is implemented and published; every parlay strategy is BLOCKED at G9. The illustrative tables state their parameters explicitly and are marked synthetic.</dd>
+    <dt>To clear it</dt><dd>Q-14: build a leg-level outcome table for at least two seasons and estimate rho per market cluster.</dd>
+    <dt>Sources</dt><dd><span class="unverified" title="no source">—</span></dd>
+  </dl>
+</div>
+<div class="flag medium">
+  <h4>F-03 · Most game statuses did not exist yet at fetch time, and two clubs were not captured</h4>
+  <div class="meta"><span class="badge warn">medium</span> <span class="badge muted">gap</span> · appears on Injuries, Depth &amp; Availability</div>
+  <dl>
+    <dt>What was found</dt><dd>Of 108 transcribed injury rows, only 6 carried a game status (Out / Questionable). The remaining 102 were practice-report entries only. Buffalo&#x27;s report was captured partially and the New York Jets report was not captured at all, because ingestion stopped part-way through the source page.</dd>
+    <dt>Why it matters</dt><dd>For a Sunday game fetched on a Thursday this is the expected state under the league&#x27;s own scheme, but it means this week&#x27;s extract cannot support a start/sit decision on its own. The BUF/NYJ omission is an ingestion limit, not a data property.</dd>
+    <dt>How it is handled</dt><dd>Coverage is stated on the Injuries page and in the dataset metadata. No status was inferred from a practice line.</dd>
+    <dt>To clear it</dt><dd>Re-snapshot the same page on Friday and Saturday; complete the BUF and NYJ reports.</dd>
+    <dt>Sources</dt><dd><span class="src"><a href="sources.html#S05" title="Official NFL Injury Report — Week 10 of the 2026 Season">S05</a></span></dd>
+  </dl>
+</div>
+<div class="flag medium">
+  <h4>F-10 · &#x27;Questionable&#x27; has no measured calibration</h4>
+  <div class="meta"><span class="badge warn">medium</span> <span class="badge muted">unverified value</span> · appears on Depth &amp; Availability, Injuries</div>
+  <dl>
+    <dt>What was found</dt><dd>The definition is verified (uncertain whether the player will play). The actual play rate of players carrying the designation is not measured, and this week&#x27;s extract has only 6 designated players.</dd>
+    <dt>Why it matters</dt><dd>If a designation does not predict participation, every model feature built on it is noise. Assuming a probability would be an invented value.</dd>
+    <dt>How it is handled</dt><dd>No probability is assigned to any designation. The availability weights used in DepthStress are declared assumptions (A-04), not calibrations.</dd>
+    <dt>To clear it</dt><dd>Q-20 / SG-06: join several seasons of designations to official inactive lists and compute play rates with confidence intervals.</dd>
+    <dt>Sources</dt><dd><span class="src"><a href="sources.html#S03" title="Competition Committee approves revisions to Injury Report">S03</a><a href="sources.html#S05" title="Official NFL Injury Report — Week 10 of the 2026 Season">S05</a></span></dd>
+  </dl>
+</div>
+<div class="flag low">
+  <h4>F-01 · Clubs have played an unequal number of games</h4>
+  <div class="meta"><span class="badge muted">low</span> <span class="badge muted">data irregularity</span> · appears on Standings, Lines, Luck &amp; Regression</div>
+  <dl>
+    <dt>What was found</dt><dd>In the 2026 standings snapshot, games played range from 8 to 9 across the 32 clubs because of bye weeks and the in-progress Week 10 slate.</dd>
+    <dt>Why it matters</dt><dd>Per-game rates are still comparable, but raw season totals (PF, PA, wins) are not. Any ranking that mixes totals across clubs with different game counts is wrong.</dd>
+    <dt>How it is handled</dt><dd>Ratings are computed per game. The games-played column is published so the user can see the mismatch.</dd>
+    <dt>To clear it</dt><dd>None needed; it is a real property of a mid-season snapshot.</dd>
+    <dt>Sources</dt><dd><span class="src"><a href="sources.html#S01" title="2026 NFL Division Standings">S01</a></span></dd>
+  </dl>
+</div>
+<div class="flag low">
+  <h4>F-05 · Week 10 slate is only half captured</h4>
+  <div class="meta"><span class="badge muted">low</span> <span class="badge muted">gap</span> · appears on Lines</div>
+  <dl>
+    <dt>What was found</dt><dd>Eight of the sixteen Week 10 games were verified with their dates, kickoff times and networks. The remainder were beyond the truncated portion of the source pages.</dd>
+    <dt>Why it matters</dt><dd>The model lines therefore cover half a slate. No matchup was invented to fill the gap.</dd>
+    <dt>How it is handled</dt><dd>The 8 verified games are published; coverage is stated as 8 of 16.</dd>
+    <dt>To clear it</dt><dd>Fetch the remaining schedule pages or use a full-slate feed.</dd>
+    <dt>Sources</dt><dd><span class="src"><a href="sources.html#S05" title="Official NFL Injury Report — Week 10 of the 2026 Season">S05</a><a href="sources.html#S06" title="2026 NFL Schedule &amp; Week 1 results">S06</a></span></dd>
+  </dl>
+</div>
+
+</div></main>
+<footer class="site"><div class="wrap">
+  <div>Built from official NFL sources only. Unverified values are left blank, never inferred.</div>
+  <div><a href="../pages/flagged.html">Flagged for review</a> · <a href="../pages/sources.html">Sources</a> · <a href="https://github.com/kanlerxz87-cyber/NFL3/blob/main/COORDINATION.md">COORDINATION.md</a> · <a href="../../index.html">← Main NFL3 site</a></div>
+</div></footer>
+<script src="../assets/app.js"></script>
+</body>
+</html>
