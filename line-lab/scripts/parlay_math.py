@@ -170,7 +170,7 @@ def main():
     # --- G5: deflated Sharpe
     dsr_rows = []
     for trials in [1, 10, 50, 200, 1000]:
-        for sr in [0.02, 0.04, 0.08]:
+        for sr in [0.05, 0.10, 0.20]:
             d, e_max = deflated_sharpe(sr, 500, trials)
             dsr_rows.append({
                 "trials": trials, "observed_sharpe": sr, "n": 500,
