@@ -1,6 +1,6 @@
 {
   "html_pages": 81,
-  "table_rows": 4240,
+  "table_rows": 4239,
   "rows_missing_official_source": 533,
   "rows_community_only": 106,
   "rows_with_internal_audit_source": 7,
@@ -209,7 +209,7 @@
     },
     {
       "path": "decision-lab/audit.html",
-      "rows": 8,
+      "rows": 7,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 7,
