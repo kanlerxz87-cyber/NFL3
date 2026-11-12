@@ -580,3 +580,13 @@ order; F-09 no leg-level outcome data; F-10 'Questionable' calibration unmeasure
 - Workflow change recorded: `.github/workflows/decision-lab.yml` no longer commits refreshed snapshots back to the branch. Capture is manual-dispatch only and uploads an artifact; the Pages workflow refreshes captures in the deployment job, rebuilds/audits, then publishes. This avoids GITHUB_TOKEN push loops and keeps snapshot publication tied to a checked deploy.
 - Re-run after the root correction: 15 unit tests OK; 13 lab pages; independent audit 77 pages / 3,626 rows / 2 findings / lab gate PASS; root validators OK; `git diff --check` OK. Current audit counts are 531 rows missing an official-source link and 106 community-only rows in preserved non-canonical workspaces; earlier 536/111 counts were before the root cleanup.
 - PR #23 is ready for review (not draft), mergeable, and both PR validate checks passed. Merge will proceed without waiting for approval after the final head check.
+
+### Publication record — arena/c2825205-nfl3, 2026-11-12 UTC
+
+- Integration PR: https://github.com/kanlerxz87-cyber/NFL3/pull/23 — **MERGED** without waiting for approval at 2026-11-12T07:48:47Z.
+- Merge commit: `9b4611a429ecf9640ea5373ec1780d9d3f0a6ab2`.
+- Checks before merge: PR head `ff8f46c5b69fea27782f575463b5e3ca068c2e37`; Decision-lab validate and Pages validate both SUCCESS; deploy/capture skipped on PR by design.
+- Pages deployment: `Validate and deploy GitHub Pages` run https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43178027508 completed SUCCESS on `9b4611a`, including official capture refresh, lab rebuild/audit, root validation, upload and deploy. Subsequent legacy `pages-build-deployment` run https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43178100902 also completed SUCCESS on `147953b` after the concurrent data-refresh push.
+- Live verification: fetched https://kanlerxz87-cyber.github.io/NFL3/decision-lab/ after deployment; canonical dashboard rendered with 254 injury rows, 1,745 depth rows, 0 validated strategies, 13 open blocking answers and 12 review flags.
+- Flagged/unverified items remain published at https://kanlerxz87-cyber.github.io/NFL3/decision-lab/flagged.html and https://kanlerxz87-cyber.github.io/NFL3/decision-lab/audit.html. They did not block site merge; they block affected betting/reward decisions.
+- This publication record is carried by a coordination-only follow-up from the same fixed Arena branch after the integration merge.
