@@ -1,12 +1,28 @@
 # Coordination board
 
-Read this board before starting work. Do not edit files claimed by another active session; log requests here. Claims with no commits for over 60 minutes may be handed off, with a note. All factual content requires an official source; unverified items belong on Flagged for Review.
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Repository review, source research, dashboard and integration | needs review | arena-4fd6bbbb | COORDINATION.md, README.md, site files, tests and Pages workflow |
 
-| Task | Status | Owner / branch | File scope |
-| --- | --- | --- | --- |
-| Initial integration: research, dashboard, tests, and Pages deployment | in progress | 56e27bb4 / `arena/56e27bb4-nfl3` | `COORDINATION.md`, `README.md`, `index.html`, `pages/`, `assets/`, `scripts/`, `.github/workflows/` |
+The Arena-provided branch is fixed as `arena/4fd6bbbb-nfl3`; this session cannot create or switch to a session-named branch. Other sessions should avoid the claimed files and log integration requests here.
 
-## Log
+## Research and integration log — arena-4fd6bbbb, 2026-11-12 UTC
 
-- 2026-11-12: Repository inspected; initial commit contains only `README.md`. No prior board or claims found. This session is acting as the integration session. Arena fixes the branch name, so the requested `session-<id>/<task>` naming convention cannot be used here.
-- 2026-11-12: Built six static pages from `scripts/build.py`. Checked each of the four injury excerpt rows against the [NFL report](https://www.nfl.com/injuries/league/2026/REG9); the title says Week 10 while the body says WEEK 9, and that discrepancy is flagged. Reviewed [club depth-chart caveat](https://static.clubs.nfl.com/image/upload/buccaneers/ohiml2zpdqt07wdkhc7s), [NFL odds FAQ](https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL), [NFL integrity announcement](https://www.nfl.com/news/nfl-draftkings-fanduel-fanatics-sports-betting-partners), [NIST validation discussion](https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=933682), and [GitHub Pages documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages). Research proposals are labeled as proposals, not verified outcomes. Checked 46 table rows for official source links and all local links with `python3 scripts/check.py`. External source content was manually reviewed via the research tools; availability is not continuously monitored. Live feeds, model results, correlations, competition and legal/data rights are unverified and flagged on the site.
+- Repository review: baseline contained only `README.md`; no existing data or application to verify. No other claims were present when this task was claimed.
+- Inspected official [NFL injury report](https://www.nfl.com/injuries/), [NFL statistics](https://www.nfl.com/stats/), [NFL Broncos roster](https://www.nfl.com/teams/denver-broncos/roster), [NWS API documentation](https://www.weather.gov/documentation/services-web-api), [scikit-learn cross-validation](https://scikit-learn.org/stable/modules/cross_validation.html), and [GitHub Pages documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages). Selected injury rows were checked against the report; proposals are explicitly labeled, and unknowns are blank.
+- The NFL depth-chart URL `/teams/denver-broncos/depth-chart` returned a 404 page. Roster status is not evidence of replacement order. Current injury report is not a historical point-in-time archive. Data rights, market quotes, lineup histories, automated refresh, correlations, validation results, leaderboard rewards and live models are unverified / not implemented; published on Flagged for Review.
+- Static integration: `python3 tests/check_site.py` checks local references and external source links in each data row; it passed. This is not an external link crawler or proof that future source content remains unchanged.
+- Status: needs review for the above open research and system gaps; the research dashboard itself is ready for static publication. No claims of complete automated tracking or verified profitable strategies are made.
+
+- Integration PR [#1](https://github.com/kanlerxz87-cyber/NFL3/pull/1) merged as `03e8669d6c9caaa1bb0b5c6e7b785a73a6a07bd7` on 2026-11-12 UTC. [Pages deployment run](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43155632864) succeeded; the published landing page was independently fetched with a cache-busting query. GitHub reported a Node 20 deprecation annotation for its managed Pages build action; deployment succeeded.
+
+## Supplemental research — arena-56e27bb4, 2026-11-12 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Supplemental sourced dashboard | needs review | arena-56e27bb4 | `research-workspace/`, coordination log |
+
+- Both sessions started from the initial commit with no board and independently claimed overlapping integration work. Main advanced while this session worked, producing an add/add conflict on this board. The conflict was resolved by preserving the previously published integration and both logs; this session moved its separate work under `research-workspace/` and left the published root site untouched.
+- Integration request to the root-site owner: review and, if appropriate, link the supplemental workspace from root navigation. This session did not change the owner's files.
+- Four injury excerpt rows checked against the [NFL report](https://www.nfl.com/injuries/league/2026/REG9); its title says Week 10 while its body says WEEK 9, so that discrepancy is flagged. Also reviewed [club depth-chart caveat](https://static.clubs.nfl.com/image/upload/buccaneers/ohiml2zpdqt07wdkhc7s), [NFL odds FAQ](https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL), [NFL integrity announcement](https://www.nfl.com/news/nfl-draftkings-fanduel-fanatics-sports-betting-partners), [NIST validation discussion](https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=933682), and [GitHub Pages documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages). Proposals are not verified outcomes. `python3 research-workspace/scripts/check.py` checks 46 table rows for official source links and local links. External source content was manually reviewed; availability is not continuously monitored. Live feeds, models, correlations, competition and legal/data rights are unverified and flagged.
+- Supplemental PR: [#4](https://github.com/kanlerxz87-cyber/NFL3/pull/4). The baseline dashboard was already merged via PR #1; the supplemental PR is separate.
