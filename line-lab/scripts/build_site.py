@@ -1074,6 +1074,8 @@ def build_gates(D):
     kt = tbl("t-kelly", [("Win prob", "num"), ("Price", "num"), ("Decimal", "num"), ("Edge per unit", "num"), ("Full Kelly", "num"), ("Quarter Kelly", "num")], k_rows, note=k["warning"], source="method")
 
     mult_rows = [{"cells": [num(r["trials"], 0), num(r["alpha_per_test"], 6), num(r["t_threshold"], 3)]} for r in sm["multiplicity"]["rows"]]
+    _t_bars = {r["trials"]: r["t_threshold"] for r in sm["multiplicity"]["rows"]}
+    t_bar_text = ", ".join(f"m={m}: t&gt;={_t_bars[m]:.2f}" for m in (1, 5, 100, 500) if m in _t_bars)
     multt = tbl("t-mult", [("Trials tried", "num"), ("Alpha per test", "num"), ("Required t", "num")], mult_rows, note=sm["multiplicity"]["method"], source="method")
 
     body = f"""
@@ -1103,6 +1105,7 @@ def build_gates(D):
 {dsrt}
 
 <h3>G2 — multiplicity</h3>
+<p class="tbl-note" style="margin-bottom:10px">Computed thresholds: {t_bar_text}.</p>
 {multt}
 
 <h3>G8 — confidence intervals: what a hot start actually means</h3>

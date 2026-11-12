@@ -14,7 +14,8 @@
   "cross-references: flags, questions, suggestions, strategies, gates and source ids all resolve",
   "decisions: 25 questions and 18 suggestions are complete and scorable",
   "strategies: 12 strategies, none claim a passed gate, all gate states recorded",
-  "claims: model output and executive summary both disclaim market lines"
+  "claims: model output and executive summary both disclaim market lines",
+  "gate numbers: every quoted t-threshold (7 occurrences) matches the computed Bonferroni table [1.96, 2.58, 3.02, 3.48, 3.89]"
  ],
  "warnings": [],
  "failures": [],
