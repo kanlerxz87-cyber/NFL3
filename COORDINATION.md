@@ -152,7 +152,13 @@ Week 10 slate uncaptured; F-06 no player-usage source; F-07 legal status of rewa
 order; F-09 no leg-level outcome data; F-10 'Questionable' calibration unmeasured. All published with sources on
 `line-lab/pages/flagged.html`.
 
-**Publication record.** PR: _pending at time of writing_ — updated below after merge.
+**Publication record.**
+
+- Integration PR [#11](https://github.com/kanlerxz87-cyber/NFL3/pull/11) merged as `94b0518e1d2a98f5d44e7615fbd3d08f2b6cc63c` on 2026-11-12 04:43 UTC. The `validate` job passed; `deploy` is skipped on pull requests by design.
+- Pages deployment for `main` completed successfully (`Validate and deploy GitHub Pages`, conclusion `success`), and the published page was independently fetched at
+  https://kanlerxz87-cyber.github.io/NFL3/line-lab/ — the dashboard rendered with its data intact.
+- Follow-up fixes after reading the live page (second PR): the source counter said "9 resolving · 3 broken" for 13 sources and silently dropped one; an already-answered P0 question was listed under "Hard blockers"; and the highest-priority action (SG-01, buy an odds archive) ranked **last** on the suggestion table because the ratio score does not encode sequencing. All three are corrected — the counter now reads 9 / 3 / 1, blockers are filtered to open items, and SG-01 and SG-02 are flagged and surfaced as a critical path panel.
+- Live verification after the follow-up merge is recorded in the section below.
 
 ### Final result — f445c027 (recorded 2026-11-12 UTC)
 - **PR #10** (follow-up fixes) — **merged** as `1b713ce76866ca5e4eaffeb43d3d764c6fdfa75d` (merge commit). Its first Pages run was cancelled by a newer `main` push (PR #11, another session); the run on the following commit `94b0518` completed **success** (`pages build and deployment` 43156630277; `Validate and deploy GitHub Pages` 43156630287).

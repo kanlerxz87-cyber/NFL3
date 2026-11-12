@@ -36,7 +36,7 @@ That is the finding, not an unfinished section.
 | League | Standings, Model lines, Correlations, Luck & regression | 32 clubs verified; four arithmetic checks pass |
 | Availability | Injuries, Depth & availability, Rules | 108 injury rows verbatim; 12 of 15 rules verified; depth order **unavailable** |
 | Decisions | Questions & gaps, Suggestions, Strategy leaderboard, Validation gates | 25 questions, 18 suggestions, 12 strategies, 13 gates |
-| Trust | Flagged for review, Sources, Coordination | 10 flags, 13 sources |
+| Trust | Flagged for review, Sources, Coordination | 10 flags; 13 sources (9 resolving, 3 recorded broken, 1 not fetched) |
 
 ```
 index.html                 generated entry point for this sub-site
