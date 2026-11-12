@@ -35,6 +35,15 @@ jobs:
         run: python3 decision-lab/scripts/build.py
       - name: Independent source/link audit
         run: python3 decision-lab/scripts/audit.py
+      - name: Availability join artifact is reproducible
+        run: |
+          python3 decision-lab/scripts/availability.py
+          if ! git diff --exit-code -- decision-lab/data/availability.json; then
+            echo "::error::availability.json is stale. Run decision-lab/scripts/availability.py and commit the result."
+            exit 1
+          fi
+      - name: Verification - offline structural families
+        run: python3 decision-lab/scripts/verify_live.py --offline
 
   deploy:
     if: github.event_name != 'pull_request'
@@ -61,6 +70,25 @@ jobs:
           python3 decision-lab/scripts/verify_sources.py
           python3 decision-lab/scripts/build.py
           python3 decision-lab/scripts/audit.py
+      - name: Availability analysis from the refreshed capture
+        continue-on-error: true
+        run: python3 decision-lab/scripts/availability.py
+      - name: Verification - live field-by-field re-fetch
+        id: verification
+        continue-on-error: true
+        run: python3 decision-lab/scripts/verify_live.py
+      - name: Rebuild pages with the live verification result
+        run: |
+          python3 decision-lab/scripts/build.py
+          python3 decision-lab/scripts/audit.py
+          python3 -c "import json;d=json.load(open('decision-lab/data/verification.json'));print('verification mode:',d.get('mode'),'status:',d.get('status'));[print('  ',f['id'],f['status'],str(f['matched'])+'/'+str(f['rows_checked']),'mismatched='+str(f['mismatched'])) for f in d['families']];print('::warning::live verification could not compare every family; unreachable sources are recorded on the verification page') if d.get('status')=='partial' else None"
+      - name: Upload verification artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-verification
+          path: decision-lab/data/verification.json
+          retention-days: 30
       - name: Validate combined root site
         run: python3 scripts/validate_site.py
       - name: Configure Pages
