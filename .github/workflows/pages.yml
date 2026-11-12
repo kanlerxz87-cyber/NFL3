@@ -36,7 +36,10 @@ jobs:
       - name: Availability join artifact is reproducible
         run: |
           python3 decision-lab/scripts/availability.py
-          git diff --exit-code -- decision-lab/data/availability.json
+          if ! git diff --exit-code -- decision-lab/data/availability.json; then
+            echo "::error::availability.json is stale. Run decision-lab/scripts/availability.py and commit the result."
+            exit 1
+          fi
       - name: Verification - offline structural families
         run: python3 decision-lab/scripts/verify_live.py --offline
 

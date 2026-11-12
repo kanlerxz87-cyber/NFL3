@@ -327,6 +327,8 @@ def run(snapshot: dict, catalog: dict, timeout: int = 45, offline: bool = False)
     return {
         "schema": "nfl3-verification/v2",
         "run_at": datetime.now(timezone.utc).isoformat(),
+        # run_at is intentionally non-deterministic: a live verification run is a point-in-time
+        # event, and the artifact is uploaded per deployment rather than committed.
         "snapshot_observed_at": observed_at,
         "status": status,
         "checks_run": len(families),

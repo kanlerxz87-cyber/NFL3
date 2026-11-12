@@ -21,7 +21,6 @@ from __future__ import annotations
 import argparse
 import json
 from collections import Counter, defaultdict
-from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -179,7 +178,8 @@ def analyse(snapshot: dict) -> dict:
 
     return {
         "schema": "nfl3-availability/v1",
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        # Deliberately no run timestamp: this artifact is byte-reproducible from the
+        # snapshot so CI can assert `git diff --exit-code` and a reviewer can diff it.
         "snapshot_observed_at": snapshot.get("observed_at", ""),
         "method": {
             "join_key": "exact (club, player name) match between the NFL report and the club depth page",
