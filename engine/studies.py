@@ -272,7 +272,8 @@ def _stacked(games: dict) -> dict:
 def injury_study(games: list[dict], injury_rows: list[dict], depth_rows: list[dict],
                  season: int) -> dict:
     """Does losing starters move the market, the result, or the total?"""
-    avail = features.weekly_availability(injury_rows, depth_rows, season)
+    week_of = features.snapshot_week_map(depth_rows, games, season)
+    avail = features.weekly_availability(injury_rows, depth_rows, season, week_of)
     if not avail:
         return {"ok": False, "reason": "no official injury/depth rows for the season"}
     season_games = [g for g in games if g["season"] == season and g["home_score"] is not None]
@@ -296,7 +297,11 @@ def injury_study(games: list[dict], injury_rows: list[dict], depth_rows: list[di
 
     usable = [r for r in rows if "home_out_starters_def" in r and "away_out_starters_def" in r]
     out = {"ok": True, "season": season, "n_games": len(rows), "n_with_report": len(usable),
-           "missing_team_weeks": missing}
+           "missing_team_weeks": missing,
+           "join_hits": sum(v.get("join_hits", 0) for v in avail.values()),
+           "team_weeks": len(avail),
+           "mean_out_off": stats.mean([v["out_starters_off"] for v in avail.values()]),
+           "mean_out_def": stats.mean([v["out_starters_def"] for v in avail.values()])}
     if usable:
         def_diff = [r["home_out_starters_def"] - r["away_out_starters_def"] for r in usable]
         off_diff = [r["home_out_starters_off"] - r["away_out_starters_off"] for r in usable]
@@ -315,14 +320,26 @@ def injury_study(games: list[dict], injury_rows: list[dict], depth_rows: list[di
         rb, nb = stats.pearson(both_off, [r["total_line"] for r in usable])
         out["total_vs_off_injuries"] = {"n": nb, "r": rb, "ci95": stats.fisher_ci(rb, nb)}
 
-    week = max((r["week"] for r in rows), default=0)
+    # Pick the newest week whose official report is substantially complete AND has a played game.
+    # The report for the upcoming week is published progressively (a few rows on Tuesday, the rest
+    # after practice), so the freshest week is often too small to tabulate.
+    per_week = {}
+    for r in injury_rows:
+        per_week.setdefault(int(r["week"]), 0)
+        per_week[int(r["week"])] += 1
+    played_weeks = {r["week"] for r in rows if r["home_score"] is not None}
+    candidates = [w for w, cnt in per_week.items() if cnt >= 100 and w in played_weeks]
+    week = max(candidates) if candidates else max(per_week, default=0)
     out["current_week"] = week
+    out["report_rows_by_week"] = dict(sorted(per_week.items()))
+    out["report_latest_week"] = max(per_week, default=0)
     out["snapshot"] = [{
         "game_id": r["game_id"], "week": r["week"], "away": r["away"], "home": r["home"],
         "gameday": r["gameday"], "spread_line": r["spread_line"], "total_line": r["total_line"],
         "home_out_def": r.get("home_out_starters_def"), "away_out_def": r.get("away_out_starters_def"),
         "home_out_off": r.get("home_out_starters_off"), "away_out_off": r.get("away_out_starters_off"),
         "home_q_def": r.get("home_q_starters_def"), "away_q_def": r.get("away_q_starters_def"),
+        "played": r["home_score"] is not None,
     } for r in rows if r["week"] == week]
     return out
 
@@ -440,3 +457,117 @@ def _fade_public_strategy(preds: list[dict]) -> dict:
     ev = gates.evaluate("Fade big favourites (line >= 7)", "contrarian", bets, n_attempts=1)
     ev["bets"] = bets
     return ev
+
+
+# --------------------------------------------------------------------------- 3b. pooled injury study
+POOL_SEASONS = [2021, 2022, 2023, 2024, 2025]
+
+
+def injury_study_pooled(games: list[dict], load_season) -> dict:
+    """Pool the injury/depth join across every season that has both official files.
+
+    ``load_season(season) -> (injury_rows, depth_rows)`` so this module never touches the loader
+    directly.  Seasons whose files are missing are skipped and named in ``seasons_missing``.
+    """
+    per_season = {}
+    missing = []
+    pooled = []
+    for season in POOL_SEASONS:
+        injury_rows, depth_rows = load_season(season)
+        if not injury_rows or not depth_rows:
+            missing.append(season)
+            continue
+        week_of = None
+        if not any(r.get("week") for r in depth_rows):
+            # 2025+ charts are daily snapshots with no week column; older charts carry week directly
+            week_of = features.snapshot_week_map(depth_rows, games, season)
+        avail = features.weekly_availability(injury_rows, depth_rows, season, week_of)
+        rows = []
+        for g in games:
+            if g["season"] != season or g["home_score"] is None or g["spread_line"] is None:
+                continue
+            f = {}
+            for side in ("home", "away"):
+                d = avail.get((features.canon(g[side]), g["week"]))
+                if d is None:
+                    f = {}
+                    break
+                for k, v in d.items():
+                    f[f"{side}_{k}"] = v
+            if not f:
+                continue
+            rows.append({**g, **f})
+        if not rows:
+            missing.append(season)
+            continue
+        per_season[season] = {
+            "n_games": len(rows),
+            "join_hits": sum(v.get("join_hits", 0) for v in avail.values()),
+            "team_weeks": len(avail),
+            "mean_out_off": stats.mean([v["out_starters_off"] for v in avail.values()]),
+            "mean_out_def": stats.mean([v["out_starters_def"] for v in avail.values()]),
+        }
+        pooled.extend(rows)
+
+    if not pooled:
+        return {"ok": False, "reason": "no season had both an injury report and a depth chart",
+                "seasons_missing": missing}
+
+    def_diff = [r["home_out_starters_def"] - r["away_out_starters_def"] for r in pooled]
+    off_diff = [r["home_out_starters_off"] - r["away_out_starters_off"] for r in pooled]
+    elo_resid = [r["spread_line"] - r.get("elo_expected_spread", 0.0) for r in pooled]
+    cover_resid = [cv.home_cover_margin(r["result"], r["spread_line"]) for r in pooled]
+    both_off = [r["home_out_starters_off"] + r["away_out_starters_off"] for r in pooled]
+    totals = [r["total_line"] for r in pooled]
+
+    def rel(xs, ys=None, label=""):
+        target = ys if ys is not None else totals
+        r, n = stats.pearson(xs, target)
+        return {"n": n, "r": r, "ci95": stats.fisher_ci(r, n), "label": label,
+                "p_value": stats.two_sided_p(r * math.sqrt(max(1, n - 2) / max(1e-9, 1 - r * r)))
+                if r == r and abs(r) < 1 else float("nan")}
+
+    out = {
+        "ok": True, "n_games": len(pooled), "seasons": sorted(per_season),
+        "seasons_missing": missing, "per_season": per_season,
+        "join_hits": sum(v["join_hits"] for v in per_season.values()),
+        "market_vs_def_injuries": rel(def_diff, elo_resid, "market spread vs Elo expectation"),
+        "market_vs_off_injuries": rel(off_diff, elo_resid, "market spread vs Elo expectation"),
+        "result_vs_def_injuries": rel(def_diff, cover_resid, "result vs market"),
+        "result_vs_off_injuries": rel(off_diff, cover_resid, "result vs market"),
+        "total_vs_off_injuries": rel(both_off, totals, "closing total"),
+        "total_vs_def_injuries": rel([r["home_out_starters_def"] + r["away_out_starters_def"]
+                                      for r in pooled], totals, "closing total"),
+    }
+
+    # Does an injury-adjusted signal actually beat the market?  Graded honestly.
+    bets = []
+    for r in pooled:
+        signal = r["home_out_starters_def"] - r["away_out_starters_def"]
+        if abs(signal) < 2:
+            continue
+        side = "away" if signal > 0 else "home"     # bet against the side missing more defenders
+        covered, push = (cv.home_covers(r["result"], r["spread_line"]) if side == "home"
+                         else cv.away_covers(r["result"], r["spread_line"]))
+        odds = (r["home_spread_odds"] if side == "home" else r["away_spread_odds"]) or -110
+        profit = 0.0 if push else (stats.american_payout(odds) if covered else -1.0)
+        bets.append({"season": r["season"], "week": r["week"], "profit": profit,
+                     "won": 1 if covered and not push else 0, "side": side, "clv": abs(signal),
+                     "half": "H1" if r["season"] <= 2023 else "H2", "market": f"{r['away']} @ {r['home']}",
+                     "game_id": r["game_id"]})
+    if bets:
+        pnl = [b["profit"] for b in bets]
+        m = stats.mean(pnl)
+        se = stats.stdev(pnl) / math.sqrt(len(pnl))
+        out["strategy_injury_lean"] = {
+            "n": len(bets), "profit_per_unit": m, "z": m / se if se else float("nan"),
+            "ci95": stats.block_bootstrap_mean_ci(pnl, block=20, n_boot=2000, seed=gates.SEED),
+            "hit_rate": sum(b["won"] for b in bets) / len(bets),
+            "per_season": {s: stats.mean([b["profit"] for b in bets if b["season"] == s])
+                           for s in sorted({b["season"] for b in bets})},
+        }
+        out["injury_gate"] = gates.evaluate(
+            "Injury lean: fade the side missing more defenders", "availability", bets,
+            n_attempts=len(POOL_SEASONS))
+        out["injury_gate"].pop("bets", None)
+    return out

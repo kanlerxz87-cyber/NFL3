@@ -103,6 +103,9 @@ def main() -> int:
     computed["clv"] = clv
     inj = studies.injury_study(D["games"], D["injuries"], D["depth"], 2026) if D["injuries"] else {"ok": False, "reason": "injury file missing"}
     computed["injury"] = inj
+    pooled = studies.injury_study_pooled(
+        D["games"], lambda s: (loader.injuries_for_season(s), loader.depth_rows_for_season(s)))
+    computed["injury_pooled"] = pooled
 
     with open(os.path.join(RESULTS, "computed.json"), "w", encoding="utf-8") as f:
         json.dump(_jsonable(computed), f, indent=1, sort_keys=True, default=str)
@@ -562,63 +565,149 @@ a near-zero value would mean the information is not priced — the signal worth 
 backup means the depth chart does not list a replacement at that slot — recorded as unverified rather
 than inferred.</p>
 {_backup_watchlist(D, inj)}
+{_pooled_section(C)}
 <h2>What is missing</h2>
 <ul class="bullets">
 <li>Historical <b>snap-share</b> evidence for backups is fetched (2026 snap counts) but joining it to
 replacement performance needs a player-level graded dataset that is not in this snapshot.</li>
 <li>Injury <b>severity</b> and expected games missed is not a field in the official report. Any estimate
 would be a model output and must be labelled as such.</li>
+<li>The 2025 injury file exists but its depth chart uses the new schema without a week column, so the
+pooled window is 2021-2024 (1,139 graded games). 2025 is one pipeline run away.</li>
 </ul>
 """
     return body
 
 
+def _pooled_section(C) -> str:
+    P = C.get("injury_pooled") or {}
+    if not P.get("ok"):
+        return f'<h2>Pooled multi-season study</h2><p class="empty">Not established: {esc(P.get("reason","no data"))}.</p>'
+    per = P.get("per_season") or {}
+    season_rows = [[fmt(s), fmt(v["n_games"]), fmt(v["team_weeks"]), fmt(v["join_hits"]),
+                    fmt(v["mean_out_off"]), fmt(v["mean_out_def"]),
+                    link("https://www.nfl.com/injuries/", "injury report"),
+                    link(release_url("depth_charts_2026.csv"), "depth charts")]
+                   for s, v in sorted(per.items())]
+    rel_rows = []
+    for key, label in (
+            ("market_vs_def_injuries", "Market spread vs defensive starters out"),
+            ("market_vs_off_injuries", "Market spread vs offensive starters out"),
+            ("result_vs_def_injuries", "Result vs closing spread, defensive starters out"),
+            ("result_vs_off_injuries", "Result vs closing spread, offensive starters out"),
+            ("total_vs_off_injuries", "Closing total vs combined offensive starters out"),
+            ("total_vs_def_injuries", "Closing total vs combined defensive starters out")):
+        v = P.get(key)
+        if not v or v["r"] != v["r"]:
+            continue
+        sig = "excludes zero" if (v["ci95"][0] > 0 or v["ci95"][1] < 0) else "includes zero"
+        rel_rows.append([esc(label), fmt(v["n"]), fmt(v["r"], 4),
+                         f'{fmt(v["ci95"][0], 4)} to {fmt(v["ci95"][1], 4)}',
+                         fmt(v["p_value"], 4),
+                         f'<span class="pill {"pill-pass" if sig == "excludes zero" else "pill-warn"}">{sig}</span>',
+                         link("https://www.nfl.com/injuries/", "injury report")])
+    st = P.get("strategy_injury_lean") or {}
+    st_rows = []
+    if st:
+        st_rows = [["Injury lean: bet against the side missing more defenders", fmt(st["n"]),
+                    fmt(st["profit_per_unit"], 4),
+                    f'{fmt(st["ci95"][0], 4)} to {fmt(st["ci95"][1], 4)}', pct(st["hit_rate"]),
+                    fmt(st["z"]),
+                    link("https://www.nfl.com/injuries/", "injury report")]]
+    g = P.get("injury_gate") or {}
+    gate_html = ""
+    if g:
+        gate_html = ("<p class='sub'>Gate result for the injury lean: "
+                     + " · ".join(f"{k.split('_')[0]} {badge(v)}" for k, v in g.get("gates", {}).items())
+                     + "</p>")
+    return f"""
+<h2>Pooled multi-season study (2021-2024)</h2>
+<p class="sub">The single-season view above is a first look. This is the version the brief actually
+needs: every season with both official files, joined the same way, pooled into one sample. A starter
+absent from the report is only counted when the official depth chart lists him at the first slot that
+week, so the join cannot invent a starter.</p>
+{table(["Season", "Games", "Team-weeks", "Starter joins", "Mean OFF starters out",
+        "Mean DEF starters out", "Injury source", "Depth source"], season_rows,
+       caption="Join coverage by season. A higher join count means more of the report was matched to a depth slot.")}
+{table(["Relationship measured", "Games", "Pearson r", "95% CI", "p-value", "Signal", "Official source"],
+       rel_rows,
+       caption="Negative r on 'market spread vs starters out' means the market already moves toward the healthier team")}
+{table(["Injury signal graded at the market price", "Bets", "Profit / unit", "95% CI",
+        "Hit rate", "z", "Official source"], st_rows,
+       caption="A candidate strategy, graded like every other one - it does not escape the gates")}
+{gate_html}
+"""
+
+
 def _backup_watchlist(D, inj) -> str:
-    depth = D.get("depth")
+    """Starters listed Out, with the next man up at the same official depth slot.
+
+    Uses the newest depth-chart snapshot only. A player who appears at several slots (a returner who
+    is also a seventh-string receiver) is matched on the slot where he is actually a starter, which is
+    why the watchlist looks at his *best* rank rather than any single row.
+    """
+    depth = D.get("depth") or []
     inj_rows = D.get("injuries") or []
     if not depth or not inj_rows:
         return '<p class="empty">Depth chart or injury report not in the snapshot.</p>'
+    latest = max((r["dt"] for r in depth), default="")
+    chart = [r for r in depth if r["dt"] == latest]
+
+    # best rank per (team, name) and the slots that player occupies in the newest snapshot
+    best: dict[tuple[str, str], dict] = {}
+    by_slot: dict[tuple[str, str], list[dict]] = collections.defaultdict(list)
+    for r in chart:
+        team = features.canon(r.get("team", ""))
+        name = (r.get("name") or "").strip().lower()
+        if not team or not name or r.get("rank") is None or r["rank"] != r["rank"]:
+            continue
+        by_slot[(team, r.get("pos", ""))].append(r)
+        cur = best.get((team, name))
+        if cur is None or r["rank"] < cur["rank"]:
+            best[(team, name)] = r
+    for k in by_slot:
+        by_slot[k].sort(key=lambda r: (r["rank"], r.get("name") or ""))
+
     week = inj.get("current_week", 0)
-    # build (team, position) -> ordered depth slots for the week
-    chart = collections.defaultdict(list)
-    for r in depth:
-        chart[(features.canon(r.get("team", "")), r.get("pos", ""))].append(r)
-    out_rows = []
-    seen = set()
+    out_rows, seen = [], set()
     for r in inj_rows:
         if int(r["week"]) != week or r["report_status"] not in ("Out", "Doubtful"):
             continue
         team = features.canon(r["team"])
-        pos = (r.get("position") or "").upper()
-        key = (team, pos, r["name"])
+        name = (r["name"] or "").strip().lower()
+        key = (team, name)
         if key in seen:
             continue
         seen.add(key)
-        # find the player's own depth rank
-        mine = None
-        for rec in depth:
-            if features.canon(rec.get("team", "")) == team and (rec.get("name") or "").lower() == (r["name"] or "").lower() and rec.get("pos") == pos:
-                mine = rec
-                break
-        rank = mine.get("rank") if mine else None
-        backup = None
-        if rank is not None and rank == mine.get("rank"):
-            candidates = [c for c in chart.get((team, pos), [])
-                          if c.get("rank") is not None and c["rank"] > (rank or 0)]
-            candidates.sort(key=lambda c: (c["rank"], c.get("name") or ""))
-            if candidates:
-                backup = candidates[0].get("name")
-        out_rows.append([esc(team), esc(pos), esc(r["name"]), esc(r.get("report_injury") or "—"),
-                         fmt(rank), esc(backup) if backup else unverified("depth chart lists no replacement"),
-                         link("https://www.nfl.com/injuries/", "NFL injury report"),
+        me = best.get(key)
+        if me is None:
+            out_rows.append([esc(team), esc(r.get("position") or "—"), esc(r["name"]),
+                             esc(r.get("report_injury") or "—"), "—",
+                             unverified("not on the newest depth chart"),
+                             link("https://www.nfl.com/injuries/", "injury report"),
+                             link(release_url("depth_charts_2026.csv"), "depth chart")])
+            continue
+        slot_rows = by_slot.get((team, me.get("pos", "")), [])
+        backup = next((c for c in slot_rows
+                       if c["rank"] > me["rank"]
+                       and (c.get("name") or "").strip().lower() != name), None)
+        backup_txt = (esc(backup["name"]) if backup
+                      else unverified("no backup listed at this slot"))
+        out_rows.append([esc(team), esc(me.get("pos") or "—"), esc(r["name"]),
+                         esc(r.get("report_injury") or "—"),
+                         "starter" if me["rank"] == 1 else f"string {int(me['rank'])}",
+                         backup_txt,
+                         link("https://www.nfl.com/injuries/", "injury report"),
                          link(release_url("depth_charts_2026.csv"), "depth chart")])
+    out_rows.sort(key=lambda row: (row[0], row[4]))
     if not out_rows:
         return '<p class="empty">No starters listed Out or Doubtful on the current week\'s report.</p>'
-    return table(["Team", "Pos", "Starter listed out", "Injury", "Depth slot", "Next man up",
-                  "Injury source", "Depth source"], out_rows[:80],
-                 caption="Depth slot 1 is the starter. Next man up is the next player at the same position on the official chart.")
-
-
+    return (f'<p class="sub">Newest official depth-chart snapshot: <code>{esc(latest)}</code>; '
+            f'official report week {fmt(week)}.</p>'
+            + table(["Team", "Pos", "Off the report", "Injury", "Depth", "Next man up",
+                     "Injury source", "Depth source"], out_rows[:60],
+                    caption="Depth shows the player's own depth slot. Next man up is the next player at "
+                            "the same slot on that snapshot, or unverified when the chart lists nobody."))
 
 
 # --------------------------------------------------------------------------- pages 07-11

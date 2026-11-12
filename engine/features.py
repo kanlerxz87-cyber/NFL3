@@ -117,91 +117,140 @@ DEF_KEY_POSITIONS = {"CB", "S", "FS", "SS", "DB", "NB", "LB", "ILB", "OLB", "MLB
 OFF_KEY_POSITIONS = {"QB", "WR", "TE", "RB", "FB", "T", "G", "C", "OT", "OG", "OL"}
 
 
-def depth_lookup(depth_rows: list[dict]) -> dict[tuple[str, int, str], dict]:
-    """(team, week, player_key) -> {depth_team, position, ...} from the depth chart snapshot.
+def depth_lookup(depth_rows: list[dict], week_of: dict[str, int] | None = None
+                 ) -> dict[tuple[str, int, str], dict]:
+    """(team, week, player name) -> depth record, normalised across both official schemas.
 
-    nflverse depth charts before 2025 carry `depth_team` (1 = starter, 2/3 = backups) and a
-    weekly cadence; the rows are keyed by team and week here for point-in-time joins.
+    nflverse changed the depth-chart schema after 2024.  Older files carry `depth_team`
+    (1 = starter, 2/3/4 = backups) plus `club_code`/`full_name`; 2025+ files carry `pos_slot` and
+    `pos_rank` plus `team`/`player_name`.  The loader normalises both to team/name/pos/rank, and an
+    older row keeps its `depth_team` and maps it onto the same `rank` field so one code path works.
     """
     out: dict[tuple[str, int, str], dict] = {}
     for r in depth_rows:
-        wk = int(r.get("week") or 0)
-        key = (canon(r["club_code"]), wk, (r["full_name"] or "").strip().lower())
+        if week_of is not None:
+            week = week_of.get((r.get("dt") or "")[:10])
+            if week is None:
+                continue
+        else:
+            week = int(r.get("week") or 0)
+        name = (r.get("name") or r.get("full_name") or "").strip().lower()
+        team = canon(r.get("team") or r.get("club_code") or "")
+        if not name or not team:
+            continue
+        rank = r.get("rank")
+        depth_team = r.get("depth_team")
+        if rank is None or rank != rank:
+            rank = float(depth_team) if depth_team not in (None, "") else float("nan")
+        rec = {"rank": rank, "position": r.get("pos") or r.get("position", ""),
+               "depth_position": r.get("depth_position", ""),
+               "formation": r.get("formation", ""),
+               "side": _side_of(r)}
+        key = (team, week, name)
         prev = out.get(key)
-        rec = {"depth_team": int(r["depth_team"]) if str(r.get("depth_team", "")).isdigit() else None,
-               "position": r.get("position", ""), "depth_position": r.get("depth_position", ""),
-               "formation": r.get("formation", "")}
-        if prev is None or (rec["depth_team"] or 99) < (prev["depth_team"] or 99):
+        if prev is None or _rank_key(rank) < _rank_key(prev.get("rank")):
             out[key] = rec
     return out
 
 
-def starter_depth_by_position(depth_rows: list[dict]) -> dict[tuple[str, int], dict[str, int]]:
-    """(team, week) -> {position: number of distinct players listed at depth_team 1}."""
-    out: dict[tuple[str, int], dict[str, set]] = collections.defaultdict(lambda: collections.defaultdict(set))
+def _rank_key(rank) -> float:
+    if rank is None or rank != rank:
+        return 99.0
+    return float(rank)
+
+
+def _side_of(r: dict) -> str:
+    """Offence / defence / special teams, from the formation text or the position code."""
+    formation = (r.get("formation") or "").lower().replace("base 4-3 d","defense").replace("base 3-4 d","defense").replace("base 4-3 o","offense").replace("base 3-4 o","offense")
+    if formation:
+        if formation.startswith("off"):
+            return "off"
+        if formation.startswith("def"):
+            return "def"
+        return "st"
+    pos = (r.get("pos") or r.get("position") or "").upper()
+    if pos in DEF_KEY_POSITIONS:
+        return "def"
+    if pos in OFF_KEY_POSITIONS:
+        return "off"
+    return "st"
+
+
+def starter_depth_by_position(depth_rows: list[dict], week_of: dict[str, int] | None = None
+                              ) -> dict[tuple[str, int], dict[str, int]]:
+    """(team, week) -> {position: number of distinct players listed at the first depth slot}."""
+    out: dict[tuple[str, int], dict[str, set]] = collections.defaultdict(
+        lambda: collections.defaultdict(set))
     for r in depth_rows:
-        if str(r.get("depth_team", "")).strip() != "1":
+        team = canon(r.get("team") or r.get("club_code") or "")
+        name = (r.get("name") or r.get("full_name") or "").strip().lower()
+        if not team or not name:
             continue
-        out[(canon(r["club_code"]), int(r.get("week") or 0))][r.get("position", "")].add(
-            (r.get("full_name") or "").lower())
+        rank = r.get("rank")
+        if rank is None or rank != rank:
+            depth_team = r.get("depth_team")
+            rank = float(depth_team) if depth_team not in (None, "") else float("nan")
+        if _rank_key(rank) != 1.0:
+            continue
+        wk = week_of.get((r.get("dt") or "")[:10]) if week_of is not None else int(r.get("week") or 0)
+        if wk is None:
+            continue
+        out[(team, wk)][r.get("pos") or r.get("position", "")].add(name)
     return {k: {p: len(v) for p, v in d.items()} for k, d in out.items()}
 
 
 def weekly_availability(injury_rows: list[dict], depth_rows: list[dict],
-                        season: int) -> dict[tuple[str, int], dict]:
-    """Per team-week availability features from the official injury report.
+                        season: int, week_of: dict[str, int] | None = None
+                        ) -> dict[tuple[str, int], dict]:
+    """Per team-week availability features from the official injury report + that week's chart.
 
-    * `out_starters_def` / `out_starters_off`: players listed at depth_team 1 in that week's
-      depth chart whose official game status is `Out` (or `Doubtful`).
-    * `q_starters_*`: starters listed `Questionable`.
-    * `out_any_def` / `out_any_off`: every injured-report player at that position group, whether or
-      not the depth chart lists them (captures 2nd/3rd string losses too).
-    * `practice_dnp_*`: starters that did not practise at all during the week.
+    * ``out_starters_def`` / ``out_starters_off``: players at the first depth slot that week whose
+      official game status is Out or Doubtful.
+    * ``q_starters_*``: first-slot players listed Questionable.
+    * ``out_any_def`` / ``out_any_off``: every injury-report player in that position group, so a
+      loss at the 2nd or 3rd string is still counted.
+    * ``dnp_starters_*``: first-slot players who did not practise at all during the week.
     """
-    depth = {}
-    for r in depth_rows:
-        nm = (r.get("full_name") or "").strip().lower()
-        if not nm:
-            continue
-        depth[(canon(r.get("club_code", "")), int(r.get("week") or 0), nm)] = r
-
-    starter_counts = starter_depth_by_position(depth_rows)
-    feats: dict[tuple[str, int], dict] = {}
+    depth = depth_lookup(depth_rows, week_of)
+    starter_counts = starter_depth_by_position(depth_rows, week_of)
 
     def blank() -> dict:
-        d = {"out_starters_def": 0, "out_starters_off": 0, "q_starters_def": 0,
-             "q_starters_off": 0, "out_any_def": 0, "out_any_off": 0,
-             "dnp_starters_def": 0, "dnp_starters_off": 0, "report_rows": 0,
-             "def_starter_slots": 0, "off_starter_slots": 0}
-        return d
+        return {"out_starters_def": 0, "out_starters_off": 0, "q_starters_def": 0,
+                "q_starters_off": 0, "out_any_def": 0, "out_any_off": 0,
+                "dnp_starters_def": 0, "dnp_starters_off": 0, "report_rows": 0,
+                "def_starter_slots": 0, "off_starter_slots": 0, "join_hits": 0}
 
+    feats: dict[tuple[str, int], dict] = {}
     for r in injury_rows:
         if int(r["season"]) != season:
             continue
-        team, wk = canon(r["team"]), int(r["week"])
-        f = feats.setdefault((team, wk), blank())
+        team, week = canon(r["team"]), int(r["week"])
+        f = feats.setdefault((team, week), blank())
         f["report_rows"] += 1
         pos = (r.get("position") or "").upper()
-        is_def = pos in DEF_KEY_POSITIONS
-        is_off = pos in OFF_KEY_POSITIONS
+        is_def, is_off = pos in DEF_KEY_POSITIONS, pos in OFF_KEY_POSITIONS
         if not (is_def or is_off):
             continue
         if is_def:
             f["out_any_def"] += 1 if r["report_status"] in ("Out", "Doubtful") else 0
         else:
             f["out_any_off"] += 1 if r["report_status"] in ("Out", "Doubtful") else 0
-        d = depth.get((team, wk, (r.get("name") or "").strip().lower()))
-        is_starter = bool(d) and str(d.get("depth_team", "")).strip() == "1"
-        if is_starter:
-            if r["report_status"] in ("Out", "Doubtful"):
-                f["out_starters_def" if (d.get("formation") == "Defense") else "out_starters_off"] += 1
-            elif r["report_status"] == "Questionable":
-                f["q_starters_def" if (d.get("formation") == "Defense") else "q_starters_off"] += 1
-            if (r.get("practice_status") or "").strip() == "Did Not Participate In Practice":
-                f["dnp_starters_def" if (d.get("formation") == "Defense") else "dnp_starters_off"] += 1
+        d = depth.get((team, week, (r.get("name") or "").strip().lower()))
+        if d is None:
+            continue
+        if _rank_key(d.get("rank")) != 1.0:
+            continue
+        f["join_hits"] += 1
+        side = d.get("side") or ("def" if is_def else "off")
+        if r["report_status"] in ("Out", "Doubtful"):
+            f["out_starters_def" if side == "def" else "out_starters_off"] += 1
+        elif r["report_status"] == "Questionable":
+            f["q_starters_def" if side == "def" else "q_starters_off"] += 1
+        if (r.get("practice_status") or "").strip() == "Did Not Participate In Practice":
+            f["dnp_starters_def" if side == "def" else "dnp_starters_off"] += 1
 
-    for (team, wk), pos_counts in starter_counts.items():
-        f = feats.setdefault((team, wk), blank())
+    for (team, week), pos_counts in starter_counts.items():
+        f = feats.setdefault((team, week), blank())
         f["def_starter_slots"] = sum(n for p, n in pos_counts.items() if p in DEF_KEY_POSITIONS)
         f["off_starter_slots"] = sum(n for p, n in pos_counts.items() if p in OFF_KEY_POSITIONS)
     return feats
@@ -253,3 +302,34 @@ def snap_shares(snap_rows: list[dict], week: int, window: int = 1) -> dict[tuple
             key = (canon(r["team"]), (r["player"] or "").strip().lower())
             shares.setdefault(key, []).append(r["off_snaps"] / total)
     return {k: sum(v) / len(v) for k, v in shares.items()}
+
+
+def snapshot_week_map(depth_rows: list[dict], games: list[dict], season: int) -> dict[str, int]:
+    """Map each daily depth-chart snapshot date onto the game week whose report it precedes.
+
+    A game's official injury report is filed for its week, so the chart that matters is the last one
+    published *before that week's first kickoff*.  Snapshots that fall inside a week's play window
+    (after the first kickoff and before the next week's report) are attributed to the following week,
+    because they describe the roster build-up to the next game.
+    """
+    kicks = sorted({(g["week"], g["gameday"]) for g in games
+                    if g["season"] == season and g["game_type"] == "REG"})
+    if not kicks:
+        return {}
+    first_kick: dict[int, str] = {}
+    for week, day in kicks:
+        if week not in first_kick or day < first_kick[week]:
+            first_kick[week] = day
+    weeks = sorted(first_kick)
+    out: dict[str, int] = {}
+    dates = sorted({(r.get("dt") or "")[:10] for r in depth_rows if r.get("dt")})
+    for d in dates:
+        target = None
+        for week in weeks:
+            if d < first_kick[week]:
+                target = week
+                break
+        if target is None:
+            target = weeks[-1]
+        out[d] = target
+    return out

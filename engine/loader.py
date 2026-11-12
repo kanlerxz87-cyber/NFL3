@@ -177,3 +177,57 @@ def rosters() -> list[dict]:
             "status": r.get("status", ""), "depth_chart_position": r.get("depth_chart_position", ""),
         })
     return out
+
+
+def depth_rows_for_season(season: int) -> list[dict]:
+    """Depth chart rows for any season, normalised across the two official schemas.
+
+    Pre-2025 files:  season, club_code, week, game_type, depth_team, formation, gsis_id, position,
+                     depth_position, full_name
+    2025+ files:     dt, team, player_name, pos_grp, pos_abb, pos_slot, pos_rank  (no week field)
+
+    Normalised record: {team, name, gsis_id, pos, slot, rank, formation, week, dt}
+    For the older schema ``rank`` is filled from ``depth_team`` (1 = starter) so one code path works.
+    """
+    out = []
+    for r in rows(f"depth_charts_{season}.csv"):
+        if r.get("depth_team") is not None or "club_code" in r:
+            team = r.get("club_code", "")
+            name = r.get("full_name", "")
+            rank = r.get("depth_team", "")
+            week = r.get("week", "")
+            dt = ""
+            pos = r.get("position", "")
+            formation = r.get("formation", "")
+            slot = ""
+        else:
+            team = r.get("team", "")
+            name = r.get("player_name", "")
+            rank = r.get("pos_rank", "")
+            week = ""
+            dt = r.get("dt", "")
+            pos = r.get("pos_abb") or r.get("pos_name", "")
+            formation = r.get("pos_grp", "")
+            slot = r.get("pos_slot", "")
+        out.append({
+            "team": team, "name": name, "gsis_id": r.get("gsis_id", ""), "pos": pos,
+            "slot": num(slot), "rank": num(rank), "formation": formation,
+            "depth_position": r.get("depth_position", ""), "week": week, "dt": dt,
+        })
+    return out
+
+
+def injuries_for_season(season: int) -> list[dict]:
+    """Official injury-report rows for any season, from the same release family."""
+    out = []
+    for r in rows(f"injuries_{season}.csv"):
+        out.append({
+            "season": int(r["season"]), "week": int(r["week"] or 0), "team": r["team"],
+            "gsis_id": r.get("gsis_id", ""), "position": r.get("position", ""),
+            "name": r.get("full_name", ""),
+            "report_injury": r.get("report_primary_injury", ""),
+            "report_status": (r.get("report_status") or "").strip(),
+            "practice_status": (r.get("practice_status") or "").strip(),
+            "practice_injury": r.get("practice_primary_injury", ""),
+        })
+    return out
