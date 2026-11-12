@@ -71,6 +71,7 @@ const outN = cnt(injuries, 'game_status', 'Out');
 const qN = cnt(injuries, 'game_status', 'Questionable');
 const injuryTextN = injuries.filter((r) => r.injury).length;
 const flagRepo = repo.filter((r) => /Flag|Blocker/.test(r.severity));
+const flaggedCount = flagRepo.length + questions.filter((q) => /Open|UNVERIFIED|Unknown/.test(q.status + q.verification)).length + sources.filter((s) => /UNVERIFIED|EXCLUDED|Partially/.test(s.status)).length;
 const openQ = questions.filter((q) => /Open|Decision|Unknown|Partly/.test(q.status));
 const decisions = questions.filter((q) => q.status === 'Decision' || /^Yes/.test(q.decision_needed_from_owner)).length;
 const proposals = suggestions.filter((s) => /Proposed/.test(s.status)).length;
@@ -94,7 +95,7 @@ page('index.html', 'Executive summary', `
   <a class="card" href="games.html"><b>${games.length}</b><span>Week 10 matchups listed</span></a>
   <a class="card" href="starters-backups.html"><b>${news.length}</b><span>starter / replacement headlines</span></a>
   <a class="card warn" href="strategies.html"><b>${validated}</b><span>strategies validated (of ${strategies.length} tracked)</span></a>
-  <a class="card warn" href="flagged.html"><b>${flagRepo.length}</b><span>items flagged for review</span></a>
+  <a class="card warn" href="flagged.html"><b>${flaggedCount}</b><span>items on the Flagged for Review page</span></a>
   <a class="card" href="suggestions.html"><b>${proposals}</b><span>proposals waiting for your decision</span></a>
 </section>
 <h2>Key findings</h2>
