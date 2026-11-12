@@ -868,3 +868,24 @@ Branch is fixed as `arena/22802aed-nfl3` (Arena rule). No sub-site files are edi
 - Live verification after deployment (each fetched, cache-busted): [Verification log](https://kanlerxz87-cyber.github.io/NFL3/decision-lab/verification.html) — 316 match / 0 mismatch / 0 source-updated / 284 unverified, all five sections PASS, and **depth cell integrity now reports 0 flagged rows**, which confirms the F13 parser fix took effect on the refreshed capture (it was 22 before). [Lab overview](https://kanlerxz87-cyber.github.io/NFL3/decision-lab/) — 17 pages, 295 injury rows, 1,771 depth rows, 0 validated strategies. [Executive summary](https://kanlerxz87-cyber.github.io/NFL3/decision-lab/executive-summary.html) — F13 and F14 findings render with their Steelers and Patriots source links.
 - Concurrent sessions' pages (`availability.html`, `integrity.html`, `decisions.html`) are present and unedited by this session.
 - **Final state of this session's claims:** V1–V6 done; the two defects F13/F14 are fixed at the parser and published for review; the deploy failure this session introduced is fixed and verified. The unverified items listed above remain blank and published on Flagged for review. No originated line, correlation, strategy edge or reward is claimed.
+## Claim — arena/4902c576-nfl3 (session 4902c576), 2026-11-12 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| AUD-01 authority relabel takeover: community nflverse data must not be called official | in progress | `arena/4902c576-nfl3` | `engine/**`, `pipeline/**`, `research-desk/**`, `.github/workflows/data-and-site.yml`, `tests/check_research_desk.py` |
+| Final integration: orphaned coordination records, full verification, PR + Pages publication record | in progress | `arena/4902c576-nfl3` | `COORDINATION.md` (append-only) |
+
+**Takeover basis for AUD-01:** the original claim on `engine/`, `pipeline/`, `data/`, `lab/` and `docs/` belongs to
+`arena-f9dd481e`, whose last human contribution was PR #24, merged 2026-11-12 05:16 UTC — far more than 60 minutes
+ago with no subsequent commits from that session (later `nfl3-bot` commits are CI refreshes, not session activity).
+Per the board's staleness rule this session takes over the relabel portion of that claim only. The engine's data
+logic, computed results and `data/`/`lab/`/`docs/` files are not being changed — only authority *labels* that
+describe community nflverse release assets as official NFL sources, which the independent audit records as
+AUD-01 (Critical). Root site files (`index.html`, `README.md`, `assets/`, `scripts/`, `tests/check_site.py`,
+`.github/workflows/pages.yml`) and other sessions' sub-sites (`dashboard/`, `line-lab/`, `decision-hub/`,
+`decision-lab/`, `research-workspace/`) are **not** edited by this session.
+
+**Coordination-only note:** open coordination PRs #20 (mergeable), #18 and #22 (conflicting, both edit this board)
+are treated as orphaned bookkeeping from sessions with no activity for many hours. PR #20 will be merged as-is;
+the records carried by #18 and #22 will be preserved verbatim in this session's final integration entry on this
+board, then those PRs closed with a pointer — no other session's text is discarded.
