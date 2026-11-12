@@ -966,3 +966,45 @@ Claim pushed before any task work begins, per the coordination rules.
 - Existing pending requests remain with their owners: link `verification-lab/index.html` (0619a74f L2) and `decision-desk` nav (6490936b C3 already applied).
 
 **Checks run on this session's tree:** `python3 injury-verification/verify.py` · `python3 injury-verification/build_page.py` · `python3 scripts/validate_site.py` (12 root pages + sub-site delegation incl. `injury-verification/`) · `python3 tests/check_site.py` · `python3 tests/check_research_desk.py research-desk` (PASS) · `python3 engine/test_engine.py` (ALL CHECKS PASSED) · `python3 decision-lab/scripts/audit.py` (101 pages, 5,300 rows, 2 findings — pre-existing AUD-01/AUD-03, unchanged by this session) · `python3 tests/test_decision_lab.py` (OK) · `git diff --check`.
+---
+
+## Claim: arena/2275e3f5-nfl3 — 2026-11-12 UTC
+
+Branch: `arena/2275e3f5-nfl3` (fixed by Arena; a session-named branch cannot be created).
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| T1 Official re-verification of the committed Week 10 snapshot (line by line) | in progress | arena/2275e3f5-nfl3 | `ops-center/data/verification.json`, this log |
+| T2 Starter/backup deficiency tracker: official injury rows x official club depth rows (1st–4th string) | in progress | arena/2275e3f5-nfl3 | `ops-center/data/*.json`, `ops-center/pages/*.html` |
+| T3 Consolidated pre-decision Q&A register across all workspaces | in progress | arena/2275e3f5-nfl3 | `ops-center/data/questions.json`, `ops-center/pages/questions.html` |
+| T4 Consolidated suggestion review centre (path A/B, approve/defer/reject, export) | in progress | arena/2275e3f5-nfl3 | `ops-center/data/suggestions.json`, `ops-center/pages/suggestions.html` |
+| T5 Consolidated strategy leaderboard / gate status across workspaces | in progress | arena/2275e3f5-nfl3 | `ops-center/data/strategies.json`, `ops-center/pages/leaderboard.html` |
+| T6 Static build + strict verifier (source link on every row, blanks preserved, no broken links) | in progress | arena/2275e3f5-nfl3 | `ops-center/scripts/` |
+| T7 Final root integration, PR, merge, Pages deploy verification | in progress | arena/2275e3f5-nfl3 | root `index.html`, `README.md`, this log |
+
+**Handoff note.** Every session listed above (`4fd6bbbb`, `56e27bb4`, `2836662c`, `f445c027`, `e5e2b753`,
+`cbdcc317`, `40c7529f`, `f9dd481e`, `c2825205`) has its work merged into `main` and its log entries are
+preserved verbatim above. The last integration claim (`arena/c2825205-nfl3`) is recorded as complete with a
+merged PR and a successful Pages deployment, so this session is taking over the *shared root integration*
+scope (`index.html`, `README.md`, this board) and logging the handoff here rather than editing another
+session's workspace files. No file inside `dashboard/`, `line-lab/`, `decision-hub/`, `decision-lab/`,
+`research-desk/`, `research-workspace/`, `pipeline/`, `engine/`, `lab/`, `data/`, `scripts/`, `tests/`,
+`assets/` or `.github/workflows/` will be modified by this session except as required to fix a broken link
+that would fail the Pages build, and any such change will be logged.
+
+**Integration rule this session follows.** All new work is written under `ops-center/**`. The root landing
+page is edited only at the end, only to add navigation to the new section and to reorganise the landing page
+into category cards; every existing page and link is preserved. Shared navigation is never edited by deleting
+another session's content.
+
+### Log — arena/2275e3f5-nfl3
+
+- 2026-11-12 22:25 UTC: claim pushed before any build work. Board read in full; nine prior sessions recorded,
+  all merged. No active implementation claim from another session was found (the three open PRs #18/#20/#22 are
+  coordination-only documentation PRs).
+- Local network note: the sandbox allows outbound HTTPS only to `github.com`, `codeload.github.com`,
+  `api.github.com`, `registry.npmjs.org`, `pypi.org` and `files.pythonhosted.org`. Direct `urllib`/`curl`
+  requests to `www.nfl.com` fail at the TLS layer from this environment, so official pages are read through the
+  agent's page-fetch tool and the resulting text is compared against the committed snapshot. The repository's
+  capture scripts (`decision-lab/scripts/capture_official.py`) run inside GitHub Actions, which does have
+  network access; this session does not rely on that for its verification.
