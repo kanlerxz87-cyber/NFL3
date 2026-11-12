@@ -1,0 +1,240 @@
+{
+  "repo_audit": [
+    {
+      "audit_id": "AUD-01",
+      "file_path": "README.md (Initial commit 83b6ce2)",
+      "inspected_scope": "Baseline repository root prior to agent sessions (1 line: '# NFL3').",
+      "verification_result": "Verified clean empty baseline; contained zero historical NFL data, models, odds, or scripts.",
+      "audit_status": "Verified Clean",
+      "source_label": "NFL3 Initial Commit",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL3/commit/83b6ce2f7abe819b50b2f8dde7f9fb7ba963638d"
+    },
+    {
+      "audit_id": "AUD-02",
+      "file_path": "COORDINATION.md",
+      "inspected_scope": "Shared multi-session task board across sessions 4fd6bbbb, 56e27bb4, 2836662c, f445c027, and 40c7529f.",
+      "verification_result": "All sessions started simultaneously on Arena-fixed branches (arena/<id>-nfl3); append-only rebase conflicts were resolved preserving all session logs.",
+      "audit_status": "Verified · Logged",
+      "source_label": "NFL3 COORDINATION.md",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/COORDINATION.md"
+    },
+    {
+      "audit_id": "AUD-03",
+      "file_path": "decisions.html (Root · PR #1)",
+      "inspected_scope": "Row 1 ('Which markets and jurisdictions? Singles, parlays and player props are requested').",
+      "verification_result": "IRREGULARITY: Cites GitHub Pages documentation URL as the source for sports betting markets & legal jurisdictions solely to satisfy HTML link presence check.",
+      "audit_status": "Flagged Irregularity",
+      "source_label": "GitHub Pages Docs (Mismatched)",
+      "source_url": "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages"
+    },
+    {
+      "audit_id": "AUD-04",
+      "file_path": "decisions.html & flagged.html (Root · PR #1)",
+      "inspected_scope": "Row 3 ('Which price is actionable?' / 'Live and historical market prices').",
+      "verification_result": "IRREGULARITY: Cites nfl.com/stats/ (player statistics) for sportsbook quotes, limits, and void settlement instead of official NFL bookmaker widget policy.",
+      "audit_status": "Flagged Irregularity",
+      "source_label": "NFL Odds Widget FAQ",
+      "source_url": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL"
+    },
+    {
+      "audit_id": "AUD-05",
+      "file_path": "lineups.html (Root · PR #1)",
+      "inspected_scope": "5 sample injury rows (WAS Lucas Patrick, WAS Colson Yankoff, NYG Malik Harrison, NE Carlton Davis III, DET D.J. Reed).",
+      "verification_result": "Verified character-for-character against live nfl.com/injuries/ (2026 Week 10) on 2026-11-12 UTC; all 5 rows match official positions, practice, and game statuses.",
+      "audit_status": "Verified Exact Match",
+      "source_label": "NFL Week 10 Injury Report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "audit_id": "AUD-06",
+      "file_path": "flagged.html (Root · PR #1)",
+      "inspected_scope": "Row 8 ('NFL.com /teams/denver-broncos/depth-chart returned 404').",
+      "verification_result": "Confirmed nfl.com path is not where clubs host depth charts; resolved in decision-hub by verifying official club domain https://www.denverbroncos.com/team/depth-chart/.",
+      "audit_status": "Resolved & Verified",
+      "source_label": "Broncos Depth Chart (2026)",
+      "source_url": "https://www.denverbroncos.com/team/depth-chart/"
+    },
+    {
+      "audit_id": "AUD-07",
+      "file_path": "research-workspace/scripts/build.py (PR #4)",
+      "inspected_scope": "4 Week 9 injury snapshot rows (BAL Lamar Jackson, Tyler Huntley, Jaylinn Hawkins; JAX Bhayshul Tuten) and Week 10 vs. WEEK 9 header note.",
+      "verification_result": "Verified exact match against https://www.nfl.com/injuries/league/2026/REG9, including the official page's own Week 10 title vs. WEEK 9 subheading conflict.",
+      "audit_status": "Verified Exact Match",
+      "source_label": "NFL Week 9 Injury Report",
+      "source_url": "https://www.nfl.com/injuries/league/2026/REG9"
+    },
+    {
+      "audit_id": "AUD-08",
+      "file_path": "dashboard/data/repo_review.csv (PR #8)",
+      "inspected_scope": "Rows R-05, R-11, R-12, and R-13 in sibling dashboard audit CSV.",
+      "verification_result": "IRREGULARITY: Row R-05 has an empty evidence_link; Rows R-11/R-12/R-13 link non-official third-party domains (statrankings.com, sports.yahoo.com, sports24.us) and R-11 missed official club /team/depth-chart pages.",
+      "audit_status": "Flagged Irregularity",
+      "source_label": "Commanders Depth Chart (Official)",
+      "source_url": "https://www.commanders.com/team/depth-chart"
+    },
+    {
+      "audit_id": "AUD-09",
+      "file_path": "scripts/validate_site.py & tests/check_site.py",
+      "inspected_scope": "Root HTML & citation validation scripts.",
+      "verification_result": "Verified scripts check root *.html only (not subdirectories) and check syntactic HTTPS presence rather than semantic relevance of cited URLs.",
+      "audit_status": "Verified Limitation",
+      "source_label": "NFL3 Repository",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL3"
+    },
+    {
+      "audit_id": "AUD-10",
+      "file_path": ".github/workflows/pages.yml (PR #7)",
+      "inspected_scope": "GitHub Actions Pages validation and deployment workflow.",
+      "verification_result": "Verified passing on main; runs scripts/validate_site.py and deploys full repository artifact (including /decision-hub/) to GitHub Pages.",
+      "audit_status": "Verified Passing",
+      "source_label": "GitHub Actions Pages Docs",
+      "source_url": "https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages"
+    }
+  ],
+  "official_sources": [
+    {
+      "src_id": "SRC-01",
+      "publisher": "National Football League (NFL.com)",
+      "title": "Official 2026 NFL Injury Report — Week 10",
+      "verified_scope": "Practice participation (DNP, LP, FP), injury descriptions, and game statuses for Week 10 (Thu Nov 12 & Sun Nov 15, 2026).",
+      "limitation": "Overwritten as week progresses; Sunday Injury/Game Status cells are blank on Thursday; IR players omitted.",
+      "source_label": "nfl.com/injuries",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "src_id": "SRC-02",
+      "publisher": "National Football League (NFL.com)",
+      "title": "Official 2026 NFL Injury Report — Week 9 (REG9)",
+      "verified_scope": "Verified Week 9 Ravens/Jaguars statuses (Lamar Jackson Out, Tyler Huntley Out, Jaylinn Hawkins Out, Bhayshul Tuten Questionable).",
+      "limitation": "HTML title says 'Week 10' while H2 body says 'Injuries - WEEK 9' (flagged).",
+      "source_label": "nfl.com/injuries/REG9",
+      "source_url": "https://www.nfl.com/injuries/league/2026/REG9"
+    },
+    {
+      "src_id": "SRC-03",
+      "publisher": "National Football League (NFL.com)",
+      "title": "Competition Committee Revisions to Injury Report Policy",
+      "verified_scope": "Official definitions of DNP, LP, FP, Out, Doubtful, Questionable, elimination of Probable, and blank Game Status for players certain to play.",
+      "limitation": "Policy rule text; does not provide historical player archive.",
+      "source_label": "NFL Injury Policy",
+      "source_url": "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693"
+    },
+    {
+      "src_id": "SRC-04",
+      "publisher": "NFL Football Operations",
+      "title": "Contract Language, Roster Sizes & Practice Squad Elevation Rules",
+      "verified_scope": "53-man roster, 48-man gameday active list (>=8 OL) vs. 47-man, 16/17-player Practice Squad, Standard Elevation Addendum.",
+      "limitation": "Contains internal 2-game vs. 3-game elevation count discrepancy across two adjacent paragraphs (flagged).",
+      "source_label": "operations.nfl.com Roster Rules",
+      "source_url": "https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language"
+    },
+    {
+      "src_id": "SRC-05",
+      "publisher": "NFL Football Operations",
+      "title": "Game and Stadium Preparation — Countdown to Kickoff",
+      "verified_scope": "Mandatory 90-minute officiating meeting delivering Inactive List, C2P helmets, and roof status; 60-minute roof lock and warm-up window.",
+      "limitation": "Operational protocol manual summary, not a live game-day feed.",
+      "source_label": "operations.nfl.com Game Prep",
+      "source_url": "https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep"
+    },
+    {
+      "src_id": "SRC-06",
+      "publisher": "NFL Football Operations",
+      "title": "Official 2026 NFL Rulebook & 2026 Rule Changes",
+      "verified_scope": "2026 rule amendments 6-1-3 (kickoff setup zone), 6-1-5 (50-yd kickoff touchback), 6-1-6 (anytime declared onside kick), and 19-2.",
+      "limitation": "Defines rules; empirical scoring delta requires 2026 play-by-play analysis.",
+      "source_label": "2026 NFL Rulebook",
+      "source_url": "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook"
+    },
+    {
+      "src_id": "SRC-07",
+      "publisher": "NFL Football Operations",
+      "title": "AT Spotters & Player Health/Safety Protocols",
+      "verified_scope": "Independent booth AT spotter intervention and mandatory minimum 1-play evaluation removal rule.",
+      "limitation": "Protocol specification only.",
+      "source_label": "operations.nfl.com AT Spotters",
+      "source_url": "https://operations.nfl.com/gameday/behind-the-scenes/at-spotters"
+    },
+    {
+      "src_id": "SRC-08",
+      "publisher": "NFL Next Gen Stats",
+      "title": "Official Next Gen Stats Glossary",
+      "verified_scope": "Tracking metric definitions: Time to Throw, CAY/IAY, AGG%, Completion Probability (xCOMP), CPOE, 8+ Box %, Cushion, Separation, TAY%, xYAC.",
+      "limitation": "Public web leaderboards do not expose full play-level historical CSV exports without licensing.",
+      "source_label": "nextgenstats.nfl.com Glossary",
+      "source_url": "https://nextgenstats.nfl.com/glossary"
+    },
+    {
+      "src_id": "SRC-09",
+      "publisher": "National Football League (NFL.com)",
+      "title": "2026 NFL Player Statistics",
+      "verified_scope": "Official 2026 season passing, rushing, receiving, defensive, and kicking statistical categories (1970–2026).",
+      "limitation": "Season aggregates do not isolate snaps played against backup defenders.",
+      "source_label": "nfl.com/stats",
+      "source_url": "https://www.nfl.com/stats/player-stats/"
+    },
+    {
+      "src_id": "SRC-10",
+      "publisher": "NFL Support",
+      "title": "Official FAQ on NFL.com Odds Widgets & Sportsbook Partners",
+      "verified_scope": "Confirms NFL does not accept wagers; widgets show FanDuel, Caesars, and DraftKings odds via external redirect.",
+      "limitation": "Does not provide historical closing odds or house settlement rules.",
+      "source_label": "support.nfl.com Odds FAQ",
+      "source_url": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL"
+    },
+    {
+      "src_id": "SRC-11",
+      "publisher": "Official NFL Club Domains (7 Verified Clubs)",
+      "title": "2026 Club Depth Charts (WAS, NYG, NE, DET, BAL, DEN, SEA)",
+      "verified_scope": "Offense, Defense, and Special Teams 1st–4th string player hierarchies on official club websites.",
+      "limitation": "Explicitly marked 'unofficial' PR/media compilations; can lag IR placements and omit rotational injured players.",
+      "source_label": "patriots.com/team/depth-chart",
+      "source_url": "https://www.patriots.com/team/depth-chart"
+    },
+    {
+      "src_id": "SRC-12",
+      "publisher": "Nevada Gaming Control Board (State of Nevada)",
+      "title": "Monthly Revenue Report — September 2025 (Form NGC-31)",
+      "verified_scope": "Official statewide regulated win percentages for Sports - Football (6.70% Sep / 5.05% 12m), Sports Parlay Cards (27.79% Sep / 8.31% 12m), and Mobile (5.99% 12m).",
+      "limitation": "Statewide Nevada accounting aggregate; online Same-Game Parlays are blended into sport/mobile categories rather than parlay cards.",
+      "source_label": "gaming.nv.gov Sep 2025 PDF",
+      "source_url": "https://www.gaming.nv.gov/contentassets/a7958398526e4e309d248ea35a2a20dd/september-2025-monthly-revenue-report.pdf"
+    },
+    {
+      "src_id": "SRC-13",
+      "publisher": "National Institute of Standards and Technology (NIST)",
+      "title": "NIST/SEMATECH e-Handbook of Statistical Methods (Confidence Limits & Hypothesis Tests)",
+      "verified_scope": "Two-sided t-confidence intervals, hypothesis testing equivalence, and risk-level alpha selection.",
+      "limitation": "General statistical methodology; requires game-cluster adjustment for correlated sports bets.",
+      "source_label": "itl.nist.gov Section 1.3.5.2",
+      "source_url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm"
+    },
+    {
+      "src_id": "SRC-14",
+      "publisher": "scikit-learn Developers",
+      "title": "Probability Calibration & Cross-Validation User Guides (v1.9.1)",
+      "verified_scope": "Strictly proper scoring rules (Log Loss, Brier Score), Murphy decomposition, reliability curves, and grouped/time-series splitting.",
+      "limitation": "Methodological software documentation, not empirical NFL proof.",
+      "source_label": "scikit-learn Calibration",
+      "source_url": "https://scikit-learn.org/stable/modules/calibration.html"
+    },
+    {
+      "src_id": "SRC-15",
+      "publisher": "U.S. National Weather Service (NOAA)",
+      "title": "NWS Web Services API Documentation",
+      "verified_scope": "Official grid-based US weather forecasts and station observations.",
+      "limitation": "US territories/states only; does not cover European/international NFL venues.",
+      "source_label": "weather.gov API Docs",
+      "source_url": "https://www.weather.gov/documentation/services-web-api"
+    },
+    {
+      "src_id": "SRC-16",
+      "publisher": "Kansspelautoriteit (Netherlands Gaming Authority)",
+      "title": "Official Regulatory Portal & Kansspelwijzer License Register",
+      "verified_scope": "Dutch online gambling licensing oversight and market monitoring.",
+      "limitation": "Operator-specific NFL prop market permissions must be checked per Ksa license.",
+      "source_label": "kansspelautoriteit.nl",
+      "source_url": "https://kansspelautoriteit.nl/"
+    }
+  ]
+}

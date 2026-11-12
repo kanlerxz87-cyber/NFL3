@@ -1,0 +1,168 @@
+{
+  "irregularities": [
+    {
+      "flag_id": "FLG-01",
+      "origin": "Official NFL Source (operations.nfl.com)",
+      "item": "Practice Squad Standard Elevation Limit Contradiction (2 Games vs. 3 Games)",
+      "verified_observation": "Under 'Standard Elevation Addendum', paragraph 2 states 'maximum of two regular-season or postseason games per player per season', while paragraph 3 immediately below states 'maximum of three regular season games in the same League Year'.",
+      "handling": "Left unresolved in Q-06 (blank answer); flagged for check against primary NFL-NFLPA CBA text.",
+      "source_label": "NFL Contract Language",
+      "source_url": "https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language"
+    },
+    {
+      "flag_id": "FLG-02",
+      "origin": "Official NFL Source (nfl.com/injuries/league/2026/REG9)",
+      "item": "Week 9 Injury Page Title vs. Body Heading Mismatch",
+      "verified_observation": "Page <title> and H1 render 'Week 10 of the 2026 Season' while H2 renders 'Injuries - WEEK 9' above Nov 5 & Nov 8, 2026 games.",
+      "handling": "Retained exact URL and game dates; never auto-relabeled by inference.",
+      "source_label": "NFL Week 9 Injury Report",
+      "source_url": "https://www.nfl.com/injuries/league/2026/REG9"
+    },
+    {
+      "flag_id": "FLG-03",
+      "origin": "Cross-Source Official Conflict (Baltimore Ravens)",
+      "item": "IR Quarterback Retained as 1st String on Club Depth Chart & Dropped from Weekly Injury Table",
+      "verified_observation": "NFL.com news reports Ravens placed Lamar Jackson on IR (Nov 5) and he does not appear on Week 10 nfl.com/injuries/, yet baltimoreravens.com/team/depth-chart on Nov 12 still lists Lamar Jackson (1st) and Tyler Huntley (2nd) ahead of Joe Fagnano (3rd).",
+      "handling": "Documented as proof that injury tracking must join 53-man/IR roster transactions rather than reading weekly injury tables or club charts alone.",
+      "source_label": "Ravens Depth Chart (2026)",
+      "source_url": "https://www.baltimoreravens.com/team/depth-chart"
+    },
+    {
+      "flag_id": "FLG-04",
+      "origin": "Cross-Source Official Conflict (Seattle Seahawks)",
+      "item": "Seahawks QB Sam Darnold Listed 1st on Club Depth Chart & Omitted on Injury Table Despite Out Headline",
+      "verified_observation": "seahawks.com/team/depth-chart lists Sam Darnold 1st / Drew Lock 2nd / Jalen Milroe 3rd, and Seattle shows 'No Injuries Reported' on nfl.com/injuries/, conflicting with NFL.com news headline ruling Darnold out.",
+      "handling": "Flagged for manual T-90m Inactive List verification; no starter assumed.",
+      "source_label": "Seahawks Depth Chart (2026)",
+      "source_url": "https://www.seahawks.com/team/depth-chart/"
+    },
+    {
+      "flag_id": "FLG-05",
+      "origin": "Cross-Source Official Lag (WAS, NYG, DET)",
+      "item": "Active Injury-Report Players Missing from Club Two-Deep Depth Charts",
+      "verified_observation": "WAS C Lucas Patrick (Out), NYG LB Malik Harrison (Questionable), and DET S Kerby Joseph (LP) appear on Week 10 nfl.com/injuries/ but are absent from their clubs' published depth-chart rows on Nov 12.",
+      "handling": "Preserved both official records side by side without fabricating depth ranks for omitted players.",
+      "source_label": "NFL Week 10 Injury Report",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "flag_id": "FLG-06",
+      "origin": "Cross-Source Position Label Divergence (New England Patriots)",
+      "item": "Dual-Slot Starter/Backup Listing for Injured Offensive Lineman Ben Brown",
+      "verified_observation": "nfl.com/injuries/ lists Ben Brown as 'C' (Out, Knee, DNP), whereas patriots.com/team/depth-chart simultaneously lists Ben Brown as 1st-string LG AND 2nd-string C.",
+      "handling": "Modeled as a multi-slot OL cascade in DEP-03 rather than single-slot replacement.",
+      "source_label": "Patriots Depth Chart (2026)",
+      "source_url": "https://www.patriots.com/team/depth-chart"
+    },
+    {
+      "flag_id": "FLG-07",
+      "origin": "Club Depth Chart Formatting Edge Case (Seattle Seahawks)",
+      "item": "Two Players Packed into Single 1st-String WR Cell",
+      "verified_observation": "seahawks.com/team/depth-chart places both Cooper Kupp and Rashid Shaheed inside the first column of row 1 WR ahead of Irvin Charles.",
+      "handling": "Flagged for HTML parser schema design (co-starter array support required).",
+      "source_label": "Seahawks Depth Chart (2026)",
+      "source_url": "https://www.seahawks.com/team/depth-chart/"
+    },
+    {
+      "flag_id": "FLG-08",
+      "origin": "Repo Root Audit (decisions.html & flagged.html · PR #1)",
+      "item": "Non-Topical Placeholder Citations in Root Decision/Flagged Tables",
+      "verified_observation": "Root decisions.html row 1 cites GitHub Pages docs for sports betting markets/jurisdictions, and row 3 cites nfl.com/stats/ for bookmaker pricing/void rules.",
+      "handling": "Left root files untouched per parallel-session scope rules; corrected topical citations inside decision-hub and logged here.",
+      "source_label": "GitHub Pages Docs",
+      "source_url": "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages"
+    },
+    {
+      "flag_id": "FLG-09",
+      "origin": "Repo Sibling Audit (dashboard/data/repo_review.csv · PR #8)",
+      "item": "Blank Citation & Non-Official Third-Party Domains in Sibling Audit CSV",
+      "verified_observation": "dashboard/data/repo_review.csv leaves evidence_link blank on R-05, links third-party sites (statrankings.com, sports.yahoo.com, sports24.us) on R-11–R-13, and states no official depth charts exist.",
+      "handling": "Verified 7 official NFL club /team/depth-chart domains in decision-hub; kept sibling files untouched per scope rules.",
+      "source_label": "Broncos Depth Chart (2026)",
+      "source_url": "https://www.denverbroncos.com/team/depth-chart/"
+    },
+    {
+      "flag_id": "FLG-10",
+      "origin": "Platform & Prompt Constraint",
+      "item": "Fixed Arena Session Branch Name vs. Prompt Branch Naming Pattern",
+      "verified_observation": "Prompt specifies session-<id>/<task> branches (with HTML-escaped angle brackets), while Arena fixes this session's branch to arena/40c7529f-nfl3.",
+      "handling": "Followed fixed Arena branch constraint and isolated file scope under decision-hub/**.",
+      "source_label": "NFL3 Branches",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL3/branches"
+    },
+    {
+      "flag_id": "FLG-11",
+      "origin": "Parallel Multi-Session Execution",
+      "item": "Four Concurrent Session Workspaces Published in Same Repository",
+      "verified_observation": "Root site (4fd6bbbb / 2836662c), research-workspace/ (56e27bb4), dashboard/ (f445c027), and decision-hub/ (40c7529f) coexist to preserve non-overlapping ownership.",
+      "handling": "Cross-linked all workspaces from decision-hub and proposed unified navigation switcher in SUG-09.",
+      "source_label": "NFL3 COORDINATION.md",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/COORDINATION.md"
+    },
+    {
+      "flag_id": "FLG-12",
+      "origin": "Official NFL Source (nfl.com/injuries/)",
+      "item": "Mid-Week Blank Injury & Game-Status Cells for Sunday Week 10 Matchups",
+      "verified_observation": "On Thursday Nov 12, 2026, Sunday Nov 15 players (e.g., DET D.J. Reed, Cade Mays, Jared Goff; NE Rhamondre Stevenson, A.J. Brown) show blank Injuries and/or Game Status columns.",
+      "handling": "Kept strictly blank ('') in all tables; flagged until Friday final Game Status publication.",
+      "source_label": "NFL Week 10 Injury Report",
+      "source_url": "https://www.nfl.com/injuries/"
+    }
+  ],
+  "unverified_blanks": [
+    {
+      "blank_id": "BLK-01",
+      "table_location": "questions.html (Q-01..Q-03, Q-05..Q-12)",
+      "field_name": "Confirmed Answer",
+      "verified_value": "",
+      "reason_unverified": "Project-specific legal jurisdiction, commercial NFL data licenses, sportsbook benchmark selection, and validation alpha thresholds have not been decided by the owner.",
+      "source_label": "Kansspelautoriteit (NL)",
+      "source_url": "https://kansspelautoriteit.nl/"
+    },
+    {
+      "blank_id": "BLK-02",
+      "table_location": "origination.html (Strategies STR-01..STR-08)",
+      "field_name": "Effective N, Out-of-Sample Brier Skill, CLV (bps), Leaderboard Rank",
+      "verified_value": "",
+      "reason_unverified": "No licensed historical play-by-play + point-in-time sportsbook closing odds dataset is connected to run Gates G1–G8.",
+      "source_label": "scikit-learn Calibration",
+      "source_url": "https://scikit-learn.org/stable/modules/calibration.html"
+    },
+    {
+      "blank_id": "BLK-03",
+      "table_location": "origination.html (Correlations COR-01..COR-08)",
+      "field_name": "Empirical Correlation (rho) & 95% Bootstrap CI",
+      "verified_value": "",
+      "reason_unverified": "No aligned multi-season historical prop and game-line settlement dataset is loaded; fabricating textbook correlations is prohibited.",
+      "source_label": "NIST Confidence Limits",
+      "source_url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm"
+    },
+    {
+      "blank_id": "BLK-04",
+      "table_location": "depth-injuries.html (DEP-01..DEP-16)",
+      "field_name": "3rd / 4th String Cells Where Club Depth Chart Stops at 2-Deep or 3-Deep",
+      "verified_value": "",
+      "reason_unverified": "Clubs publish 4-deep chains for some positions (e.g., NE RB, DET CB/TE, NYG TE, DEN TE, SEA RB) and 2-deep/3-deep for others; unlisted strings are never guessed from rosters.",
+      "source_label": "Commanders Depth Chart (2026)",
+      "source_url": "https://www.commanders.com/team/depth-chart"
+    },
+    {
+      "blank_id": "BLK-05",
+      "table_location": "depth-injuries.html (DEP-01..DEP-16)",
+      "field_name": "Quantified EPA / Win-Probability Replacement Drop-Off",
+      "verified_value": "",
+      "reason_unverified": "Requires historical snap-weighted play-by-play participation joined to player IDs; left blank until licensed play-by-play is ingested.",
+      "source_label": "NFL Next Gen Stats Glossary",
+      "source_url": "https://nextgenstats.nfl.com/glossary"
+    },
+    {
+      "blank_id": "BLK-06",
+      "table_location": "index.html & executive-summary.html",
+      "field_name": "Originated Numeric Week 10 Spreads, Totals & Prop Fair Lines",
+      "verified_value": "",
+      "reason_unverified": "Originating numeric fair prices without calibrated play-by-play priors and T-90m active lists would produce unverified numbers.",
+      "source_label": "NFL Odds Widget FAQ",
+      "source_url": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL"
+    }
+  ]
+}
