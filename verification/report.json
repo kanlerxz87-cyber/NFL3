@@ -25,7 +25,7 @@
   },
   "table_citations": {
     "html_pages": 95,
-    "table_rows": 4889,
+    "table_rows": 4893,
     "rows_missing_approved_primary_link": 534,
     "rows_missing_nfl_or_club_link": 764,
     "rows_community_only": 121,
@@ -73,7 +73,7 @@
       "www.miamidolphins.com": 72,
       "www.neworleanssaints.com": 76,
       "www.newyorkjets.com": 66,
-      "www.nfl.com": 1988,
+      "www.nfl.com": 1992,
       "www.packers.com": 8,
       "www.panthers.com": 74,
       "www.patriots.com": 100,
@@ -119,7 +119,7 @@
       "decision-hub/questions.html": 12,
       "decision-hub/repo-audit.html": 28,
       "decision-hub/suggestions.html": 10,
-      "decision-lab/audit.html": 9,
+      "decision-lab/audit.html": 8,
       "decision-lab/availability.html": 216,
       "decision-lab/decisions.html": 9,
       "decision-lab/depth.html": 1747,
@@ -135,7 +135,7 @@
       "decision-lab/strategies.html": 11,
       "decision-lab/suggestions.html": 27,
       "decision-lab/validation.html": 15,
-      "decision-lab/verification.html": 296,
+      "decision-lab/verification.html": 301,
       "decisions.html": 11,
       "flagged.html": 9,
       "index.html": 17,
@@ -387,11 +387,11 @@
     ]
   },
   "audit_count_comparison": {
-    "saved_html_pages": 81,
+    "saved_html_pages": 95,
     "independent_html_pages": 95,
-    "saved_table_rows": 4241,
-    "independent_table_rows": 4889,
-    "saved_index_rows": 16,
+    "saved_table_rows": 4893,
+    "independent_table_rows": 4893,
+    "saved_index_rows": 17,
     "independent_index_rows": 17,
     "saved_rows_missing_official_source": 533,
     "independent_rows_missing_approved_primary_link": 534,
@@ -820,23 +820,11 @@
       "official_reference": "S05"
     },
     {
-      "id": "SRC-04",
-      "severity": "High",
-      "status": "Reproduced stale generated audit output",
-      "title": "Saved repository audit totals do not match the current HTML",
-      "detail": "Saved `audit.json` records 4241 rows across 81 pages (16 in index.html); a fresh offline scan finds 4889 rows across 95 pages (17 in index.html). Regenerate the canonical audit/build so its saved counts match the checked-in HTML; this is a report freshness issue, not a game-data mismatch.",
-      "code": [
-        "decision-lab/data/audit.json",
-        "index.html"
-      ],
-      "official_reference": "S05"
-    },
-    {
       "id": "SRC-05",
       "severity": "High",
       "status": "Open requirement / review finding",
       "title": "Repository table rows lack a link to an approved primary-source host",
-      "detail": "The independent fixed-host scanner counted 534 such rows among 4889 `<tbody>` rows on 95 HTML pages. This is a host-level count only; it does not judge whether a link's content supports its row. See `pages_with_missing_primary_links` in `report.json` for a per-page breakdown.",
+      "detail": "The independent fixed-host scanner counted 534 such rows among 4893 `<tbody>` rows on 95 HTML pages. This is a host-level count only; it does not judge whether a link's content supports its row. See `pages_with_missing_primary_links` in `report.json` for a per-page breakdown.",
       "code": [
         "verification/audit_sources.py",
         "decision-lab/data/audit.json"
