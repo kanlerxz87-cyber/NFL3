@@ -24,7 +24,7 @@ Rules:
   * Every reported item carries the official source URL.
 
 Exit code 0 always (this is a reporting tool); the verify gate for the site is
-tests/check_site.py. Run:  python3 injury-injury-verification/verify.py
+tests/check_site.py. Run:  python3 injury-verification/verify.py
 """
 from __future__ import annotations
 
