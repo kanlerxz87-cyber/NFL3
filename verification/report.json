@@ -1,0 +1,596 @@
+{
+  "report_version": 1,
+  "scope": "Offline source-authority and row-citation audit of the repository state; no external URLs fetched.",
+  "limitations": [
+    "This run does not fetch or re-open NFL/club pages. Links are provided for manual review; availability and page contents may change.",
+    "An approved hostname proves only the publisher domain, not that a linked page supports the specific claim or that the extracted row is parsed correctly.",
+    "SHA-256 checksums support byte-integrity comparisons only; they do not prove NFL authorship, truth, license, or currentness.",
+    "The static club-domain map is a review aid based on the official NFL team directory URL in catalog source S05; verify it again when updating the map.",
+    "The historical snapshot timestamp is not a live injury/depth feed or a guarantee about current lineups; this HTML/report is generated from the checked-in snapshot and is not refreshed automatically by the Pages deployment capture step.",
+    "No odds/proposition ledger, validated strategy edge, empirical parlay correlation, or funded reward result is established by this audit."
+  ],
+  "snapshot": {
+    "injury_rows": 254,
+    "no_injury_sections": 4,
+    "depth_rows": 1745,
+    "depth_successes": 30,
+    "depth_failures": 2,
+    "depth_teams": 30,
+    "snapshot_observed_at": "2026-11-12T06:32:36.211205+00:00",
+    "fixed_host_check_errors": [],
+    "coverage_warnings": [
+      "depth coverage absent for Houston Texans: https://www.houstontexans.com/team/depth-chart: no depth table parsed; https://www.houstontexans.com/team/depth-chart/: no depth table parsed",
+      "depth coverage absent for Green Bay Packers: https://www.packers.com/team/depth-chart: no depth table parsed; https://www.packers.com/team/depth-chart/: no depth table parsed"
+    ]
+  },
+  "table_citations": {
+    "html_pages": 77,
+    "table_rows": 3626,
+    "rows_missing_approved_primary_link": 530,
+    "rows_missing_nfl_or_club_link": 677,
+    "rows_community_only": 119,
+    "host_link_counts_in_tables": {
+      "apnews.com": 1,
+      "docs.github.com": 31,
+      "github.com": 198,
+      "kansspelautoriteit.nl": 8,
+      "lamag.com": 2,
+      "media.nfl.com": 5,
+      "nextgenstats.nfl.com": 21,
+      "nflreadr.nflverse.com": 1,
+      "operations.nfl.com": 39,
+      "scikit-learn.org": 55,
+      "sports.yahoo.com": 6,
+      "sports24.us": 4,
+      "static.clubs.nfl.com": 6,
+      "statrankings.com": 4,
+      "sticktothemodel.com": 2,
+      "support.nfl.com": 38,
+      "tsapps.nist.gov": 15,
+      "www.49ers.com": 58,
+      "www.atlantafalcons.com": 59,
+      "www.azcardinals.com": 57,
+      "www.baltimoreravens.com": 65,
+      "www.bengals.com": 57,
+      "www.buccaneers.com": 60,
+      "www.buffalobills.com": 61,
+      "www.chargers.com": 59,
+      "www.chicagobears.com": 59,
+      "www.chiefs.com": 56,
+      "www.clevelandbrowns.com": 58,
+      "www.colts.com": 63,
+      "www.commanders.com": 70,
+      "www.dallascowboys.com": 58,
+      "www.denverbroncos.com": 63,
+      "www.detroitlions.com": 62,
+      "www.fsroundup.com": 2,
+      "www.gaming.nv.gov": 10,
+      "www.giants.com": 64,
+      "www.itl.nist.gov": 23,
+      "www.jaguars.com": 56,
+      "www.miamidolphins.com": 56,
+      "www.neworleanssaints.com": 59,
+      "www.newyorkjets.com": 57,
+      "www.nfl.com": 1055,
+      "www.panthers.com": 57,
+      "www.patriots.com": 70,
+      "www.philadelphiaeagles.com": 52,
+      "www.raiders.com": 57,
+      "www.seahawks.com": 66,
+      "www.steelers.com": 58,
+      "www.tennesseetitans.com": 62,
+      "www.therams.com": 55,
+      "www.vikings.com": 58,
+      "www.weather.gov": 5
+    },
+    "pages_with_missing_primary_links": [
+      {
+        "path": "dashboard/flagged.html",
+        "rows_missing_approved_primary_link": 17,
+        "rows": 27
+      },
+      {
+        "path": "dashboard/questions.html",
+        "rows_missing_approved_primary_link": 8,
+        "rows": 18
+      },
+      {
+        "path": "dashboard/repo-review.html",
+        "rows_missing_approved_primary_link": 8,
+        "rows": 16
+      },
+      {
+        "path": "dashboard/sources.html",
+        "rows_missing_approved_primary_link": 6,
+        "rows": 11
+      },
+      {
+        "path": "dashboard/strategies.html",
+        "rows_missing_approved_primary_link": 14,
+        "rows": 27
+      },
+      {
+        "path": "dashboard/suggestions.html",
+        "rows_missing_approved_primary_link": 10,
+        "rows": 14
+      },
+      {
+        "path": "decision-hub/executive-summary.html",
+        "rows_missing_approved_primary_link": 1,
+        "rows": 6
+      },
+      {
+        "path": "decision-hub/flagged.html",
+        "rows_missing_approved_primary_link": 2,
+        "rows": 18
+      },
+      {
+        "path": "decision-hub/index.html",
+        "rows_missing_approved_primary_link": 1,
+        "rows": 10
+      },
+      {
+        "path": "decision-hub/repo-audit.html",
+        "rows_missing_approved_primary_link": 3,
+        "rows": 28
+      },
+      {
+        "path": "decision-hub/suggestions.html",
+        "rows_missing_approved_primary_link": 1,
+        "rows": 10
+      },
+      {
+        "path": "line-lab/index.html",
+        "rows_missing_approved_primary_link": 15,
+        "rows": 15
+      },
+      {
+        "path": "line-lab/pages/coordination.html",
+        "rows_missing_approved_primary_link": 13,
+        "rows": 13
+      },
+      {
+        "path": "line-lab/pages/correlations.html",
+        "rows_missing_approved_primary_link": 8,
+        "rows": 8
+      },
+      {
+        "path": "line-lab/pages/depth.html",
+        "rows_missing_approved_primary_link": 10,
+        "rows": 10
+      },
+      {
+        "path": "line-lab/pages/executive-summary.html",
+        "rows_missing_approved_primary_link": 16,
+        "rows": 16
+      },
+      {
+        "path": "line-lab/pages/gates.html",
+        "rows_missing_approved_primary_link": 70,
+        "rows": 70
+      },
+      {
+        "path": "line-lab/pages/injuries.html",
+        "rows_missing_approved_primary_link": 10,
+        "rows": 118
+      },
+      {
+        "path": "line-lab/pages/lines.html",
+        "rows_missing_approved_primary_link": 80,
+        "rows": 80
+      },
+      {
+        "path": "line-lab/pages/methodology.html",
+        "rows_missing_approved_primary_link": 5,
+        "rows": 5
+      },
+      {
+        "path": "line-lab/pages/questions.html",
+        "rows_missing_approved_primary_link": 25,
+        "rows": 25
+      },
+      {
+        "path": "line-lab/pages/rules.html",
+        "rows_missing_approved_primary_link": 19,
+        "rows": 19
+      },
+      {
+        "path": "line-lab/pages/sources.html",
+        "rows_missing_approved_primary_link": 4,
+        "rows": 16
+      },
+      {
+        "path": "line-lab/pages/standings.html",
+        "rows_missing_approved_primary_link": 8,
+        "rows": 40
+      },
+      {
+        "path": "line-lab/pages/strategies.html",
+        "rows_missing_approved_primary_link": 12,
+        "rows": 12
+      },
+      {
+        "path": "line-lab/pages/suggestions.html",
+        "rows_missing_approved_primary_link": 18,
+        "rows": 18
+      },
+      {
+        "path": "research-desk/correlation.html",
+        "rows_missing_approved_primary_link": 11,
+        "rows": 11
+      },
+      {
+        "path": "research-desk/executive-summary.html",
+        "rows_missing_approved_primary_link": 16,
+        "rows": 16
+      },
+      {
+        "path": "research-desk/flagged.html",
+        "rows_missing_approved_primary_link": 7,
+        "rows": 7
+      },
+      {
+        "path": "research-desk/index.html",
+        "rows_missing_approved_primary_link": 3,
+        "rows": 3
+      },
+      {
+        "path": "research-desk/lines.html",
+        "rows_missing_approved_primary_link": 28,
+        "rows": 28
+      },
+      {
+        "path": "research-desk/questions.html",
+        "rows_missing_approved_primary_link": 7,
+        "rows": 10
+      },
+      {
+        "path": "research-desk/review.html",
+        "rows_missing_approved_primary_link": 20,
+        "rows": 24
+      },
+      {
+        "path": "research-desk/sources.html",
+        "rows_missing_approved_primary_link": 18,
+        "rows": 21
+      },
+      {
+        "path": "research-desk/strategies.html",
+        "rows_missing_approved_primary_link": 15,
+        "rows": 15
+      },
+      {
+        "path": "research-desk/suggestions.html",
+        "rows_missing_approved_primary_link": 15,
+        "rows": 15
+      },
+      {
+        "path": "research-workspace/pages/availability.html",
+        "rows_missing_approved_primary_link": 2,
+        "rows": 8
+      },
+      {
+        "path": "research-workspace/pages/decisions.html",
+        "rows_missing_approved_primary_link": 2,
+        "rows": 11
+      },
+      {
+        "path": "research-workspace/pages/flagged.html",
+        "rows_missing_approved_primary_link": 1,
+        "rows": 6
+      },
+      {
+        "path": "research-workspace/pages/strategies.html",
+        "rows_missing_approved_primary_link": 1,
+        "rows": 9
+      }
+    ]
+  },
+  "audit_count_comparison": {
+    "saved_rows_missing_official_source": 531,
+    "independent_rows_missing_approved_primary_link": 530,
+    "saved_rows_community_only": 106,
+    "independent_rows_community_only": 119,
+    "note": "Not directly comparable: this audit rejects all github.com hosts as NFL-authority evidence and accepts the supplemental tsapps.nist.gov publisher; the saved audit used different host/path rules."
+  },
+  "existing_gate_reproduction": {
+    "snapshot_declared_host_added_to_allowlist": true,
+    "directory_host_from_synthetic_html_is_adopted": true,
+    "arbitrary_github_repository_not_classified_community": true,
+    "http_url_host_passes_host_only_membership_check": true,
+    "static_allowlist_rejects_snapshot_declared_host": true,
+    "static_allowlist_rejects_http": true,
+    "source_lines": {
+      "dynamic_depth_host_add": 53,
+      "host_only_depth_row_test": 204,
+      "github_community_classifier": 41,
+      "github_extra_official_entry": 21,
+      "directory_host_adoption": 198,
+      "discovered_host_allowlist": 215
+    }
+  },
+  "sources": [
+    {
+      "id": "S01",
+      "label": "NFL official injury report, 2026 Week 10",
+      "url": "https://www.nfl.com/injuries/league/2026/REG10",
+      "publisher": "NFL",
+      "checked_in_catalog": "2026-11-12",
+      "status_in_catalog": "opened",
+      "scope": "Player, position, injury text, practice status and game status for the published Week 10 report.",
+      "limit": "Mutable page; not a point-in-time archive. Does not establish depth order, workload or replacement assignment.",
+      "catalogued": true,
+      "host_approved": true
+    },
+    {
+      "id": "S02",
+      "label": "NFL Week 10 injury report article",
+      "url": "https://www.nfl.com/news/nfl-week-10-injury-report-2026-season",
+      "publisher": "NFL.com",
+      "checked_in_catalog": "2026-11-12",
+      "status_in_catalog": "opened",
+      "scope": "Dated injury-status article and game context for Week 10.",
+      "limit": "Article updates can lag the report page; conflicting statuses must be flagged, not merged by guess.",
+      "catalogued": true,
+      "host_approved": true
+    },
+    {
+      "id": "S03",
+      "label": "NFL injury-report policy revisions",
+      "url": "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693",
+      "publisher": "NFL.com",
+      "checked_in_catalog": "2026-11-12",
+      "status_in_catalog": "opened",
+      "scope": "Definitions of practice participation and game-status categories; Questionable means uncertain, Doubtful unlikely, Out will not play.",
+      "limit": "Status labels are not calibrated probabilities and do not quantify replacement quality.",
+      "catalogued": true,
+      "host_approved": true
+    },
+    {
+      "id": "S04",
+      "label": "2026 NFL official rulebook",
+      "url": "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook/",
+      "publisher": "NFL Football Operations",
+      "checked_in_catalog": "2026-11-12",
+      "status_in_catalog": "opened",
+      "scope": "Season-specific playing rules, scoring, timing and overtime.",
+      "limit": "Playing rules are not sportsbook settlement rules; each market still needs its own documented grading terms.",
+      "catalogued": true,
+      "host_approved": true
+    },
+    {
+      "id": "S05",
+      "label": "NFL team directory",
+      "url": "https://www.nfl.com/teams/",
+      "publisher": "NFL",
+      "checked_in_catalog": "2026-11-12",
+      "status_in_catalog": "opened",
+      "scope": "Official links to all 32 club websites and NFL team profiles.",
+      "limit": "Directory does not itself provide depth order, snap counts or injury history.",
+      "catalogued": true,
+      "host_approved": true
+    },
+    {
+      "id": "S06",
+      "label": "Washington Commanders club depth chart",
+      "url": "https://www.commanders.com/team/depth-chart",
+      "publisher": "Washington Commanders",
+      "checked_in_catalog": "2026-11-12",
+      "status_in_catalog": "opened",
+      "scope": "Club-published offensive, defensive and special-teams depth lists.",
+      "limit": "Club depth charts are guidance, not confirmed game participation; cross-source lag and missing ranks remain possible.",
+      "catalogued": true,
+      "host_approved": true
+    },
+    {
+      "id": "S07",
+      "label": "New York Giants club depth chart",
+      "url": "https://www.giants.com/team/depth-chart",
+      "publisher": "New York Giants",
+      "checked_in_catalog": "2026-11-12",
+      "status_in_catalog": "opened",
+      "scope": "Club-published offensive, defensive and special-teams depth lists.",
+      "limit": "Does not prove actual snaps, starter confirmation or replacement assignment.",
+      "catalogued": true,
+      "host_approved": true
+    },
+    {
+      "id": "S08",
+      "label": "Colts Week 10 unofficial depth chart",
+      "url": "https://www.colts.com/news/colts-release-unofficial-depth-chart-for-week-10",
+      "publisher": "Indianapolis Colts",
+      "checked_in_catalog": "2026-11-12",
+      "status_in_catalog": "opened",
+      "scope": "Club article explicitly labeled unofficial; ordered position lists for offense, defense and special teams.",
+      "limit": "Unofficial by the publisher's own label; cannot be treated as confirmed lineup or workload.",
+      "catalogued": true,
+      "host_approved": true
+    },
+    {
+      "id": "S09",
+      "label": "NFL Next Gen Stats glossary",
+      "url": "https://nextgenstats.nfl.com/glossary",
+      "publisher": "NFL Next Gen Stats",
+      "checked_in_catalog": "2026-11-12",
+      "status_in_catalog": "opened",
+      "scope": "Official definitions for tracking-derived passing, rushing and receiving metrics.",
+      "limit": "Glossary access does not establish a licensed historical play-level feed or redistribution right.",
+      "catalogued": true,
+      "host_approved": true
+    },
+    {
+      "id": "S10",
+      "label": "NFL game and stadium preparation",
+      "url": "https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep/",
+      "publisher": "NFL Football Operations",
+      "checked_in_catalog": "2026-11-12",
+      "status_in_catalog": "opened",
+      "scope": "Game-day operations timeline, including inactive-list delivery and medical/technical preparation.",
+      "limit": "Operational timeline is not a machine-readable inactive feed.",
+      "catalogued": true,
+      "host_approved": true
+    },
+    {
+      "id": "S11",
+      "label": "NFL AT spotters",
+      "url": "https://operations.nfl.com/game-operations-logistics/game-day-assistants/at-spotters",
+      "publisher": "NFL Football Operations",
+      "checked_in_catalog": "2026-11-12",
+      "status_in_catalog": "opened",
+      "scope": "Independent certified athletic trainers observe potential injuries and can trigger medical review.",
+      "limit": "Spotter process does not publish real-time diagnoses or replacement depth for modeling.",
+      "catalogued": true,
+      "host_approved": true
+    },
+    {
+      "id": "S12",
+      "label": "NFL odds-widget FAQ",
+      "url": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL",
+      "publisher": "NFL Support",
+      "checked_in_catalog": "2026-11-12",
+      "status_in_catalog": "opened",
+      "scope": "Odds widgets are supplied by bookmaker partners; bets redirect to the partner sportsbook.",
+      "limit": "Does not establish an NFL-authored odds archive, API, historical prices or prop settlement terms.",
+      "catalogued": true,
+      "host_approved": true
+    },
+    {
+      "id": "S13",
+      "label": "NIST confidence limits for the mean",
+      "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm",
+      "publisher": "NIST/SEMATECH",
+      "checked_in_catalog": "2026-11-12",
+      "status_in_catalog": "opened",
+      "scope": "Confidence-interval interpretation and uncertainty guidance.",
+      "limit": "Statistical reference, not evidence of NFL betting skill; game-cluster dependence requires appropriate resampling.",
+      "catalogued": true,
+      "host_approved": true
+    },
+    {
+      "id": "S14",
+      "label": "scikit-learn TimeSeriesSplit",
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html",
+      "publisher": "scikit-learn project",
+      "checked_in_catalog": "2026-11-12",
+      "status_in_catalog": "opened",
+      "scope": "Time-ordered train/test splitting to avoid training on future data.",
+      "limit": "Official software documentation, not an NFL source; grouped game leakage still needs explicit controls.",
+      "catalogued": true,
+      "host_approved": true
+    },
+    {
+      "id": "S15",
+      "label": "scikit-learn probability calibration",
+      "url": "https://scikit-learn.org/stable/modules/calibration.html",
+      "publisher": "scikit-learn project",
+      "checked_in_catalog": "2026-11-12",
+      "status_in_catalog": "opened",
+      "scope": "Calibration curves and proper scoring-rule caveats.",
+      "limit": "Lower Brier loss alone does not prove better calibration or profitability.",
+      "catalogued": true,
+      "host_approved": true
+    },
+    {
+      "id": "S16",
+      "label": "GitHub Pages custom workflows",
+      "url": "https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages",
+      "publisher": "GitHub Docs",
+      "checked_in_catalog": "2026-11-12",
+      "status_in_catalog": "opened",
+      "scope": "Build/deploy workflow requirements and Pages artifact deployment.",
+      "limit": "Pages hosts static output; it is not a database, wagering backend or guaranteed real-time scheduler.",
+      "catalogued": true,
+      "host_approved": true
+    },
+    {
+      "id": "S17",
+      "label": "Washington Commanders roster",
+      "url": "https://www.nfl.com/teams/washington-commanders/roster",
+      "publisher": "NFL",
+      "checked_in_catalog": "2026-11-12",
+      "status_in_catalog": "opened",
+      "scope": "Player identity, position and roster status.",
+      "limit": "Roster status is not depth order or confirmed game-day active status.",
+      "catalogued": true,
+      "host_approved": true
+    },
+    {
+      "id": "SUP-01",
+      "label": "NIST-hosted supplemental publication (pub_id 933682)",
+      "url": "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=933682",
+      "publisher": "NIST domain, not in the canonical source catalog",
+      "checked_in_catalog": "",
+      "status_in_catalog": "supplemental reference only",
+      "scope": "A source link already used by preserved research-workspace rows and referenced in the existing coordination log.",
+      "limit": "Not reopened by this independent offline audit; confirm the publication title and claim relevance manually.",
+      "catalogued": false,
+      "host_approved": true
+    }
+  ],
+  "catalog_source_errors": [],
+  "strategy_status_counts": {
+    "Not run": 10
+  },
+  "strategies_total": 10,
+  "strategies_validated": 0,
+  "findings": [
+    {
+      "id": "SRC-01",
+      "severity": "High",
+      "status": "Confirmed by offline synthetic tests",
+      "title": "Source-host checks are not independent of the data being checked",
+      "detail": "`official_hosts(snapshot)` adds hosts from `depth_rows` and `depth_directory_successes`; `verify_lab()` then accepts a depth row when its host is in that same set. A synthetic `untrusted.invalid` host is admitted. Separately, `capture_official.py` adopts matching hostnames from the team-directory HTML and creates its redirect allowlist from the discovered hostname; a synthetic directory entry was accepted. Add a static 32-club host map before either gate. These are verifier design gaps, not evidence that current club hosts are malicious.",
+      "code": [
+        "decision-lab/scripts/audit.py",
+        "decision-lab/scripts/capture_official.py"
+      ],
+      "official_reference": "S05"
+    },
+    {
+      "id": "SRC-02",
+      "severity": "High",
+      "status": "Confirmed by offline synthetic test",
+      "title": "The depth-row check does not require HTTPS",
+      "detail": "The existing depth-row gate compares only `urlparse(source_url).hostname` against an allowlist; an HTTP URL on an allowed hostname passes that part of the check. The independent fixed allowlist rejects HTTP.",
+      "code": [
+        "decision-lab/scripts/audit.py",
+        "decision-lab/scripts/validation.py"
+      ],
+      "official_reference": "S05"
+    },
+    {
+      "id": "SRC-03",
+      "severity": "High",
+      "status": "Confirmed by offline synthetic test",
+      "title": "The broad repo audit can treat unrelated GitHub repositories as official",
+      "detail": "`github.com` is in the broad `EXTRA_OFFICIAL` host set, while `is_community()` only excludes two nflverse path prefixes. A test URL under an unrelated GitHub owner is therefore eligible to count as an official table citation. GitHub hosting/digests establish neither NFL authorship nor NFL factual authority.",
+      "code": [
+        "decision-lab/scripts/audit.py"
+      ],
+      "official_reference": "S05"
+    },
+    {
+      "id": "SRC-05",
+      "severity": "High",
+      "status": "Open requirement / review finding",
+      "title": "Many repository table rows still lack a link to an approved primary-source host",
+      "detail": "The independent fixed-host scanner counted 530 such rows among 3626 `<tbody>` rows on 77 HTML pages. This is a host-level count only; it does not judge whether a link's content supports its row. See `pages_with_missing_primary_links` in `report.json` for a per-page breakdown.",
+      "code": [
+        "verification/audit_sources.py",
+        "decision-lab/data/audit.json"
+      ],
+      "official_reference": "S05"
+    },
+    {
+      "id": "SRC-06",
+      "severity": "Review required",
+      "status": "Coverage explicitly incomplete",
+      "title": "Two club depth-chart probes did not parse a table",
+      "detail": "depth coverage absent for Houston Texans: https://www.houstontexans.com/team/depth-chart: no depth table parsed; https://www.houstontexans.com/team/depth-chart/: no depth table parsed; depth coverage absent for Green Bay Packers: https://www.packers.com/team/depth-chart: no depth table parsed; https://www.packers.com/team/depth-chart/: no depth table parsed",
+      "code": [
+        "decision-lab/data/official_snapshot.json"
+      ],
+      "official_reference": "S05"
+    }
+  ]
+}
