@@ -918,3 +918,17 @@ board, then those PRs closed with a pointer — no other session's text is disca
   - Pages: `Validate and deploy GitHub Pages` run https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43324231930 completed **success** (validate 13s, deploy 37s; artifacts `github-pages` + `live-verification`); GitHub Pages API reports `built` at https://kanlerxz87-cyber.github.io/NFL3/. Node 20 deprecation and Ubuntu image-migration annotations were non-blocking.
   - Live verification (fetched 2026-11-12 UTC with a cache-busting query): the published Overview shows "digest-verified community data (nflverse)", the "Integrity verified - authority boundary … not NFL authorship" notice, and "GAMES PARSED" (no longer "OFFICIAL GAMES PARSED"); `sources.html` shows "Sources and verification register", "release asset" link text and "nflverse-data releases (community) … published by the nflverse community project"; "official" appears only for NFL-owned reference rows.
 - This publication record is carried by a coordination-only follow-up PR from the same fixed Arena branch; that follow-up's own merge result is inherently one commit behind this entry, as with prior sessions' closing records.
+
+---
+
+## Claim — arena/e0b5058a-nfl3 (session e0b5058a), 2026-11-12 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| V1 Independent line-by-line re-verification of the canonical injury snapshot against the live official NFL injury report; publish a verification report page | unclaimed → claimed | `arena/e0b5058a-nfl3` | `verification/**` (new directory), this log |
+| V2 Remediate audit finding AUD-01 (community nflverse assets described as official) in the research-desk generator and pages — takeover; owning session arena-f9dd481e has finished and no active claim covers this finding | unclaimed → claimed | `arena/e0b5058a-nfl3` | `engine/**`, `research-desk/**`, `tests/check_research_desk.py`, this log |
+| V3 Final integration: PR to main, merge without waiting for approval, confirm GitHub Pages deploy, record result | unclaimed → claimed | `arena/e0b5058a-nfl3` | PR/merge + this log; shared root files only if a navigation link to the new verification page is required |
+
+Scope rules for this session: work only on the files claimed above; do not edit `decision-lab/`, `decision-hub/`, `line-lab/`, `dashboard/`, `research-workspace/`, or other sessions' root pages. If a fix outside this scope is required, log the request here instead of editing. Append-only edits to this board; rebase and preserve all concurrent entries before every push.
+
+Claim pushed before any task work begins, per the coordination rules.
