@@ -1,0 +1,26 @@
+name: Verification lab checks
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'verification-lab/**'
+      - 'tests/test_verification_lab.py'
+      - '.github/workflows/verification-lab.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild verification lab from checked registers
+        run: python3 verification-lab/scripts/build.py
+      - name: Fail-closed verification lab checks
+        run: python3 tests/test_verification_lab.py
+      - name: Confirm the rebuild is deterministic
+        run: git diff --exit-code -- verification-lab

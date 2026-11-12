@@ -46,6 +46,10 @@ jobs:
           fi
       - name: Verification - offline structural families
         run: python3 decision-lab/scripts/verify_live.py --offline
+      - name: Verification lab build and fail-closed checks
+        run: |
+          python3 verification-lab/scripts/build.py
+          python3 tests/test_verification_lab.py
 
   deploy:
     if: github.event_name != 'pull_request'
