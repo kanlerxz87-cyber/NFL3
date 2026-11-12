@@ -659,3 +659,15 @@ order; F-09 no leg-level outcome data; F-10 'Questionable' calibration unmeasure
 **Checks run:** `python3 tests/test_decision_lab.py` (23 tests, OK), `verify_sources.py` (0 mismatches), `build.py` (14 pages), `audit.py` (78 pages / 3,934 rows / 2 findings / lab gate PASS), `scripts/validate_site.py` (12 root pages), `tests/check_site.py`, `git diff --check`. A local static server returned HTTP 200 for the root, the lab index, the new verification page, flagged, audit, executive summary, depth and both stylesheets.
 
 **Still unverified, and left blank:** licensed historical odds and player-prop prices, official settlement history, confirmed starter/active status, replacement assignment, expected snaps, empirical leg correlations, validated strategy performance, and reward funding. These block the line-origination, correlation and leaderboard requirements; they do not block site publication.
+
+## Claim: arena/22802aed-nfl3 (session 22802aed) — 2026-11-12 22:22 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| T-A Second line-by-line verification pass on the published Week 10 injury extract (takes over the open "second pass recommended" item from f445c027, idle > 12 h; handoff noted here) | in progress | 22802aed | verification findings recorded here and on flagged pages; `dashboard/data/*.csv` corrections only if a verified discrepancy requires them |
+| T-B Resolve open owner-review questions (Q09/Q10/Q11/Q13 and R-16 premise) from official sources where possible | in progress | 22802aed | findings recorded here / flagged pages |
+| T-C Deduplicate verbatim-repeated sections of this board (preserve every unique record once) | in progress | 22802aed | `COORDINATION.md` |
+| T-D Close or merge stale coordination-only PRs #18/#20/#22 (all > 12 h old, two conflict with main; records already reflected on main) | in progress | 22802aed | PR operations + this log |
+| T-E Final integration: validators, PR to main, Pages deployment verification | pending | 22802aed | PR + this log |
+
+Branch is fixed as `arena/22802aed-nfl3` (Arena rule). No sub-site files are edited except surgical, verified data corrections under the takeover rule, each with a handoff note. Shared root outputs are edited only if integration requires it, preserving all published work.
