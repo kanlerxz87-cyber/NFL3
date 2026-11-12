@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strategy leaderboard · NFL3</title>
+<meta name="description" content="NFL3 — verified NFL data, a line-origination model, validation gates and a decision register. Every value sourced, unverified values flagged.">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site">
+  <div class="wrap">
+    <div class="brand">
+      <div class="brand-mark">N3</div>
+      <div>
+        <h1>NFL3 — strategy &amp; line origination</h1>
+        <p class="tag">Verified inputs · model-implied outputs · explicit gaps</p>
+      </div>
+      <div class="status-strip">
+        <span>line-lab · session arena-e5e2b753</span>
+        <span>2026 season · through Week 10</span>
+        <span>0 scored strategies</span>
+      </div>
+    </div>
+  </div>
+</header>
+<nav class="site" aria-label="Sections"><div class="wrap"><a href="../index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="methodology.html">Methodology</a><span class="sep"></span><a href="standings.html">Standings</a><a href="lines.html">Model lines</a><a href="correlations.html">Correlations</a><a href="luck.html">Luck &amp; regression</a><span class="sep"></span><a href="injuries.html">Injuries</a><a href="depth.html">Depth &amp; availability</a><a href="rules.html">Rules</a><span class="sep"></span><a href="questions.html">Questions &amp; gaps</a><a href="suggestions.html">Suggestions</a><a href="strategies.html" class="active">Strategy leaderboard</a><a href="gates.html">Validation gates</a><span class="sep"></span><a href="flagged.html">Flagged for review</a><a href="sources.html">Sources</a><a href="coordination.html">Coordination</a></div></nav>
+<main id="main"><div class="wrap">
+<div class="page-head"><div class="eyebrow">Decisions</div><h2>Strategy leaderboard</h2><p>Twelve strategies across single bets, parlays and player props — with every gate state shown, including the ones that block them.</p></div>
+
+<div class="callout bad">
+  <h4>Zero of twelve strategies are scored — and that is the honest answer</h4>
+  <p>The board ranks nothing because nothing can be measured. Every strategy is blocked at gate G0: the league publishes no odds archive of its own (S09, S13) and none has been purchased, so there is no price, no closing line and no way to separate an edge from a coin flip. Parlay and prop entries are additionally blocked at G9 and G10 for missing leg-level and usage data.</p>
+  <p style="margin-bottom:0">Publishing an empty board is a deliberate choice. Filling it with hypothetical results would be precisely the failure this project exists to prevent.</p>
+</div>
+
+<h3>How the board will rank once G0 clears</h3>
+<div class="formula">composite = 0.40·z(mean CLV) + 0.30·z(shrunk ROI) + 0.20·stability + 0.10·capacity
+shrunk_ROI = ROI × n / (n + 400)</div>
+<p>The shrinkage term is the important one: with 400 graded bets, half the measured ROI is treated as signal and half as noise. A 30-bet heater cannot lead the board, by construction.</p>
+<p class="tbl-note">Grading spec: price fixed at submission, pushes refunded, voids excluded, and a line move never re-grades a placed bet. See <a href="gates.html">Validation gates</a> for the 13 gates and the reward tiers.</p>
+
+<div class="toolbar"><input type="search" data-filter="t-strat" placeholder="Filter strategies…" aria-label="Filter strategies…"><span class="count" data-count-for="t-strat"></span></div>
+<div class="tablewrap"><table id="t-strat" data-source="register"><thead><tr><th class="">ID</th><th class="">Strategy</th><th class="">Type</th><th class="">Market</th><th class="">State</th><th class="">Blocked at</th><th class="num">Gates unrun</th><th class="wrap">Thesis</th></tr></thead><tbody><tr class=""><td class="" data-sort="ST-01"><strong>ST-01</strong></td><td class="" data-sort="Rating-mismatch spread">Rating-mismatch spread</td><td class="" data-sort="single bet"><span class="badge info">single bet</span></td><td class="" data-sort="spread / moneyline">spread / moneyline</td><td class=""><span class="badge bad">BLOCKED</span></td><td class="">G0</td><td class="num">10/11</td><td class="wrap">Bet when the model&#x27;s margin disagrees with the market by more than a declared threshold, and the disagreement is not explained by information the market has and the model does not (injuries, weather, rest).</td></tr><tr class=""><td class="" data-sort="ST-02"><strong>ST-02</strong></td><td class="" data-sort="Pythagorean luck regression">Pythagorean luck regression</td><td class="" data-sort="single bet"><span class="badge info">single bet</span></td><td class="" data-sort="spread / win total">spread / win total</td><td class=""><span class="badge bad">BLOCKED</span></td><td class="">G0</td><td class="num">10/11</td><td class="wrap">Clubs whose win total runs ahead of their scoring margin should regress. This build measures that gap directly: 76.7% of win-pct variance is explained by scoring margin, leaving 23.3% as the pool where luck lives.</td></tr><tr class=""><td class="" data-sort="ST-03"><strong>ST-03</strong></td><td class="" data-sort="Rest and schedule asymmetry">Rest and schedule asymmetry</td><td class="" data-sort="single bet"><span class="badge info">single bet</span></td><td class="" data-sort="spread">spread</td><td class=""><span class="badge bad">BLOCKED</span></td><td class="">G0</td><td class="num">10/11</td><td class="wrap">Unequal rest (Thursday games, bye weeks, international travel) is a priced-in discount that is sometimes mispriced. This season has nine international games and a Week 11 schedule change, so the population of unusual spots is unusually large.</td></tr><tr class=""><td class="" data-sort="ST-04"><strong>ST-04</strong></td><td class="" data-sort="Divisional compression">Divisional compression</td><td class="" data-sort="single bet"><span class="badge info">single bet</span></td><td class="" data-sort="spread / total">spread / total</td><td class=""><span class="badge bad">BLOCKED</span></td><td class="">G0</td><td class="num">10/11</td><td class="wrap">Familiarity compresses margins. The measured correlation between division form and overall form is only +0.33 (p=0.066, n=32), i.e. division results carry real but modest extra information.</td></tr><tr class=""><td class="" data-sort="ST-05"><strong>ST-05</strong></td><td class="" data-sort="Two-leg same-game parlay (team total + spread)">Two-leg same-game parlay (team total + spread)</td><td class="" data-sort="parlay"><span class="badge info">parlay</span></td><td class="" data-sort="SGP">SGP</td><td class=""><span class="badge bad">BLOCKED</span></td><td class="">G0, G9</td><td class="num">10/12</td><td class="wrap">Two legs on the same team are strongly positively correlated, so an independent-leg price overpays the bettor. The engine quantifies the size of that mispricing for any rho.</td></tr><tr class=""><td class="" data-sort="ST-06"><strong>ST-06</strong></td><td class="" data-sort="Two-leg cross-game parlay">Two-leg cross-game parlay</td><td class="" data-sort="parlay"><span class="badge info">parlay</span></td><td class="" data-sort="parlay">parlay</td><td class=""><span class="badge bad">BLOCKED</span></td><td class="">G0</td><td class="num">11/12</td><td class="wrap">Legs in different games are close to independent, so the product rule is roughly valid. The book&#x27;s parlay price is therefore the fair product minus a hold — a pure price-taking bet with no informational edge.</td></tr><tr class=""><td class="" data-sort="ST-07"><strong>ST-07</strong></td><td class="" data-sort="Quarterback-out offence fade">Quarterback-out offence fade</td><td class="" data-sort="single bet"><span class="badge info">single bet</span></td><td class="" data-sort="spread / team total">spread / team total</td><td class=""><span class="badge bad">BLOCKED</span></td><td class="">G0</td><td class="num">10/11</td><td class="wrap">A verified starting-QB absence is the largest single availability shock in the sport. The injury report makes the absence official; the market has to reprice it.</td></tr><tr class=""><td class="" data-sort="ST-08"><strong>ST-08</strong></td><td class="" data-sort="Secondary attrition versus the pass">Secondary attrition versus the pass</td><td class="" data-sort="single bet"><span class="badge info">single bet</span></td><td class="" data-sort="team total / pass props">team total / pass props</td><td class=""><span class="badge bad">BLOCKED</span></td><td class="">G0</td><td class="num">10/11</td><td class="wrap">Cornerback and safety attrition is the defensive analogue of a QB absence, and it is visible on the official report by position.</td></tr><tr class=""><td class="" data-sort="ST-09"><strong>ST-09</strong></td><td class="" data-sort="Running-back workload prop">Running-back workload prop</td><td class="" data-sort="player prop"><span class="badge info">player prop</span></td><td class="" data-sort="rushing yards / attempts">rushing yards / attempts</td><td class=""><span class="badge bad">BLOCKED</span></td><td class="">G0, G10</td><td class="num">10/12</td><td class="wrap">Opportunity drives production. A back whose snap share and carry share are verified rising is mispriced if the market lags usage.</td></tr><tr class=""><td class="" data-sort="ST-10"><strong>ST-10</strong></td><td class="" data-sort="Receiver target-share prop">Receiver target-share prop</td><td class="" data-sort="player prop"><span class="badge info">player prop</span></td><td class="" data-sort="receptions / receiving yards">receptions / receiving yards</td><td class=""><span class="badge bad">BLOCKED</span></td><td class="">G0, G10</td><td class="num">10/12</td><td class="wrap">Target share is stickier than yards per target. Price the volume, let the efficiency vary.</td></tr><tr class=""><td class="" data-sort="ST-11"><strong>ST-11</strong></td><td class="" data-sort="Three-leg same-game script parlay">Three-leg same-game script parlay</td><td class="" data-sort="parlay"><span class="badge info">parlay</span></td><td class="" data-sort="SGP">SGP</td><td class=""><span class="badge bad">BLOCKED</span></td><td class="">G0, G10, G9</td><td class="num">10/13</td><td class="wrap">QB passing yards + WR receiving yards + team total over share a common driver. The equicorrelated factor model shows the joint probability is materially higher than the product of the legs.</td></tr><tr class=""><td class="" data-sort="ST-12"><strong>ST-12</strong></td><td class="" data-sort="Availability-adjusted line versus market">Availability-adjusted line versus market</td><td class="" data-sort="combo"><span class="badge info">combo</span></td><td class="" data-sort="spread + team total">spread + team total</td><td class=""><span class="badge bad">BLOCKED</span></td><td class="">G0</td><td class="num">12/13</td><td class="wrap">The full pipeline: model line, then adjust for verified availability, then compare with the market. This is the strategy the whole project exists to build.</td></tr></tbody></table></div>
+
+<h3>Each strategy in detail</h3>
+
+<div class="flag" style="border-left-color:var(--accent)">
+  <h4>ST-01 — Rating-mismatch spread <span class="badge info">single bet</span></h4>
+  <div class="meta">spread / moneyline</div>
+  <dl>
+    <dt>Thesis</dt><dd>Bet when the model&#x27;s margin disagrees with the market by more than a declared threshold, and the disagreement is not explained by information the market has and the model does not (injuries, weather, rest).</dd>
+    <dt>Rule</dt><dd>If |model_margin - market_margin| &gt;= 2.0 points after an injury adjustment, take the side the model prefers at the best available price.</dd>
+    
+    <dt>Verdict</dt><dd><strong>BLOCKED at G0 — no odds archive (F-04). The model exists; the market does not.</strong></dd>
+    <dt>How it fails</dt><dd>The model currently lacks opponent adjustment, so most &#x27;disagreements&#x27; with a sharp market would be model error, not edge.</dd>
+    <dt>Gate state</dt><dd><span class="badge bad">G0: blocked</span> <span class="badge muted">G1: unrun</span> <span class="badge muted">G2: unrun</span> <span class="badge muted">G3: unrun</span> <span class="badge muted">G4: unrun</span> <span class="badge muted">G5: unrun</span> <span class="badge muted">G6: unrun</span> <span class="badge muted">G7: unrun</span> <span class="badge muted">G8: unrun</span> <span class="badge muted">G11: unrun</span> <span class="badge muted">G12: unrun</span></dd>
+  </dl>
+</div>
+<div class="flag" style="border-left-color:var(--accent)">
+  <h4>ST-02 — Pythagorean luck regression <span class="badge info">single bet</span></h4>
+  <div class="meta">spread / win total</div>
+  <dl>
+    <dt>Thesis</dt><dd>Clubs whose win total runs ahead of their scoring margin should regress. This build measures that gap directly: 76.7% of win-pct variance is explained by scoring margin, leaving 23.3% as the pool where luck lives.</dd>
+    <dt>Rule</dt><dd>Fade clubs with luck_wins &gt;= +1.5, back clubs with luck_wins &lt;= -1.5, only while the market has not already priced the regression.</dd>
+    <dt>Current examples</dt><dd>Denver +2.01 and Cleveland +1.99 expected wins above margin; Tampa Bay -2.48 and Houston -1.59 below. See the Luck page.</dd>
+    <dt>Verdict</dt><dd><strong>BLOCKED at G0. The signal is computed from official data; the test is impossible without prices.</strong></dd>
+    <dt>How it fails</dt><dd>The &#x27;luck&#x27; residual also contains real information the margin misses (special teams, clutch play, opponent quality). Treating all of it as luck would be an error, and this is the main way this strategy can be wrong.</dd>
+    <dt>Gate state</dt><dd><span class="badge bad">G0: blocked</span> <span class="badge muted">G1: unrun</span> <span class="badge muted">G2: unrun</span> <span class="badge muted">G3: unrun</span> <span class="badge muted">G4: unrun</span> <span class="badge muted">G5: unrun</span> <span class="badge muted">G6: unrun</span> <span class="badge muted">G7: unrun</span> <span class="badge muted">G8: unrun</span> <span class="badge muted">G11: unrun</span> <span class="badge muted">G12: unrun</span></dd>
+  </dl>
+</div>
+<div class="flag" style="border-left-color:var(--accent)">
+  <h4>ST-03 — Rest and schedule asymmetry <span class="badge info">single bet</span></h4>
+  <div class="meta">spread</div>
+  <dl>
+    <dt>Thesis</dt><dd>Unequal rest (Thursday games, bye weeks, international travel) is a priced-in discount that is sometimes mispriced. This season has nine international games and a Week 11 schedule change, so the population of unusual spots is unusually large.</dd>
+    <dt>Rule</dt><dd>Flag games with rest differential &gt;= 3 days or a travel-time zone change &gt;= 5 hours; require a model edge beyond the declared threshold.</dd>
+    
+    <dt>Verdict</dt><dd><strong>BLOCKED at G0. Schedule facts are verifiable; the effect size is not estimable here.</strong></dd>
+    <dt>How it fails</dt><dd>Small effects, heavily studied by the market. The prior should be that any edge is already gone.</dd>
+    <dt>Gate state</dt><dd><span class="badge bad">G0: blocked</span> <span class="badge muted">G1: unrun</span> <span class="badge muted">G2: unrun</span> <span class="badge muted">G3: unrun</span> <span class="badge muted">G4: unrun</span> <span class="badge muted">G5: unrun</span> <span class="badge muted">G6: unrun</span> <span class="badge muted">G7: unrun</span> <span class="badge muted">G8: unrun</span> <span class="badge muted">G11: unrun</span> <span class="badge muted">G12: unrun</span></dd>
+  </dl>
+</div>
+<div class="flag" style="border-left-color:var(--accent)">
+  <h4>ST-04 — Divisional compression <span class="badge info">single bet</span></h4>
+  <div class="meta">spread / total</div>
+  <dl>
+    <dt>Thesis</dt><dd>Familiarity compresses margins. The measured correlation between division form and overall form is only +0.33 (p=0.066, n=32), i.e. division results carry real but modest extra information.</dd>
+    <dt>Rule</dt><dd>In divisional games, shade the underdog and the under. Reject if the market total already sits below the model total by the declared threshold.</dd>
+    
+    <dt>Verdict</dt><dd><strong>BLOCKED at G0.</strong></dd>
+    <dt>How it fails</dt><dd>C6 is a cross-sectional correlation, not an effect estimate on margins. Using it as an effect size would be a category error.</dd>
+    <dt>Gate state</dt><dd><span class="badge bad">G0: blocked</span> <span class="badge muted">G1: unrun</span> <span class="badge muted">G2: unrun</span> <span class="badge muted">G3: unrun</span> <span class="badge muted">G4: unrun</span> <span class="badge muted">G5: unrun</span> <span class="badge muted">G6: unrun</span> <span class="badge muted">G7: unrun</span> <span class="badge muted">G8: unrun</span> <span class="badge muted">G11: unrun</span> <span class="badge muted">G12: unrun</span></dd>
+  </dl>
+</div>
+<div class="flag" style="border-left-color:var(--accent)">
+  <h4>ST-05 — Two-leg same-game parlay (team total + spread) <span class="badge info">parlay</span></h4>
+  <div class="meta">SGP</div>
+  <dl>
+    <dt>Thesis</dt><dd>Two legs on the same team are strongly positively correlated, so an independent-leg price overpays the bettor. The engine quantifies the size of that mispricing for any rho.</dd>
+    <dt>Rule</dt><dd>Price the joint with a Gaussian copula and estimated rho; bet only if the offered SGP price exceeds the copula fair price by the declared margin.</dd>
+    
+    <dt>Verdict</dt><dd><strong>BLOCKED at G0 and G9 — no SGP prices and no leg-level dataset to estimate rho (F-09).</strong></dd>
+    <dt>How it fails</dt><dd>Books apply their own correlation adjustment. If their rho is better estimated than ours, the &#x27;edge&#x27; is our error.</dd>
+    <dt>Gate state</dt><dd><span class="badge bad">G0: blocked</span> <span class="badge muted">G1: unrun</span> <span class="badge muted">G2: unrun</span> <span class="badge muted">G3: unrun</span> <span class="badge muted">G4: unrun</span> <span class="badge muted">G5: unrun</span> <span class="badge muted">G6: unrun</span> <span class="badge muted">G7: unrun</span> <span class="badge muted">G8: unrun</span> <span class="badge bad">G9: blocked</span> <span class="badge muted">G11: unrun</span> <span class="badge muted">G12: unrun</span></dd>
+  </dl>
+</div>
+<div class="flag" style="border-left-color:var(--accent)">
+  <h4>ST-06 — Two-leg cross-game parlay <span class="badge info">parlay</span></h4>
+  <div class="meta">parlay</div>
+  <dl>
+    <dt>Thesis</dt><dd>Legs in different games are close to independent, so the product rule is roughly valid. The book&#x27;s parlay price is therefore the fair product minus a hold — a pure price-taking bet with no informational edge.</dd>
+    <dt>Rule</dt><dd>Never bet without a leg-level edge; the parlay multiplier cannot create one.</dd>
+    
+    <dt>Verdict</dt><dd><strong>BLOCKED at G0. Included on the board deliberately as the control case: if this strategy ever shows profit, suspect the grading, not the skill.</strong></dd>
+    <dt>How it fails</dt><dd>Compounding the book&#x27;s margin across legs. Structurally -EV unless each leg carries a real edge.</dd>
+    <dt>Gate state</dt><dd><span class="badge bad">G0: blocked</span> <span class="badge muted">G1: unrun</span> <span class="badge muted">G2: unrun</span> <span class="badge muted">G3: unrun</span> <span class="badge muted">G4: unrun</span> <span class="badge muted">G5: unrun</span> <span class="badge muted">G6: unrun</span> <span class="badge muted">G7: unrun</span> <span class="badge muted">G8: unrun</span> <span class="badge muted">G9: unrun</span> <span class="badge muted">G11: unrun</span> <span class="badge muted">G12: unrun</span></dd>
+  </dl>
+</div>
+<div class="flag" style="border-left-color:var(--accent)">
+  <h4>ST-07 — Quarterback-out offence fade <span class="badge info">single bet</span></h4>
+  <div class="meta">spread / team total</div>
+  <dl>
+    <dt>Thesis</dt><dd>A verified starting-QB absence is the largest single availability shock in the sport. The injury report makes the absence official; the market has to reprice it.</dd>
+    <dt>Rule</dt><dd>If the starting QB is Out or Doubtful on the official report, apply the declared QB weight to the team&#x27;s model rating and require a residual edge.</dd>
+    <dt>Current examples</dt><dd>Week 10 verified designations include Kyler Murray (MIN, did not participate, no game status yet) and TreVeyon Henderson (NE, Out, illness).</dd>
+    <dt>Verdict</dt><dd><strong>BLOCKED at G0, and additionally dependent on Q-09 for the &#x27;starting QB&#x27; determination.</strong></dd>
+    <dt>How it fails</dt><dd>Without a verified depth order, &#x27;the starter&#x27; is an assumption. That is why Q-09 is a P0 question.</dd>
+    <dt>Gate state</dt><dd><span class="badge bad">G0: blocked</span> <span class="badge muted">G1: unrun</span> <span class="badge muted">G2: unrun</span> <span class="badge muted">G3: unrun</span> <span class="badge muted">G4: unrun</span> <span class="badge muted">G5: unrun</span> <span class="badge muted">G6: unrun</span> <span class="badge muted">G7: unrun</span> <span class="badge muted">G8: unrun</span> <span class="badge muted">G11: unrun</span> <span class="badge muted">G12: unrun</span></dd>
+  </dl>
+</div>
+<div class="flag" style="border-left-color:var(--accent)">
+  <h4>ST-08 — Secondary attrition versus the pass <span class="badge info">single bet</span></h4>
+  <div class="meta">team total / pass props</div>
+  <dl>
+    <dt>Thesis</dt><dd>Cornerback and safety attrition is the defensive analogue of a QB absence, and it is visible on the official report by position.</dd>
+    <dt>Rule</dt><dd>Count verified CB/S unavailability, weight by the declared defensive-back weights, and compare the repriced total with the market.</dd>
+    <dt>Current examples</dt><dd>Verified Week 10 examples: Carlton Davis III (NE, CB, knee, Out); Malik Harrison (NYG, LB, groin, Questionable); D.J. Reed (DET, CB, did not participate, no status yet).</dd>
+    <dt>Verdict</dt><dd><strong>BLOCKED at G0. The availability half is verified; the valuation half is an explicit assumption (A-04).</strong></dd>
+    <dt>How it fails</dt><dd>Position weights are the weak link. Publish both a low and a high weight set and require the signal to survive both (SG-15).</dd>
+    <dt>Gate state</dt><dd><span class="badge bad">G0: blocked</span> <span class="badge muted">G1: unrun</span> <span class="badge muted">G2: unrun</span> <span class="badge muted">G3: unrun</span> <span class="badge muted">G4: unrun</span> <span class="badge muted">G5: unrun</span> <span class="badge muted">G6: unrun</span> <span class="badge muted">G7: unrun</span> <span class="badge muted">G8: unrun</span> <span class="badge muted">G11: unrun</span> <span class="badge muted">G12: unrun</span></dd>
+  </dl>
+</div>
+<div class="flag" style="border-left-color:var(--accent)">
+  <h4>ST-09 — Running-back workload prop <span class="badge info">player prop</span></h4>
+  <div class="meta">rushing yards / attempts</div>
+  <dl>
+    <dt>Thesis</dt><dd>Opportunity drives production. A back whose snap share and carry share are verified rising is mispriced if the market lags usage.</dd>
+    <dt>Rule</dt><dd>Project attempts from recent share, convert to yards with a per-carry distribution, and price the over. Blocked unless the player is confirmed active.</dd>
+    
+    <dt>Verdict</dt><dd><strong>BLOCKED at G0, G10 — no usage data (Q-03) and no confirmation route for participation.</strong></dd>
+    <dt>How it fails</dt><dd>Usage models overfit to the last two games. Needs the full season&#x27;s distribution, not a hot stretch.</dd>
+    <dt>Gate state</dt><dd><span class="badge bad">G0: blocked</span> <span class="badge muted">G1: unrun</span> <span class="badge muted">G2: unrun</span> <span class="badge muted">G3: unrun</span> <span class="badge muted">G4: unrun</span> <span class="badge muted">G5: unrun</span> <span class="badge muted">G6: unrun</span> <span class="badge muted">G7: unrun</span> <span class="badge muted">G8: unrun</span> <span class="badge bad">G10: blocked</span> <span class="badge muted">G11: unrun</span> <span class="badge muted">G12: unrun</span></dd>
+  </dl>
+</div>
+<div class="flag" style="border-left-color:var(--accent)">
+  <h4>ST-10 — Receiver target-share prop <span class="badge info">player prop</span></h4>
+  <div class="meta">receptions / receiving yards</div>
+  <dl>
+    <dt>Thesis</dt><dd>Target share is stickier than yards per target. Price the volume, let the efficiency vary.</dd>
+    <dt>Rule</dt><dd>Project targets from verified share, convert with the player&#x27;s own distribution; require the offered line to sit at least one standard deviation from the projection.</dd>
+    
+    <dt>Verdict</dt><dd><strong>BLOCKED at G0, G10.</strong></dd>
+    <dt>How it fails</dt><dd>The verified Week 10 report lists several pass-catchers with practice limitations and no game status — a reminder that the prop decision point is after the deadline, not before it.</dd>
+    <dt>Gate state</dt><dd><span class="badge bad">G0: blocked</span> <span class="badge muted">G1: unrun</span> <span class="badge muted">G2: unrun</span> <span class="badge muted">G3: unrun</span> <span class="badge muted">G4: unrun</span> <span class="badge muted">G5: unrun</span> <span class="badge muted">G6: unrun</span> <span class="badge muted">G7: unrun</span> <span class="badge muted">G8: unrun</span> <span class="badge bad">G10: blocked</span> <span class="badge muted">G11: unrun</span> <span class="badge muted">G12: unrun</span></dd>
+  </dl>
+</div>
+<div class="flag" style="border-left-color:var(--accent)">
+  <h4>ST-11 — Three-leg same-game script parlay <span class="badge info">parlay</span></h4>
+  <div class="meta">SGP</div>
+  <dl>
+    <dt>Thesis</dt><dd>QB passing yards + WR receiving yards + team total over share a common driver. The equicorrelated factor model shows the joint probability is materially higher than the product of the legs.</dd>
+    <dt>Rule</dt><dd>Price with the three-leg copula; require the offered price to exceed the copula fair price by the declared margin; reject if rho cannot be estimated.</dd>
+    
+    <dt>Verdict</dt><dd><strong>BLOCKED at G0, G9, G10. Highest variance of anything here; the most gate exposure; the most attractive to overconfident operators. That combination is why G9/G10 are hard gates.</strong></dd>
+    <dt>How it fails</dt><dd>Highest model risk on the board. Even a correct rho can be wrong enough to flip the sign of the EV.</dd>
+    <dt>Gate state</dt><dd><span class="badge bad">G0: blocked</span> <span class="badge muted">G1: unrun</span> <span class="badge muted">G2: unrun</span> <span class="badge muted">G3: unrun</span> <span class="badge muted">G4: unrun</span> <span class="badge muted">G5: unrun</span> <span class="badge muted">G6: unrun</span> <span class="badge muted">G7: unrun</span> <span class="badge muted">G8: unrun</span> <span class="badge bad">G9: blocked</span> <span class="badge bad">G10: blocked</span> <span class="badge muted">G11: unrun</span> <span class="badge muted">G12: unrun</span></dd>
+  </dl>
+</div>
+<div class="flag" style="border-left-color:var(--accent)">
+  <h4>ST-12 — Availability-adjusted line versus market <span class="badge info">combo</span></h4>
+  <div class="meta">spread + team total</div>
+  <dl>
+    <dt>Thesis</dt><dd>The full pipeline: model line, then adjust for verified availability, then compare with the market. This is the strategy the whole project exists to build.</dd>
+    <dt>Rule</dt><dd>Model margin -&gt; availability adjustment (A-04 weights) -&gt; compare with market -&gt; bet the residual above threshold.</dd>
+    
+    <dt>Verdict</dt><dd><strong>BLOCKED at G0. Two of its five inputs do not exist yet (market, depth order).</strong></dd>
+    <dt>How it fails</dt><dd>Compounds every other risk: model error, weight error, depth error, and market error.</dd>
+    <dt>Gate state</dt><dd><span class="badge bad">G0: blocked</span> <span class="badge muted">G1: unrun</span> <span class="badge muted">G2: unrun</span> <span class="badge muted">G3: unrun</span> <span class="badge muted">G4: unrun</span> <span class="badge muted">G5: unrun</span> <span class="badge muted">G6: unrun</span> <span class="badge muted">G7: unrun</span> <span class="badge muted">G8: unrun</span> <span class="badge muted">G9: unrun</span> <span class="badge muted">G10: unrun</span> <span class="badge muted">G11: unrun</span> <span class="badge muted">G12: unrun</span></dd>
+  </dl>
+</div>
+
+</div></main>
+<footer class="site"><div class="wrap">
+  <div>Built from official NFL sources only. Unverified values are left blank, never inferred.</div>
+  <div><a href="../pages/flagged.html">Flagged for review</a> · <a href="../pages/sources.html">Sources</a> · <a href="https://github.com/kanlerxz87-cyber/NFL3/blob/main/COORDINATION.md">COORDINATION.md</a> · <a href="../../index.html">← Main NFL3 site</a></div>
+</div></footer>
+<script src="../assets/app.js"></script>
+</body>
+</html>

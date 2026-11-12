@@ -1,0 +1,10 @@
+gate_id,gate,rule,status
+G0,Data provenance,Each input has an official or licensed source URL and timestamp,Proposed
+G1,Leakage check,Signal uses only information available before the line lock,Proposed
+G2,Out-of-sample,Rules fixed on training seasons; tested on a holdout not used for design,Proposed
+G3,Minimum sample,"At least N bets per strategy (N to be set by owner; e.g., 300 singles)",Proposed – decision needed (Q17)
+G4,Closing line value,Positive CLV vs. the chosen closing benchmark (Q14),Proposed
+G5,Significance with multiple tests,Result survives correction for all strategies tested,Proposed
+G6,Robustness,Stable across season halves and not driven by one week,Proposed
+G7,Correlation check (parlays),Leg correlation measured from data; parlay EV adjusted for it,Proposed
+G8,Compliance,"Market is lawful for the user and not in a prohibited prop category as reported (Q12, Q13)",Proposed – see Q13 (unverified)

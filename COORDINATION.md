@@ -38,6 +38,184 @@ The Arena-provided branch is fixed as `arena/4fd6bbbb-nfl3`; this session cannot
 - Added supplementary requirements/questions, signal hypotheses, lineup/injury evidence schema, validation gates, prioritized suggestions and extended flagged items. The previously published landing and source register were preserved; a research-deep-dives table links the additions from the overview. Official NFL injury, player-stat, team-stat, team-directory and 2026 rulebook pages were opened on 2026-11-12 UTC. No live values were copied; unknowns remain flagged.
 - Verification: `python3 scripts/validate_site.py` passed across 12 HTML pages (local links/assets and citation links); `python3 tests/check_site.py` passed for the existing dashboard; `git diff --check` passed. These checks do not crawl external links or guarantee future source content.
 - Unresolved market-feed/rights, historical price, depth-chart, model, correlation, automated ingestion and leaderboard policy gaps remain visible on Flagged for Review. No verified strategy or automated injury pipeline was produced by this session.
+- Final integration follow-up: added root Overview links to both `dashboard/` and `line-lab/`. `node dashboard/scripts/check.mjs` passed (254 injury rows, 14 games, 19 headlines; rows sourced or flagged); `python3 line-lab/scripts/verify.py` passed (13 checks, 17 pages); root validation scripts also passed. Both nested dashboards explicitly label unverified items and avoid claiming validated betting performance. External content is not continuously crawled.
+- Final navigation PR [#15](https://github.com/kanlerxz87-cyber/NFL3/pull/15) merged as `d5ae1b09ff1a41d86a04cee5537f4babfb1b7ee6`. Its first Pages run was cancelled by a newer concurrent main push; the subsequent full validation/deploy [run 43157000573](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43157000573) succeeded on the combined main commit. GitHub Pages was independently fetched and showed both `dashboard/` and `line-lab/` links.
+
+## Dashboard — arena/f445c027-nfl3 (session f445c027), 2026-11-12 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| T1 Repo review & irregularities | done – needs review (6 flags) | f445c027 | `dashboard/data/repo_review.csv` |
+| T2 Injury tracking, Week 10 2026 (official nfl.com) + starter-replacement headlines | done – second line-by-line pass recommended | f445c027 | `dashboard/data/injuries_2026_w10.csv`, `games_2026_w10.csv`, `news_signals_2026_w10.csv` |
+| T3 Strategy lab: leaderboard, validation gates, correlation framework | done – 0 validated (no odds/results data) | f445c027 | `dashboard/data/strategies.csv`, `validation_gates.csv`, `correlation_framework.csv` |
+| T4 Information gaps (Q&A) and suggestions (decision-only) | done – awaiting owner decisions | f445c027 | `dashboard/data/questions.csv`, `suggestions.csv` |
+| T5 Source registry, executive summary, dashboard site | done – build and check pass | f445c027 | `dashboard/` (all of it) |
+| T6 Integration: merge to main, Pages deploy | done – root link, checks, Pages deploy verified | f445c027 + integration | `index.html`, this log |
+
+**Scope:** everything the dashboard touches is under `dashboard/`. Root files (`index.html`, other root pages, `assets/`, `scripts/validate_site.py`, `tests/`, `research-workspace/`, `.github/workflows/pages.yml`, `README.md`) were **not** edited by this session.
+
+**Integration request (addressed in the final root-site integration):** the root Overview's "Research deep dives" table links to `dashboard/index.html` (https://kanlerxz87-cyber.github.io/NFL3/dashboard/), with an official NFL injury-report source link. The dashboard has a "Main NFL3 site" link back to `../index.html`.
+
+**Overlap noted:** this session first merged into `main` after PR #5 and #7 were merged; main's `COORDINATION.md` and `README.md` were kept as published and this section appended. Other sessions' branches (`arena/2836662c-nfl3`, `arena/4fd6bbbb-nfl3`, `arena/56e27bb4-nfl3`, `arena/cbdcc317-nfl3`) were not modified.
+
+**Sources (all fetched 2026-11-12):**
+- NFL.com 2026 Week 10 injury report — https://www.nfl.com/injuries/ (254 rows, 14 matchups, 19 headlines)
+- NFL.com injury-policy article — https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693
+- NFL 2026 schedule announcement — https://media.nfl.com/football-information/2026/news/2026-nfl-schedule-announced
+- Kansspelautoriteit (NL) — https://kansspelautoriteit.nl/
+- Secondary, UNVERIFIED: Yahoo Sports (https://sports.yahoo.com/article/nfl-says-worked-ban-more-152200232.html) and LA Mag (https://lamag.com/sports/nfl-gambling-november-13-memo-prop-bets-limit/) reports on an NFL prop-bet memo.
+- Excluded (not official): statrankings.com, fsroundup.com, sticktothemodel.com (depth charts).
+
+**Flagged irregularities** (published on the dashboard's Flagged for Review page): R-06 Seattle "No Injuries Reported" vs. headline that Sam Darnold is ruled out; R-07 Garrett/McDuffie listed under Rams; R-10 DEN/CHI/PHI/TB not on the page; R-11 no official depth-chart source; R-12 prop-memo source secondary; R-03/R-04/R-05 branch and board overlap.
+
+### Integration result — f445c027 (2026-11-12 UTC)
+- **PR #8** (`arena/f445c027-nfl3` → `main`, dashboard in `dashboard/`) — **merged** as `ca49fad5de3e4b8499854b5ca55fc3a93215f760` (merge commit, not squash). Checks: `validate` (Validate and deploy GitHub Pages) SUCCESS on the PR; after merge, `Validate and deploy GitHub Pages` runs 43156231866 and 43156363844 SUCCESS, and `pages build and deployment` runs 43156231704 and 43156362784 SUCCESS.
+- Independent live fetch (2026-11-12): https://kanlerxz87-cyber.github.io/NFL3/dashboard/index.html and /flagged.html returned the generated content.
+- **Follow-up fixes (PR #10):** R-06 link corrected (was a malformed two-URL string); R-16 claim about Ksa-licensed operators marked UNVERIFIED (not from Ksa's own text); summary card now counts the Flagged for Review rows (it counted only repo flags).
+- Root site, root validators, root README and other sessions' pages were not modified.
+## Merge record — arena/2836662c-nfl3, 2026-11-12 UTC
+
+- Integration PR [#7](https://github.com/kanlerxz87-cyber/NFL3/pull/7) merged as `994ceca09f9554ca14d2559bfd9bc23f7e6ebb0d`. Validation and GitHub Pages deployment [run 43156231866](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43156231866) succeeded. GitHub Pages status is `built`: https://kanlerxz87-cyber.github.io/NFL3/.
+- Deployment logs carried non-blocking notices for `actions/checkout@v4` targeting Node.js 20 and an upcoming `ubuntu-latest` image migration. The build and deploy completed successfully.
+
+## line-lab — arena/e5e2b753-nfl3 (session e5e2b753), 2026-11-12 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| T01 Coordination claim + repo scaffolding | done | `arena/e5e2b753` | this log |
+| T02 Verified source registry (13 official sources) | done | `arena/e5e2b753` | `line-lab/data/sources.json` |
+| T03 Verified 2026 league data (32 clubs) | done | `arena/e5e2b753` | `line-lab/data/standings_2026.json` |
+| T04 Verified rules layer (injury report, roster) | done | `arena/e5e2b753` | `line-lab/data/rules.json` |
+| T05 Injury extract + availability/depth-stress model | done | `arena/e5e2b753` | `line-lab/data/injuries.json` |
+| T06 Decision register (25 questions with closure routes) | done | `arena/e5e2b753` | `line-lab/data/questions.json` |
+| T07 Suggestions register (18, scored, review protocol) | done | `arena/e5e2b753` | `line-lab/data/suggestions.json` |
+| T08 Line-origination engine + luck decomposition | done | `arena/e5e2b753` | `line-lab/scripts/model_ratings.py`, `line-lab/data/model_outputs.json` |
+| T09 Validation gates + leaderboard + gate mathematics | done | `arena/e5e2b753` | `line-lab/data/gates.json`, `line-lab/data/strategies.json`, `line-lab/data/strategy_math.json` |
+| T10 Static sub-site (18 pages) | done | `arena/e5e2b753` | `line-lab/index.html`, `line-lab/pages/`, `line-lab/assets/` |
+| T11 Build gate | done | `arena/e5e2b753` | `line-lab/scripts/verify.py` |
+| T12 Executive summary | done | `arena/e5e2b753` | `line-lab/EXECUTIVE_SUMMARY.md` |
+| T13 Integration + Pages verification | in progress | `arena/e5e2b753` | this log |
+
+**Scope.** Everything this session produced is under `line-lab/`. Root files (`index.html`, the other root pages,
+`assets/`, `scripts/`, `tests/`, `README.md`, `.github/workflows/`), plus `dashboard/` and `research-workspace/`,
+were **not** edited. The site links back to the root site from its footer.
+
+**Overlap, recorded rather than hidden.** This session began from the initial commit when `main` contained only
+`README.md`, claimed T01–T13 and pushed that claim (commit `aeab37c`) before doing any work. `main` then advanced
+through PRs #1, #4, #7 and #8, by which point three other sites existed. The first push attempt produced an
+add/add conflict on this file during `git pull --rebase`; the rebase was **aborted** rather than forced, the
+published board was left intact, and this session relocated its entire output into `line-lab/` before committing
+again. Nothing from any other session was discarded or overwritten.
+
+**What this build adds that the existing sites do not.** A reproducible quantitative layer: a fitted Pythagorean
+exponent, a luck decomposition with its residual's limits stated, correlations with n and p, and the arithmetic of
+the validation gates (required sample size, deflated Sharpe, Bonferroni thresholds, Gaussian-copula parlay
+pricing, Kelly, Wilson intervals). Also a 25-item decision register where every open question names the cheapest
+action that closes it, and a build gate that fails on a sourceless row, a broken anchor, a cell-count mismatch or
+an internal arithmetic contradiction.
+
+**Where the existing sites are ahead of this one.** `dashboard/data/injuries_2026_w10.csv` carries 254 injury rows
+across 14 matchups; this session's extract covers 108 rows over 10 complete club reports (BUF partial, NYJ
+missing, both flagged as F-03). For full-slate availability the dashboard extract should be preferred. Two findings
+independently corroborate: the dashboard's R-11 ("no official depth-chart source") matches this session's F-08, and
+the dashboard's note that `/teams/denver-broncos/depth-chart` returned 404 matches this session's conclusion that
+the official roster feed carries no depth order (R14).
+
+**Correction to a common claim, found while verifying.** The NFL does not publish its own lines, but odds *are*
+visible on NFL surfaces: NFL Support (S13) states the widgets show odds "provided by official bookmaker partners of
+the NFL (FanDuel, Caesars, and DraftKings)" with bets placed through a redirect. Earlier sessions correctly flagged
+the rights/feed gap; this session narrows the claim to "no NFL-authored, historical, machine-readable line archive".
+
+**Integration request (addressed by the final root-site integration):** the root Overview's "Research deep dives" table links to `line-lab/index.html` (https://kanlerxz87-cyber.github.io/NFL3/line-lab/), with an official NFL standings source link. The destination labels its figures as model-implied, not market lines.
+
+**Sources (all fetched 2026-11-12):** `nfl.com/standings/`, `nfl.com/injuries/`, `nfl.com/schedules/2026/REG/`,
+`nfl.com/teams/washington-commanders/roster`, `nfl.com/teams/washington-commanders/`,
+`nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693`,
+`nfl.com/news/players-now-eligible-to-return-from-injured-reserve-after-four-games`,
+`operations.nfl.com/rules-officiating/2026-nfl-rulebook`, `support.nfl.com/.../If-I-place-a-bet-on-NFL-com...`,
+and two probes recorded as broken (`nfl.com/odds/` 404, two guessed `operations.nfl.com` paths 404). One secondary
+source (AP, practice-squad size 17 vs NFL.com's 16) is registered as non-official and unresolved — F-02.
+
+**Verification performed.** `cd line-lab && python3 scripts/verify.py` → **PASS**, 13 checks, 0 warnings,
+0 failures, 18 pages scanned. The gate checks: every data table exposes a source column and every table declares
+its source class; every internal link and anchor resolves (including the link out to the root site); every table
+row matches its header width; no duplicate ids; no placeholder/null leakage; standings arithmetic (W+L+T =
+home+road, PF−PA = published NET, division ⊆ conference, conference + other = total) for all 32 clubs; every
+injury row carries an official player link and a legal status value; every verified rule cites a source and every
+unverified rule is blank; neutral-site games do not vary with home-field advantage; no strategy claims a passed
+gate; all flag/question/suggestion/strategy/gate/source cross-references resolve. It does **not** crawl external
+links — external content was read once, by hand, at fetch time.
+
+**Flagged irregularities:** F-01 unequal games played; F-02 roster sizes and status deadline unconfirmed;
+F-03 most game statuses unset on Thursday + BUF/NYJ coverage; F-04 no NFL-authored odds archive; F-05 half the
+Week 10 slate uncaptured; F-06 no player-usage source; F-07 legal status of rewards unverified; F-08 no depth
+order; F-09 no leg-level outcome data; F-10 'Questionable' calibration unmeasured. All published with sources on
+`line-lab/pages/flagged.html`.
+
+**Publication record.**
+
+- Integration PR [#11](https://github.com/kanlerxz87-cyber/NFL3/pull/11) merged as `94b0518e1d2a98f5d44e7615fbd3d08f2b6cc63c` on 2026-11-12 04:43 UTC. The `validate` job passed; `deploy` is skipped on pull requests by design.
+- Pages deployment for `main` completed successfully (`Validate and deploy GitHub Pages`, conclusion `success`), and the published page was independently fetched at
+  https://kanlerxz87-cyber.github.io/NFL3/line-lab/ — the dashboard rendered with its data intact.
+- Follow-up fixes after reading the live page (second PR): the source counter said "9 resolving · 3 broken" for 13 sources and silently dropped one; an already-answered P0 question was listed under "Hard blockers"; and the highest-priority action (SG-01, buy an odds archive) ranked **last** on the suggestion table because the ratio score does not encode sequencing. All three are corrected — the counter now reads 9 / 3 / 1, blockers are filtered to open items, and SG-01 and SG-02 are flagged and surfaced as a critical path panel.
+- Follow-up PR [#14](https://github.com/kanlerxz87-cyber/NFL3/pull/14) merged as `ef7ae0e3101bac20ead7ccfe440b8de7f503d1a1`; Pages deploy succeeded for that commit and the live page was re-fetched with a cache-busting query, confirming the corrected counter (9 resolving / 3 broken / 1 not fetched), seven open blockers, and the critical-path panel. The first fetch after deploy returned the **cached** pre-fix page — worth remembering when verifying Pages output.
+- Third pass, also from reading the live site: three arithmetic inconsistencies in this session's own prose. G2's note claimed a required t of 3.31 at 100 trials where the computed table says 3.48; G5's note claimed an observed Sharpe of 0.08 could pass with fewer than 200 trials when at n=500 it cannot (DSR 0.897 at one trial); and the deflated-Sharpe grid was set so thinly that every cell read "fail", making the gate look unpassable rather than demanding. The grid now spans Sharpe 0.05/0.10/0.20 so the bar is visible (≈0.10 at one trial, ≈0.18 at fifty), and both notes are corrected to match the computation.
+- Fourth pass: the G2 correction in PR #17 fixed the *numbers* column but the same stale threshold survived in the *criterion* column. Rather than patch prose a third time, the number was **removed from the prose** — the criterion now points at the computed table, and the thresholds are rendered from `data/strategy_math.json` — and a new gate check was added so the whole error class fails the build: `check_gate_numbers()` asserts that every `t >= X` quoted anywhere on the gates page matches a Bonferroni threshold in the computation. It reports 7 occurrences checked against `[1.96, 2.58, 3.02, 3.48, 3.89]`.
+- PR [#17](https://github.com/kanlerxz87-cyber/NFL3/pull/17) merged as `35a8a6680b716796bbb71ecba4b929d4d58afe0f`; Pages deploy succeeded for that commit (`Validate and deploy GitHub Pages` → success; `pages build and deployment` → success) and the live gates page was re-fetched with a cache-busting query to confirm the corrected G5 table (0.05 / 0.10 / 0.20 spanning pass and fail).
+- **Lesson recorded for future sessions:** four separate defects in this sub-site were invisible to the build gate and were found only by reading the rendered page — a source counter that did not add up, an answered question listed as a blocker, a top-priority action ranked last, and two thresholds that contradicted their own table. A green gate proves structure, not correctness.
+- Live verification after the follow-up merge is recorded in the section below.
+
+### Final result — f445c027 (recorded 2026-11-12 UTC)
+- **PR #10** (follow-up fixes) — **merged** as `1b713ce76866ca5e4eaffeb43d3d764c6fdfa75d` (merge commit). Its first Pages run was cancelled by a newer `main` push (PR #11, another session); the run on the following commit `94b0518` completed **success** (`pages build and deployment` 43156630277; `Validate and deploy GitHub Pages` 43156630287).
+- **Live verification (fetched 2026-11-12):** https://kanlerxz87-cyber.github.io/NFL3/dashboard/ shows R-06 corrected, R-16 marked UNVERIFIED, and the Flagged count (27).
+- **Dashboard status:** 10 pages, 254 injury rows, 14 games, 19 headlines, 0 of 12 strategies validated, 13 proposals awaiting decision, 27 flagged items. Checks: `dashboard/scripts/check.mjs` OK; root `tests/check_site.py` and `scripts/validate_site.py` OK.
+- **Still open (for owner review):** second line-by-line pass on the 254 injury rows; Seattle/Darnold reconciliation (Q09); Rams Garrett/McDuffie labels (Q10); DEN/CHI/PHI/TB Week 10 status (Q11); official depth-chart source (Q02); odds and historical results (Q04/Q05); NFL primary prop-bet memo (Q13); Ksa licence rules (Q12). Root links to `dashboard/` and `line-lab/` were added by the final integration.
+
+## Independent integration review — arena/cbdcc317-nfl3, 2026-11-12 UTC
+
+- This branch began at `83b6ce2`, before the coordination board and other sessions' work were visible. It initially claimed root integration and opened [PR #6](https://github.com/kanlerxz87-cyber/NFL3/pull/6). Main has since integrated PRs #1, #4, #7–#15, including the root overview and linked `/dashboard/` and `/line-lab/` sites. To respect owners' scopes, this branch contains no site, dataset or workflow changes—only this coordination handoff.
+- Checks on current main passed: `python3 tests/check_site.py`; `python3 scripts/validate_site.py`; `cd dashboard && npm run all` (254 injury rows, 14 games, 19 news rows, 10 generated pages); and `cd line-lab && python3 scripts/verify.py` (13 checks, 17 pages, 32-team standings arithmetic, 108 injury rows, source/table contracts, no warnings/failures). Python compilation passed. These checks are structural/consistency checks, not independent manual confirmation of all source facts or external link crawling.
+- Latest main `ef7ae0e` has successful [validation run 43157000573](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43157000573) and [Pages deployment run 43157000498](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43157000498). GitHub Pages API reports `built` and public; root URL is https://kanlerxz87-cyber.github.io/NFL3/.
+- Independent line-lab review found issues to send to owner `arena/e5e2b753-nfl3`; no owner files were changed:
+  1. In `line-lab/pages/injuries.html`, the row-level “Src” link goes to an NFL player profile, while the practice/game status comes from common report S05. A player profile verifies identity, not the row's injury/status facts. Add a report-specific official URL or dated report snapshot as the row source and retain the profile link separately.
+  2. F-04's absolute claim that no historical machine-readable odds archive is published is not established by the 404 at `/odds/` (S09) and NFL Support's statement that widget odds are partner-supplied (S13). The reviewed evidence supports “not located in the sources checked”; historical market-data availability should stay unverified absent a league/provider confirmation.
+  3. C1's same-season, cross-sectional margin/win-percentage correlation for 32 clubs is descriptive, not an out-of-time forecast or betting-skill measure; the 23.3% remainder is not a pure luck estimate. The Luck page caveats this; align “core skill signal”/“luck pool” headings with that limit.
+  4. ST-06 describes cross-game legs as “close to independent” despite F-09 stating no leg-level outcomes exist. Label this as an untested assumption, not a finding. C6's p=0.066 (n=32) also does not establish incremental signal.
+- PR #14 corrected a source counter, blocker filter and critical-path ordering; PR #15 linked both research sites from the root. These improve discoverability/accuracy but do not resolve the source/evidence concerns above. No line, market odds, player-prop projection, parlay correlation, strategy edge or reward was independently verified by this session.
+- PR #6 was opened before the parallel integrations and merge attempts encountered concurrent base updates. This branch is syncing current main and limiting the PR to the coordination log; it must not overlay a stale site snapshot.
+
+## Comprehensive Decision & Line Origination Hub — arena-40c7529f, 2026-11-12 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| T1 Line-by-line repo review & official source registry (17 official sources) | done (needs review: FLG-01..FLG-12) | arena-40c7529f | `decision-hub/data/repo_audit_sources.json`, `decision-hub/repo-audit.html` |
+| T2 Executive summary & master requirements traceability | done | arena-40c7529f | `decision-hub/data/requirements_summary.json`, `decision-hub/index.html`, `decision-hub/executive-summary.html` |
+| T3 Suggestions review center (10 proposals, Path A/B selector & JSON exporter) | done | arena-40c7529f | `decision-hub/data/suggestions.json`, `decision-hub/suggestions.html` |
+| T4 Pre-decision Q&A & missing-information discovery matrix (12 gating items) | done (needs review: 11 blank answers) | arena-40c7529f | `decision-hub/data/questions_discovery.json`, `decision-hub/questions.html` |
+| T5 NFL line origination, Gates G1–G8, pairwise correlation protocol & anti-luck leaderboard | done (needs review: empirical cells blank) | arena-40c7529f | `decision-hub/data/origination_leaderboard.json`, `decision-hub/origination.html` |
+| T6 Offense & defense 1st–4th string injury/backup deficiency tracker (7 official club depth charts) | done (needs review: cross-source lags flagged) | arena-40c7529f | `decision-hub/data/injuries_depth.json`, `decision-hub/depth-injuries.html` |
+| T7 Flagged for Review register, static build & strict row/blank/host verifier | done | arena-40c7529f | `decision-hub/data/flagged_review.json`, `decision-hub/flagged.html`, `decision-hub/scripts/`, `decision-hub/assets/` |
+
+- Session branch note: Arena fixes this session's branch as `arena/40c7529f-nfl3` (cannot switch or rename branches). To respect `arena-4fd6bbbb` (root site files), `arena/2836662c-nfl3` (root additions), `arena-56e27bb4` (`research-workspace/`), `f445c027` (`dashboard/`), and `e5e2b753` (`line-lab/`), all deliverables from this session are strictly scoped under `decision-hub/**` (published at `/NFL3/decision-hub/` on GitHub Pages) with zero edits to other sessions' files.
+- Rebase conflict log: `git pull --rebase origin main` encountered append-only conflicts in `COORDINATION.md` as concurrent PRs merged on `main`. Resolved cleanly by retaining 100% of all prior sessions' entries (`4fd6bbbb`, `56e27bb4`, `2836662c`, `f445c027`, `e5e2b753`, `cbdcc317`) and appending this section.
+- Integration request logged for root-site owner: link `decision-hub/index.html` (`https://kanlerxz87-cyber.github.io/NFL3/decision-hub/`) from root `index.html` navigation / Research Deep Dives table during cross-session root integration.
+- Official verified sources inspected on 2026-11-12 UTC:
+  - [NFL 2026 Week 10 Injury Report](https://www.nfl.com/injuries/) & [NFL 2026 Week 9 Injury Report (REG9)](https://www.nfl.com/injuries/league/2026/REG9)
+  - [NFL Injury Report Policy Revisions](https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693)
+  - [NFL Operations Contract Language & Roster Sizes](https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language), [International Player Pathway (17-man Practice Squad rule)](https://operations.nfl.com/programs-initiatives/international-growth/international-player-pathway), [Game & Stadium Prep (90-min Inactive List / 60-min Roof Lock)](https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep), [AT Spotters](https://operations.nfl.com/gameday/behind-the-scenes/at-spotters), and [2026 NFL Rulebook](https://operations.nfl.com/rules-officiating/2026-nfl-rulebook)
+  - [NFL Next Gen Stats Glossary](https://nextgenstats.nfl.com/glossary), [NFL 2026 Player Stats](https://www.nfl.com/stats/player-stats/), and [NFL Support Odds Widget FAQ](https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL)
+  - Official 2026 NFL Club Depth Charts (resolving prior sessions' R-11 / F-08 / 404 flags): [Baltimore Ravens](https://www.baltimoreravens.com/team/depth-chart), [New England Patriots](https://www.patriots.com/team/depth-chart), [Detroit Lions](https://www.detroitlions.com/team/depth-chart), [Washington Commanders](https://www.commanders.com/team/depth-chart), [New York Giants](https://www.giants.com/team/depth-chart), [Denver Broncos](https://www.denverbroncos.com/team/depth-chart/), and [Seattle Seahawks](https://www.seahawks.com/team/depth-chart/)
+  - Regulatory, Statistical & Infrastructure Authorities: [Nevada Gaming Control Board Sep 2025 Monthly Revenue Report (Form NGC-31 PDF)](https://www.gaming.nv.gov/contentassets/a7958398526e4e309d248ea35a2a20dd/september-2025-monthly-revenue-report.pdf), [NIST Statistical Handbook §1.3.5.2](https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm), [scikit-learn Calibration](https://scikit-learn.org/stable/modules/calibration.html) & [Cross-Validation](https://scikit-learn.org/stable/modules/cross_validation.html), [NWS Web API Docs](https://www.weather.gov/documentation/services-web-api), [Kansspelautoriteit (NL)](https://kansspelautoriteit.nl/), and [GitHub Pages Docs](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)
+- Verification performed:
+  - `python3 decision-hub/scripts/build_hub.py` generated 8 pages deterministically from `decision-hub/data/*.json`.
+  - `python3 decision-hub/scripts/verify_hub.py` PASSED across all 8 pages, 144 table rows, 99 strictly empty (`""`) unverified cells, 0 broken local links (including sibling links), and 100% official-domain HTTPS row links.
+  - Existing repository checks `python3 scripts/validate_site.py`, `python3 tests/check_site.py`, and `git diff --check` all PASSED.
+- Irregularities flagged on `decision-hub/flagged.html` (`FLG-01`–`FLG-12` + `BLK-01`–`BLK-06`):
+  - `FLG-01`: `operations.nfl.com` internal contradiction stating both 2-game and 3-game Practice Squad Standard Elevation limits in adjacent paragraphs.
+  - `FLG-02`: `nfl.com/injuries/league/2026/REG9` `<title>`/`<h1>` ("Week 10") vs. `<h2>` ("WEEK 9") mismatch.
+  - `FLG-03`–`FLG-07`: Cross-source lags between `nfl.com/injuries/`, NFL.com news, and official club depth charts (BAL IR QB Lamar Jackson still listed 1st string; SEA Sam Darnold conflict; WAS Lucas Patrick / NYG Malik Harrison / DET Kerby Joseph omitted from club two-deeps; NE Ben Brown dual-listed at 1st LG & 2nd C; SEA Cooper Kupp + Rashid Shaheed packed in single 1st-string WR cell).
+  - `FLG-08`–`FLG-09`: Repo audit citation bugs in root `decisions.html` (GitHub Pages docs cited for betting jurisdictions) and `dashboard/data/repo_review.csv` (empty `R-05` link and third-party blog URLs on `R-11`–`R-13`).
+  - `BLK-01`–`BLK-06`: All unconfirmed pre-decision answers, empirical correlations (`rho`), strategy skill scores/CLV/ranks, unlisted 3rd/4th strings, and EPA drop-offs intentionally left blank (`""`).
 
 ## Reproducible modeling and final integration — arena/c2825205-nfl3
 
@@ -49,3 +227,5 @@ The Arena-provided branch is fixed as `arena/4fd6bbbb-nfl3`; this session cannot
 - Arena fixes the working branch; no other branches will be created. Root integration will re-fetch the board and preserve concurrent work before editing shared navigation/index/validators. Existing `needs review` rows do not block integration, but active claims will be respected.
 - Request to root-site owners: link the reproducible research lab and its review queue after its tests pass; do not replace existing research pages.
 - Official content opened directly so far: [NFL 2026 Week 10 injury report](https://www.nfl.com/injuries/league/2026/REG10), [NFL Week 10 injury article](https://www.nfl.com/news/nfl-week-10-injury-report-2026-season), [2026 official rulebook](https://operations.nfl.com/rules-officiating/2026-nfl-rulebook). Live injury content changes; historical snapshots and starter replacement order are not established by these pages.
+
+- 2026-11-12 05:19 UTC: merged advancing main again; retained every prior entry and resolved the append-only board conflict. Draft PR #23 is open; a conflicting PR had no checks. No owner files outside the declared lab scope changed.

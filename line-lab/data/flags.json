@@ -1,0 +1,184 @@
+{
+ "meta": {
+  "title": "Flagged for review",
+  "generated": "2026-11-12",
+  "purpose": "Every value that could not be confirmed from an official source, every gap, and every irregularity found while working line by line. Nothing here is hidden in a footnote.",
+  "rule_applied": "If a value could not be confirmed against an official NFL page, it was left blank and listed here. No value was inferred, estimated or recalled from memory to fill a cell.",
+  "counts": {
+   "flags": 10,
+   "blocking": 3
+  }
+ },
+ "flags": [
+  {
+   "id": "F-01",
+   "severity": "low",
+   "type": "data irregularity",
+   "title": "Clubs have played an unequal number of games",
+   "what": "In the 2026 standings snapshot, games played range from 8 to 9 across the 32 clubs because of bye weeks and the in-progress Week 10 slate.",
+   "why": "Per-game rates are still comparable, but raw season totals (PF, PA, wins) are not. Any ranking that mixes totals across clubs with different game counts is wrong.",
+   "handling": "Ratings are computed per game. The games-played column is published so the user can see the mismatch.",
+   "affects": [
+    "Standings",
+    "Lines",
+    "Luck & Regression"
+   ],
+   "source_ids": [
+    "S01"
+   ],
+   "closure": "None needed; it is a real property of a mid-season snapshot."
+  },
+  {
+   "id": "F-02",
+   "severity": "high",
+   "type": "unverified values",
+   "title": "Core roster numbers could not be confirmed on an official page",
+   "what": "Active-roster size, game-day active size, the game-status publication deadline, and the current practice-squad size are all left blank or marked unverified. An Associated Press article surfaced in search describing a 17-man practice squad, which conflicts with the NFL.com report of 16.",
+   "why": "These numbers set the frame for every availability calculation. Publishing a remembered number as a verified one would be exactly the failure mode this project forbids.",
+   "handling": "Rules R05, R09, R11 and R12 are marked unverified. R09 carries the conflict note.",
+   "affects": [
+    "Rules",
+    "Depth & Availability"
+   ],
+   "source_ids": [
+    "S04",
+    "S12"
+   ],
+   "closure": "Find an official 2026 NFL Football Operations roster-rules page (or the current CBA summary) and quote the four figures directly."
+  },
+  {
+   "id": "F-03",
+   "severity": "medium",
+   "type": "gap",
+   "title": "Most game statuses did not exist yet at fetch time, and two clubs were not captured",
+   "what": "Of 108 transcribed injury rows, only 6 carried a game status (Out / Questionable). The remaining 102 were practice-report entries only. Buffalo's report was captured partially and the New York Jets report was not captured at all, because ingestion stopped part-way through the source page.",
+   "why": "For a Sunday game fetched on a Thursday this is the expected state under the league's own scheme, but it means this week's extract cannot support a start/sit decision on its own. The BUF/NYJ omission is an ingestion limit, not a data property.",
+   "handling": "Coverage is stated on the Injuries page and in the dataset metadata. No status was inferred from a practice line.",
+   "affects": [
+    "Injuries",
+    "Depth & Availability"
+   ],
+   "source_ids": [
+    "S05"
+   ],
+   "closure": "Re-snapshot the same page on Friday and Saturday; complete the BUF and NYJ reports."
+  },
+  {
+   "id": "F-04",
+   "severity": "critical",
+   "type": "missing information",
+   "title": "No NFL-authored odds archive, so nothing can be validated",
+   "what": "nfl.com/odds/ returns 404. NFL Support confirms that NFL widgets show odds 'provided by official bookmaker partners of the NFL (FanDuel, Caesars, and DraftKings)' and that bets are placed through a redirect to the bookmaker. So odds are visible on NFL surfaces, but they are a partner feed, not an NFL product, and no historical archive is published. Consequently no closing line, CLV, ATS record, backtest or leaderboard score exists anywhere in this project.",
+   "why": "Lines are supplied by licensed sportsbooks, not authored by the league. This is a structural fact about the source landscape, not a limitation of effort. Anything extracted from a partner widget would be a snapshot of a third party's price, with no guarantee of history or continuity.",
+   "handling": "Every model output is labelled a model-implied number, never a line. The leaderboard publishes zero scored strategies rather than fabricated ones.",
+   "affects": [
+    "Lines",
+    "Strategy Leaderboard",
+    "Validation Gates",
+    "Executive Summary"
+   ],
+   "source_ids": [
+    "S09",
+    "S13"
+   ],
+   "closure": "Purchase a historical odds archive (SG-01) and define the closing-line snapshot rule in writing (Q-04)."
+  },
+  {
+   "id": "F-05",
+   "severity": "low",
+   "type": "gap",
+   "title": "Week 10 slate is only half captured",
+   "what": "Eight of the sixteen Week 10 games were verified with their dates, kickoff times and networks. The remainder were beyond the truncated portion of the source pages.",
+   "why": "The model lines therefore cover half a slate. No matchup was invented to fill the gap.",
+   "handling": "The 8 verified games are published; coverage is stated as 8 of 16.",
+   "affects": [
+    "Lines"
+   ],
+   "source_ids": [
+    "S05",
+    "S06"
+   ],
+   "closure": "Fetch the remaining schedule pages or use a full-slate feed."
+  },
+  {
+   "id": "F-06",
+   "severity": "high",
+   "type": "missing information",
+   "title": "Player-level usage source unverified",
+   "what": "No official stats surface was fetched, so no claim is made about whether snaps, routes, targets and carries are published there, or at what cost.",
+   "why": "Every player-prop strategy depends on usage data. Without it, props cannot be originated at all.",
+   "handling": "All prop strategies are marked BLOCKED at G0 and G10. No prop line is published.",
+   "affects": [
+    "Strategy Leaderboard",
+    "Validation Gates"
+   ],
+   "source_ids": [],
+   "closure": "Q-03: fetch and document the official stats surfaces field by field."
+  },
+  {
+   "id": "F-07",
+   "severity": "high",
+   "type": "missing information",
+   "title": "Legal status of the reward structure unverified",
+   "what": "No regulatory source was consulted. Whether betting and paying performance rewards is lawful for the operator's jurisdiction is unknown.",
+   "why": "The project is designed to pay rewards for top-performing strategies. If the underlying activity is not lawful where the operator lives, the reward structure must not be built.",
+   "handling": "No stakes, no money, and no real-money linkage are implemented anywhere in this build. The site is analysis only.",
+   "affects": [
+    "Executive Summary",
+    "Suggestions"
+   ],
+   "source_ids": [],
+   "closure": "Q-05: written legal opinion, not a forum post."
+  },
+  {
+   "id": "F-08",
+   "severity": "critical",
+   "type": "missing information",
+   "title": "Depth order (1st/2nd/3rd string) is not in the official roster feed",
+   "what": "The official NFL.com roster page exposes player, number, position, roster status, height, weight, experience and college. It has no depth-rank column. It was read in full to confirm this.",
+   "why": "The central requirement \u2014 detecting when a 2nd, 3rd or 4th string player must replace a starter \u2014 is a depth-order question. Without an order, any 'backup' label would be an invention.",
+   "handling": "The DepthStress index measures verified availability degradation by position group. It explicitly does not claim who replaces whom, and says so in its own definition.",
+   "affects": [
+    "Depth & Availability",
+    "Strategy Leaderboard"
+   ],
+   "source_ids": [
+    "S07"
+   ],
+   "closure": "Q-09 / SG-05: verify per-club official depth charts, or derive order from an official snap-count source, for at least 30 of 32 clubs."
+  },
+  {
+   "id": "F-09",
+   "severity": "high",
+   "type": "missing information",
+   "title": "No leg-level outcomes, so no correlation coefficient is estimated",
+   "what": "The only correlations computed in this project are cross-sectional team correlations (C1-C8) from season aggregates. No pairwise leg correlation for parlays or props exists.",
+   "why": "Parlay and combo pricing depends entirely on the joint distribution. Any rho used would be an assumption dressed as a measurement.",
+   "handling": "The copula mathematics is implemented and published; every parlay strategy is BLOCKED at G9. The illustrative tables state their parameters explicitly and are marked synthetic.",
+   "affects": [
+    "Strategy Leaderboard",
+    "Validation Gates"
+   ],
+   "source_ids": [],
+   "closure": "Q-14: build a leg-level outcome table for at least two seasons and estimate rho per market cluster."
+  },
+  {
+   "id": "F-10",
+   "severity": "medium",
+   "type": "unverified value",
+   "title": "'Questionable' has no measured calibration",
+   "what": "The definition is verified (uncertain whether the player will play). The actual play rate of players carrying the designation is not measured, and this week's extract has only 6 designated players.",
+   "why": "If a designation does not predict participation, every model feature built on it is noise. Assuming a probability would be an invented value.",
+   "handling": "No probability is assigned to any designation. The availability weights used in DepthStress are declared assumptions (A-04), not calibrations.",
+   "affects": [
+    "Depth & Availability",
+    "Injuries"
+   ],
+   "source_ids": [
+    "S03",
+    "S05"
+   ],
+   "closure": "Q-20 / SG-06: join several seasons of designations to official inactive lists and compute play rates with confidence intervals."
+  }
+ ]
+}

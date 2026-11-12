@@ -1,0 +1,7 @@
+leg_a,leg_b,same_game,hypothesised_direction,correlation_value,sample_size,data_source,source_link,status
+QB passing yards over,WR1 receptions over,Yes,Positive (expected),,,None yet,https://www.nfl.com/,Blank – not computed
+QB passing yards over,Team total over,Yes,Positive (expected),,,None yet,https://www.nfl.com/,Blank – not computed
+RB rushing attempts over,Team spread (favorite),Yes,Positive (game-script hypothesis),,,None yet,https://www.nfl.com/,Blank – not computed
+Game total over,Game total under,Yes,Negative (mutually exclusive),,,None yet,https://www.nfl.com/,Blank – not computed
+Player A TD scored,Player B TD scored (same team),Yes,Unknown sign,,,None yet,,Blank – not computed
+Team A moneyline,Team B moneyline,Yes,Negative (mutually exclusive),,,None yet,,Blank – not computed

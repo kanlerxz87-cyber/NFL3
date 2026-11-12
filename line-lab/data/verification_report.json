@@ -1,0 +1,24 @@
+{
+ "generated": "2026-11-12",
+ "result": "PASS",
+ "checks_passed": [
+  "internal links checked across 17 pages; 28 distinct anchors resolve",
+  "table contract: 8 data tables all expose a source column; method/register tables declared explicitly; 0 undeclared",
+  "table shapes: every row matches its header; 59 element ids unique per page",
+  "no placeholder/null text in any page",
+  "standings integrity: 32 clubs, all arithmetic checks pass",
+  "standings integrity: 8 divisions of 4 clubs",
+  "injuries: 108 rows across 10 clubs, all links official, all statuses legal",
+  "rules: 15 rules; every verified rule cites a source, every unverified rule is blank",
+  "model: 8 lines, 32 ratings, 32 luck rows; neutral-site handling enforced",
+  "cross-references: flags, questions, suggestions, strategies, gates and source ids all resolve",
+  "decisions: 25 questions and 18 suggestions are complete and scorable",
+  "strategies: 12 strategies, none claim a passed gate, all gate states recorded",
+  "claims: model output and executive summary both disclaim market lines",
+  "gate numbers: every quoted t-threshold (7 occurrences) matches the computed Bonferroni table [1.96, 2.58, 3.02, 3.48, 3.89]"
+ ],
+ "warnings": [],
+ "failures": [],
+ "pages_scanned": 17,
+ "policy": "A row without a source, a broken link, a dead anchor, a null leak or an internal contradiction fails the build. Unverified values are allowed only when blank and flagged."
+}

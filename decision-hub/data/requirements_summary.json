@@ -1,0 +1,171 @@
+{
+  "metadata": {
+    "verified_date_utc": "2026-11-12",
+    "nfl_season": 2026,
+    "nfl_current_week": 10,
+    "session_id": "arena-40c7529f",
+    "branch": "arena/40c7529f-nfl3"
+  },
+  "requirements_matrix": [
+    {
+      "req_id": "REQ-01",
+      "category": "Collection & Governance",
+      "requirement": "Collect, organize, and analyze NFL data utilizing a full list of explicit project requirements.",
+      "current_state": "Structured JSON schemas, taxonomy, and official source registry built; live automated API ingestion not yet connected.",
+      "verified_metric": "17 official domains verified",
+      "deliverable_page": "index.html",
+      "status": "Verified Scope",
+      "source_label": "NFL.com Stats (2026)",
+      "source_url": "https://www.nfl.com/stats/player-stats/"
+    },
+    {
+      "req_id": "REQ-02",
+      "category": "Decision Support",
+      "requirement": "Provide actionable site improvement suggestions in a dedicated section so a reviewer can choose the best path before implementing changes.",
+      "current_state": "Dedicated Suggestions Review Center built with Path A / B / C trade-offs and non-mutating path-selection exporter; 0 unapproved changes applied.",
+      "verified_metric": "10 proposals · 0 auto-applied",
+      "deliverable_page": "suggestions.html",
+      "status": "Proposed · Awaiting Path",
+      "source_label": "GitHub Pages Docs",
+      "source_url": "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages"
+    },
+    {
+      "req_id": "REQ-03",
+      "category": "Information Discovery",
+      "requirement": "List pre-decision questions, known facts, answers, missing information, and discovery suggestions before any decision is made.",
+      "current_state": "12 pre-decision questions cataloged separating verified official facts from blank unverified answers with concrete discovery steps.",
+      "verified_metric": "",
+      "deliverable_page": "questions.html",
+      "status": "Unverified · Blank Answers",
+      "source_label": "NFL Odds Widget FAQ",
+      "source_url": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL"
+    },
+    {
+      "req_id": "REQ-04",
+      "category": "Line Origination",
+      "requirement": "Originate independent NFL lines and research useful signal strategies across single bets, parlays, and player prop bet combos.",
+      "current_state": "8 origination & signal architectures specified across Singles, Parlays, and Prop Combos; numeric fair lines left blank pending licensed historical feed.",
+      "verified_metric": "",
+      "deliverable_page": "origination.html",
+      "status": "Unverified · Blank Lines",
+      "source_label": "NFL Next Gen Stats Glossary",
+      "source_url": "https://nextgenstats.nfl.com/glossary"
+    },
+    {
+      "req_id": "REQ-05",
+      "category": "Validation & Anti-Luck",
+      "requirement": "Treat strategy research as a skill-based leaderboard competition with rewards, mandatory validation gates, correlation estimation, and luck removal.",
+      "current_state": "8 sequential validation gates (G1–G8), pairwise correlation matrix protocol, and escrowed post-gate reward rules defined; 0 strategies promoted.",
+      "verified_metric": "",
+      "deliverable_page": "origination.html",
+      "status": "Unverified · 0/8 Gates Run",
+      "source_label": "scikit-learn Calibration",
+      "source_url": "https://scikit-learn.org/stable/modules/calibration.html"
+    },
+    {
+      "req_id": "REQ-06",
+      "category": "Defensive Backup Deficiencies",
+      "requirement": "Track injuries and identify defensive deficiencies where 2nd, 3rd, or 4th string backups replace starters due to lineups.",
+      "current_state": "Verified 2026 official club defensive 1st–4th string chains (NE CB, DET CB 1st–4th, BAL SS/CB, WAS CB) cross-checked against Week 9/10 NFL injury reports.",
+      "verified_metric": "7 official club charts verified",
+      "deliverable_page": "depth-injuries.html",
+      "status": "Verified Snapshot",
+      "source_label": "Lions Depth Chart (2026)",
+      "source_url": "https://www.detroitlions.com/team/depth-chart"
+    },
+    {
+      "req_id": "REQ-07",
+      "category": "Offensive Backup Deficiencies",
+      "requirement": "Track injuries and starter vs. 2nd, 3rd, or 4th string backup replacements across offensive lineups.",
+      "current_state": "Verified 2026 offensive 1st–4th string chains including BAL 3rd-string QB start (Joe Fagnano) and NE 1st–4th RB / multi-slot OL cascades.",
+      "verified_metric": "16 depth chains audited",
+      "deliverable_page": "depth-injuries.html",
+      "status": "Verified Snapshot",
+      "source_label": "Patriots Depth Chart (2026)",
+      "source_url": "https://www.patriots.com/team/depth-chart"
+    },
+    {
+      "req_id": "REQ-08",
+      "category": "Executive Briefing",
+      "requirement": "Create an executive summary outlining important operational, analytical, and governance details.",
+      "current_state": "Dedicated Executive Summary page detailing scope, verified official findings, structural market benchmarks, and go/no-go blockers.",
+      "verified_metric": "Complete",
+      "deliverable_page": "executive-summary.html",
+      "status": "Verified Scope",
+      "source_label": "NFL Game & Stadium Prep",
+      "source_url": "https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep"
+    },
+    {
+      "req_id": "REQ-09",
+      "category": "Repository Audit",
+      "requirement": "Review the repo line by line against official verified trusted sources, provide manual review links, and flag irregularities.",
+      "current_state": "Audited baseline commit 83b6ce2 plus concurrent workspaces (root, research-workspace/, dashboard/, workflows); all irregularities documented.",
+      "verified_metric": "14 repo artifacts audited",
+      "deliverable_page": "repo-audit.html",
+      "status": "Flagged for Review",
+      "source_label": "NFL3 GitHub Repository",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL3"
+    },
+    {
+      "req_id": "REQ-10",
+      "category": "Verification & Review Queue",
+      "requirement": "Publish all irregularities and unverified blank values on a clearly labeled Flagged for Review page with official links.",
+      "current_state": "Published Flagged for Review register covering 12 source/repo irregularities and 10 categories of intentionally blank unverified metrics.",
+      "verified_metric": "22 review entries",
+      "deliverable_page": "flagged.html",
+      "status": "Flagged for Review",
+      "source_label": "NFL Week 10 Injury Report",
+      "source_url": "https://www.nfl.com/injuries/"
+    }
+  ],
+  "executive_findings": [
+    {
+      "pillar": "1 · Repository Baseline & Concurrent Workspaces",
+      "verified_finding": "NFL3 originated from a 1-file commit (83b6ce2, README.md) and now hosts parallel session workspaces coordinated via COORDINATION.md; line-by-line audit uncovered placeholder citations and third-party links in sibling workspaces.",
+      "confirmed_benchmark": "Commit 83b6ce2 baseline",
+      "open_gap": "Unified root navigation merge across parallel session directories awaits human path approval.",
+      "source_label": "NFL3 Repository",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL3"
+    },
+    {
+      "pillar": "2 · Regulatory Market Hold Benchmark (Singles vs. Parlays)",
+      "verified_finding": "Official Nevada Gaming Control Board Form NGC-31 Statewide data confirms Parlay Cards carry substantially higher operator hold than straight Football pools, underscoring why uncalibrated parlay multiplication destroys edge.",
+      "confirmed_benchmark": "Football 5.05% (12m) / 6.70% (Sep 2025) vs. Parlay Cards 8.31% (12m) / 27.79% (Sep 2025)",
+      "open_gap": "Licensed point-in-time sportsbook closing odds and Same-Game Parlay (SGP) pricing feeds are not yet connected.",
+      "source_label": "NGCB Sep 2025 Report (PDF)",
+      "source_url": "https://www.gaming.nv.gov/contentassets/a7958398526e4e309d248ea35a2a20dd/september-2025-monthly-revenue-report.pdf"
+    },
+    {
+      "pillar": "3 · Official NFL Roster, Elevation & 90-Minute Inactive Mechanics",
+      "verified_finding": "NFL Operations establishes a 53-man Active/Inactive List (up to 54–55 via Practice Squad elevations), a 48-player game-day active limit (47 if <8 offensive linemen), and mandatory Inactive List delivery 90 minutes pre-kickoff.",
+      "confirmed_benchmark": "53 roster · 48 active (>=8 OL) · T-90m inactives",
+      "open_gap": "Automated T-90m inactive scraper and reconciliation of a textual 2-game vs. 3-game elevation discrepancy on operations.nfl.com.",
+      "source_label": "NFL Contract & Roster Rules",
+      "source_url": "https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language"
+    },
+    {
+      "pillar": "4 · Offense & Defense 1st–4th String Replacement Verification",
+      "verified_finding": "Official NFL club domains publish 1st–4th string depth charts (e.g., BAL 3rd-string QB Joe Fagnano behind Out QBs Lamar Jackson & Tyler Huntley; NE 1st–4th RBs; DET 1st–4th CBs), but club charts lag IR moves and omit some injured rotational players.",
+      "confirmed_benchmark": "7 club depth charts cross-checked vs. nfl.com/injuries/",
+      "open_gap": "Historical snap-weighted EPA replacement drop-off curves per positional string tier remain uncomputed (left blank).",
+      "source_label": "Ravens Depth Chart (2026)",
+      "source_url": "https://www.baltimoreravens.com/team/depth-chart"
+    },
+    {
+      "pillar": "5 · 2026 NFL Rulebook & Next Gen Stats Signal Inputs",
+      "verified_finding": "The 2026 NFL Rulebook modifies kickoff setup-zone alignment (6-1-3), touchback spot on 50-yard-line kickoffs (6-1-5), and permits declared onside kicks at any time (6-1-6), directly shifting field-position and total-points distributions.",
+      "confirmed_benchmark": "Rules 6-1-3, 6-1-5, 6-1-6, 19-2",
+      "open_gap": "Out-of-sample 2026 kickoff/touchback expected-points recalibration requires play-by-play ingestion.",
+      "source_label": "2026 NFL Rulebook",
+      "source_url": "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook"
+    },
+    {
+      "pillar": "6 · Skill-Over-Luck Leaderboard & Validation Gates",
+      "verified_finding": "Random variance cannot be eliminated from single NFL games, but luck in strategy selection is controlled via 8 strict gates: point-in-time freeze, game-grouped walk-forward CV, Brier/Log-Loss decomposition, CLV, NIST sample power, FDR adjustment, correlation caps, and prospective shadow runs.",
+      "confirmed_benchmark": "",
+      "open_gap": "All strategy scores, correlations, and ranks are intentionally blank until historical play-by-play and odds archives are licensed.",
+      "source_label": "NIST Confidence & Testing",
+      "source_url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm"
+    }
+  ]
+}

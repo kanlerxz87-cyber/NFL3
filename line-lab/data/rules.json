@@ -1,0 +1,192 @@
+{
+ "meta": {
+  "title": "Verified rules layer",
+  "purpose": "The rules that convert raw reporting into decision-grade availability information. Only rules confirmed against an official NFL page are marked verified. Anything unconfirmed is left blank and flagged.",
+  "retrieved_at": "2026-11-12",
+  "seasons_confirmed": "Rules confirmed as published; see per-rule 'as_of' for when the league announced them. Whether each rule is still in force for the 2026 season is stated per rule and flagged where it could not be confirmed."
+ },
+ "rules": [
+  {
+   "id": "R01",
+   "group": "Injury report",
+   "statement": "The Practice Report lists an injured player in exactly one of three categories: Did Not Participate, Limited Participation, or Full Participation.",
+   "definitions": "Limited Participation = less than 100 percent of the player's normal repetitions. Full Participation = 100 percent of normal repetitions.",
+   "official": true,
+   "status": "verified",
+   "as_of": "Competition Committee revision (published by NFL.com)",
+   "source_id": "S03",
+   "in_force_2026": "verified"
+  },
+  {
+   "id": "R02",
+   "group": "Injury report",
+   "statement": "The Game Status Report uses three designations: Out, Doubtful, Questionable.",
+   "definitions": "Out = the player will not play. Doubtful = it is unlikely the player will participate. Questionable = it is uncertain whether the player will play.",
+   "official": true,
+   "status": "verified",
+   "as_of": "Competition Committee revision (published by NFL.com)",
+   "source_id": "S03",
+   "in_force_2026": "verified"
+  },
+  {
+   "id": "R03",
+   "group": "Injury report",
+   "statement": "The 'Probable' game status no longer exists.",
+   "definitions": "Eliminated because approximately 95 percent of players listed as Probable in prior years did in fact play.",
+   "official": true,
+   "status": "verified",
+   "as_of": "Competition Committee revision (published by NFL.com)",
+   "source_id": "S03",
+   "in_force_2026": "verified"
+  },
+  {
+   "id": "R04",
+   "group": "Injury report",
+   "statement": "A player certain to play is not listed on the Game Status Report even if he appeared on that week's practice report. If such a player is then deactivated, the club must explain to the league and is subject to discipline.",
+   "definitions": "",
+   "official": true,
+   "status": "verified",
+   "as_of": "Competition Committee revision (published by NFL.com)",
+   "source_id": "S03",
+   "in_force_2026": "verified"
+  },
+  {
+   "id": "R05",
+   "group": "Injury report",
+   "statement": "The deadline for publishing the Game Status Report.",
+   "definitions": "",
+   "official": false,
+   "status": "unverified",
+   "value": null,
+   "as_of": "",
+   "source_id": null,
+   "in_force_2026": "unverified",
+   "note": "A commonly repeated figure (4:00 p.m. ET two days before kickoff, with Thursday games on Wednesday) appeared only in secondary reporting that was not fetched and not published by the NFL. Left blank. See F-02."
+  },
+  {
+   "id": "R06",
+   "group": "Roster",
+   "statement": "A player placed on reserve/injured becomes eligible to return once four games have elapsed since the date he was placed on the list.",
+   "definitions": "Previously three games.",
+   "official": true,
+   "status": "verified",
+   "as_of": "2022 league/NFLPA agreement reported by NFL.com",
+   "source_id": "S04",
+   "in_force_2026": "unverified"
+  },
+  {
+   "id": "R07",
+   "group": "Roster",
+   "statement": "Eight players per season may be designated to return from reserve/injured and/or reserve/non-football injury/illness to the 53-man active roster or the practice squad.",
+   "definitions": "Each return designation counts against the club's allotment of eight.",
+   "official": true,
+   "status": "verified",
+   "as_of": "2022 league/NFLPA agreement reported by NFL.com",
+   "source_id": "S04",
+   "in_force_2026": "unverified"
+  },
+  {
+   "id": "R08",
+   "group": "Roster",
+   "statement": "An individual player may return from reserve/injured a maximum of twice per season.",
+   "definitions": "Each return counts against the eight designations.",
+   "official": true,
+   "status": "verified",
+   "as_of": "2022 league/NFLPA agreement reported by NFL.com",
+   "source_id": "S04",
+   "in_force_2026": "unverified"
+  },
+  {
+   "id": "R09",
+   "group": "Roster",
+   "statement": "Practice squads were increased to 16 players.",
+   "definitions": "Up from 14 under the prior rules.",
+   "official": true,
+   "status": "verified",
+   "as_of": "2022 league/NFLPA agreement reported by NFL.com",
+   "source_id": "S04",
+   "in_force_2026": "unverified",
+   "conflict": "A 2026 Associated Press article surfaced in search describes 17-man practice squads. That page was not fetched and the NFL has not been re-checked for the current size. See I-06 / F-02."
+  },
+  {
+   "id": "R10",
+   "group": "Roster",
+   "statement": "A practice-squad player may be elevated to the game-day roster a maximum of three times per season.",
+   "definitions": "Up from two.",
+   "official": true,
+   "status": "verified",
+   "as_of": "2022 league/NFLPA agreement reported by NFL.com",
+   "source_id": "S04",
+   "in_force_2026": "unverified"
+  },
+  {
+   "id": "R11",
+   "group": "Roster",
+   "statement": "Regular-season active roster size.",
+   "definitions": "",
+   "official": false,
+   "status": "unverified",
+   "value": null,
+   "source_id": null,
+   "as_of": "",
+   "in_force_2026": "unverified",
+   "note": "'53' is universally repeated but was not confirmed on an official NFL page during this session. Left blank rather than filled from memory or from a non-official article. See F-02."
+  },
+  {
+   "id": "R12",
+   "group": "Roster",
+   "statement": "Game-day active roster size.",
+   "definitions": "",
+   "official": false,
+   "status": "unverified",
+   "value": null,
+   "source_id": null,
+   "as_of": "",
+   "in_force_2026": "unverified",
+   "note": "Not confirmed on an official page during this session. Left blank. See F-02."
+  },
+  {
+   "id": "R13",
+   "group": "Roster",
+   "statement": "NFL.com club roster pages expose a per-player roster-status flag; the value 'ACT' (active) was observed for every listed player on the Washington Commanders page.",
+   "definitions": "",
+   "official": true,
+   "status": "verified",
+   "as_of": "live page",
+   "source_id": "S07",
+   "in_force_2026": "verified"
+  },
+  {
+   "id": "R14",
+   "group": "Data availability",
+   "statement": "NFL.com club roster pages do not publish a depth order (1st / 2nd / 3rd string) column.",
+   "definitions": "",
+   "official": true,
+   "status": "verified",
+   "as_of": "live page",
+   "source_id": "S07",
+   "in_force_2026": "verified",
+   "note": "This is the single most important finding for the backup/deficiency requirement: the official roster feed gives position and roster status, not the depth chart order."
+  },
+  {
+   "id": "R15",
+   "group": "Playing rules",
+   "statement": "2026 rule changes listed by NFL Football Operations.",
+   "definitions": "6-1-3 alignment requirements for receiving-team players in the setup zone on a kickoff or safety kick; 6-1-5 dead-ball spot after a touchback when the kickoff is from the 50-yard line; 6-1-6 kicking team may declare an onside kick at any time; 19-2 league personnel may consult on-field officials on potential disqualification for flagrant football and non-football acts even if not called on the field.",
+   "official": true,
+   "status": "verified",
+   "as_of": "2026 NFL Rulebook",
+   "source_id": "S02",
+   "in_force_2026": "verified"
+  }
+ ],
+ "official_page_absent": [
+  {
+   "claim": "An NFL-authored point spread / total / price page",
+   "probe_url": "https://www.nfl.com/odds/",
+   "http_status": 404,
+   "source_id": "S09",
+   "conclusion": "No NFL-published odds page exists at that path. Narrower and more accurate statement, confirmed by S13: NFL widgets display odds supplied by partner bookmakers (FanDuel, Caesars, DraftKings) and redirect to the bookmaker. The league does not author, archive or publish lines of its own."
+  }
+ ]
+}

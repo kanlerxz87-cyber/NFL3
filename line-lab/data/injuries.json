@@ -1,0 +1,1108 @@
+{
+ "meta": {
+  "title": "Week 10 of the 2026 season \u2014 official injury report (verified extract)",
+  "source_id": "S05",
+  "source_url": "https://www.nfl.com/injuries/",
+  "retrieved_at": "2026-11-12",
+  "week": 10,
+  "season": 2026,
+  "coverage": "Ten club reports were captured in full (WAS, NYG, NE, DET, KC, ATL, MIN, GB, JAX, TEN). The source page returned 7 chunks and ingestion stopped after the Buffalo report had been partly read, so BUF and NYJ are NOT covered. No value has been inferred to fill a gap.",
+  "fields": {
+   "inj": "Injury as published (blank on the official page = null here, never guessed)",
+   "pr": "Practice status, verbatim from the official three-category scheme",
+   "gs": "Game status (Out / Doubtful / Questionable). null = no designation published at fetch time, which is the normal state before the deadline",
+   "u": "Official nfl.com player page used as the row's source link"
+  },
+  "counts": {
+   "rows": 108,
+   "teams_complete": 10,
+   "rows_with_game_status": 6,
+   "rows_with_named_injury": 6
+  },
+  "flags": [
+   "F-03"
+  ]
+ },
+ "rows": [
+  {
+   "team": "WAS",
+   "game": "WAS@NYG",
+   "p": "John Bates",
+   "pos": "TE",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/john-bates/"
+  },
+  {
+   "team": "WAS",
+   "game": "WAS@NYG",
+   "p": "Treylon Burks",
+   "pos": "WR",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/treylon-burks/"
+  },
+  {
+   "team": "WAS",
+   "game": "WAS@NYG",
+   "p": "Jayden Daniels",
+   "pos": "QB",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/jayden-daniels/"
+  },
+  {
+   "team": "WAS",
+   "game": "WAS@NYG",
+   "p": "Matt Gulbin",
+   "pos": "C",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/matt-gulbin/"
+  },
+  {
+   "team": "WAS",
+   "game": "WAS@NYG",
+   "p": "Chig Okonkwo",
+   "pos": "TE",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/chigoziem-okonkwo/"
+  },
+  {
+   "team": "WAS",
+   "game": "WAS@NYG",
+   "p": "Lucas Patrick",
+   "pos": "C",
+   "inj": "Concussion",
+   "pr": "Did Not Participate",
+   "gs": "Out",
+   "u": "https://www.nfl.com/players/lucas-patrick/"
+  },
+  {
+   "team": "WAS",
+   "game": "WAS@NYG",
+   "p": "Amik Robertson",
+   "pos": "CB",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/amik-robertson/"
+  },
+  {
+   "team": "WAS",
+   "game": "WAS@NYG",
+   "p": "Shy Tuttle",
+   "pos": "DT",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/shy-tuttle/"
+  },
+  {
+   "team": "WAS",
+   "game": "WAS@NYG",
+   "p": "Colson Yankoff",
+   "pos": "TE",
+   "inj": "Knee",
+   "pr": "Did Not Participate",
+   "gs": "Out",
+   "u": "https://www.nfl.com/players/colson-yankoff/"
+  },
+  {
+   "team": "NYG",
+   "game": "WAS@NYG",
+   "p": "Abdul Carter",
+   "pos": "LB",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/abdul-carter/"
+  },
+  {
+   "team": "NYG",
+   "game": "WAS@NYG",
+   "p": "Jermaine Eluemunor",
+   "pos": "T",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/jermaine-eluemunor/"
+  },
+  {
+   "team": "NYG",
+   "game": "WAS@NYG",
+   "p": "Malik Harrison",
+   "pos": "LB",
+   "inj": "Groin",
+   "pr": "Limited Participation",
+   "gs": "Questionable",
+   "u": "https://www.nfl.com/players/malik-harrison/"
+  },
+  {
+   "team": "NYG",
+   "game": "WAS@NYG",
+   "p": "Colton Hood",
+   "pos": "CB",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/colton-hood/"
+  },
+  {
+   "team": "NYG",
+   "game": "WAS@NYG",
+   "p": "Theo Johnson",
+   "pos": "TE",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/theo-johnson/"
+  },
+  {
+   "team": "NYG",
+   "game": "WAS@NYG",
+   "p": "Charlie Jones",
+   "pos": "WR",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/charlie-jones-3/"
+  },
+  {
+   "team": "NYG",
+   "game": "WAS@NYG",
+   "p": "J.J. McCarthy",
+   "pos": "QB",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/j-j-mccarthy/"
+  },
+  {
+   "team": "NYG",
+   "game": "WAS@NYG",
+   "p": "Darnell Mooney",
+   "pos": "WR",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/darnell-mooney/"
+  },
+  {
+   "team": "NYG",
+   "game": "WAS@NYG",
+   "p": "Malik Nabers",
+   "pos": "WR",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/malik-nabers/"
+  },
+  {
+   "team": "NYG",
+   "game": "WAS@NYG",
+   "p": "Cam Skattebo",
+   "pos": "RB",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/cam-skattebo/"
+  },
+  {
+   "team": "NYG",
+   "game": "WAS@NYG",
+   "p": "Andrew Thomas",
+   "pos": "T",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/andrew-thomas/"
+  },
+  {
+   "team": "NE",
+   "game": "NE@DET",
+   "p": "Ben Brown",
+   "pos": "C",
+   "inj": "Knee",
+   "pr": "Did Not Participate",
+   "gs": "Out",
+   "u": "https://www.nfl.com/players/ben-brown-2/"
+  },
+  {
+   "team": "NE",
+   "game": "NE@DET",
+   "p": "A.J. Brown",
+   "pos": "WR",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/a-j-brown/"
+  },
+  {
+   "team": "NE",
+   "game": "NE@DET",
+   "p": "Kevin Byard",
+   "pos": "S",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/kevin-byard/"
+  },
+  {
+   "team": "NE",
+   "game": "NE@DET",
+   "p": "Carlton Davis III",
+   "pos": "CB",
+   "inj": "Knee",
+   "pr": "Did Not Participate",
+   "gs": "Out",
+   "u": "https://www.nfl.com/players/carlton-davis/"
+  },
+  {
+   "team": "NE",
+   "game": "NE@DET",
+   "p": "Reggie Gilliam",
+   "pos": "FB",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/reggie-gilliam/"
+  },
+  {
+   "team": "NE",
+   "game": "NE@DET",
+   "p": "TreVeyon Henderson",
+   "pos": "RB",
+   "inj": "Illness",
+   "pr": "Did Not Participate",
+   "gs": "Out",
+   "u": "https://www.nfl.com/players/treveyon-henderson/"
+  },
+  {
+   "team": "NE",
+   "game": "NE@DET",
+   "p": "Hunter Henry",
+   "pos": "TE",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/hunter-henry/"
+  },
+  {
+   "team": "NE",
+   "game": "NE@DET",
+   "p": "Cameron Latu",
+   "pos": "TE",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/cameron-latu/"
+  },
+  {
+   "team": "NE",
+   "game": "NE@DET",
+   "p": "Drake Maye",
+   "pos": "QB",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/drake-maye/"
+  },
+  {
+   "team": "NE",
+   "game": "NE@DET",
+   "p": "Morgan Moses",
+   "pos": "T",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/morgan-moses/"
+  },
+  {
+   "team": "NE",
+   "game": "NE@DET",
+   "p": "Walter Rouse",
+   "pos": "T",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/walter-rouse/"
+  },
+  {
+   "team": "NE",
+   "game": "NE@DET",
+   "p": "Brenden Schooler",
+   "pos": "S",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/brenden-schooler/"
+  },
+  {
+   "team": "NE",
+   "game": "NE@DET",
+   "p": "Rhamondre Stevenson",
+   "pos": "RB",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/rhamondre-stevenson/"
+  },
+  {
+   "team": "NE",
+   "game": "NE@DET",
+   "p": "Greg Van Roten",
+   "pos": "G",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/greg-van-roten/"
+  },
+  {
+   "team": "NE",
+   "game": "NE@DET",
+   "p": "Charles Woods",
+   "pos": "CB",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/charles-woods/"
+  },
+  {
+   "team": "DET",
+   "game": "NE@DET",
+   "p": "Brian Branch",
+   "pos": "S",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/brian-branch/"
+  },
+  {
+   "team": "DET",
+   "game": "NE@DET",
+   "p": "Jared Goff",
+   "pos": "QB",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/jared-goff/"
+  },
+  {
+   "team": "DET",
+   "game": "NE@DET",
+   "p": "Kerby Joseph",
+   "pos": "S",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/kerby-joseph/"
+  },
+  {
+   "team": "DET",
+   "game": "NE@DET",
+   "p": "Cade Mays",
+   "pos": "C",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/cade-mays/"
+  },
+  {
+   "team": "DET",
+   "game": "NE@DET",
+   "p": "D.J. Reed",
+   "pos": "CB",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/d-j-reed/"
+  },
+  {
+   "team": "DET",
+   "game": "NE@DET",
+   "p": "Jacob Saylors",
+   "pos": "RB",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/jacob-saylors/"
+  },
+  {
+   "team": "DET",
+   "game": "NE@DET",
+   "p": "Amon-Ra St. Brown",
+   "pos": "WR",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/amon-ra-st-brown/"
+  },
+  {
+   "team": "DET",
+   "game": "NE@DET",
+   "p": "Sione Vaki",
+   "pos": "RB",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/sione-vaki/"
+  },
+  {
+   "team": "DET",
+   "game": "NE@DET",
+   "p": "D.J. Wonnum",
+   "pos": "DE",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/d-j-wonnum/"
+  },
+  {
+   "team": "KC",
+   "game": "KC@ATL",
+   "p": "Jeffrey Bassa",
+   "pos": "LB",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/jeffrey-bassa/"
+  },
+  {
+   "team": "KC",
+   "game": "KC@ATL",
+   "p": "Mansoor Delane",
+   "pos": "CB",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/mansoor-delane/"
+  },
+  {
+   "team": "KC",
+   "game": "KC@ATL",
+   "p": "Justin Fields",
+   "pos": "QB",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/justin-fields/"
+  },
+  {
+   "team": "KC",
+   "game": "KC@ATL",
+   "p": "Jaden Hicks",
+   "pos": "S",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/jaden-hicks/"
+  },
+  {
+   "team": "KC",
+   "game": "KC@ATL",
+   "p": "Travis Kelce",
+   "pos": "TE",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/travis-kelce/"
+  },
+  {
+   "team": "KC",
+   "game": "KC@ATL",
+   "p": "Patrick Mahomes",
+   "pos": "QB",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/patrick-mahomes/"
+  },
+  {
+   "team": "KC",
+   "game": "KC@ATL",
+   "p": "Jaylon Moore",
+   "pos": "T",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/jaylon-moore-2/"
+  },
+  {
+   "team": "KC",
+   "game": "KC@ATL",
+   "p": "Omarr Norman-Lott",
+   "pos": "DT",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/omarr-norman-lott/"
+  },
+  {
+   "team": "KC",
+   "game": "KC@ATL",
+   "p": "Rashee Rice",
+   "pos": "WR",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/rashee-rice/"
+  },
+  {
+   "team": "KC",
+   "game": "KC@ATL",
+   "p": "Peter Woods",
+   "pos": "DT",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/peter-woods/"
+  },
+  {
+   "team": "KC",
+   "game": "KC@ATL",
+   "p": "Xavier Worthy",
+   "pos": "WR",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/xavier-worthy/"
+  },
+  {
+   "team": "ATL",
+   "game": "KC@ATL",
+   "p": "Zachariah Branch",
+   "pos": "WR",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/zachariah-branch/"
+  },
+  {
+   "team": "ATL",
+   "game": "KC@ATL",
+   "p": "Divine Deablo",
+   "pos": "LB",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/divine-deablo/"
+  },
+  {
+   "team": "ATL",
+   "game": "KC@ATL",
+   "p": "Gervon Dexter Sr.",
+   "pos": "DT",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/gervon-dexter/"
+  },
+  {
+   "team": "ATL",
+   "game": "KC@ATL",
+   "p": "James Pearce Jr.",
+   "pos": "DE",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/james-pearce-jr/"
+  },
+  {
+   "team": "ATL",
+   "game": "KC@ATL",
+   "p": "Za'Darius Smith",
+   "pos": "DE",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/za-darius-smith/"
+  },
+  {
+   "team": "ATL",
+   "game": "KC@ATL",
+   "p": "Josh Woods",
+   "pos": "LB",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/josh-woods/"
+  },
+  {
+   "team": "MIN",
+   "game": "MIN@GB",
+   "p": "Blake Cashman",
+   "pos": "LB",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/blake-cashman/"
+  },
+  {
+   "team": "MIN",
+   "game": "MIN@GB",
+   "p": "T.J. Hockenson",
+   "pos": "TE",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/t-j-hockenson/"
+  },
+  {
+   "team": "MIN",
+   "game": "MIN@GB",
+   "p": "Tyrion Ingram-Dawkins",
+   "pos": "DT",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/tyrion-ingram-dawkins/"
+  },
+  {
+   "team": "MIN",
+   "game": "MIN@GB",
+   "p": "Theo Jackson",
+   "pos": "S",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/theo-jackson/"
+  },
+  {
+   "team": "MIN",
+   "game": "MIN@GB",
+   "p": "Jauan Jennings",
+   "pos": "WR",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/jauan-jennings/"
+  },
+  {
+   "team": "MIN",
+   "game": "MIN@GB",
+   "p": "Kyler Murray",
+   "pos": "QB",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/kyler-murray/"
+  },
+  {
+   "team": "MIN",
+   "game": "MIN@GB",
+   "p": "Kyle Van Noy",
+   "pos": "LB",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/kyle-van-noy/"
+  },
+  {
+   "team": "MIN",
+   "game": "MIN@GB",
+   "p": "Jay Ward",
+   "pos": "S",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/jay-ward/"
+  },
+  {
+   "team": "MIN",
+   "game": "MIN@GB",
+   "p": "Carson Wentz",
+   "pos": "QB",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/carson-wentz/"
+  },
+  {
+   "team": "GB",
+   "game": "MIN@GB",
+   "p": "Aaron Banks",
+   "pos": "G",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/aaron-banks/"
+  },
+  {
+   "team": "GB",
+   "game": "MIN@GB",
+   "p": "Chris Brooks",
+   "pos": "RB",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/christopher-brooks/"
+  },
+  {
+   "team": "GB",
+   "game": "MIN@GB",
+   "p": "Javon Bullard",
+   "pos": "S",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/javon-bullard/"
+  },
+  {
+   "team": "GB",
+   "game": "MIN@GB",
+   "p": "Zaire Franklin",
+   "pos": "LB",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/zaire-franklin/"
+  },
+  {
+   "team": "GB",
+   "game": "MIN@GB",
+   "p": "Travis Glover",
+   "pos": "G",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/travis-glover/"
+  },
+  {
+   "team": "GB",
+   "game": "MIN@GB",
+   "p": "Ty'Ron Hopper",
+   "pos": "LB",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/ty-ron-hopper/"
+  },
+  {
+   "team": "GB",
+   "game": "MIN@GB",
+   "p": "Josh Jacobs",
+   "pos": "RB",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/josh-jacobs-x3315/"
+  },
+  {
+   "team": "GB",
+   "game": "MIN@GB",
+   "p": "Bo Melton",
+   "pos": "WR",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/bo-melton/"
+  },
+  {
+   "team": "GB",
+   "game": "MIN@GB",
+   "p": "Skyy Moore",
+   "pos": "WR",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/skyy-moore/"
+  },
+  {
+   "team": "GB",
+   "game": "MIN@GB",
+   "p": "Micah Parsons",
+   "pos": "LB",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/micah-parsons/"
+  },
+  {
+   "team": "GB",
+   "game": "MIN@GB",
+   "p": "Sean Rhyan",
+   "pos": "C",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/sean-rhyan/"
+  },
+  {
+   "team": "GB",
+   "game": "MIN@GB",
+   "p": "Trey Smack",
+   "pos": "K",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/trey-smack/"
+  },
+  {
+   "team": "GB",
+   "game": "MIN@GB",
+   "p": "Lukas Van Ness",
+   "pos": "LB",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/lukas-van-ness/"
+  },
+  {
+   "team": "GB",
+   "game": "MIN@GB",
+   "p": "Josh Whyle",
+   "pos": "TE",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/josh-whyle/"
+  },
+  {
+   "team": "GB",
+   "game": "MIN@GB",
+   "p": "Savion Williams",
+   "pos": "WR",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/savion-williams/"
+  },
+  {
+   "team": "GB",
+   "game": "MIN@GB",
+   "p": "Kevin Zeitler",
+   "pos": "G",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/kevin-zeitler/"
+  },
+  {
+   "team": "JAX",
+   "game": "JAX@TEN",
+   "p": "Jessie Bates",
+   "pos": "S",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/jessie-bates/"
+  },
+  {
+   "team": "JAX",
+   "game": "JAX@TEN",
+   "p": "Ezra Cleveland",
+   "pos": "G",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/ezra-cleveland/"
+  },
+  {
+   "team": "JAX",
+   "game": "JAX@TEN",
+   "p": "Branson Combs",
+   "pos": "LB",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/branson-combs/"
+  },
+  {
+   "team": "JAX",
+   "game": "JAX@TEN",
+   "p": "Jordan Davis",
+   "pos": "DT",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/jordan-davis/"
+  },
+  {
+   "team": "JAX",
+   "game": "JAX@TEN",
+   "p": "Robert Hainsey",
+   "pos": "C",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/robert-hainsey/"
+  },
+  {
+   "team": "JAX",
+   "game": "JAX@TEN",
+   "p": "Antonio Johnson",
+   "pos": "S",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/antonio-johnson-3/"
+  },
+  {
+   "team": "JAX",
+   "game": "JAX@TEN",
+   "p": "Jakobi Meyers",
+   "pos": "WR",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/jakobi-meyers/"
+  },
+  {
+   "team": "JAX",
+   "game": "JAX@TEN",
+   "p": "Chris Rodriguez Jr.",
+   "pos": "RB",
+   "inj": null,
+   "pr": "Limited Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/chris-rodriguez-jr/"
+  },
+  {
+   "team": "JAX",
+   "game": "JAX@TEN",
+   "p": "Bhayshul Tuten",
+   "pos": "RB",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/bhayshul-tuten/"
+  },
+  {
+   "team": "JAX",
+   "game": "JAX@TEN",
+   "p": "Travon Walker",
+   "pos": "DE",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/travon-walker/"
+  },
+  {
+   "team": "TEN",
+   "game": "JAX@TEN",
+   "p": "Cody Barton",
+   "pos": "LB",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/cody-barton/"
+  },
+  {
+   "team": "TEN",
+   "game": "JAX@TEN",
+   "p": "John Franklin-Myers",
+   "pos": "DE",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/john-franklin-myers/"
+  },
+  {
+   "team": "TEN",
+   "game": "JAX@TEN",
+   "p": "Marcus Harris",
+   "pos": "CB",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/marcus-harris-4/"
+  },
+  {
+   "team": "TEN",
+   "game": "JAX@TEN",
+   "p": "Anthony Hill Jr.",
+   "pos": "LB",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/anthony-hill-jr/"
+  },
+  {
+   "team": "TEN",
+   "game": "JAX@TEN",
+   "p": "Jaylon Jones",
+   "pos": "CB",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/jaylon-jones-2/"
+  },
+  {
+   "team": "TEN",
+   "game": "JAX@TEN",
+   "p": "JC Latham",
+   "pos": "T",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/jc-latham/"
+  },
+  {
+   "team": "TEN",
+   "game": "JAX@TEN",
+   "p": "Tony Pollard",
+   "pos": "RB",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/tony-pollard/"
+  },
+  {
+   "team": "TEN",
+   "game": "JAX@TEN",
+   "p": "Peter Skoronski",
+   "pos": "G",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/peter-skoronski/"
+  },
+  {
+   "team": "TEN",
+   "game": "JAX@TEN",
+   "p": "Tyjae Spears",
+   "pos": "RB",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/tyjae-spears/"
+  },
+  {
+   "team": "TEN",
+   "game": "JAX@TEN",
+   "p": "Carnell Tate",
+   "pos": "WR",
+   "inj": null,
+   "pr": "Did Not Participate",
+   "gs": null,
+   "u": "https://www.nfl.com/players/carnell-tate/"
+  },
+  {
+   "team": "TEN",
+   "game": "JAX@TEN",
+   "p": "Tommy Townsend",
+   "pos": "P",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/tommy-townsend/"
+  },
+  {
+   "team": "TEN",
+   "game": "JAX@TEN",
+   "p": "Kevin Winston Jr.",
+   "pos": "S",
+   "inj": null,
+   "pr": "Full Participation",
+   "gs": null,
+   "u": "https://www.nfl.com/players/kevin-winston-jr/"
+  }
+ ]
+}
