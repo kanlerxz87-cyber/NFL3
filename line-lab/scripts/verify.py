@@ -394,6 +394,25 @@ def check_strategies():
     ok(f"strategies: {len(st)} strategies, none claim a passed gate, all gate states recorded")
 
 
+def check_gate_numbers():
+    """Catch the class of error where prose quotes a threshold that the adjacent
+    computation contradicts. Every 't >= X' on the gates page must match a
+    Bonferroni threshold in strategy_math.json."""
+    sm = load("strategy_math.json")
+    allowed = {round(r["t_threshold"], 2) for r in sm["multiplicity"]["rows"]}
+    path = os.path.join(ROOT, "pages", "gates.html")
+    with open(path) as f:
+        src = f.read()
+    quoted = [float(x) for x in re.findall(r"t\s*(?:&gt;=|>=)\s*([0-9]+\.[0-9]+)", src)]
+    bad = [q for q in quoted if not any(abs(q - a) < 0.011 for a in allowed)]
+    if bad:
+        fail(f"gates page quotes t-thresholds that the computation does not support: {sorted(set(bad))} "
+             f"(computed: {sorted(allowed)})")
+    else:
+        ok(f"gate numbers: every quoted t-threshold ({len(quoted)} occurrences) matches the computed "
+           f"Bonferroni table {sorted(allowed)}")
+
+
 def check_claims_consistency():
     """Guard against the site over-claiming anywhere in prose."""
     mo = load("model_outputs.json")
@@ -421,6 +440,7 @@ def main():
     check_decisions()
     check_strategies()
     check_claims_consistency()
+    check_gate_numbers()
 
     report = {
         "generated": "2026-11-12",

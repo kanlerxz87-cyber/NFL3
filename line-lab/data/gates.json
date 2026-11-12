@@ -33,11 +33,11 @@
    "name": "Statistical significance with multiplicity",
    "type": "hard",
    "applies_to": "all",
-   "criterion": "t-statistic on mean CLV >= the threshold implied by Bonferroni over the logged trial count (t >= 1.96 with one trial; t >= 3.31 with 100 trials).",
+   "criterion": "t-statistic on mean CLV >= the Bonferroni threshold for the number of trials actually logged (thresholds printed below, computed from the trial count \u2014 never quoted from prose).",
    "needs": "Per-bet CLV; trial log",
    "failure": "Not admitted. The trial count must be honest or the gate is void.",
    "why": "Searching many ideas guarantees apparent winners. The correction is the price of the search.",
-   "numbers": "t >= 1.96 with one trial; t >= 3.48 with 100 logged trials; t >= 3.89 with 500. See the multiplicity table below, which is computed, not quoted."
+   "numbers": "At one trial the bar is t >= 1.96; at 100 trials it is t >= 3.48; at 500 it is t >= 3.89. These are rendered from the computation, not typed."
   },
   {
    "id": "G3",
