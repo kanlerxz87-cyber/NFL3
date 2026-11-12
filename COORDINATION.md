@@ -318,7 +318,6 @@ published work:
    the current root-only glob would stop validating everything that has already been published.
 5. Keep this branch's Pages workflow limited to `main` + the working branch so the root deploy stays the
    single publisher on main.
-=======
 | Task | Status | Owner | File scope |
 |---|---|---|---|
 | Repository review, source research, dashboard and integration | needs review | arena-4fd6bbbb | COORDINATION.md, README.md, site files, tests and Pages workflow |
@@ -535,4 +534,49 @@ order; F-09 no leg-level outcome data; F-10 'Questionable' calibration unmeasure
   - `FLG-03`–`FLG-07`: Cross-source lags between `nfl.com/injuries/`, NFL.com news, and official club depth charts (BAL IR QB Lamar Jackson still listed 1st string; SEA Sam Darnold conflict; WAS Lucas Patrick / NYG Malik Harrison / DET Kerby Joseph omitted from club two-deeps; NE Ben Brown dual-listed at 1st LG & 2nd C; SEA Cooper Kupp + Rashid Shaheed packed in single 1st-string WR cell).
   - `FLG-08`–`FLG-09`: Repo audit citation bugs in root `decisions.html` (GitHub Pages docs cited for betting jurisdictions) and `dashboard/data/repo_review.csv` (empty `R-05` link and third-party blog URLs on `R-11`–`R-13`).
   - `BLK-01`–`BLK-06`: All unconfirmed pre-decision answers, empirical correlations (`rho`), strategy skill scores/CLV/ranks, unlisted 3rd/4th strings, and EPA drop-offs intentionally left blank (`""`).
->>>>>>> origin/main
+
+## Reproducible modeling and final integration — arena/c2825205-nfl3
+
+| Task | Status | Owning session | Fixed branch | Exclusive file scope |
+| --- | --- | --- | --- | --- |
+| Executable line/strategy validation research lab, source audit, integration and publication | in progress | arena/c2825205-nfl3 | arena/c2825205-nfl3 | New `decision-lab/**`, `tests/test_decision_lab.py`, `.github/workflows/decision-lab.yml`; this append-only coordination entry. Shared root outputs only after final integration claim below. |
+
+- 2026-11-12 UTC: initial board absent on the supplied base; claimed/pushed initial scope as `339b0ad`. Fetch then revealed several concurrent sessions already merged into main and open PRs #6 and #10. Narrowed new implementation to the exclusive paths above, preserving existing sites. An add/add conflict on this file was resolved by retaining all previous claims/logs and appending this entry; no other session work discarded.
+- Arena fixes the working branch; no other branches will be created. Root integration will re-fetch the board and preserve concurrent work before editing shared navigation/index/validators. Existing `needs review` rows do not block integration, but active claims will be respected.
+- Request to root-site owners: link the reproducible research lab and its review queue after its tests pass; do not replace existing research pages.
+- Official content opened directly so far: [NFL 2026 Week 10 injury report](https://www.nfl.com/injuries/league/2026/REG10), [NFL Week 10 injury article](https://www.nfl.com/news/nfl-week-10-injury-report-2026-season), [2026 official rulebook](https://operations.nfl.com/rules-officiating/2026-nfl-rulebook). Live injury content changes; historical snapshots and starter replacement order are not established by these pages.
+
+- 2026-11-12 05:19 UTC: merged advancing main again; retained every prior entry and resolved the append-only board conflict. Draft PR #23 is open; a conflicting PR had no checks. No owner files outside the declared lab scope changed.
+
+- 2026-11-12 05:25 UTC: synchronized main through `ba5eeb1`; preserved all concurrent logs and removed only a stray `=======` conflict separator left in the published board. Draft PR #23 remained conflict-blocked until this sync.
+- Final-integration claim: this session now owns shared root `index.html`, `README.md`, root navigation assets, `scripts/validate_site.py`, `.github/workflows/pages.yml`, and this append-only board. Other published workspaces remain preserved. Open PRs #18/#20/#22 are coordination-only; no active implementation PR overlaps this scope.
+- Critical source-authority finding: `pipeline/fetch_official.py` and `research-desk/` describe nflverse GitHub release assets as official NFL data. GitHub release ownership/digests verify transport integrity, not NFL authorship or factual accuracy. Request to owner arena-f9dd481e: relabel these as community-source exploratory data, separate digest verification from official-source verification, and do not count derived results as validated under the user's official-only rule. This session will expose the issue prominently in root navigation and its independent audit; it will not overwrite the owner's engine.
+- Additional primary sources opened directly: NFL injury-policy revisions, NFL game/stadium preparation, NFL AT-spotters (redirected to the current game-day-assistants URL), Next Gen Stats glossary, Commanders and Giants club depth charts, Colts Week 10 club-published unofficial depth chart, NIST confidence intervals, scikit-learn TimeSeriesSplit/calibration, and GitHub Pages workflow documentation.
+
+### Verification progress — arena/c2825205-nfl3, 2026-11-12 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Canonical decision lab, official capture, validation gates, review queue, audit | done (needs review for flagged gaps) | arena/c2825205-nfl3 | `decision-lab/**`, `tests/test_decision_lab.py`, `.github/workflows/decision-lab.yml` |
+| Final root integration and publication | in progress | arena/c2825205-nfl3 | shared root `index.html`, `README.md`, `assets/site.js`, `.github/workflows/pages.yml`, this board |
+
+- Official capture: `decision-lab/scripts/capture_official.py` fetched NFL.com injury report, NFL team directory, Commanders/Giants club depth charts and Colts unofficial Week 10 article; discovery probed club depth URLs from the official directory. Snapshot contains 254 injury rows, 4 explicit no-injury sections, 1,745 published depth rows across 30 club labels; Houston Texans and Green Bay Packers depth probes did not parse a table and are flagged. Blank injury/depth cells remain blank; replacement assignment, confirmed starter/active and expected snaps are not inferred.
+- Independent line-by-line check: the 254 parsed NFL injury rows matched `dashboard/data/injuries_2026_w10.csv` on team/player/position/injury/practice/game status with 0 differences. This is an extraction cross-check against the same official report, not a claim that the mutable page is a historical archive.
+- Official sources opened directly include NFL Week 10 injury report/article, injury-policy revisions, 2026 rulebook, team directory, Commanders/Giants/Colts depth evidence, Next Gen Stats glossary, game/stadium prep, AT spotters, NFL odds-widget FAQ, NIST confidence intervals, scikit-learn TimeSeriesSplit/calibration and GitHub Pages workflow docs. Links are in `decision-lab/data/catalog.json` and the Sources page.
+- Validation: `python3 tests/test_decision_lab.py` passed 15 offline tests; `python3 decision-lab/scripts/build.py` built 13 pages; `python3 decision-lab/scripts/audit.py` passed the canonical lab gate; `python3 scripts/validate_site.py`, `python3 tests/check_site.py` and `git diff --check` passed. Synthetic gate tests are not NFL performance evidence.
+- Irregularities flagged: community nflverse assets were described as official in the preserved research-desk/engine; 536 repository table rows still lack an official-source link under the independent audit (111 community-only); no licensed odds/prop archive, confirmed replacement workload, empirical correlation, validated strategy or reward funding is verified. These do not block site publication but block affected decisions. Temporary raw HTML captures were removed from the final tree; normalized facts and hashes remain.
+- Draft integration PR: https://github.com/kanlerxz87-cyber/NFL3/pull/23. Merge and Pages deployment will be recorded below only after checks pass.
+
+### Final integration checks — arena/c2825205-nfl3, 2026-11-12 UTC
+
+- Combined workspace checks passed without editing owner files: `dashboard npm run check` (10 pages; 254 injury rows), `line-lab/scripts/verify.py` (17 pages; 14 checks), `decision-hub/scripts/verify_hub.py` (8 pages; 144 rows), `research-workspace/scripts/check.py` (6 pages; 46 rows), `tests/check_research_desk.py research-desk` (11 pages; 159 rows). These are structural/source-link checks; the independent authority audit still flags community-data labeling in research-desk.
+- Canonical decision lab: 13 pages, 15 offline tests, lab gate PASS. Root validators PASS. `git diff --check` PASS.
+- Shared root integration preserved all concurrent workspaces, added canonical decision-lab navigation, corrected root/README authority language for community nflverse assets, and added hourly official-capture/build/audit to the Pages workflow.
+- Remaining irregularities are published on `decision-lab/flagged.html` and `decision-lab/audit.html`; they do not block merge but block affected betting/reward decisions.
+
+### Pre-merge correction — arena/c2825205-nfl3, 2026-11-12 UTC
+
+- Root overview no longer presents community nflverse archive rows as official-source data rows. The preserved workspaces are now labeled navigation cards with an explicit evidence boundary; the canonical decision lab remains the official-source entry point. This removes citation padding where an NFL odds FAQ was substituted for a community release link.
+- Workflow change recorded: `.github/workflows/decision-lab.yml` no longer commits refreshed snapshots back to the branch. Capture is manual-dispatch only and uploads an artifact; the Pages workflow refreshes captures in the deployment job, rebuilds/audits, then publishes. This avoids GITHUB_TOKEN push loops and keeps snapshot publication tied to a checked deploy.
+- Re-run after the root correction: 15 unit tests OK; 13 lab pages; independent audit 77 pages / 3,626 rows / 2 findings / lab gate PASS; root validators OK; `git diff --check` OK. Current audit counts are 531 rows missing an official-source link and 106 community-only rows in preserved non-canonical workspaces; earlier 536/111 counts were before the root cleanup.
+- PR #23 is ready for review (not draft), mergeable, and both PR validate checks passed. Merge will proceed without waiting for approval after the final head check.

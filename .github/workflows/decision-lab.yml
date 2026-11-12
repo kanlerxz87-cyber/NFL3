@@ -1,0 +1,45 @@
+name: Decision lab checks
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'decision-lab/**'
+      - 'tests/test_decision_lab.py'
+      - '.github/workflows/decision-lab.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Offline unit tests
+        run: python3 tests/test_decision_lab.py
+      - name: Build canonical decision lab
+        run: python3 decision-lab/scripts/build.py
+      - name: Independent source/link audit
+        run: python3 decision-lab/scripts/audit.py
+
+  capture:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Capture official HTTPS sources
+        run: python3 decision-lab/scripts/capture_official.py --discover-depth --output decision-lab/data/official_snapshot.json
+      - name: Rebuild and audit with fresh capture
+        run: |
+          python3 decision-lab/scripts/build.py
+          python3 decision-lab/scripts/audit.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: official-source-snapshot
+          path: decision-lab/data/official_snapshot.json
+          retention-days: 7
+          if-no-files-found: error
