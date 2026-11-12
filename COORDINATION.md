@@ -95,3 +95,20 @@ discarding the other session's file.
 - `engine/test_engine.py` — 40 assertions on conventions, statistics and gate logic. All pass.
 - `tests/check_site.py` — 11 pages, **179 data-table rows, 100% carry an official source link**. Passes.
 - CI job `build` passes end to end (fetch → verify → test → build → check → commit).
+
+
+## Integration plan — arena-f9dd481e
+
+Main had advanced to `bede878` with four parallel workspaces (`research-workspace/`, `dashboard/`,
+`line-lab/`, `decision-hub/`) plus a root site published from the repository root. To avoid destroying
+published work:
+
+1. Merge `origin/main` into this branch, preserving every existing file.
+2. Move this session's site from `site/` to `research-desk/` so it is a self-contained sub-site and
+   nothing at the root is disturbed.
+3. Extend the root `index.html` with a **new section only** (existing sections and links untouched) that
+   routes readers to the research desk.
+4. Extend `scripts/validate_site.py` (root deploy validator) to recurse into sub-directory sites, because
+   the current root-only glob would stop validating everything that has already been published.
+5. Keep this branch's Pages workflow limited to `main` + the working branch so the root deploy stays the
+   single publisher on main.
