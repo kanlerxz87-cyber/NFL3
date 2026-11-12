@@ -275,7 +275,7 @@ def injury_study(games: list[dict], injury_rows: list[dict], depth_rows: list[di
     week_of = features.snapshot_week_map(depth_rows, games, season)
     avail = features.weekly_availability(injury_rows, depth_rows, season, week_of)
     if not avail:
-        return {"ok": False, "reason": "no official injury/depth rows for the season"}
+        return {"ok": False, "reason": "no injury/depth rows for the season"}
     season_games = [g for g in games if g["season"] == season and g["home_score"] is not None]
     missing = 0
     rows = []
@@ -320,7 +320,7 @@ def injury_study(games: list[dict], injury_rows: list[dict], depth_rows: list[di
         rb, nb = stats.pearson(both_off, [r["total_line"] for r in usable])
         out["total_vs_off_injuries"] = {"n": nb, "r": rb, "ci95": stats.fisher_ci(rb, nb)}
 
-    # Pick the newest week whose official report is substantially complete AND has a played game.
+    # Pick the newest week whose report is substantially complete AND has a played game.
     # The report for the upcoming week is published progressively (a few rows on Tuesday, the rest
     # after practice), so the freshest week is often too small to tabulate.
     per_week = {}
@@ -464,7 +464,7 @@ POOL_SEASONS = [2021, 2022, 2023, 2024, 2025]
 
 
 def injury_study_pooled(games: list[dict], load_season) -> dict:
-    """Pool the injury/depth join across every season that has both official files.
+    """Pool the injury/depth join across every season that has both release files.
 
     ``load_season(season) -> (injury_rows, depth_rows)`` so this module never touches the loader
     directly.  Seasons whose files are missing are skipped and named in ``seasons_missing``.

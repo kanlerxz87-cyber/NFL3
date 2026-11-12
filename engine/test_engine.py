@@ -1,7 +1,7 @@
 """Self-tests for the engine. Run with:  python3 engine/test_engine.py
 
 These exist because a single sign error silently flips every graded bet. The convention tests use
-real rows from the official nflverse schedule so they fail loudly if the formula is ever "fixed"
+real rows from the nflverse community schedule so they fail loudly if the formula is ever "fixed"
 in the wrong direction again.
 """
 from __future__ import annotations
@@ -27,7 +27,7 @@ def check(name: str, got, want, tol: float = 1e-9) -> None:
 
 
 # --------------------------------------------------------------- sign conventions on real games
-print("sign conventions (real official rows)")
+print("sign conventions (real release rows)")
 
 # 2025_01_DAL_PHI: DAL 20 @ PHI 24 -> result +4. spread_line +8.5 = PHI home favourites by 8.5.
 # PHI won by only 4, so the home side did NOT cover and the away side DID.

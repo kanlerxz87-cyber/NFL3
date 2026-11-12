@@ -1,11 +1,11 @@
-"""Feature construction from the verified official snapshots.
+"""Feature construction from the digest-verified snapshots.
 
 Design rules that keep this honest:
 
 * Every feature for a game is built only from information available *before* that game's kickoff.
   Anything derived from the game itself (score, result) is a target, never a feature.
 * Rolling form uses only prior weeks of the same season, so no result of a future week can leak in.
-* Availability features come from the official weekly injury report and depth chart of the same
+* Availability features come from the weekly injury report and depth chart releases of the same
   week; they describe *what was known* when the game was played.
 """
 from __future__ import annotations
@@ -119,7 +119,7 @@ OFF_KEY_POSITIONS = {"QB", "WR", "TE", "RB", "FB", "T", "G", "C", "OT", "OG", "O
 
 def depth_lookup(depth_rows: list[dict], week_of: dict[str, int] | None = None
                  ) -> dict[tuple[str, int, str], dict]:
-    """(team, week, player name) -> depth record, normalised across both official schemas.
+    """(team, week, player name) -> depth record, normalised across both release schemas.
 
     nflverse changed the depth-chart schema after 2024.  Older files carry `depth_team`
     (1 = starter, 2/3/4 = backups) plus `club_code`/`full_name`; 2025+ files carry `pos_slot` and
@@ -202,10 +202,10 @@ def starter_depth_by_position(depth_rows: list[dict], week_of: dict[str, int] | 
 def weekly_availability(injury_rows: list[dict], depth_rows: list[dict],
                         season: int, week_of: dict[str, int] | None = None
                         ) -> dict[tuple[str, int], dict]:
-    """Per team-week availability features from the official injury report + that week's chart.
+    """Per team-week availability features from the injury report + that week's chart.
 
     * ``out_starters_def`` / ``out_starters_off``: players at the first depth slot that week whose
-      official game status is Out or Doubtful.
+      report game status is Out or Doubtful.
     * ``q_starters_*``: first-slot players listed Questionable.
     * ``out_any_def`` / ``out_any_off``: every injury-report player in that position group, so a
       loss at the 2nd or 3rd string is still counted.
@@ -307,7 +307,7 @@ def snap_shares(snap_rows: list[dict], week: int, window: int = 1) -> dict[tuple
 def snapshot_week_map(depth_rows: list[dict], games: list[dict], season: int) -> dict[str, int]:
     """Map each daily depth-chart snapshot date onto the game week whose report it precedes.
 
-    A game's official injury report is filed for its week, so the chart that matters is the last one
+    A game's injury report is filed for its week, so the chart that matters is the last one
     published *before that week's first kickoff*.  Snapshots that fall inside a week's play window
     (after the first kickoff and before the next week's report) are attributed to the following week,
     because they describe the roster build-up to the next game.
