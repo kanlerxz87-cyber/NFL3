@@ -69,5 +69,5 @@ The Arena-provided branch is fixed as `arena/4fd6bbbb-nfl3`; this session cannot
 ### Integration result — f445c027 (2026-11-12 UTC)
 - **PR #8** (`arena/f445c027-nfl3` → `main`, dashboard in `dashboard/`) — **merged** as `ca49fad5de3e4b8499854b5ca55fc3a93215f760` (merge commit, not squash). Checks: `validate` (Validate and deploy GitHub Pages) SUCCESS on the PR; after merge, `Validate and deploy GitHub Pages` runs 43156231866 and 43156363844 SUCCESS, and `pages build and deployment` runs 43156231704 and 43156362784 SUCCESS.
 - Independent live fetch (2026-11-12): https://kanlerxz87-cyber.github.io/NFL3/dashboard/index.html and /flagged.html returned the generated content.
-- **Follow-up fixes (this PR, #9):** R-06 link corrected (was a malformed two-URL string); R-16 claim about Ksa-licensed operators marked UNVERIFIED (not from Ksa's own text); summary card now counts the Flagged for Review rows (it counted only repo flags).
+- **Follow-up fixes (PR #10):** R-06 link corrected (was a malformed two-URL string); R-16 claim about Ksa-licensed operators marked UNVERIFIED (not from Ksa's own text); summary card now counts the Flagged for Review rows (it counted only repo flags).
 - Root site, root validators, root README and other sessions' pages were not modified.
