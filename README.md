@@ -1,22 +1,7 @@
-# Fourth Down Lab
+# NFL3 research desk
 
-An evidence-first NFL lines and strategy research dashboard, published as a static GitHub Pages site from `index.html`.
+A static, source-linked NFL decision dashboard for GitHub Pages. Open `index.html` locally or serve the repository root with `python3 -m http.server`. Navigation uses relative paths for project-site hosting.
 
-## Purpose
+This is a research foundation, **not** an automated data pipeline, live injury tracker, betting model, leaderboard, or source of betting advice. The injury table is a small, dated snapshot, not a complete report. See the site's Flagged for Review page for unverified gaps and the decision journal for proposed next steps. Source links provide context for proposals and are not endorsements.
 
-The dashboard organizes decision questions, source requirements, injury/depth-chart tracking needs, candidate signal families, validation gates, suggestions, and unverified items. It does not contain a live data feed, model, betting picks, verified edge, or player-specific facts. Empty fields are deliberately left blank rather than inferred.
-
-## Publish
-
-The workflow in `.github/workflows/pages.yml` deploys the repository root to GitHub Pages on pushes to `main` and manual dispatch. Enable GitHub Pages with GitHub Actions as the repository's build/deployment source. A successful workflow and Pages URL must be confirmed in Actions; this repository change alone does not prove it is live.
-
-## Evidence standards
-
-- Prefer official NFL/team sources for NFL facts; capture the date, URL, and retrieval timestamp.
-- Preserve source history; do not overwrite changes to injury designations or lineup depth.
-- Report model probabilities as estimates, not facts. No result is verified without reproducible data and a held-out test.
-- Review `COORDINATION.md` for source checks, open risks, and task status.
-
-## Limitations
-
-No historical odds/results, official data feed, sportsbook settlement definitions, jurisdiction, bankroll requirements, or approved model specification were present at initial review. No profitability or correlation claims are made.
+Run `python3 tests/check_site.py` to validate internal links, HTML parsing, and a source link on each table row. External links were manually inspected at research time; content may change. Proposed workflow deployment is described in `.github/workflows/pages.yml`; deployment requires GitHub Actions verification.
