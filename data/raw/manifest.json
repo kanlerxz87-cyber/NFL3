@@ -61,6 +61,18 @@
       "url": "https://github.com/nflverse/nflverse-data/releases/download/depth_charts/depth_charts_2024.csv",
       "verified": true
     },
+    "depth_charts_2025": {
+      "asset_url": "https://github.com/nflverse/nflverse-data/releases/download/depth_charts/depth_charts_2025.csv",
+      "bytes": 52917870,
+      "path": "data/raw/depth_charts_2025.csv",
+      "release_asset_updated_utc": "2026-03-14T07:32:30Z",
+      "release_tag": "depth_charts",
+      "release_url": "https://github.com/nflverse/nflverse-data/releases/tag/depth_charts",
+      "sha256": "sha256:f5a4aa3fa70150e810b2255200c8735a6c1cc8ff77361308ce39149345b39b4a",
+      "stored_as": "depth_charts_2025.csv.gz",
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/depth_charts/depth_charts_2025.csv",
+      "verified": true
+    },
     "games": {
       "asset_url": "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv",
       "bytes": 2189959,
@@ -194,6 +206,6 @@
       "verified": true
     }
   },
-  "generated_utc": "2026-11-12T05:24:23Z",
+  "generated_utc": "2026-11-12T05:24:53Z",
   "source_repo": "https://github.com/nflverse/nflverse-data"
 }
