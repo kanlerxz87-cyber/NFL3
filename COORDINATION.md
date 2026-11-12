@@ -614,3 +614,18 @@ order; F-09 no leg-level outcome data; F-10 'Questionable' calibration unmeasure
 - PR validation: Decision Lab checks run [43319962608](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43319962608) and Pages validation run [43319962653](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43319962653) succeeded. GitHub emitted only managed Node.js 20 deprecation / Ubuntu image migration annotations.
 - Pages deployment: post-merge `Validate and deploy GitHub Pages` run [43320040436](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43320040436) succeeded for merge head `11112ce7c2b6ee7a9acc63cce90d7b98a23bbc6b`; GitHub Pages API reported `built`. Fetched the deployed [Flagged for Review page](https://kanlerxz87-cyber.github.io/NFL3/decision-lab/flagged.html?verify=43320040436) and confirmed F01 renders the qualified authority finding, the observed GitHub publisher and the official NFL reference separately.
 - Concurrent PR #20 and a scheduled data refresh advanced `main` after this merge; `git pull --rebase origin main` fast-forwarded this fixed branch while preserving those changes. No other files were edited in the follow-up.
+
+## Independent verification pass & integrity section — arena/771f5797-nfl3, 2026-11-12 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| V1 Live re-verification of the official injury snapshot, line by line | in progress | arena/771f5797-nfl3 | `scripts/verify_live.py`, `decision-lab/data/verification.json` |
+| V2 Live re-verification of club depth rows + documented parse failures | in progress | arena/771f5797-nfl3 | same as V1 |
+| V3 New "Verification & integrity" site section (per-family coverage, method, match counts, irregularities) | in progress | arena/771f5797-nfl3 | `decision-lab/scripts/build.py`, `decision-lab/verification.html` |
+| V4 Suggestions register upgrade (path comparison, review + export, findings-driven additions) | in progress | arena/771f5797-nfl3 | `decision-lab/data/catalog.json`, `decision-lab/suggestions.html` |
+| V5 Findings-driven additions to questions/flags register | in progress | arena/771f5797-nfl3 | `decision-lab/data/catalog.json` |
+| V6 Final integration: build, validate links, PR, merge, Pages deploy verification | in progress | arena/771f5797-nfl3 | `COORDINATION.md`, `README.md`, `index.html`, `.github/workflows/pages.yml` |
+
+- Claim method: this session works on the fixed Arena branch `arena/771f5797-nfl3` (cannot create session-named branches). Scope deliberately avoids `dashboard/`, `line-lab/`, `decision-hub/`, `research-desk/`, `research-workspace/`, `engine/`, `pipeline/` and `decision-lab/scripts/capture_official.py`, all owned by earlier sessions. Shared root navigation/`README.md` are edited only in the final integration step below, after re-fetching the board.
+- Baseline re-run before any edit: `scripts/validate_site.py` PASS (12 root pages), `tests/check_site.py` PASS, `tests/test_decision_lab.py` PASS (15 tests), `decision-lab/scripts/build.py` PASS (13 pages, audit findings=2, lab gate PASS). No baseline breakage found.
+- Environment note: this sandbox blocks outbound TLS to nfl.com/club sites from `bash`/Python (verified: `urllib` fails with TLS EOF; `curl` returns 000), so `capture_official.py` cannot run here. Live verification below is done by opening the official pages directly through the page-fetch tool, and the reproducible automated re-check is committed as `scripts/verify_live.py` for the GitHub Actions runner, which does have egress.
