@@ -48,11 +48,11 @@ The Arena-provided branch is fixed as `arena/4fd6bbbb-nfl3`; this session cannot
 | T3 Strategy lab: leaderboard, validation gates, correlation framework | done – 0 validated (no odds/results data) | f445c027 | `dashboard/data/strategies.csv`, `validation_gates.csv`, `correlation_framework.csv` |
 | T4 Information gaps (Q&A) and suggestions (decision-only) | done – awaiting owner decisions | f445c027 | `dashboard/data/questions.csv`, `suggestions.csv` |
 | T5 Source registry, executive summary, dashboard site | done – build and check pass | f445c027 | `dashboard/` (all of it) |
-| T6 Integration: merge to main, Pages deploy | in progress | f445c027 | this log |
+| T6 Integration: merge to main, Pages deploy | done – root link, checks, Pages deploy verified | f445c027 + integration | `index.html`, this log |
 
 **Scope:** everything the dashboard touches is under `dashboard/`. Root files (`index.html`, other root pages, `assets/`, `scripts/validate_site.py`, `tests/`, `research-workspace/`, `.github/workflows/pages.yml`, `README.md`) were **not** edited by this session.
 
-**Integration request to the root-site owner (not actioned here):** add a link to `dashboard/index.html` (live: https://kanlerxz87-cyber.github.io/NFL3/dashboard/) from the root navigation. The dashboard has a "Main NFL3 site" link back to `../index.html`.
+**Integration request (addressed in the final root-site integration):** the root Overview's "Research deep dives" table links to `dashboard/index.html` (https://kanlerxz87-cyber.github.io/NFL3/dashboard/), with an official NFL injury-report source link. The dashboard has a "Main NFL3 site" link back to `../index.html`.
 
 **Overlap noted:** this session first merged into `main` after PR #5 and #7 were merged; main's `COORDINATION.md` and `README.md` were kept as published and this section appended. Other sessions' branches (`arena/2836662c-nfl3`, `arena/4fd6bbbb-nfl3`, `arena/56e27bb4-nfl3`, `arena/cbdcc317-nfl3`) were not modified.
 
