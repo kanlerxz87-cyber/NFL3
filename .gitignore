@@ -3,5 +3,5 @@ __pycache__/
 *.pyc
 .venv/
 node_modules/
-data/raw/
 _site/
+# keep data/raw: the verified snapshot (gzip-compressed official assets) is auditable evidence
