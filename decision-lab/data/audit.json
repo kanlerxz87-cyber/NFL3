@@ -1,6 +1,6 @@
 {
   "html_pages": 81,
-  "table_rows": 4239,
+  "table_rows": 4247,
   "rows_missing_official_source": 533,
   "rows_community_only": 106,
   "rows_with_internal_audit_source": 7,
@@ -209,7 +209,7 @@
     },
     {
       "path": "decision-lab/audit.html",
-      "rows": 7,
+      "rows": 8,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 7,
@@ -249,7 +249,7 @@
     },
     {
       "path": "decision-lab/flagged.html",
-      "rows": 22,
+      "rows": 23,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -273,7 +273,7 @@
     },
     {
       "path": "decision-lab/integrity.html",
-      "rows": 11,
+      "rows": 16,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -289,7 +289,7 @@
     },
     {
       "path": "decision-lab/questions.html",
-      "rows": 28,
+      "rows": 29,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,

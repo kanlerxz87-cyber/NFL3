@@ -241,6 +241,25 @@ class AvailabilityTests(unittest.TestCase):
         self.assertEqual(av.family("LT"), "OL")
 
 
+class VerificationParserDispatchTests(unittest.TestCase):
+
+    def test_depth_parser_is_chosen_per_source(self):
+        """The Colts publish depth in an article; table clubs publish a table.
+        Comparing with the wrong parser produced 50 false mismatches in production,
+        so the dispatch itself is pinned by a test."""
+        self.assertEqual(vl.parser_for("https://www.colts.com/news/colts-release-unofficial-depth-chart-for-week-10"), "article")
+        self.assertEqual(vl.parser_for("https://www.colts.com/team/depth-chart"), "table")
+        self.assertEqual(vl.parser_for("https://www.commanders.com/team/depth-chart"), "table")
+
+    def test_article_depth_parsing_matches_its_own_source(self):
+        page = f'<script type="application/ld+json">{COLTS_FIXTURE}</script>'
+        rows = vl.parse_depth_source(page, "https://www.colts.com/news/x", "Colts", "2026-01-01T00:00:00+00:00", "0" * 64, "club-published UNOFFICIAL depth chart")
+        names = [r["player"] for r in rows]
+        self.assertIn("Daniel Jones", names)
+        self.assertIn("Laiatu Latu", names)
+        self.assertTrue(all(r["team"] == "Colts" for r in rows))
+
+
 class VerificationTests(unittest.TestCase):
     """Synthetic comparison tests: no network, no NFL claims."""
 
@@ -277,6 +296,20 @@ class VerificationTests(unittest.TestCase):
         live = [{"team": "BBB"}]
         result = vl.compare_no_injury(pub, live)
         self.assertEqual(result["mismatched"], 2)
+
+    def test_row_presence_difference_is_not_field_drift(self):
+        """A page that moved on to another week changes which rows exist, not their
+        values. That must not be reported as field drift."""
+        result = vl.compare_records([self.base], [], vl.INJURY_FIELDS)
+        self.assertEqual(result["mismatched"], 0)
+        self.assertEqual(result["missing_live"], 1)
+        fam = vl.family("F1", "test", "m", "https://www.nfl.com/injuries/", result)
+        self.assertEqual(fam["status"], "row-set-differs")
+
+    def test_field_change_is_reported_as_drift(self):
+        live = dict(self.base, practice_status="Full Participation in Practice")
+        fam = vl.family("F1", "test", "m", "https://www.nfl.com/injuries/", vl.compare_records([self.base], [live], vl.INJURY_FIELDS))
+        self.assertEqual(fam["status"], "drift")
 
     def test_depth_comparison_detects_rank_change(self):
         row = {"unit": "Offense", "position": "WR", "player": "One", "published_rank": 1}

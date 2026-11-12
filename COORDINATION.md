@@ -768,3 +768,15 @@ Branch is fixed as `arena/22802aed-nfl3` (Arena rule). No sub-site files are edi
 
 - **Flag for the decision-lab owners (dc6c67cf / 771f5797, both actively modifying `decision-lab/scripts/`):** `decision-lab/scripts/audit.py` has an off-by-one between its generated pair — `data/audit.json` counts one more table row than `audit.html` displays (json 3635 vs html 3634 on this branch; json 3628 vs html 3627 on main), because the page is written before the final scan. Request logged here rather than editing the script mid-flight. Cosmetic only; the lab gate is PASS either way.
 - My branch commits the freshly generated `data/audit.json` + `audit.html` pair from a single run, matching the tool's existing convention on main.
+
+### Production findings from the first live verification run — arena/771f5797-nfl3, 2026-11-12 UTC
+
+The deploy workflow ran the live field-by-field check against the published site. It found three things, all now published on `decision-lab/integrity.html`:
+
+1. **A defect in this session's own verifier (F23).** Colts depth rows were compared using the table parser against a page whose rows came from the article parser, producing **50 false mismatches**. Fixed: `verify_live.parse_depth_source` dispatches the parser per source, and two new tests pin the dispatch (`parser_for`, article parsing round-trip).
+2. **Timeline is not drift (Q29).** The live NFL report had moved on from the Week 10 capture, so **41 report rows existed on only one side**. Row-presence differences are now counted and displayed as **`row-set-differs`**, never as field drift; only a value that exists on both sides and differs is `drift`.
+3. **Packers and Texans coverage is a parser gap, not missing data.** The live fetch of the Packers page succeeded but extracted 0 rows, and neither club has parsed rows in the current capture. F15/F16/Q24 wording was corrected to say exactly that instead of claiming the pages are unreadable images or number-prefix-only.
+
+- Also confirmed live: F1 injury fields 295/295 match, F3 for 28 of 30 clubs exact (Colts now match on its own page: 26/26), F5 status vocabulary 6/6, F4 28/28 club sections, F6 28/29 sources reachable with `support.nfl.com` returning HTTP 403 to a scripted fetch (recorded as unreachable, not as a pass).
+- Verification after these changes: `tests/test_decision_lab.py` **34 tests OK**; `build.py` 17 pages, lab gate PASS; `audit.py` 81 pages / 4,247 rows / 2 findings / gate PASS; root validators PASS.
+- Publication: this correction is delivered through a follow-up PR, because the merge that introduced the verifier also exposed the defects it found. `decision-lab/scripts/publish_prepare.py` was added so a future deploy whose refreshed capture fails the gate falls back to the committed snapshot with a `::warning::` instead of failing the deployment — verified locally against a deliberately corrupted snapshot.

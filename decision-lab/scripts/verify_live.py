@@ -63,20 +63,23 @@ def compare_records(published: list[dict], live: list[dict], fields: tuple[str, 
         other = live_index.get(k)
         if other is None:
             missing_live += 1
-            details.append({"scope": "injury", "key": " / ".join(k), "field": "(row)", "published": "present", "live": "absent"})
+            details.append({"scope": "injury", "key": " / ".join(k), "field": "(row)", "published": "present",
+                            "live": "absent", "category": "row-missing-live"})
             continue
         diffs = [f for f in fields if (row.get(f, "") or "") != (other.get(f, "") or "")]
         if diffs:
             mismatched += 1
             for f in diffs:
                 details.append({"scope": "injury", "key": " / ".join(k), "field": f,
-                                "published": row.get(f, ""), "live": other.get(f, "")})
+                                "published": row.get(f, ""), "live": other.get(f, ""),
+                                "category": "field-change"})
         else:
             matched += 1
     for k in live_index:
         if k not in pub_index:
             extra_live += 1
-            details.append({"scope": "injury", "key": " / ".join(k), "field": "(row)", "published": "absent", "live": "present"})
+            details.append({"scope": "injury", "key": " / ".join(k), "field": "(row)", "published": "absent",
+                            "live": "present", "category": "row-extra-live"})
     return {
         "published_rows": len(pub_index), "live_rows": len(live_index),
         "matched": matched, "mismatched": mismatched,
@@ -105,13 +108,29 @@ def compare_depth(published: list[dict], live: list[dict]) -> dict:
         return {(r.get("unit", ""), r.get("position", ""), r.get("player", ""), int(r.get("published_rank", 0))) for r in rows}
     pub, liv = tuples(published), tuples(live)
     details = [{"scope": "depth", "key": " / ".join(map(str, t)), "field": "(row)",
-                "published": "present", "live": "absent"} for t in sorted(pub - liv)]
+                "published": "present", "live": "absent", "category": "row-missing-live"} for t in sorted(pub - liv)]
     details += [{"scope": "depth", "key": " / ".join(map(str, t)), "field": "(row)",
-                 "published": "absent", "live": "present"} for t in sorted(liv - pub)]
+                 "published": "absent", "live": "present", "category": "row-extra-live"} for t in sorted(liv - pub)]
     return {
         "published_rows": len(pub), "live_rows": len(liv),
         "matched": len(pub & liv), "mismatched": len(pub ^ liv), "details": details,
     }
+
+
+def parser_for(url: str) -> str:
+    """Club depth evidence is published two ways; the live check must use the same
+    parser per source that the capture used, or it compares methods instead of data."""
+    path = urlparse(url).path.lower()
+    return "article" if "/news/" in path else "table"
+
+
+def parse_depth_source(text: str, url: str, club: str, observed_at: str, digest: str, authority: str) -> list[dict]:
+    if parser_for(url) == "article":
+        rows = capture.parse_colts_article(text, url, observed_at, digest)
+        for row in rows:
+            row["team"] = club
+        return rows
+    return capture.parse_depth_tables(text, club, url, observed_at, digest, authority)
 
 
 def depth_gaps(depth_rows: list[dict], expected_clubs: int) -> dict:
@@ -140,11 +159,19 @@ def family(fid: str, name: str, method: str, source_url: str, result: dict | Non
                 "rows_checked": 0, "matched": 0, "mismatched": 0, "coverage": ""}
     total = result.get("published_rows", 0)
     coverage = f"{result['matched']}/{total}" if total else "n/a"
+    rows_differ = result.get("row_differences", result.get("missing_live", 0) + result.get("extra_live", 0))
+    if result["mismatched"]:
+        status = "drift"
+    elif rows_differ:
+        status = "row-set-differs"
+    else:
+        status = "match"
     return {"id": fid, "name": name, "method": method, "source_url": source_url,
-            "compared": compared, "status": "match" if result["mismatched"] == 0 else "drift",
+            "compared": compared, "status": status,
             "note": note, "rows_checked": total, "matched": result["matched"],
             "mismatched": result["mismatched"], "coverage": coverage,
-            "extra_live": result.get("extra_live", 0), "missing_live": result.get("missing_live", 0)}
+            "extra_live": result.get("extra_live", 0), "missing_live": result.get("missing_live", 0),
+            "row_differences": rows_differ}
 
 
 def fetch_text(url: str, allowed: set[str], timeout: int = 45) -> tuple[str | None, str, str]:
@@ -216,7 +243,7 @@ def run(snapshot: dict, catalog: dict, timeout: int = 45, offline: bool = False)
                                    note=f"not compared: {err[:140]}"))
             continue
         digest = hashlib.sha256(text.encode()).hexdigest()
-        live = capture.parse_depth_tables(text, club, final_url, datetime.now(timezone.utc).isoformat(), digest, published[0]["authority"])
+        live = parse_depth_source(text, final_url, club, datetime.now(timezone.utc).isoformat(), digest, published[0]["authority"])
         result = compare_depth(published, live)
         depth_matched += result["matched"]
         depth_total += result["published_rows"]
@@ -320,10 +347,17 @@ def run(snapshot: dict, catalog: dict, timeout: int = 45, offline: bool = False)
 
     compared = [f for f in families if f["compared"]]
     drift = [f for f in compared if f["status"] == "drift"]
+    rowdiff = [f for f in compared if f["status"] == "row-set-differs"]
     if offline:
         status = "drift" if drift else "structural-only"
+    elif unreachable:
+        status = "partial"
+    elif drift:
+        status = "drift"
+    elif rowdiff:
+        status = "row-set-differs"
     else:
-        status = "verified" if not unreachable and not drift else ("drift" if not unreachable else "partial")
+        status = "verified"
     return {
         "schema": "nfl3-verification/v2",
         "run_at": datetime.now(timezone.utc).isoformat(),
@@ -334,6 +368,7 @@ def run(snapshot: dict, catalog: dict, timeout: int = 45, offline: bool = False)
         "checks_run": len(families),
         "checks_compared": len(compared),
         "checks_drift": len(drift),
+        "checks_row_set_differs": len(rowdiff),
         "checks_unreachable": len(unreachable),
         "row_totals": {"rows_checked": sum(f["rows_checked"] for f in families),
                        "matched": sum(f["matched"] for f in families),
