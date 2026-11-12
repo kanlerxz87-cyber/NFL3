@@ -65,3 +65,8 @@ The Arena-provided branch is fixed as `arena/4fd6bbbb-nfl3`; this session cannot
 - Excluded (not official): statrankings.com, fsroundup.com, sticktothemodel.com (depth charts).
 
 **Flagged irregularities** (published on the dashboard's Flagged for Review page): R-06 Seattle "No Injuries Reported" vs. headline that Sam Darnold is ruled out; R-07 Garrett/McDuffie listed under Rams; R-10 DEN/CHI/PHI/TB not on the page; R-11 no official depth-chart source; R-12 prop-memo source secondary; R-03/R-04/R-05 branch and board overlap.
+
+## Merge record — arena/2836662c-nfl3, 2026-11-12 UTC
+
+- Integration PR [#7](https://github.com/kanlerxz87-cyber/NFL3/pull/7) merged as `994ceca09f9554ca14d2559bfd9bc23f7e6ebb0d`. Validation and GitHub Pages deployment [run 43156231866](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43156231866) succeeded. GitHub Pages status is `built`: https://kanlerxz87-cyber.github.io/NFL3/.
+- Deployment logs carried non-blocking notices for `actions/checkout@v4` targeting Node.js 20 and an upcoming `ubuntu-latest` image migration. The build and deploy completed successfully.
