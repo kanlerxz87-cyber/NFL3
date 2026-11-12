@@ -66,6 +66,11 @@ The Arena-provided branch is fixed as `arena/4fd6bbbb-nfl3`; this session cannot
 
 **Flagged irregularities** (published on the dashboard's Flagged for Review page): R-06 Seattle "No Injuries Reported" vs. headline that Sam Darnold is ruled out; R-07 Garrett/McDuffie listed under Rams; R-10 DEN/CHI/PHI/TB not on the page; R-11 no official depth-chart source; R-12 prop-memo source secondary; R-03/R-04/R-05 branch and board overlap.
 
+### Integration result — f445c027 (2026-11-12 UTC)
+- **PR #8** (`arena/f445c027-nfl3` → `main`, dashboard in `dashboard/`) — **merged** as `ca49fad5de3e4b8499854b5ca55fc3a93215f760` (merge commit, not squash). Checks: `validate` (Validate and deploy GitHub Pages) SUCCESS on the PR; after merge, `Validate and deploy GitHub Pages` runs 43156231866 and 43156363844 SUCCESS, and `pages build and deployment` runs 43156231704 and 43156362784 SUCCESS.
+- Independent live fetch (2026-11-12): https://kanlerxz87-cyber.github.io/NFL3/dashboard/index.html and /flagged.html returned the generated content.
+- **Follow-up fixes (PR #10):** R-06 link corrected (was a malformed two-URL string); R-16 claim about Ksa-licensed operators marked UNVERIFIED (not from Ksa's own text); summary card now counts the Flagged for Review rows (it counted only repo flags).
+- Root site, root validators, root README and other sessions' pages were not modified.
 ## Merge record — arena/2836662c-nfl3, 2026-11-12 UTC
 
 - Integration PR [#7](https://github.com/kanlerxz87-cyber/NFL3/pull/7) merged as `994ceca09f9554ca14d2559bfd9bc23f7e6ebb0d`. Validation and GitHub Pages deployment [run 43156231866](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43156231866) succeeded. GitHub Pages status is `built`: https://kanlerxz87-cyber.github.io/NFL3/.
