@@ -1,0 +1,7 @@
+# generated artefacts that are large or reproducible
+__pycache__/
+*.pyc
+.venv/
+node_modules/
+data/raw/
+_site/
