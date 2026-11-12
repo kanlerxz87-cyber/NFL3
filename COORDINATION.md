@@ -216,3 +216,7 @@ order; F-09 no leg-level outcome data; F-10 'Questionable' calibration unmeasure
   - `FLG-03`–`FLG-07`: Cross-source lags between `nfl.com/injuries/`, NFL.com news, and official club depth charts (BAL IR QB Lamar Jackson still listed 1st string; SEA Sam Darnold conflict; WAS Lucas Patrick / NYG Malik Harrison / DET Kerby Joseph omitted from club two-deeps; NE Ben Brown dual-listed at 1st LG & 2nd C; SEA Cooper Kupp + Rashid Shaheed packed in single 1st-string WR cell).
   - `FLG-08`–`FLG-09`: Repo audit citation bugs in root `decisions.html` (GitHub Pages docs cited for betting jurisdictions) and `dashboard/data/repo_review.csv` (empty `R-05` link and third-party blog URLs on `R-11`–`R-13`).
   - `BLK-01`–`BLK-06`: All unconfirmed pre-decision answers, empirical correlations (`rho`), strategy skill scores/CLV/ranks, unlisted 3rd/4th strings, and EPA drop-offs intentionally left blank (`""`).
+- Pull Request, Merge & Live GitHub Pages Verification (`arena-40c7529f`):
+  - PR [#21](https://github.com/kanlerxz87-cyber/NFL3/pull/21) merged into `main` as commit `bede878d3f6a6be010e12d88fc727d341c4c9590` on 2026-11-12 UTC.
+  - GitHub Pages workflow [run 43158128745](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43158128745) and `pages-build-deployment` [run 43158128352](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43158128352) both completed with `success` (`status: built`).
+  - Live site independently fetched and verified at `https://kanlerxz87-cyber.github.io/NFL3/decision-hub/` (including `flagged.html` and `depth-injuries.html`).
