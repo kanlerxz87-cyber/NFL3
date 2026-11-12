@@ -12,7 +12,7 @@ reward is funded.** Everything below is traced to an official page or is an expl
 | Collect, organise and analyse NFL information against a full requirements register | Partial — 17 requirements traced; completeness limited to verified sources | [Requirements](decision-lab/requirements.html) |
 | A clean GitHub Pages site with subpages organised by category | Done — landing page grouped by Decide / Availability / Origination / Verify / Archive | [Overview](index.html) |
 | Improve decision making; a suggestions section someone can review before implementing | Done — 75 merged proposals, path A/B, approve/defer/reject, export. Nothing is implemented | [Suggestions](ops-center/suggestions.html) |
-| A clear list of questions, known information, answers and discovery actions | Done — 99 merged questions from six workspaces, themed, blocking first, blank answers marked unverified | [Decision register](ops-center/questions.html) |
+| A clear list of questions, known information, answers and discovery actions | Done — 100 merged questions across the workspaces, themed, blocking first, blank answers marked unverified | [Decision register](ops-center/questions.html) |
 | Originate our own NFL lines | Blocked — no licensed price history, so nothing can be scored | [Line origination](ops-center/leaderboard.html) |
 | Research and develop signal strategies; leaderboard with rewards | Partial — 34 strategies and 31 gates registered, 0 validated; reward rules drafted, none funded | [Line origination](ops-center/leaderboard.html) |
 | Single bets, parlays, player-prop combos | Registered, not evaluated — no leg-level outcome data exists | [Line origination](ops-center/leaderboard.html) |

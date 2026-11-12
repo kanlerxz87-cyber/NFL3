@@ -11943,7 +11943,7 @@
   {
    "area": "Depth extraction",
    "question": "Should jersey-number prefixes be stripped before name matching on club depth pages?",
-   "known": "The Packers chart places jersey numbers before names (for example '9 Christian Watson'), which breaks exact-name joins for 16 of 17 Packers report rows.",
+   "known": "The Packers chart places jersey numbers before names (for example '9 Christian Watson') and repeats a player across slots (Kitan Oladapo at both safeties). The live check fetched the page but extracted 0 rows, so the parser \u2014 not the published data \u2014 is the blocker.",
    "answer": "",
    "missing": "A documented, reversible rule plus a stored original string for audit.",
    "discovery": "Add number-stripping with the raw published string preserved, and unit-test both forms.",
@@ -13161,6 +13161,22 @@
    ],
    "sources": [],
    "id": "Q-99"
+  },
+  {
+   "area": "Verification semantics",
+   "question": "When the live official page has moved on to a later week, is a row difference drift, staleness or an extraction error?",
+   "known": "A live run compared a Week 10 capture against a page that had advanced, producing 41 apparent row differences that the data does not actually explain.",
+   "answer": "",
+   "missing": "An agreed definition of each category and a rule for when a capture must be re-versioned instead of compared.",
+   "discovery": "Classify every difference as capture-time, source-time or extraction-time; only extraction errors fail a gate, and all three are published.",
+   "blocking": false,
+   "provenance": [
+    "decision-lab/Q29"
+   ],
+   "sources": [
+    "https://www.nfl.com/injuries/league/2026/REG10"
+   ],
+   "id": "Q-100"
   }
  ],
  "suggestions": [

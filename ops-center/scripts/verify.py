@@ -21,6 +21,8 @@ ROOT = Path(__file__).resolve().parents[2]
 OPS = ROOT / "ops-center"
 PAGES = sorted(p.name for p in OPS.glob("*.html"))
 
+import json
+
 import build as builder  # noqa: E402  (reuses the same source classifier as the site)
 
 OFFICIAL_HOSTS = {
@@ -143,11 +145,46 @@ def check_determinism(errors: list[str]) -> None:
             errors.append(f"{p}: build is not deterministic")
 
 
+def check_root_counts(warnings: list[str]) -> None:
+    """The landing page quotes headline counts. If the data moves, they go stale.
+
+    Reported as a warning rather than a failure because index.html is a shared
+    file, but it is the difference between a number that is right and a number
+    that merely looks right.
+    """
+    index = ROOT / "index.html"
+    derived = OPS / "data" / "derived.json"
+    if not index.exists() or not derived.exists():
+        return
+    text = index.read_text(encoding="utf-8")
+    data = json.loads(derived.read_text(encoding="utf-8"))
+
+    expected = {
+        "injury_rows_current": data.get("injury_rows_current"),
+        "questions": len(data.get("questions", [])),
+        "suggestions": len(data.get("suggestions", [])),
+        "flags": len(data.get("flags", [])),
+    }
+    found = {}
+    for key in expected:
+        m = re.search(r">" + str(expected[key]).replace(",", "") + r"<", text)
+        if m:
+            found[key] = expected[key]
+    chains = sum(1 for c in data.get("chains", [])
+                 if c.get("chain_status") == "chain-identified")
+    if not re.search(r">" + str(chains) + r"<", text):
+        warnings.append(f"index.html: replacement-chain count does not match the data ({chains})")
+    for key, value in expected.items():
+        if key not in found:
+            warnings.append(f"index.html: {key} count ({value}) not found on the landing page")
+
+
 def main() -> int:
     errors: list[str] = []
     warnings: list[str] = []
     check_pages(errors, warnings)
     check_determinism(errors)
+    check_root_counts(warnings)
 
     for w in warnings:
         print(f"WARN  {w}")
@@ -159,3 +196,41 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+
+def check_root_counts(warnings: list[str]) -> None:
+    """The landing page quotes headline counts. If the data moves, they go stale.
+
+    Reported as a warning rather than a failure because index.html is a shared
+    file, but it is the difference between a number that is right and a number
+    that merely looks right.
+    """
+    index = ROOT / "index.html"
+    derived = OPS / "data" / "derived.json"
+    if not index.exists() or not derived.exists():
+        return
+    text = index.read_text(encoding="utf-8")
+    data = json.loads(derived.read_text(encoding="utf-8"))
+
+    expected = {
+        "injury_rows_current": data.get("injury_rows_current"),
+        "questions": len(data.get("questions", [])),
+        "suggestions": len(data.get("suggestions", [])),
+        "flags": len(data.get("flags", [])),
+    }
+    found = {}
+    for key in expected:
+        m = re.search(r">" + str(expected[key]).replace(",", "") + r"<", text)
+        if m:
+            found[key] = expected[key]
+    chains = sum(1 for c in data.get("chains", [])
+                 if c.get("chain_status") == "chain-identified")
+    if not re.search(r">" + str(chains) + r"<", text):
+        warnings.append(f"index.html: replacement-chain count does not match the data ({chains})")
+    for key, value in expected.items():
+        if key not in found:
+            warnings.append(f"index.html: {key} count ({value}) not found on the landing page")
