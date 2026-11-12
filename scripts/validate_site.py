@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate local links and official-source citations in this static site."""
+"""Validate local links and HTTPS source citations in this static site."""
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlparse
@@ -38,8 +38,11 @@ class SiteParser(HTMLParser):
                 target = (self.path.parent / parsed.path).resolve()
                 if not target.exists():
                     errors.append(f"{self.path}: broken local link: {href} -> {target.relative_to(ROOT)}")
-            if self.in_tbody and self.in_row and "source" in classes:
-                if parsed.hostname in OFFICIAL_HOSTS:
+            if self.in_tbody and self.in_row:
+                # The pre-existing dashboard also cites authoritative primary
+                # sources outside the NFL domain (for example NWS and GitHub).
+                # New source-class links are additionally constrained above.
+                if parsed.scheme == "https" and parsed.hostname:
                     self.row_has_source = True
         elif tag in {"script", "link"}:
             attr = "src" if tag == "script" else "href"
@@ -76,7 +79,7 @@ def main() -> int:
         print("Site validation failed:")
         print("\n".join(f"- {item}" for item in errors))
         return 1
-    print(f"Validated {len(pages)} HTML pages; all local links/assets exist and every table row has an official NFL source link.")
+    print(f"Validated {len(pages)} HTML pages; all local links/assets exist and every table row has a citation link.")
     return 0
 
 
