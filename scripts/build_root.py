@@ -243,12 +243,15 @@ measured and no reward has been approved &mdash; those cells are blank on purpos
 <div class="brief">
 <div><div class="card-kicker">ESTABLISHED</div><h3>The official capture is faithful and reproducible.</h3>
 <p>{injury_rows:,} injury rows and {depth_rows:,} club depth rows were captured from official NFL and club pages with a
-document hash, and {verification.get('injury_rows_matched', 0)} of the {verification.get('injury_rows_compared', 0)} rows re-read
-line by line from the live pages match exactly.</p>
+document hash. {VERIFICATION.get('coverage', {}).get('rows_read_live', 0)} injury rows and
+{VERIFICATION.get('coverage', {}).get('depth_rows_read_live', 0)} club depth rows were then re-read line by line from the
+live pages: every row that also existed in the capture matched exactly, and the {drift} that had changed are listed on
+the verification report.</p>
 <a class="text-link" href="verification.html">Read the verification report →</a></div>
 <div><div class="card-kicker">NOT ESTABLISHED</div><h3>No price, no edge, no reward.</h3>
 <p>No licensed historical odds or player-prop feed is established, so no independent line can be compared with a market
-price, no leg correlation can be measured and no leaderboard entry can be scored. The gates exist; nothing has passed them.</p>
+price, no leg correlation can be measured and no leaderboard entry can be scored. The gates exist; nothing has passed them.
+The capture itself is a point in time: {drift} of the rows read had already changed since it was taken.</p>
 <a class="text-link" href="validation.html">See the validation gates →</a></div>
 </div>
 <div class="section-head"><div><div class="section-label">02 / THE PATH</div><h2>Recommended order of work</h2></div>

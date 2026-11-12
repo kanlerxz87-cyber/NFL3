@@ -640,3 +640,65 @@ source. A value that cannot be confirmed from an official source stays blank and
 the Flagged for Review page. Nothing is inferred or filled in.
 
 **Claim pushed before work started (this commit).**
+
+### Progress log — arena/6eba4e89-nfl3 (session 6eba4e89), 2026-11-12 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| T1 Coordination claim, plan and scope | done | `arena/6eba4e89-nfl3` | this log |
+| T2 Unified root site: one design system, category navigation, generated from the canonical catalog | done | `arena/6eba4e89-nfl3` | root `*.html`, `assets/style.css`, `scripts/build_root.py` |
+| T3 Root executive summary, questions-and-answers register, suggestions/decision-path board | done | `arena/6eba4e89-nfl3` | root `executive-summary.html`, `questions.html`, `suggestions.html`, `data/root_decisions.json` |
+| T4 Line-by-line verification of canonical data against live official sources + verification report page | done | `arena/6eba4e89-nfl3` | `scripts/verify_sources.py`, `data/verification/*`, root `verification.html` |
+| T5 Audit upgrade: resolve source-register anchors and classify every row | done | `arena/6eba4e89-nfl3` | `decision-lab/scripts/audit.py`, `decision-lab/data/audit.json` |
+| T6 Root validators, Pages workflow, README | done | `arena/6eba4e89-nfl3` | `scripts/validate_site.py`, `tests/check_site.py`, `.github/workflows/pages.yml`, `README.md` |
+| T7 Pull request, merge and GitHub Pages deployment verification | in progress | `arena/6eba4e89-nfl3` | this log |
+
+**What changed.** The root site is now a single generated dashboard instead of two hand-written themes. `scripts/build_root.py`
+renders 14 root pages from `decision-lab/data/catalog.json`, `decision-lab/data/official_snapshot.json`,
+`data/root_decisions.json` and `data/verification/verification.json`, so no root table row is hand-typed and every
+row keeps an official source link. `requirements.html` and the unused second stylesheet were removed; every page
+filename that other workspaces link to still exists. New pages: `executive-summary.html` (findings, the full
+requirements register, fact boundaries, blockers), `questions.html` (22 questions with a deliberately blank answer
+cell wherever no official source establishes one), `verification.html` (the line-by-line check and every difference
+found) and `review.html` (the protocol for closing a published gap). `suggestions.html` is now a review board: the
+proposed paths, 13 site-improvement proposals with their trade-off and dependency, and the 12 registered suggestions,
+each with the official source that grounds it.
+
+**Verification performed (line by line, against the live official pages).**
+- 151 injury-report rows were read from <https://www.nfl.com/injuries/> on 2026-11-12 at approximately 22:25–22:35 UTC
+  and transcribed field by field into `data/verification/live_injuries_2026-11-12.csv`; the complete Washington
+  Commanders depth chart (60 rows) was read from <https://www.commanders.com/team/depth-chart> at approximately
+  22:30 UTC and transcribed into `data/verification/live_depth_commanders_2026-11-12.csv`.
+- `scripts/verify_sources.py` compares those readings with the committed capture: **108 injury rows and 60 depth rows
+  match on every compared field**, with **43 rows in drift** — 22 rows added after the capture (Seattle Seahawks and
+  Cincinnati Bengals gained full tables; two 49ers rows and one Cardinals row were added) and 21 practice-status
+  revisions. Zero duplicate keys.
+- `scripts/verify_sources.py --recapture` re-fetches the official pages on a networked runner and compares the whole
+  population; the Pages workflow runs it on every deployment.
+- The build agent has no direct HTTPS egress to `nfl.com` from its shell, so the sampled comparison is against a
+  transcription of the live page, not a byte-level re-fetch. That limit is stated on the verification page and in
+  `data/verification/README.md`.
+
+**Audit upgrade.** `decision-lab/scripts/audit.py` now resolves a `page.html#Sxx` citation through that page's source
+register before judging a row. Repository-wide: 3,312 rows cite an official source directly, 131 cite one through a
+registered source id, 107 cite only community or secondary sources and 252 carry no https link at all — so the previous
+"531 rows without an official source" figure mixed three different problems. The remaining gaps sit in the preserved
+archives (`line-lab`, `dashboard`, `research-desk`) and are published on the Flagged for review page with the
+citation-coverage breakdown.
+
+**Sources opened for this task:** <https://www.nfl.com/injuries/>, <https://www.commanders.com/team/depth-chart>,
+plus the canonical register's 17 sources (<https://www.nfl.com/standings/>, <https://operations.nfl.com/rules-officiating/2026-nfl-rulebook/>,
+<https://www.nfl.com/teams/>, <https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL>,
+<https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm>, <https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html>,
+<https://scikit-learn.org/stable/modules/calibration.html>, <https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages>).
+
+**Checks run locally, all passing:** `scripts/build_root.py`, `scripts/verify_sources.py`, `scripts/validate_site.py`,
+`tests/check_site.py`, `tests/test_decision_lab.py` (15 tests), `decision-lab/scripts/build.py`,
+`decision-lab/scripts/audit.py` (79 pages, 3,850 rows, lab gate PASS), `dashboard/scripts/check.mjs`,
+`line-lab/scripts/verify.py` (14 checks), `decision-hub/scripts/verify_hub.py`, `research-workspace/scripts/check.py`,
+`tests/check_research_desk.py`.
+
+**Irregularities flagged, not fixed:** the mutable official pages (43 drifted rows, now listed on the verification and
+flagged pages); no licensed odds or prop archive; no confirmed replacement workload; community-sourced rows in the
+preserved research desk remain marked unverified and are excluded from the official-only gates; 252 rows in the
+preserved archives still carry no source link at all and are counted on the flagged page.
