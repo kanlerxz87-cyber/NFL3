@@ -78,7 +78,6 @@ The Arena-provided branch is fixed as `arena/4fd6bbbb-nfl3`; this session cannot
 - Integration PR [#7](https://github.com/kanlerxz87-cyber/NFL3/pull/7) merged as `994ceca09f9554ca14d2559bfd9bc23f7e6ebb0d`. Validation and GitHub Pages deployment [run 43156231866](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43156231866) succeeded. GitHub Pages status is `built`: https://kanlerxz87-cyber.github.io/NFL3/.
 - Deployment logs carried non-blocking notices for `actions/checkout@v4` targeting Node.js 20 and an upcoming `ubuntu-latest` image migration. The build and deploy completed successfully.
 
-
 ## line-lab — arena/e5e2b753-nfl3 (session e5e2b753), 2026-11-12 UTC
 
 | Task | Status | Owner | File scope |
@@ -184,3 +183,36 @@ order; F-09 no leg-level outcome data; F-10 'Questionable' calibration unmeasure
   4. ST-06 describes cross-game legs as “close to independent” despite F-09 stating no leg-level outcomes exist. Label this as an untested assumption, not a finding. C6's p=0.066 (n=32) also does not establish incremental signal.
 - PR #14 corrected a source counter, blocker filter and critical-path ordering; PR #15 linked both research sites from the root. These improve discoverability/accuracy but do not resolve the source/evidence concerns above. No line, market odds, player-prop projection, parlay correlation, strategy edge or reward was independently verified by this session.
 - PR #6 was opened before the parallel integrations and merge attempts encountered concurrent base updates. This branch is syncing current main and limiting the PR to the coordination log; it must not overlay a stale site snapshot.
+
+## Comprehensive Decision & Line Origination Hub — arena-40c7529f, 2026-11-12 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| T1 Line-by-line repo review & official source registry (17 official sources) | done (needs review: FLG-01..FLG-12) | arena-40c7529f | `decision-hub/data/repo_audit_sources.json`, `decision-hub/repo-audit.html` |
+| T2 Executive summary & master requirements traceability | done | arena-40c7529f | `decision-hub/data/requirements_summary.json`, `decision-hub/index.html`, `decision-hub/executive-summary.html` |
+| T3 Suggestions review center (10 proposals, Path A/B selector & JSON exporter) | done | arena-40c7529f | `decision-hub/data/suggestions.json`, `decision-hub/suggestions.html` |
+| T4 Pre-decision Q&A & missing-information discovery matrix (12 gating items) | done (needs review: 11 blank answers) | arena-40c7529f | `decision-hub/data/questions_discovery.json`, `decision-hub/questions.html` |
+| T5 NFL line origination, Gates G1–G8, pairwise correlation protocol & anti-luck leaderboard | done (needs review: empirical cells blank) | arena-40c7529f | `decision-hub/data/origination_leaderboard.json`, `decision-hub/origination.html` |
+| T6 Offense & defense 1st–4th string injury/backup deficiency tracker (7 official club depth charts) | done (needs review: cross-source lags flagged) | arena-40c7529f | `decision-hub/data/injuries_depth.json`, `decision-hub/depth-injuries.html` |
+| T7 Flagged for Review register, static build & strict row/blank/host verifier | done | arena-40c7529f | `decision-hub/data/flagged_review.json`, `decision-hub/flagged.html`, `decision-hub/scripts/`, `decision-hub/assets/` |
+
+- Session branch note: Arena fixes this session's branch as `arena/40c7529f-nfl3` (cannot switch or rename branches). To respect `arena-4fd6bbbb` (root site files), `arena/2836662c-nfl3` (root additions), `arena-56e27bb4` (`research-workspace/`), `f445c027` (`dashboard/`), and `e5e2b753` (`line-lab/`), all deliverables from this session are strictly scoped under `decision-hub/**` (published at `/NFL3/decision-hub/` on GitHub Pages) with zero edits to other sessions' files.
+- Rebase conflict log: `git pull --rebase origin main` encountered append-only conflicts in `COORDINATION.md` as concurrent PRs merged on `main`. Resolved cleanly by retaining 100% of all prior sessions' entries (`4fd6bbbb`, `56e27bb4`, `2836662c`, `f445c027`, `e5e2b753`, `cbdcc317`) and appending this section.
+- Integration request logged for root-site owner: link `decision-hub/index.html` (`https://kanlerxz87-cyber.github.io/NFL3/decision-hub/`) from root `index.html` navigation / Research Deep Dives table during cross-session root integration.
+- Official verified sources inspected on 2026-11-12 UTC:
+  - [NFL 2026 Week 10 Injury Report](https://www.nfl.com/injuries/) & [NFL 2026 Week 9 Injury Report (REG9)](https://www.nfl.com/injuries/league/2026/REG9)
+  - [NFL Injury Report Policy Revisions](https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693)
+  - [NFL Operations Contract Language & Roster Sizes](https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language), [International Player Pathway (17-man Practice Squad rule)](https://operations.nfl.com/programs-initiatives/international-growth/international-player-pathway), [Game & Stadium Prep (90-min Inactive List / 60-min Roof Lock)](https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep), [AT Spotters](https://operations.nfl.com/gameday/behind-the-scenes/at-spotters), and [2026 NFL Rulebook](https://operations.nfl.com/rules-officiating/2026-nfl-rulebook)
+  - [NFL Next Gen Stats Glossary](https://nextgenstats.nfl.com/glossary), [NFL 2026 Player Stats](https://www.nfl.com/stats/player-stats/), and [NFL Support Odds Widget FAQ](https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL)
+  - Official 2026 NFL Club Depth Charts (resolving prior sessions' R-11 / F-08 / 404 flags): [Baltimore Ravens](https://www.baltimoreravens.com/team/depth-chart), [New England Patriots](https://www.patriots.com/team/depth-chart), [Detroit Lions](https://www.detroitlions.com/team/depth-chart), [Washington Commanders](https://www.commanders.com/team/depth-chart), [New York Giants](https://www.giants.com/team/depth-chart), [Denver Broncos](https://www.denverbroncos.com/team/depth-chart/), and [Seattle Seahawks](https://www.seahawks.com/team/depth-chart/)
+  - Regulatory, Statistical & Infrastructure Authorities: [Nevada Gaming Control Board Sep 2025 Monthly Revenue Report (Form NGC-31 PDF)](https://www.gaming.nv.gov/contentassets/a7958398526e4e309d248ea35a2a20dd/september-2025-monthly-revenue-report.pdf), [NIST Statistical Handbook §1.3.5.2](https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm), [scikit-learn Calibration](https://scikit-learn.org/stable/modules/calibration.html) & [Cross-Validation](https://scikit-learn.org/stable/modules/cross_validation.html), [NWS Web API Docs](https://www.weather.gov/documentation/services-web-api), [Kansspelautoriteit (NL)](https://kansspelautoriteit.nl/), and [GitHub Pages Docs](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)
+- Verification performed:
+  - `python3 decision-hub/scripts/build_hub.py` generated 8 pages deterministically from `decision-hub/data/*.json`.
+  - `python3 decision-hub/scripts/verify_hub.py` PASSED across all 8 pages, 144 table rows, 99 strictly empty (`""`) unverified cells, 0 broken local links (including sibling links), and 100% official-domain HTTPS row links.
+  - Existing repository checks `python3 scripts/validate_site.py`, `python3 tests/check_site.py`, and `git diff --check` all PASSED.
+- Irregularities flagged on `decision-hub/flagged.html` (`FLG-01`–`FLG-12` + `BLK-01`–`BLK-06`):
+  - `FLG-01`: `operations.nfl.com` internal contradiction stating both 2-game and 3-game Practice Squad Standard Elevation limits in adjacent paragraphs.
+  - `FLG-02`: `nfl.com/injuries/league/2026/REG9` `<title>`/`<h1>` ("Week 10") vs. `<h2>` ("WEEK 9") mismatch.
+  - `FLG-03`–`FLG-07`: Cross-source lags between `nfl.com/injuries/`, NFL.com news, and official club depth charts (BAL IR QB Lamar Jackson still listed 1st string; SEA Sam Darnold conflict; WAS Lucas Patrick / NYG Malik Harrison / DET Kerby Joseph omitted from club two-deeps; NE Ben Brown dual-listed at 1st LG & 2nd C; SEA Cooper Kupp + Rashid Shaheed packed in single 1st-string WR cell).
+  - `FLG-08`–`FLG-09`: Repo audit citation bugs in root `decisions.html` (GitHub Pages docs cited for betting jurisdictions) and `dashboard/data/repo_review.csv` (empty `R-05` link and third-party blog URLs on `R-11`–`R-13`).
+  - `BLK-01`–`BLK-06`: All unconfirmed pre-decision answers, empirical correlations (`rho`), strategy skill scores/CLV/ranks, unlisted 3rd/4th strings, and EPA drop-offs intentionally left blank (`""`).

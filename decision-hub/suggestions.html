@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NFL3 Decision &amp; Line Origination Hub — Source-Verified NFL Analytics">
+  <title>Site &amp; Architecture Improvement Suggestions | NFL3 Decision Hub</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="index.html">
+        <span class="brand-badge">N3</span>
+        <span>
+          <span class="brand-title">NFL3 Decision Hub</span>
+          <span class="brand-sub">Origination &amp; Depth Lab</span>
+        </span>
+      </a>
+      <div class="nav-group-label">Decision Hub Categories</div>
+      <nav class="nav-list" aria-label="Primary categories">
+        <a class="nav-link" href="index.html"><span class="nav-num">01</span><span>Overview &amp; Requirements</span></a><a class="nav-link" href="executive-summary.html"><span class="nav-num">02</span><span>Executive Summary</span></a><a class="nav-link" aria-current="page" href="suggestions.html"><span class="nav-num">03</span><span>Suggestions Review</span></a><a class="nav-link" href="questions.html"><span class="nav-num">04</span><span>Pre-Decision Q&amp;A</span></a><a class="nav-link" href="origination.html"><span class="nav-num">05</span><span>Line Origination &amp; Lab</span></a><a class="nav-link" href="depth-injuries.html"><span class="nav-num">06</span><span>Depth &amp; Injury Tracker</span></a><a class="nav-link" href="repo-audit.html"><span class="nav-num">07</span><span>Repo Audit &amp; Sources</span></a><a class="nav-link" href="flagged.html"><span class="nav-num">08</span><span>Flagged for Review</span></a>
+      </nav>
+      <div class="nav-group-label">Repository Workspaces</div>
+      <nav class="nav-list" aria-label="Sibling repository workspaces">
+        <a class="nav-link" href="../index.html"><span class="nav-num">R1</span><span>Root NFL3 Site</span></a><a class="nav-link" href="../dashboard/index.html"><span class="nav-num">R2</span><span>Week 10 Dashboard</span></a><a class="nav-link" href="../line-lab/index.html"><span class="nav-num">R3</span><span>Quantitative Line Lab</span></a><a class="nav-link" href="../research-workspace/index.html"><span class="nav-num">R4</span><span>Research Workspace</span></a>
+      </nav>
+      <div class="sidebar-footer">
+        <strong>Zero-Hallucination Mode</strong>
+        Verified 2026-11-12 UTC (2026 Wk 10). Unconfirmed values remain strictly blank.
+      </div>
+    </aside>
+    <div class="main-area">
+      <header class="topbar">
+        <div class="breadcrumb">NFL3 HUB / <strong>Suggestions Review</strong></div>
+        <div class="topbar-controls">
+          <span id="filter-row-count" class="section-note" aria-live="polite"></span>
+          <input id="global-table-search" class="search-input" type="search" placeholder="Filter table rows on this page..." aria-label="Filter table rows on this page">
+          <span class="verified-pill">Verified 2026-11-12 UTC</span>
+        </div>
+      </header>
+      <main id="main-content" class="page-container">
+        <section class="page-hero">
+          <div class="eyebrow">03 · Dedicated Suggestions Review Section</div>
+          <h1>Site &amp; Architecture Improvement Suggestions</h1>
+          <p class="hero-lede">Review concrete upgrades designed to strengthen decision quality, compare implementation paths side-by-side, and record path approvals before modifying the system.</p>
+        </section>
+        
+    <div class="alert-banner">
+      <strong>Review-Before-Implementation Gate:</strong> None of the 10 improvements below have been auto-applied to production pipelines. Use the <strong>Reviewer Path Selector</strong> column to record preferred options locally and export a JSON decision slip before authorizing engineering work.
+      <div id="suggestion-selection-summary" style="margin-top:6px;font-weight:700;"></div>
+    </div>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" type="button" data-filter="all">All Suggestions (10)</button>
+      <button class="filter-btn" type="button" data-filter="data">Data &amp; Hygiene</button>
+      <button class="filter-btn" type="button" data-filter="line">Line &amp; Parlay Pricing</button>
+      <button class="filter-btn" type="button" data-filter="validation">Validation &amp; Leaderboard</button>
+      <button class="filter-btn" type="button" data-filter="lineup">Lineups &amp; Environment</button>
+      <button id="export-decisions-btn" class="action-btn primary" type="button">Export Chosen Paths (.json)</button>
+      <button id="reset-decisions-btn" class="action-btn" type="button">Reset Selections</button>
+    </div>
+
+    <section class="section-block" style="margin-top:14px;">
+      <div class="section-header">
+        <div>
+          <div class="eyebrow">Decision-Support Backlog</div>
+          <h2>Site &amp; System Improvement Proposals</h2>
+        </div>
+        <p class="section-note">Compare lightweight Path A against institutional Path B before implementing changes.</p>
+      </div>
+      <div class="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Category</th>
+              <th scope="col">Suggestion &amp; Observed Gap</th>
+              <th scope="col">How It Improves Decisions</th>
+              <th scope="col">Path A (Lightweight)</th>
+              <th scope="col">Path B (Institutional)</th>
+              <th scope="col">Prerequisites</th>
+              <th scope="col">Choose Path</th>
+              <th scope="col">Official Source</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-tag="data architecture"><td>SUG-01</td><td>Data Architecture</td><td><strong>Point-in-Time Snapshot Ledger for Injuries, Depth Charts &amp; Inactives</strong><br><span class="section-note">NFL.com overwrites weekly injury tables in place and removes players once placed on Injured Reserve (e.g., Lamar Jackson in Week 10), while club depth charts lag IR moves.</span></td><td>Prevents lookahead leakage when backtesting originated lines and preserves exact pre-kickoff replacement certainty.</td><td>Path A (Lightweight): Scheduled GitHub Action archiving immutable timestamped JSON snapshots 3x/week plus T-85m pre-kickoff.</td><td>Path B (Institutional): Append-only PostgreSQL/Parquet event store reconciled against official licensed NFL data feeds.</td><td>Confirm NFL.com &amp; club website terms of use or procure commercial feed license (see Q-02).</td><td><select class="path-select" data-sug-id="SUG-01" aria-label="Choose path for SUG-01"><option value="Pending Review">Pending Review</option><option value="Path A">Approve Path A</option><option value="Path B">Approve Path B</option><option value="Defer">Defer / Hold</option></select></td><td><a class="source-link" href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693" target="_blank" rel="noopener noreferrer">NFL Injury Report Policy ↗</a></td></tr><tr data-tag="lineup &amp; deficiency ui"><td>SUG-02</td><td>Lineup &amp; Deficiency UI</td><td><strong>Interactive Offense vs. Defense Matchup Deficiency Matrix (1st–4th String)</strong><br><span class="section-note">Raw alphabetical injury tables bury positional cascades (such as NE Ben Brown listed as 1st LG &amp; 2nd C while Out, alongside backup T Walter Rouse DNP).</span></td><td>Surfaces immediate trench and coverage mismatches (e.g., WR1 facing promoted 2nd/3rd-string CB, or EDGE1 facing 2nd/3rd-string OT/LG) on one screen.</td><td>Path A (Static Rule Engine): Flag positions where 1st-string is Out/DNP and 2nd/3rd-string is elevated using depth-chart rank rules.</td><td>Path B (Snap &amp; NGS Weighted): Weight each missing starter by prior-4-week snap share and Next Gen Stats separation/pressure metrics.</td><td>Requires multi-source player ID mapping across nfl.com/injuries/, club depth charts, and 53-man rosters (see Q-05).</td><td><select class="path-select" data-sug-id="SUG-02" aria-label="Choose path for SUG-02"><option value="Pending Review">Pending Review</option><option value="Path A">Approve Path A</option><option value="Path B">Approve Path B</option><option value="Defer">Defer / Hold</option></select></td><td><a class="source-link" href="https://www.patriots.com/team/depth-chart" target="_blank" rel="noopener noreferrer">Patriots Depth Chart (2026) ↗</a></td></tr><tr data-tag="line origination"><td>SUG-03</td><td>Line Origination</td><td><strong>Vig-Free Market Consensus vs. Originated Fair-Line Decomposition View</strong><br><span class="section-note">Comparing model win probabilities directly against raw bookmaker American odds (-110 / SGP prices) conflates model disagreement with operator hold.</span></td><td>Separates true pricing divergence (origination alpha) from operator vig/margin before any bet structure is considered.</td><td>Path A (Benchmark Mode): Display originated fair probability alongside vig-stripped pinnacle/consensus benchmark probabilities.</td><td>Path B (Execution Mode): Integrate multi-book timestamped order-book limits, push probabilities on key numbers (3, 7), and SGP hold penalties.</td><td>Requires licensed historical &amp; live sportsbook quote archive and jurisdiction clearance (see Q-01, Q-03).</td><td><select class="path-select" data-sug-id="SUG-03" aria-label="Choose path for SUG-03"><option value="Pending Review">Pending Review</option><option value="Path A">Approve Path A</option><option value="Path B">Approve Path B</option><option value="Defer">Defer / Hold</option></select></td><td><a class="source-link" href="https://www.gaming.nv.gov/contentassets/a7958398526e4e309d248ea35a2a20dd/september-2025-monthly-revenue-report.pdf" target="_blank" rel="noopener noreferrer">NGCB Sep 2025 Report (PDF) ↗</a></td></tr><tr data-tag="parlay &amp; prop pricing"><td>SUG-04</td><td>Parlay &amp; Prop Pricing</td><td><strong>Joint-Simulation Correlation Explorer with Confidence Intervals</strong><br><span class="section-note">Point estimates of leg correlation (rho) in small NFL season samples (~272 regular-season games/year) carry wide sampling error and regime drift.</span></td><td>Prevents originating parlays or player prop combos on spurious historical correlations by requiring lower-bound confidence edge.</td><td>Path A (Parametric Copula): Estimate shrunk empirical phi/Pearson correlations with game-clustered 95% confidence bounds.</td><td>Path B (Play-by-Play Monte Carlo): Simulate play-level drive states conditioned on pace, weather, and starter availability.</td><td>Requires aligned historical play-by-play and settled prop line archive (see Q-06, Q-07).</td><td><select class="path-select" data-sug-id="SUG-04" aria-label="Choose path for SUG-04"><option value="Pending Review">Pending Review</option><option value="Path A">Approve Path A</option><option value="Path B">Approve Path B</option><option value="Defer">Defer / Hold</option></select></td><td><a class="source-link" href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm" target="_blank" rel="noopener noreferrer">NIST Confidence Limits ↗</a></td></tr><tr data-tag="validation &amp; governance"><td>SUG-05</td><td>Validation &amp; Governance</td><td><strong>Pre-Registered Strategy Registry &amp; Deflated Multiple-Testing Audit Log</strong><br><span class="section-note">Testing dozens of feature combinations and promoting only the top backtest winner guarantees selection bias (&#x27;winner&#x27;s curse&#x27;) on a leaderboard.</span></td><td>Forces every strategy trial—including failed parameter sweeps—into the denominator of False Discovery Rate (FDR) and Deflated Sharpe checks.</td><td>Path A (Git Commit Lock): Require immutable Git commit registration of strategy code and parameters prior to walk-forward scoring.</td><td>Path B (Automated CI Gatekeeper): Reject PRs to the leaderboard unless all 8 validation gates pass on locked holdout splits.</td><td>Requires agreement on minimum effective sample size and alpha threshold before first backtest run (see Q-08).</td><td><select class="path-select" data-sug-id="SUG-05" aria-label="Choose path for SUG-05"><option value="Pending Review">Pending Review</option><option value="Path A">Approve Path A</option><option value="Path B">Approve Path B</option><option value="Defer">Defer / Hold</option></select></td><td><a class="source-link" href="https://scikit-learn.org/stable/modules/cross_validation.html" target="_blank" rel="noopener noreferrer">scikit-learn Cross-Validation ↗</a></td></tr><tr data-tag="leaderboard &amp; rewards"><td>SUG-06</td><td>Leaderboard &amp; Rewards</td><td><strong>Two-Stage Skill Leaderboard (Proper-Score Qualification -&gt; Prospective CLV/ROI Escrow)</strong><br><span class="section-note">Rewarding raw short-term ROI allows high-variance longshot parlays to top a leaderboard purely by luck.</span></td><td>Aligns incentives strictly with calibrated probabilistic skill (Brier Skill Score + Closing Line Value) over multi-week prospective samples.</td><td>Path A (Non-Monetary Research Credits): Award compute tiers and badge recognition based on prospective Brier Skill Score and CLV.</td><td>Path B (Escrowed Milestone Pool): Vest rewards across 8+ prospective NFL weeks only when post-gate p-value and drawdown rules hold.</td><td>Requires legal/compliance sign-off on competition reward structure in applicable jurisdictions (see Q-01, Q-09).</td><td><select class="path-select" data-sug-id="SUG-06" aria-label="Choose path for SUG-06"><option value="Pending Review">Pending Review</option><option value="Path A">Approve Path A</option><option value="Path B">Approve Path B</option><option value="Defer">Defer / Hold</option></select></td><td><a class="source-link" href="https://scikit-learn.org/stable/modules/calibration.html" target="_blank" rel="noopener noreferrer">scikit-learn Calibration ↗</a></td></tr><tr data-tag="environmental context"><td>SUG-07</td><td>Environmental Context</td><td><strong>Stadium Roof/Surface &amp; NWS Hourly Wind/Precipitation Overlay</strong><br><span class="section-note">Outdoor passing efficiency and field-goal accuracy degrade non-linearly in high wind/precipitation, while retractable roofs lock 60–90 minutes pre-kickoff.</span></td><td>Prevents totals and passing-prop mispricing by coupling NWS forecast grids with official 90-minute stadium roof designations.</td><td>Path A (NWS Grid Lookup): Map all 30 NFL US stadium lat/lon coordinates to api.weather.gov hourly forecast endpoints.</td><td>Path B (International + Roof Feed): Add international venue weather feeds (Munich/London/Madrid) plus T-90m roof-status parser.</td><td>Requires stadium coordinate registry and international weather source selection (see Q-10).</td><td><select class="path-select" data-sug-id="SUG-07" aria-label="Choose path for SUG-07"><option value="Pending Review">Pending Review</option><option value="Path A">Approve Path A</option><option value="Path B">Approve Path B</option><option value="Defer">Defer / Hold</option></select></td><td><a class="source-link" href="https://www.weather.gov/documentation/services-web-api" target="_blank" rel="noopener noreferrer">NWS Web API Docs ↗</a></td></tr><tr data-tag="2026 rule-regime adjustment"><td>SUG-08</td><td>2026 Rule-Regime Adjustment</td><td><strong>2026 Kickoff &amp; Declared Onside-Kick Regime Priors Filter</strong><br><span class="section-note">Pooling 2018–2025 totals and drive-start averages blindly ignores 2026 Rulebook changes to kickoff setup zones (6-1-3), 50-yard touchbacks (6-1-5), and anytime onside kicks (6-1-6).</span></td><td>Avoids systematic bias in originated game totals and 4th-quarter comeback win-probability curves.</td><td>Path A (Regime Indicator): Add season-regime fixed effects / exponential decay down-weighting pre-2026 special-teams plays.</td><td>Path B (Structural Drive Re-Weighting): Re-anchor starting field-position priors solely on 2026 Weeks 1–9 official play-by-play.</td><td>Requires 2026 play-by-play special-teams dataset verification (see Q-11).</td><td><select class="path-select" data-sug-id="SUG-08" aria-label="Choose path for SUG-08"><option value="Pending Review">Pending Review</option><option value="Path A">Approve Path A</option><option value="Path B">Approve Path B</option><option value="Defer">Defer / Hold</option></select></td><td><a class="source-link" href="https://operations.nfl.com/rules-officiating/2026-nfl-rulebook" target="_blank" rel="noopener noreferrer">2026 NFL Rulebook ↗</a></td></tr><tr data-tag="site ux &amp; consolidation"><td>SUG-09</td><td>Site UX &amp; Consolidation</td><td><strong>Unified Root Navigation Bridging Parallel Session Workspaces</strong><br><span class="section-note">Concurrent multi-agent work created separate directories (root pages, research-workspace/, dashboard/, decision-hub/) to respect non-overlapping file claims.</span></td><td>Gives human reviewers a single canonical entry bar comparing all session audits without losing any session&#x27;s verified evidence.</td><td>Path A (Top Switcher Banner): Add a lightweight workspace switcher bar across root index.html linking all 4 workspaces.</td><td>Path B (Canonical Merge): Consolidate verified datasets into one build pipeline after human review selects preferred UI.</td><td>Requires cross-session lock release or owner approval per COORDINATION.md.</td><td><select class="path-select" data-sug-id="SUG-09" aria-label="Choose path for SUG-09"><option value="Pending Review">Pending Review</option><option value="Path A">Approve Path A</option><option value="Path B">Approve Path B</option><option value="Defer">Defer / Hold</option></select></td><td><a class="source-link" href="https://github.com/kanlerxz87-cyber/NFL3" target="_blank" rel="noopener noreferrer">NFL3 Repository ↗</a></td></tr><tr data-tag="data hygiene"><td>SUG-10</td><td>Data Hygiene</td><td><strong>Automated Official-Domain Allowlist &amp; Empty-Cell Integrity Pre-Commit Hook</strong><br><span class="section-note">Line-by-line repo review found placeholder links (GitHub Pages docs cited for betting jurisdictions) and secondary blog URLs in sibling workspaces.</span></td><td>Guarantees every future commit enforces semantic domain-to-topic matching and blocks inferred fill-ins for missing data.</td><td>Path A (CI Check): Run decision-hub/scripts/verify_hub.py in GitHub Actions on every pull request.</td><td>Path B (Schema + HTTP Snapshot Check): Store SHA-256 content hashes and HTTP retrieval timestamps alongside every cited official URL.</td><td>Approve official domain allowlist policy (see Q-12).</td><td><select class="path-select" data-sug-id="SUG-10" aria-label="Choose path for SUG-10"><option value="Pending Review">Pending Review</option><option value="Path A">Approve Path A</option><option value="Path B">Approve Path B</option><option value="Defer">Defer / Hold</option></select></td><td><a class="source-link" href="https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages" target="_blank" rel="noopener noreferrer">GitHub Actions Pages Docs ↗</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    
+        <footer class="site-footer">
+          <span>NFL3 Decision &amp; Line Origination Hub · Session <code>arena-40c7529f</code></span>
+          <span>Every table row cites a verified official source · <a href="flagged.html">Open Flagged for Review →</a></span>
+        </footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
