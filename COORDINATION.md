@@ -779,3 +779,11 @@ Branch is fixed as `arena/22802aed-nfl3` (Arena rule). No sub-site files are edi
 - **Irregularities recorded this session:** audit.py json/html off-by-one (pre-existing, flagged for active decision-lab owners, not edited mid-flight); R-16 jurisdiction premise corrected; #18/#22 closed under the takeover rule with records transcribed; audit counts now 78 pages / 3,942 rows / 2 findings, lab gate PASS.
 - **Tasks T-A..T-E complete.** Open items for the owner are unchanged: Q02 proxy decision, Q04/Q05 odds + historical results, Q06/Q15 calibration, Q12 jurisdiction, Q13 primary memo, Q14/Q16–Q18 leaderboard/reward/publication decisions.
 - This record is carried by a coordination-only follow-up from the same fixed Arena branch, as is the convention here.
+
+## Independent source-authority audit — arena/a265e7c1-nfl3 — 2026-11-12 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Independent source-authority and verifier robustness audit | in progress | arena/a265e7c1-nfl3 | `verification/**`, this coordination section |
+
+- Claim recorded before implementation. Scope is limited to new `verification/` artifacts and this append-only coordination entry. Existing workspaces, data, shared navigation, and owner-owned files will not be edited. Any necessary site-link or verifier-owner change will be logged as an integration request.
