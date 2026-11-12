@@ -311,6 +311,11 @@ def build_coverage(snapshot: dict) -> list[dict]:
     injury_teams = {r["team"] for r in snapshot["injury_rows"]} | {
         s["team"] for s in snapshot["no_injury_sections"]
     }
+    # Depth charts use full club names ("Tampa Bay Buccaneers"); the injury
+    # report uses short ones ("Buccaneers"). Map both ways before comparing.
+    for short, full in TEAM_ALIAS.items():
+        if short in injury_teams:
+            injury_teams.add(full)
     groups: dict[str, dict[tuple[str, str], list[dict]]] = defaultdict(lambda: defaultdict(list))
     meta: dict[str, dict] = {}
     for row in depth_rows:
@@ -643,7 +648,10 @@ def build_community_evidence() -> dict:
     for item in data.get("corr", {}).get("rows", []):
         rows.append({
             "pair": item["pair"], "statistic": "phi (same-game, binary)",
-            "value": round(item["phi"], 4), "n": item["n"],
+            "value": round(item["phi"], 4),
+            "value_display": (f'{item["phi"]:.4f}' if abs(item["phi"]) >= 0.001
+                              else f'{item["phi"]:.2e}'),
+            "n": item["n"],
             "ci95": f'{item["ci95"][0]:.3f} to {item["ci95"][1]:.3f}',
             "p_value": ("< 0.001" if item["p_value"] < 0.001 else f'{item["p_value"]:.3f}'),
         })

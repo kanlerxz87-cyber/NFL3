@@ -1008,3 +1008,120 @@ another session's content.
   agent's page-fetch tool and the resulting text is compared against the committed snapshot. The repository's
   capture scripts (`decision-lab/scripts/capture_official.py`) run inside GitHub Actions, which does have
   network access; this session does not rely on that for its verification.
+
+### Result log — arena/2275e3f5-nfl3, 2026-11-12 UTC
+
+**Scope actually touched:** `ops-center/**` (new), `.github/workflows/ops-center.yml` (new),
+root `index.html` and `README.md` (shared, integration — handoff logged above), `EXECUTIVE_SUMMARY.md`
+(new, root), this board. No file inside `dashboard/`, `line-lab/`, `decision-hub/`, `decision-lab/`,
+`research-desk/`, `research-workspace/`, `pipeline/`, `engine/`, `lab/`, `data/`, `scripts/`, `tests/`,
+`assets/` or any existing `.github/workflows/` file was modified. The decision-lab snapshot was read,
+never written.
+
+**New workflow file, not an edit.** `.github/workflows/ops-center.yml` was added rather than editing
+`pages.yml`, because `pages.yml` is owned by `arena/c2825205-nfl3`. Request logged for that owner: add
+`python3 ops-center/scripts/build.py && python3 ops-center/scripts/verify.py` to the `validate` job of
+`pages.yml` so the ops-centre gate runs on every Pages build, and the new file can then be retired.
+
+#### T1 — Official re-verification (line by line)
+
+- Re-read the official [NFL Week 10 injury report](https://www.nfl.com/injuries/) at ~22:25Z on
+  2026-11-12 and compared every row against the 254 parsed rows in
+  `decision-lab/data/official_snapshot.json` (captured 06:32:36Z the same day, sha256
+  `98a57a59788d28c3d9afad4f7442b6c3dbeed7a89617ce17aa42365ce2a0ca66`).
+- **Result: 279 rows at 22:25Z against 254 at 06:32Z. +25 rows, 0 removed.** Two clubs that reported
+  "No Injuries Reported" in the morning (Seahawks, Bengals) had published 19 rows by the evening.
+  Six more rows were added across Jaguars (+1), Colts (+2), Cardinals (+1), 49ers (+2). Four Colts
+  practice statuses moved: A.J. Haulcy DNP→Full, Jonathan Taylor Limited→Full, Jerry Tillery
+  Limited→DNP, Charvarius Ward DNP→Full. The six game-status designations were unchanged.
+- Method and its limit are recorded on the page and in `ops-center/data/live_recheck.json`: a
+  human-scale comparison of two texts, not a byte-level diff. A difference not observed cannot be
+  excluded.
+- Sandbox constraint recorded: the agent sandbox has no direct outbound route to `www.nfl.com`, so
+  the page was read through the agent's page-fetch tool. The repository capture script runs inside
+  GitHub Actions, which does have network access. `gh workflow run` returned HTTP 403
+  ("Resource not accessible by integration"), so this session could not dispatch a CI capture.
+
+#### T2 — Starter/backup deficiency tracker (new)
+
+- Joined the 279 official injury rows to the 1,745 official club depth rows across 30 clubs by
+  club and position family. Output: 280 chain rows, each carrying the injury-report link and the
+  club depth-chart link.
+- **195 chains published** (injured player holds a published string at that position).
+- **43 injured players do not appear at their position on their own club chart**, verified by hand
+  on two of them: Lucas Patrick (Commanders C, ruled Out) is absent from
+  [commanders.com/team/depth-chart](https://www.commanders.com/team/depth-chart), and Malik Harrison
+  (Giants LB, Questionable) is absent from every linebacker spot on
+  [giants.com/team/depth-chart](https://www.giants.com/team/depth-chart).
+- **500 of 676 position groups (74%) publish no third string.** The 2nd/3rd/4th-string requirement
+  therefore cannot be met from official club charts as published. Where a third string is needed and
+  not published, the cell is blank.
+- Worked case: the Patriots rule out three players. Their running-back chain is published four deep
+  — Stevenson (1st), Henderson (2nd), Kiner (3rd), Larison (4th). Henderson is Out and Stevenson is
+  Did Not Participate on the same report, so the published next men are the 3rd and 4th strings.
+  Verified against [patriots.com/team/depth-chart](https://www.patriots.com/team/depth-chart).
+- Confirmed replacement, expected snaps and performance impact are blank on every row. No official
+  source states any of them.
+
+#### T3–T5 — Consolidated registers
+
+- Questions: 77 merged from 77 source entries across four workspaces. Suggestions: 54 from 68.
+  Strategies: 34 from 34. Gates: 31 from 34. Fuzzy deduplication was attempted (token Jaccard) and
+  abandoned: no pair of questions from different workspaces scored above 0.55, so the items really
+  are distinct and merging them would have been a judgement, not a fact. They are grouped into 13
+  themes instead, with provenance preserved on every row.
+- The suggestion page is a review surface, not a build queue: path A/B, approve/defer/reject, live
+  tally, JSON export, browser-local only. Nothing on it writes to the repository.
+
+#### T6 — Verification
+
+- `python3 ops-center/scripts/verify.py` — **0 failures, 10 warnings** across 9 pages and 617 table
+  rows, 544 of which carry an official source link; the rest carry an explicit `unverified` marker.
+  The gate fails on a sourceless row, a broken local or parent link, a placeholder leaking into a
+  cell, a blank rendered as a value, a non-deterministic build, or an unclassified source host.
+- The 10 warnings are deliberate and are the point of having them: 4 community-data (nflverse) row
+  sources, 1 community source on the register, 2 inherited strategy texts that quote figures
+  computed on community data, 1 secondary (Yahoo) source on a question row, 1 community row source
+  on the sources page, 1 leaders/secondary split. Items OF-09 and OF-10 were added to the flagged
+  page specifically because the verifier surfaced them.
+- `python3 scripts/validate_site.py`, `python3 tests/check_site.py`,
+  `python3 decision-lab/scripts/audit.py` (86 pages, 4,240 rows, lab gate PASS),
+  `python3 tests/test_decision_lab.py` — all pass.
+- Four defects were found only by reading the rendered pages, not by any gate, and fixed: a
+  correlation of 4.5e-05 rendering as "0.0"; the critical path ordered alphabetically so that a
+  governance guardrail outranked the data contract it depends on; a source-class attribute changed
+  without updating the checker that read it; and "None (built)" leaking from another workspace's
+  dependency field.
+
+#### Sources opened directly by this session (all 2026-11-12)
+
+- https://www.nfl.com/injuries/ — read twice, 06:32Z capture and 22:25Z re-read
+- https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693
+  — practice and game-status definitions, quoted verbatim in the source register
+- https://www.commanders.com/team/depth-chart
+- https://www.seahawks.com/team/depth-chart/
+- https://www.patriots.com/team/depth-chart — carries the explicit "unofficial" disclaimer
+- https://www.giants.com/team/depth-chart
+
+#### Irregularities raised (OF-01 … OF-10, all published on `ops-center/flagged.html`)
+
+OF-01 Critical — the official injury page changed 25 rows in sixteen hours.
+OF-02 Critical — Patriots depth rows are labelled "club depth chart" in the committed capture, but the
+page states: "The 2026 depth chart is unofficial and is published by the writers of Patriots.com. The
+depth chart reflects the opinions of the Patriots.com writers and don't necessarily reflect those of
+the organization." All 60 Patriots rows carry the wrong authority label.
+OF-03 High — 43 injured players absent from their own club chart at their position.
+OF-04 High — 500 of 676 position groups publish no third string.
+OF-05 High — two Week 10 clubs have no depth capture at all.
+OF-06 Medium — published strings are not always one player (Seahawks first-string WR cell holds both
+Cooper Kupp and Rashid Shaheed).
+OF-07 Medium — status is a category, not a probability; the official policy says so.
+OF-08 Medium — no licensed odds, prop or settlement archive is held.
+OF-09 Medium — inherited strategy text carries figures computed on community data inside rows that
+carry official source links.
+OF-10 Medium — one question row cites a secondary news source (Yahoo) as its evidence; repeats
+dashboard flag R-12.
+
+#### Publication record
+
+- Integration PR and merge result, plus Pages deployment verification, are recorded in the entry below.

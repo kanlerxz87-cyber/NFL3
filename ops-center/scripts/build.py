@@ -569,7 +569,10 @@ def page_suggestions(ctx: dict) -> str:
     for i, s in enumerate(sgs, 1):
         s["id"] = f"SG-{i:02d}"
 
-    critical = [s for s in sgs if s["priority"] == "Critical"]
+    # Order the critical path by declared dependency, not by alphabetical luck:
+    # items nothing else depends on come first.
+    critical = sorted((s for s in sgs if s["priority"] == "Critical"),
+                      key=lambda s: (0 if not s["depends"] else 1, s["title"]))
     body = [
         notice("ok",
                "<b>This is a review surface, not a build queue.</b> Nothing here has been implemented. "
@@ -757,7 +760,8 @@ def page_leaderboard(ctx: dict) -> str:
                    "official-only gate."))
         body.append(table(
             ["Leg pair", "Statistic", "Value", "n", "95% CI", "p", "Source"],
-            ["<tr>" + f"<td>{e(r['pair'])}</td><td>{e(r['statistic'])}</td><td>{r['value']}</td>"
+            ["<tr>" + f"<td>{e(r['pair'])}</td><td>{e(r['statistic'])}</td>"
+             f"<td>{e(r.get('value_display', r['value']))}</td>"
              f"<td>{r['n']:,}</td><td>{e(r['ci95'])}</td><td>{e(r['p_value'])}</td>"
              + sources_cell([comm.get("source_url", "")]) + "</tr>"
              for r in comm["rows"]],
@@ -770,8 +774,9 @@ def page_leaderboard(ctx: dict) -> str:
                 f'<p>On {st.get("n", 0):,} community-data games a three-leg same-game parlay hit '
                 f'<b>{st.get("p_triple_observed", 0):.1%}</b> of the time against '
                 f'<b>{st.get("p_triple_if_independent", 0):.1%}</b> if the legs were independent &mdash; a lift of '
-                f'<b>{st.get("lift", 0):.2f}x</b>. The two margins are near-duplicates of each other, which is '
-                'exactly why a three-leg same-game parlay is not three independent bets.</p>'
+                f'<b>{st.get("lift", 0):.2f}x</b>. The home-win and favourite-cover legs are near-duplicates '
+                'whenever the home side is the favourite, which is exactly why a three-leg '
+                'same-game parlay is not three independent bets.</p>'
                 '<p class="fine">Community source: '
                 '<a href="https://github.com/nflverse/nflverse-data/releases" target="_blank" '
                 'rel="noopener noreferrer">nflverse releases &#8599;</a>. Not official; not a decision input.</p>'
