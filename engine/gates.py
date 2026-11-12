@@ -6,7 +6,7 @@ shows exactly which gate stopped it.
 
 Gate definitions
 ----------------
-G1  Data integrity         every input file matches the official SHA-256 digest; sample size
+G1  Data integrity         every input file matches the SHA-256 digest published with its release; sample size
                            >= MIN_BETS graded bets in the out-of-sample window.
 G2  Beats the vig          mean profit per unit > 0 after the market's price, with a 95%
                            block-bootstrap CI whose lower bound is > 0.

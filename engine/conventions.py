@@ -1,14 +1,14 @@
 """The single place where sign conventions live.
 
 Getting a sign wrong silently flips every graded bet, so every module imports from here and
-nothing else re-derives a convention inline.  Verified against the official nflverse schedule
+nothing else re-derives a convention inline.  Verified against the nflverse community schedule release
 dictionary (data-raw/dictionary_schedules.csv) and spot-checked against real rows:
 
     spread_line : positive  => HOME team is favoured by that many points
     result      : home_score - away_score   (positive => home won)
     total       : home_score + away_score
 
-Examples from the official file that pin this down:
+Examples from that file that pin this down:
     2025_01_DAL_PHI  result +4   spread_line +8.5   -> PHI were 8.5-point home favourites
     2025_01_KC_LAC   result +6   spread_line -3.0   -> KC were 3-point road favourites
     2025_01_ARI_NO   result -7   spread_line -6.0   -> NO were 6-point home favourites
@@ -25,7 +25,7 @@ def home_cover_margin(result: float, spread_line: float) -> float:
     """How much the home side beat its number by, in points.
 
     ``spread_line`` is the number of points added to the home team's margin for settlement.  With
-    the official schema (positive = home favoured), the home side covers when
+    the release schema (positive = home favoured), the home side covers when
     ``result - spread_line > 0``.  Worked example: 2025_01_DAL_PHI, PHI won by 4 (result +4) but
     were 8.5-point favourites (spread_line +8.5) -> 4 - 8.5 = -4.5, so the home side did not cover.
     Positive return value means the home side covered.

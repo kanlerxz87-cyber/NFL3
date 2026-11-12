@@ -2,7 +2,7 @@
 
 Inputs
 ------
-* Verified official games file (scores + the market's own closing line).
+* Digest-verified games file (scores + the market's own closing line).
 * Leak-free pre-game Elo ratings and rolling form built in `features.py`.
 
 Output per game

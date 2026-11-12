@@ -1,17 +1,17 @@
 name: data-refresh
 
 # Full pipeline, automated:
-#   1. fetch the official nflverse release assets and verify each against its published SHA-256
+#   1. fetch the community nflverse release assets and verify each against its published SHA-256
 #   2. run the engine self-tests
 #   3. build the static research desk from the verified snapshot
-#   4. check every table row carries an official source link and every local link resolves
+#   4. check every table row carries a source link and every local link resolves
 #   5. commit the refreshed snapshot + rebuilt pages back to the branch
 #
 # Publication is deliberately NOT done here. The repository publishes one site from the repository root
 # via pages.yml; a second Pages upload would race it and replace the whole site with research-desk/ alone.
 on:
   schedule:
-    - cron: '23 10 * * *'   # daily refresh of the official snapshot
+    - cron: '23 10 * * *'   # daily refresh of the verified snapshot
   push:
     branches: ['main', 'arena/f9dd481e-nfl3']
     # no path filter: GitHub skips schedule runs entirely when a workflow has a path filter, and a
@@ -39,7 +39,7 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Fetch and verify official sources
+      - name: Fetch and verify release digests
         if: github.event_name != 'push' || !contains(github.event.head_commit.message, '[skip-fetch]')
         run: |
           set -o pipefail
@@ -66,7 +66,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "no changes to commit"
           else
-            git commit -m "chore(data): refresh official snapshot and rebuild site [skip ci]"
+            git commit -m "chore(data): refresh verified snapshot and rebuild site [skip ci]"
             git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi

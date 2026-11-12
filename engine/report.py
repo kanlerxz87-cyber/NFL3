@@ -2,9 +2,9 @@
 
 Design constraints that come straight from the brief:
 
-* every table row that carries a factual value also carries a link to the official source it came
-  from (or to the Official Sources page row that names that release asset);
-* a value that could not be confirmed from an official source is rendered as an em dash and
+* every table row that carries a factual value also carries a link to the source it came
+  from (an official NFL page, or the Sources page row that names that release asset);
+* a value that could not be confirmed from a linked source is rendered as an em dash and
   labelled "unverified" - never guessed, never inferred;
 * the dashboard is plain HTML/CSS with relative links so it works as a GitHub project site.
 """
@@ -84,7 +84,7 @@ class Page:
             ("availability.html", "Injuries &amp; backups", "06"),
             ("questions.html", "Questions &amp; gaps", "07"),
             ("suggestions.html", "Suggestion board", "08"),
-            ("sources.html", "Official sources", "09"),
+            ("sources.html", "Sources", "09"),
             ("flagged.html", "Flagged for review", "10"),
             ("review.html", "Repository review", "11"),
         ]
@@ -112,7 +112,7 @@ class Page:
   <div class="wrap">
     <div class="eyebrow"><span></span>{esc(subtitle)}</div>
     {body}
-    <footer>NFL3 research desk · every value links to its official source · unverified values are
+    <footer>NFL3 research desk · every value links to its source (official NFL page or digest-verified release) · unverified values are
     left blank, never inferred</footer>
   </div>
 </main>

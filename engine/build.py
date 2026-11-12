@@ -31,7 +31,7 @@ RESULTS = os.path.join(ROOT, "lab", "results")
 
 RELEASE = {
     "games.csv": ("schedules", "games.csv", "schedule, results, closing lines, QB, rest, weather"),
-    "injuries_2026.csv": ("injuries", "injuries_2026.csv", "official weekly injury report rows"),
+    "injuries_2026.csv": ("injuries", "injuries_2026.csv", "weekly injury-report rows (community release)"),
     "depth_charts_2026.csv": ("depth_charts", "depth_charts_2026.csv", "weekly depth chart"),
     "depth_charts_2024.csv": ("depth_charts", "depth_charts_2024.csv", "weekly depth chart (depth_team)"),
     "snap_counts_2026.csv": ("snap_counts", "snap_counts_2026.csv", "offensive/defensive snap counts"),
@@ -119,7 +119,7 @@ def main() -> int:
         ("availability.html", "Injuries &amp; backup depth", "POINT-IN-TIME AVAILABILITY", build_availability),
         ("questions.html", "Questions &amp; information gaps", "BEFORE ANY DECISION", build_questions),
         ("suggestions.html", "Suggestion board", "REVIEW AND CHOOSE", build_suggestions),
-        ("sources.html", "Official sources", "VERIFICATION REGISTER", build_sources),
+        ("sources.html", "Sources", "VERIFICATION REGISTER", build_sources),
         ("flagged.html", "Flagged for review", "IRREGULARITIES", build_flagged),
         ("review.html", "Repository review", "LINE-BY-LINE", build_review),
     ]
@@ -152,8 +152,10 @@ def status_banner(D: dict) -> str:
                 'has not produced <code>data/raw/manifest.json</code> on this branch. Every number below '
                 'is therefore marked not established rather than estimated.</div>')
     newest = max(v.get("release_asset_updated_utc", "") for v in files.values())
-    return (f'<div class="notice ok"><b>Data verified.</b> {len(files)} official release asset(s) matched '
-            f'their GitHub-published SHA-256 digest; newest official asset timestamp {esc(newest)}. '
+    return (f'<div class="notice ok"><b>Integrity verified - authority boundary.</b> {len(files)} '
+            f'community release asset(s) (nflverse) matched their GitHub-published SHA-256 digest; newest '
+            f'asset timestamp {esc(newest)}. A digest match proves the bytes are unchanged since release, '
+            f'not NFL authorship. Official NFL pages are cited separately on the register. '
             f'{link("sources.html", "See the verification register →")}</div>')
 
 
@@ -162,7 +164,7 @@ def metrics_strip(computed: dict) -> str:
     fam = computed.get("family", [])
     passing = [s for s in fam if s.get("status") == "passes all gates"]
     items = [
-        ("OFFICIAL GAMES PARSED", fmt(computed.get("n_games_total"))),
+        ("GAMES PARSED", fmt(computed.get("n_games_total"))),
         ("OUT-OF-SAMPLE GAMES", fmt(computed.get("preds_n"))),
         ("STRATEGIES TESTED", fmt(len(fam))),
         ("STRATEGIES PASSING ALL GATES", fmt(len(passing))),
@@ -185,7 +187,7 @@ def build_index(D, C) -> str:
                      link("strategies.html", "detail")])
     body = f"""
 <h1>Original lines, measured honestly</h1>
-<p class="lede">This desk originates its own NFL numbers from verified official data, then grades them
+<p class="lede">This desk originates its own NFL numbers from digest-verified community data (nflverse), then grades them
 against the market's closing line. It is a measurement exercise: the leaderboard is designed to
 reward skill and to reject luck, so most strategies are expected to fail.</p>
 {status_banner(D)}
@@ -200,7 +202,7 @@ reward skill and to reject luck, so most strategies are expected to fail.</p>
     significance, season stability, closing-line value and a slippage stress test.</p>
     <a class="textlink" href="strategies.html">Open the leaderboard →</a></div>
   <div class="card"><div class="kicker">AVAILABILITY</div><h3>Starters and the men behind them</h3>
-    <p>Official injury reports joined to that week's official depth chart show which starters are out
+    <p>The weekly injury report joined to that week's depth chart (digest-verified community releases) shows which starters are out
     and whether a 2nd, 3rd or 4th string player has to replace them.</p>
     <a class="textlink" href="availability.html">Open availability →</a></div>
   <div class="card"><div class="kicker">DECISIONS</div><h3>Questions before conclusions</h3>
@@ -255,17 +257,17 @@ fails, and what must happen before any change is implemented.</p>
 {status_banner(D)}
 <h2>1 · What was built</h2>
 <ul class="bullets">
-<li><b>A verified data layer.</b> Official nflverse release assets are downloaded by CI and each file is
+<li><b>A verified data layer.</b> nflverse community release assets are downloaded by CI and each file is
 checked against the SHA-256 digest GitHub publishes for that asset. A digest mismatch stops the build.</li>
 <li><b>An original-line engine.</b> A walk-forward model fits only on prior seasons, so every
 out-of-sample prediction was made before the games it grades.</li>
 <li><b>A validation regime.</b> Seven pre-registered gates, with multiple-testing and
 selection-adjustment controls, applied to a fixed family of strategies.</li>
-<li><b>An availability layer.</b> Official weekly injury reports joined to the same week's official
-depth chart, so a starter listed Out is linked to the backup who replaced him.</li>
+<li><b>An availability layer.</b> Weekly injury-report rows joined to the same week's depth chart
+(digest-verified community releases), so a starter listed Out is linked to the backup who replaced him.</li>
 </ul>
 <h2>2 · Headline findings</h2>
-{table(["Finding", "Value", "Unit / definition", "Official source"], eda,
+{table(["Finding", "Value", "Unit / definition", "Source"], eda,
        caption="Computed from the verified snapshot. Blank cells are unverified, not zero.") if eda else
        '<p class="empty">No line study yet.</p>'}
 <p class="sub">{esc(_finding_sentence(line))}</p>
@@ -341,7 +343,7 @@ def build_lines(D, C) -> str:
 <p class="lede">Every game gets an independent spread and total from a transparent model. The model is
 refitted each season on earlier seasons only, so the numbers below are genuinely out of sample.</p>
 <div class="notice ok">Definition of our spread: positive means the <b>home team is favoured</b>, matching
-the official schedule schema. Model inputs: pre-game Elo, prior-six-game scoring-margin form, rest
+the release's schedule schema. Model inputs: pre-game Elo, prior-six-game scoring-margin form, rest
 differential and a home-field term. Totals: prior-six-game points for and against on both sides of
 the ball, blended with the league's scoring level.</div>
 <h2>Accuracy by season</h2>
@@ -543,25 +545,25 @@ def build_availability(D, C) -> str:
                                link("https://www.nfl.com/injuries/", "NFL injury report")])
     body = f"""
 <h1>Injuries and backup depth</h1>
-<p class="lede">Which starters are out, who is behind them on the official depth chart, and whether the
+<p class="lede">Which starters are out, who is behind them on the depth chart (community release), and whether the
 market already knows.</p>
-<div class="notice ok"><b>How availability is measured.</b> The official weekly injury report gives each
-player's game status (Out, Doubtful, Questionable). The same week's official depth chart gives each
+<div class="notice ok"><b>How availability is measured.</b> The weekly injury report gives each
+player's game status (Out, Doubtful, Questionable). The same week's depth chart gives each
 player's depth slot (1 = starter, 2/3/4 = backups). Joining them on player name and team-week produces
 "starters listed Out" per side of the ball — the input a replacement-quality model needs.</div>
 <h2>Current week at a glance</h2>
 {table(["Week", "Date", "Matchup", "Closing spread", "Closing total", "Home OFF starters out",
         "Home DEF starters out", "Away OFF starters out", "Away DEF starters out",
         "Questionable DEF (home / away)", "Injury source", "Depth source"], snap_rows,
-       caption="Starters = players at depth slot 1 on that week's official chart who are listed Out or Doubtful")}
+       caption="Starters = players at depth slot 1 on that week's chart who are listed Out or Doubtful")}
 <h2>Does the market already price starter absences?</h2>
 <p class="sub">A correlation between the availability differential and the market's deviation from the
 pre-game Elo expectation. A large, correctly-signed value means the market already moves for injuries;
 a near-zero value would mean the information is not priced — the signal worth chasing.</p>
-{table(["Relationship", "Games", "Pearson r", "95% CI", "Official source"], stats_rows,
+{table(["Relationship", "Games", "Pearson r", "95% CI", "Source"], stats_rows,
        caption="Single-season sample; treat as a first look, not a validated signal")}
 <h2>Backup-depth watchlist</h2>
-<p class="sub">Starters listed Out, with the next man up from the same official depth chart. A blank
+<p class="sub">Starters listed Out, with the next man up from the same depth chart. A blank
 backup means the depth chart does not list a replacement at that slot — recorded as unverified rather
 than inferred.</p>
 {_backup_watchlist(D, inj)}
@@ -570,7 +572,7 @@ than inferred.</p>
 <ul class="bullets">
 <li>Historical <b>snap-share</b> evidence for backups is fetched (2026 snap counts) but joining it to
 replacement performance needs a player-level graded dataset that is not in this snapshot.</li>
-<li>Injury <b>severity</b> and expected games missed is not a field in the official report. Any estimate
+<li>Injury <b>severity</b> and expected games missed is not a field in the report. Any estimate
 would be a model output and must be labelled as such.</li>
 <li>The 2025 injury file exists but its depth chart uses the new schema without a week column, so the
 pooled window is 2021-2024 (1,139 graded games). 2025 is one pipeline run away.</li>
@@ -623,24 +625,24 @@ def _pooled_section(C) -> str:
     return f"""
 <h2>Pooled multi-season study (2021-2024)</h2>
 <p class="sub">The single-season view above is a first look. This is the version the brief actually
-needs: every season with both official files, joined the same way, pooled into one sample. A starter
-absent from the report is only counted when the official depth chart lists him at the first slot that
+needs: every season with both release files, joined the same way, pooled into one sample. A starter
+absent from the report is only counted when the depth chart lists him at the first slot that
 week, so the join cannot invent a starter.</p>
 {table(["Season", "Games", "Team-weeks", "Starter joins", "Mean OFF starters out",
         "Mean DEF starters out", "Injury source", "Depth source"], season_rows,
        caption="Join coverage by season. A higher join count means more of the report was matched to a depth slot.")}
-{table(["Relationship measured", "Games", "Pearson r", "95% CI", "p-value", "Signal", "Official source"],
+{table(["Relationship measured", "Games", "Pearson r", "95% CI", "p-value", "Signal", "Source"],
        rel_rows,
        caption="Negative r on 'market spread vs starters out' means the market already moves toward the healthier team")}
 {table(["Injury signal graded at the market price", "Bets", "Profit / unit", "95% CI",
-        "Hit rate", "z", "Official source"], st_rows,
+        "Hit rate", "z", "Source"], st_rows,
        caption="A candidate strategy, graded like every other one - it does not escape the gates")}
 {gate_html}
 """
 
 
 def _backup_watchlist(D, inj) -> str:
-    """Starters listed Out, with the next man up at the same official depth slot.
+    """Starters listed Out, with the next man up at the same depth slot.
 
     Uses the newest depth-chart snapshot only. A player who appears at several slots (a returner who
     is also a seventh-string receiver) is matched on the slot where he is actually a starter, which is
@@ -702,8 +704,8 @@ def _backup_watchlist(D, inj) -> str:
     out_rows.sort(key=lambda row: (row[0], row[4]))
     if not out_rows:
         return '<p class="empty">No starters listed Out or Doubtful on the current week\'s report.</p>'
-    return (f'<p class="sub">Newest official depth-chart snapshot: <code>{esc(latest)}</code>; '
-            f'official report week {fmt(week)}.</p>'
+    return (f'<p class="sub">Newest depth-chart snapshot: <code>{esc(latest)}</code>; '
+            f'report week {fmt(week)}.</p>'
             + table(["Team", "Pos", "Off the report", "Injury", "Depth", "Next man up",
                      "Injury source", "Depth source"], out_rows[:60],
                     caption="Depth shows the player's own depth slot. Next man up is the next player at "
