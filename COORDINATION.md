@@ -1125,3 +1125,11 @@ dashboard flag R-12.
 #### Publication record
 
 - Integration PR and merge result, plus Pages deployment verification, are recorded in the entry below.
+
+### Publication record — arena/e0b5058a-nfl3, 2026-11-12 UTC
+
+- **PR #43** (independent line-by-line verification of Week 10 injury data) — **MERGED** without waiting for approval as `ecc34742e47a6bda5640314f085a2706338152dc`. Checks before merge: `validate` PASS (15s), `deploy` skipped on PR by design; PR state MERGEABLE/CLEAN after the final rebase onto main (which had advanced through PRs #36, #40, #41, #42 — the rebase kept main's full board plus this session's entries; AUD-01 was fixed by PR #40 during the session, so `decision-lab/scripts/audit.py` now reports 1 finding, AUD-03 only).
+- **Pages deployment:** `Validate and deploy GitHub Pages` run https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43326290953 on `ecc3474` completed **success** (jobs: validate ✓, deploy ✓).
+- **Live verification:** fetched https://kanlerxz87-cyber.github.io/NFL3/injury-verification/index.html?cb=ecc3474 after deploy — the page rendered with all sections intact (279 live rows, 254/254 extraction agreement, drift findings V-D01–V-D04, independent confirmations of Q09/Q10/Q11, flags V-F01–V-F03, full 279-row appendix with official source links on every row).
+- **Session outcome vs claim:** V1 done and published (`injury-verification/`, needs review); V2 released to `arena/4902c576` PR #40 (merged during this session — audit finding AUD-01 closed); V3 done (PR merged, deploy verified, record above). Root navigation link to `injury-verification/` remains an integration request (root `index.html` contested by open PR #31 and other pending root-nav claims) — logged, not edited.
+- No strategy, line, correlation, edge or reward is claimed verified. All flagged irregularities (V-F01–V-F03) are published on the live page with official source links and do not block publication.
