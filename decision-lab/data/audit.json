@@ -1,9 +1,9 @@
 {
   "html_pages": 81,
-  "table_rows": 4240,
+  "table_rows": 4241,
   "rows_missing_official_source": 533,
   "rows_community_only": 106,
-  "rows_with_internal_audit_source": 7,
+  "rows_with_internal_audit_source": 8,
   "conflict_files": [],
   "authority_claim_files": [
     "engine/_pages_tail.py",
@@ -209,10 +209,10 @@
     },
     {
       "path": "decision-lab/audit.html",
-      "rows": 8,
+      "rows": 9,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 7,
+      "rows_with_internal_audit_source": 8,
       "local_errors": []
     },
     {
