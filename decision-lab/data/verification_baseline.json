@@ -1,11 +1,11 @@
 {
   "transcribed_by": "arena/dc6c67cf-nfl3, read directly from the official pages linked per row",
-  "transcribed_at": "2026-11-12",
+  "transcribed_at": "2026-11-12 (re-checked after the Week 10 report was updated during the day)",
   "sources": {
     "standings": "https://www.nfl.com/standings/",
     "injuries": "https://www.nfl.com/injuries/league/2026/REG10"
   },
-  "note": "Independent second transcription used by decision-lab/scripts/verify_sources.py. It is deliberately small and hand-checked rather than scraped, so a transcription error is visible for review. Players and clubs outside this list are reported as unverified, never as confirmed.",
+  "note": "Independent second transcription used by decision-lab/scripts/verify_sources.py. It is deliberately small and hand-checked rather than scraped, so a transcription error is visible for review. Players and clubs outside this list are reported as unverified, never as confirmed. The Week 10 report is edited during the week; this baseline was re-read after Lions players gained injury/game-status entries, and the verifier now reports such changes as `source_updated` rather than as extraction errors.",
   "standings": {
     "BUF": {
       "w": 7,
@@ -334,16 +334,16 @@
       "player": "Jared Goff",
       "position": "QB",
       "injury": "",
-      "practice_status": "Limited Participation in Practice",
+      "practice_status": "Full Participation in Practice",
       "game_status": ""
     },
     {
       "team": "Lions",
       "player": "Kerby Joseph",
       "position": "S",
-      "injury": "",
-      "practice_status": "Limited Participation in Practice",
-      "game_status": ""
+      "injury": "Knee",
+      "practice_status": "Full Participation in Practice",
+      "game_status": "Out"
     },
     {
       "team": "Chiefs",
