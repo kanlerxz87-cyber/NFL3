@@ -590,3 +590,11 @@ order; F-09 no leg-level outcome data; F-10 'Questionable' calibration unmeasure
 - Live verification: fetched https://kanlerxz87-cyber.github.io/NFL3/decision-lab/ after deployment; canonical dashboard rendered with 254 injury rows, 1,745 depth rows, 0 validated strategies, 13 open blocking answers and 12 review flags.
 - Flagged/unverified items remain published at https://kanlerxz87-cyber.github.io/NFL3/decision-lab/flagged.html and https://kanlerxz87-cyber.github.io/NFL3/decision-lab/audit.html. They did not block site merge; they block affected betting/reward decisions.
 - This publication record is carried by a coordination-only follow-up from the same fixed Arena branch after the integration merge.
+
+## Independent source-authority audit — arena/a265e7c1-nfl3 — 2026-11-12 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Independent source-authority and verifier robustness audit | in progress | arena/a265e7c1-nfl3 | `verification/**`, this coordination section |
+
+- Claim recorded before implementation. Scope is limited to new `verification/` artifacts and this append-only coordination entry. Existing workspaces, data, shared navigation, and owner-owned files will not be edited. Any necessary site-link or verifier-owner change will be logged as an integration request.
