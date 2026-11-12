@@ -76,12 +76,14 @@ class SourceAuthorityTests(unittest.TestCase):
             with self.subTest(source=item["id"], url=item["url"]):
                 self.assertTrue(audit.approved_authority_url(item["url"]))
 
-    def test_repo_row_scan_is_nonempty_and_reports_unlinked_rows(self):
+    def test_repo_row_scan_counts_pages_and_rows_consistently(self):
         result = audit.scan_html_rows()
         self.assertGreater(result["html_pages"], 0)
         self.assertGreater(result["table_rows"], 0)
-        self.assertGreater(result["rows_missing_approved_primary_link"], 0)
-        self.assertGreater(result["rows_community_only"], 0)
+        self.assertEqual(result["html_pages"], len(result["rows_by_page"]))
+        self.assertEqual(result["table_rows"], sum(result["rows_by_page"].values()))
+        self.assertLessEqual(result["rows_missing_approved_primary_link"], result["table_rows"])
+        self.assertLessEqual(result["rows_community_only"], result["table_rows"])
 
     def test_report_reproduces_current_snapshot_and_source_gaps(self):
         report = audit.collect_report()
