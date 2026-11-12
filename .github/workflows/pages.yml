@@ -29,6 +29,8 @@ jobs:
         run: python3 tests/check_site.py
       - name: Decision lab offline tests
         run: python3 tests/test_decision_lab.py
+      - name: Independent line-by-line source verification
+        run: python3 decision-lab/scripts/verify_sources.py
       - name: Build canonical decision lab
         run: python3 decision-lab/scripts/build.py
       - name: Independent source/link audit
@@ -61,8 +63,11 @@ jobs:
       - name: Refresh official decision-lab captures
         continue-on-error: true
         run: python3 decision-lab/scripts/capture_official.py --discover-depth --output decision-lab/data/official_snapshot.json
+      - name: Flag depth cells that still need a fresh capture
+        run: python3 decision-lab/scripts/add_depth_integrity.py
       - name: Rebuild and audit decision lab for publication
         run: |
+          python3 decision-lab/scripts/verify_sources.py
           python3 decision-lab/scripts/build.py
           python3 decision-lab/scripts/audit.py
       - name: Availability analysis from the refreshed capture

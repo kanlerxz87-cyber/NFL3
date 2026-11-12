@@ -1,0 +1,357 @@
+{
+  "transcribed_by": "arena/dc6c67cf-nfl3, read directly from the official pages linked per row",
+  "transcribed_at": "2026-11-12",
+  "sources": {
+    "standings": "https://www.nfl.com/standings/",
+    "injuries": "https://www.nfl.com/injuries/league/2026/REG10"
+  },
+  "note": "Independent second transcription used by decision-lab/scripts/verify_sources.py. It is deliberately small and hand-checked rather than scraped, so a transcription error is visible for review. Players and clubs outside this list are reported as unverified, never as confirmed.",
+  "standings": {
+    "BUF": {
+      "w": 7,
+      "l": 1,
+      "t": 0,
+      "pf": 256,
+      "pa": 187,
+      "net": 69
+    },
+    "NE": {
+      "w": 5,
+      "l": 4,
+      "t": 0,
+      "pf": 211,
+      "pa": 207,
+      "net": 4
+    },
+    "NYJ": {
+      "w": 2,
+      "l": 7,
+      "t": 0,
+      "pf": 182,
+      "pa": 223,
+      "net": -41
+    },
+    "MIA": {
+      "w": 1,
+      "l": 7,
+      "t": 0,
+      "pf": 126,
+      "pa": 200,
+      "net": -74
+    },
+    "PIT": {
+      "w": 6,
+      "l": 2,
+      "t": 0,
+      "pf": 180,
+      "pa": 144,
+      "net": 36
+    },
+    "CIN": {
+      "w": 6,
+      "l": 2,
+      "t": 0,
+      "pf": 240,
+      "pa": 175,
+      "net": 65
+    },
+    "CLE": {
+      "w": 5,
+      "l": 4,
+      "t": 0,
+      "pf": 161,
+      "pa": 196,
+      "net": -35
+    },
+    "BAL": {
+      "w": 4,
+      "l": 5,
+      "t": 0,
+      "pf": 189,
+      "pa": 236,
+      "net": -47
+    },
+    "JAX": {
+      "w": 6,
+      "l": 2,
+      "t": 0,
+      "pf": 229,
+      "pa": 121,
+      "net": 108
+    },
+    "HOU": {
+      "w": 3,
+      "l": 5,
+      "t": 0,
+      "pf": 209,
+      "pa": 192,
+      "net": 17
+    },
+    "IND": {
+      "w": 2,
+      "l": 7,
+      "t": 0,
+      "pf": 184,
+      "pa": 249,
+      "net": -65
+    },
+    "TEN": {
+      "w": 1,
+      "l": 7,
+      "t": 0,
+      "pf": 144,
+      "pa": 199,
+      "net": -55
+    },
+    "DEN": {
+      "w": 7,
+      "l": 2,
+      "t": 0,
+      "pf": 198,
+      "pa": 186,
+      "net": 12
+    },
+    "KC": {
+      "w": 6,
+      "l": 2,
+      "t": 0,
+      "pf": 202,
+      "pa": 143,
+      "net": 59
+    },
+    "LV": {
+      "w": 4,
+      "l": 5,
+      "t": 0,
+      "pf": 238,
+      "pa": 268,
+      "net": -30
+    },
+    "LAC": {
+      "w": 0,
+      "l": 8,
+      "t": 0,
+      "pf": 121,
+      "pa": 219,
+      "net": -98
+    },
+    "NYG": {
+      "w": 5,
+      "l": 2,
+      "t": 1,
+      "pf": 182,
+      "pa": 172,
+      "net": 10
+    },
+    "DAL": {
+      "w": 4,
+      "l": 5,
+      "t": 0,
+      "pf": 246,
+      "pa": 236,
+      "net": 10
+    },
+    "WAS": {
+      "w": 2,
+      "l": 5,
+      "t": 1,
+      "pf": 172,
+      "pa": 202,
+      "net": -30
+    },
+    "PHI": {
+      "w": 2,
+      "l": 7,
+      "t": 0,
+      "pf": 148,
+      "pa": 221,
+      "net": -73
+    },
+    "CHI": {
+      "w": 7,
+      "l": 2,
+      "t": 0,
+      "pf": 241,
+      "pa": 184,
+      "net": 57
+    },
+    "DET": {
+      "w": 6,
+      "l": 2,
+      "t": 0,
+      "pf": 222,
+      "pa": 189,
+      "net": 33
+    },
+    "MIN": {
+      "w": 6,
+      "l": 2,
+      "t": 0,
+      "pf": 146,
+      "pa": 116,
+      "net": 30
+    },
+    "GB": {
+      "w": 6,
+      "l": 3,
+      "t": 0,
+      "pf": 216,
+      "pa": 191,
+      "net": 25
+    },
+    "CAR": {
+      "w": 3,
+      "l": 5,
+      "t": 0,
+      "pf": 199,
+      "pa": 219,
+      "net": -20
+    },
+    "NO": {
+      "w": 3,
+      "l": 5,
+      "t": 0,
+      "pf": 185,
+      "pa": 216,
+      "net": -31
+    },
+    "TB": {
+      "w": 3,
+      "l": 6,
+      "t": 0,
+      "pf": 202,
+      "pa": 178,
+      "net": 24
+    },
+    "ATL": {
+      "w": 3,
+      "l": 6,
+      "t": 0,
+      "pf": 188,
+      "pa": 223,
+      "net": -35
+    },
+    "SF": {
+      "w": 7,
+      "l": 1,
+      "t": 0,
+      "pf": 235,
+      "pa": 156,
+      "net": 79
+    },
+    "SEA": {
+      "w": 5,
+      "l": 4,
+      "t": 0,
+      "pf": 202,
+      "pa": 162,
+      "net": 40
+    },
+    "LA": {
+      "w": 5,
+      "l": 4,
+      "t": 0,
+      "pf": 214,
+      "pa": 181,
+      "net": 33
+    },
+    "AZ": {
+      "w": 3,
+      "l": 6,
+      "t": 0,
+      "pf": 178,
+      "pa": 255,
+      "net": -77
+    }
+  },
+  "injuries": [
+    {
+      "team": "Commanders",
+      "player": "Lucas Patrick",
+      "position": "C",
+      "injury": "Concussion",
+      "practice_status": "Did Not Participate In Practice",
+      "game_status": "Out"
+    },
+    {
+      "team": "Commanders",
+      "player": "Colson Yankoff",
+      "position": "TE",
+      "injury": "Knee",
+      "practice_status": "Did Not Participate In Practice",
+      "game_status": "Out"
+    },
+    {
+      "team": "Commanders",
+      "player": "Amik Robertson",
+      "position": "CB",
+      "injury": "",
+      "practice_status": "Limited Participation in Practice",
+      "game_status": ""
+    },
+    {
+      "team": "Giants",
+      "player": "Malik Harrison",
+      "position": "LB",
+      "injury": "Groin",
+      "practice_status": "Limited Participation in Practice",
+      "game_status": "Questionable"
+    },
+    {
+      "team": "Patriots",
+      "player": "Ben Brown",
+      "position": "C",
+      "injury": "Knee",
+      "practice_status": "Did Not Participate In Practice",
+      "game_status": "Out"
+    },
+    {
+      "team": "Patriots",
+      "player": "Carlton Davis III",
+      "position": "CB",
+      "injury": "Knee",
+      "practice_status": "Did Not Participate In Practice",
+      "game_status": "Out"
+    },
+    {
+      "team": "Patriots",
+      "player": "TreVeyon Henderson",
+      "position": "RB",
+      "injury": "Illness",
+      "practice_status": "Did Not Participate In Practice",
+      "game_status": "Out"
+    },
+    {
+      "team": "Patriots",
+      "player": "Drake Maye",
+      "position": "QB",
+      "injury": "",
+      "practice_status": "Full Participation in Practice",
+      "game_status": ""
+    },
+    {
+      "team": "Lions",
+      "player": "Jared Goff",
+      "position": "QB",
+      "injury": "",
+      "practice_status": "Limited Participation in Practice",
+      "game_status": ""
+    },
+    {
+      "team": "Lions",
+      "player": "Kerby Joseph",
+      "position": "S",
+      "injury": "",
+      "practice_status": "Limited Participation in Practice",
+      "game_status": ""
+    },
+    {
+      "team": "Chiefs",
+      "player": "Patrick Mahomes",
+      "position": "QB",
+      "injury": "",
+      "practice_status": "Full Participation in Practice",
+      "game_status": ""
+    }
+  ]
+}

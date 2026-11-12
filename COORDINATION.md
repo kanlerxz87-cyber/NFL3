@@ -670,3 +670,101 @@ F13 Texans depth is an image (13 rows unjoinable); F14 Packers jersey-number pre
 - Two consistency bugs created by the merge were found and fixed by the tests, not by eye: a duplicate source id (now deduplicated by title+URL) and stale `SG` cross-references in the strategies and decision pages (now SG13/SG16/SG18/SG19/SG24/SG25 as appropriate).
 - Re-verified after the merge: `python3 tests/test_decision_lab.py` (30 tests **OK**), `build.py` (**17 pages**, lab gate PASS — the gate again rejected two of this session's own uncited rows first), `audit.py` (81 pages, 3,940 rows, 2 findings, gate PASS), `scripts/validate_site.py` and `tests/check_site.py` PASS, `availability.py` byte-reproducible, `verify_live.py --offline` F4 28/28, F7 185/254, F8 30/32.
 - Both verification pages are now cross-linked and clearly labelled so a reviewer sees two different methods: a small hand-checked transcription (can catch parser bugs because it is independent) and the automated full-field re-fetch (covers every published row but shares the parser, so it cannot catch a parser bug by itself).
+
+## Independent verification and defect repair — arena/dc6c67cf-nfl3, 2026-11-12 UTC
+
+| Task | Status | Owning session | Fixed branch | Exclusive file scope |
+|---|---|---|---|---|
+| V1 Line-by-line independent re-verification of published official-source data | in progress | arena/dc6c67cf-nfl3 | arena/dc6c67cf-nfl3 | `decision-lab/data/verification_*.json` |
+| V2 Depth-capture parser defects (multi-player cells, authority labelling) + regression tests | in progress | arena/dc6c67cf-nfl3 | arena/dc6c67cf-nfl3 | `decision-lab/scripts/capture_official.py`, `tests/test_decision_lab.py` |
+| V3 Snapshot repair for the confirmed defects, provenance recorded | in progress | arena/dc6c67cf-nfl3 | arena/dc6c67cf-nfl3 | `decision-lab/data/official_snapshot.json` |
+| V4 New "Verification log" page + navigation entry | in progress | arena/dc6c67cf-nfl3 | arena/dc6c67cf-nfl3 | `decision-lab/verification*.html`, `decision-lab/scripts/build.py` |
+| V5 Integration: checks, PR, merge, Pages deploy record | pending | arena/dc6c67cf-nfl3 | arena/dc6c67cf-nfl3 | this board, shared root nav |
+
+- Claim basis: every pre-existing board entry is `done`/`needs review`, and the only open pull requests (#18, #20, #22) are coordination-log-only follow-ups with no implementation files and no commits inside the last 60 minutes. No other session holds an active claim, so this session may integrate. Prior work is preserved; nothing is overwritten except the two confirmed defects below.
+- Scope discipline: the concurrent workspaces (`research-desk/`, `line-lab/`, `dashboard/`, `decision-hub/`, `research-workspace/`) are **not** edited by this session. Their known labelling issues stay published on the audit page.
+
+### Defects found by this session (evidence first, then fix)
+
+1. **Multi-player depth cells were flattened into one fake player name.** Several official club depth pages put two players in a single published cell (e.g. Steelers TE1 is "Pat Freiermuth \* Darnell Washington"; Seahawks WR1 is "Cooper Kupp \* Rashid Shaheed"). The capturer concatenated the cell text, producing rows such as `Pat Freiermuth Darnell Washington` — a player who does not exist. Verified against the live club pages; the exact affected count is published below.
+2. **`authority` labelled self-declared *unofficial* charts as plain "club depth chart".** The Patriots page states in its own text that its 2026 depth chart "is unofficial and is published by the writers of Patriots.com". The capturer recorded those 62 rows as `club depth chart`, the same label used for charts with no such disclaimer. The Colts rows were already labelled correctly, which shows the label is meaningful and the Patriots case is a miss.
+
+- Both defects are capture-layer errors, not source errors. The parser is fixed so a fresh capture cannot reproduce them; the already-captured rows are flagged rather than rewritten, because splitting on whitespace was tested and produced garbage (`Kris Jenkins Jr. Landon Robinson` -> `Kris Jenkins` / `Jr. Landon Robinson`), so no player name is invented.
+
+### Verification results — arena/dc6c67cf-nfl3, 2026-11-12 UTC
+
+**What was opened directly this session** (each link below was fetched and read, not recalled):
+[NFL 2026 Week 10 injury report](https://www.nfl.com/injuries/),
+[REG10 injury report](https://www.nfl.com/injuries/league/2026/REG10),
+[2026 NFL standings](https://www.nfl.com/standings/),
+[Commanders depth chart](https://www.commanders.com/team/depth-chart),
+[Giants depth chart](https://www.giants.com/team/depth-chart),
+[Patriots unofficial depth chart](https://www.patriots.com/team/depth-chart),
+[Steelers depth chart](https://www.steelers.com/team/depth-chart/),
+[Seahawks depth chart](https://www.seahawks.com/team/depth-chart/),
+[Broncos depth chart](https://www.denverbroncos.com/team/depth-chart/).
+
+**Line-by-line result:** `decision-lab/scripts/verify_sources.py` reports **314 matches, 0 mismatches, 265 explicitly unverified**. Breakdown: 192 standings values and 64 standings arithmetic identities (all 32 clubs) match the independent transcription; 44 injury values across 11 players match; 10 registered source hosts resolve to HTTPS; 22 depth rows are flagged and excluded; 243 injury values and all 22 flagged depth rows have no independent transcription and are reported as unverified rather than assumed correct. The 32/32 standings rows (W-L-T, PF, PA, NET) and both the Commanders and Giants depth charts were additionally confirmed by eye against the live pages.
+
+**Is the check able to fail?** Yes, and this is tested. `VerificationTests.test_mutated_value_is_caught` corrupts a published number (KC points-for 202 → 999) and asserts exactly one mismatch is reported with reference `202`. Without that negative control a green verification page would prove nothing.
+
+**Defects fixed:** F13 joined multi-player depth cells (22 captured rows) and F14 self-declared unofficial charts labelled as plain club charts. The parser is fixed and the already-captured rows are flagged, not silently rewritten — splitting on whitespace was tested and produced garbage (`'Kris Jenkins Jr. Landon Robinson'` → `Kris Jenkins` / `Jr. Landon Robinson`), so no name was invented.
+
+**Checks run:** `python3 tests/test_decision_lab.py` (23 tests, OK), `verify_sources.py` (0 mismatches), `build.py` (14 pages), `audit.py` (78 pages / 3,934 rows / 2 findings / lab gate PASS), `scripts/validate_site.py` (12 root pages), `tests/check_site.py`, `git diff --check`. A local static server returned HTTP 200 for the root, the lab index, the new verification page, flagged, audit, executive summary, depth and both stylesheets.
+
+**Still unverified, and left blank:** licensed historical odds and player-prop prices, official settlement history, confirmed starter/active status, replacement assignment, expected snaps, empirical leg correlations, validated strategy performance, and reward funding. These block the line-origination, correlation and leaderboard requirements; they do not block site publication.
+
+## Claim: arena/22802aed-nfl3 (session 22802aed) — 2026-11-12 22:22 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| T-A Second line-by-line verification pass on the published Week 10 injury extract (takes over the open "second pass recommended" item from f445c027, idle > 12 h; handoff noted here) | done | 22802aed | findings in the log below and on the dashboard flagged/review pages; extract left unchanged by design |
+| T-B Resolve open owner-review questions (Q09/Q10/Q11/Q13 and R-16 premise) from official sources where possible | done (Q12/Q13 remain open for owner) | 22802aed | findings in the log below; `dashboard/data/questions.csv`, `dashboard/data/repo_review.csv` |
+| T-C Deduplicate verbatim-repeated sections of this board (preserve every unique record once) | done | 22802aed | `COORDINATION.md` |
+| T-D Close or merge stale coordination-only PRs #18/#20/#22 (all > 12 h old, two conflict with main; records already reflected on main) | in progress | 22802aed | PR operations + this log |
+| T-E Final integration: validators, PR to main, Pages deployment verification | in progress | 22802aed | PR + this log |
+
+Branch is fixed as `arena/22802aed-nfl3` (Arena rule). No sub-site files are edited except surgical, verified data corrections under the takeover rule, each with a handoff note. Shared root outputs are edited only if integration requires it, preserving all published work.
+
+## Second-pass verification and board dedupe — arena/22802aed-nfl3, 2026-11-12 ~22:45 UTC
+
+### What was verified (official sources, fetched 2026-11-12 22:20–22:35 UTC)
+
+- Live [NFL Week 10 injury report](https://www.nfl.com/injuries/) re-fetched in full (7 content chunks). It now shows 279 player rows over 26 teams and 2 "No Injuries Reported" sections (LAC, BAL). Sandbox-side fetches to nfl.com are TLS-blocked, so the fetch used the session's external page-fetch tooling; content was compared row by row against `dashboard/data/injuries_2026_w10.csv`.
+- **Result: the published 254-row extract is faithful to the official page as captured at 06:32 UTC.** Exact-match team sections verified in full: WAS 9/9, LAR 10/10, PIT 8/8; every spot-checked row of IND, SF, AZ, JAX matches; team counts match for 18 of 24 teams. Zero published rows were contradicted as errors. Per the no-backfill rule, the extract was NOT edited; the check gate still reconciles 254 rows.
+- **Live-report movement since capture (+25 rows, +3 status changes):** SEA +15 (its "No Injuries Reported" section is gone; the report now lists Sam Darnold QB DNP and Drew Lock QB Limited — consistent with the [ruled-out headline](https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again) — this resolves Q09/R-06 as report lag, now corrected on the official page itself); CIN +4 (section populated); IND added CJ Allen and Grover Stewart and upgraded A.J. Haulcy, Jonathan Taylor, Charvarius Ward to Full; SF added Dre Greenlaw and Christian McCaffrey (both DNP); AZ added Andrew Wingard; JAX added BJ Green II. Recorded as `dashboard/data/repo_review.csv` rows R-17/R-18.
+- **Q10/R-07 resolved:** [official Rams 2026 roster](https://www.nfl.com/teams/los-angeles-rams/roster) lists Myles Garrett (#95, LB, ACT) and Trent McDuffie (#22, CB, ACT) — the injury-report team labels are correct.
+- **Q11/R-10 resolved:** the [official Week 10 schedule page](https://www.nfl.com/schedules/2026/by-week/week-10) lists "Teams on Bye: Chicago Bears (7-2), Denver Broncos (7-2), Philadelphia Eagles (2-7), Tampa Bay Buccaneers (3-6)". All 28 team records in `games_2026_w10.csv` (matchups, kickoff times, networks, records) were cross-checked line by line against the official schedule page — all match.
+- **Q13/R-12/R-21:** the Nov 13 2025 prop-bet memo remains secondary-only. Multiple independent secondary reports (Tom Pelissero/NFL Network, Ari Meirov, [USA Today Touchdown Wire](https://touchdownwire.usatoday.com/story/sports/nfl/touchdown/2025/11/14/nfl-issues-memo-to-teams-detailing-the-leagues-policies-on-sports-betting/87262424007), Covers) agree on its content, but no primary text is published on an official NFL site. It stays UNVERIFIED for compliance use.
+- **R-16 premise corrected:** this session's metadata places the user in San Jose, California, US — not the Netherlands. Q12 is re-scoped; no jurisdiction claim is asserted and no regulator lookup was performed for California (R-22).
+
+### Files changed under the takeover rule (handoff noted; owner f445c027 idle > 12 h)
+
+- `dashboard/data/repo_review.csv` — appended R-17..R-23 (second-pass findings and resolutions). No prior rows altered.
+- `dashboard/data/questions.csv` — updated Q02, Q09, Q10, Q11, Q12, Q13 with verified statuses, sources and verification notes. No rows added or removed; column order unchanged.
+- `dashboard/` HTML pages regenerated with `node dashboard/scripts/build.mjs` (only content derived from the two CSVs changed).
+
+### Board dedupe (T-C)
+
+- This board contained a **verbatim duplicate block**: former lines 327–537 byte-equal to lines 9–219 (duplicating the 4fd6bbbb/56e27bb4/2836662c/f445c027/e5e2b753/cbdcc317/40c7529f sections), plus a 6-line accidental re-paste of the original top-board table inside f9dd481e's integration plan. Both were removed programmatically with an assertion that every deleted line occurred at least twice, so **no unique record was lost**; each session's section now appears exactly once. Diff: −217 lines, 0 additions to prior sessions' text.
+
+### Checks run after the changes (all pass)
+
+- `node dashboard/scripts/check.mjs` — OK (10 pages; 254 injury rows reconcile; all rows sourced or flagged).
+- `python3 scripts/validate_site.py` — OK (12 root pages); `python3 tests/check_site.py` — OK; `python3 tests/test_decision_lab.py` — 15 tests OK; `python3 decision-lab/scripts/audit.py` — 77 pages, lab gate PASS; `git diff --check` — OK.
+
+### Still open after this pass (for owner review)
+
+- Q02 proxy decision (weekly official club depth-chart collection vs documented proxy) — owner decision required.
+- Q04/Q05 licensed odds and historical results; Q06/Q15 empirical injury/parlay calibration; Q14 CLV benchmark; Q16–Q18 leaderboard rewards, sample-size and publication-scope decisions — unchanged, awaiting owner.
+- Q12 jurisdiction (corrected premise) and Q13 primary memo text — unresolved; flagged, do not block publication.
+
+### T-D result — arena/22802aed-nfl3, 2026-11-12 ~23:05 UTC
+
+- PR #20 (e5e2b753 final publication record) — found already MERGED on main (by a concurrent session); nothing to do.
+- PR #18 (cbdcc317) and PR #22 (40c7529f) — both > 12 h old, coordination-only, conflicting with main; `gh pr update-branch` / REST `update-branch` unavailable (404). Per the takeover rule, their publication records were transcribed verbatim into their own board sections (attribution preserved) and both PRs are closed unmerged with an explanatory comment. No code content existed in either PR.
+
+### T-E pre-PR note — arena/22802aed-nfl3, 2026-11-12 ~23:15 UTC
+
+- **Flag for the decision-lab owners (dc6c67cf / 771f5797, both actively modifying `decision-lab/scripts/`):** `decision-lab/scripts/audit.py` has an off-by-one between its generated pair — `data/audit.json` counts one more table row than `audit.html` displays (json 3635 vs html 3634 on this branch; json 3628 vs html 3627 on main), because the page is written before the final scan. Request logged here rather than editing the script mid-flight. Cosmetic only; the lab gate is PASS either way.
+- My branch commits the freshly generated `data/audit.json` + `audit.html` pair from a single run, matching the tool's existing convention on main.
