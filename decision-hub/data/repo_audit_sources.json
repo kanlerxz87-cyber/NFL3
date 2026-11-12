@@ -89,6 +89,15 @@
       "audit_status": "Verified Passing",
       "source_label": "GitHub Actions Pages Docs",
       "source_url": "https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages"
+    },
+    {
+      "audit_id": "AUD-11",
+      "file_path": "line-lab/ (PR #11 & PR #14)",
+      "inspected_scope": "Flags F-02 (AP secondary source on 16 vs. 17 practice squad) and F-08 (no official depth charts) plus injuries.html player-profile row links.",
+      "verification_result": "Resolved F-02 & F-08 in decision-hub via primary official NFL Operations text (16 standard / 17 with IPP player) and 7 official NFL club /team/depth-chart pages; noted injuries.html row-link scope gap.",
+      "audit_status": "Resolved & Flagged",
+      "source_label": "NFL International Pathway",
+      "source_url": "https://operations.nfl.com/programs-initiatives/international-growth/international-player-pathway"
     }
   ],
   "official_sources": [
@@ -235,6 +244,15 @@
       "limitation": "Operator-specific NFL prop market permissions must be checked per Ksa license.",
       "source_label": "kansspelautoriteit.nl",
       "source_url": "https://kansspelautoriteit.nl/"
+    },
+    {
+      "src_id": "SRC-17",
+      "publisher": "NFL Football Operations",
+      "title": "International Player Pathway (IPP) Program — 2026 Practice Squad Rule",
+      "verified_scope": "Confirms clubs may carry 17 Practice Squad players in 2026 when one qualifies as an International Player (resolving 16 vs. 17 ambiguity).",
+      "limitation": "Program rule scope.",
+      "source_label": "operations.nfl.com IPP",
+      "source_url": "https://operations.nfl.com/programs-initiatives/international-growth/international-player-pathway"
     }
   ]
 }
