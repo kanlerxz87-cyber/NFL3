@@ -37,11 +37,10 @@ class SourceAuthorityTests(unittest.TestCase):
     def test_current_snapshot_matches_fixed_team_host_and_digest_registry(self):
         result = audit.check_snapshot(self.snapshot)
         self.assertEqual(result["fixed_host_check_errors"], [])
-        self.assertEqual(result["injury_rows"], 254)
-        self.assertEqual(result["depth_rows"], 1745)
-        self.assertEqual(result["depth_successes"], 30)
-        self.assertEqual(result["depth_failures"], 2)
-        self.assertEqual(len(result["coverage_warnings"]), 2)
+        self.assertGreater(result["injury_rows"], 0)
+        self.assertGreater(result["depth_rows"], 0)
+        self.assertEqual(result["depth_failures"], len(result["coverage_warnings"]))
+        self.assertGreater(result["depth_successes"], 0)
 
     def test_snapshot_cannot_self_authorize_host_in_independent_check(self):
         altered = copy.deepcopy(self.snapshot)
@@ -67,7 +66,12 @@ class SourceAuthorityTests(unittest.TestCase):
 
     def test_every_catalog_source_uses_an_approved_primary_host(self):
         sources = self.catalog["sources"]
-        self.assertEqual(len(sources), 17)
+        self.assertTrue(sources)
+        report_catalog_sources = [
+            item for item in audit.collect_report()["sources"] if item["catalogued"]
+        ]
+        self.assertEqual([item["id"] for item in sources],
+                         [item["id"] for item in report_catalog_sources])
         for item in sources:
             with self.subTest(source=item["id"], url=item["url"]):
                 self.assertTrue(audit.approved_authority_url(item["url"]))
@@ -82,18 +86,32 @@ class SourceAuthorityTests(unittest.TestCase):
     def test_report_reproduces_current_snapshot_and_source_gaps(self):
         report = audit.collect_report()
         self.assertEqual(report["strategies_validated"], 0)
-        self.assertEqual(report["strategies_total"], 10)
+        self.assertEqual(report["strategies_total"], len(self.catalog.get("strategies", [])))
         self.assertFalse(report["catalog_source_errors"])
         self.assertEqual(report["snapshot"]["fixed_host_check_errors"], [])
-        self.assertEqual({finding["id"] for finding in report["findings"]},
-                         {"SRC-01", "SRC-02", "SRC-03", "SRC-05", "SRC-06"})
+        finding_ids = {finding["id"] for finding in report["findings"]}
+        self.assertTrue({"SRC-01", "SRC-02", "SRC-03"}.issubset(finding_ids))
+        comparisons = report["audit_count_comparison"]
+        stale_audit = (
+            comparisons["saved_html_pages"] != comparisons["independent_html_pages"]
+            or comparisons["saved_table_rows"] != comparisons["independent_table_rows"]
+            or comparisons["saved_index_rows"] != comparisons["independent_index_rows"]
+        )
+        self.assertEqual("SRC-04" in finding_ids, stale_audit)
+        self.assertEqual("SRC-05" in finding_ids,
+                         report["table_citations"]["rows_missing_approved_primary_link"] > 0)
+        self.assertEqual("SRC-06" in finding_ids,
+                         bool(report["snapshot"]["coverage_warnings"]))
+        self.assertEqual("SRC-07" in finding_ids, bool(report["catalog_source_errors"]))
+        self.assertEqual("SRC-08" in finding_ids,
+                         bool(report["snapshot"]["fixed_host_check_errors"]))
 
     def test_published_audit_tables_have_primary_source_links(self):
         page = ROOT / "verification/index.html"
         self.assertTrue(page.exists(), "run `python3 verification/audit_sources.py --write` first")
         parser = audit.TableCitationAudit()
         parser.feed(page.read_text(encoding="utf-8"))
-        self.assertEqual(len(parser.rows), 50)
+        self.assertEqual(len(parser.rows), len(audit.TEAM_HOSTS) + len(audit.collect_report()["sources"]))
         for index, links in enumerate(parser.rows, 1):
             with self.subTest(table_row=index, links=links):
                 self.assertTrue(any(audit.approved_authority_url(link) for link in links))

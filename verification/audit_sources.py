@@ -183,6 +183,7 @@ def scan_html_rows() -> dict:
     pages = 0
     row_count = 0
     host_counts: Counter[str] = Counter()
+    rows_by_page: dict[str, int] = {}
     for path in sorted(ROOT.rglob("*.html")):
         relative = path.relative_to(ROOT)
         if any(part in {".git", "node_modules", "__pycache__"} for part in relative.parts):
@@ -196,6 +197,7 @@ def scan_html_rows() -> dict:
         parser = TableCitationAudit()
         parser.feed(source)
         pages += 1
+        rows_by_page[relative.as_posix()] = len(parser.rows)
         missing = 0
         for links in parser.rows:
             row_count += 1
@@ -221,6 +223,7 @@ def scan_html_rows() -> dict:
         "rows_missing_nfl_or_club_link": nfl_missing,
         "rows_community_only": community_only,
         "host_link_counts_in_tables": dict(sorted(host_counts.items())),
+        "rows_by_page": rows_by_page,
         "pages_with_missing_primary_links": per_page,
     }
 
@@ -419,12 +422,19 @@ def collect_report() -> dict:
     reproduced = reproduce_existing_allowlist_gaps()
     saved_audit_path = LAB / "data/audit.json"
     saved_audit = json.loads(saved_audit_path.read_text(encoding="utf-8")) if saved_audit_path.exists() else {}
+    saved_index = next((page for page in saved_audit.get("pages", []) if page.get("path") == "index.html"), {})
     audit_count_comparison = {
+        "saved_html_pages": saved_audit.get("html_pages"),
+        "independent_html_pages": row_report["html_pages"],
+        "saved_table_rows": saved_audit.get("table_rows"),
+        "independent_table_rows": row_report["table_rows"],
+        "saved_index_rows": saved_index.get("rows"),
+        "independent_index_rows": row_report["rows_by_page"].get("index.html"),
         "saved_rows_missing_official_source": saved_audit.get("rows_missing_official_source"),
         "independent_rows_missing_approved_primary_link": row_report["rows_missing_approved_primary_link"],
         "saved_rows_community_only": saved_audit.get("rows_community_only"),
         "independent_rows_community_only": row_report["rows_community_only"],
-        "note": "Not directly comparable: this audit rejects all github.com hosts as NFL-authority evidence and accepts the supplemental tsapps.nist.gov publisher; the saved audit used different host/path rules.",
+        "note": "Citation totals are not directly comparable: this audit rejects every github.com host as NFL-authority evidence and recognizes the supplemental tsapps.nist.gov source; the saved audit uses different host/path rules. A table-row total mismatch is reported separately as a stale-output flag.",
     }
     sources = []
     for item in catalog.get("sources", []):
@@ -478,28 +488,40 @@ def collect_report() -> dict:
             "code": ["decision-lab/scripts/audit.py"],
             "official_reference": "S05",
         })
+    if (audit_count_comparison["saved_html_pages"] != audit_count_comparison["independent_html_pages"]
+            or audit_count_comparison["saved_table_rows"] != audit_count_comparison["independent_table_rows"]
+            or audit_count_comparison["saved_index_rows"] != audit_count_comparison["independent_index_rows"]):
+        findings.append({
+            "id": "SRC-04", "severity": "High", "status": "Reproduced stale generated audit output",
+            "title": "Saved repository audit totals do not match the current HTML",
+            "detail": f"Saved `audit.json` records {audit_count_comparison['saved_table_rows']} rows across {audit_count_comparison['saved_html_pages']} pages ({audit_count_comparison['saved_index_rows']} in index.html); a fresh offline scan finds {audit_count_comparison['independent_table_rows']} rows across {audit_count_comparison['independent_html_pages']} pages ({audit_count_comparison['independent_index_rows']} in index.html). Regenerate the canonical audit/build so its saved counts match the checked-in HTML; this is a report freshness issue, not a game-data mismatch.",
+            "code": ["decision-lab/data/audit.json", "index.html"],
+            "official_reference": "S05",
+        })
     if snapshot_report["fixed_host_check_errors"]:
         findings.append({
-            "id": "SRC-04", "severity": "High", "status": "Current snapshot needs review",
+            "id": "SRC-08", "severity": "High", "status": "Current snapshot needs review",
             "title": "Current snapshot has a publisher, digest, team-mapping, or coverage inconsistency",
             "detail": "At least one captured record failed the independent static checks; see `report.json` for exact field-level errors.",
             "code": ["decision-lab/data/official_snapshot.json", "verification/audit_sources.py"],
             "official_reference": "S05",
         })
-    findings.append({
-        "id": "SRC-05", "severity": "High", "status": "Open requirement / review finding",
-        "title": "Many repository table rows still lack a link to an approved primary-source host",
-        "detail": f"The independent fixed-host scanner counted {row_report['rows_missing_approved_primary_link']} such rows among {row_report['table_rows']} `<tbody>` rows on {row_report['html_pages']} HTML pages. This is a host-level count only; it does not judge whether a link's content supports its row. See `pages_with_missing_primary_links` in `report.json` for a per-page breakdown.",
-        "code": ["verification/audit_sources.py", "decision-lab/data/audit.json"],
-        "official_reference": "S05",
-    })
-    findings.append({
-        "id": "SRC-06", "severity": "Review required", "status": "Coverage explicitly incomplete",
-        "title": "Two club depth-chart probes did not parse a table",
-        "detail": "; ".join(snapshot_report["coverage_warnings"]) or "No depth coverage warnings.",
-        "code": ["decision-lab/data/official_snapshot.json"],
-        "official_reference": "S05",
-    })
+    if row_report["rows_missing_approved_primary_link"]:
+        findings.append({
+            "id": "SRC-05", "severity": "High", "status": "Open requirement / review finding",
+            "title": "Repository table rows lack a link to an approved primary-source host",
+            "detail": f"The independent fixed-host scanner counted {row_report['rows_missing_approved_primary_link']} such rows among {row_report['table_rows']} `<tbody>` rows on {row_report['html_pages']} HTML pages. This is a host-level count only; it does not judge whether a link's content supports its row. See `pages_with_missing_primary_links` in `report.json` for a per-page breakdown.",
+            "code": ["verification/audit_sources.py", "decision-lab/data/audit.json"],
+            "official_reference": "S05",
+        })
+    if snapshot_report["coverage_warnings"]:
+        findings.append({
+            "id": "SRC-06", "severity": "Review required", "status": "Coverage explicitly incomplete",
+            "title": "Club depth-chart coverage is incomplete",
+            "detail": "; ".join(snapshot_report["coverage_warnings"]),
+            "code": ["decision-lab/data/official_snapshot.json"],
+            "official_reference": "S05",
+        })
     if catalog_source_errors:
         findings.append({
             "id": "SRC-07", "severity": "High", "status": "Source-register host review required",
@@ -542,6 +564,18 @@ def render_html(report: dict) -> str:
     snap = report["snapshot"]
     table = report["table_citations"]
     comparison = report["audit_count_comparison"]
+    audit_totals_match = (
+        comparison["saved_html_pages"] == comparison["independent_html_pages"]
+        and comparison["saved_table_rows"] == comparison["independent_table_rows"]
+        and comparison["saved_index_rows"] == comparison["independent_index_rows"]
+    )
+    freshness_note = (
+        "Saved canonical audit page and row totals match this independent scan."
+        if audit_totals_match else
+        "Saved canonical audit totals differ from the current HTML; see finding SRC-04."
+    )
+    catalog_source_count = sum(1 for source in report["sources"] if source["catalogued"])
+    supplemental_source_count = len(report["sources"]) - catalog_source_count
     summary_cards = [
         ("NFL injury rows", snap["injury_rows"], "https://www.nfl.com/injuries/league/2026/REG10"),
         ("Club depth rows", snap["depth_rows"], "https://www.nfl.com/teams/"),
@@ -662,7 +696,7 @@ h2{{margin:2rem 0 .8rem;font-size:1.55rem}}h3{{line-height:1.25}}.findings{{disp
 <div class="alert"><strong>Review required:</strong> the existing canonical audit's source-host gate can trust a host declared inside the snapshot it is validating. An offline synthetic test reproduced that behavior. This does <strong>not</strong> show that current club hosts are malicious; it means the current gate is not sufficient proof of publisher authority. The independent fixed-host checks below passed for the checked-in capture, subject to the stated limits. This report is pinned to the snapshot timestamp shown below and does not automatically refresh when the Pages workflow captures newer data.</div>
 <section aria-labelledby="snapshot-stats"><h2 id="snapshot-stats">Current captured evidence</h2><div class="metrics">{cards}</div>
 <p><strong>Snapshot observed:</strong> {html.escape(snap['snapshot_observed_at'])}. <strong>Rows/pages scanned:</strong> {table['table_rows']} table rows across {table['html_pages']} HTML pages. <strong>Rows lacking a link to an approved primary-source host:</strong> {table['rows_missing_approved_primary_link']}. <strong>Rows without an NFL/club host:</strong> {table['rows_missing_nfl_or_club_link']} (methodology rows may appropriately cite other primary authorities). Counts treat every &lt;tbody&gt; row as requiring a citation; this may include question, suggestion, navigation, and finding rows.</p>
-<p class="note"><strong>Count reconciliation:</strong> the stored `decision-lab/data/audit.json` reports {comparison['saved_rows_missing_official_source']} missing-source rows and {comparison['saved_rows_community_only']} community-only rows; this independent scan reports {comparison['independent_rows_missing_approved_primary_link']} and {comparison['independent_rows_community_only']}, respectively. These are not like-for-like counts: the independent scan rejects every `github.com` link as NFL-authored evidence and recognizes `tsapps.nist.gov` as a supplemental NIST source. The per-page differences are in `report.json`.</p>
+<p class="note"><strong>Count reconciliation:</strong> saved `decision-lab/data/audit.json` records {comparison['saved_table_rows']} total rows across {comparison['saved_html_pages']} pages ({comparison['saved_index_rows']} rows in `index.html`); this independent scan finds {comparison['independent_table_rows']} across {comparison['independent_html_pages']} pages ({comparison['independent_index_rows']} in `index.html`). {freshness_note} For citation counts, saved audit.json reports {comparison['saved_rows_missing_official_source']} missing and {comparison['saved_rows_community_only']} community-only; this scan finds {comparison['independent_rows_missing_approved_primary_link']} and {comparison['independent_rows_community_only']}. These are not like-for-like: the independent scan rejects every `github.com` link as NFL-authored evidence and recognizes `tsapps.nist.gov` as a supplemental NIST source. Per-page detail is in `report.json`.</p>
 </section>
 <section aria-labelledby="findings"><h2 id="findings">Findings and required follow-up</h2><div class="findings">{''.join(finding_cards)}</div>
 <p><strong>Recommended corrective path:</strong> maintain a versioned static allowlist of NFL and club domains; validate each snapshot row's team-to-host mapping and HTTPS scheme against that independent list; validate discovered team-directory links against the known club roster; and classify all GitHub-hosted data as non-NFL-authored unless there is a separately verified NFL publisher record. Keep unverified values blank and retain affected decisions behind a fail-closed gate.</p></section>
@@ -671,7 +705,7 @@ h2{{margin:2rem 0 .8rem;font-size:1.55rem}}h3{{line-height:1.25}}.findings{{disp
 <p class="note">A club-published chart may be explicitly unofficial and is not proof of active status, starter status, replacement assignment, or expected snaps. Those fields remain blank in the canonical data unless official evidence supports them.</p>
 </section>
 <section aria-labelledby="sources"><h2 id="sources">Official source links for manual review</h2><p class="note">The URLs below are the source-register entries used for this audit's NFL, club, statistics-method, and workflow context. This run did not fetch these pages; source links are provided for review.</p>
-<div class="table-wrap"><table><caption>All 17 canonical catalog sources plus one supplemental NIST link (each row links to its primary source)</caption><thead><tr><th>ID</th><th>Reference</th><th>Publisher as saved</th><th>Official link</th><th>Saved scope</th><th>Saved limitation</th><th>Fixed-host review</th></tr></thead><tbody>{''.join(source_rows)}</tbody></table></div>
+<div class="table-wrap"><table><caption>All {catalog_source_count} canonical catalog sources plus {supplemental_source_count} supplemental link(s) (each row links to its primary source)</caption><thead><tr><th>ID</th><th>Reference</th><th>Publisher as saved</th><th>Official link</th><th>Saved scope</th><th>Saved limitation</th><th>Fixed-host review</th></tr></thead><tbody>{''.join(source_rows)}</tbody></table></div>
 </section>
 <section aria-labelledby="limits"><h2 id="limits">What this audit does not establish</h2><ul>{limitations}</ul><p>Full machine-readable results: <a href="report.json">report.json</a>. Reproduce offline: <code>python3 verification/test_audit_sources.py</code> and <code>python3 verification/audit_sources.py --write</code>.</p></section>
 </main>
