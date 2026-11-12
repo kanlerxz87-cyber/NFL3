@@ -614,3 +614,29 @@ order; F-09 no leg-level outcome data; F-10 'Questionable' calibration unmeasure
 - PR validation: Decision Lab checks run [43319962608](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43319962608) and Pages validation run [43319962653](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43319962653) succeeded. GitHub emitted only managed Node.js 20 deprecation / Ubuntu image migration annotations.
 - Pages deployment: post-merge `Validate and deploy GitHub Pages` run [43320040436](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43320040436) succeeded for merge head `11112ce7c2b6ee7a9acc63cce90d7b98a23bbc6b`; GitHub Pages API reported `built`. Fetched the deployed [Flagged for Review page](https://kanlerxz87-cyber.github.io/NFL3/decision-lab/flagged.html?verify=43320040436) and confirmed F01 renders the qualified authority finding, the observed GitHub publisher and the official NFL reference separately.
 - Concurrent PR #20 and a scheduled data refresh advanced `main` after this merge; `git pull --rebase origin main` fast-forwarded this fixed branch while preserving those changes. No other files were edited in the follow-up.
+## Root site integration & line-by-line verification — arena/6eba4e89-nfl3 (session 6eba4e89), 2026-11-12 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| T1 Coordination claim, plan and scope | in progress | `arena/6eba4e89-nfl3` | this log |
+| T2 Unified root site: one design system, category navigation, generated from the canonical catalog | unclaimed | `arena/6eba4e89-nfl3` | root `*.html`, `assets/`, `scripts/build_root.py` |
+| T3 Root executive summary, questions-and-answers register, suggestions/decision-path board | unclaimed | `arena/6eba4e89-nfl3` | root `executive-summary.html`, `questions.html`, `suggestions.html`, `data/root_decisions.json` |
+| T4 Line-by-line verification of canonical data against live official sources + verification report page | unclaimed | `arena/6eba4e89-nfl3` | `scripts/verify_sources.py`, `data/verification/*`, root `verification.html` |
+| T5 Audit upgrade: resolve source-register anchors, classify rows (official direct / official via register / community / unsourced) | unclaimed | `arena/6eba4e89-nfl3` | `decision-lab/scripts/audit.py`, `decision-lab/data/audit.json` |
+| T6 Root validators, Pages workflow, README, final integration | unclaimed | `arena/6eba4e89-nfl3` | `scripts/validate_site.py`, `tests/check_site.py`, `.github/workflows/pages.yml`, `README.md` |
+| T7 Pull request, merge and GitHub Pages deployment verification | unclaimed | `arena/6eba4e89-nfl3` | this log |
+
+**Scope and boundaries.** This session is the final integration session for the repository: every other
+session's task on this board is recorded as `done`/`needs review`, and its pull requests are merged except
+three coordination-only pull requests (#18, #20, #22) that touch only this log. This session therefore owns
+the shared root outputs (root pages, `assets/`, root validators, the Pages workflow) and the root-facing
+data it generates. It does **not** re-derive, overwrite or delete any preserved workspace
+(`dashboard/`, `line-lab/`, `decision-hub/`, `research-desk/`, `research-workspace/`, `decision-lab/`,
+`engine/`, `pipeline/`). Existing page filenames are kept so that every inbound link from a preserved
+workspace stays valid.
+
+**Ground rule inherited from the request.** Every published table row carries a source link to an official
+source. A value that cannot be confirmed from an official source stays blank and is listed as unverified on
+the Flagged for Review page. Nothing is inferred or filled in.
+
+**Claim pushed before work started (this commit).**
