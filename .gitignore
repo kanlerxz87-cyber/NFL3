@@ -1,0 +1,7 @@
+# generated artefacts that are large or reproducible
+__pycache__/
+*.pyc
+.venv/
+node_modules/
+_site/
+# keep data/raw: the verified snapshot (gzip-compressed official assets) is auditable evidence

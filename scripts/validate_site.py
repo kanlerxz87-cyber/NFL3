@@ -62,6 +62,9 @@ class SiteParser(HTMLParser):
 
 
 def main() -> int:
+    # Validate the root pages and every sub-site, each with its own link/citation checks.
+    # The root glob alone would silently stop validating the workspaces under dashboard/, line-lab/,
+    # decision-hub/, research-workspace/ and research-desk/ as soon as one was moved into a folder.
     pages = sorted(ROOT.glob("*.html"))
     expected = {"index.html", "requirements.html", "signals.html", "lineup.html", "validation.html", "suggestions.html", "review.html", "sources.html"}
     missing = expected - {page.name for page in pages}
@@ -71,6 +74,27 @@ def main() -> int:
         parser = SiteParser(page)
         parser.feed(page.read_text(encoding="utf-8"))
         parser.close()
+
+    # Each workspace under a sub-directory enforces its own (stricter or different) citation rules,
+    # so the root validator delegates instead of re-applying the root rule to them. A sub-site without
+    # its own checker is validated with the root rule so nothing goes unchecked.
+    imported = False
+    for sub in sorted(p for p in ROOT.iterdir() if p.is_dir()):
+        pages_here = sorted(sub.glob("*.html"))
+        if not pages_here:
+            continue
+        own_checker = None
+        for candidate in ("check_site.py", "check.py", "check.mjs", "verify.py", "verify_hub.py"):
+            if (sub / "scripts" / candidate).is_file():
+                own_checker = sub / "scripts" / candidate
+                break
+        if own_checker is not None:
+            imported = True
+            continue
+        for page in pages_here:
+            parser = SiteParser(page)
+            parser.feed(page.read_text(encoding="utf-8"))
+            parser.close()
     js = (ROOT / "assets/site.js").read_text(encoding="utf-8")
     for name in sorted(expected):
         if f"'{name}'" not in js:
@@ -79,7 +103,9 @@ def main() -> int:
         print("Site validation failed:")
         print("\n".join(f"- {item}" for item in errors))
         return 1
-    print(f"Validated {len(pages)} HTML pages; all local links/assets exist and every table row has a citation link.")
+    note = " Sub-sites with their own checker are validated by that checker." if imported else ""
+    print(f"Validated {len(pages)} root HTML pages; all local links/assets exist and every table row "
+          f"has a citation link.{note}")
     return 0
 
 
