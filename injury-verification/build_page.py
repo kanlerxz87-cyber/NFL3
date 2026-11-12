@@ -5,7 +5,7 @@ Deterministic: re-running produces the same page. Every table body row carries
 an official https://www.nfl.com/ citation. Unverified values stay blank and are
 listed on the page; nothing is inferred.
 
-Run: python3 injury-injury-verification/build_page.py
+Run: python3 injury-verification/build_page.py
 """
 from __future__ import annotations
 
@@ -303,10 +303,10 @@ answers from its own fetch, 4–9 minutes later — corroboration, not a new cla
 <div class="table-wrap"><table><thead><tr>
 <th scope="col">Step</th><th scope="col">Command</th><th scope="col">Result</th>
 <th scope="col">Source / context</th></tr></thead><tbody>
-<tr><td>1. Compare all three sources</td><td><code>python3 injury-injury-verification/verify.py</code></td>
+<tr><td>1. Compare all three sources</td><td><code>python3 injury-verification/verify.py</code></td>
 <td>Writes <code>injury-verification/report.json</code>; prints every difference</td>
 <td><a href="{SRC_REPORT}" target="_blank" rel="noopener noreferrer">Official report ↗</a></td></tr>
-<tr><td>2. Rebuild this page</td><td><code>python3 injury-injury-verification/build_page.py</code></td>
+<tr><td>2. Rebuild this page</td><td><code>python3 injury-verification/build_page.py</code></td>
 <td>Regenerates <code>injury-verification/index.html</code> from report.json + evidence</td>
 <td><a href="{SRC_REPORT}" target="_blank" rel="noopener noreferrer">Official report ↗</a></td></tr>
 <tr><td>3. Site-wide citation gate</td><td><code>python3 scripts/validate_site.py</code></td>
