@@ -26,6 +26,15 @@ jobs:
         run: python3 decision-lab/scripts/build.py
       - name: Independent source/link audit
         run: python3 decision-lab/scripts/audit.py
+      - name: Availability join artifact is reproducible
+        run: |
+          python3 decision-lab/scripts/availability.py
+          if ! git diff --exit-code -- decision-lab/data/availability.json; then
+            echo "::error::availability.json is stale. Run decision-lab/scripts/availability.py and commit the result."
+            exit 1
+          fi
+      - name: Verification - offline structural families
+        run: python3 decision-lab/scripts/verify_live.py --offline
 
   capture:
     if: github.event_name == 'workflow_dispatch'

@@ -15,6 +15,8 @@ import audit
 DATA = LAB / "data"
 CATALOG = json.loads((DATA / "catalog.json").read_text())
 SNAPSHOT = json.loads((DATA / "official_snapshot.json").read_text())
+AVAILABILITY = json.loads((DATA / "availability.json").read_text()) if (DATA / "availability.json").exists() else None
+VERIFICATION = json.loads((DATA / "verification.json").read_text()) if (DATA / "verification.json").exists() else None
 SOURCES = {s["id"]: s for s in CATALOG["sources"]}
 PAGES = [
     ("index.html", "Overview"), ("executive-summary.html", "Executive summary"),
@@ -22,7 +24,9 @@ PAGES = [
     ("suggestions.html", "Suggestions"), ("lines.html", "Line origination"),
     ("strategies.html", "Signals & leaderboard"), ("validation.html", "Validation gates"),
     ("injuries.html", "Injuries"), ("depth.html", "Depth & backups"),
+    ("availability.html", "Availability & replacements"), ("decisions.html", "Decision paths"),
     ("sources.html", "Sources & capture"), ("verification.html", "Verification log"),
+    ("integrity.html", "Verification & integrity"),
     ("flagged.html", "Flagged for review"), ("audit.html", "Repository audit"),
 ]
 
@@ -75,7 +79,7 @@ def build_index() -> str:
 <div class="eyebrow">Canonical decision workspace</div><h1>NFL decision lab</h1>
 <p class="lede">A source-first dashboard for requirements, questions, suggestions, line-origination protocol, injury/depth evidence and fail-closed validation. It preserves concurrent research workspaces while separating official facts from exploratory community data.</p>
 <div class="notice danger"><strong>Decision boundary:</strong> no originated line, correlation, strategy edge or reward is verified for deployment. Existing <a href="../research-desk/index.html">research-desk</a> outputs use community nflverse assets and are flagged as exploratory, not official NFL verification.</div>
-<div class="metrics">{metric("Official injury rows", str(SNAPSHOT["coverage"]["injury_rows"]), "NFL.com Week 10 capture")}{metric("Club depth rows", str(SNAPSHOT["coverage"]["depth_rows"]), f'{len(SNAPSHOT["coverage"]["depth_teams"])} club labels captured')}{metric("Validated strategies", "0", "No eligible verified ledger")}{metric("Open blocking answers", str(critical), "Blank until evidence exists")}{metric("Review flags", str(len(CATALOG["flags"])), "Source-linked irregularities")}</div>
+<div class="metrics">{metric("Official injury rows", str(SNAPSHOT["coverage"]["injury_rows"]), "NFL.com Week 10 capture")}{metric("Club depth rows", str(SNAPSHOT["coverage"]["depth_rows"]), f'{len(SNAPSHOT["coverage"]["depth_teams"])} club labels captured')}{metric("Report rows joined to depth", str(AVAILABILITY["coverage"]["matched_rows"]) if AVAILABILITY else "—", f'{AVAILABILITY["coverage"]["unmatched_rows"]} unmatched, each with a reason' if AVAILABILITY else "no analysis")}{metric("Replacement leads", str(AVAILABILITY["coverage"]["replacement_leads"]) if AVAILABILITY else "—", "Published next-man evidence")}{metric("Validated strategies", "0", "No eligible verified ledger")}{metric("Open blocking answers", str(critical), "Blank until evidence exists")}{metric("Review flags", str(len(CATALOG["flags"])), "Source-linked irregularities")}</div>
 <h2>Recommended path</h2><div class="cards"><div class="card"><h3>1 · Evidence contract</h3><p>Approve official-only provenance, immutable snapshots and conflict flags before model expansion.</p><a href="suggestions.html">Review suggestions →</a></div><div class="card"><h3>2 · Data foundation</h3><p>Secure permissioned odds/prop history and official outcome mapping; keep market values blank until then.</p><a href="questions.html">Open decision questions →</a></div><div class="card"><h3>3 · Shadow singles</h3><p>Pre-register a simple baseline, validate by game clusters, then consider personnel ablations and combos.</p><a href="validation.html">See validation gates →</a></div></div>
 <h2>Category tables</h2>{table("Every category is source-linked; unknown empirical cells remain blank.", ["Category", "Purpose", "State", "Source"], [[td(f'<a href="{e(url)}">{e(label)}</a>'), td(purpose), td(state), td(source_link(sid))] for url, label, purpose, state, sid in [
     ("executive-summary.html", "Executive summary", "Important details, blockers and next decisions", "Ready for review", "S01"),
@@ -89,6 +93,9 @@ def build_index() -> str:
     ("depth.html", "Depth & backups", "Published club order, not confirmed workload", "Partial club coverage", "S06"),
     ("sources.html", "Sources & capture", "Official references and capture hashes", "Opened/captured", "S05"),
     ("verification.html", "Verification log", "Line-by-line re-check with counted exceptions", "Run; 0 mismatches", "S01"),
+    ("availability.html", "Availability & replacements", "Which published starters are on the report, who is listed next, and what cannot be answered", "Analysis with per-row sources", "S01"),
+    ("decisions.html", "Decision paths", "Three routes compared on prerequisites, cost, benefit and risk", "Ready for a recorded human choice", "S16"),
+    ("integrity.html", "Verification & integrity", "Automated field-by-field re-check of the live official source, with drift and unreachable sources reported", "Live run wired into deployment", "S01"),
     ("flagged.html", "Flagged for review", "Irregularities and unverified items", "Published, non-blocking for site", "S02"),
     ("audit.html", "Repository audit", "Independent source-authority and link audit", "See findings", "S16"),
 ]])}'''
@@ -108,6 +115,22 @@ def build_summary() -> str:
     [td("Parlays require joint evidence"), td("Marginal multiplication fails under dependence"), td("Validate direct joint probability and payout rules before combo signals"), td(source_link("S15"))],
     [td("Depth capture joined two players in one cell"), td("Published rows contained non-existent player names"), td("Parser fixed; 22 captured rows flagged and excluded until a fresh capture"), td(source_link("S19"))],
     [td("Self-declared unofficial charts were labelled official"), td("Patriots rows claimed more authority than the page gives them"), td("Capturer now reads the page caveat and labels it UNOFFICIAL"), td(source_link("S20"))],
+])}
+<h2>Verified findings from the availability analysis</h2>{table("Each number is reproduced by decision-lab/scripts/availability.py from the committed snapshot.", ["Finding", "Measured", "Why it matters", "Source"], [
+    [td("Most report rows can be located on a club depth page"), td(f'{AVAILABILITY["coverage"]["matched_rows"]} of {AVAILABILITY["coverage"]["injury_rows"]} joined; {AVAILABILITY["coverage"]["unmatched_rows"]} unmatched, all listed with a reason') if AVAILABILITY else td("—"), td("Personnel questions are answerable for those clubs, and the remainder is visible rather than silently dropped."), td(source_link("S01"))],
+    [td("The unmatched rows are concentrated in two clubs"), td("29 of 69 come from the Texans (image chart) and Packers (jersey-number prefixes)") if AVAILABILITY else td("—"), td("This is a parsing gap, not missing data, so it is fixable without new sources."), td(source_link("S28") + "<br>" + source_link("S29"))],
+    [td("'Rank 1' does not identify a starter"), td("149 club/unit/position slots publish more than one rank-1 player"), td("Treating column 1 as a confirmed starter would fabricate a lineup the club never published."), td(source_link("S07"))],
+    [td("Injury designation is sparse at capture"), td(f'{sum(v for k, v in AVAILABILITY["report_status_counts"]["game_status"].items() if k != "blank") if AVAILABILITY else 0} of 254 rows carry Out or Questionable'), td("The NFL policy says a player certain to play is not listed, so a blank is not evidence of health."), td(source_link("S03"))],
+    [td("Depleted depth slots can be counted, not projected"), td("19 slots have 2+ of the top three published players on the report") if AVAILABILITY else td("—"), td("This is the measurable input for replacement-deficiency research; the effect size still needs snaps."), td(source_link("S06"))],
+    [td("The report is structurally complete this week"), td("28 of 28 expected club sections across 14 matchups"), td("Nothing is missing at the club level, which isolates the gap to parsing."), td(source_link("S01"))],
+    [td("Depth evidence goes stale on publication"), td("The Colts' own Week 10 release reports two starting-receiver trades"), td("A depth snapshot must be versioned against roster events, not trusted as durable."), td(source_link("S08"))],
+])}
+<h2>What is still missing before a decision</h2>{table("Missing information, phrased as answerable questions.", ["Missing information", "Why it blocks", "Discovery action", "Source"], [
+    [td("Permissioned, timestamped price history"), td("No market-relative skill, correlation, parlay or prop test is possible."), td("Secure a data agreement (SG14); publish no price until then."), td(source_link("S12"))],
+    [td("Official inactive lists and snap counts"), td("A designation cannot become confirmed participation or backup usage."), td("Capture both per game (SG18)."), td(source_link("S01"))],
+    [td("Multi-day retained captures"), td("A single snapshot cannot be backtested, so no history exists yet."), td("Schedule daily captures with hashes (SG16)."), td(source_link("S01"))],
+    [td("A pre-registered primary metric"), td("Without it, 'best path' is undefined and win rate would be used by default."), td("Answer Q27, then freeze the metric (SG19)."), td(source_link("S13"))],
+    [td("Product scope, jurisdiction and reward funding"), td("A prize or wager feature is unlawful or unfunded until answered."), td("Answer Q01 and Q18; keep rewards recognition-only."), td(source_link("S12"))],
 ])}
 <h2>Next decision sequence</h2><ol class="list"><li>Approve the official-only evidence contract and recognition-only leaderboard.</li><li>Resolve product/jurisdiction and data-rights questions without inventing answers.</li><li>Automate durable official snapshots and conflict alerts.</li><li>Run a pre-registered singles shadow baseline; expand only after gates pass.</li></ol>'''
     return shell("Executive summary", "executive-summary.html", content)
@@ -167,6 +190,7 @@ def build_strategies() -> str:
     leaderboard = [[td("No eligible strategies"), td("", blank=True), td("", blank=True), td("", blank=True), td("All canonical strategies are Not run; community-data results are excluded from official-only ranking."), td(source_link("S13"))]]
     content = '<div class="eyebrow">Signal research</div><h1>Signals, strategies and leaderboard</h1><p class="lede">Singles, parlays and player-prop combinations are separate research divisions. Correlation and performance cells remain blank without verified matched outcomes.</p>'
     content += table("Strategy hypotheses. No strategy has passed canonical validation.", ["ID", "Strategy", "Division", "Hypothesis", "Required inputs", "Validation test", "Risk", "State", "Correlation", "Source"], rows)
+    content += '<div class="notice"><strong>Input readiness (measured):</strong> availability evidence now exists for the personnel strategies — <a href="availability.html">147 published depth slots join to the official report</a>, 19 with two or more listed players. Snapped participation is still absent: no inactive list or snap count is captured, so ST02, ST03, ST04 and ST08 cannot be tested yet.</div>'
     content += '<h2>Leaderboard</h2><div class="notice">Rank only gate-passing strategies by benchmark-relative proper-score skill with uncertainty. Raw win rate, short-run ROI and unverified community results do not earn rewards.</div>'
     content += table("Current eligible leaderboard.", ["Entry", "Skill score", "Uncertainty", "Reward", "Note", "Source"], leaderboard)
     return shell("Signals & leaderboard", "strategies.html", content)
@@ -331,6 +355,12 @@ def main() -> int:
         "sources.html": build_sources, "verification.html": build_verification,
         "flagged.html": build_flagged,
     }
+    import pages_extra
+    builders.update({
+        "availability.html": pages_extra.build_availability,
+        "decisions.html": pages_extra.build_decisions,
+        "integrity.html": pages_extra.build_integrity,
+    })
     for name, builder in builders.items():
         (LAB / name).write_text(builder(), encoding="utf-8")
     placeholder = {"html_pages": 0, "table_rows": 0, "rows_missing_official_source": 0,

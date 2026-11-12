@@ -1,0 +1,71 @@
+{
+  "schema": "nfl3-verification/v2",
+  "run_at": "2026-11-12T22:35:20.477953+00:00",
+  "snapshot_observed_at": "2026-11-12T06:32:36.211205+00:00",
+  "status": "drift",
+  "checks_run": 3,
+  "checks_compared": 3,
+  "checks_drift": 1,
+  "checks_unreachable": 0,
+  "row_totals": {
+    "rows_checked": 314,
+    "matched": 243,
+    "mismatched": 2
+  },
+  "mode": "offline-structural",
+  "families": [
+    {
+      "id": "F4",
+      "name": "Matchup completeness",
+      "method": "count clubs per matchup against a two-club expectation",
+      "source_url": "https://www.nfl.com/injuries/",
+      "compared": true,
+      "status": "match",
+      "note": "14 matchups on the report expect 28 club sections (2 per matchup); 28 club sections were captured. Any difference would be an unexplained coverage gap.",
+      "rows_checked": 28,
+      "matched": 28,
+      "mismatched": 0,
+      "coverage": "28/28",
+      "extra_live": 0,
+      "missing_live": 0
+    },
+    {
+      "id": "F8",
+      "name": "Club depth coverage",
+      "method": "count captured club depth pages and published rank-1 rows per unit",
+      "source_url": "https://www.nfl.com/teams/",
+      "compared": true,
+      "status": "drift",
+      "note": "30 of 32 clubs from the official directory have a parsed depth table; Houston Texans not parsed; Green Bay Packers not parsed",
+      "rows_checked": 32,
+      "matched": 30,
+      "mismatched": 2,
+      "coverage": "30/32",
+      "clubs_without_depth": [
+        "Houston Texans",
+        "Green Bay Packers"
+      ],
+      "unit_gaps": []
+    },
+    {
+      "id": "F7",
+      "name": "Injury-to-depth join coverage",
+      "method": "exact (club, player) join; unmatched rows are reported, never guessed",
+      "source_url": "https://www.nfl.com/injuries/",
+      "compared": true,
+      "status": "match",
+      "note": "the join is a research lead: a published depth rank is not a confirmed starter or snap share",
+      "rows_checked": 254,
+      "matched": 185,
+      "mismatched": 0,
+      "coverage": "185/254",
+      "unmatched_rows": 69
+    }
+  ],
+  "skipped_offline": [
+    "F1 injury report field-by-field, F2 no-injury sections, F3 club depth charts, F5 status vocabulary and F6 source reachability need outbound HTTPS and are run by the scheduled publication workflow"
+  ],
+  "unreachable": [],
+  "mismatches": [],
+  "mismatch_count": 0
+}
