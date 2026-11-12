@@ -1,13 +1,14 @@
-name: data-and-site
+name: data-refresh
 
 # Full pipeline, automated:
 #   1. fetch the official nflverse release assets and verify each against its published SHA-256
 #   2. run the engine self-tests
 #   3. build the static research desk from the verified snapshot
 #   4. check every table row carries an official source link and every local link resolves
-#   5. commit the refreshed snapshot + site back to the branch, and publish to GitHub Pages
+#   5. commit the refreshed snapshot + rebuilt pages back to the branch
 #
-# Triggered on main and on the working branch, so the branch preview is always current.
+# Publication is deliberately NOT done here. The repository publishes one site from the repository root
+# via pages.yml; a second Pages upload would race it and replace the whole site with research-desk/ alone.
 on:
   schedule:
     - cron: '23 10 * * *'   # daily refresh of the official snapshot
@@ -19,11 +20,9 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 concurrency:
-  group: data-and-site-${{ github.ref_name }}
+  group: data-refresh-${{ github.ref_name }}
   cancel-in-progress: false
 
 jobs:
@@ -54,7 +53,10 @@ jobs:
         run: python3 engine/build.py
 
       - name: Verify the published site
-        run: python3 tests/check_site.py site
+        run: python3 tests/check_research_desk.py research-desk
+
+      - name: Verify the root site and sub-sites
+        run: python3 scripts/validate_site.py
 
       - name: Commit refreshed snapshot and site
         run: |
@@ -68,18 +70,3 @@ jobs:
             git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
-
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: research-desk
-
-  deploy:
-    needs: build
-    if: github.ref_name == 'main' || github.ref_name == 'arena/f9dd481e-nfl3'
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
