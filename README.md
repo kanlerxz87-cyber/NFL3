@@ -5,11 +5,14 @@ Nothing here is betting advice, a sportsbook, or an approved wagering system.
 
 **Live site:** https://kanlerxz87-cyber.github.io/NFL3/
 
+**Executive summary:** [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMMARY.md)
+
 ## Start here
 
 | Workspace | What it is | Entry point |
 |---|---|---|
 | **Decision desk (evidence chain)** | Verified game log for 2026 Weeks 1-9 cross-checked against official standings, opponent-adjusted ratings with a measured luck/skill split, measured correlations, a walk-forward skill test, an injury-to-depth-slot join, 24 blocking decisions and 17 reviewable suggestions. | [`decision-desk/index.html`](decision-desk/index.html) |
+| **Ops centre** | Consolidated view: injury rows joined to club depth charts into replacement chains, the merged questions register, the suggestions review surface, the strategy leaderboard and gates, sources and flags. Every row carries an official link; blanks stay blank. | [`ops-center/index.html`](ops-center/index.html) |
 | **Canonical decision lab** | Official-source decision dashboard: requirements, questions, suggestions, line-origination protocol, injury/depth snapshots, fail-closed validation gates, flagged review and independent audit. Unknown values stay blank. | [`decision-lab/index.html`](decision-lab/index.html) |
 | **Verification log** | Independent hand-checked transcription with counted exceptions: every value either matches, or is explicitly counted as unverified. | [`decision-lab/verification.html`](decision-lab/verification.html) |
 | **Verification & integrity (automated)** | Automated re-fetch that compares each published field with the live official source; drift and unreachable sources are reported, never counted as passes. | [`decision-lab/integrity.html`](decision-lab/integrity.html) |
@@ -52,11 +55,31 @@ The lab captures official NFL injury reports and club depth pages, preserves bla
 - `.github/workflows/pages.yml` validates the site, refreshes official decision-lab captures for deployment, builds the lab, audits it, and publishes GitHub Pages.
 - `.github/workflows/data-and-site.yml` is the preserved community-data research-desk pipeline. Its outputs are exploratory and flagged, not official-only decision evidence.
 
+## Ops centre
+
+Joins the official NFL injury report to official club depth charts and publishes the result as
+replacement chains: for every listed player, the string his club publishes behind him, whether that
+next man is himself on the report, and — where the answer does not exist — an explicit blank.
+
+It also merges the questions, suggestions, strategy, gate and flag registers that four separate
+workspaces had each built into one register apiece, keeping the provenance of every merged entry.
+
+```bash
+python3 ops-center/scripts/build.py    # regenerate pages from the committed snapshot
+python3 ops-center/scripts/verify.py   # strict gate
+```
+
+The gate fails the build if any table row lacks an official source link, if a local link is broken,
+if a placeholder leaks into a cell, if a blank is rendered as though it were a value, or if two
+consecutive builds differ. It reports rows with a source link and warns on community or secondary
+sources so they are never mistaken for official ones.
+
 ## Repository checks
 
 ```bash
 python3 scripts/validate_site.py
 python3 tests/check_site.py
+python3 ops-center/scripts/verify.py
 python3 decision-lab/scripts/audit.py
 ```
 
