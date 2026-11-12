@@ -636,3 +636,26 @@ order; F-09 no leg-level outcome data; F-10 'Questionable' calibration unmeasure
 2. **`authority` labelled self-declared *unofficial* charts as plain "club depth chart".** The Patriots page states in its own text that its 2026 depth chart "is unofficial and is published by the writers of Patriots.com". The capturer recorded those 62 rows as `club depth chart`, the same label used for charts with no such disclaimer. The Colts rows were already labelled correctly, which shows the label is meaningful and the Patriots case is a miss.
 
 - Both defects are capture-layer errors, not source errors. The parser is fixed so a fresh capture cannot reproduce them; the already-captured rows are flagged rather than rewritten, because splitting on whitespace was tested and produced garbage (`Kris Jenkins Jr. Landon Robinson` -> `Kris Jenkins` / `Jr. Landon Robinson`), so no player name is invented.
+
+### Verification results — arena/dc6c67cf-nfl3, 2026-11-12 UTC
+
+**What was opened directly this session** (each link below was fetched and read, not recalled):
+[NFL 2026 Week 10 injury report](https://www.nfl.com/injuries/),
+[REG10 injury report](https://www.nfl.com/injuries/league/2026/REG10),
+[2026 NFL standings](https://www.nfl.com/standings/),
+[Commanders depth chart](https://www.commanders.com/team/depth-chart),
+[Giants depth chart](https://www.giants.com/team/depth-chart),
+[Patriots unofficial depth chart](https://www.patriots.com/team/depth-chart),
+[Steelers depth chart](https://www.steelers.com/team/depth-chart/),
+[Seahawks depth chart](https://www.seahawks.com/team/depth-chart/),
+[Broncos depth chart](https://www.denverbroncos.com/team/depth-chart/).
+
+**Line-by-line result:** `decision-lab/scripts/verify_sources.py` reports **314 matches, 0 mismatches, 265 explicitly unverified**. Breakdown: 192 standings values and 64 standings arithmetic identities (all 32 clubs) match the independent transcription; 44 injury values across 11 players match; 10 registered source hosts resolve to HTTPS; 22 depth rows are flagged and excluded; 243 injury values and all 22 flagged depth rows have no independent transcription and are reported as unverified rather than assumed correct. The 32/32 standings rows (W-L-T, PF, PA, NET) and both the Commanders and Giants depth charts were additionally confirmed by eye against the live pages.
+
+**Is the check able to fail?** Yes, and this is tested. `VerificationTests.test_mutated_value_is_caught` corrupts a published number (KC points-for 202 → 999) and asserts exactly one mismatch is reported with reference `202`. Without that negative control a green verification page would prove nothing.
+
+**Defects fixed:** F13 joined multi-player depth cells (22 captured rows) and F14 self-declared unofficial charts labelled as plain club charts. The parser is fixed and the already-captured rows are flagged, not silently rewritten — splitting on whitespace was tested and produced garbage (`'Kris Jenkins Jr. Landon Robinson'` → `Kris Jenkins` / `Jr. Landon Robinson`), so no name was invented.
+
+**Checks run:** `python3 tests/test_decision_lab.py` (23 tests, OK), `verify_sources.py` (0 mismatches), `build.py` (14 pages), `audit.py` (78 pages / 3,934 rows / 2 findings / lab gate PASS), `scripts/validate_site.py` (12 root pages), `tests/check_site.py`, `git diff --check`. A local static server returned HTTP 200 for the root, the lab index, the new verification page, flagged, audit, executive summary, depth and both stylesheets.
+
+**Still unverified, and left blank:** licensed historical odds and player-prop prices, official settlement history, confirmed starter/active status, replacement assignment, expected snaps, empirical leg correlations, validated strategy performance, and reward funding. These block the line-origination, correlation and leaderboard requirements; they do not block site publication.

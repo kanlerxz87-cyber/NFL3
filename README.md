@@ -27,9 +27,18 @@ Nothing here is betting advice, a sportsbook, or an approved wagering system.
 
 ```bash
 python3 tests/test_decision_lab.py
+python3 decision-lab/scripts/verify_sources.py
+python3 decision-lab/scripts/add_depth_integrity.py
 python3 decision-lab/scripts/build.py
 python3 decision-lab/scripts/audit.py
 ```
+
+`verify_sources.py` is the line-by-line check: it compares every published official
+value with a separate hand transcription (`decision-lab/data/verification_baseline.json`)
+and with the official page's own arithmetic, then writes
+`decision-lab/data/verification_report.json` and publishes `decision-lab/verification.html`.
+It runs offline on purpose, so an unreachable network cannot look like a pass. Its
+negative-control test mutates a published number and asserts the checker reports it.
 
 The lab captures official NFL injury reports and club depth pages, preserves blank cells, and builds static tables with an official source link on every row. `validation.py` implements ten fail-closed gates; its unit tests use synthetic fixtures only and are not NFL performance evidence.
 
