@@ -1,9 +1,9 @@
 {
-  "html_pages": 77,
-  "table_rows": 3628,
+  "html_pages": 78,
+  "table_rows": 3934,
   "rows_missing_official_source": 531,
   "rows_community_only": 106,
-  "rows_with_internal_audit_source": 7,
+  "rows_with_internal_audit_source": 8,
   "conflict_files": [],
   "authority_claim_files": [
     "engine/_pages_tail.py",
@@ -209,10 +209,10 @@
     },
     {
       "path": "decision-lab/audit.html",
-      "rows": 8,
+      "rows": 9,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 7,
+      "rows_with_internal_audit_source": 8,
       "local_errors": []
     },
     {
@@ -225,7 +225,7 @@
     },
     {
       "path": "decision-lab/executive-summary.html",
-      "rows": 5,
+      "rows": 7,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -233,7 +233,7 @@
     },
     {
       "path": "decision-lab/flagged.html",
-      "rows": 12,
+      "rows": 14,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -241,7 +241,7 @@
     },
     {
       "path": "decision-lab/index.html",
-      "rows": 12,
+      "rows": 13,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -281,7 +281,7 @@
     },
     {
       "path": "decision-lab/sources.html",
-      "rows": 23,
+      "rows": 27,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -306,6 +306,14 @@
     {
       "path": "decision-lab/validation.html",
       "rows": 15,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-lab/verification.html",
+      "rows": 296,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,

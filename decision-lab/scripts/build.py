@@ -22,8 +22,8 @@ PAGES = [
     ("suggestions.html", "Suggestions"), ("lines.html", "Line origination"),
     ("strategies.html", "Signals & leaderboard"), ("validation.html", "Validation gates"),
     ("injuries.html", "Injuries"), ("depth.html", "Depth & backups"),
-    ("sources.html", "Sources & capture"), ("flagged.html", "Flagged for review"),
-    ("audit.html", "Repository audit"),
+    ("sources.html", "Sources & capture"), ("verification.html", "Verification log"),
+    ("flagged.html", "Flagged for review"), ("audit.html", "Repository audit"),
 ]
 
 
@@ -88,6 +88,7 @@ def build_index() -> str:
     ("injuries.html", "Injuries", "Official report rows with blank replacement fields", "Captured snapshot", "S01"),
     ("depth.html", "Depth & backups", "Published club order, not confirmed workload", "Partial club coverage", "S06"),
     ("sources.html", "Sources & capture", "Official references and capture hashes", "Opened/captured", "S05"),
+    ("verification.html", "Verification log", "Line-by-line re-check with counted exceptions", "Run; 0 mismatches", "S01"),
     ("flagged.html", "Flagged for review", "Irregularities and unverified items", "Published, non-blocking for site", "S02"),
     ("audit.html", "Repository audit", "Independent source-authority and link audit", "See findings", "S16"),
 ]])}'''
@@ -105,6 +106,8 @@ def build_summary() -> str:
     [td("Club depth charts can be unofficial or stale"), td("Published rank is guidance, not confirmed snaps"), td("Store authority and timestamp; flag conflicts"), td(source_link("S08"))],
     [td("Luck cannot be removed"), td("Residual variance is not pure luck; hot streaks are not skill"), td("Proper scores, game-cluster uncertainty, ablations, multiplicity and shadow records"), td(source_link("S13"))],
     [td("Parlays require joint evidence"), td("Marginal multiplication fails under dependence"), td("Validate direct joint probability and payout rules before combo signals"), td(source_link("S15"))],
+    [td("Depth capture joined two players in one cell"), td("Published rows contained non-existent player names"), td("Parser fixed; 22 captured rows flagged and excluded until a fresh capture"), td(source_link("S19"))],
+    [td("Self-declared unofficial charts were labelled official"), td("Patriots rows claimed more authority than the page gives them"), td("Capturer now reads the page caveat and labels it UNOFFICIAL"), td(source_link("S20"))],
 ])}
 <h2>Next decision sequence</h2><ol class="list"><li>Approve the official-only evidence contract and recognition-only leaderboard.</li><li>Resolve product/jurisdiction and data-rights questions without inventing answers.</li><li>Automate durable official snapshots and conflict alerts.</li><li>Run a pre-registered singles shadow baseline; expand only after gates pass.</li></ol>'''
     return shell("Executive summary", "executive-summary.html", content)
@@ -255,6 +258,69 @@ def build_audit(audit_doc: dict) -> str:
     return shell("Repository audit", "audit.html", content)
 
 
+def build_verification() -> str:
+    report_path = DATA / "verification_report.json"
+    if report_path.exists():
+        report = json.loads(report_path.read_text())
+    else:
+        report = {"totals": {"match": 0, "mismatch": 0, "unverified": 0}, "sections": [],
+                  "transcribed_by": "", "transcribed_at": "", "method": ""}
+    integrity = SNAPSHOT.get("depth_cell_integrity", {})
+    sections = report.get("sections", [])
+    totals = report.get("totals", {})
+
+    overview = [
+        [td("Values re-checked against an independent transcription"), td(str(totals.get("match", 0))), td(pill("match", "ok")), td(raw_source("https://www.nfl.com/standings/", "NFL standings"))],
+        [td("Values that contradict the transcription"), td(str(totals.get("mismatch", 0))), td(pill("mismatch" if totals.get("mismatch") else "none", "danger" if totals.get("mismatch") else "ok")), td(raw_source("https://www.nfl.com/standings/", "NFL standings"))],
+        [td("Values with no independent transcription (left unverified)"), td(str(totals.get("unverified", 0))), td(pill("unverified", "warn")), td(raw_source("https://www.nfl.com/injuries/league/2026/REG10", "NFL injury report"))],
+        [td("Depth rows whose published cell held more than one player"), td(str(integrity.get("rows_needs_split", 0))), td(pill("excluded", "warn")), td(raw_source("https://www.nfl.com/teams/", "NFL team directory"))],
+    ]
+
+    section_sources = {
+        "line-lab/data/standings_2026.json": "https://www.nfl.com/standings/",
+        "decision-lab/data/official_snapshot.json": "https://www.nfl.com/injuries/league/2026/REG10",
+        "decision-lab/data/catalog.json": "https://www.nfl.com/teams/",
+    }
+    section_rows = [
+        [td(e(s["page"])), td(str(s["summary"].get("match", 0))), td(str(s["summary"].get("mismatch", 0))),
+         td(str(s["summary"].get("unverified", 0))),
+         td(pill("PASS" if s["summary"].get("mismatch", 0) == 0 else "FAIL", "ok" if s["summary"].get("mismatch", 0) == 0 else "danger")),
+         td(raw_source(section_sources.get(s["page"].split(" (")[0], "https://www.nfl.com/standings/"), "Official source"))]
+        for s in sections
+    ]
+
+    detail_rows = []
+    for s in sections:
+        for row in s["rows"]:
+            if row["status"] == "match":
+                continue  # matches are counted; the exceptions are what a reviewer needs
+            detail_rows.append([
+                td(e(row["label"])), td(e(row["field"])), td(e(row.get("published", ""))),
+                td(e(row.get("reference", "")) if row.get("reference") is not None else td("", blank=True)),
+                td(pill(row["status"], "danger" if row["status"] == "mismatch" else "warn")),
+                td(e(row.get("note", ""))), td(raw_source(row["source"], "Official source")),
+            ])
+
+    split_rows = [
+        [td(e(item["team"])), td(e(item["unit"])), td(e(item["position"])), td(str(item["published_rank"])),
+         td(e(item["stored_value"])), td(raw_source(item["source_url"], "Club source"))]
+        for item in integrity.get("rows", [])
+    ]
+
+    content = f'''<div class="eyebrow">Independent re-verification</div><h1>Verification log</h1>
+<p class="lede">Every published value is re-checked against a second, independent transcription of the official page and against the page's own arithmetic. This is the line-by-line record. It runs without network access on purpose: a failed fetch must not be able to look like a passing check.</p>
+<div class="notice ok"><strong>How to read a pass:</strong> a match means the published value equals the independent transcription. An unverified cell means no transcription exists for it, so this review makes <em>no</em> claim either way — it is not a soft pass.</div>
+<div class="notice warn"><strong>Counted exceptions:</strong> {totals.get("mismatch", 0)} mismatches and {totals.get("unverified", 0)} unverified values. Unverified values are listed individually below so they cannot be mistaken for confirmed facts.</div>
+<h2>Summary</h2>{table("Verification counts.", ["Measure", "Count", "State", "Official source"], overview)}
+<h2>By section</h2>{table("Each section is checked independently; a mismatch in any one fails the run.", ["Section", "Match", "Mismatch", "Unverified", "Result", "Official source"], section_rows)}
+{"<h2>Mismatches and unverified values</h2>" + table("Every value that is not a confirmed match, with the official page to re-check.", ["Item", "Field", "Published", "Reference", "Status", "Note", "Source"], detail_rows) if detail_rows else ""}
+{"<h2>Depth cells that need a fresh capture</h2>" + table("Rows where the published cell held more than one player. The stored text is kept exactly as published; no player name was invented by splitting it.", ["Team", "Unit", "Position", "Rank", "Stored value", "Source"], split_rows) if split_rows else ""}
+<h2>Method and limits</h2>
+<p>{e(report.get("method", ""))}</p>
+<p>Transcription by {e(report.get("transcribed_by", "") or "not recorded")}, {e(report.get("transcribed_at", "") or "undated")}. The transcription is intentionally small and hand-checked so a mistake in it is visible for review rather than hidden inside a scraper. A larger automated re-capture would need the club and NFL sites to be reachable from the build.</p>'''
+    return shell("Verification log", "verification.html", content)
+
+
 def main() -> int:
     builders = {
         "index.html": build_index, "executive-summary.html": build_summary,
@@ -262,7 +328,8 @@ def main() -> int:
         "suggestions.html": build_suggestions, "lines.html": build_lines,
         "strategies.html": build_strategies, "validation.html": build_validation,
         "injuries.html": build_injuries, "depth.html": build_depth,
-        "sources.html": build_sources, "flagged.html": build_flagged,
+        "sources.html": build_sources, "verification.html": build_verification,
+        "flagged.html": build_flagged,
     }
     for name, builder in builders.items():
         (LAB / name).write_text(builder(), encoding="utf-8")

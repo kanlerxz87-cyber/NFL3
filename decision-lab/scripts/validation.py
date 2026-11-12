@@ -20,7 +20,8 @@ OFFICIAL_HOSTS = {
     "nfl.com", "www.nfl.com", "operations.nfl.com", "support.nfl.com", "nextgenstats.nfl.com",
     "media.nfl.com", "static.www.nfl.com", "www.commanders.com", "www.giants.com", "www.colts.com",
     "www.baltimoreravens.com", "www.patriots.com", "www.detroitlions.com", "www.denverbroncos.com",
-    "www.seahawks.com", "www.itl.nist.gov", "itl.nist.gov", "scikit-learn.org", "docs.github.com",
+    "www.seahawks.com", "www.steelers.com", "www.itl.nist.gov", "itl.nist.gov", "scikit-learn.org",
+    "docs.github.com",
 }
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
 REQUIRED = (

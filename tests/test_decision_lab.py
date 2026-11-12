@@ -207,6 +207,50 @@ class ValidationTests(unittest.TestCase):
         self.assertFalse(result["eligible"])
 
 
+class VerificationTests(unittest.TestCase):
+    """The independent verifier must be able to fail, or it proves nothing."""
+
+    def setUp(self):
+        import verify_sources
+        self.verify = verify_sources
+        self.baseline = json.loads((ROOT / "decision-lab/data/verification_baseline.json").read_text())
+        self.published = ROOT / "line-lab/data/standings_2026.json"
+        self.original = self.published.read_text()
+
+    def tearDown(self):
+        self.published.write_text(self.original)
+
+    def test_baseline_covers_every_club(self):
+        data = json.loads(self.original)
+        for team in data["teams"]:
+            self.assertIn(team["abbr"], self.baseline["standings"], team["abbr"])
+
+    def test_published_standings_match_transcription(self):
+        result = self.verify.check_standings(self.baseline)
+        self.assertEqual(result["summary"]["mismatch"], 0)
+        self.assertGreater(result["summary"]["match"], 0)
+
+    def test_mutated_value_is_caught(self):
+        """Negative control: a wrong published number must be reported."""
+        data = json.loads(self.original)
+        for team in data["teams"]:
+            if team["abbr"] == "KC":
+                team["pf"] = 999
+        self.published.write_text(json.dumps(data))
+        result = self.verify.check_standings(self.baseline)
+        bad = [r for r in result["rows"] if r["status"] == "mismatch"]
+        self.assertEqual(len(bad), 1)
+        self.assertEqual((bad[0]["label"], bad[0]["field"]), ("KC", "pf"))
+        self.assertEqual(bad[0]["reference"], "202")
+
+    def test_absent_reference_is_unverified_not_guessed(self):
+        """A club with no transcription is unverified; it is never assumed correct."""
+        result = self.verify.check_standings({"standings": {}})
+        self.assertEqual(result["summary"]["match"], 0)
+        self.assertEqual(result["summary"]["mismatch"], 0)
+        self.assertGreater(result["summary"]["unverified"], 0)
+
+
 class CatalogTests(unittest.TestCase):
     def test_catalog_sources_and_blanks(self):
         catalog = json.loads((ROOT / "decision-lab/data/catalog.json").read_text())
