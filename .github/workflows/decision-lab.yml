@@ -1,40 +1,42 @@
-name: Decision lab checks and official-source capture
+name: Decision lab checks
 
 on:
   workflow_dispatch:
   pull_request:
     branches: [main]
     paths:
-      - 'decision-lab/scripts/**'
-      - 'decision-lab/templates/**'
-      - 'decision-lab/assets/**'
+      - 'decision-lab/**'
       - 'tests/test_decision_lab.py'
       - '.github/workflows/decision-lab.yml'
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Offline unit tests
+        run: python3 tests/test_decision_lab.py
+      - name: Build canonical decision lab
+        run: python3 decision-lab/scripts/build.py
+      - name: Independent source/link audit
+        run: python3 decision-lab/scripts/audit.py
+
   capture:
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Capture official HTTPS sources and normalize published values
+      - name: Capture official HTTPS sources
         run: python3 decision-lab/scripts/capture_official.py --discover-depth --output decision-lab/data/official_snapshot.json
-      - name: Save verified snapshot on the fixed session branch during review
-        if: github.event_name == 'pull_request' && github.head_ref == 'arena/c2825205-nfl3'
-        shell: bash
+      - name: Rebuild and audit with fresh capture
         run: |
-          git config user.name "nfl3-source-audit"
-          git config user.email "nfl3-source-audit@users.noreply.github.com"
-          git add decision-lab/data/official_snapshot.json
-          if ! git diff --cached --quiet; then
-            git commit -m "chore: refresh official-source snapshot for verification [skip ci]"
-            git push origin HEAD:arena/c2825205-nfl3
-          fi
+          python3 decision-lab/scripts/build.py
+          python3 decision-lab/scripts/audit.py
       - uses: actions/upload-artifact@v4
         with:
           name: official-source-snapshot

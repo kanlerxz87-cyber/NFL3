@@ -6,27 +6,39 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: '17 * * * *'
 
 permissions:
   contents: read
 
 concurrency:
-  group: pages-${{ github.ref }}
-  cancel-in-progress: true
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-      - name: Validate pages, local links and table citations
+      - name: Validate root pages, local links and table citations
         run: python3 scripts/validate_site.py
+      - name: Existing root site checks
+        run: python3 tests/check_site.py
+      - name: Decision lab offline tests
+        run: python3 tests/test_decision_lab.py
+      - name: Build canonical decision lab
+        run: python3 decision-lab/scripts/build.py
+      - name: Independent source/link audit
+        run: python3 decision-lab/scripts/audit.py
 
   deploy:
     if: github.event_name != 'pull_request'
     needs: validate
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     permissions:
       contents: read
       pages: write
@@ -37,6 +49,15 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+      - name: Refresh official decision-lab captures
+        continue-on-error: true
+        run: python3 decision-lab/scripts/capture_official.py --discover-depth --output decision-lab/data/official_snapshot.json
+      - name: Rebuild and audit decision lab for publication
+        run: |
+          python3 decision-lab/scripts/build.py
+          python3 decision-lab/scripts/audit.py
+      - name: Validate combined root site
+        run: python3 scripts/validate_site.py
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload static site

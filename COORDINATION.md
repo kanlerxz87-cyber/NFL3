@@ -318,7 +318,6 @@ published work:
    the current root-only glob would stop validating everything that has already been published.
 5. Keep this branch's Pages workflow limited to `main` + the working branch so the root deploy stays the
    single publisher on main.
-=======
 | Task | Status | Owner | File scope |
 |---|---|---|---|
 | Repository review, source research, dashboard and integration | needs review | arena-4fd6bbbb | COORDINATION.md, README.md, site files, tests and Pages workflow |
@@ -535,7 +534,6 @@ order; F-09 no leg-level outcome data; F-10 'Questionable' calibration unmeasure
   - `FLG-03`–`FLG-07`: Cross-source lags between `nfl.com/injuries/`, NFL.com news, and official club depth charts (BAL IR QB Lamar Jackson still listed 1st string; SEA Sam Darnold conflict; WAS Lucas Patrick / NYG Malik Harrison / DET Kerby Joseph omitted from club two-deeps; NE Ben Brown dual-listed at 1st LG & 2nd C; SEA Cooper Kupp + Rashid Shaheed packed in single 1st-string WR cell).
   - `FLG-08`–`FLG-09`: Repo audit citation bugs in root `decisions.html` (GitHub Pages docs cited for betting jurisdictions) and `dashboard/data/repo_review.csv` (empty `R-05` link and third-party blog URLs on `R-11`–`R-13`).
   - `BLK-01`–`BLK-06`: All unconfirmed pre-decision answers, empirical correlations (`rho`), strategy skill scores/CLV/ranks, unlisted 3rd/4th strings, and EPA drop-offs intentionally left blank (`""`).
->>>>>>> origin/main
 
 ## Reproducible modeling and final integration — arena/c2825205-nfl3
 
@@ -554,3 +552,17 @@ order; F-09 no leg-level outcome data; F-10 'Questionable' calibration unmeasure
 - Final-integration claim: this session now owns shared root `index.html`, `README.md`, root navigation assets, `scripts/validate_site.py`, `.github/workflows/pages.yml`, and this append-only board. Other published workspaces remain preserved. Open PRs #18/#20/#22 are coordination-only; no active implementation PR overlaps this scope.
 - Critical source-authority finding: `pipeline/fetch_official.py` and `research-desk/` describe nflverse GitHub release assets as official NFL data. GitHub release ownership/digests verify transport integrity, not NFL authorship or factual accuracy. Request to owner arena-f9dd481e: relabel these as community-source exploratory data, separate digest verification from official-source verification, and do not count derived results as validated under the user's official-only rule. This session will expose the issue prominently in root navigation and its independent audit; it will not overwrite the owner's engine.
 - Additional primary sources opened directly: NFL injury-policy revisions, NFL game/stadium preparation, NFL AT-spotters (redirected to the current game-day-assistants URL), Next Gen Stats glossary, Commanders and Giants club depth charts, Colts Week 10 club-published unofficial depth chart, NIST confidence intervals, scikit-learn TimeSeriesSplit/calibration, and GitHub Pages workflow documentation.
+
+### Verification progress — arena/c2825205-nfl3, 2026-11-12 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Canonical decision lab, official capture, validation gates, review queue, audit | done (needs review for flagged gaps) | arena/c2825205-nfl3 | `decision-lab/**`, `tests/test_decision_lab.py`, `.github/workflows/decision-lab.yml` |
+| Final root integration and publication | in progress | arena/c2825205-nfl3 | shared root `index.html`, `README.md`, `assets/site.js`, `.github/workflows/pages.yml`, this board |
+
+- Official capture: `decision-lab/scripts/capture_official.py` fetched NFL.com injury report, NFL team directory, Commanders/Giants club depth charts and Colts unofficial Week 10 article; discovery probed club depth URLs from the official directory. Snapshot contains 254 injury rows, 4 explicit no-injury sections, 1,745 published depth rows across 30 club labels; Houston Texans and Green Bay Packers depth probes did not parse a table and are flagged. Blank injury/depth cells remain blank; replacement assignment, confirmed starter/active and expected snaps are not inferred.
+- Independent line-by-line check: the 254 parsed NFL injury rows matched `dashboard/data/injuries_2026_w10.csv` on team/player/position/injury/practice/game status with 0 differences. This is an extraction cross-check against the same official report, not a claim that the mutable page is a historical archive.
+- Official sources opened directly include NFL Week 10 injury report/article, injury-policy revisions, 2026 rulebook, team directory, Commanders/Giants/Colts depth evidence, Next Gen Stats glossary, game/stadium prep, AT spotters, NFL odds-widget FAQ, NIST confidence intervals, scikit-learn TimeSeriesSplit/calibration and GitHub Pages workflow docs. Links are in `decision-lab/data/catalog.json` and the Sources page.
+- Validation: `python3 tests/test_decision_lab.py` passed 15 offline tests; `python3 decision-lab/scripts/build.py` built 13 pages; `python3 decision-lab/scripts/audit.py` passed the canonical lab gate; `python3 scripts/validate_site.py`, `python3 tests/check_site.py` and `git diff --check` passed. Synthetic gate tests are not NFL performance evidence.
+- Irregularities flagged: community nflverse assets were described as official in the preserved research-desk/engine; 536 repository table rows still lack an official-source link under the independent audit (111 community-only); no licensed odds/prop archive, confirmed replacement workload, empirical correlation, validated strategy or reward funding is verified. These do not block site publication but block affected decisions. Temporary raw HTML captures were removed from the final tree; normalized facts and hashes remain.
+- Draft integration PR: https://github.com/kanlerxz87-cyber/NFL3/pull/23. Merge and Pages deployment will be recorded below only after checks pass.
