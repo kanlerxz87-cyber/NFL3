@@ -590,3 +590,27 @@ order; F-09 no leg-level outcome data; F-10 'Questionable' calibration unmeasure
 - Live verification: fetched https://kanlerxz87-cyber.github.io/NFL3/decision-lab/ after deployment; canonical dashboard rendered with 254 injury rows, 1,745 depth rows, 0 validated strategies, 13 open blocking answers and 12 review flags.
 - Flagged/unverified items remain published at https://kanlerxz87-cyber.github.io/NFL3/decision-lab/flagged.html and https://kanlerxz87-cyber.github.io/NFL3/decision-lab/audit.html. They did not block site merge; they block affected betting/reward decisions.
 - This publication record is carried by a coordination-only follow-up from the same fixed Arena branch after the integration merge.
+
+## Final integration and verification — arena/58e04b09-nfl3 (session 58e04b09), 2026-11-12 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| T1 Coordination claim + board update | in progress | arena/58e04b09-nfl3 | `COORDINATION.md` |
+| T2 Official-source re-verification pass (line by line) | unclaimed | arena/58e04b09-nfl3 | `site/data/registry.json`, `site/data/verification.json` |
+| T3 Consolidated categorized dashboard (landing + subpages) | unclaimed | arena/58e04b09-nfl3 | `site/`, `scripts/build_site.py` |
+| T4 AUD-01 fix: community-source authority relabel | unclaimed | arena/58e04b09-nfl3 | `engine/`, `research-desk/`, `pipeline/` |
+| T5 AUD-03 fix: official source link on every table row | unclaimed | arena/58e04b09-nfl3 | `dashboard/`, `line-lab/`, `research-workspace/` data + generators |
+| T6 Root integration, tests, PR, merge, Pages deploy | unclaimed | arena/58e04b09-nfl3 | root `index.html`, `assets/`, `scripts/`, `tests/`, `.github/workflows/` |
+
+**Scope note.** Arena fixes this session's branch to `arena/58e04b09-nfl3`; no other branch will be created or pushed.
+Every other session branch on the remote (`arena/c56ed83b-nfl3`, `arena/c2825205-nfl3`, `arena/cbdcc317-nfl3`,
+`arena/e5e2b753-nfl3`, `arena/f9dd481e-nfl3`, `arena/f445c027-nfl3`, `arena/4fd6bbbb-nfl3`, `arena/40c7529f-nfl3`,
+`arena/56e27bb4-nfl3`, `arena/2836662c-nfl3`) was inspected before claiming: the newest commit on any of them is
+`2026-11-12T08:02:24Z`, and PRs #1, #4, #6–#17, #19, #21, #23, #24 and #25 are already merged. No live claim
+overlaps this scope, so this session takes the final-integration role described in the task instructions.
+
+**Takeover recorded.** `arena/c2825205-nfl3` held the shared root-output claim ("Final root integration and
+publication | in progress"). That session's PR #23 and PR #25 are merged and its last commit is over ten hours
+old, so the claim is stale under the 60-minute no-commit rule; this session takes it over and records it here.
+`engine/`, `pipeline/` and `research-desk/` were released by `arena/f9dd481e-nfl3` (PR #24 merged 2026-11-12
+05:16 UTC); its open request to relabel community nflverse assets is picked up as task T4 below.
