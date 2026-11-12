@@ -1,0 +1,11 @@
+{
+  "name": "nfl3-dashboard",
+  "private": true,
+  "description": "Static NFL3 dashboard built from data/*.csv into docs/ for GitHub Pages. No runtime dependencies.",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "all": "node scripts/build.mjs && node scripts/check.mjs"
+  }
+}

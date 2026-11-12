@@ -28,12 +28,49 @@ The Arena-provided branch is fixed as `arena/4fd6bbbb-nfl3`; this session cannot
 - Supplemental PR: [#4](https://github.com/kanlerxz87-cyber/NFL3/pull/4). The baseline dashboard was already merged via PR #1; the supplemental PR is separate.
 - Supplemental PR [#4](https://github.com/kanlerxz87-cyber/NFL3/pull/4) merged as `8d1926e0723e1440405b908129623b3a814dae29`. [Pages deployment run](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43155889164) succeeded, and the published root and supplemental review page were fetched independently. GitHub's managed Pages action reported a Node 20 deprecation annotation; deployment succeeded.
 
+## Integration follow-up — arena/2836662c-nfl3, 2026-11-12 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Additional evidence-first decision-site pages and validation workflow | needs review | `arena/2836662c-nfl3` | root static site pages/assets, `scripts/validate_site.py`, Pages workflow |
+
+- This session began from the initial commit before other sessions' changes were available locally and initially claimed a broad root-site integration. A subsequent rebase encountered an add/add conflict in the shared coordination file as `main` advanced through other merged sessions. The previous board and logs are preserved; this entry records the overlap, not a request to discard prior work.
+- Added supplementary requirements/questions, signal hypotheses, lineup/injury evidence schema, validation gates, prioritized suggestions and extended flagged items. The previously published landing and source register were preserved; a research-deep-dives table links the additions from the overview. Official NFL injury, player-stat, team-stat, team-directory and 2026 rulebook pages were opened on 2026-11-12 UTC. No live values were copied; unknowns remain flagged.
+- Verification: `python3 scripts/validate_site.py` passed across 12 HTML pages (local links/assets and citation links); `python3 tests/check_site.py` passed for the existing dashboard; `git diff --check` passed. These checks do not crawl external links or guarantee future source content.
+- Unresolved market-feed/rights, historical price, depth-chart, model, correlation, automated ingestion and leaderboard policy gaps remain visible on Flagged for Review. No verified strategy or automated injury pipeline was produced by this session.
+
+## Dashboard — arena/f445c027-nfl3 (session f445c027), 2026-11-12 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| T1 Repo review & irregularities | done – needs review (6 flags) | f445c027 | `dashboard/data/repo_review.csv` |
+| T2 Injury tracking, Week 10 2026 (official nfl.com) + starter-replacement headlines | done – second line-by-line pass recommended | f445c027 | `dashboard/data/injuries_2026_w10.csv`, `games_2026_w10.csv`, `news_signals_2026_w10.csv` |
+| T3 Strategy lab: leaderboard, validation gates, correlation framework | done – 0 validated (no odds/results data) | f445c027 | `dashboard/data/strategies.csv`, `validation_gates.csv`, `correlation_framework.csv` |
+| T4 Information gaps (Q&A) and suggestions (decision-only) | done – awaiting owner decisions | f445c027 | `dashboard/data/questions.csv`, `suggestions.csv` |
+| T5 Source registry, executive summary, dashboard site | done – build and check pass | f445c027 | `dashboard/` (all of it) |
+| T6 Integration: merge to main, Pages deploy | in progress | f445c027 | this log |
+
+**Scope:** everything the dashboard touches is under `dashboard/`. Root files (`index.html`, other root pages, `assets/`, `scripts/validate_site.py`, `tests/`, `research-workspace/`, `.github/workflows/pages.yml`, `README.md`) were **not** edited by this session.
+
+**Integration request to the root-site owner (not actioned here):** add a link to `dashboard/index.html` (live: https://kanlerxz87-cyber.github.io/NFL3/dashboard/) from the root navigation. The dashboard has a "Main NFL3 site" link back to `../index.html`.
+
+**Overlap noted:** this session first merged into `main` after PR #5 and #7 were merged; main's `COORDINATION.md` and `README.md` were kept as published and this section appended. Other sessions' branches (`arena/2836662c-nfl3`, `arena/4fd6bbbb-nfl3`, `arena/56e27bb4-nfl3`, `arena/cbdcc317-nfl3`) were not modified.
+
+**Sources (all fetched 2026-11-12):**
+- NFL.com 2026 Week 10 injury report — https://www.nfl.com/injuries/ (254 rows, 14 matchups, 19 headlines)
+- NFL.com injury-policy article — https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693
+- NFL 2026 schedule announcement — https://media.nfl.com/football-information/2026/news/2026-nfl-schedule-announced
+- Kansspelautoriteit (NL) — https://kansspelautoriteit.nl/
+- Secondary, UNVERIFIED: Yahoo Sports (https://sports.yahoo.com/article/nfl-says-worked-ban-more-152200232.html) and LA Mag (https://lamag.com/sports/nfl-gambling-november-13-memo-prop-bets-limit/) reports on an NFL prop-bet memo.
+- Excluded (not official): statrankings.com, fsroundup.com, sticktothemodel.com (depth charts).
+
+**Flagged irregularities** (published on the dashboard's Flagged for Review page): R-06 Seattle "No Injuries Reported" vs. headline that Sam Darnold is ruled out; R-07 Garrett/McDuffie listed under Rams; R-10 DEN/CHI/PHI/TB not on the page; R-11 no official depth-chart source; R-12 prop-memo source secondary; R-03/R-04/R-05 branch and board overlap.
+
 ## Duplicate integration handoff — arena/cbdcc317-nfl3, 2026-11-12 UTC
 
-- This Arena branch started at `83b6ce2` before the shared coordination file and earlier integration PRs were visible locally. It claimed root integration and pushed claim commit `1f711a4`, then created [PR #6](https://github.com/kanlerxz87-cyber/NFL3/pull/6).
-- After fetching the current main branch, this session found the root dashboard already integrated under PRs [#1](https://github.com/kanlerxz87-cyber/NFL3/pull/1) and [#4](https://github.com/kanlerxz87-cyber/NFL3/pull/4), with explicit owners/scopes on this board. GitHub reported PR #6 as conflicting. To avoid replacing or duplicating either owner's pages, this session kept the published root site and supplemental workspace, and is reducing its PR to this coordination handoff only.
-- Independent review confirmed GitHub Pages is `built` at [https://kanlerxz87-cyber.github.io/NFL3/](https://kanlerxz87-cyber.github.io/NFL3/) with main as its source. The main-branch [Pages deployment run](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43156010508) completed successfully on 2026-11-12. PR #1 and #4 deployment successes are recorded above.
-- Official NFL source routes checked by this session: [injury reports](https://www.nfl.com/injuries/), [player stats](https://www.nfl.com/stats/player-stats/), [team stats](https://www.nfl.com/stats/team-stats/), [schedules](https://www.nfl.com/schedules/), [standings](https://www.nfl.com/standings/), [teams](https://www.nfl.com/teams/), [players](https://www.nfl.com/players/) and the [2026 NFL Rulebook](https://operations.nfl.com/rules-officiating/2026-nfl-rulebook). These were route checks only; no new live stat, lineup, injury or odds value was imported. Live data is dynamic and was not independently cross-checked; maintain the existing flagged status.
-- Local proposal templates from the duplicate branch were structurally checked (8 pages, 85 cited rows) but are not being published because the existing board assigns the root files to other sessions. Consider its additional review questions/suggestion-board framing only if it fills a gap in `decisions.html`; no edit to another session's site scope was made.
-- Existing implementation and deployment are complete on main; this session's duplicate PR must not replace them. The previous `needs review` statuses and open research limitations above remain authoritative.
-- Conflict handling: merged the latest `origin/main` into the current branch with main's already-published site files preserved, removed this session's duplicate site/workflow files, and retained only the coordination log entry. A subsequent default `git pull --rebase` tried to replay the imported merge history and conflicted on `COORDINATION.md`; aborted that flattening rebase, retaining the explicit merge commit with `origin/main` as its second parent. No main or other-session work was discarded.
+- This Arena branch started from `83b6ce2` before the shared board and other sessions' merged work were visible. It initially claimed root integration and pushed claim commit `1f711a4`, then opened [PR #6](https://github.com/kanlerxz87-cyber/NFL3/pull/6).
+- Fetching current main showed that PRs [#1](https://github.com/kanlerxz87-cyber/NFL3/pull/1), [#4](https://github.com/kanlerxz87-cyber/NFL3/pull/4), [#7](https://github.com/kanlerxz87-cyber/NFL3/pull/7) and [#8](https://github.com/kanlerxz87-cyber/NFL3/pull/8) already integrated the root site, decision deep-dives, and a dedicated CSV-backed dashboard at `/dashboard/`. To avoid conflicting with the assigned root/dashboard owners, this branch preserves current main and limits its remaining change to this coordination note; it does not replace their pages, datasets, scripts or Pages configuration.
+- Current GitHub Pages API reported `built`, public, main-root source at [https://kanlerxz87-cyber.github.io/NFL3/](https://kanlerxz87-cyber.github.io/NFL3/). The latest [Pages deployment run](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43156362784) and [Validate and deploy run](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43156363844) completed successfully for `ca49fad` on 2026-11-12 UTC.
+- Verification on current main: `python3 tests/check_site.py` passed. From the repository root, `node dashboard/scripts/check.mjs` checked 254 injury rows, 14 game rows, 19 news rows and generated-page tables (10 pages; all rows sourced or flagged). A temporary isolated copy of `dashboard/` ran the build but its link check correctly reported `../index.html` missing because the repo-root landing page was not copied into that isolated test; the in-repository run is the relevant check and passed. No external values were copied or independently reverified by this session.
+- Official NFL route check for this session remains in the prior handoff entry; route access does not verify any changing live value. Existing dashboard flags (including conflicting injury/headline/team data, missing official depth-chart evidence, no odds/outcomes, no validated strategies and no reward policy) remain authoritative.
+- Merge conflict handling: this branch preserved the latest `origin/main` tree and retained only its coordination handoff. A default pull-rebase across the earlier merge history conflicted, was aborted without discarding other-session work, and is described in the earlier handoff section. Keep PR #6 limited to the coordination log; do not merge a stale site snapshot over current main.
