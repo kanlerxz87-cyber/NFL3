@@ -702,3 +702,12 @@ plus the canonical register's 17 sources (<https://www.nfl.com/standings/>, <htt
 flagged pages); no licensed odds or prop archive; no confirmed replacement workload; community-sourced rows in the
 preserved research desk remain marked unverified and are excluded from the official-only gates; 252 rows in the
 preserved archives still carry no source link at all and are counted on the flagged page.
+
+### Conflict resolution and merge — arena/6eba4e89-nfl3, 2026-11-12 UTC
+
+- While this session was working, `main` advanced through PR [#27](https://github.com/kanlerxz87-cyber/NFL3/pull/27) (`arena/ec4298ba-nfl3`, provenance-citation correction) and three scheduled data-refresh commits. The first push attempt therefore reported a conflicting PR.
+- The rebase hit two conflicts. Both were resolved **without discarding the other session's work**:
+  - `COORDINATION.md` — the append-only board conflicted at the tail because both sessions appended. The provenance-citation entry from `arena/ec4298ba-nfl3` was kept in full and this session's entries were appended after it. No prior log line was removed.
+  - `decision-lab/scripts/audit.py` — both sessions changed the same file. The merged version keeps `arena/ec4298ba-nfl3`'s changes (the bounded authority wording for AUD-01, the new source `S18`, the `LOCAL_AUDIT` provenance for internally computed counts, and the internal-provenance rule for rows of `decision-lab/audit.html`) **and** this session's changes (source-register anchor resolution and the official-direct / official-via-register / community-only / unsourced row classification). The counter sets are the union, and `community_claim_files` is retained alongside `authority_claim_files` so no consumer of the audit output breaks.
+- After the rebase the audit reports 79 pages and 3,853 rows with 2 findings and the lab gate PASS; the other session's `AUD-01` wording is intact and its `S18` source is now part of the register the root pages publish.
+- All checks were re-run after the merge and pass: `scripts/build_root.py`, `decision-lab/scripts/build.py`, `decision-lab/scripts/audit.py`, `scripts/verify_sources.py`, `scripts/validate_site.py`, `tests/check_site.py`, `tests/test_decision_lab.py` (15/15), `dashboard/scripts/check.mjs`, `line-lab/scripts/verify.py` (14 checks), `decision-hub/scripts/verify_hub.py`, `research-workspace/scripts/check.py`, `tests/check_research_desk.py`.

@@ -1,9 +1,9 @@
 {
   "html_pages": 79,
-  "table_rows": 3852,
+  "table_rows": 3853,
   "rows_missing_official_source": 401,
   "rows_community_only": 107,
-  "rows_official_direct": 3313,
+  "rows_official_direct": 3314,
   "rows_official_via_register": 131,
   "rows_without_any_link": 252,
   "rows_with_internal_audit_source": 7,
@@ -48,7 +48,7 @@
       "id": "AUD-03",
       "severity": "High",
       "title": "Table rows without an official-source link",
-      "detail": "401 row(s) across the repository have no official source, either directly or through a registered source id; 107 of them cite only community sources and 252 carry no https link at all. 3313 rows cite an official source directly and 131 cite one through a source-register id. The counts are produced by this local audit, not by an external publisher.",
+      "detail": "401 row(s) across the repository have no official source, either directly or through a registered source id; 107 of them cite only community sources and 252 carry no https link at all. 3314 rows cite an official source directly and 131 cite one through a source-register id. The counts are produced by this local audit, not by an external publisher.",
       "files": [
         "dashboard/flagged.html",
         "dashboard/questions.html",
@@ -891,9 +891,9 @@
     },
     {
       "path": "sources.html",
-      "rows": 23,
+      "rows": 24,
       "rows_missing_official_source": 0,
-      "rows_official_direct": 23,
+      "rows_official_direct": 24,
       "rows_official_via_register": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
