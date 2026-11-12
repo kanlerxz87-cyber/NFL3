@@ -191,7 +191,7 @@ def parse_colts_article(raw: str, source_url: str, observed_at: str, digest: str
 def club_directory(raw: str) -> list[tuple[str, str]]:
     """Extract official club website links from the NFL team directory."""
     found: dict[str, str] = {}
-    for match in re.finditer(r'title="View (.+?) Website"\s+href="(https://[^"]+)"', raw):
+    for match in re.finditer(r'title="View ([^"]+) Website"\s+href="(https://[^"]+)"', raw):
         name, url = match.groups()
         host = urlparse(url).hostname or ""
         if host and host not in found:
