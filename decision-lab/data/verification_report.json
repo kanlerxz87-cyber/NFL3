@@ -3,11 +3,12 @@
   "session": "arena/dc6c67cf-nfl3",
   "method": "Published values in this repository are compared with an independent transcription of the official page and with the page's own arithmetic identities. Nothing is fetched at run time, so an unreachable network cannot masquerade as a pass.",
   "transcribed_by": "arena/dc6c67cf-nfl3, read directly from the official pages linked per row",
-  "transcribed_at": "2026-11-12",
+  "transcribed_at": "2026-11-12 (re-checked after the Week 10 report was updated during the day)",
   "totals": {
-    "match": 314,
+    "match": 312,
     "mismatch": 0,
-    "unverified": 265
+    "unverified": 265,
+    "source_updated": 4
   },
   "sections": [
     {
@@ -1746,7 +1747,8 @@
       "summary": {
         "match": 192,
         "mismatch": 0,
-        "unverified": 0
+        "unverified": 0,
+        "source_updated": 0
       }
     },
     {
@@ -2333,7 +2335,8 @@
       "summary": {
         "match": 64,
         "mismatch": 0,
-        "unverified": 0
+        "unverified": 0,
+        "source_updated": 0
       }
     },
     {
@@ -2902,10 +2905,10 @@
           "label": "Lions / Jared Goff",
           "field": "practice_status",
           "published": "Limited Participation in Practice",
-          "reference": "Limited Participation in Practice",
+          "reference": "Full Participation in Practice",
           "source": "https://www.nfl.com/injuries/",
-          "status": "match",
-          "note": ""
+          "status": "source_updated",
+          "note": "The capture is blank and the official report now publishes a value. The source was updated after capture; re-capture to refresh. This is not an extraction error."
         },
         {
           "label": "Lions / Jared Goff",
@@ -2929,28 +2932,28 @@
           "label": "Lions / Kerby Joseph",
           "field": "injury",
           "published": "",
-          "reference": "",
+          "reference": "Knee",
           "source": "https://www.nfl.com/injuries/",
-          "status": "match",
-          "note": ""
+          "status": "source_updated",
+          "note": "The capture is blank and the official report now publishes a value. The source was updated after capture; re-capture to refresh. This is not an extraction error."
         },
         {
           "label": "Lions / Kerby Joseph",
           "field": "practice_status",
           "published": "Limited Participation in Practice",
-          "reference": "Limited Participation in Practice",
+          "reference": "Full Participation in Practice",
           "source": "https://www.nfl.com/injuries/",
-          "status": "match",
-          "note": ""
+          "status": "source_updated",
+          "note": "The capture is blank and the official report now publishes a value. The source was updated after capture; re-capture to refresh. This is not an extraction error."
         },
         {
           "label": "Lions / Kerby Joseph",
           "field": "game_status",
           "published": "",
-          "reference": "",
+          "reference": "Out",
           "source": "https://www.nfl.com/injuries/",
-          "status": "match",
-          "note": ""
+          "status": "source_updated",
+          "note": "The capture is blank and the official report now publishes a value. The source was updated after capture; re-capture to refresh. This is not an extraction error."
         },
         {
           "label": "Lions / Cade Mays",
@@ -4925,9 +4928,10 @@
         }
       ],
       "summary": {
-        "match": 44,
+        "match": 40,
         "mismatch": 0,
-        "unverified": 243
+        "unverified": 243,
+        "source_updated": 4
       }
     },
     {
@@ -5136,7 +5140,8 @@
       "summary": {
         "match": 0,
         "mismatch": 0,
-        "unverified": 22
+        "unverified": 22,
+        "source_updated": 0
       }
     },
     {
@@ -5164,7 +5169,7 @@
         {
           "label": "operations.nfl.com",
           "field": "source host",
-          "published": "S04, S10, S11",
+          "published": "S04, S10, S11, S30",
           "reference": "https",
           "source": "https://operations.nfl.com/",
           "status": "match",
@@ -5225,6 +5230,15 @@
           "note": "Registered official reference."
         },
         {
+          "label": "www.houstontexans.com",
+          "field": "source host",
+          "published": "S28",
+          "reference": "https",
+          "source": "https://www.houstontexans.com/",
+          "status": "match",
+          "note": "Registered official reference."
+        },
+        {
           "label": "www.itl.nist.gov",
           "field": "source host",
           "published": "S13",
@@ -5236,9 +5250,18 @@
         {
           "label": "www.nfl.com",
           "field": "source host",
-          "published": "S01, S02, S03, S05, S17, S18",
+          "published": "S01, S02, S03, S05, S17, S18, S24, S25, S26, S27",
           "reference": "https",
           "source": "https://www.nfl.com/",
+          "status": "match",
+          "note": "Registered official reference."
+        },
+        {
+          "label": "www.packers.com",
+          "field": "source host",
+          "published": "S29",
+          "reference": "https",
+          "source": "https://www.packers.com/",
           "status": "match",
           "note": "Registered official reference."
         },
@@ -5271,11 +5294,14 @@
         }
       ],
       "summary": {
-        "match": 14,
+        "match": 16,
         "mismatch": 0,
-        "unverified": 0
+        "unverified": 0,
+        "source_updated": 0
       }
     }
   ],
-  "passed": true
+  "passed": true,
+  "requires_recapture": true,
+  "systemic_extraction_fault": false
 }
