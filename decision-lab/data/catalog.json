@@ -1591,6 +1591,14 @@
       "finding": "The first live run of the automated integrity check compared Colts depth rows parsed from a news article against the club's tabular page, reporting 50 mismatches that were an artefact of the check, not of the data. The run also showed 41 report rows on the live page versus 254 in the capture, because the live NFL report had moved on to the next week.",
       "action": "The verifier now dispatches a parser per source and a test pins that dispatch. Timeline differences are separated from extraction errors and published as their own category rather than as data drift.",
       "source": "S01"
+    },
+    {
+      "id": "F24",
+      "severity": "Medium",
+      "title": "GitHub Pages is published by two mechanisms that can race",
+      "finding": "The repository deploys with actions/deploy-pages, but the Pages site is also configured with build_type 'legacy' (source: main branch, path /). Two publishers compete: a failed legacy pages-build-deployment run was observed while the Actions deployment succeeded. The API returned HTTP 403 for the attempt to switch build_type to 'workflow' from an automated token, so this cannot be changed from CI.",
+      "action": "Repository owner: Settings -> Pages -> Build and deployment -> Source: 'GitHub Actions'. Until then, treat a single failed pages-build-deployment run as superseded when the 'Validate and deploy GitHub Pages' run is green, and check the live URL for the expected page.",
+      "source": "S16"
     }
   ],
   "paths": [
