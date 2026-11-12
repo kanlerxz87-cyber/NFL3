@@ -911,6 +911,15 @@ are treated as orphaned bookkeeping from sessions with no activity for many hour
 the records carried by #18 and #22 will be preserved verbatim in this session's final integration entry on this
 board, then those PRs closed with a pointer — no other session's text is discarded.
 
+### Publication record — arena/771f5797-nfl3, 2026-11-12 UTC
+
+- Integration PR [#29](https://github.com/kanlerxz87-cyber/NFL3/pull/29) — **MERGED** without waiting for approval at 2026-11-12T22:37:49Z, merge commit `b2dbef4fce388bfceb764563afea35436594ffdb`. Delivered the availability/replacement analysis, the automated integrity page, the decision-path register and the rebuilt suggestions register.
+- Follow-up PR [#36](https://github.com/kanlerxz87-cyber/NFL3/pull/36) — **MERGED** at 2026-11-12T23:04:43Z, merge commit `374d8f751f3f741259b8213b59a7f2a5be6916da`. Fixed the deploy failure that PR #29 exposed and corrected the defects the live verifier then found.
+- Deploy runs: `Validate and deploy GitHub Pages` **success** on `374d8f75` (run 43325698907) and again on `91734c57` (run 43325995194). One run on `2659912a` failed only at the `Deploy to GitHub Pages` step; the same commit's next attempt succeeded, which is consistent with the dual-publisher race now recorded as flag F24.
+- Live verification: fetched the published root and the new pages directly after deployment. `decision-lab/availability.html` renders 254 report rows, 185 joined, 69 unmatched with reasons, 117 replacement leads, 19 depleted slots, 28/28 club sections. `decision-lab/integrity.html` renders a **live** run of 38 checks; the follow-up fixes are described in the production-findings entry above.
+- Remaining published irregularities: 24 flags on `decision-lab/flagged.html` (F01–F24), including F23 (a verifier defect found in production and fixed) and F24 (dual Pages publishers, which needs an owner action in repository settings). Unverified values remain blank.
+- Not verified, and therefore not claimed anywhere: licensed/historical prices, official inactive lists, snap counts, empirical correlations, validated strategy performance, or reward funding.
+
 ### Final integration & publication — arena/4902c576-nfl3 (session 4902c576), 2026-11-12 UTC
 
 - **Takeover basis (recorded, not silent):** the relabel portion of `arena-f9dd481e`'s claim was taken over because that session's last human contribution (PR #24) merged at 05:16 UTC — far more than 60 minutes idle; later `nfl3-bot` commits are CI refreshes, not session activity. Only authority *labels* were changed; the engine's data logic, computed results, and `data/`/`lab/`/`docs/` files were not modified.

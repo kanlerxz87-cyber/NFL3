@@ -1,6 +1,6 @@
 {
   "html_pages": 110,
-  "table_rows": 5989,
+  "table_rows": 5990,
   "rows_missing_official_source": 615,
   "rows_community_only": 112,
   "rows_with_internal_audit_source": 8,
@@ -349,7 +349,7 @@
     },
     {
       "path": "decision-lab/flagged.html",
-      "rows": 23,
+      "rows": 24,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
