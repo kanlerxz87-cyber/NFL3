@@ -872,6 +872,15 @@ The deploy workflow ran the live field-by-field check against the published site
 - **Checks run:** `python3 verification-lab/scripts/build.py` (5 pages) · `python3 tests/test_verification_lab.py` (5 pages, 112 sourced rows, PASS) · `python3 decision-lab/scripts/build.py` (14 pages, gate PASS) · `python3 decision-lab/scripts/audit.py` (83 pages, 4,046 rows, 2 findings, gate PASS) · `python3 tests/test_decision_lab.py` (15 OK) · `python3 scripts/validate_site.py` · `python3 tests/check_site.py` · `git diff --check`.
 - **Integration requests (not performed here):** link `verification-lab/index.html` from root `index.html` and from `decision-lab/index.html`; have the integration session decide whether the P0 corrections are applied to `decision-lab/data/official_snapshot.json` (owned by another session) or remain published as flags.
 - **PR:** https://github.com/kanlerxz87-cyber/NFL3/pull/30. No strategy, edge, correlation or price is claimed verified.
+
+### Publication record — verification lab, arena/0619a74f-nfl3
+
+- Integration PR [#30](https://github.com/kanlerxz87-cyber/NFL3/pull/30) — **MERGED** without waiting for approval at 2026-11-12T22:48:13Z, merge commit `0e05be248036c2281e19f6e021b9abab5ced5a9c`. Checks on head `51415a4`: Decision lab checks SUCCESS, Verification lab checks SUCCESS, Validate and deploy GitHub Pages (validate job) SUCCESS.
+- Follow-up PR [#41](https://github.com/kanlerxz87-cyber/NFL3/pull/41) — **MERGED**; merge commit `8098664`. It removed hardcoded counts from the overview and queue pages in favour of counts computed from the registers, and gave blank cells context-specific labels so a missing value cannot be read as a zero.
+- First post-merge `Validate and deploy GitHub Pages` run [43323253847](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43323253847) failed on the deploy step with `No artifacts named "github-pages" were found`, although the `github-pages` artifact existed for that run. Re-running the failed job was rejected (`its workflow file may be broken`), and `workflow_dispatch` is not permitted for this App integration (HTTP 403). The next scheduled/push run ([43324231930](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43324231930)) completed both validate and deploy steps with SUCCESS, so this was a transient artifact-handling failure, not a defect introduced here. Observed, not fixed.
+- Live verification after deployment: https://kanlerxz87-cyber.github.io/NFL3/verification-lab/ renders 31 records (15 confirmed / 13 contradicted / 3 gaps), 13 blocking questions and 4 P0 proposals; https://kanlerxz87-cyber.github.io/NFL3/verification-lab/questions.html renders 16 questions with `no answer yet` markers rather than filled-in answers. GitHub Pages API reports `built`.
+- **Still open (integration request, not done here):** `index.html` and `decision-lab/index.html` do not yet link `verification-lab/`, because both are shared navigation owned by the final integration session. The lab is reachable only by URL until that link is added. Concurrent claims V1-V4 (`arena/dc6c67cf-nfl3`, `decision-lab/data/official_snapshot.json` repair and a verification page) and PR #39/#31 remain in other sessions' scopes and were not touched.
+- Durable finding for whichever session owns `decision-lab/data/official_snapshot.json`: the published capture is still 254 rows with Seattle and Cincinnati marked injury-free, and the `/injuries/` page is not a historical archive, so a re-capture must be published with its own timestamp rather than assumed stable.
 ### Publication record — deploy fix, arena/dc6c67cf-nfl3
 
 - PR [#37](https://github.com/kanlerxz87-cyber/NFL3/pull/37) **MERGED** at 2026-11-12T22:44:34Z; merge commit `c4adb0098d64bc353b55e397b2d7b4fb8af653eb`.
@@ -884,8 +893,8 @@ The deploy workflow ran the live field-by-field check against the published site
 
 | Task | Status | Owner | File scope |
 |---|---|---|---|
-| AUD-01 authority relabel takeover: community nflverse data must not be called official | in progress | `arena/4902c576-nfl3` | `engine/**`, `pipeline/**`, `research-desk/**`, `.github/workflows/data-and-site.yml`, `tests/check_research_desk.py` |
-| Final integration: orphaned coordination records, full verification, PR + Pages publication record | in progress | `arena/4902c576-nfl3` | `COORDINATION.md` (append-only) |
+| AUD-01 authority relabel takeover: community nflverse data must not be called official | done — AUD-01 cleared | `arena/4902c576-nfl3` | `engine/**`, `pipeline/**`, `research-desk/**`, `.github/workflows/data-and-site.yml`, `tests/check_research_desk.py` |
+| Final integration: orphaned coordination records, full verification, PR + Pages publication record | done | `arena/4902c576-nfl3` | `COORDINATION.md` (append-only) |
 
 **Takeover basis for AUD-01:** the original claim on `engine/`, `pipeline/`, `data/`, `lab/` and `docs/` belongs to
 `arena-f9dd481e`, whose last human contribution was PR #24, merged 2026-11-12 05:16 UTC — far more than 60 minutes
@@ -910,3 +919,226 @@ board, then those PRs closed with a pointer — no other session's text is disca
 - Live verification: fetched the published root and the new pages directly after deployment. `decision-lab/availability.html` renders 254 report rows, 185 joined, 69 unmatched with reasons, 117 replacement leads, 19 depleted slots, 28/28 club sections. `decision-lab/integrity.html` renders a **live** run of 38 checks; the follow-up fixes are described in the production-findings entry above.
 - Remaining published irregularities: 24 flags on `decision-lab/flagged.html` (F01–F24), including F23 (a verifier defect found in production and fixed) and F24 (dual Pages publishers, which needs an owner action in repository settings). Unverified values remain blank.
 - Not verified, and therefore not claimed anywhere: licensed/historical prices, official inactive lists, snap counts, empirical correlations, validated strategy performance, or reward funding.
+
+### Final integration & publication — arena/4902c576-nfl3 (session 4902c576), 2026-11-12 UTC
+
+- **Takeover basis (recorded, not silent):** the relabel portion of `arena-f9dd481e`'s claim was taken over because that session's last human contribution (PR #24) merged at 05:16 UTC — far more than 60 minutes idle; later `nfl3-bot` commits are CI refreshes, not session activity. Only authority *labels* were changed; the engine's data logic, computed results, and `data/`/`lab/`/`docs/` files were not modified.
+- **What changed (PR #40):** 89 asserted one-to-one edits across `engine/` (11 files), `pipeline/` (2 files), `.github/workflows/data-and-site.yml` and `tests/check_research_desk.py`; all 11 `research-desk/` pages regenerated by `engine/build.py`; `decision-lab/data/audit.json` refreshed with main's upgraded `audit.py` (`authority_claim_files` schema). nflverse release assets are now labelled digest-verified **community** releases; "official" is reserved for NFL-owned pages (nfl.com / operations.nfl.com / club sites) and official game-status fields; Overview and Executive summary carry an authority-boundary notice ("a digest match proves the bytes are unchanged since release, not NFL authorship").
+- **AUD-01 (Critical) cleared** under both audit schema versions: `community_claim_files` / `authority_claim_files` are empty. Post-merge audit: 100 pages, 5,005 rows, 1 finding (AUD-03 only), lab gate PASS.
+- **Sources consulted (2026-11-12 UTC):** the independent audit `decision-lab/scripts/audit.py` (its `CLAIM_PATTERNS` and `COMMUNITY_HOSTS` define the finding and the community classification); prior board rulings (PR #23 pre-merge correction; the arena-f9dd481e relabel request); https://github.com/nflverse/nflverse-data/releases (publisher identity: community project, not NFL-operated).
+- **Verification performed:** `engine/test_engine.py` ALL CHECKS PASSED; `tests/check_research_desk.py research-desk` PASS (11 pages, 159 rows, 100% sourced); `scripts/validate_site.py` + `tests/check_site.py` PASS; dashboard `npm run check`, `line-lab/scripts/verify.py` (14 checks), `decision-hub/scripts/verify_hub.py`, `decision-desk/scripts/check.py` (14 pages, 647 rows), `research-workspace/scripts/check.py` all PASS; `tests/test_decision_lab.py` 30/30 OK; `decision-lab/scripts/audit.py` PASS; Python compilation and `git diff --check` PASS; a fresh `engine/build.py` run is byte-identical to the committed pages. None of these crawl external links; external content was read once, by hand, at fetch time.
+- **Conflict log:** three rebases onto a fast-moving `main` (PRs #26–#38 plus scheduled bot refreshes merged mid-session). `COORDINATION.md` append conflicts were resolved by keeping every prior entry and re-appending this session's; `research-desk/` + `audit.json` conflicts were resolved by taking main's upgraded side and **regenerating** from source rather than hand-merging HTML; float-repr churn in `lab/results/computed.json` was reverted as semantically identical; no other session's work was discarded.
+- **Orphaned coordination records preserved:** PR #20 (line-lab final publication record, incl. PR #19 → `3bd9d10`) was merged by this session. PRs #18 and #22 were closed without merge at 22:32 UTC; their records are preserved here because they exist nowhere else on this board: **PR #6** merged as `0a96e994d931f76d15c336e2c9215e76cec433a9` at 2026-11-12 04:47:51 UTC with Pages runs 43157149536/43157149581 then 43157237704/43157238158 succeeding and Pages API `built`; **PR #21** merged as `bede878d3f6a6be010e12d88fc727d341c4c9590` with Pages runs 43158128745/43158128352 succeeding and `decision-hub/` live-verified (flagged.html, depth-injuries.html). The review requests recorded in #18 remain attributed to `arena/cbdcc317-nfl3`.
+- **Flagged, not blocking:** AUD-03 (High): 531 rows across `dashboard/` and `line-lab/` lack an official-source link, 106 cite community hosts only — other sessions' scope, still published on Flagged for Review. `decision-hub`'s banner calls scikit-learn.org / weather.gov / kansspelautoriteit.nl rows "official primary sources" — noted for its owner, not edited here. No odds archive, validated strategy, rewards funding or legal position is claimed anywhere in this session's work.
+- **Publication record — PR #40:**
+  - Integration PR: https://github.com/kanlerxz87-cyber/NFL3/pull/40 — **MERGED** as `cbd12a9f6110edc38d8eb35386c583e80ccf83d9` without waiting for approval.
+  - PR checks before merge: both `validate` jobs SUCCESS (runs 43324089278, 43324089576); `deploy`/`capture` skipped on PR by design.
+  - Pages: `Validate and deploy GitHub Pages` run https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43324231930 completed **success** (validate 13s, deploy 37s; artifacts `github-pages` + `live-verification`); GitHub Pages API reports `built` at https://kanlerxz87-cyber.github.io/NFL3/. Node 20 deprecation and Ubuntu image-migration annotations were non-blocking.
+  - Live verification (fetched 2026-11-12 UTC with a cache-busting query): the published Overview shows "digest-verified community data (nflverse)", the "Integrity verified - authority boundary … not NFL authorship" notice, and "GAMES PARSED" (no longer "OFFICIAL GAMES PARSED"); `sources.html` shows "Sources and verification register", "release asset" link text and "nflverse-data releases (community) … published by the nflverse community project"; "official" appears only for NFL-owned reference rows.
+- This publication record is carried by a coordination-only follow-up PR from the same fixed Arena branch; that follow-up's own merge result is inherently one commit behind this entry, as with prior sessions' closing records.
+
+---
+
+## Claim — arena/e0b5058a-nfl3 (session e0b5058a), 2026-11-12 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| V1 Independent line-by-line re-verification of the canonical injury snapshot against the live official NFL injury report; publish a verification report page | done — needs review | `arena/e0b5058a-nfl3` | `injury-verification/**` (renamed from `verification/**`, see collision log below), this log |
+| V2 Remediate audit finding AUD-01 (community nflverse assets described as official) in the research-desk generator and pages — takeover; owning session arena-f9dd481e has finished and no active claim covers this finding | released → handed to `arena/4902c576-nfl3` (PR #40 opened 2026-11-12 22:49 UTC covering `engine/**`, `research-desk/**`, `pipeline/**`, `tests/check_research_desk.py`) | `arena/4902c576-nfl3` (now owner) | this log only for e0b5058a |
+| V3 Final integration: PR to main, merge without waiting for approval, confirm GitHub Pages deploy, record result | unclaimed → claimed | `arena/e0b5058a-nfl3` | PR/merge + this log; shared root files only if a navigation link to the new verification page is required |
+
+Scope rules for this session: work only on the files claimed above; do not edit `decision-lab/`, `decision-hub/`, `line-lab/`, `dashboard/`, `research-workspace/`, or other sessions' root pages. If a fix outside this scope is required, log the request here instead of editing. Append-only edits to this board; rebase and preserve all concurrent entries before every push.
+
+Claim pushed before any task work begins, per the coordination rules.
+
+### Session log — arena/e0b5058a-nfl3, 2026-11-12 UTC
+
+**Claim precedence.** This session's V1–V3 claim was pushed at 2026-11-12T22:26:36Z (`7bda721` on this branch). Claims are only visible to other sessions once merged to `main`, so later claimants working from `main` could not see it.
+
+**V1 — done (needs review).** Independent line-by-line verification of the Week 10 2026 injury data, published under `injury-verification/`:
+- Evidence: `injury-verification/evidence/live_injuries_2026_w10.tsv` — all 279 rows of the live official report (https://www.nfl.com/injuries/) fetched at 2026-11-12T22:34:14Z through a markdown rendering path (a different parser than the repo's regex-on-HTML capture), transcribed row by row.
+- Three-way field-level comparison (`python3 injury-verification/verify.py` → `report.json`):
+  - **B decision-lab snapshot vs C dashboard CSV: 254/254 keys agree on all fields, 0 differences** — two independent extractors of the same official page agree exactly.
+  - **A live vs B/C: 250/254 matched keys agree; 25 rows only in live; 4 field differences; 0 rows removed; 0 day/matchup context differences; 0 duplicate keys.** Every difference accounted for: Seahawks table appeared (15 rows; snapshot had "No Injuries Reported"), Bengals table appeared (4 rows), six players added to existing tables (49ers McCaffrey/Greenlaw, Cardinals Wingard, Colts Allen/Stewart, Jaguars Green II), and four Colts practice-status updates (Haulcy, Ward, Tillery, Taylor) between 06:32Z and 22:34Z.
+- Independent confirmation (not new claims) of the second-pass resolutions by `arena/22802aed`: Q11/R-10 bye teams confirmed on https://www.nfl.com/schedules/2026/by-week/week-10 ("Teams on Bye": CHI, DEN, PHI, TB); Q10/R-07 confirmed on https://www.nfl.com/teams/los-angeles-rams/roster (Myles Garrett #95 LB ACT, Trent McDuffie #22 CB ACT are 2026 Rams); Q09/R-06 report lag confirmed gone (Seahawks table present at 22:34Z).
+- New flags published on `injury-verification/index.html`: **V-F01** — official article states Sam Darnold will not play Week 10 while his report row's Game Status cell is blank as of 22:34Z (practice status DNP is consistent; the formal designation is missing — blank left blank, not filled from the article). **V-F02** — 16h capture mutability (+25 rows / 4 field changes on one URL; point-in-time storage needed for reproducibility). **V-F03** — only 6 of 279 rows carry a Game Status mid-week (timing limitation, blanks preserved).
+- Verification: `python3 injury-verification/verify.py` and `python3 injury-verification/build_page.py` deterministic; `python3 scripts/validate_site.py` and `python3 tests/check_site.py` pass; validator coverage of the new page was negative-tested (a removed row link fails the build). All 295 table body rows carry an official `https://www.nfl.com/` citation. `git diff --check` clean.
+
+**V2 — released, not started.** While this session prepared V2, `arena/4902c576-nfl3` opened PR #40 (22:49 UTC) claiming the identical AUD-01 remediation scope (`engine/**`, `research-desk/**`, `pipeline/**`, `tests/check_research_desk.py`). Per the never-duplicate-a-claimed-task rule, this session released V2 to PR #40 before editing any of those files. No engine/research-desk file was touched by e0b5058a.
+
+**Collision log — `verification/**`.** This session originally claimed and built `verification/**` (claim pushed 22:26Z). `arena/a265e7c1-nfl3` then opened PR #39 (22:47Z) claiming the same `verification/**` directory for an offline source-authority audit, based on `main` where this session's claim was not yet visible. PR #39 holds `verification/README.md`, `verification/audit_sources.py`, `verification/index.html`, `verification/report.json`, `verification/test_audit_sources.py`; this session held `verification/index.html`, `verification/report.json`, `verification/verify.py`, `verification/build_page.py`, `verification/evidence/` — an add/add conflict on two paths. To preserve **both** sessions' completed work without requiring the open PR to be reworked, this session moved its workspace to the disjoint directory **`injury-verification/`** (renamed before its PR was opened). Precedence is recorded above; no file from PR #39 was modified or discarded. Both pages are complementary: PR #39 audits source-authority hosts offline across the repo; V1 re-verifies the injury dataset line by line against the live official page.
+
+**Rebase incident (resolved, recorded).** The first `git pull --rebase origin main` over this board (main had advanced past PRs #26–#30) produced an add/add conflict on `COORDINATION.md`; the initial resolution incorrectly kept only the common prefix plus this session's claim, dropping main's concurrent entries. This was caught before push, the branch history was rebuilt from `0e05be2` with main's full board plus this session's claim (`+14` lines only vs main), and no other session's work reached the remote in a discarded state. The second rebase (onto the same tip) applied cleanly.
+
+**Integration requests (not performed here):**
+- Root Overview navigation link to `injury-verification/index.html` — logged for the integration session; root `index.html` is contested by open PR #31 (whole-root rebuild via `scripts/build_root.py`) and pending root-nav claims (`arena/dc6c67cf` V5, `arena/0619a74f` L2), so this session did not edit it.
+- Existing pending requests remain with their owners: link `verification-lab/index.html` (0619a74f L2) and `decision-desk` nav (6490936b C3 already applied).
+
+**Checks run on this session's tree:** `python3 injury-verification/verify.py` · `python3 injury-verification/build_page.py` · `python3 scripts/validate_site.py` (12 root pages + sub-site delegation incl. `injury-verification/`) · `python3 tests/check_site.py` · `python3 tests/check_research_desk.py research-desk` (PASS) · `python3 engine/test_engine.py` (ALL CHECKS PASSED) · `python3 decision-lab/scripts/audit.py` (101 pages, 5,300 rows, 2 findings — pre-existing AUD-01/AUD-03, unchanged by this session) · `python3 tests/test_decision_lab.py` (OK) · `git diff --check`.
+---
+
+## Claim: arena/2275e3f5-nfl3 — 2026-11-12 UTC
+
+Branch: `arena/2275e3f5-nfl3` (fixed by Arena; a session-named branch cannot be created).
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| T1 Official re-verification of the committed Week 10 snapshot (line by line) | in progress | arena/2275e3f5-nfl3 | `ops-center/data/verification.json`, this log |
+| T2 Starter/backup deficiency tracker: official injury rows x official club depth rows (1st–4th string) | in progress | arena/2275e3f5-nfl3 | `ops-center/data/*.json`, `ops-center/pages/*.html` |
+| T3 Consolidated pre-decision Q&A register across all workspaces | in progress | arena/2275e3f5-nfl3 | `ops-center/data/questions.json`, `ops-center/pages/questions.html` |
+| T4 Consolidated suggestion review centre (path A/B, approve/defer/reject, export) | in progress | arena/2275e3f5-nfl3 | `ops-center/data/suggestions.json`, `ops-center/pages/suggestions.html` |
+| T5 Consolidated strategy leaderboard / gate status across workspaces | in progress | arena/2275e3f5-nfl3 | `ops-center/data/strategies.json`, `ops-center/pages/leaderboard.html` |
+| T6 Static build + strict verifier (source link on every row, blanks preserved, no broken links) | in progress | arena/2275e3f5-nfl3 | `ops-center/scripts/` |
+| T7 Final root integration, PR, merge, Pages deploy verification | in progress | arena/2275e3f5-nfl3 | root `index.html`, `README.md`, this log |
+
+**Handoff note.** Every session listed above (`4fd6bbbb`, `56e27bb4`, `2836662c`, `f445c027`, `e5e2b753`,
+`cbdcc317`, `40c7529f`, `f9dd481e`, `c2825205`) has its work merged into `main` and its log entries are
+preserved verbatim above. The last integration claim (`arena/c2825205-nfl3`) is recorded as complete with a
+merged PR and a successful Pages deployment, so this session is taking over the *shared root integration*
+scope (`index.html`, `README.md`, this board) and logging the handoff here rather than editing another
+session's workspace files. No file inside `dashboard/`, `line-lab/`, `decision-hub/`, `decision-lab/`,
+`research-desk/`, `research-workspace/`, `pipeline/`, `engine/`, `lab/`, `data/`, `scripts/`, `tests/`,
+`assets/` or `.github/workflows/` will be modified by this session except as required to fix a broken link
+that would fail the Pages build, and any such change will be logged.
+
+**Integration rule this session follows.** All new work is written under `ops-center/**`. The root landing
+page is edited only at the end, only to add navigation to the new section and to reorganise the landing page
+into category cards; every existing page and link is preserved. Shared navigation is never edited by deleting
+another session's content.
+
+### Log — arena/2275e3f5-nfl3
+
+- 2026-11-12 22:25 UTC: claim pushed before any build work. Board read in full; nine prior sessions recorded,
+  all merged. No active implementation claim from another session was found (the three open PRs #18/#20/#22 are
+  coordination-only documentation PRs).
+- Local network note: the sandbox allows outbound HTTPS only to `github.com`, `codeload.github.com`,
+  `api.github.com`, `registry.npmjs.org`, `pypi.org` and `files.pythonhosted.org`. Direct `urllib`/`curl`
+  requests to `www.nfl.com` fail at the TLS layer from this environment, so official pages are read through the
+  agent's page-fetch tool and the resulting text is compared against the committed snapshot. The repository's
+  capture scripts (`decision-lab/scripts/capture_official.py`) run inside GitHub Actions, which does have
+  network access; this session does not rely on that for its verification.
+
+### Result log — arena/2275e3f5-nfl3, 2026-11-12 UTC
+
+**Scope actually touched:** `ops-center/**` (new), `.github/workflows/ops-center.yml` (new),
+root `index.html` and `README.md` (shared, integration — handoff logged above), `EXECUTIVE_SUMMARY.md`
+(new, root), this board. No file inside `dashboard/`, `line-lab/`, `decision-hub/`, `decision-lab/`,
+`research-desk/`, `research-workspace/`, `pipeline/`, `engine/`, `lab/`, `data/`, `scripts/`, `tests/`,
+`assets/` or any existing `.github/workflows/` file was modified. The decision-lab snapshot was read,
+never written.
+
+**New workflow file, not an edit.** `.github/workflows/ops-center.yml` was added rather than editing
+`pages.yml`, because `pages.yml` is owned by `arena/c2825205-nfl3`. Request logged for that owner: add
+`python3 ops-center/scripts/build.py && python3 ops-center/scripts/verify.py` to the `validate` job of
+`pages.yml` so the ops-centre gate runs on every Pages build, and the new file can then be retired.
+
+#### T1 — Official re-verification (line by line)
+
+- Re-read the official [NFL Week 10 injury report](https://www.nfl.com/injuries/) at ~22:25Z on
+  2026-11-12 and compared every row against the 254 parsed rows in
+  `decision-lab/data/official_snapshot.json` (captured 06:32:36Z the same day, sha256
+  `98a57a59788d28c3d9afad4f7442b6c3dbeed7a89617ce17aa42365ce2a0ca66`).
+- **Result: 279 rows at 22:25Z against 254 at 06:32Z. +25 rows, 0 removed.** Two clubs that reported
+  "No Injuries Reported" in the morning (Seahawks, Bengals) had published 19 rows by the evening.
+  Six more rows were added across Jaguars (+1), Colts (+2), Cardinals (+1), 49ers (+2). Four Colts
+  practice statuses moved: A.J. Haulcy DNP→Full, Jonathan Taylor Limited→Full, Jerry Tillery
+  Limited→DNP, Charvarius Ward DNP→Full. The six game-status designations were unchanged.
+- Method and its limit are recorded on the page and in `ops-center/data/live_recheck.json`: a
+  human-scale comparison of two texts, not a byte-level diff. A difference not observed cannot be
+  excluded.
+- Sandbox constraint recorded: the agent sandbox has no direct outbound route to `www.nfl.com`, so
+  the page was read through the agent's page-fetch tool. The repository capture script runs inside
+  GitHub Actions, which does have network access. `gh workflow run` returned HTTP 403
+  ("Resource not accessible by integration"), so this session could not dispatch a CI capture.
+
+#### T2 — Starter/backup deficiency tracker (new)
+
+- Joined the 279 official injury rows to the 1,745 official club depth rows across 30 clubs by
+  club and position family. Output: 280 chain rows, each carrying the injury-report link and the
+  club depth-chart link.
+- **195 chains published** (injured player holds a published string at that position).
+- **43 injured players do not appear at their position on their own club chart**, verified by hand
+  on two of them: Lucas Patrick (Commanders C, ruled Out) is absent from
+  [commanders.com/team/depth-chart](https://www.commanders.com/team/depth-chart), and Malik Harrison
+  (Giants LB, Questionable) is absent from every linebacker spot on
+  [giants.com/team/depth-chart](https://www.giants.com/team/depth-chart).
+- **500 of 676 position groups (74%) publish no third string.** The 2nd/3rd/4th-string requirement
+  therefore cannot be met from official club charts as published. Where a third string is needed and
+  not published, the cell is blank.
+- Worked case: the Patriots rule out three players. Their running-back chain is published four deep
+  — Stevenson (1st), Henderson (2nd), Kiner (3rd), Larison (4th). Henderson is Out and Stevenson is
+  Did Not Participate on the same report, so the published next men are the 3rd and 4th strings.
+  Verified against [patriots.com/team/depth-chart](https://www.patriots.com/team/depth-chart).
+- Confirmed replacement, expected snaps and performance impact are blank on every row. No official
+  source states any of them.
+
+#### T3–T5 — Consolidated registers
+
+- Questions: 77 merged from 77 source entries across four workspaces. Suggestions: 54 from 68.
+  Strategies: 34 from 34. Gates: 31 from 34. Fuzzy deduplication was attempted (token Jaccard) and
+  abandoned: no pair of questions from different workspaces scored above 0.55, so the items really
+  are distinct and merging them would have been a judgement, not a fact. They are grouped into 13
+  themes instead, with provenance preserved on every row.
+- The suggestion page is a review surface, not a build queue: path A/B, approve/defer/reject, live
+  tally, JSON export, browser-local only. Nothing on it writes to the repository.
+
+#### T6 — Verification
+
+- `python3 ops-center/scripts/verify.py` — **0 failures, 10 warnings** across 9 pages and 617 table
+  rows, 544 of which carry an official source link; the rest carry an explicit `unverified` marker.
+  The gate fails on a sourceless row, a broken local or parent link, a placeholder leaking into a
+  cell, a blank rendered as a value, a non-deterministic build, or an unclassified source host.
+- The 10 warnings are deliberate and are the point of having them: 4 community-data (nflverse) row
+  sources, 1 community source on the register, 2 inherited strategy texts that quote figures
+  computed on community data, 1 secondary (Yahoo) source on a question row, 1 community row source
+  on the sources page, 1 leaders/secondary split. Items OF-09 and OF-10 were added to the flagged
+  page specifically because the verifier surfaced them.
+- `python3 scripts/validate_site.py`, `python3 tests/check_site.py`,
+  `python3 decision-lab/scripts/audit.py` (86 pages, 4,240 rows, lab gate PASS),
+  `python3 tests/test_decision_lab.py` — all pass.
+- Four defects were found only by reading the rendered pages, not by any gate, and fixed: a
+  correlation of 4.5e-05 rendering as "0.0"; the critical path ordered alphabetically so that a
+  governance guardrail outranked the data contract it depends on; a source-class attribute changed
+  without updating the checker that read it; and "None (built)" leaking from another workspace's
+  dependency field.
+
+#### Sources opened directly by this session (all 2026-11-12)
+
+- https://www.nfl.com/injuries/ — read twice, 06:32Z capture and 22:25Z re-read
+- https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693
+  — practice and game-status definitions, quoted verbatim in the source register
+- https://www.commanders.com/team/depth-chart
+- https://www.seahawks.com/team/depth-chart/
+- https://www.patriots.com/team/depth-chart — carries the explicit "unofficial" disclaimer
+- https://www.giants.com/team/depth-chart
+
+#### Irregularities raised (OF-01 … OF-10, all published on `ops-center/flagged.html`)
+
+OF-01 Critical — the official injury page changed 25 rows in sixteen hours.
+OF-02 Critical — Patriots depth rows are labelled "club depth chart" in the committed capture, but the
+page states: "The 2026 depth chart is unofficial and is published by the writers of Patriots.com. The
+depth chart reflects the opinions of the Patriots.com writers and don't necessarily reflect those of
+the organization." All 60 Patriots rows carry the wrong authority label.
+OF-03 High — 43 injured players absent from their own club chart at their position.
+OF-04 High — 500 of 676 position groups publish no third string.
+OF-05 High — two Week 10 clubs have no depth capture at all.
+OF-06 Medium — published strings are not always one player (Seahawks first-string WR cell holds both
+Cooper Kupp and Rashid Shaheed).
+OF-07 Medium — status is a category, not a probability; the official policy says so.
+OF-08 Medium — no licensed odds, prop or settlement archive is held.
+OF-09 Medium — inherited strategy text carries figures computed on community data inside rows that
+carry official source links.
+OF-10 Medium — one question row cites a secondary news source (Yahoo) as its evidence; repeats
+dashboard flag R-12.
+
+#### Publication record
+
+- Integration PR and merge result, plus Pages deployment verification, are recorded in the entry below.
+
+### Publication record — arena/e0b5058a-nfl3, 2026-11-12 UTC
+
+- **PR #43** (independent line-by-line verification of Week 10 injury data) — **MERGED** without waiting for approval as `ecc34742e47a6bda5640314f085a2706338152dc`. Checks before merge: `validate` PASS (15s), `deploy` skipped on PR by design; PR state MERGEABLE/CLEAN after the final rebase onto main (which had advanced through PRs #36, #40, #41, #42 — the rebase kept main's full board plus this session's entries; AUD-01 was fixed by PR #40 during the session, so `decision-lab/scripts/audit.py` now reports 1 finding, AUD-03 only).
+- **Pages deployment:** `Validate and deploy GitHub Pages` run https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43326290953 on `ecc3474` completed **success** (jobs: validate ✓, deploy ✓).
+- **Live verification:** fetched https://kanlerxz87-cyber.github.io/NFL3/injury-verification/index.html?cb=ecc3474 after deploy — the page rendered with all sections intact (279 live rows, 254/254 extraction agreement, drift findings V-D01–V-D04, independent confirmations of Q09/Q10/Q11, flags V-F01–V-F03, full 279-row appendix with official source links on every row).
+- **Session outcome vs claim:** V1 done and published (`injury-verification/`, needs review); V2 released to `arena/4902c576` PR #40 (merged during this session — audit finding AUD-01 closed); V3 done (PR merged, deploy verified, record above). Root navigation link to `injury-verification/` remains an integration request (root `index.html` contested by open PR #31 and other pending root-nav claims) — logged, not edited.
+- No strategy, line, correlation, edge or reward is claimed verified. All flagged irregularities (V-F01–V-F03) are published on the live page with official source links and do not block publication.

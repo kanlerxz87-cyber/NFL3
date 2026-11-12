@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "note": "Only sources opened and read directly by this session are listed with status 'opened'. Sources carried over from other workspaces are listed with status 'inherited, not re-opened' and are never used to fill a value on this site.",
+  "sources": [
+    {
+      "id": "OS-01",
+      "title": "NFL official injury report, 2026 Week 10",
+      "publisher": "NFL.com",
+      "url": "https://www.nfl.com/injuries/",
+      "status": "opened",
+      "checked": "2026-11-12",
+      "observations": [
+        {"at": "2026-11-12T06:32:36Z", "by": "repository capture script (decision-lab/scripts/capture_official.py)", "rows": 254, "sha256": "98a57a59788d28c3d9afad4f7442b6c3dbeed7a89617ce17aa42365ce2a0ca66"},
+        {"at": "2026-11-12T22:25Z", "by": "this session, manual page read", "rows": 279, "sha256": ""}
+      ],
+      "scope": "Player, position, injury text, practice status and game status for the published Week 10 report.",
+      "limit": "Mutable page. The two observations on the same day differ by 25 rows. It is not a point-in-time archive and carries no depth order, workload or replacement assignment."
+    },
+    {
+      "id": "OS-02",
+      "title": "NFL injury report policy revisions (practice and game status definitions)",
+      "publisher": "NFL.com",
+      "url": "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693",
+      "status": "opened",
+      "checked": "2026-11-12",
+      "scope": "Official definitions: practice report is Did Not Participate, Limited Participation (less than 100 percent of a player's normal repetitions) or Full Participation (100 percent of normal repetitions). Game status: Questionable means uncertain whether the player will play; Doubtful means unlikely to participate; Out means the player will not play. 'Probable' was eliminated. A player certain to play is not listed in the Game Status Report.",
+      "limit": "Status labels are ordinal categories, not calibrated probabilities. Nothing in the policy quantifies replacement quality, snap share or performance impact."
+    },
+    {
+      "id": "OS-03",
+      "title": "Washington Commanders depth chart",
+      "publisher": "Commanders.com",
+      "url": "https://www.commanders.com/team/depth-chart",
+      "status": "opened",
+      "checked": "2026-11-12",
+      "scope": "Published offensive, defensive and special-teams position order for the Commanders. Read directly this session to verify the centre and tight-end chains behind two players ruled Out.",
+      "limit": "No 'unofficial' disclaimer was present in the content read. Most positions publish two strings only; third and fourth strings are not published. Lucas Patrick, ruled Out by the league report, does not appear on this chart."
+    },
+    {
+      "id": "OS-04",
+      "title": "Seattle Seahawks depth chart",
+      "publisher": "Seahawks.com",
+      "url": "https://www.seahawks.com/team/depth-chart/",
+      "status": "opened",
+      "checked": "2026-11-12",
+      "scope": "Published position order for the Seahawks. Read directly this session to verify the quarterback chain (Sam Darnold, Drew Lock, Jalen Milroe) and the left-guard chain.",
+      "limit": "The first wide-receiver cell packs two players (Cooper Kupp and Rashid Shaheed) into a single published string, so 'first string' is not a single player at that position."
+    },
+    {
+      "id": "OS-05",
+      "title": "New England Patriots depth chart",
+      "publisher": "Patriots.com",
+      "url": "https://www.patriots.com/team/depth-chart",
+      "status": "opened",
+      "checked": "2026-11-12",
+      "scope": "Published position order for the Patriots. Read directly this session to verify the running-back chain (Rhamondre Stevenson, TreVeyon Henderson, Corey Kiner, Lan Larison), the centre chain and the left-guard chain behind three players ruled Out.",
+      "limit": "This page carries an explicit disclaimer: 'The 2026 depth chart is unofficial and is published by the writers of Patriots.com. The depth chart reflects the opinions of the Patriots.com writers and don't necessarily reflect those of the organization.' The committed repository capture labels these rows 'club depth chart'; that label is wrong and is flagged as OF-02."
+    },
+    {
+      "id": "OS-06",
+      "title": "New York Giants depth chart",
+      "publisher": "Giants.com",
+      "url": "https://www.giants.com/team/depth-chart",
+      "status": "opened",
+      "checked": "2026-11-12",
+      "scope": "Published position order for the Giants. Read directly this session to check whether Malik Harrison (listed Questionable by the league report) appears at linebacker.",
+      "limit": "He does not appear at any linebacker spot on this chart. No 'unofficial' disclaimer was present in the content read."
+    },
+    {
+      "id": "OS-07",
+      "title": "Canonical decision lab official snapshot (repository artifact)",
+      "publisher": "this repository",
+      "url": "https://kanlerxz87-cyber.github.io/NFL3/decision-lab/",
+      "status": "opened",
+      "checked": "2026-11-12",
+      "scope": "Source of the parsed baseline used by this workspace: 254 official injury rows and 1,745 official club depth rows across 30 club labels, each carrying its source URL, capture timestamp and SHA-256 of the captured bytes.",
+      "limit": "It is a derived artifact of another session's capture, not a primary source. Depth rows for 27 clubs were discovered by URL probing and are not accompanied by a manifest entry."
+    },
+    {
+      "id": "OS-08",
+      "title": "2026 NFL rulebook",
+      "publisher": "NFL Football Operations",
+      "url": "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook/",
+      "status": "inherited, not re-opened",
+      "checked": "2026-11-12 (by another session)",
+      "scope": "Playing rules, scoring and timing cited by other workspaces.",
+      "limit": "Playing rules are not sportsbook settlement rules."
+    },
+    {
+      "id": "OS-09",
+      "title": "nflverse community data release assets",
+      "publisher": "nflverse (community, GitHub)",
+      "url": "https://github.com/nflverse/nflverse-data/releases",
+      "status": "inherited, not re-opened",
+      "checked": "2026-11-12 (by another session)",
+      "scope": "The community dataset behind the research-desk and engine results quoted on the leaderboard page.",
+      "limit": "Not NFL-authored. A matching GitHub digest proves transport integrity, not authorship or accuracy. Values derived from it are labelled community-source and are excluded from every official-only gate."
+    }
+  ]
+}

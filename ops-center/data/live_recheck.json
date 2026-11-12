@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "title": "Second observation of the official NFL injury report, 2026 Week 10",
+  "purpose": "Establishes, with evidence, that the official NFL injury page is a mutable page and not a point-in-time archive. It is the reason a dated snapshot history is a prerequisite for any availability feature.",
+  "source_url": "https://www.nfl.com/injuries/",
+  "publisher": "NFL.com",
+  "baseline": {
+    "label": "committed repository capture in decision-lab/data/official_snapshot.json",
+    "observed_at": "2026-11-12T06:32:36.211205+00:00",
+    "injury_rows": 254,
+    "no_injury_sections": 4,
+    "source_sha256": "98a57a59788d28c3d9afad4f7442b6c3dbeed7a89617ce17aa42365ce2a0ca66"
+  },
+  "reobservation": {
+    "observed_at": "2026-11-12T22:25Z",
+    "observed_at_note": "Approximate. The page was read in five sequential chunks between 22:25Z and 22:35Z on 2026-11-12 through the agent page-fetch tool. It was not read by the repository capture script, because the agent sandbox has no direct outbound route to www.nfl.com.",
+    "method": "Manual read of the rendered official page, compared row by row against the parsed baseline rows in decision-lab/data/official_snapshot.json on team, player, position, injury text, practice status and game status.",
+    "method_limit": "This is a human-scale comparison of two texts, not a byte-level diff of the underlying HTML. Rows present in both observations were compared; the differences listed below are the ones observed. A difference not observed here cannot be excluded.",
+    "injury_rows_observed": 279,
+    "no_injury_sections_observed": 2,
+    "game_status_rows_observed": 6
+  },
+  "delta": {
+    "rows_added": 25,
+    "rows_removed": 0,
+    "practice_status_changes": 4,
+    "game_status_changes": 0,
+    "summary": "Between 06:32Z and 22:25Z on the same day the official page went from 254 to 279 injury rows. Two clubs that reported no injuries in the morning (Seahawks, Bengals) published 19 rows by the evening, and six further rows were added to four clubs. Four Colts practice statuses changed in both directions. No row disappeared and no game-status designation changed."
+  },
+  "added_rows": [
+    {"day": "SUNDAY, NOVEMBER 15TH", "matchup": "SEA @ LV", "team": "Seahawks", "player": "AJ Barner", "position": "TE", "injury": "", "practice_status": "Full Participation in Practice", "game_status": "", "player_url": "https://www.nfl.com/players/aj-barner/"},
+    {"day": "SUNDAY, NOVEMBER 15TH", "matchup": "SEA @ LV", "team": "Seahawks", "player": "Anthony Bradford", "position": "G", "injury": "", "practice_status": "Limited Participation in Practice", "game_status": "", "player_url": "https://www.nfl.com/players/anthony-bradford/"},
+    {"day": "SUNDAY, NOVEMBER 15TH", "matchup": "SEA @ LV", "team": "Seahawks", "player": "Charles Cross", "position": "T", "injury": "", "practice_status": "Did Not Participate In Practice", "game_status": "", "player_url": "https://www.nfl.com/players/charles-cross-2/"},
+    {"day": "SUNDAY, NOVEMBER 15TH", "matchup": "SEA @ LV", "team": "Seahawks", "player": "Sam Darnold", "position": "QB", "injury": "", "practice_status": "Did Not Participate In Practice", "game_status": "", "player_url": "https://www.nfl.com/players/sam-darnold/"},
+    {"day": "SUNDAY, NOVEMBER 15TH", "matchup": "SEA @ LV", "team": "Seahawks", "player": "Derick Hall", "position": "LB", "injury": "", "practice_status": "Limited Participation in Practice", "game_status": "", "player_url": "https://www.nfl.com/players/derick-hall/"},
+    {"day": "SUNDAY, NOVEMBER 15TH", "matchup": "SEA @ LV", "team": "Seahawks", "player": "Drew Lock", "position": "QB", "injury": "", "practice_status": "Limited Participation in Practice", "game_status": "", "player_url": "https://www.nfl.com/players/drew-lock/"},
+    {"day": "SUNDAY, NOVEMBER 15TH", "matchup": "SEA @ LV", "team": "Seahawks", "player": "Quenton Nelson", "position": "G", "injury": "", "practice_status": "Did Not Participate In Practice", "game_status": "", "player_url": "https://www.nfl.com/players/quenton-nelson/"},
+    {"day": "SUNDAY, NOVEMBER 15TH", "matchup": "SEA @ LV", "team": "Seahawks", "player": "Uchenna Nwosu", "position": "LB", "injury": "", "practice_status": "Limited Participation in Practice", "game_status": "", "player_url": "https://www.nfl.com/players/uchenna-nwosu/"},
+    {"day": "SUNDAY, NOVEMBER 15TH", "matchup": "SEA @ LV", "team": "Seahawks", "player": "Patrick O'Connell", "position": "LB", "injury": "", "practice_status": "Limited Participation in Practice", "game_status": "", "player_url": "https://www.nfl.com/players/patrick-o-connell/"},
+    {"day": "SUNDAY, NOVEMBER 15TH", "matchup": "SEA @ LV", "team": "Seahawks", "player": "Connor O'Toole", "position": "LB", "injury": "", "practice_status": "Limited Participation in Practice", "game_status": "", "player_url": "https://www.nfl.com/players/connor-o-toole/"},
+    {"day": "SUNDAY, NOVEMBER 15TH", "matchup": "SEA @ LV", "team": "Seahawks", "player": "Brandon Pili", "position": "DT", "injury": "", "practice_status": "Did Not Participate In Practice", "game_status": "", "player_url": "https://www.nfl.com/players/brandon-pili/"},
+    {"day": "SUNDAY, NOVEMBER 15TH", "matchup": "SEA @ LV", "team": "Seahawks", "player": "Jarran Reed", "position": "DT", "injury": "", "practice_status": "Did Not Participate In Practice", "game_status": "", "player_url": "https://www.nfl.com/players/jarran-reed/"},
+    {"day": "SUNDAY, NOVEMBER 15TH", "matchup": "SEA @ LV", "team": "Seahawks", "player": "Rashid Shaheed", "position": "WR", "injury": "", "practice_status": "Full Participation in Practice", "game_status": "", "player_url": "https://www.nfl.com/players/rashid-shaheed/"},
+    {"day": "SUNDAY, NOVEMBER 15TH", "matchup": "SEA @ LV", "team": "Seahawks", "player": "Jaxon Smith-Njigba", "position": "WR", "injury": "", "practice_status": "Did Not Participate In Practice", "game_status": "", "player_url": "https://www.nfl.com/players/jaxon-smith-njigba/"},
+    {"day": "SUNDAY, NOVEMBER 15TH", "matchup": "SEA @ LV", "team": "Seahawks", "player": "Leonard Williams", "position": "DT", "injury": "", "practice_status": "Did Not Participate In Practice", "game_status": "", "player_url": "https://www.nfl.com/players/leonard-williams/"},
+    {"day": "SUNDAY, NOVEMBER 15TH", "matchup": "PIT @ CIN", "team": "Bengals", "player": "Jonathan Allen", "position": "DT", "injury": "", "practice_status": "Did Not Participate In Practice", "game_status": "", "player_url": "https://www.nfl.com/players/jonathan-allen/"},
+    {"day": "SUNDAY, NOVEMBER 15TH", "matchup": "PIT @ CIN", "team": "Bengals", "player": "Kyle Dugger", "position": "S", "injury": "", "practice_status": "Did Not Participate In Practice", "game_status": "", "player_url": "https://www.nfl.com/players/kyle-dugger/"},
+    {"day": "SUNDAY, NOVEMBER 15TH", "matchup": "PIT @ CIN", "team": "Bengals", "player": "Dylan Fairchild", "position": "G", "injury": "", "practice_status": "Limited Participation in Practice", "game_status": "", "player_url": "https://www.nfl.com/players/dylan-fairchild/"},
+    {"day": "SUNDAY, NOVEMBER 15TH", "matchup": "PIT @ CIN", "team": "Bengals", "player": "DJ Turner II", "position": "CB", "injury": "", "practice_status": "Limited Participation in Practice", "game_status": "", "player_url": "https://www.nfl.com/players/dj-turner-2/"},
+    {"day": "SUNDAY, NOVEMBER 15TH", "matchup": "JAX @ TEN", "team": "Jaguars", "player": "BJ Green II", "position": "DE", "injury": "", "practice_status": "Full Participation in Practice", "game_status": "", "player_url": "https://www.nfl.com/players/bj-green-ii/"},
+    {"day": "SUNDAY, NOVEMBER 15TH", "matchup": "MIA @ IND", "team": "Colts", "player": "CJ Allen", "position": "LB", "injury": "", "practice_status": "Full Participation in Practice", "game_status": "", "player_url": "https://www.nfl.com/players/cj-allen/"},
+    {"day": "SUNDAY, NOVEMBER 15TH", "matchup": "MIA @ IND", "team": "Colts", "player": "Grover Stewart", "position": "DT", "injury": "", "practice_status": "Did Not Participate In Practice", "game_status": "", "player_url": "https://www.nfl.com/players/grover-stewart/"},
+    {"day": "SUNDAY, NOVEMBER 15TH", "matchup": "LAR @ AZ", "team": "Cardinals", "player": "Andrew Wingard", "position": "S", "injury": "", "practice_status": "Limited Participation in Practice", "game_status": "", "player_url": "https://www.nfl.com/players/andrew-wingard/"},
+    {"day": "SUNDAY, NOVEMBER 15TH", "matchup": "SF @ DAL", "team": "49ers", "player": "Dre Greenlaw", "position": "LB", "injury": "", "practice_status": "Did Not Participate In Practice", "game_status": "", "player_url": "https://www.nfl.com/players/dre-greenlaw-x9042/"},
+    {"day": "SUNDAY, NOVEMBER 15TH", "matchup": "SF @ DAL", "team": "49ers", "player": "Christian McCaffrey", "position": "RB", "injury": "", "practice_status": "Did Not Participate In Practice", "game_status": "", "player_url": "https://www.nfl.com/players/christian-mccaffrey/"}
+  ],
+  "practice_status_changes": [
+    {"team": "Colts", "player": "A.J. Haulcy", "position": "S", "baseline_practice_status": "Did Not Participate In Practice", "reobserved_practice_status": "Full Participation in Practice", "player_url": "https://www.nfl.com/players/a-j-haulcy/"},
+    {"team": "Colts", "player": "Jonathan Taylor", "position": "RB", "baseline_practice_status": "Limited Participation in Practice", "reobserved_practice_status": "Full Participation in Practice", "player_url": "https://www.nfl.com/players/jonathan-taylor/"},
+    {"team": "Colts", "player": "Jerry Tillery", "position": "DT", "baseline_practice_status": "Limited Participation in Practice", "reobserved_practice_status": "Did Not Participate In Practice", "player_url": "https://www.nfl.com/players/jerry-tillery/"},
+    {"team": "Colts", "player": "Charvarius Ward", "position": "CB", "baseline_practice_status": "Did Not Participate In Practice", "reobserved_practice_status": "Full Participation in Practice", "player_url": "https://www.nfl.com/players/charvarius-ward/"}
+  ],
+  "game_status_rows_reobserved": [
+    {"team": "Commanders", "player": "Lucas Patrick", "position": "C", "injury": "Concussion", "game_status": "Out"},
+    {"team": "Commanders", "player": "Colson Yankoff", "position": "TE", "injury": "Knee", "game_status": "Out"},
+    {"team": "Giants", "player": "Malik Harrison", "position": "LB", "injury": "Groin", "game_status": "Questionable"},
+    {"team": "Patriots", "player": "Ben Brown", "position": "C", "injury": "Knee", "game_status": "Out"},
+    {"team": "Patriots", "player": "Carlton Davis III", "position": "CB", "injury": "Knee", "game_status": "Out"},
+    {"team": "Patriots", "player": "TreVeyon Henderson", "position": "RB", "injury": "Illness", "game_status": "Out"}
+  ],
+  "no_injury_sections_reobserved": [
+    {"team": "Chargers", "matchup": "LAC @ BAL", "day": "MONDAY, NOVEMBER 16TH", "text": "No Injuries Reported"},
+    {"team": "Ravens", "matchup": "LAC @ BAL", "day": "MONDAY, NOVEMBER 16TH", "text": "No Injuries Reported"}
+  ],
+  "implication": "A single daily capture is not a usable availability history. Questionable to Out transitions, and the Thursday to Friday practice-status changes that precede them, are only recoverable from a series of dated captures. Any feature built on one snapshot silently carries hindsight."
+}

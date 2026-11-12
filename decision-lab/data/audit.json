@@ -1,18 +1,30 @@
 {
-  "html_pages": 100,
-  "table_rows": 5012,
-  "rows_missing_official_source": 533,
-  "rows_community_only": 106,
-  "rows_with_internal_audit_source": 7,
-  "conflict_files": [],
+  "html_pages": 110,
+  "table_rows": 5989,
+  "rows_missing_official_source": 615,
+  "rows_community_only": 112,
+  "rows_with_internal_audit_source": 8,
+  "conflict_files": [
+    "index.html"
+  ],
   "authority_claim_files": [],
   "local_errors": [],
   "findings": [
     {
+      "id": "AUD-02",
+      "severity": "High",
+      "title": "Merge-conflict markers remain in repository text",
+      "detail": "1 file(s) contain conflict separators.",
+      "files": [
+        "index.html"
+      ],
+      "source": "LOCAL_AUDIT"
+    },
+    {
       "id": "AUD-03",
       "severity": "High",
       "title": "Table rows without an official-source link",
-      "detail": "533 row(s) across the repository lack an official HTTPS source; 106 cite only community sources.",
+      "detail": "615 row(s) across the repository lack an official HTTPS source; 112 cite only community sources.",
       "files": [
         "dashboard/flagged.html",
         "dashboard/questions.html",
@@ -297,10 +309,10 @@
     },
     {
       "path": "decision-lab/audit.html",
-      "rows": 7,
+      "rows": 8,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 7,
+      "rows_with_internal_audit_source": 8,
       "local_errors": []
     },
     {
@@ -337,7 +349,7 @@
     },
     {
       "path": "decision-lab/flagged.html",
-      "rows": 24,
+      "rows": 23,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -449,7 +461,15 @@
     },
     {
       "path": "index.html",
-      "rows": 17,
+      "rows": 36,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "injury-verification/index.html",
+      "rows": 295,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -603,6 +623,78 @@
       "path": "lineups.html",
       "rows": 9,
       "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "ops-center/availability.html",
+      "rows": 280,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "ops-center/coverage.html",
+      "rows": 30,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "ops-center/drift.html",
+      "rows": 35,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "ops-center/flagged.html",
+      "rows": 10,
+      "rows_missing_official_source": 2,
+      "rows_community_only": 1,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "ops-center/index.html",
+      "rows": 20,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "ops-center/leaderboard.html",
+      "rows": 99,
+      "rows_missing_official_source": 36,
+      "rows_community_only": 4,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "ops-center/questions.html",
+      "rows": 100,
+      "rows_missing_official_source": 22,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "ops-center/sources.html",
+      "rows": 9,
+      "rows_missing_official_source": 2,
+      "rows_community_only": 1,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "ops-center/suggestions.html",
+      "rows": 80,
+      "rows_missing_official_source": 20,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
       "local_errors": []
