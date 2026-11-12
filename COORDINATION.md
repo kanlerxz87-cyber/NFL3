@@ -185,6 +185,7 @@ order; F-09 no leg-level outcome data; F-10 'Questionable' calibration unmeasure
   4. ST-06 describes cross-game legs as “close to independent” despite F-09 stating no leg-level outcomes exist. Label this as an untested assumption, not a finding. C6's p=0.066 (n=32) also does not establish incremental signal.
 - PR #14 corrected a source counter, blocker filter and critical-path ordering; PR #15 linked both research sites from the root. These improve discoverability/accuracy but do not resolve the source/evidence concerns above. No line, market odds, player-prop projection, parlay correlation, strategy edge or reward was independently verified by this session.
 - PR #6 was opened before the parallel integrations and merge attempts encountered concurrent base updates. This branch is syncing current main and limiting the PR to the coordination log; it must not overlay a stale site snapshot.
+- **Publication record, transcribed 2026-11-12 23:05 UTC by 22802aed from the session's stale PR #18 (closed unmerged, >12 h old, branch un-updatable):** PR #6 was merged to main as `0a96e994d931f76d15c336e2c9215e76cec433a9` at 2026-11-12 04:47:51 UTC. Its first legacy Pages deployment was cancelled when a newer main update arrived; the combined main was subsequently deployed successfully by runs 43157149536/43157149581 and, after PR #17's final line-lab corrections, runs 43157237704/43157238158. GitHub Pages API status is `built`. The four line-lab review requests above remain with the owning session; the merge result does not mark them verified or resolved.
 
 ## Comprehensive Decision & Line Origination Hub — arena-40c7529f, 2026-11-12 UTC
 
@@ -218,6 +219,7 @@ order; F-09 no leg-level outcome data; F-10 'Questionable' calibration unmeasure
   - `FLG-03`–`FLG-07`: Cross-source lags between `nfl.com/injuries/`, NFL.com news, and official club depth charts (BAL IR QB Lamar Jackson still listed 1st string; SEA Sam Darnold conflict; WAS Lucas Patrick / NYG Malik Harrison / DET Kerby Joseph omitted from club two-deeps; NE Ben Brown dual-listed at 1st LG & 2nd C; SEA Cooper Kupp + Rashid Shaheed packed in single 1st-string WR cell).
   - `FLG-08`–`FLG-09`: Repo audit citation bugs in root `decisions.html` (GitHub Pages docs cited for betting jurisdictions) and `dashboard/data/repo_review.csv` (empty `R-05` link and third-party blog URLs on `R-11`–`R-13`).
   - `BLK-01`–`BLK-06`: All unconfirmed pre-decision answers, empirical correlations (`rho`), strategy skill scores/CLV/ranks, unlisted 3rd/4th strings, and EPA drop-offs intentionally left blank (`""`).
+- **Publication record, transcribed 2026-11-12 23:05 UTC by 22802aed from the session's stale PR #22 (closed unmerged, >12 h old, branch un-updatable):** PR #21 was merged into `main` as commit `bede878d3f6a6be010e12d88fc727d341c4c9590` on 2026-11-12 UTC. GitHub Pages workflow run 43158128745 and `pages-build-deployment` run 43158128352 both completed with `success` (`status: built`). The live site was independently fetched and verified at `https://kanlerxz87-cyber.github.io/NFL3/decision-hub/` (including `flagged.html` and `depth-injuries.html`).
 
 ---
 
@@ -487,3 +489,8 @@ Branch is fixed as `arena/22802aed-nfl3` (Arena rule). No sub-site files are edi
 - Q02 proxy decision (weekly official club depth-chart collection vs documented proxy) — owner decision required.
 - Q04/Q05 licensed odds and historical results; Q06/Q15 empirical injury/parlay calibration; Q14 CLV benchmark; Q16–Q18 leaderboard rewards, sample-size and publication-scope decisions — unchanged, awaiting owner.
 - Q12 jurisdiction (corrected premise) and Q13 primary memo text — unresolved; flagged, do not block publication.
+
+### T-D result — arena/22802aed-nfl3, 2026-11-12 ~23:05 UTC
+
+- PR #20 (e5e2b753 final publication record) — found already MERGED on main (by a concurrent session); nothing to do.
+- PR #18 (cbdcc317) and PR #22 (40c7529f) — both > 12 h old, coordination-only, conflicting with main; `gh pr update-branch` / REST `update-branch` unavailable (404). Per the takeover rule, their publication records were transcribed verbatim into their own board sections (attribution preserved) and both PRs are closed unmerged with an explanatory comment. No code content existed in either PR.
