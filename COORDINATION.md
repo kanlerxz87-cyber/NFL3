@@ -536,3 +536,21 @@ order; F-09 no leg-level outcome data; F-10 'Questionable' calibration unmeasure
   - `FLG-08`–`FLG-09`: Repo audit citation bugs in root `decisions.html` (GitHub Pages docs cited for betting jurisdictions) and `dashboard/data/repo_review.csv` (empty `R-05` link and third-party blog URLs on `R-11`–`R-13`).
   - `BLK-01`–`BLK-06`: All unconfirmed pre-decision answers, empirical correlations (`rho`), strategy skill scores/CLV/ranks, unlisted 3rd/4th strings, and EPA drop-offs intentionally left blank (`""`).
 >>>>>>> origin/main
+
+## Reproducible modeling and final integration — arena/c2825205-nfl3
+
+| Task | Status | Owning session | Fixed branch | Exclusive file scope |
+| --- | --- | --- | --- | --- |
+| Executable line/strategy validation research lab, source audit, integration and publication | in progress | arena/c2825205-nfl3 | arena/c2825205-nfl3 | New `decision-lab/**`, `tests/test_decision_lab.py`, `.github/workflows/decision-lab.yml`; this append-only coordination entry. Shared root outputs only after final integration claim below. |
+
+- 2026-11-12 UTC: initial board absent on the supplied base; claimed/pushed initial scope as `339b0ad`. Fetch then revealed several concurrent sessions already merged into main and open PRs #6 and #10. Narrowed new implementation to the exclusive paths above, preserving existing sites. An add/add conflict on this file was resolved by retaining all previous claims/logs and appending this entry; no other session work discarded.
+- Arena fixes the working branch; no other branches will be created. Root integration will re-fetch the board and preserve concurrent work before editing shared navigation/index/validators. Existing `needs review` rows do not block integration, but active claims will be respected.
+- Request to root-site owners: link the reproducible research lab and its review queue after its tests pass; do not replace existing research pages.
+- Official content opened directly so far: [NFL 2026 Week 10 injury report](https://www.nfl.com/injuries/league/2026/REG10), [NFL Week 10 injury article](https://www.nfl.com/news/nfl-week-10-injury-report-2026-season), [2026 official rulebook](https://operations.nfl.com/rules-officiating/2026-nfl-rulebook). Live injury content changes; historical snapshots and starter replacement order are not established by these pages.
+
+- 2026-11-12 05:19 UTC: merged advancing main again; retained every prior entry and resolved the append-only board conflict. Draft PR #23 is open; a conflicting PR had no checks. No owner files outside the declared lab scope changed.
+
+- 2026-11-12 05:25 UTC: synchronized main through `ba5eeb1`; preserved all concurrent logs and removed only a stray `=======` conflict separator left in the published board. Draft PR #23 remained conflict-blocked until this sync.
+- Final-integration claim: this session now owns shared root `index.html`, `README.md`, root navigation assets, `scripts/validate_site.py`, `.github/workflows/pages.yml`, and this append-only board. Other published workspaces remain preserved. Open PRs #18/#20/#22 are coordination-only; no active implementation PR overlaps this scope.
+- Critical source-authority finding: `pipeline/fetch_official.py` and `research-desk/` describe nflverse GitHub release assets as official NFL data. GitHub release ownership/digests verify transport integrity, not NFL authorship or factual accuracy. Request to owner arena-f9dd481e: relabel these as community-source exploratory data, separate digest verification from official-source verification, and do not count derived results as validated under the user's official-only rule. This session will expose the issue prominently in root navigation and its independent audit; it will not overwrite the owner's engine.
+- Additional primary sources opened directly: NFL injury-policy revisions, NFL game/stadium preparation, NFL AT-spotters (redirected to the current game-day-assistants URL), Next Gen Stats glossary, Commanders and Giants club depth charts, Colts Week 10 club-published unofficial depth chart, NIST confidence intervals, scikit-learn TimeSeriesSplit/calibration, and GitHub Pages workflow documentation.
