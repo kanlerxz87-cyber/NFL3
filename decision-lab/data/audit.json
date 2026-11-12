@@ -1,6 +1,6 @@
 {
   "html_pages": 100,
-  "table_rows": 5000,
+  "table_rows": 5005,
   "rows_missing_official_source": 533,
   "rows_community_only": 106,
   "rows_with_internal_audit_source": 7,
@@ -449,7 +449,7 @@
     },
     {
       "path": "decision-lab/verification.html",
-      "rows": 296,
+      "rows": 301,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
