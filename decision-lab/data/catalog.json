@@ -1,117 +1,997 @@
 {
   "updated": "2026-11-12",
   "sources": [
-    {"id": "S01", "title": "NFL official injury report, 2026 Week 10", "url": "https://www.nfl.com/injuries/league/2026/REG10", "publisher": "NFL", "checked": "2026-11-12", "status": "opened", "scope": "Player, position, injury text, practice status and game status for the published Week 10 report.", "limit": "Mutable page; not a point-in-time archive. Does not establish depth order, workload or replacement assignment."},
-    {"id": "S02", "title": "NFL Week 10 injury report article", "url": "https://www.nfl.com/news/nfl-week-10-injury-report-2026-season", "publisher": "NFL.com", "checked": "2026-11-12", "status": "opened", "scope": "Dated injury-status article and game context for Week 10.", "limit": "Article updates can lag the report page; conflicting statuses must be flagged, not merged by guess."},
-    {"id": "S03", "title": "NFL injury-report policy revisions", "url": "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693", "publisher": "NFL.com", "checked": "2026-11-12", "status": "opened", "scope": "Definitions of practice participation and game-status categories; Questionable means uncertain, Doubtful unlikely, Out will not play.", "limit": "Status labels are not calibrated probabilities and do not quantify replacement quality."},
-    {"id": "S04", "title": "2026 NFL official rulebook", "url": "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook/", "publisher": "NFL Football Operations", "checked": "2026-11-12", "status": "opened", "scope": "Season-specific playing rules, scoring, timing and overtime.", "limit": "Playing rules are not sportsbook settlement rules; each market still needs its own documented grading terms."},
-    {"id": "S05", "title": "NFL team directory", "url": "https://www.nfl.com/teams/", "publisher": "NFL", "checked": "2026-11-12", "status": "opened", "scope": "Official links to all 32 club websites and NFL team profiles.", "limit": "Directory does not itself provide depth order, snap counts or injury history."},
-    {"id": "S06", "title": "Washington Commanders club depth chart", "url": "https://www.commanders.com/team/depth-chart", "publisher": "Washington Commanders", "checked": "2026-11-12", "status": "opened", "scope": "Club-published offensive, defensive and special-teams depth lists.", "limit": "Club depth charts are guidance, not confirmed game participation; cross-source lag and missing ranks remain possible."},
-    {"id": "S07", "title": "New York Giants club depth chart", "url": "https://www.giants.com/team/depth-chart", "publisher": "New York Giants", "checked": "2026-11-12", "status": "opened", "scope": "Club-published offensive, defensive and special-teams depth lists.", "limit": "Does not prove actual snaps, starter confirmation or replacement assignment."},
-    {"id": "S08", "title": "Colts Week 10 unofficial depth chart", "url": "https://www.colts.com/news/colts-release-unofficial-depth-chart-for-week-10", "publisher": "Indianapolis Colts", "checked": "2026-11-12", "status": "opened", "scope": "Club article explicitly labeled unofficial; ordered position lists for offense, defense and special teams.", "limit": "Unofficial by the publisher's own label; cannot be treated as confirmed lineup or workload."},
-    {"id": "S09", "title": "NFL Next Gen Stats glossary", "url": "https://nextgenstats.nfl.com/glossary", "publisher": "NFL Next Gen Stats", "checked": "2026-11-12", "status": "opened", "scope": "Official definitions for tracking-derived passing, rushing and receiving metrics.", "limit": "Glossary access does not establish a licensed historical play-level feed or redistribution right."},
-    {"id": "S10", "title": "NFL game and stadium preparation", "url": "https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep/", "publisher": "NFL Football Operations", "checked": "2026-11-12", "status": "opened", "scope": "Game-day operations timeline, including inactive-list delivery and medical/technical preparation.", "limit": "Operational timeline is not a machine-readable inactive feed."},
-    {"id": "S11", "title": "NFL AT spotters", "url": "https://operations.nfl.com/game-operations-logistics/game-day-assistants/at-spotters", "publisher": "NFL Football Operations", "checked": "2026-11-12", "status": "opened", "scope": "Independent certified athletic trainers observe potential injuries and can trigger medical review.", "limit": "Spotter process does not publish real-time diagnoses or replacement depth for modeling."},
-    {"id": "S12", "title": "NFL odds-widget FAQ", "url": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL", "publisher": "NFL Support", "checked": "2026-11-12", "status": "opened", "scope": "Odds widgets are supplied by bookmaker partners; bets redirect to the partner sportsbook.", "limit": "Does not establish an NFL-authored odds archive, API, historical prices or prop settlement terms."},
-    {"id": "S13", "title": "NIST confidence limits for the mean", "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm", "publisher": "NIST/SEMATECH", "checked": "2026-11-12", "status": "opened", "scope": "Confidence-interval interpretation and uncertainty guidance.", "limit": "Statistical reference, not evidence of NFL betting skill; game-cluster dependence requires appropriate resampling."},
-    {"id": "S14", "title": "scikit-learn TimeSeriesSplit", "url": "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html", "publisher": "scikit-learn project", "checked": "2026-11-12", "status": "opened", "scope": "Time-ordered train/test splitting to avoid training on future data.", "limit": "Official software documentation, not an NFL source; grouped game leakage still needs explicit controls."},
-    {"id": "S15", "title": "scikit-learn probability calibration", "url": "https://scikit-learn.org/stable/modules/calibration.html", "publisher": "scikit-learn project", "checked": "2026-11-12", "status": "opened", "scope": "Calibration curves and proper scoring-rule caveats.", "limit": "Lower Brier loss alone does not prove better calibration or profitability."},
-    {"id": "S16", "title": "GitHub Pages custom workflows", "url": "https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages", "publisher": "GitHub Docs", "checked": "2026-11-12", "status": "opened", "scope": "Build/deploy workflow requirements and Pages artifact deployment.", "limit": "Pages hosts static output; it is not a database, wagering backend or guaranteed real-time scheduler."},
-    {"id": "S17", "title": "Washington Commanders roster", "url": "https://www.nfl.com/teams/washington-commanders/roster", "publisher": "NFL", "checked": "2026-11-12", "status": "opened", "scope": "Player identity, position and roster status.", "limit": "Roster status is not depth order or confirmed game-day active status."}
+    {
+      "id": "S01",
+      "title": "NFL official injury report, 2026 Week 10",
+      "url": "https://www.nfl.com/injuries/league/2026/REG10",
+      "publisher": "NFL",
+      "checked": "2026-11-12",
+      "status": "opened",
+      "scope": "Player, position, injury text, practice status and game status for the published Week 10 report.",
+      "limit": "Mutable page; not a point-in-time archive. Does not establish depth order, workload or replacement assignment."
+    },
+    {
+      "id": "S02",
+      "title": "NFL Week 10 injury report article",
+      "url": "https://www.nfl.com/news/nfl-week-10-injury-report-2026-season",
+      "publisher": "NFL.com",
+      "checked": "2026-11-12",
+      "status": "opened",
+      "scope": "Dated injury-status article and game context for Week 10.",
+      "limit": "Article updates can lag the report page; conflicting statuses must be flagged, not merged by guess."
+    },
+    {
+      "id": "S03",
+      "title": "NFL injury-report policy revisions",
+      "url": "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693",
+      "publisher": "NFL.com",
+      "checked": "2026-11-12",
+      "status": "opened",
+      "scope": "Definitions of practice participation and game-status categories; Questionable means uncertain, Doubtful unlikely, Out will not play.",
+      "limit": "Status labels are not calibrated probabilities and do not quantify replacement quality."
+    },
+    {
+      "id": "S04",
+      "title": "2026 NFL official rulebook",
+      "url": "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook/",
+      "publisher": "NFL Football Operations",
+      "checked": "2026-11-12",
+      "status": "opened",
+      "scope": "Season-specific playing rules, scoring, timing and overtime.",
+      "limit": "Playing rules are not sportsbook settlement rules; each market still needs its own documented grading terms."
+    },
+    {
+      "id": "S05",
+      "title": "NFL team directory",
+      "url": "https://www.nfl.com/teams/",
+      "publisher": "NFL",
+      "checked": "2026-11-12",
+      "status": "opened",
+      "scope": "Official links to all 32 club websites and NFL team profiles.",
+      "limit": "Directory does not itself provide depth order, snap counts or injury history."
+    },
+    {
+      "id": "S06",
+      "title": "Washington Commanders club depth chart",
+      "url": "https://www.commanders.com/team/depth-chart",
+      "publisher": "Washington Commanders",
+      "checked": "2026-11-12",
+      "status": "opened",
+      "scope": "Club-published offensive, defensive and special-teams depth lists.",
+      "limit": "Club depth charts are guidance, not confirmed game participation; cross-source lag and missing ranks remain possible."
+    },
+    {
+      "id": "S07",
+      "title": "New York Giants club depth chart",
+      "url": "https://www.giants.com/team/depth-chart",
+      "publisher": "New York Giants",
+      "checked": "2026-11-12",
+      "status": "opened",
+      "scope": "Club-published offensive, defensive and special-teams depth lists.",
+      "limit": "Does not prove actual snaps, starter confirmation or replacement assignment."
+    },
+    {
+      "id": "S08",
+      "title": "Colts Week 10 unofficial depth chart",
+      "url": "https://www.colts.com/news/colts-release-unofficial-depth-chart-for-week-10",
+      "publisher": "Indianapolis Colts",
+      "checked": "2026-11-12",
+      "status": "opened",
+      "scope": "Club article explicitly labeled unofficial; ordered position lists for offense, defense and special teams.",
+      "limit": "Unofficial by the publisher's own label; cannot be treated as confirmed lineup or workload."
+    },
+    {
+      "id": "S09",
+      "title": "NFL Next Gen Stats glossary",
+      "url": "https://nextgenstats.nfl.com/glossary",
+      "publisher": "NFL Next Gen Stats",
+      "checked": "2026-11-12",
+      "status": "opened",
+      "scope": "Official definitions for tracking-derived passing, rushing and receiving metrics.",
+      "limit": "Glossary access does not establish a licensed historical play-level feed or redistribution right."
+    },
+    {
+      "id": "S10",
+      "title": "NFL game and stadium preparation",
+      "url": "https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep/",
+      "publisher": "NFL Football Operations",
+      "checked": "2026-11-12",
+      "status": "opened",
+      "scope": "Game-day operations timeline, including inactive-list delivery and medical/technical preparation.",
+      "limit": "Operational timeline is not a machine-readable inactive feed."
+    },
+    {
+      "id": "S11",
+      "title": "NFL AT spotters",
+      "url": "https://operations.nfl.com/game-operations-logistics/game-day-assistants/at-spotters",
+      "publisher": "NFL Football Operations",
+      "checked": "2026-11-12",
+      "status": "opened",
+      "scope": "Independent certified athletic trainers observe potential injuries and can trigger medical review.",
+      "limit": "Spotter process does not publish real-time diagnoses or replacement depth for modeling."
+    },
+    {
+      "id": "S12",
+      "title": "NFL odds-widget FAQ",
+      "url": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL",
+      "publisher": "NFL Support",
+      "checked": "2026-11-12",
+      "status": "opened",
+      "scope": "Odds widgets are supplied by bookmaker partners; bets redirect to the partner sportsbook.",
+      "limit": "Does not establish an NFL-authored odds archive, API, historical prices or prop settlement terms."
+    },
+    {
+      "id": "S13",
+      "title": "NIST confidence limits for the mean",
+      "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm",
+      "publisher": "NIST/SEMATECH",
+      "checked": "2026-11-12",
+      "status": "opened",
+      "scope": "Confidence-interval interpretation and uncertainty guidance.",
+      "limit": "Statistical reference, not evidence of NFL betting skill; game-cluster dependence requires appropriate resampling."
+    },
+    {
+      "id": "S14",
+      "title": "scikit-learn TimeSeriesSplit",
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html",
+      "publisher": "scikit-learn project",
+      "checked": "2026-11-12",
+      "status": "opened",
+      "scope": "Time-ordered train/test splitting to avoid training on future data.",
+      "limit": "Official software documentation, not an NFL source; grouped game leakage still needs explicit controls."
+    },
+    {
+      "id": "S15",
+      "title": "scikit-learn probability calibration",
+      "url": "https://scikit-learn.org/stable/modules/calibration.html",
+      "publisher": "scikit-learn project",
+      "checked": "2026-11-12",
+      "status": "opened",
+      "scope": "Calibration curves and proper scoring-rule caveats.",
+      "limit": "Lower Brier loss alone does not prove better calibration or profitability."
+    },
+    {
+      "id": "S16",
+      "title": "GitHub Pages custom workflows",
+      "url": "https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages",
+      "publisher": "GitHub Docs",
+      "checked": "2026-11-12",
+      "status": "opened",
+      "scope": "Build/deploy workflow requirements and Pages artifact deployment.",
+      "limit": "Pages hosts static output; it is not a database, wagering backend or guaranteed real-time scheduler."
+    },
+    {
+      "id": "S17",
+      "title": "Washington Commanders roster",
+      "url": "https://www.nfl.com/teams/washington-commanders/roster",
+      "publisher": "NFL",
+      "checked": "2026-11-12",
+      "status": "opened",
+      "scope": "Player identity, position and roster status.",
+      "limit": "Roster status is not depth order or confirmed game-day active status."
+    }
   ],
   "requirements": [
-    {"id": "R01", "requirement": "Collect, organize and analyze NFL information with a complete requirements register.", "state": "partial", "evidence": "Source-linked research workspaces and this canonical register exist; completeness is limited to verified sources.", "next": "Close data-rights and historical-feed gaps before claiming complete coverage.", "source": "S01"},
-    {"id": "R02", "requirement": "Clean GitHub Pages dashboard with category subpages and readable tables.", "state": "implemented", "evidence": "Static pages, relative links, source column on every table row, responsive CSS and build checks.", "next": "Keep link/citation checks in CI.", "source": "S16"},
-    {"id": "R03", "requirement": "Suggestions reviewed before implementation changes.", "state": "implemented", "evidence": "Dedicated suggestion board with recommended path, dependencies, trade-offs and optional browser-local review export.", "next": "Reviewer may approve/defer/reject; no selection silently deploys a strategy.", "source": "S16"},
-    {"id": "R04", "requirement": "Clear questions, known information, missing answers and discovery actions.", "state": "implemented", "evidence": "Decision register separates known facts from unknowns and names the cheapest discovery action.", "next": "Answers requiring contracts, jurisdiction or budget remain open.", "source": "S12"},
-    {"id": "R05", "requirement": "Originate independent NFL lines.", "state": "blocked", "evidence": "Existing research-desk contains exploratory community-data models; official-only validation inputs and licensed market history are not established.", "next": "Use the line-origination protocol only after official outcomes and permissioned prices pass gates.", "source": "S12"},
-    {"id": "R06", "requirement": "Research useful signals for singles, parlays and player-prop combinations.", "state": "partial", "evidence": "Testable hypotheses and validation design are documented; no strategy is approved.", "next": "Run pre-registered walk-forward tests on verified data.", "source": "S09"},
-    {"id": "R07", "requirement": "Leaderboard competition with rewards for top strategies.", "state": "partial", "evidence": "Gate-first ranking and reward rules are specified; eligible verified entries and reward funding are absent.", "next": "Withhold rewards until eligibility, legal review and funding are verified.", "source": "S13"},
-    {"id": "R08", "requirement": "Every strategy passes validation gates.", "state": "implemented", "evidence": "Ten fail-closed gates cover provenance, timing, completeness, market rules, pre-registration, evaluation, dependence, personnel, shadow and rewards.", "next": "No live strategy has passed; synthetic unit tests are not performance evidence.", "source": "S14"},
-    {"id": "R09", "requirement": "Determine correlation values.", "state": "blocked", "evidence": "No official-only matched leg-outcome sample is verified. Correlation cells remain blank.", "next": "Estimate pairwise and joint dependence from training games only; validate on held-out combinations.", "source": "S15"},
-    {"id": "R10", "requirement": "Remove luck and reward selective skill.", "state": "partial", "evidence": "Luck cannot be eliminated. Proper scores, game-cluster uncertainty, ablations, multiplicity control and prospective shadow records reduce false confidence.", "next": "Never label residual variance as pure luck or a hot streak as skill.", "source": "S13"},
-    {"id": "R11", "requirement": "Track injuries and offensive/defensive starter replacements.", "state": "partial", "evidence": "Official report snapshot and club depth evidence are separated; replacement assignment and workload remain blank without direct evidence.", "next": "Automate timestamped capture and flag stale/conflicting sources.", "source": "S03"},
-    {"id": "R12", "requirement": "Identify 2nd/3rd/4th-string backup deficiencies.", "state": "partial", "evidence": "Club depth lists can establish published order; deficiency requires role, participation and outcome evidence.", "next": "Do not infer a fixed points penalty from string rank alone.", "source": "S06"},
-    {"id": "R13", "requirement": "Executive summary.", "state": "implemented", "evidence": "Summary states delivered work, blockers, recommended path and verification boundaries.", "next": "Update after material evidence changes.", "source": "S01"},
-    {"id": "R14", "requirement": "No manual user input; autonomous completion.", "state": "partial", "evidence": "Build, checks, capture workflow and publication are automated; contracts, budget and legal decisions cannot be invented.", "next": "Use conservative research-only defaults and leave unresolved decisions open.", "source": "S16"},
-    {"id": "R15", "requirement": "Line-by-line official-source verification; blank unconfirmed values.", "state": "partial", "evidence": "Canonical tables use official sources and blank unknowns. Independent audit flags community-data mislabeling in an existing workspace.", "next": "Treat digest integrity as separate from official factual verification.", "source": "S12"},
-    {"id": "R16", "requirement": "Coordinate parallel sessions and avoid conflicts.", "state": "implemented", "evidence": "COORDINATION.md claims, append-only logs, fixed Arena branch and preserved concurrent workspaces.", "next": "Re-fetch before final merge; preserve other sessions' content.", "source": "S16"},
-    {"id": "R17", "requirement": "PR, merge, Pages deployment and flagged-review page.", "state": "in_progress", "evidence": "Draft integration PR exists; merge occurs only after checks pass.", "next": "Record PR, merge commit and successful Pages run in coordination log.", "source": "S16"}
+    {
+      "id": "R01",
+      "requirement": "Collect, organize and analyze NFL information with a complete requirements register.",
+      "state": "partial",
+      "evidence": "Source-linked research workspaces and this canonical register exist; completeness is limited to verified sources.",
+      "next": "Close data-rights and historical-feed gaps before claiming complete coverage.",
+      "source": "S01"
+    },
+    {
+      "id": "R02",
+      "requirement": "Clean GitHub Pages dashboard with category subpages and readable tables.",
+      "state": "implemented",
+      "evidence": "Static pages, relative links, source column on every table row, responsive CSS and build checks.",
+      "next": "Keep link/citation checks in CI.",
+      "source": "S16"
+    },
+    {
+      "id": "R03",
+      "requirement": "Suggestions reviewed before implementation changes.",
+      "state": "implemented",
+      "evidence": "Dedicated suggestion board with recommended path, dependencies, trade-offs and optional browser-local review export.",
+      "next": "Reviewer may approve/defer/reject; no selection silently deploys a strategy.",
+      "source": "S16"
+    },
+    {
+      "id": "R04",
+      "requirement": "Clear questions, known information, missing answers and discovery actions.",
+      "state": "implemented",
+      "evidence": "Decision register separates known facts from unknowns and names the cheapest discovery action.",
+      "next": "Answers requiring contracts, jurisdiction or budget remain open.",
+      "source": "S12"
+    },
+    {
+      "id": "R05",
+      "requirement": "Originate independent NFL lines.",
+      "state": "blocked",
+      "evidence": "Existing research-desk contains exploratory community-data models; official-only validation inputs and licensed market history are not established.",
+      "next": "Use the line-origination protocol only after official outcomes and permissioned prices pass gates.",
+      "source": "S12"
+    },
+    {
+      "id": "R06",
+      "requirement": "Research useful signals for singles, parlays and player-prop combinations.",
+      "state": "partial",
+      "evidence": "Testable hypotheses and validation design are documented; no strategy is approved.",
+      "next": "Run pre-registered walk-forward tests on verified data.",
+      "source": "S09"
+    },
+    {
+      "id": "R07",
+      "requirement": "Leaderboard competition with rewards for top strategies.",
+      "state": "partial",
+      "evidence": "Gate-first ranking and reward rules are specified; eligible verified entries and reward funding are absent.",
+      "next": "Withhold rewards until eligibility, legal review and funding are verified.",
+      "source": "S13"
+    },
+    {
+      "id": "R08",
+      "requirement": "Every strategy passes validation gates.",
+      "state": "implemented",
+      "evidence": "Ten fail-closed gates cover provenance, timing, completeness, market rules, pre-registration, evaluation, dependence, personnel, shadow and rewards.",
+      "next": "No live strategy has passed; synthetic unit tests are not performance evidence.",
+      "source": "S14"
+    },
+    {
+      "id": "R09",
+      "requirement": "Determine correlation values.",
+      "state": "blocked",
+      "evidence": "No official-only matched leg-outcome sample is verified. Correlation cells remain blank.",
+      "next": "Estimate pairwise and joint dependence from training games only; validate on held-out combinations.",
+      "source": "S15"
+    },
+    {
+      "id": "R10",
+      "requirement": "Remove luck and reward selective skill.",
+      "state": "partial",
+      "evidence": "Luck cannot be eliminated. Proper scores, game-cluster uncertainty, ablations, multiplicity control and prospective shadow records reduce false confidence.",
+      "next": "Never label residual variance as pure luck or a hot streak as skill.",
+      "source": "S13"
+    },
+    {
+      "id": "R11",
+      "requirement": "Track injuries and offensive/defensive starter replacements.",
+      "state": "partial",
+      "evidence": "Official report snapshot and club depth evidence are separated; replacement assignment and workload remain blank without direct evidence.",
+      "next": "Automate timestamped capture and flag stale/conflicting sources.",
+      "source": "S03"
+    },
+    {
+      "id": "R12",
+      "requirement": "Identify 2nd/3rd/4th-string backup deficiencies.",
+      "state": "partial",
+      "evidence": "Club depth lists can establish published order; deficiency requires role, participation and outcome evidence.",
+      "next": "Do not infer a fixed points penalty from string rank alone.",
+      "source": "S06"
+    },
+    {
+      "id": "R13",
+      "requirement": "Executive summary.",
+      "state": "implemented",
+      "evidence": "Summary states delivered work, blockers, recommended path and verification boundaries.",
+      "next": "Update after material evidence changes.",
+      "source": "S01"
+    },
+    {
+      "id": "R14",
+      "requirement": "No manual user input; autonomous completion.",
+      "state": "partial",
+      "evidence": "Build, checks, capture workflow and publication are automated; contracts, budget and legal decisions cannot be invented.",
+      "next": "Use conservative research-only defaults and leave unresolved decisions open.",
+      "source": "S16"
+    },
+    {
+      "id": "R15",
+      "requirement": "Line-by-line official-source verification; blank unconfirmed values.",
+      "state": "partial",
+      "evidence": "Canonical tables use official sources and blank unknowns. Independent audit flags community-data mislabeling in an existing workspace.",
+      "next": "Treat digest integrity as separate from official factual verification.",
+      "source": "S12"
+    },
+    {
+      "id": "R16",
+      "requirement": "Coordinate parallel sessions and avoid conflicts.",
+      "state": "implemented",
+      "evidence": "COORDINATION.md claims, append-only logs, fixed Arena branch and preserved concurrent workspaces.",
+      "next": "Re-fetch before final merge; preserve other sessions' content.",
+      "source": "S16"
+    },
+    {
+      "id": "R17",
+      "requirement": "PR, merge, Pages deployment and flagged-review page.",
+      "state": "implemented",
+      "evidence": "PR #23 merged as 9b4611a429ecf9640ea5373ec1780d9d3f0a6ab2; Pages validate/deploy run 43178027508 succeeded; live decision-lab page fetched.",
+      "next": "Keep flagged items under review; hourly Pages refresh rebuilds and audits before publication.",
+      "source": "S16"
+    }
   ],
   "questions": [
-    {"id": "Q01", "area": "Product scope", "question": "Is this private research, public analytics, paid recommendations or wagering operations?", "known": "The request is research/decision support and a public GitHub Pages site.", "answer": "", "missing": "Jurisdiction, audience, monetization and whether stakes are handled.", "discovery": "Default to analytics-only; obtain qualified legal review before any paid or wagering feature.", "blocking": true, "source": "S12"},
-    {"id": "Q02", "area": "Market taxonomy", "question": "Which spreads, totals, moneylines, team totals and player props are in scope?", "known": "Singles, parlays and player-prop combinations are requested.", "answer": "", "missing": "Exact market definitions, books, overtime/void/push rules and prop settlement.", "discovery": "Create a market dictionary from permissioned book rules and official NFL scoring rules.", "blocking": true, "source": "S04"},
-    {"id": "Q03", "area": "Odds rights", "question": "Which provider permits historical and live odds retention, derived models and redistribution?", "known": "NFL widgets display partner-supplied odds; no licensed archive is verified here.", "answer": "", "missing": "Contract, API terms, latency, limits, prop coverage and retention rights.", "discovery": "Request written vendor terms; compare coverage and cost without assuming access.", "blocking": true, "source": "S12"},
-    {"id": "Q04", "area": "Official outcomes", "question": "What authoritative machine-readable source settles every target and market?", "known": "NFL publishes scores, stats and season-specific rules.", "answer": "", "missing": "Licensed export, correction policy and market-specific grading map.", "discovery": "Map NFL game/player identifiers to book market IDs and test settlement on known cases.", "blocking": true, "source": "S04"},
-    {"id": "Q05", "area": "Point-in-time data", "question": "Can every feature be reconstructed as it was known before kickoff?", "known": "Current injury pages and club depth charts are mutable.", "answer": "", "missing": "Immutable snapshots, publication times, correction history and as-of joins.", "discovery": "Capture raw-source hashes and timestamps on a schedule; never backfill from future pages.", "blocking": true, "source": "S01"},
-    {"id": "Q06", "area": "Depth authority", "question": "Which depth charts are official guidance, unofficial lists or confirmed lineups?", "known": "Commanders/Giants publish club depth pages; Colts explicitly labels its Week 10 chart unofficial.", "answer": "", "missing": "Confirmed starters, game-day actives and actual replacement participation.", "discovery": "Store source authority separately; join inactive lists and participation only when verified.", "blocking": true, "source": "S08"},
-    {"id": "Q07", "area": "Backup deficiency", "question": "How much does a specific replacement change expected performance?", "known": "Depth order alone does not measure quality or workload.", "answer": "", "missing": "Role-specific snaps, opponent-adjusted outcomes and enough replacement cases.", "discovery": "Estimate effects from verified historical participation with uncertainty; abstain when sparse.", "blocking": true, "source": "S09"},
-    {"id": "Q08", "area": "Injury semantics", "question": "How should Questionable, Doubtful, Out and blank status be encoded?", "known": "NFL policy defines the labels; blank game status is not a probability.", "answer": "", "missing": "Empirical availability calibration by status, timing and team.", "discovery": "Keep categorical labels; estimate probabilities only from point-in-time training data.", "blocking": false, "source": "S03"},
-    {"id": "Q09", "area": "Source conflicts", "question": "What happens when NFL.com, a club chart and a news article disagree?", "known": "Week 10 sources show status/depth lags and missing players.", "answer": "", "missing": "A reconciled, timestamped authority policy.", "discovery": "Preserve both observations, flag the conflict and suppress affected model inputs.", "blocking": false, "source": "S02"},
-    {"id": "Q10", "area": "Line origination", "question": "What model family and uncertainty method produce the independent number?", "known": "A transparent baseline plus opponent/context adjustments is testable; no family is validated.", "answer": "", "missing": "Verified training sample, feature definitions, calibration and holdout results.", "discovery": "Pre-register a simple baseline first; expand only if held-out skill improves.", "blocking": true, "source": "S14"},
-    {"id": "Q11", "area": "Correlation", "question": "Which leg pairs are dependent and how stable is the dependence?", "known": "Same-game outcomes can share game script; no verified correlation value is available.", "answer": "", "missing": "Matched binary leg outcomes, joint events, sample counts and conditional groups.", "discovery": "Estimate phi/Pearson association and direct joint probability on training games; bootstrap by game.", "blocking": true, "source": "S15"},
-    {"id": "Q12", "area": "Parlay pricing", "question": "Can joint probability and payout be verified without an independence shortcut?", "known": "Multiplying marginal probabilities is invalid when legs are dependent.", "answer": "", "missing": "Book combo price, void rules, joint settlement and held-out joint calibration.", "discovery": "Price from validated joint outcomes; compare with independence baseline and reject sparse pairs.", "blocking": true, "source": "S04"},
-    {"id": "Q13", "area": "Player props", "question": "Are prop lines, participation and settlement available at the decision timestamp?", "known": "NFL tracking glossary defines useful metrics but is not a prop feed.", "answer": "", "missing": "Historical prop quotes, player IDs, minutes/snaps, void rules and book coverage.", "discovery": "Secure permissioned prop history and official participation labels before modeling.", "blocking": true, "source": "S09"},
-    {"id": "Q14", "area": "Validation thresholds", "question": "What minimum evidence is required before a strategy is eligible?", "known": "Thresholds must be declared before viewing results; this site proposes conservative design defaults.", "answer": "", "missing": "Owner-approved sample, risk, calibration and shadow policy.", "discovery": "Use the published proposed gates as research defaults; do not claim they are league rules.", "blocking": false, "source": "S13"},
-    {"id": "Q15", "area": "Multiple testing", "question": "How many strategies and feature variants were tried?", "known": "Leaderboard selection inflates apparent performance.", "answer": "", "missing": "Complete trial registry including failed and abandoned variants.", "discovery": "Hash pre-registrations and apply family-wise multiplicity control before ranking.", "blocking": true, "source": "S14"},
-    {"id": "Q16", "area": "Luck vs skill", "question": "Can luck be removed from the evaluation?", "known": "No. Randomness remains; uncertainty can be quantified and false confidence reduced.", "answer": "Luck cannot be eliminated; require out-of-sample, uncertainty-aware evidence.", "missing": "Prospective verified forecast record and stable benchmark improvement.", "discovery": "Use proper scores, game-cluster intervals, ablations and shadow follow-up.", "blocking": false, "source": "S13"},
-    {"id": "Q17", "area": "Leaderboard score", "question": "What score determines the winner?", "known": "Raw win rate and short-run ROI are inadequate.", "answer": "", "missing": "Approved scoring rule, benchmark, stake policy and minimum activity.", "discovery": "Propose benchmark-relative Brier skill with uncertainty and gate eligibility; keep divisions separate.", "blocking": false, "source": "S15"},
-    {"id": "Q18", "area": "Rewards", "question": "Who funds rewards and what legal rules apply?", "known": "No reward pool, payment system or legal approval is verified.", "answer": "", "missing": "Budget, eligibility, tax/legal review and dispute process.", "discovery": "Publish recognition-only leaderboard until funding and compliance are confirmed.", "blocking": true, "source": "S12"},
-    {"id": "Q19", "area": "Automation", "question": "Can ingestion run without manual entry and survive source changes?", "known": "GitHub Actions can schedule captures and build static pages; Pages has no backend database.", "answer": "", "missing": "Durable history storage, alerting, rights and source SLA.", "discovery": "Use scheduled official captures with hashes; add durable storage only after retention review.", "blocking": false, "source": "S16"},
-    {"id": "Q20", "area": "Data authority", "question": "Are nflverse release assets official NFL data?", "known": "They are community-maintained GitHub releases; a digest proves byte integrity, not NFL authorship.", "answer": "No official NFL authority is established for those assets in this review.", "missing": "NFL endorsement/license or row-level official confirmation.", "discovery": "Label community outputs exploratory/unverified and exclude them from official-only gates.", "blocking": true, "source": "S12"},
-    {"id": "Q21", "area": "Review workflow", "question": "How are suggestions approved without accidental deployment?", "known": "The suggestion board can record optional browser-local choices and export JSON.", "answer": "", "missing": "Server-side identity, durable approvals and change-control integration.", "discovery": "Treat exports as review artifacts; require a separate tracked change before implementation.", "blocking": false, "source": "S16"},
-    {"id": "Q22", "area": "Security/privacy", "question": "Will accounts, payments or sensitive betting activity be collected?", "known": "This site is static and collects no account or wagering data.", "answer": "", "missing": "Future product scope and privacy/legal requirements.", "discovery": "Keep data minimization; threat-model any future backend before adding it.", "blocking": false, "source": "S16"}
+    {
+      "id": "Q01",
+      "area": "Product scope",
+      "question": "Is this private research, public analytics, paid recommendations or wagering operations?",
+      "known": "The request is research/decision support and a public GitHub Pages site.",
+      "answer": "",
+      "missing": "Jurisdiction, audience, monetization and whether stakes are handled.",
+      "discovery": "Default to analytics-only; obtain qualified legal review before any paid or wagering feature.",
+      "blocking": true,
+      "source": "S12"
+    },
+    {
+      "id": "Q02",
+      "area": "Market taxonomy",
+      "question": "Which spreads, totals, moneylines, team totals and player props are in scope?",
+      "known": "Singles, parlays and player-prop combinations are requested.",
+      "answer": "",
+      "missing": "Exact market definitions, books, overtime/void/push rules and prop settlement.",
+      "discovery": "Create a market dictionary from permissioned book rules and official NFL scoring rules.",
+      "blocking": true,
+      "source": "S04"
+    },
+    {
+      "id": "Q03",
+      "area": "Odds rights",
+      "question": "Which provider permits historical and live odds retention, derived models and redistribution?",
+      "known": "NFL widgets display partner-supplied odds; no licensed archive is verified here.",
+      "answer": "",
+      "missing": "Contract, API terms, latency, limits, prop coverage and retention rights.",
+      "discovery": "Request written vendor terms; compare coverage and cost without assuming access.",
+      "blocking": true,
+      "source": "S12"
+    },
+    {
+      "id": "Q04",
+      "area": "Official outcomes",
+      "question": "What authoritative machine-readable source settles every target and market?",
+      "known": "NFL publishes scores, stats and season-specific rules.",
+      "answer": "",
+      "missing": "Licensed export, correction policy and market-specific grading map.",
+      "discovery": "Map NFL game/player identifiers to book market IDs and test settlement on known cases.",
+      "blocking": true,
+      "source": "S04"
+    },
+    {
+      "id": "Q05",
+      "area": "Point-in-time data",
+      "question": "Can every feature be reconstructed as it was known before kickoff?",
+      "known": "Current injury pages and club depth charts are mutable.",
+      "answer": "",
+      "missing": "Immutable snapshots, publication times, correction history and as-of joins.",
+      "discovery": "Capture raw-source hashes and timestamps on a schedule; never backfill from future pages.",
+      "blocking": true,
+      "source": "S01"
+    },
+    {
+      "id": "Q06",
+      "area": "Depth authority",
+      "question": "Which depth charts are official guidance, unofficial lists or confirmed lineups?",
+      "known": "Commanders/Giants publish club depth pages; Colts explicitly labels its Week 10 chart unofficial.",
+      "answer": "",
+      "missing": "Confirmed starters, game-day actives and actual replacement participation.",
+      "discovery": "Store source authority separately; join inactive lists and participation only when verified.",
+      "blocking": true,
+      "source": "S08"
+    },
+    {
+      "id": "Q07",
+      "area": "Backup deficiency",
+      "question": "How much does a specific replacement change expected performance?",
+      "known": "Depth order alone does not measure quality or workload.",
+      "answer": "",
+      "missing": "Role-specific snaps, opponent-adjusted outcomes and enough replacement cases.",
+      "discovery": "Estimate effects from verified historical participation with uncertainty; abstain when sparse.",
+      "blocking": true,
+      "source": "S09"
+    },
+    {
+      "id": "Q08",
+      "area": "Injury semantics",
+      "question": "How should Questionable, Doubtful, Out and blank status be encoded?",
+      "known": "NFL policy defines the labels; blank game status is not a probability.",
+      "answer": "",
+      "missing": "Empirical availability calibration by status, timing and team.",
+      "discovery": "Keep categorical labels; estimate probabilities only from point-in-time training data.",
+      "blocking": false,
+      "source": "S03"
+    },
+    {
+      "id": "Q09",
+      "area": "Source conflicts",
+      "question": "What happens when NFL.com, a club chart and a news article disagree?",
+      "known": "Week 10 sources show status/depth lags and missing players.",
+      "answer": "",
+      "missing": "A reconciled, timestamped authority policy.",
+      "discovery": "Preserve both observations, flag the conflict and suppress affected model inputs.",
+      "blocking": false,
+      "source": "S02"
+    },
+    {
+      "id": "Q10",
+      "area": "Line origination",
+      "question": "What model family and uncertainty method produce the independent number?",
+      "known": "A transparent baseline plus opponent/context adjustments is testable; no family is validated.",
+      "answer": "",
+      "missing": "Verified training sample, feature definitions, calibration and holdout results.",
+      "discovery": "Pre-register a simple baseline first; expand only if held-out skill improves.",
+      "blocking": true,
+      "source": "S14"
+    },
+    {
+      "id": "Q11",
+      "area": "Correlation",
+      "question": "Which leg pairs are dependent and how stable is the dependence?",
+      "known": "Same-game outcomes can share game script; no verified correlation value is available.",
+      "answer": "",
+      "missing": "Matched binary leg outcomes, joint events, sample counts and conditional groups.",
+      "discovery": "Estimate phi/Pearson association and direct joint probability on training games; bootstrap by game.",
+      "blocking": true,
+      "source": "S15"
+    },
+    {
+      "id": "Q12",
+      "area": "Parlay pricing",
+      "question": "Can joint probability and payout be verified without an independence shortcut?",
+      "known": "Multiplying marginal probabilities is invalid when legs are dependent.",
+      "answer": "",
+      "missing": "Book combo price, void rules, joint settlement and held-out joint calibration.",
+      "discovery": "Price from validated joint outcomes; compare with independence baseline and reject sparse pairs.",
+      "blocking": true,
+      "source": "S04"
+    },
+    {
+      "id": "Q13",
+      "area": "Player props",
+      "question": "Are prop lines, participation and settlement available at the decision timestamp?",
+      "known": "NFL tracking glossary defines useful metrics but is not a prop feed.",
+      "answer": "",
+      "missing": "Historical prop quotes, player IDs, minutes/snaps, void rules and book coverage.",
+      "discovery": "Secure permissioned prop history and official participation labels before modeling.",
+      "blocking": true,
+      "source": "S09"
+    },
+    {
+      "id": "Q14",
+      "area": "Validation thresholds",
+      "question": "What minimum evidence is required before a strategy is eligible?",
+      "known": "Thresholds must be declared before viewing results; this site proposes conservative design defaults.",
+      "answer": "",
+      "missing": "Owner-approved sample, risk, calibration and shadow policy.",
+      "discovery": "Use the published proposed gates as research defaults; do not claim they are league rules.",
+      "blocking": false,
+      "source": "S13"
+    },
+    {
+      "id": "Q15",
+      "area": "Multiple testing",
+      "question": "How many strategies and feature variants were tried?",
+      "known": "Leaderboard selection inflates apparent performance.",
+      "answer": "",
+      "missing": "Complete trial registry including failed and abandoned variants.",
+      "discovery": "Hash pre-registrations and apply family-wise multiplicity control before ranking.",
+      "blocking": true,
+      "source": "S14"
+    },
+    {
+      "id": "Q16",
+      "area": "Luck vs skill",
+      "question": "Can luck be removed from the evaluation?",
+      "known": "No. Randomness remains; uncertainty can be quantified and false confidence reduced.",
+      "answer": "Luck cannot be eliminated; require out-of-sample, uncertainty-aware evidence.",
+      "missing": "Prospective verified forecast record and stable benchmark improvement.",
+      "discovery": "Use proper scores, game-cluster intervals, ablations and shadow follow-up.",
+      "blocking": false,
+      "source": "S13"
+    },
+    {
+      "id": "Q17",
+      "area": "Leaderboard score",
+      "question": "What score determines the winner?",
+      "known": "Raw win rate and short-run ROI are inadequate.",
+      "answer": "",
+      "missing": "Approved scoring rule, benchmark, stake policy and minimum activity.",
+      "discovery": "Propose benchmark-relative Brier skill with uncertainty and gate eligibility; keep divisions separate.",
+      "blocking": false,
+      "source": "S15"
+    },
+    {
+      "id": "Q18",
+      "area": "Rewards",
+      "question": "Who funds rewards and what legal rules apply?",
+      "known": "No reward pool, payment system or legal approval is verified.",
+      "answer": "",
+      "missing": "Budget, eligibility, tax/legal review and dispute process.",
+      "discovery": "Publish recognition-only leaderboard until funding and compliance are confirmed.",
+      "blocking": true,
+      "source": "S12"
+    },
+    {
+      "id": "Q19",
+      "area": "Automation",
+      "question": "Can ingestion run without manual entry and survive source changes?",
+      "known": "GitHub Actions can schedule captures and build static pages; Pages has no backend database.",
+      "answer": "",
+      "missing": "Durable history storage, alerting, rights and source SLA.",
+      "discovery": "Use scheduled official captures with hashes; add durable storage only after retention review.",
+      "blocking": false,
+      "source": "S16"
+    },
+    {
+      "id": "Q20",
+      "area": "Data authority",
+      "question": "Are nflverse release assets official NFL data?",
+      "known": "They are community-maintained GitHub releases; a digest proves byte integrity, not NFL authorship.",
+      "answer": "No official NFL authority is established for those assets in this review.",
+      "missing": "NFL endorsement/license or row-level official confirmation.",
+      "discovery": "Label community outputs exploratory/unverified and exclude them from official-only gates.",
+      "blocking": true,
+      "source": "S12"
+    },
+    {
+      "id": "Q21",
+      "area": "Review workflow",
+      "question": "How are suggestions approved without accidental deployment?",
+      "known": "The suggestion board can record optional browser-local choices and export JSON.",
+      "answer": "",
+      "missing": "Server-side identity, durable approvals and change-control integration.",
+      "discovery": "Treat exports as review artifacts; require a separate tracked change before implementation.",
+      "blocking": false,
+      "source": "S16"
+    },
+    {
+      "id": "Q22",
+      "area": "Security/privacy",
+      "question": "Will accounts, payments or sensitive betting activity be collected?",
+      "known": "This site is static and collects no account or wagering data.",
+      "answer": "",
+      "missing": "Future product scope and privacy/legal requirements.",
+      "discovery": "Keep data minimization; threat-model any future backend before adding it.",
+      "blocking": false,
+      "source": "S16"
+    }
   ],
   "suggestions": [
-    {"id": "SG01", "title": "Adopt an official-only evidence contract", "priority": "Critical", "effort": "Low", "impact": "Prevents false verification claims", "recommendation": "Approve first", "path": "A", "depends": "", "detail": "Separate source authority, byte integrity and model validation. Community data may be exploratory only; canonical decision values require official confirmation.", "tradeoff": "Some existing exploratory numbers become non-decision evidence.", "source": "S12"},
-    {"id": "SG02", "title": "Secure permissioned odds and prop history", "priority": "Critical", "effort": "High", "impact": "Enables market comparison and settlement", "recommendation": "Approve after rights review", "path": "A", "depends": "SG01", "detail": "Obtain written terms for historical/live prices, limits, timestamps, props, retention and derived data.", "tradeoff": "Cost and vendor selection remain unresolved; do not scrape around rights.", "source": "S12"},
-    {"id": "SG03", "title": "Build immutable official availability snapshots", "priority": "High", "effort": "Medium", "impact": "Removes hindsight from injury/depth features", "recommendation": "Approve", "path": "A", "depends": "SG01", "detail": "Scheduled capture of NFL injury reports, club depth pages and inactive evidence with raw hashes, timestamps and conflict flags.", "tradeoff": "Public pages can change or block automation; durable storage needs review.", "source": "S01"},
-    {"id": "SG04", "title": "Start with a singles-only shadow baseline", "priority": "High", "effort": "Medium", "impact": "Creates a clean benchmark before complexity", "recommendation": "Approve after data gates", "path": "B", "depends": "SG02, SG03", "detail": "Pre-register a simple team-strength model, freeze versions and record forecasts before kickoff.", "tradeoff": "No immediate betting recommendations or rewards.", "source": "S14"},
-    {"id": "SG05", "title": "Add injury/depth ablations, not fixed penalties", "priority": "High", "effort": "Medium", "impact": "Tests whether personnel information adds skill", "recommendation": "Approve after SG03", "path": "B", "depends": "SG03, SG04", "detail": "Compare identical models with and without verified availability features using chronological holdouts.", "tradeoff": "Sparse replacement cases may force abstention.", "source": "S09"},
-    {"id": "SG06", "title": "Delay parlays until joint outcomes validate", "priority": "High", "effort": "Medium", "impact": "Avoids independence and combinatorial overfit", "recommendation": "Defer multi-leg launch", "path": "B", "depends": "SG04", "detail": "Require matched leg outcomes, direct joint calibration, game-cluster uncertainty and book payout rules.", "tradeoff": "Slower expansion into requested combo markets.", "source": "S15"},
-    {"id": "SG07", "title": "Use proper-score leaderboard divisions", "priority": "Medium", "effort": "Medium", "impact": "Reduces reward for lucky streaks", "recommendation": "Approve design", "path": "B", "depends": "SG04", "detail": "Separate singles, game parlays, same-game parlays and prop combos; rank eligible strategies by benchmark-relative skill with uncertainty.", "tradeoff": "Requires minimum sample and complete trial registry.", "source": "S15"},
-    {"id": "SG08", "title": "Keep rewards recognition-only until approved", "priority": "Critical", "effort": "Low", "impact": "Avoids unfunded or non-compliant incentives", "recommendation": "Approve", "path": "A", "depends": "", "detail": "No money, credits or stake handling until budget, jurisdiction and legal review are verified.", "tradeoff": "No monetary competition at launch.", "source": "S12"},
-    {"id": "SG09", "title": "Publish a conflict-aware review queue", "priority": "High", "effort": "Low", "impact": "Makes irregularities actionable", "recommendation": "Approve", "path": "A", "depends": "", "detail": "Flag source lags, authority gaps, missing ranks and unsupported claims with official links and discovery actions.", "tradeoff": "Flags do not block publication but block affected decisions.", "source": "S02"},
-    {"id": "SG10", "title": "Automate build, citation and link gates", "priority": "High", "effort": "Low", "impact": "Prevents broken or sourceless publication", "recommendation": "Approve", "path": "A", "depends": "", "detail": "Fail CI on missing row sources, broken local links, duplicate IDs, conflict markers or unsupported verified badges.", "tradeoff": "External content still needs scheduled re-verification.", "source": "S16"},
-    {"id": "SG11", "title": "Add durable snapshot storage and alerts", "priority": "Medium", "effort": "Medium", "impact": "Supports long-run tracking and replay", "recommendation": "Review after retention policy", "path": "B", "depends": "SG03", "detail": "Store immutable captures outside the static site, monitor freshness and alert on source/schema changes.", "tradeoff": "Hosting, retention and access controls need a decision.", "source": "S16"},
-    {"id": "SG12", "title": "Expand to player-prop combinations last", "priority": "Medium", "effort": "High", "impact": "Addresses the hardest requested market safely", "recommendation": "Defer", "path": "B", "depends": "SG02, SG05, SG06", "detail": "Require verified participation, prop settlement, joint dependence and held-out calibration before any combo signal.", "tradeoff": "Highest data and overfit burden; no launch date is promised.", "source": "S09"}
+    {
+      "id": "SG01",
+      "title": "Adopt an official-only evidence contract",
+      "priority": "Critical",
+      "effort": "Low",
+      "impact": "Prevents false verification claims",
+      "recommendation": "Approve first",
+      "path": "A",
+      "depends": "",
+      "detail": "Separate source authority, byte integrity and model validation. Community data may be exploratory only; canonical decision values require official confirmation.",
+      "tradeoff": "Some existing exploratory numbers become non-decision evidence.",
+      "source": "S12"
+    },
+    {
+      "id": "SG02",
+      "title": "Secure permissioned odds and prop history",
+      "priority": "Critical",
+      "effort": "High",
+      "impact": "Enables market comparison and settlement",
+      "recommendation": "Approve after rights review",
+      "path": "A",
+      "depends": "SG01",
+      "detail": "Obtain written terms for historical/live prices, limits, timestamps, props, retention and derived data.",
+      "tradeoff": "Cost and vendor selection remain unresolved; do not scrape around rights.",
+      "source": "S12"
+    },
+    {
+      "id": "SG03",
+      "title": "Build immutable official availability snapshots",
+      "priority": "High",
+      "effort": "Medium",
+      "impact": "Removes hindsight from injury/depth features",
+      "recommendation": "Approve",
+      "path": "A",
+      "depends": "SG01",
+      "detail": "Scheduled capture of NFL injury reports, club depth pages and inactive evidence with raw hashes, timestamps and conflict flags.",
+      "tradeoff": "Public pages can change or block automation; durable storage needs review.",
+      "source": "S01"
+    },
+    {
+      "id": "SG04",
+      "title": "Start with a singles-only shadow baseline",
+      "priority": "High",
+      "effort": "Medium",
+      "impact": "Creates a clean benchmark before complexity",
+      "recommendation": "Approve after data gates",
+      "path": "B",
+      "depends": "SG02, SG03",
+      "detail": "Pre-register a simple team-strength model, freeze versions and record forecasts before kickoff.",
+      "tradeoff": "No immediate betting recommendations or rewards.",
+      "source": "S14"
+    },
+    {
+      "id": "SG05",
+      "title": "Add injury/depth ablations, not fixed penalties",
+      "priority": "High",
+      "effort": "Medium",
+      "impact": "Tests whether personnel information adds skill",
+      "recommendation": "Approve after SG03",
+      "path": "B",
+      "depends": "SG03, SG04",
+      "detail": "Compare identical models with and without verified availability features using chronological holdouts.",
+      "tradeoff": "Sparse replacement cases may force abstention.",
+      "source": "S09"
+    },
+    {
+      "id": "SG06",
+      "title": "Delay parlays until joint outcomes validate",
+      "priority": "High",
+      "effort": "Medium",
+      "impact": "Avoids independence and combinatorial overfit",
+      "recommendation": "Defer multi-leg launch",
+      "path": "B",
+      "depends": "SG04",
+      "detail": "Require matched leg outcomes, direct joint calibration, game-cluster uncertainty and book payout rules.",
+      "tradeoff": "Slower expansion into requested combo markets.",
+      "source": "S15"
+    },
+    {
+      "id": "SG07",
+      "title": "Use proper-score leaderboard divisions",
+      "priority": "Medium",
+      "effort": "Medium",
+      "impact": "Reduces reward for lucky streaks",
+      "recommendation": "Approve design",
+      "path": "B",
+      "depends": "SG04",
+      "detail": "Separate singles, game parlays, same-game parlays and prop combos; rank eligible strategies by benchmark-relative skill with uncertainty.",
+      "tradeoff": "Requires minimum sample and complete trial registry.",
+      "source": "S15"
+    },
+    {
+      "id": "SG08",
+      "title": "Keep rewards recognition-only until approved",
+      "priority": "Critical",
+      "effort": "Low",
+      "impact": "Avoids unfunded or non-compliant incentives",
+      "recommendation": "Approve",
+      "path": "A",
+      "depends": "",
+      "detail": "No money, credits or stake handling until budget, jurisdiction and legal review are verified.",
+      "tradeoff": "No monetary competition at launch.",
+      "source": "S12"
+    },
+    {
+      "id": "SG09",
+      "title": "Publish a conflict-aware review queue",
+      "priority": "High",
+      "effort": "Low",
+      "impact": "Makes irregularities actionable",
+      "recommendation": "Approve",
+      "path": "A",
+      "depends": "",
+      "detail": "Flag source lags, authority gaps, missing ranks and unsupported claims with official links and discovery actions.",
+      "tradeoff": "Flags do not block publication but block affected decisions.",
+      "source": "S02"
+    },
+    {
+      "id": "SG10",
+      "title": "Automate build, citation and link gates",
+      "priority": "High",
+      "effort": "Low",
+      "impact": "Prevents broken or sourceless publication",
+      "recommendation": "Approve",
+      "path": "A",
+      "depends": "",
+      "detail": "Fail CI on missing row sources, broken local links, duplicate IDs, conflict markers or unsupported verified badges.",
+      "tradeoff": "External content still needs scheduled re-verification.",
+      "source": "S16"
+    },
+    {
+      "id": "SG11",
+      "title": "Add durable snapshot storage and alerts",
+      "priority": "Medium",
+      "effort": "Medium",
+      "impact": "Supports long-run tracking and replay",
+      "recommendation": "Review after retention policy",
+      "path": "B",
+      "depends": "SG03",
+      "detail": "Store immutable captures outside the static site, monitor freshness and alert on source/schema changes.",
+      "tradeoff": "Hosting, retention and access controls need a decision.",
+      "source": "S16"
+    },
+    {
+      "id": "SG12",
+      "title": "Expand to player-prop combinations last",
+      "priority": "Medium",
+      "effort": "High",
+      "impact": "Addresses the hardest requested market safely",
+      "recommendation": "Defer",
+      "path": "B",
+      "depends": "SG02, SG05, SG06",
+      "detail": "Require verified participation, prop settlement, joint dependence and held-out calibration before any combo signal.",
+      "tradeoff": "Highest data and overfit burden; no launch date is promised.",
+      "source": "S09"
+    }
   ],
   "strategies": [
-    {"id": "ST01", "name": "Opponent-adjusted team strength", "division": "Singles", "hypothesis": "Rolling offense/defense efficiency with opponent and context adjustments improves spread/total forecasts versus a simple baseline.", "inputs": "Official game outcomes, possessions/context, as-of features and permissioned prices.", "test": "Walk-forward by game; compare Brier/log loss and calibration against frozen baseline and market.", "risk": "Schedule strength, garbage time and small samples.", "status": "Not run", "source": "S09"},
-    {"id": "ST02", "name": "Quarterback availability shock", "division": "Singles", "hypothesis": "Confirmed QB absence/replacement changes team scoring enough to create incremental forecast value.", "inputs": "Timestamped injury/inactive evidence, confirmed replacement, historical participation and prices.", "test": "Ablate availability feature; cluster uncertainty by game; require held-out improvement.", "risk": "Status is not playing probability; replacement quality varies.", "status": "Not run", "source": "S03"},
-    {"id": "ST03", "name": "Offensive-line replacement stress", "division": "Singles / team totals", "hypothesis": "Multiple verified OL replacements degrade protection/run efficiency beyond what the market prices.", "inputs": "Position-specific depth, actives, snaps, pressure/sack outcomes and market prices.", "test": "Role-weighted exposure model versus unweighted injury count; chronological holdout.", "risk": "String rank alone is not a deficiency estimate.", "status": "Not run", "source": "S06"},
-    {"id": "ST04", "name": "Secondary replacement exposure", "division": "Singles / totals", "hypothesis": "Verified defensive-back replacements affect passing efficiency and scoring conditional on coverage role.", "inputs": "Depth/actives, participation, opponent-adjusted passing outcomes and prices.", "test": "Compare defense-exposure feature ablation with game-cluster intervals.", "risk": "Rotation and scheme confounding; sparse cases.", "status": "Not run", "source": "S07"},
-    {"id": "ST05", "name": " Pace and possession efficiency", "division": "Totals", "hypothesis": "Neutral pace and points-per-possession improve total forecasts over raw points per game.", "inputs": "Official play/context data or licensed verified equivalents; prices and settlement.", "test": "Pre-registered total model; held-out calibration and market comparison.", "risk": "Pace and efficiency can be endogenous to score script.", "status": "Not run", "source": "S09"},
-    {"id": "ST06", "name": "Cross-game parlay value", "division": "Game parlays", "hypothesis": "Only combinations with verified joint pricing and demonstrated dependence treatment may have value.", "inputs": "Timestamped combo prices, leg outcomes, void/push rules and joint sample.", "test": "Direct joint probability versus independence baseline; held-out joint Brier score.", "risk": "Cross-game independence is an assumption, not a verified fact.", "status": "Not run", "source": "S04"},
-    {"id": "ST07", "name": "Same-game script combination", "division": "Same-game parlays", "hypothesis": "Game-script-linked legs require conditional joint modeling rather than multiplying marginals.", "inputs": "Matched same-game leg outcomes, combo payout rules and prices.", "test": "Estimate dependence on training games; validate joint calibration and payout EV out of sample.", "risk": "Strong dependence, sparse combos and book margin.", "status": "Not run", "source": "S15"},
-    {"id": "ST08", "name": "Receiver opportunity prop", "division": "Player props", "hypothesis": "Verified target-share/air-yard changes under personnel shifts may improve reception/yardage forecasts.", "inputs": "NGS definitions, licensed tracking/participation, prop quotes and settlement.", "test": "Player-grouped chronological validation; compare with book-implied probability.", "risk": "Role changes, coverage and void rules.", "status": "Not run", "source": "S09"},
-    {"id": "ST09", "name": "Rushing workload prop combo", "division": "Prop combinations", "hypothesis": "Confirmed replacement workload and game script may jointly affect rushing attempts/yards.", "inputs": "Depth/actives, snap counts, rush outcomes, prop lines and joint settlement.", "test": "Joint outcome model with game-cluster bootstrap and independence comparison.", "risk": "Workload uncertainty and correlated legs.", "status": "Not run", "source": "S08"},
-    {"id": "ST10", "name": "Injury-news timing reaction", "division": "Singles / props", "hypothesis": "Forecasts updated only after verified status changes may beat stale baselines if execution is feasible.", "inputs": "Immutable report timestamps, quote timestamps, latency/limits and settlement.", "test": "Event-time study with no future information; execution-cost stress test.", "risk": "Market may react first; stale or revised reports cause leakage.", "status": "Not run", "source": "S01"}
+    {
+      "id": "ST01",
+      "name": "Opponent-adjusted team strength",
+      "division": "Singles",
+      "hypothesis": "Rolling offense/defense efficiency with opponent and context adjustments improves spread/total forecasts versus a simple baseline.",
+      "inputs": "Official game outcomes, possessions/context, as-of features and permissioned prices.",
+      "test": "Walk-forward by game; compare Brier/log loss and calibration against frozen baseline and market.",
+      "risk": "Schedule strength, garbage time and small samples.",
+      "status": "Not run",
+      "source": "S09"
+    },
+    {
+      "id": "ST02",
+      "name": "Quarterback availability shock",
+      "division": "Singles",
+      "hypothesis": "Confirmed QB absence/replacement changes team scoring enough to create incremental forecast value.",
+      "inputs": "Timestamped injury/inactive evidence, confirmed replacement, historical participation and prices.",
+      "test": "Ablate availability feature; cluster uncertainty by game; require held-out improvement.",
+      "risk": "Status is not playing probability; replacement quality varies.",
+      "status": "Not run",
+      "source": "S03"
+    },
+    {
+      "id": "ST03",
+      "name": "Offensive-line replacement stress",
+      "division": "Singles / team totals",
+      "hypothesis": "Multiple verified OL replacements degrade protection/run efficiency beyond what the market prices.",
+      "inputs": "Position-specific depth, actives, snaps, pressure/sack outcomes and market prices.",
+      "test": "Role-weighted exposure model versus unweighted injury count; chronological holdout.",
+      "risk": "String rank alone is not a deficiency estimate.",
+      "status": "Not run",
+      "source": "S06"
+    },
+    {
+      "id": "ST04",
+      "name": "Secondary replacement exposure",
+      "division": "Singles / totals",
+      "hypothesis": "Verified defensive-back replacements affect passing efficiency and scoring conditional on coverage role.",
+      "inputs": "Depth/actives, participation, opponent-adjusted passing outcomes and prices.",
+      "test": "Compare defense-exposure feature ablation with game-cluster intervals.",
+      "risk": "Rotation and scheme confounding; sparse cases.",
+      "status": "Not run",
+      "source": "S07"
+    },
+    {
+      "id": "ST05",
+      "name": " Pace and possession efficiency",
+      "division": "Totals",
+      "hypothesis": "Neutral pace and points-per-possession improve total forecasts over raw points per game.",
+      "inputs": "Official play/context data or licensed verified equivalents; prices and settlement.",
+      "test": "Pre-registered total model; held-out calibration and market comparison.",
+      "risk": "Pace and efficiency can be endogenous to score script.",
+      "status": "Not run",
+      "source": "S09"
+    },
+    {
+      "id": "ST06",
+      "name": "Cross-game parlay value",
+      "division": "Game parlays",
+      "hypothesis": "Only combinations with verified joint pricing and demonstrated dependence treatment may have value.",
+      "inputs": "Timestamped combo prices, leg outcomes, void/push rules and joint sample.",
+      "test": "Direct joint probability versus independence baseline; held-out joint Brier score.",
+      "risk": "Cross-game independence is an assumption, not a verified fact.",
+      "status": "Not run",
+      "source": "S04"
+    },
+    {
+      "id": "ST07",
+      "name": "Same-game script combination",
+      "division": "Same-game parlays",
+      "hypothesis": "Game-script-linked legs require conditional joint modeling rather than multiplying marginals.",
+      "inputs": "Matched same-game leg outcomes, combo payout rules and prices.",
+      "test": "Estimate dependence on training games; validate joint calibration and payout EV out of sample.",
+      "risk": "Strong dependence, sparse combos and book margin.",
+      "status": "Not run",
+      "source": "S15"
+    },
+    {
+      "id": "ST08",
+      "name": "Receiver opportunity prop",
+      "division": "Player props",
+      "hypothesis": "Verified target-share/air-yard changes under personnel shifts may improve reception/yardage forecasts.",
+      "inputs": "NGS definitions, licensed tracking/participation, prop quotes and settlement.",
+      "test": "Player-grouped chronological validation; compare with book-implied probability.",
+      "risk": "Role changes, coverage and void rules.",
+      "status": "Not run",
+      "source": "S09"
+    },
+    {
+      "id": "ST09",
+      "name": "Rushing workload prop combo",
+      "division": "Prop combinations",
+      "hypothesis": "Confirmed replacement workload and game script may jointly affect rushing attempts/yards.",
+      "inputs": "Depth/actives, snap counts, rush outcomes, prop lines and joint settlement.",
+      "test": "Joint outcome model with game-cluster bootstrap and independence comparison.",
+      "risk": "Workload uncertainty and correlated legs.",
+      "status": "Not run",
+      "source": "S08"
+    },
+    {
+      "id": "ST10",
+      "name": "Injury-news timing reaction",
+      "division": "Singles / props",
+      "hypothesis": "Forecasts updated only after verified status changes may beat stale baselines if execution is feasible.",
+      "inputs": "Immutable report timestamps, quote timestamps, latency/limits and settlement.",
+      "test": "Event-time study with no future information; execution-cost stress test.",
+      "risk": "Market may react first; stale or revised reports cause leakage.",
+      "status": "Not run",
+      "source": "S01"
+    }
   ],
   "gates": [
-    {"id": "G01", "name": "Official provenance", "rule": "Every decision input has an official source URL, retrieval time, raw hash and field-level confirmation; community data is excluded from official-only claims.", "fail": "Missing authority, hash mismatch or inferred value.", "source": "S12"},
-    {"id": "G02", "name": "As-of integrity", "rule": "Feature availability and quote timestamps precede forecast time; forecast precedes kickoff; training games end before holdout games.", "fail": "Future information, overlapping game clusters or retrospective edits.", "source": "S14"},
-    {"id": "G03", "name": "Completeness", "rule": "Required fields, identifiers, coverage and duplicate checks pass; unknown cells remain blank and flagged.", "fail": "Silent imputation, duplicate events or missing settlement.", "source": "S01"},
-    {"id": "G04", "name": "Market executability", "rule": "Permissioned timestamped price, limits/latency, vig, push/void and settlement rules are documented.", "fail": "No actionable price or unverifiable grading.", "source": "S12"},
-    {"id": "G05", "name": "Pre-registration", "rule": "Model version, feature set, thresholds, benchmark and complete trial family are hashed before evaluation.", "fail": "Post-hoc rule changes or hidden failed trials.", "source": "S14"},
-    {"id": "G06", "name": "Out-of-sample skill", "rule": "Walk-forward proper-score improvement over a frozen baseline survives game-cluster uncertainty and multiplicity adjustment.", "fail": "Uncertainty includes no improvement, or evidence disappears in untouched holdout.", "source": "S13"},
-    {"id": "G07", "name": "Dependence / combos", "rule": "Matched joint outcomes validate direct joint probability and dependence against an independence baseline.", "fail": "Sparse pairs, marginal-only pricing or test-set correlation fitting.", "source": "S15"},
-    {"id": "G08", "name": "Personnel robustness", "rule": "Availability features use dated official/club evidence with authority labels; conflicts or stale sources trigger abstention.", "fail": "Depth rank inferred from injury listing or fixed unsupported penalty.", "source": "S03"},
-    {"id": "G09", "name": "Prospective shadow", "rule": "Frozen forecasts are logged before outcomes and monitored for drift, calibration and freshness.", "fail": "No independent prospective record or changed rules after seeing results.", "source": "S14"},
-    {"id": "G10", "name": "Reward eligibility", "rule": "Only strategies passing G01-G09 enter a division leaderboard; rewards require approved funding and legal policy.", "fail": "Raw win-rate ranking, lucky streak reward or unresolved dispute.", "source": "S13"}
+    {
+      "id": "G01",
+      "name": "Official provenance",
+      "rule": "Every decision input has an official source URL, retrieval time, raw hash and field-level confirmation; community data is excluded from official-only claims.",
+      "fail": "Missing authority, hash mismatch or inferred value.",
+      "source": "S12"
+    },
+    {
+      "id": "G02",
+      "name": "As-of integrity",
+      "rule": "Feature availability and quote timestamps precede forecast time; forecast precedes kickoff; training games end before holdout games.",
+      "fail": "Future information, overlapping game clusters or retrospective edits.",
+      "source": "S14"
+    },
+    {
+      "id": "G03",
+      "name": "Completeness",
+      "rule": "Required fields, identifiers, coverage and duplicate checks pass; unknown cells remain blank and flagged.",
+      "fail": "Silent imputation, duplicate events or missing settlement.",
+      "source": "S01"
+    },
+    {
+      "id": "G04",
+      "name": "Market executability",
+      "rule": "Permissioned timestamped price, limits/latency, vig, push/void and settlement rules are documented.",
+      "fail": "No actionable price or unverifiable grading.",
+      "source": "S12"
+    },
+    {
+      "id": "G05",
+      "name": "Pre-registration",
+      "rule": "Model version, feature set, thresholds, benchmark and complete trial family are hashed before evaluation.",
+      "fail": "Post-hoc rule changes or hidden failed trials.",
+      "source": "S14"
+    },
+    {
+      "id": "G06",
+      "name": "Out-of-sample skill",
+      "rule": "Walk-forward proper-score improvement over a frozen baseline survives game-cluster uncertainty and multiplicity adjustment.",
+      "fail": "Uncertainty includes no improvement, or evidence disappears in untouched holdout.",
+      "source": "S13"
+    },
+    {
+      "id": "G07",
+      "name": "Dependence / combos",
+      "rule": "Matched joint outcomes validate direct joint probability and dependence against an independence baseline.",
+      "fail": "Sparse pairs, marginal-only pricing or test-set correlation fitting.",
+      "source": "S15"
+    },
+    {
+      "id": "G08",
+      "name": "Personnel robustness",
+      "rule": "Availability features use dated official/club evidence with authority labels; conflicts or stale sources trigger abstention.",
+      "fail": "Depth rank inferred from injury listing or fixed unsupported penalty.",
+      "source": "S03"
+    },
+    {
+      "id": "G09",
+      "name": "Prospective shadow",
+      "rule": "Frozen forecasts are logged before outcomes and monitored for drift, calibration and freshness.",
+      "fail": "No independent prospective record or changed rules after seeing results.",
+      "source": "S14"
+    },
+    {
+      "id": "G10",
+      "name": "Reward eligibility",
+      "rule": "Only strategies passing G01-G09 enter a division leaderboard; rewards require approved funding and legal policy.",
+      "fail": "Raw win-rate ranking, lucky streak reward or unresolved dispute.",
+      "source": "S13"
+    }
   ],
   "flags": [
-    {"id": "F01", "severity": "Critical", "title": "Community data labeled official in an existing workspace", "finding": "pipeline/fetch_official.py and research-desk describe nflverse GitHub assets as official NFL data. Digest matching verifies bytes, not NFL authorship or factual accuracy.", "action": "Treat those outputs as exploratory/unverified; do not use them for official-only decisions or rewards.", "source": "S12"},
-    {"id": "F02", "severity": "Critical", "title": "No verified historical odds/prop archive", "finding": "NFL Support confirms partner-supplied widgets, not a licensed historical feed or settlement archive.", "action": "Obtain permissioned market history before CLV, ROI or parlay EV claims.", "source": "S12"},
-    {"id": "F03", "severity": "High", "title": "Depth charts are not confirmed participation", "finding": "Club charts can be unofficial or lag injury reports; Colts explicitly labels its Week 10 chart unofficial.", "action": "Keep authority, rank, active status and workload separate; blank missing fields.", "source": "S08"},
-    {"id": "F04", "severity": "High", "title": "Injury source lags and conflicts", "finding": "NFL.com report/article and club depth pages can disagree on availability or listed players.", "action": "Preserve both timestamps and flag conflicts; suppress affected signals.", "source": "S02"},
-    {"id": "F05", "severity": "High", "title": "No empirical correlation or validated strategy", "finding": "Canonical official-only matched leg outcomes and prospective records are absent; correlation and performance cells are blank.", "action": "Run the documented protocol only after data gates pass.", "source": "S15"},
-    {"id": "F06", "severity": "High", "title": "Luck cannot be eliminated", "finding": "Residual variance contains chance, opponent effects and model error; it is not a pure luck estimate.", "action": "Use uncertainty, ablations, multiplicity control and shadow validation; avoid certainty claims.", "source": "S13"},
-    {"id": "F07", "severity": "High", "title": "Rewards lack funding and legal approval", "finding": "No reward pool, jurisdiction analysis or payment compliance is verified.", "action": "Recognition-only until approved; no stake handling.", "source": "S12"},
-    {"id": "F08", "severity": "Medium", "title": "Static hosting has no durable backend", "finding": "GitHub Pages serves static files; scheduled Actions are not a guaranteed real-time database or alerting service.", "action": "Use immutable captures and add durable storage/alerting after retention review.", "source": "S16"},
-    {"id": "F09", "severity": "Medium", "title": "Current report is not a historical archive", "finding": "The Week 10 injury page changes and does not provide point-in-time reconstruction by itself.", "action": "Store retrieval time and raw hash for every capture; never backfill from a later page.", "source": "S01"},
-    {"id": "F10", "severity": "Medium", "title": "Review choices are browser-local", "finding": "Suggestion selections/export do not create server-side approval or deploy changes.", "action": "Use exported JSON as a review artifact and require a tracked implementation change.", "source": "S16"},
-    {"id": "F11", "severity": "Medium", "title": "Parallel-session overlap and coordination noise", "finding": "Multiple sessions began from the same empty baseline and produced overlapping dashboards; append-only logs preserve the history.", "action": "Keep canonical decision tables here and preserve other workspaces as linked research archives.", "source": "S16"},
-    {"id": "F12", "severity": "Medium", "title": "Official source links are not reuse permission", "finding": "Public NFL/club pages establish facts for review but do not by themselves grant redistribution, API or commercial rights.", "action": "Confirm terms before bulk republication or commercial automation.", "source": "S05"}
+    {
+      "id": "F01",
+      "severity": "Critical",
+      "title": "Community data labeled official in an existing workspace",
+      "finding": "pipeline/fetch_official.py and research-desk describe nflverse GitHub assets as official NFL data. Digest matching verifies bytes, not NFL authorship or factual accuracy.",
+      "action": "Treat those outputs as exploratory/unverified; do not use them for official-only decisions or rewards.",
+      "source": "S12"
+    },
+    {
+      "id": "F02",
+      "severity": "Critical",
+      "title": "No verified historical odds/prop archive",
+      "finding": "NFL Support confirms partner-supplied widgets, not a licensed historical feed or settlement archive.",
+      "action": "Obtain permissioned market history before CLV, ROI or parlay EV claims.",
+      "source": "S12"
+    },
+    {
+      "id": "F03",
+      "severity": "High",
+      "title": "Depth charts are not confirmed participation",
+      "finding": "Club charts can be unofficial or lag injury reports; Colts explicitly labels its Week 10 chart unofficial.",
+      "action": "Keep authority, rank, active status and workload separate; blank missing fields.",
+      "source": "S08"
+    },
+    {
+      "id": "F04",
+      "severity": "High",
+      "title": "Injury source lags and conflicts",
+      "finding": "NFL.com report/article and club depth pages can disagree on availability or listed players.",
+      "action": "Preserve both timestamps and flag conflicts; suppress affected signals.",
+      "source": "S02"
+    },
+    {
+      "id": "F05",
+      "severity": "High",
+      "title": "No empirical correlation or validated strategy",
+      "finding": "Canonical official-only matched leg outcomes and prospective records are absent; correlation and performance cells are blank.",
+      "action": "Run the documented protocol only after data gates pass.",
+      "source": "S15"
+    },
+    {
+      "id": "F06",
+      "severity": "High",
+      "title": "Luck cannot be eliminated",
+      "finding": "Residual variance contains chance, opponent effects and model error; it is not a pure luck estimate.",
+      "action": "Use uncertainty, ablations, multiplicity control and shadow validation; avoid certainty claims.",
+      "source": "S13"
+    },
+    {
+      "id": "F07",
+      "severity": "High",
+      "title": "Rewards lack funding and legal approval",
+      "finding": "No reward pool, jurisdiction analysis or payment compliance is verified.",
+      "action": "Recognition-only until approved; no stake handling.",
+      "source": "S12"
+    },
+    {
+      "id": "F08",
+      "severity": "Medium",
+      "title": "Static hosting has no durable backend",
+      "finding": "GitHub Pages serves static files; scheduled Actions are not a guaranteed real-time database or alerting service.",
+      "action": "Use immutable captures and add durable storage/alerting after retention review.",
+      "source": "S16"
+    },
+    {
+      "id": "F09",
+      "severity": "Medium",
+      "title": "Current report is not a historical archive",
+      "finding": "The Week 10 injury page changes and does not provide point-in-time reconstruction by itself.",
+      "action": "Store retrieval time and raw hash for every capture; never backfill from a later page.",
+      "source": "S01"
+    },
+    {
+      "id": "F10",
+      "severity": "Medium",
+      "title": "Review choices are browser-local",
+      "finding": "Suggestion selections/export do not create server-side approval or deploy changes.",
+      "action": "Use exported JSON as a review artifact and require a tracked implementation change.",
+      "source": "S16"
+    },
+    {
+      "id": "F11",
+      "severity": "Medium",
+      "title": "Parallel-session overlap and coordination noise",
+      "finding": "Multiple sessions began from the same empty baseline and produced overlapping dashboards; append-only logs preserve the history.",
+      "action": "Keep canonical decision tables here and preserve other workspaces as linked research archives.",
+      "source": "S16"
+    },
+    {
+      "id": "F12",
+      "severity": "Medium",
+      "title": "Official source links are not reuse permission",
+      "finding": "Public NFL/club pages establish facts for review but do not by themselves grant redistribution, API or commercial rights.",
+      "action": "Confirm terms before bulk republication or commercial automation.",
+      "source": "S05"
+    }
   ]
 }
