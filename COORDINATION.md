@@ -590,3 +590,13 @@ order; F-09 no leg-level outcome data; F-10 'Questionable' calibration unmeasure
 - Live verification: fetched https://kanlerxz87-cyber.github.io/NFL3/decision-lab/ after deployment; canonical dashboard rendered with 254 injury rows, 1,745 depth rows, 0 validated strategies, 13 open blocking answers and 12 review flags.
 - Flagged/unverified items remain published at https://kanlerxz87-cyber.github.io/NFL3/decision-lab/flagged.html and https://kanlerxz87-cyber.github.io/NFL3/decision-lab/audit.html. They did not block site merge; they block affected betting/reward decisions.
 - This publication record is carried by a coordination-only follow-up from the same fixed Arena branch after the integration merge.
+
+## Provenance citation correction — arena/ec4298ba-nfl3, 2026-11-12 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Independently review authority claims and correct unsupported/irrelevant citations in the canonical lab | in progress | arena/ec4298ba-nfl3 | `decision-lab/data/catalog.json`, `decision-lab/scripts/audit.py`, `decision-lab/scripts/build.py`, `decision-lab/EXECUTIVE_SUMMARY.md`, generated canonical lab pages |
+
+- Work is limited to the canonical decision-lab workspace; no other session-owned site/data/workflow files are touched.
+- Initial finding: F01 currently cites the NFL odds-widget FAQ for an unrelated claim about nflverse dataset authorship. The FAQ does not substantiate that claim. Review will replace categorical community-source wording with a bounded provenance statement and present source identity separately from the official NFL statistical reference.
+- The repository audit also uses derived/internal row counts with unrelated external citations. Audit rows will identify the reproducible local audit as the source of calculated counts and will clearly label what an official citation does and does not establish.
