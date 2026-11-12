@@ -9,6 +9,7 @@ Nothing here is betting advice, a sportsbook, or an approved wagering system.
 
 | Workspace | What it is | Entry point |
 |---|---|---|
+| **Decision desk (evidence chain)** | Verified game log for 2026 Weeks 1-9 cross-checked against official standings, opponent-adjusted ratings with a measured luck/skill split, measured correlations, a walk-forward skill test, an injury-to-depth-slot join, 24 blocking decisions and 17 reviewable suggestions. | [`decision-desk/index.html`](decision-desk/index.html) |
 | **Canonical decision lab** | Official-source decision dashboard: requirements, questions, suggestions, line-origination protocol, injury/depth snapshots, fail-closed validation gates, flagged review and independent audit. Unknown values stay blank. | [`decision-lab/index.html`](decision-lab/index.html) |
 | Overview | Root landing page and links to preserved concurrent workspaces | [`index.html`](index.html) |
 | Research desk | Exploratory community-data line/strategy engine using nflverse GitHub assets. Digest integrity is verified, but NFL official authority is **not** established; do not treat its results as official-only validation. | [`research-desk/index.html`](research-desk/index.html) |
