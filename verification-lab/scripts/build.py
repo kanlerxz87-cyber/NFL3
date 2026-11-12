@@ -40,9 +40,14 @@ def source(url: str, label: str) -> str:
     return f'<a href="{e(url)}" target="_blank" rel="noopener noreferrer">{e(label)}</a>{mark}'
 
 
-def cell(text: str = "", blank: bool = False) -> str:
+def cell(text: str = "", blank: bool = False, blank_label: str = "unverified") -> str:
+    """Render a cell, or an explicit blank marker.
+
+    A blank is never silently empty: it carries a label so a reader cannot
+    mistake a missing value for a zero or an empty string from the source.
+    """
     if blank or text == "":
-        return '<td class="blank" aria-label="unverified, intentionally blank">&mdash;<span>unverified</span></td>'
+        return f'<td class="blank" aria-label="{blank_label}, intentionally blank">&mdash;<span>{blank_label}</span></td>'
     return f"<td>{text}</td>"
 
 
@@ -87,6 +92,8 @@ def build_index() -> str:
     open_blocks = sum(1 for q in QUESTIONS["questions"] if q["blocking"])
     p0 = sum(1 for i in QUEUE["items"] if i["priority"] == "P0")
     findings = [r for r in RECHECK["records"] if r["status"] != "confirmed"]
+    n_q = len(QUESTIONS["questions"])
+    n_items = len(QUEUE["items"])
     rows = [
         [cell(e(r["id"])), cell(status_pill(r["status"])), cell(e(r["claim"])), cell(e(r["observed"])), cell(e(r["action"])), cell(source(r["source_url"], r["source_label"]))]
         for r in findings
@@ -118,9 +125,9 @@ def build_index() -> str:
 
 <h2>How to read this workspace</h2>
 {table("Scope of this verification workspace.", ["Page", "What it holds", "Why it exists", "Source"], [
-    [cell('<a href="register.html">Verification register</a>'), cell("All 32 claim-level checks: claim, observed value, status, action"), cell("The evidence base for every statement above"), cell(source("https://www.nfl.com/injuries/league/2026/REG10", "NFL official injury report, 2026 Week 10"))],
-    [cell('<a href="questions.html">Questions to resolve</a>'), cell("16 questions, each with known facts, blanks and a discovery action"), cell("Answers that must exist before a decision is reasonable"), cell(source("https://www.nfl.com/news/nfl-week-10-injury-report-2026-season", "NFL Week 10 injury report article"))],
-    [cell('<a href="queue.html">Suggestion queue</a>'), cell("11 ordered proposals: P0 fixes, P1 structural fixes, P2 decisions"), cell("Something to review and choose from before anything is implemented"), cell(source("https://www.nfl.com/transactions/", "NFL 2026 league transactions"))],
+    [cell('<a href="register.html">Verification register</a>'), cell(f"All {total} claim-level checks: claim, observed value, status, action"), cell("The evidence base for every statement above"), cell(source("https://www.nfl.com/injuries/league/2026/REG10", "NFL official injury report, 2026 Week 10"))],
+    [cell('<a href="questions.html">Questions to resolve</a>'), cell(f"{n_q} questions, each with known facts, blanks and a discovery action"), cell("Answers that must exist before a decision is reasonable"), cell(source("https://www.nfl.com/news/nfl-week-10-injury-report-2026-season", "NFL Week 10 injury report article"))],
+    [cell('<a href="queue.html">Suggestion queue</a>'), cell(f"{n_items} ordered proposals: P0 fixes, P1 structural fixes, P2 decisions"), cell("Something to review and choose from before anything is implemented"), cell(source("https://www.nfl.com/transactions/", "NFL 2026 league transactions"))],
     [cell('<a href="methods.html">Method &amp; limits</a>'), cell("What was opened, what was not, and what this pass cannot claim"), cell("Separates verified from pending so the register is not over-read"), cell(source("https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm", "NIST confidence limits for the mean"))],
 ])}
 """
@@ -151,7 +158,7 @@ def build_register() -> str:
 
 def build_questions() -> str:
     rows = [
-        [cell(e(q["id"])), cell(e(q["area"])), cell(e(q["question"])), cell(e(q["known"])), cell(q["unknown"], blank=True), cell(e(q["discovery"])), cell(pill("Blocking" if q["blocking"] else "Open", "danger" if q["blocking"] else "warn")), cell(e(q["effort"])), cell(source(q["source_url"], q["source_label"]))]
+        [cell(e(q["id"])), cell(e(q["area"])), cell(e(q["question"])), cell(e(q["known"])), cell(q["unknown"], blank=True, blank_label="no answer yet"), cell(e(q["discovery"])), cell(pill("Blocking" if q["blocking"] else "Open", "danger" if q["blocking"] else "warn")), cell(e(q["effort"])), cell(source(q["source_url"], q["source_label"]))]
         for q in QUESTIONS["questions"]
     ]
     blocking = sum(1 for q in QUESTIONS["questions"] if q["blocking"])
@@ -177,14 +184,15 @@ def build_queue() -> str:
     order = {"P0": 0, "P1": 1, "P2": 2}
     items = sorted(QUEUE["items"], key=lambda i: (order.get(i["priority"], 9), i["id"]))
     rows = [
-        [cell(e(i["id"])), cell(pill(i["priority"], "danger" if i["priority"] == "P0" else "warn")), cell(e(i["kind"])), cell(e(i["title"])), cell(e(i["why"])), cell(e(i["how"])), cell(e(i["acceptance"])), cell(e(i["risk"])), cell(e(i["fixes"]) or "", blank=not i["fixes"]), cell(source(i["source_url"], i["source_label"]))]
+        [cell(e(i["id"])), cell(pill(i["priority"], "danger" if i["priority"] == "P0" else "warn")), cell(e(i["kind"])), cell(e(i["title"])), cell(e(i["why"])), cell(e(i["how"])), cell(e(i["acceptance"])), cell(e(i["risk"])), cell(e(i["fixes"]) or "", blank=not i["fixes"], blank_label="not tied to a row"), cell(source(i["source_url"], i["source_label"]))]
         for i in items
     ]
     p0 = sum(1 for i in items if i["priority"] == "P0")
+    n_items = len(items)
     content = f"""
 <div class="eyebrow">Review, choose, then implement</div>
 <h1>Suggestion queue</h1>
-<p class="lede">Eleven proposals, ordered so each removes uncertainty the next one depends on. {p0} are P0 because they correct a claim that is currently wrong on the published site. Nothing here is implemented by this session: pick what to accept.</p>
+<p class="lede">{n_items} proposals, ordered so each removes uncertainty the next one depends on. {p0} are P0 because they correct a claim that is currently wrong on the published site. Nothing here is implemented by this session: pick what to accept.</p>
 <div class="notice"><strong>Two kinds of row.</strong> <em>Fix</em> rows correct a defect this pass proved. <em>Decision</em> rows are open choices with no obviously correct answer &mdash; they need your call, not a patch. Each row names an acceptance test, so 'done' is checkable rather than a matter of opinion.</div>
 {table("Proposed work, ordered by dependency.", ["ID", "Priority", "Kind", "Proposal", "Why it matters", "How to do it", "Acceptance test", "Main risk", "Addresses", "Source"], rows)}
 <h2>What not to do yet</h2>
@@ -225,7 +233,7 @@ def build_methods() -> str:
 <ul class="list">
 <li>Static only. No live feed, no scheduled re-capture, no alerting; a value is only as fresh as its timestamp.</li>
 <li>No source content was republished wholesale; observations are short factual restatements for review, and link rights are not implied.</li>
-<li>Twenty-three captured club depth pages, the team directory, the rulebook, game-day preparation, AT spotters, calibration docs and the Pages documentation were not re-opened in this pass and are marked pending.</li>
+<li>The other captured club depth pages (23 of 30 at the time of the pass), the team directory, the rulebook, game-day preparation, AT spotters, calibration docs and the Pages documentation were not re-opened in this pass and are marked pending.</li>
 <li>This pass did not edit any other session's files. Corrective changes are proposed on the <a href="queue.html">suggestion queue</a>.</li>
 <li>Uncertainty is reported, never dismissed. No result on this site is presented as free of chance, opponent effects or model error.</li>
 </ul>
