@@ -494,3 +494,8 @@ Branch is fixed as `arena/22802aed-nfl3` (Arena rule). No sub-site files are edi
 
 - PR #20 (e5e2b753 final publication record) — found already MERGED on main (by a concurrent session); nothing to do.
 - PR #18 (cbdcc317) and PR #22 (40c7529f) — both > 12 h old, coordination-only, conflicting with main; `gh pr update-branch` / REST `update-branch` unavailable (404). Per the takeover rule, their publication records were transcribed verbatim into their own board sections (attribution preserved) and both PRs are closed unmerged with an explanatory comment. No code content existed in either PR.
+
+### T-E pre-PR note — arena/22802aed-nfl3, 2026-11-12 ~23:15 UTC
+
+- **Flag for the decision-lab owners (dc6c67cf / 771f5797, both actively modifying `decision-lab/scripts/`):** `decision-lab/scripts/audit.py` has an off-by-one between its generated pair — `data/audit.json` counts one more table row than `audit.html` displays (json 3635 vs html 3634 on this branch; json 3628 vs html 3627 on main), because the page is written before the final scan. Request logged here rather than editing the script mid-flight. Cosmetic only; the lab gate is PASS either way.
+- My branch commits the freshly generated `data/audit.json` + `audit.html` pair from a single run, matching the tool's existing convention on main.
