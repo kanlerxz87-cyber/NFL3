@@ -1,0 +1,34 @@
+name: Ops centre checks
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'ops-center/**'
+      - 'decision-lab/data/official_snapshot.json'
+      - '.github/workflows/ops-center.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'ops-center/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the ops centre
+        run: python3 ops-center/scripts/build.py
+      - name: Strict gate (source link on every row, no broken links, deterministic build)
+        run: python3 ops-center/scripts/verify.py
+      - name: Root site validators still pass
+        run: |
+          python3 scripts/validate_site.py
+          python3 tests/check_site.py
+      - name: Canonical decision lab audit
+        run: python3 decision-lab/scripts/audit.py
