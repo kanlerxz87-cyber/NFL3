@@ -1,11 +1,11 @@
-// Builds the static GitHub Pages site in docs/ from data/*.csv. No dependencies.
+// Builds the static dashboard pages in dashboard/ from dashboard/data/*.csv. No dependencies.
 // All numbers on the pages are computed from the CSVs; nothing is typed in by hand.
 import { mkdirSync, writeFileSync, copyFileSync } from 'node:fs';
 import { loadCSV } from './csv.mjs';
 
 const ROOT = new URL('..', import.meta.url).pathname;
 const D = (f) => loadCSV(ROOT + 'data/' + f);
-const OUT = ROOT + 'docs/';
+const OUT = ROOT; // generated pages live in dashboard/ and are served at /NFL3/dashboard/
 mkdirSync(OUT + 'assets', { recursive: true });
 
 const injuries = D('injuries_2026_w10.csv');
@@ -48,7 +48,7 @@ function page(file, title, body, active) {
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)} · NFL3 Dashboard</title><link rel="stylesheet" href="assets/style.css"></head>
 <body>
-<header class="top"><a class="brand" href="index.html">NFL3 Dashboard</a><nav>${nav}</nav></header>
+<header class="top"><a class="brand" href="index.html">NFL3 Dashboard</a><nav>${nav}<a href="../index.html">Main NFL3 site ↗</a></nav></header>
 <main>
 <h1>${esc(title)}</h1>
 ${body}
@@ -186,5 +186,4 @@ ${table('src', ['ID', 'Title', 'Publisher', 'Type', 'Used for', 'How verified', 
 
 copyFileSync(ROOT + 'scripts/site.css', OUT + 'assets/style.css');
 copyFileSync(ROOT + 'scripts/site.js', OUT + 'assets/app.js');
-writeFileSync(OUT + '.nojekyll', '');
 console.log('built', ['index', 'injuries', 'games', 'starters-backups', 'strategies', 'questions', 'suggestions', 'flagged', 'repo-review', 'sources'].length, 'pages;', injuries.length, 'injury rows; no-injury teams:', noInjury.join(','));

@@ -1,21 +1,13 @@
-# NFL3
+# NFL3 research desk
 
-Collects, organizes and analyzes NFL data, and publishes it as a static dashboard on GitHub Pages.
+A static, source-linked NFL decision dashboard for GitHub Pages. Open `index.html` locally or serve the repository root with `python3 -m http.server`. Navigation uses relative paths for project-site hosting.
 
-- **Live site:** https://kanlerxz87-cyber.github.io/NFL3/ (after the merge to `main` and Pages deploy; see COORDINATION.md)
-- **Data (source of truth):** `data/*.csv` — every row has a source link or an `UNVERIFIED` flag.
-- **Site (generated):** `docs/` — built from the CSVs by `scripts/build.mjs`. Do not hand-edit `docs/`.
-- **Verification gate:** `scripts/check.mjs` — fails if a row has no source, an internal link is broken, or an external link is not https.
-- **Coordination:** `COORDINATION.md` (shared task board and log).
+This is a research foundation, **not** an automated data pipeline, live injury tracker, betting model, leaderboard, or source of betting advice. The injury table is a small, dated snapshot, not a complete report. See the site's Flagged for Review page for unverified gaps and the decision journal for proposed next steps. Source links provide context for proposals and are not endorsements.
 
-## Rebuild
+Run `python3 tests/check_site.py` to validate internal links, HTML parsing, and a source link on each table row. External links were manually inspected at research time; content may change.
 
-```bash
-npm run all    # node scripts/build.mjs && node scripts/check.mjs (no dependencies)
-```
+## Additional research pages
 
-## Scope and limits
+The Overview includes a **Research deep dives** table linking to expanded questions and requirements, signal hypotheses, lineup evidence schema, validation gates, implementation suggestions, and extended flagged items. These pages supplement (and do not replace) the primary dashboard pages.
 
-- Verified values come from official NFL sources (nfl.com) and the Dutch regulator (kansspelautoriteit.nl).
-- Depth charts, betting lines, historical results and correlations are **not** in the repo yet; those fields are blank and flagged.
-- No strategy is validated and no reward is assigned yet. Analysis only; not betting advice.
+`python3 scripts/validate_site.py` additionally checks local links/assets and citation rows across the extended pages. `.github/workflows/pages.yml` runs validation on pull requests and deploys the static repository to GitHub Pages after a push to `main` (repository Pages must be configured to use GitHub Actions). This remains documentation and research design: it does not automatically ingest current data or provide picks.

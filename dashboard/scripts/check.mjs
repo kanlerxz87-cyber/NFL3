@@ -1,4 +1,4 @@
-// Verification gate. Fails (exit 1) if any row lacks a source, a link is broken,
+// Verification gate for dashboard/. Fails (exit 1) if any row lacks a source, a link is broken,
 // or an external link is not https. Run after scripts/build.mjs.
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { loadCSV } from './csv.mjs';
@@ -35,7 +35,7 @@ if (inj.some((r) => !/^Verified/.test(r.verification))) fail('injury row without
 notes.push(`injury rows ${inj.length}; teams with rows ${teamsInInj.size}; games ${games.length}; teams ${teamsInGames.size}`);
 
 // 3) HTML: internal links resolve; external links are https; table rows carry a source or UNVERIFIED flag.
-const docs = ROOT + 'docs/';
+const docs = ROOT; // dashboard/ (generated pages)
 const pages = readdirSync(docs).filter((f) => f.endsWith('.html'));
 for (const p of pages) {
   const html = readFileSync(docs + p, 'utf8');
