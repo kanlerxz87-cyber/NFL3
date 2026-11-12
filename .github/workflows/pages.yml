@@ -27,6 +27,8 @@ jobs:
         run: python3 scripts/validate_site.py
       - name: Existing root site checks
         run: python3 tests/check_site.py
+      - name: Decision desk checks (data, links, row citations, blanks)
+        run: python3 decision-desk/scripts/check.py
       - name: Decision lab offline tests
         run: python3 tests/test_decision_lab.py
       - name: Independent line-by-line source verification

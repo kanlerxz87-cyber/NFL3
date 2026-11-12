@@ -9,6 +9,7 @@ Nothing here is betting advice, a sportsbook, or an approved wagering system.
 
 | Workspace | What it is | Entry point |
 |---|---|---|
+| **Decision desk (evidence chain)** | Verified game log for 2026 Weeks 1-9 cross-checked against official standings, opponent-adjusted ratings with a measured luck/skill split, measured correlations, a walk-forward skill test, an injury-to-depth-slot join, 24 blocking decisions and 17 reviewable suggestions. | [`decision-desk/index.html`](decision-desk/index.html) |
 | **Canonical decision lab** | Official-source decision dashboard: requirements, questions, suggestions, line-origination protocol, injury/depth snapshots, fail-closed validation gates, flagged review and independent audit. Unknown values stay blank. | [`decision-lab/index.html`](decision-lab/index.html) |
 | **Verification log** | Independent hand-checked transcription with counted exceptions: every value either matches, or is explicitly counted as unverified. | [`decision-lab/verification.html`](decision-lab/verification.html) |
 | **Verification & integrity (automated)** | Automated re-fetch that compares each published field with the live official source; drift and unreachable sources are reported, never counted as passes. | [`decision-lab/integrity.html`](decision-lab/integrity.html) |
