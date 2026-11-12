@@ -126,6 +126,11 @@ def build_integrity() -> str:
         'that produced the snapshot, then a field-by-field comparison.</div>'
         f'<div class="metrics">{metrics}</div>'
     )
+    if doc.get("mode") == "offline-structural":
+        content += ('<div class="notice warn"><strong>This page is showing an offline structural run.</strong> The deployment '
+                    'workflow performs the live field-by-field re-fetch and uploads it as the <code>live-verification</code> '
+                    'artifact, but it does not write to the repository, so the committed page keeps the last run that could be '
+                    'reproduced from the committed tree. The live result for a given deployment is available in that run\'s artifact.</div>')
     fam = [[td(e(f["id"])), td(e(f["name"])),
             td(pill(f["status"], "ok" if f["status"] == "match" else ("danger" if f["status"] in {"drift", "unreachable"} else "warn"))),
             td(e(f["method"])), td(f'{f["matched"]}/{f["rows_checked"]}' if f["rows_checked"] else "—"),
@@ -156,12 +161,6 @@ def build_integrity() -> str:
         [td("row-set-differs"), td("No published value changed, but the live page lists a different set of rows (for example it moved on to the next week)."), td("Re-capture and re-version; do not describe this as a data error."), td(B.source_link("S01"))],
         [td("drift"), td("A value that exists in both published and live data differs."), td("Treat as a real discrepancy; the official source wins."), td(B.source_link("S01"))],
         [td("unreachable"), td("The source could not be fetched, so nothing was compared."), td("Do not treat the published value as verified."), td(B.source_link("S01"))],
-        [td("structural-only"), td("Offline run: joins and coverage were checked, live fields were not."), td("Wait for the scheduled live run."), td(B.source_link("S16"))],
-    ])
-    content += table("Superseded status wording (kept only so older runs are readable).", ["Status", "Meaning", "Action", "Source"], [
-        [td("match"), td("Every compared field equals the official source at run time."), td("Verified for this moment only."), td(B.source_link("S01"))],
-        [td("drift"), td("At least one published value differs from the live official source."), td("Open the mismatch table; the official source wins."), td(B.source_link("S01"))],
-        [td("unreachable"), td("The official source could not be fetched. Nothing was compared."), td("Do not treat the published value as verified."), td(B.source_link("S01"))],
         [td("structural-only"), td("Offline run: joins and coverage were checked, live fields were not."), td("Wait for the scheduled live run."), td(B.source_link("S16"))],
     ])
     content += table("Honest limits of this verification.", ["Limit", "Consequence", "Source"], [
