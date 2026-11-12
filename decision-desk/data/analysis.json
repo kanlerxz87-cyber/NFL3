@@ -1,0 +1,1988 @@
+{
+  "source": {
+    "games_csv": "data/games_2026.csv",
+    "schedule_pages": [
+      "https://www.nfl.com/schedules/2026/by-week/week-1",
+      "https://www.nfl.com/schedules/2026/by-week/week-2",
+      "https://www.nfl.com/schedules/2026/by-week/week-3",
+      "https://www.nfl.com/schedules/2026/by-week/week-4",
+      "https://www.nfl.com/schedules/2026/by-week/week-5",
+      "https://www.nfl.com/schedules/2026/by-week/week-6",
+      "https://www.nfl.com/schedules/2026/by-week/week-7",
+      "https://www.nfl.com/schedules/2026/by-week/week-8",
+      "https://www.nfl.com/schedules/2026/by-week/week-9"
+    ],
+    "standings_crosscheck": "https://www.nfl.com/standings/",
+    "observed": "2026-11-12",
+    "note": "Scores are official NFL.com finals. One Week 2 game is rendered 'Hidden Score' on the official page and is left blank, never inferred."
+  },
+  "league": {
+    "games_with_scores": 135,
+    "games_unverified_blank": [
+      "week 2 WAS at DAL"
+    ],
+    "mean_total_points": 45.8444,
+    "sd_total_points": 14.3292,
+    "mean_home_margin": -0.1259,
+    "sd_home_margin": 13.2391,
+    "mean_home_margin_ci95": [
+      -2.363,
+      2.0815
+    ],
+    "median_total_points": 45,
+    "share_home_wins": 0.4889,
+    "share_ties": 0.0074,
+    "note": "A total line needs the mean and sd of the combined score; a spread needs the mean and sd of the margin. These are estimated from official finals only. They describe the past nine weeks and carry no market comparison."
+  },
+  "model_all": {
+    "form": "home = mu + hfa/2 + attack[home] - defence[away]; away = mu - hfa/2 + attack[away] - defence[home]",
+    "ridge_lambda": 2.0,
+    "mu_points_per_team": 22.9579,
+    "hfa_points": -0.6132,
+    "implied_league_total": 45.9159,
+    "fitted_games": 135
+  },
+  "model_fit": {
+    "residual_sd_home_points": 7.4333,
+    "residual_sd_away_points": 8.6808,
+    "residual_sd_margin": 10.4038,
+    "note": "Residual sd of the margin is the number a spread's uncertainty band needs. It is estimated in sample, so it is optimistic."
+  },
+  "reliability": {
+    "method": "Split the nine weeks into odd and even weeks, re-fit team ratings independently, correlate the implied net team strength. Spearman-Brown corrects the half-sample correlation to the full nine-week scale.",
+    "half_sample_r": 0.4039,
+    "spearman_brown_full_sample": 0.5754,
+    "stable_variance_share": 0.5754,
+    "noise_variance_share": 0.4246,
+    "games_in_odd_weeks": 76,
+    "games_in_even_weeks": 59,
+    "caveat": "A nine-week, single-season sample is small. The reliability figure bounds how much of an early-season team rating can be trusted; it does not make the rating predictive and it is not a market edge."
+  },
+  "correlations": [
+    {
+      "pair": "Same-game margin vs same-game total",
+      "a": "margin",
+      "b": "total",
+      "n": 135,
+      "r": -0.1696,
+      "ci95": [
+        -0.3263,
+        -0.0106
+      ],
+      "use": "Sets whether a spread signal and a total signal can be treated as independent when combining legs. This is measured; prop-to-prop correlation is not, because no prop outcome data exists in this repository."
+    },
+    {
+      "pair": "Team margin in week w vs week w+1 (week-to-week persistence)",
+      "a": "margin_w",
+      "b": "margin_w+1",
+      "n": 222,
+      "r": 0.095,
+      "ci95": [
+        -0.0401,
+        0.2224
+      ],
+      "use": "If week-to-week persistence is near zero, single-week streak or 'hot team' signals are noise and must not be promoted to a strategy."
+    },
+    {
+      "pair": "Team points scored vs points allowed (32 teams, whole sample)",
+      "a": "pf",
+      "b": "pa",
+      "n": 32,
+      "r": -0.0945,
+      "ci95": [
+        -0.432,
+        0.241
+      ],
+      "use": "Measured, not assumed. If scoring and conceding are strongly positively related, pace is a shared factor and affects how a team total and a game total move together."
+    },
+    {
+      "pair": "Prop-to-prop correlation (any two player props)",
+      "a": "prop_a",
+      "b": "prop_b",
+      "n": 0,
+      "r": null,
+      "ci95": null,
+      "use": "UNKNOWN - BLANK. No player-level outcome data exists in this repository, so no prop correlation can be stated. Any number here would be fabricated. It must be measured from official box scores before a prop-combination strategy may pass a gate."
+    }
+  ],
+  "walk_forward": {
+    "evaluation_weeks": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "n_games": 88,
+    "brier_model": 0.2138,
+    "brier_home_base_rate": 0.2445,
+    "brier_coin_flip": 0.2472,
+    "log_loss_model": 0.6262,
+    "log_loss_home_base_rate": 0.6879,
+    "log_loss_coin_flip": 0.6931,
+    "brier_skill_vs_base_rate": 0.1257,
+    "brier_skill_vs_coin_flip": 0.1349,
+    "straight_up_accuracy": 0.6667,
+    "margin_mae": 9.2561,
+    "sigma_used_note": "sigma is re-estimated inside each walk-forward step from prior weeks only",
+    "verdict": "Computed out of sample with no tuning on evaluation weeks. Even a positive number here is a winner-probability skill, not a betting edge: no price, no vig, no closing line and no settlement archive exist in this repository.",
+    "weekly": [
+      {
+        "week": 4,
+        "n": 16,
+        "brier_model": 0.2107,
+        "brier_coin_flip": 0.25,
+        "skill_vs_coin_flip": 0.1571,
+        "log_loss_model": 0.5975
+      },
+      {
+        "week": 5,
+        "n": 15,
+        "brier_model": 0.2108,
+        "brier_coin_flip": 0.2333,
+        "skill_vs_coin_flip": 0.0964,
+        "log_loss_model": 0.6876
+      },
+      {
+        "week": 6,
+        "n": 14,
+        "brier_model": 0.2613,
+        "brier_coin_flip": 0.25,
+        "skill_vs_coin_flip": -0.0453,
+        "log_loss_model": 0.7237
+      },
+      {
+        "week": 7,
+        "n": 14,
+        "brier_model": 0.2702,
+        "brier_coin_flip": 0.25,
+        "skill_vs_coin_flip": -0.0808,
+        "log_loss_model": 0.7359
+      },
+      {
+        "week": 8,
+        "n": 14,
+        "brier_model": 0.2048,
+        "brier_coin_flip": 0.25,
+        "skill_vs_coin_flip": 0.1808,
+        "log_loss_model": 0.5895
+      },
+      {
+        "week": 9,
+        "n": 15,
+        "brier_model": 0.1315,
+        "brier_coin_flip": 0.25,
+        "skill_vs_coin_flip": 0.4739,
+        "log_loss_model": 0.436
+      }
+    ],
+    "weeks_with_positive_skill": "4 of 6",
+    "skill_ci95": [
+      -0.0223,
+      0.2781
+    ]
+  },
+  "luck": {
+    "method": "For every team, actual wins are compared with (a) the wins the fitted opponent-adjusted ratings expected before those games and (b) a Pythagorean point-differential estimate. All inputs are official finals.",
+    "league_sd_margin_used": 10.4038,
+    "pythagorean_exponent": 2.37,
+    "teams": [
+      {
+        "team": "DEN",
+        "games": 9,
+        "w": 7,
+        "l": 2,
+        "t": 0,
+        "expected_wins_from_points": 4.6925,
+        "wins_minus_expected": 2.3075,
+        "one_score_games": 6,
+        "one_score_wins": 6,
+        "one_score_record": "6-0",
+        "pythagorean_wins": 4.8328,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "CLE",
+        "games": 9,
+        "w": 5,
+        "l": 4,
+        "t": 0,
+        "expected_wins_from_points": 3.5634,
+        "wins_minus_expected": 1.4366,
+        "one_score_games": 7,
+        "one_score_wins": 5,
+        "one_score_record": "5-2",
+        "pythagorean_wins": 3.4696,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "MIN",
+        "games": 8,
+        "w": 6,
+        "l": 2,
+        "t": 0,
+        "expected_wins_from_points": 4.7827,
+        "wins_minus_expected": 1.2173,
+        "one_score_games": 5,
+        "one_score_wins": 4,
+        "one_score_record": "4-1",
+        "pythagorean_wins": 5.0641,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "BUF",
+        "games": 8,
+        "w": 7,
+        "l": 1,
+        "t": 0,
+        "expected_wins_from_points": 5.8783,
+        "wins_minus_expected": 1.1217,
+        "one_score_games": 4,
+        "one_score_wins": 3,
+        "one_score_record": "3-1",
+        "pythagorean_wins": 5.4236,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "DET",
+        "games": 8,
+        "w": 6,
+        "l": 2,
+        "t": 0,
+        "expected_wins_from_points": 4.9679,
+        "wins_minus_expected": 1.0321,
+        "one_score_games": 5,
+        "one_score_wins": 4,
+        "one_score_record": "4-1",
+        "pythagorean_wins": 4.7537,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "PIT",
+        "games": 8,
+        "w": 6,
+        "l": 2,
+        "t": 0,
+        "expected_wins_from_points": 5.0668,
+        "wins_minus_expected": 0.9332,
+        "one_score_games": 5,
+        "one_score_wins": 4,
+        "one_score_record": "4-1",
+        "pythagorean_wins": 5.0337,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "CHI",
+        "games": 9,
+        "w": 7,
+        "l": 2,
+        "t": 0,
+        "expected_wins_from_points": 6.1092,
+        "wins_minus_expected": 0.8908,
+        "one_score_games": 3,
+        "one_score_wins": 2,
+        "one_score_record": "2-1",
+        "pythagorean_wins": 5.8919,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "SF",
+        "games": 8,
+        "w": 7,
+        "l": 1,
+        "t": 0,
+        "expected_wins_from_points": 6.1816,
+        "wins_minus_expected": 0.8184,
+        "one_score_games": 3,
+        "one_score_wins": 3,
+        "one_score_record": "3-0",
+        "pythagorean_wins": 5.8026,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "GB",
+        "games": 9,
+        "w": 6,
+        "l": 3,
+        "t": 0,
+        "expected_wins_from_points": 5.2003,
+        "wins_minus_expected": 0.7997,
+        "one_score_games": 3,
+        "one_score_wins": 2,
+        "one_score_record": "2-1",
+        "pythagorean_wins": 5.1513,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "BAL",
+        "games": 9,
+        "w": 4,
+        "l": 5,
+        "t": 0,
+        "expected_wins_from_points": 3.3122,
+        "wins_minus_expected": 0.6878,
+        "one_score_games": 5,
+        "one_score_wins": 3,
+        "one_score_record": "3-2",
+        "pythagorean_wins": 3.3423,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "AZ",
+        "games": 9,
+        "w": 3,
+        "l": 6,
+        "t": 0,
+        "expected_wins_from_points": 2.3623,
+        "wins_minus_expected": 0.6377,
+        "one_score_games": 3,
+        "one_score_wins": 2,
+        "one_score_record": "2-1",
+        "pythagorean_wins": 2.6912,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "NYG",
+        "games": 8,
+        "w": 5,
+        "l": 2,
+        "t": 1,
+        "expected_wins_from_points": 4.4747,
+        "wins_minus_expected": 0.5253,
+        "one_score_games": 4,
+        "one_score_wins": 2,
+        "one_score_record": "2-2",
+        "pythagorean_wins": 4.2675,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "NE",
+        "games": 9,
+        "w": 5,
+        "l": 4,
+        "t": 0,
+        "expected_wins_from_points": 4.4791,
+        "wins_minus_expected": 0.5209,
+        "one_score_games": 5,
+        "one_score_wins": 3,
+        "one_score_record": "3-2",
+        "pythagorean_wins": 4.602,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "LV",
+        "games": 9,
+        "w": 4,
+        "l": 5,
+        "t": 0,
+        "expected_wins_from_points": 3.6728,
+        "wins_minus_expected": 0.3272,
+        "one_score_games": 3,
+        "one_score_wins": 1,
+        "one_score_record": "1-2",
+        "pythagorean_wins": 3.8711,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "CIN",
+        "games": 8,
+        "w": 6,
+        "l": 2,
+        "t": 0,
+        "expected_wins_from_points": 5.6976,
+        "wins_minus_expected": 0.3024,
+        "one_score_games": 5,
+        "one_score_wins": 3,
+        "one_score_record": "3-2",
+        "pythagorean_wins": 5.4309,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "KC",
+        "games": 8,
+        "w": 6,
+        "l": 2,
+        "t": 0,
+        "expected_wins_from_points": 5.7228,
+        "wins_minus_expected": 0.2772,
+        "one_score_games": 3,
+        "one_score_wins": 2,
+        "one_score_record": "2-1",
+        "pythagorean_wins": 5.5516,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "NO",
+        "games": 8,
+        "w": 3,
+        "l": 5,
+        "t": 0,
+        "expected_wins_from_points": 3.1251,
+        "wins_minus_expected": -0.1251,
+        "one_score_games": 5,
+        "one_score_wins": 3,
+        "one_score_record": "3-2",
+        "pythagorean_wins": 3.2738,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "ATL",
+        "games": 9,
+        "w": 3,
+        "l": 6,
+        "t": 0,
+        "expected_wins_from_points": 3.367,
+        "wins_minus_expected": -0.367,
+        "one_score_games": 2,
+        "one_score_wins": 0,
+        "one_score_record": "0-2",
+        "pythagorean_wins": 3.6018,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "CAR",
+        "games": 8,
+        "w": 3,
+        "l": 5,
+        "t": 0,
+        "expected_wins_from_points": 3.3809,
+        "wins_minus_expected": -0.3809,
+        "one_score_games": 3,
+        "one_score_wins": 1,
+        "one_score_record": "1-2",
+        "pythagorean_wins": 3.548,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "LA",
+        "games": 9,
+        "w": 5,
+        "l": 4,
+        "t": 0,
+        "expected_wins_from_points": 5.5006,
+        "wins_minus_expected": -0.5006,
+        "one_score_games": 5,
+        "one_score_wins": 2,
+        "one_score_record": "2-3",
+        "pythagorean_wins": 5.3815,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "PHI",
+        "games": 9,
+        "w": 2,
+        "l": 7,
+        "t": 0,
+        "expected_wins_from_points": 2.5257,
+        "wins_minus_expected": -0.5257,
+        "one_score_games": 4,
+        "one_score_wins": 2,
+        "one_score_record": "2-2",
+        "pythagorean_wins": 2.5095,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "SEA",
+        "games": 9,
+        "w": 5,
+        "l": 4,
+        "t": 0,
+        "expected_wins_from_points": 5.5697,
+        "wins_minus_expected": -0.5697,
+        "one_score_games": 5,
+        "one_score_wins": 2,
+        "one_score_record": "2-3",
+        "pythagorean_wins": 5.6506,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "JAX",
+        "games": 8,
+        "w": 6,
+        "l": 2,
+        "t": 0,
+        "expected_wins_from_points": 6.6881,
+        "wins_minus_expected": -0.6881,
+        "one_score_games": 4,
+        "one_score_wins": 2,
+        "one_score_record": "2-2",
+        "pythagorean_wins": 6.5547,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "IND",
+        "games": 9,
+        "w": 2,
+        "l": 7,
+        "t": 0,
+        "expected_wins_from_points": 2.6912,
+        "wins_minus_expected": -0.6912,
+        "one_score_games": 5,
+        "one_score_wins": 1,
+        "one_score_record": "1-4",
+        "pythagorean_wins": 2.9526,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "MIA",
+        "games": 8,
+        "w": 1,
+        "l": 7,
+        "t": 0,
+        "expected_wins_from_points": 1.9132,
+        "wins_minus_expected": -0.9132,
+        "one_score_games": 4,
+        "one_score_wins": 1,
+        "one_score_record": "1-3",
+        "pythagorean_wins": 2.0054,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "DAL",
+        "games": 8,
+        "w": 3,
+        "l": 5,
+        "t": 0,
+        "expected_wins_from_points": 3.9325,
+        "wins_minus_expected": -0.9325,
+        "one_score_games": 4,
+        "one_score_wins": 2,
+        "one_score_record": "2-2",
+        "pythagorean_wins": 3.8439,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "WAS",
+        "games": 7,
+        "w": 2,
+        "l": 4,
+        "t": 1,
+        "expected_wins_from_points": 3.1989,
+        "wins_minus_expected": -1.1989,
+        "one_score_games": 5,
+        "one_score_wins": 1,
+        "one_score_record": "1-4",
+        "pythagorean_wins": 3.1607,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "NYJ",
+        "games": 9,
+        "w": 2,
+        "l": 7,
+        "t": 0,
+        "expected_wins_from_points": 3.3298,
+        "wins_minus_expected": -1.3298,
+        "one_score_games": 6,
+        "one_score_wins": 1,
+        "one_score_record": "1-5",
+        "pythagorean_wins": 3.4371,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "LAC",
+        "games": 8,
+        "w": 0,
+        "l": 8,
+        "t": 0,
+        "expected_wins_from_points": 1.4314,
+        "wins_minus_expected": -1.4314,
+        "one_score_games": 2,
+        "one_score_wins": 0,
+        "one_score_record": "0-2",
+        "pythagorean_wins": 1.5748,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "HOU",
+        "games": 8,
+        "w": 3,
+        "l": 5,
+        "t": 0,
+        "expected_wins_from_points": 4.4546,
+        "wins_minus_expected": -1.4546,
+        "one_score_games": 5,
+        "one_score_wins": 1,
+        "one_score_record": "1-4",
+        "pythagorean_wins": 4.4008,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "TEN",
+        "games": 8,
+        "w": 1,
+        "l": 7,
+        "t": 0,
+        "expected_wins_from_points": 2.6079,
+        "wins_minus_expected": -1.6079,
+        "one_score_games": 6,
+        "one_score_wins": 1,
+        "one_score_record": "1-5",
+        "pythagorean_wins": 2.5376,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      },
+      {
+        "team": "TB",
+        "games": 9,
+        "w": 3,
+        "l": 6,
+        "t": 0,
+        "expected_wins_from_points": 5.1192,
+        "wins_minus_expected": -2.1192,
+        "one_score_games": 6,
+        "one_score_wins": 0,
+        "one_score_record": "0-6",
+        "pythagorean_wins": 5.1695,
+        "note": "expected_wins_from_ratings is the win total the opponent-adjusted ratings predicted before those games; wins minus that total is the unexplained residual (candidate luck or clutch performance, not proof of either). pythagorean_wins uses the conventional 2.37 exponent, which is an assumption and is labelled as one."
+      }
+    ],
+    "summary": "Reported because 'removing luck' is a request the data can only partly satisfy. What the data supports is measuring (a) how much of a rating repeats, (b) how far a team's record sits from its point differential, and (c) whether skill survives out of sample. Luck itself is never removed."
+  },
+  "teams": [
+    {
+      "team": "JAX",
+      "games": 8,
+      "points_for": 229,
+      "points_against": 121,
+      "net_points": 108,
+      "attack_rating": 4.2486,
+      "defence_rating": 5.9312,
+      "net_rating": 10.1798,
+      "half_r_odd": 11.4143,
+      "half_r_even": 5.0137
+    },
+    {
+      "team": "SF",
+      "games": 8,
+      "points_for": 235,
+      "points_against": 156,
+      "net_points": 79,
+      "attack_rating": 4.8991,
+      "defence_rating": 2.0911,
+      "net_rating": 6.9903,
+      "half_r_odd": 4.7872,
+      "half_r_even": 6.9628
+    },
+    {
+      "team": "BUF",
+      "games": 8,
+      "points_for": 256,
+      "points_against": 187,
+      "net_points": 69,
+      "attack_rating": 7.2322,
+      "defence_rating": -0.7506,
+      "net_rating": 6.4816,
+      "half_r_odd": 4.7317,
+      "half_r_even": 6.2768
+    },
+    {
+      "team": "CIN",
+      "games": 8,
+      "points_for": 240,
+      "points_against": 175,
+      "net_points": 65,
+      "attack_rating": 6.3671,
+      "defence_rating": -0.0253,
+      "net_rating": 6.3418,
+      "half_r_odd": 7.4479,
+      "half_r_even": 3.0351
+    },
+    {
+      "team": "CHI",
+      "games": 9,
+      "points_for": 241,
+      "points_against": 184,
+      "net_points": 57,
+      "attack_rating": 4.2294,
+      "defence_rating": 1.2153,
+      "net_rating": 5.4447,
+      "half_r_odd": 2.387,
+      "half_r_even": 4.424
+    },
+    {
+      "team": "KC",
+      "games": 8,
+      "points_for": 202,
+      "points_against": 143,
+      "net_points": 59,
+      "attack_rating": 1.3082,
+      "defence_rating": 2.7779,
+      "net_rating": 4.0861,
+      "half_r_odd": 5.9504,
+      "half_r_even": 1.9743
+    },
+    {
+      "team": "MIN",
+      "games": 8,
+      "points_for": 146,
+      "points_against": 116,
+      "net_points": 30,
+      "attack_rating": -4.1517,
+      "defence_rating": 7.8015,
+      "net_rating": 3.6497,
+      "half_r_odd": 3.9296,
+      "half_r_even": 1.801
+    },
+    {
+      "team": "SEA",
+      "games": 9,
+      "points_for": 202,
+      "points_against": 162,
+      "net_points": 40,
+      "attack_rating": -0.6671,
+      "defence_rating": 4.2258,
+      "net_rating": 3.5587,
+      "half_r_odd": 4.9678,
+      "half_r_even": 0.982
+    },
+    {
+      "team": "TB",
+      "games": 9,
+      "points_for": 202,
+      "points_against": 178,
+      "net_points": 24,
+      "attack_rating": 0.2587,
+      "defence_rating": 3.1344,
+      "net_rating": 3.3932,
+      "half_r_odd": 3.1153,
+      "half_r_even": -0.0913
+    },
+    {
+      "team": "PIT",
+      "games": 8,
+      "points_for": 180,
+      "points_against": 144,
+      "net_points": 36,
+      "attack_rating": -0.6705,
+      "defence_rating": 3.7519,
+      "net_rating": 3.0814,
+      "half_r_odd": 5.771,
+      "half_r_even": 1.6942
+    },
+    {
+      "team": "GB",
+      "games": 9,
+      "points_for": 216,
+      "points_against": 191,
+      "net_points": 25,
+      "attack_rating": 1.0741,
+      "defence_rating": 1.8536,
+      "net_rating": 2.9277,
+      "half_r_odd": 1.5764,
+      "half_r_even": 4.3574
+    },
+    {
+      "team": "DET",
+      "games": 8,
+      "points_for": 222,
+      "points_against": 189,
+      "net_points": 33,
+      "attack_rating": 3.3213,
+      "defence_rating": -0.7887,
+      "net_rating": 2.5326,
+      "half_r_odd": 4.4099,
+      "half_r_even": 0.5402
+    },
+    {
+      "team": "DEN",
+      "games": 9,
+      "points_for": 198,
+      "points_against": 186,
+      "net_points": 12,
+      "attack_rating": 0.0378,
+      "defence_rating": 2.2916,
+      "net_rating": 2.3294,
+      "half_r_odd": -2.0938,
+      "half_r_even": 3.0105
+    },
+    {
+      "team": "NE",
+      "games": 9,
+      "points_for": 211,
+      "points_against": 207,
+      "net_points": 4,
+      "attack_rating": 1.1779,
+      "defence_rating": 0.8967,
+      "net_rating": 2.0746,
+      "half_r_odd": -2.2571,
+      "half_r_even": 5.8293
+    },
+    {
+      "team": "LA",
+      "games": 9,
+      "points_for": 214,
+      "points_against": 181,
+      "net_points": 33,
+      "attack_rating": -0.2957,
+      "defence_rating": 2.2468,
+      "net_rating": 1.9511,
+      "half_r_odd": -1.0129,
+      "half_r_even": 2.7778
+    },
+    {
+      "team": "HOU",
+      "games": 8,
+      "points_for": 209,
+      "points_against": 192,
+      "net_points": 17,
+      "attack_rating": 1.7275,
+      "defence_rating": -0.253,
+      "net_rating": 1.4745,
+      "half_r_odd": 2.7106,
+      "half_r_even": -1.9478
+    },
+    {
+      "team": "ATL",
+      "games": 9,
+      "points_for": 188,
+      "points_against": 223,
+      "net_points": -35,
+      "attack_rating": -1.4489,
+      "defence_rating": 0.0471,
+      "net_rating": -1.4019,
+      "half_r_odd": 2.8295,
+      "half_r_even": -4.6381
+    },
+    {
+      "team": "NYG",
+      "games": 8,
+      "points_for": 182,
+      "points_against": 172,
+      "net_points": 10,
+      "attack_rating": -1.7237,
+      "defence_rating": 0.2616,
+      "net_rating": -1.4621,
+      "half_r_odd": 2.3218,
+      "half_r_even": -4.923
+    },
+    {
+      "team": "CAR",
+      "games": 8,
+      "points_for": 199,
+      "points_against": 219,
+      "net_points": -20,
+      "attack_rating": 2.2797,
+      "defence_rating": -3.7483,
+      "net_rating": -1.4686,
+      "half_r_odd": -9.9637,
+      "half_r_even": 6.1886
+    },
+    {
+      "team": "WAS",
+      "games": 7,
+      "points_for": 152,
+      "points_against": 165,
+      "net_points": -13,
+      "attack_rating": -0.5392,
+      "defence_rating": -1.5178,
+      "net_rating": -2.0571,
+      "half_r_odd": -0.3701,
+      "half_r_even": -1.4971
+    },
+    {
+      "team": "DAL",
+      "games": 8,
+      "points_for": 209,
+      "points_against": 216,
+      "net_points": -7,
+      "attack_rating": 1.8357,
+      "defence_rating": -4.2905,
+      "net_rating": -2.4549,
+      "half_r_odd": -0.2004,
+      "half_r_even": -2.3526
+    },
+    {
+      "team": "LV",
+      "games": 9,
+      "points_for": 238,
+      "points_against": 268,
+      "net_points": -30,
+      "attack_rating": 2.7238,
+      "defence_rating": -5.5066,
+      "net_rating": -2.7828,
+      "half_r_odd": -6.8808,
+      "half_r_even": 1.7859
+    },
+    {
+      "team": "NO",
+      "games": 8,
+      "points_for": 185,
+      "points_against": 216,
+      "net_points": -31,
+      "attack_rating": 0.6186,
+      "defence_rating": -4.0104,
+      "net_rating": -3.3917,
+      "half_r_odd": -2.6709,
+      "half_r_even": -4.3503
+    },
+    {
+      "team": "CLE",
+      "games": 9,
+      "points_for": 161,
+      "points_against": 196,
+      "net_points": -35,
+      "attack_rating": -3.9643,
+      "defence_rating": 0.5559,
+      "net_rating": -3.4084,
+      "half_r_odd": -5.7192,
+      "half_r_even": -2.2213
+    },
+    {
+      "team": "NYJ",
+      "games": 9,
+      "points_for": 182,
+      "points_against": 223,
+      "net_points": -41,
+      "attack_rating": -2.4275,
+      "defence_rating": -1.5242,
+      "net_rating": -3.9518,
+      "half_r_odd": -3.4239,
+      "half_r_even": -1.6006
+    },
+    {
+      "team": "BAL",
+      "games": 9,
+      "points_for": 189,
+      "points_against": 236,
+      "net_points": -47,
+      "attack_rating": -2.4667,
+      "defence_rating": -1.8857,
+      "net_rating": -4.3524,
+      "half_r_odd": -0.0403,
+      "half_r_even": -5.6251
+    },
+    {
+      "team": "IND",
+      "games": 9,
+      "points_for": 184,
+      "points_against": 249,
+      "net_points": -65,
+      "attack_rating": -1.189,
+      "defence_rating": -4.1956,
+      "net_rating": -5.3846,
+      "half_r_odd": -3.5093,
+      "half_r_even": -4.0158
+    },
+    {
+      "team": "MIA",
+      "games": 8,
+      "points_for": 126,
+      "points_against": 200,
+      "net_points": -74,
+      "attack_rating": -5.1941,
+      "defence_rating": -0.3118,
+      "net_rating": -5.506,
+      "half_r_odd": -4.7474,
+      "half_r_even": -3.3944
+    },
+    {
+      "team": "AZ",
+      "games": 9,
+      "points_for": 178,
+      "points_against": 255,
+      "net_points": -77,
+      "attack_rating": -1.9821,
+      "defence_rating": -4.4331,
+      "net_rating": -6.4152,
+      "half_r_odd": -6.1288,
+      "half_r_even": -5.6077
+    },
+    {
+      "team": "PHI",
+      "games": 9,
+      "points_for": 148,
+      "points_against": 221,
+      "net_points": -73,
+      "attack_rating": -5.6547,
+      "defence_rating": -0.8486,
+      "net_rating": -6.5032,
+      "half_r_odd": -4.0262,
+      "half_r_even": -3.9977
+    },
+    {
+      "team": "TEN",
+      "games": 8,
+      "points_for": 144,
+      "points_against": 199,
+      "net_points": -55,
+      "attack_rating": -4.7579,
+      "defence_rating": -2.4668,
+      "net_rating": -7.2246,
+      "half_r_odd": -7.597,
+      "half_r_even": -3.4556
+    },
+    {
+      "team": "LAC",
+      "games": 8,
+      "points_for": 121,
+      "points_against": 219,
+      "net_points": -98,
+      "attack_rating": -6.2065,
+      "defence_rating": -2.5252,
+      "net_rating": -8.7317,
+      "half_r_odd": -7.7086,
+      "half_r_even": -6.935
+    }
+  ],
+  "origination": {
+    "method": "Independent numbers, not copies of any market. Spread = opponent-adjusted net rating difference plus estimated home-field advantage. Total = fitted league total, which is constant by construction for every game - a documented limitation of a points-only model.",
+    "board": {
+      "NE@SEA": {
+        "away": "NE",
+        "home": "SEA",
+        "originated_home_margin": 0.8709,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "SF@LA": {
+        "away": "SF",
+        "home": "LA",
+        "originated_home_margin": -5.6523,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "CHI@CAR": {
+        "away": "CHI",
+        "home": "CAR",
+        "originated_home_margin": -7.5265,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "TB@CIN": {
+        "away": "TB",
+        "home": "CIN",
+        "originated_home_margin": 2.3354,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "NO@DET": {
+        "away": "NO",
+        "home": "DET",
+        "originated_home_margin": 5.3111,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "BUF@HOU": {
+        "away": "BUF",
+        "home": "HOU",
+        "originated_home_margin": -5.6202,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "BAL@IND": {
+        "away": "BAL",
+        "home": "IND",
+        "originated_home_margin": -1.6454,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "CLE@JAX": {
+        "away": "CLE",
+        "home": "JAX",
+        "originated_home_margin": 12.975,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "ATL@PIT": {
+        "away": "ATL",
+        "home": "PIT",
+        "originated_home_margin": 3.8701,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "NYJ@TEN": {
+        "away": "NYJ",
+        "home": "TEN",
+        "originated_home_margin": -3.8861,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "AZ@LAC": {
+        "away": "AZ",
+        "home": "LAC",
+        "originated_home_margin": -2.9296,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "MIA@LV": {
+        "away": "MIA",
+        "home": "LV",
+        "originated_home_margin": 2.11,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "GB@MIN": {
+        "away": "GB",
+        "home": "MIN",
+        "originated_home_margin": 0.1089,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "WAS@PHI": {
+        "away": "WAS",
+        "home": "PHI",
+        "originated_home_margin": -5.0594,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "DAL@NYG": {
+        "away": "DAL",
+        "home": "NYG",
+        "originated_home_margin": 0.3795,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "DEN@KC": {
+        "away": "DEN",
+        "home": "KC",
+        "originated_home_margin": 1.1435,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "DET@BUF": {
+        "away": "DET",
+        "home": "BUF",
+        "originated_home_margin": 3.3358,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "CAR@ATL": {
+        "away": "CAR",
+        "home": "ATL",
+        "originated_home_margin": -0.5465,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "NO@BAL": {
+        "away": "NO",
+        "home": "BAL",
+        "originated_home_margin": -1.5738,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "MIN@CHI": {
+        "away": "MIN",
+        "home": "CHI",
+        "originated_home_margin": 1.1817,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "CIN@HOU": {
+        "away": "CIN",
+        "home": "HOU",
+        "originated_home_margin": -5.4804,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "PIT@NE": {
+        "away": "PIT",
+        "home": "NE",
+        "originated_home_margin": -1.6201,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "GB@NYJ": {
+        "away": "GB",
+        "home": "NYJ",
+        "originated_home_margin": -7.4926,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "CLE@TB": {
+        "away": "CLE",
+        "home": "TB",
+        "originated_home_margin": 6.1884,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "PHI@TEN": {
+        "away": "PHI",
+        "home": "TEN",
+        "originated_home_margin": -1.3346,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "JAX@DEN": {
+        "away": "JAX",
+        "home": "DEN",
+        "originated_home_margin": -8.4636,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "LV@LAC": {
+        "away": "LV",
+        "home": "LAC",
+        "originated_home_margin": -6.5621,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "SEA@AZ": {
+        "away": "SEA",
+        "home": "AZ",
+        "originated_home_margin": -10.5871,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "MIA@SF": {
+        "away": "MIA",
+        "home": "SF",
+        "originated_home_margin": 11.883,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "IND@KC": {
+        "away": "IND",
+        "home": "KC",
+        "originated_home_margin": 8.8575,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "NYG@LA": {
+        "away": "NYG",
+        "home": "LA",
+        "originated_home_margin": 2.8,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "ATL@GB": {
+        "away": "ATL",
+        "home": "GB",
+        "originated_home_margin": 3.7163,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "LAC@BUF": {
+        "away": "LAC",
+        "home": "BUF",
+        "originated_home_margin": 14.6,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "CAR@CLE": {
+        "away": "CAR",
+        "home": "CLE",
+        "originated_home_margin": -2.553,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "NYJ@DET": {
+        "away": "NYJ",
+        "home": "DET",
+        "originated_home_margin": 5.8711,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "HOU@IND": {
+        "away": "HOU",
+        "home": "IND",
+        "originated_home_margin": -7.4723,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "NE@JAX": {
+        "away": "NE",
+        "home": "JAX",
+        "originated_home_margin": 7.492,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "KC@MIA": {
+        "away": "KC",
+        "home": "MIA",
+        "originated_home_margin": -10.2052,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "TEN@NYG": {
+        "away": "TEN",
+        "home": "NYG",
+        "originated_home_margin": 5.1493,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "CIN@PIT": {
+        "away": "CIN",
+        "home": "PIT",
+        "originated_home_margin": -3.8735,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "SEA@WAS": {
+        "away": "SEA",
+        "home": "WAS",
+        "originated_home_margin": -6.2289,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "AZ@SF": {
+        "away": "AZ",
+        "home": "SF",
+        "originated_home_margin": 12.7923,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "MIN@TB": {
+        "away": "MIN",
+        "home": "TB",
+        "originated_home_margin": -0.8698,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "LV@NO": {
+        "away": "LV",
+        "home": "NO",
+        "originated_home_margin": -1.2222,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "BAL@DAL": {
+        "away": "BAL",
+        "home": "DAL",
+        "originated_home_margin": 1.2843,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "LA@DEN": {
+        "away": "LA",
+        "home": "DEN",
+        "originated_home_margin": -0.2349,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "PHI@CHI": {
+        "away": "PHI",
+        "home": "CHI",
+        "originated_home_margin": 11.3347,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "PIT@CLE": {
+        "away": "PIT",
+        "home": "CLE",
+        "originated_home_margin": -7.1031,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "IND@WAS": {
+        "away": "IND",
+        "home": "WAS",
+        "originated_home_margin": 2.7143,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "TEN@BAL": {
+        "away": "TEN",
+        "home": "BAL",
+        "originated_home_margin": 2.259,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "NE@BUF": {
+        "away": "NE",
+        "home": "BUF",
+        "originated_home_margin": 3.7938,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "NYJ@CHI": {
+        "away": "NYJ",
+        "home": "CHI",
+        "originated_home_margin": 8.7833,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "JAX@CIN": {
+        "away": "JAX",
+        "home": "CIN",
+        "originated_home_margin": -4.4512,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "DAL@HOU": {
+        "away": "DAL",
+        "home": "HOU",
+        "originated_home_margin": 3.3162,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "AZ@NYG": {
+        "away": "AZ",
+        "home": "NYG",
+        "originated_home_margin": 4.3399,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "LA@PHI": {
+        "away": "LA",
+        "home": "PHI",
+        "originated_home_margin": -9.0676,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "GB@TB": {
+        "away": "GB",
+        "home": "TB",
+        "originated_home_margin": -0.1477,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "MIA@MIN": {
+        "away": "MIA",
+        "home": "MIN",
+        "originated_home_margin": 8.5425,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "KC@LV": {
+        "away": "KC",
+        "home": "LV",
+        "originated_home_margin": -7.4821,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "LAC@SEA": {
+        "away": "LAC",
+        "home": "SEA",
+        "originated_home_margin": 11.6771,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "DEN@SF": {
+        "away": "DEN",
+        "home": "SF",
+        "originated_home_margin": 4.0477,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "DET@CAR": {
+        "away": "DET",
+        "home": "CAR",
+        "originated_home_margin": -4.6144,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "ATL@NO": {
+        "away": "ATL",
+        "home": "NO",
+        "originated_home_margin": -2.6031,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "TB@DAL": {
+        "away": "TB",
+        "home": "DAL",
+        "originated_home_margin": -6.4612,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "PHI@JAX": {
+        "away": "PHI",
+        "home": "JAX",
+        "originated_home_margin": 16.0698,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "CIN@MIA": {
+        "away": "CIN",
+        "home": "MIA",
+        "originated_home_margin": -12.4609,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "LV@NE": {
+        "away": "LV",
+        "home": "NE",
+        "originated_home_margin": 4.2441,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "MIN@NO": {
+        "away": "MIN",
+        "home": "NO",
+        "originated_home_margin": -7.6547,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "CLE@NYJ": {
+        "away": "CLE",
+        "home": "NYJ",
+        "originated_home_margin": -1.1565,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "IND@PIT": {
+        "away": "IND",
+        "home": "PIT",
+        "originated_home_margin": 7.8528,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "HOU@TEN": {
+        "away": "HOU",
+        "home": "TEN",
+        "originated_home_margin": -9.3124,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "NYG@WAS": {
+        "away": "NYG",
+        "home": "WAS",
+        "originated_home_margin": -1.2081,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "CHI@GB": {
+        "away": "CHI",
+        "home": "GB",
+        "originated_home_margin": -3.1302,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "DEN@LAC": {
+        "away": "DEN",
+        "home": "LAC",
+        "originated_home_margin": -11.6743,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "DET@AZ": {
+        "away": "DET",
+        "home": "AZ",
+        "originated_home_margin": -9.561,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "SF@SEA": {
+        "away": "SF",
+        "home": "SEA",
+        "originated_home_margin": -4.0448,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "BAL@ATL": {
+        "away": "BAL",
+        "home": "ATL",
+        "originated_home_margin": 2.3373,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "BUF@LA": {
+        "away": "BUF",
+        "home": "LA",
+        "originated_home_margin": -5.1436,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "SEA@DEN": {
+        "away": "SEA",
+        "home": "DEN",
+        "originated_home_margin": -1.8425,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "HOU@JAX": {
+        "away": "HOU",
+        "home": "JAX",
+        "originated_home_margin": 8.0921,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "CHI@ATL": {
+        "away": "CHI",
+        "home": "ATL",
+        "originated_home_margin": -7.4598,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "BAL@CLE": {
+        "away": "BAL",
+        "home": "CLE",
+        "originated_home_margin": 0.3307,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "TEN@IND": {
+        "away": "TEN",
+        "home": "IND",
+        "originated_home_margin": 1.2268,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "NYJ@NE": {
+        "away": "NYJ",
+        "home": "NE",
+        "originated_home_margin": 5.4131,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "NO@NYG": {
+        "away": "NO",
+        "home": "NYG",
+        "originated_home_margin": 1.3164,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "CAR@PHI": {
+        "away": "CAR",
+        "home": "PHI",
+        "originated_home_margin": -5.6478,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "PIT@TB": {
+        "away": "PIT",
+        "home": "TB",
+        "originated_home_margin": -0.3015,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "AZ@LA": {
+        "away": "AZ",
+        "home": "LA",
+        "originated_home_margin": 7.7532,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "LAC@KC": {
+        "away": "LAC",
+        "home": "KC",
+        "originated_home_margin": 12.2045,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "BUF@LV": {
+        "away": "BUF",
+        "home": "LV",
+        "originated_home_margin": -9.8776,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "DAL@GB": {
+        "away": "DAL",
+        "home": "GB",
+        "originated_home_margin": 4.7693,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "WAS@SF": {
+        "away": "WAS",
+        "home": "SF",
+        "originated_home_margin": 8.4341,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "NE@CHI": {
+        "away": "NE",
+        "home": "CHI",
+        "originated_home_margin": 2.7569,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "PIT@NO": {
+        "away": "PIT",
+        "home": "NO",
+        "originated_home_margin": -7.0864,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "SF@ATL": {
+        "away": "SF",
+        "home": "ATL",
+        "originated_home_margin": -9.0053,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "CIN@BAL": {
+        "away": "CIN",
+        "home": "BAL",
+        "originated_home_margin": -11.3074,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "TB@CAR": {
+        "away": "TB",
+        "home": "CAR",
+        "originated_home_margin": -5.475,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "NYG@HOU": {
+        "away": "NYG",
+        "home": "HOU",
+        "originated_home_margin": 2.3234,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "IND@MIN": {
+        "away": "IND",
+        "home": "MIN",
+        "originated_home_margin": 8.4211,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "MIA@NYJ": {
+        "away": "MIA",
+        "home": "NYJ",
+        "originated_home_margin": 0.941,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "CLE@TEN": {
+        "away": "CLE",
+        "home": "TEN",
+        "originated_home_margin": -4.4294,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "DEN@AZ": {
+        "away": "DEN",
+        "home": "AZ",
+        "originated_home_margin": -9.3578,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "GB@DET": {
+        "away": "GB",
+        "home": "DET",
+        "originated_home_margin": -1.0083,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "LA@LV": {
+        "away": "LA",
+        "home": "LV",
+        "originated_home_margin": -5.3471,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "KC@SEA": {
+        "away": "KC",
+        "home": "SEA",
+        "originated_home_margin": -1.1406,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "DAL@PHI": {
+        "away": "DAL",
+        "home": "PHI",
+        "originated_home_margin": -4.6616,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "CAR@GB": {
+        "away": "CAR",
+        "home": "GB",
+        "originated_home_margin": 3.7831,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "BAL@BUF": {
+        "away": "BAL",
+        "home": "BUF",
+        "originated_home_margin": 10.2207,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "TEN@CIN": {
+        "away": "TEN",
+        "home": "CIN",
+        "originated_home_margin": 12.9532,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "AZ@DAL": {
+        "away": "AZ",
+        "home": "DAL",
+        "originated_home_margin": 3.3472,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "MIN@DET": {
+        "away": "MIN",
+        "home": "DET",
+        "originated_home_margin": -1.7304,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "IND@JAX": {
+        "away": "IND",
+        "home": "JAX",
+        "originated_home_margin": 14.9512,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "LV@NYJ": {
+        "away": "LV",
+        "home": "NYJ",
+        "originated_home_margin": -1.7822,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "CLE@PIT": {
+        "away": "CLE",
+        "home": "PIT",
+        "originated_home_margin": 5.8767,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "ATL@TB": {
+        "away": "ATL",
+        "home": "TB",
+        "originated_home_margin": 4.1818,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "LAC@LA": {
+        "away": "LAC",
+        "home": "LA",
+        "originated_home_margin": 10.0696,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "KC@DEN": {
+        "away": "KC",
+        "home": "DEN",
+        "originated_home_margin": -2.3699,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "NE@MIA": {
+        "away": "NE",
+        "home": "MIA",
+        "originated_home_margin": -8.1937,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "PHI@WAS": {
+        "away": "PHI",
+        "home": "WAS",
+        "originated_home_margin": 3.833,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "CHI@SEA": {
+        "away": "CHI",
+        "home": "SEA",
+        "originated_home_margin": -2.4992,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "JAX@BAL": {
+        "away": "JAX",
+        "home": "BAL",
+        "originated_home_margin": -15.1454,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "CIN@ATL": {
+        "away": "CIN",
+        "home": "ATL",
+        "originated_home_margin": -8.3568,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "DEN@CAR": {
+        "away": "DEN",
+        "home": "CAR",
+        "originated_home_margin": -4.4112,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "DAL@IND": {
+        "away": "DAL",
+        "home": "IND",
+        "originated_home_margin": -3.5429,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "NYJ@KC": {
+        "away": "NYJ",
+        "home": "KC",
+        "originated_home_margin": 7.4246,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "DET@MIA": {
+        "away": "DET",
+        "home": "MIA",
+        "originated_home_margin": -8.6517,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "CLE@NO": {
+        "away": "CLE",
+        "home": "NO",
+        "originated_home_margin": -0.5965,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "NYG@PHI": {
+        "away": "NYG",
+        "home": "PHI",
+        "originated_home_margin": -5.6543,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "LA@WAS": {
+        "away": "LA",
+        "home": "WAS",
+        "originated_home_margin": -4.6214,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "HOU@LAC": {
+        "away": "HOU",
+        "home": "LAC",
+        "originated_home_margin": -10.8194,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "LV@SF": {
+        "away": "LV",
+        "home": "SF",
+        "originated_home_margin": 9.1599,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "GB@NE": {
+        "away": "GB",
+        "home": "NE",
+        "originated_home_margin": -1.4663,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "AZ@SEA": {
+        "away": "AZ",
+        "home": "SEA",
+        "originated_home_margin": 9.3607,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "TB@CHI": {
+        "away": "TB",
+        "home": "CHI",
+        "originated_home_margin": 1.4383,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      },
+      "BUF@MIN": {
+        "away": "BUF",
+        "home": "MIN",
+        "originated_home_margin": -3.445,
+        "originated_total": 45.9159,
+        "sigma_margin_for_band": 10.4038
+      }
+    },
+    "status": "SHADOW ONLY. No originated number in this table has been compared with a market price, so no edge, no value and no closing-line advantage is claimed or measurable here."
+  },
+  "limitations": [
+    "Nine weeks of one season, 135 usable finals: wide uncertainty on every estimate.",
+    "No injury adjustment: ratings ignore who was actually available.",
+    "No market prices anywhere in the repository, so edge, vig and CLV are UNKNOWN and blank.",
+    "No player-level outcomes, so prop and parlay-leg correlations are UNKNOWN and blank.",
+    "A constant total for every game is a model limitation, not a claim about any matchup.",
+    "The one hidden-score game is excluded rather than estimated.",
+    "Home-field advantage is estimated here at essentially zero for this sample. That is a sample property of 2026 Weeks 1-9 and must not be generalised into a prior without more seasons."
+  ]
+}
