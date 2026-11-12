@@ -1,7 +1,7 @@
 {
-  "html_pages": 83,
-  "table_rows": 4046,
-  "rows_missing_official_source": 531,
+  "html_pages": 100,
+  "table_rows": 5000,
+  "rows_missing_official_source": 533,
   "rows_community_only": 106,
   "rows_with_internal_audit_source": 7,
   "conflict_files": [],
@@ -36,7 +36,7 @@
       "id": "AUD-03",
       "severity": "High",
       "title": "Table rows without an official-source link",
-      "detail": "531 row(s) across the repository lack an official HTTPS source; 106 cite only community sources.",
+      "detail": "533 row(s) across the repository lack an official HTTPS source; 106 cite only community sources.",
       "files": [
         "dashboard/flagged.html",
         "dashboard/questions.html",
@@ -66,7 +66,7 @@
     {
       "path": "dashboard/flagged.html",
       "rows": 27,
-      "rows_missing_official_source": 15,
+      "rows_missing_official_source": 16,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
       "local_errors": []
@@ -105,8 +105,8 @@
     },
     {
       "path": "dashboard/repo-review.html",
-      "rows": 16,
-      "rows_missing_official_source": 4,
+      "rows": 23,
+      "rows_missing_official_source": 5,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
       "local_errors": []
@@ -139,6 +139,118 @@
       "path": "dashboard/suggestions.html",
       "rows": 14,
       "rows_missing_official_source": 10,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/audit.html",
+      "rows": 11,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/decisions.html",
+      "rows": 24,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/flagged.html",
+      "rows": 20,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/index.html",
+      "rows": 27,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/injuries.html",
+      "rows": 180,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/lines.html",
+      "rows": 141,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/luck.html",
+      "rows": 74,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/questions.html",
+      "rows": 35,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/requirements.html",
+      "rows": 18,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/sources.html",
+      "rows": 22,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/strategies.html",
+      "rows": 25,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/suggestions.html",
+      "rows": 34,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/summary.html",
+      "rows": 16,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/validation.html",
+      "rows": 20,
+      "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
       "local_errors": []
@@ -216,6 +328,22 @@
       "local_errors": []
     },
     {
+      "path": "decision-lab/availability.html",
+      "rows": 216,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-lab/decisions.html",
+      "rows": 9,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
       "path": "decision-lab/depth.html",
       "rows": 1747,
       "rows_missing_official_source": 0,
@@ -225,7 +353,7 @@
     },
     {
       "path": "decision-lab/executive-summary.html",
-      "rows": 7,
+      "rows": 19,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -233,7 +361,7 @@
     },
     {
       "path": "decision-lab/flagged.html",
-      "rows": 14,
+      "rows": 22,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -241,7 +369,7 @@
     },
     {
       "path": "decision-lab/index.html",
-      "rows": 13,
+      "rows": 16,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -250,6 +378,14 @@
     {
       "path": "decision-lab/injuries.html",
       "rows": 258,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-lab/integrity.html",
+      "rows": 11,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -265,7 +401,7 @@
     },
     {
       "path": "decision-lab/questions.html",
-      "rows": 22,
+      "rows": 28,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -273,7 +409,7 @@
     },
     {
       "path": "decision-lab/requirements.html",
-      "rows": 17,
+      "rows": 26,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -281,7 +417,7 @@
     },
     {
       "path": "decision-lab/sources.html",
-      "rows": 27,
+      "rows": 34,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -297,7 +433,7 @@
     },
     {
       "path": "decision-lab/suggestions.html",
-      "rows": 12,
+      "rows": 27,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -337,7 +473,7 @@
     },
     {
       "path": "index.html",
-      "rows": 13,
+      "rows": 17,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
