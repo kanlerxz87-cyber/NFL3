@@ -1,11 +1,10 @@
 {
-  "html_pages": 95,
-  "table_rows": 4893,
-  "rows_missing_official_source": 533,
+  "html_pages": 82,
+  "table_rows": 3738,
+  "rows_missing_official_source": 531,
   "rows_community_only": 106,
-  "rows_with_internal_audit_source": 7,
   "conflict_files": [],
-  "authority_claim_files": [
+  "community_claim_files": [
     "engine/_pages_tail.py",
     "engine/build.py",
     "engine/conventions.py",
@@ -19,8 +18,8 @@
     {
       "id": "AUD-01",
       "severity": "Critical",
-      "title": "NFL authority is unverified for GitHub-hosted data",
-      "detail": "7 file(s) describe nflverse GitHub releases as official or verified. Their local manifest checks GitHub-published digests, which verifies byte integrity only; this scan found no NFL authorship/authorization evidence in those files. This is not a finding that the data are inaccurate.",
+      "title": "Community-source authority mislabeled as official",
+      "detail": "7 file(s) use official/verified language for nflverse/community assets. Digest integrity is not NFL factual verification.",
       "files": [
         "engine/_pages_tail.py",
         "engine/build.py",
@@ -30,13 +29,13 @@
         "research-desk/index.html",
         "research-desk/questions.html"
       ],
-      "source": "S18"
+      "source": "S12"
     },
     {
       "id": "AUD-03",
       "severity": "High",
       "title": "Table rows without an official-source link",
-      "detail": "533 row(s) across the repository lack an official HTTPS source; 106 cite only community sources.",
+      "detail": "531 row(s) across the repository lack an official HTTPS source; 106 cite only community sources.",
       "files": [
         "dashboard/flagged.html",
         "dashboard/questions.html",
@@ -59,16 +58,15 @@
         "line-lab/pages/standings.html",
         "line-lab/pages/strategies.html"
       ],
-      "source": "LOCAL_AUDIT"
+      "source": "S12"
     }
   ],
   "pages": [
     {
       "path": "dashboard/flagged.html",
       "rows": 27,
-      "rows_missing_official_source": 16,
+      "rows_missing_official_source": 15,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -76,7 +74,6 @@
       "rows": 14,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -84,7 +81,6 @@
       "rows": 0,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -92,7 +88,6 @@
       "rows": 254,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -100,15 +95,13 @@
       "rows": 18,
       "rows_missing_official_source": 8,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
       "path": "dashboard/repo-review.html",
-      "rows": 23,
-      "rows_missing_official_source": 5,
+      "rows": 16,
+      "rows_missing_official_source": 4,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -116,7 +109,6 @@
       "rows": 11,
       "rows_missing_official_source": 6,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -124,7 +116,6 @@
       "rows": 43,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -132,7 +123,6 @@
       "rows": 27,
       "rows_missing_official_source": 14,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -140,119 +130,6 @@
       "rows": 14,
       "rows_missing_official_source": 10,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
-      "local_errors": []
-    },
-    {
-      "path": "decision-desk/audit.html",
-      "rows": 11,
-      "rows_missing_official_source": 0,
-      "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
-      "local_errors": []
-    },
-    {
-      "path": "decision-desk/decisions.html",
-      "rows": 24,
-      "rows_missing_official_source": 0,
-      "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
-      "local_errors": []
-    },
-    {
-      "path": "decision-desk/flagged.html",
-      "rows": 20,
-      "rows_missing_official_source": 0,
-      "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
-      "local_errors": []
-    },
-    {
-      "path": "decision-desk/index.html",
-      "rows": 27,
-      "rows_missing_official_source": 0,
-      "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
-      "local_errors": []
-    },
-    {
-      "path": "decision-desk/injuries.html",
-      "rows": 180,
-      "rows_missing_official_source": 0,
-      "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
-      "local_errors": []
-    },
-    {
-      "path": "decision-desk/lines.html",
-      "rows": 141,
-      "rows_missing_official_source": 0,
-      "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
-      "local_errors": []
-    },
-    {
-      "path": "decision-desk/luck.html",
-      "rows": 74,
-      "rows_missing_official_source": 0,
-      "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
-      "local_errors": []
-    },
-    {
-      "path": "decision-desk/questions.html",
-      "rows": 35,
-      "rows_missing_official_source": 0,
-      "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
-      "local_errors": []
-    },
-    {
-      "path": "decision-desk/requirements.html",
-      "rows": 18,
-      "rows_missing_official_source": 0,
-      "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
-      "local_errors": []
-    },
-    {
-      "path": "decision-desk/sources.html",
-      "rows": 22,
-      "rows_missing_official_source": 0,
-      "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
-      "local_errors": []
-    },
-    {
-      "path": "decision-desk/strategies.html",
-      "rows": 25,
-      "rows_missing_official_source": 0,
-      "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
-      "local_errors": []
-    },
-    {
-      "path": "decision-desk/suggestions.html",
-      "rows": 34,
-      "rows_missing_official_source": 0,
-      "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
-      "local_errors": []
-    },
-    {
-      "path": "decision-desk/summary.html",
-      "rows": 16,
-      "rows_missing_official_source": 0,
-      "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
-      "local_errors": []
-    },
-    {
-      "path": "decision-desk/validation.html",
-      "rows": 20,
-      "rows_missing_official_source": 0,
-      "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -260,7 +137,6 @@
       "rows": 27,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -268,7 +144,6 @@
       "rows": 6,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -276,7 +151,6 @@
       "rows": 18,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -284,7 +158,6 @@
       "rows": 10,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -292,7 +165,6 @@
       "rows": 33,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -300,7 +172,6 @@
       "rows": 12,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -308,7 +179,6 @@
       "rows": 28,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -316,31 +186,13 @@
       "rows": 10,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
       "path": "decision-lab/audit.html",
-      "rows": 8,
+      "rows": 7,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 7,
-      "local_errors": []
-    },
-    {
-      "path": "decision-lab/availability.html",
-      "rows": 216,
-      "rows_missing_official_source": 0,
-      "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
-      "local_errors": []
-    },
-    {
-      "path": "decision-lab/decisions.html",
-      "rows": 9,
-      "rows_missing_official_source": 0,
-      "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -348,31 +200,27 @@
       "rows": 1747,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
       "path": "decision-lab/executive-summary.html",
-      "rows": 19,
+      "rows": 5,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
       "path": "decision-lab/flagged.html",
-      "rows": 22,
+      "rows": 12,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
       "path": "decision-lab/index.html",
-      "rows": 16,
+      "rows": 12,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -380,15 +228,6 @@
       "rows": 258,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
-      "local_errors": []
-    },
-    {
-      "path": "decision-lab/integrity.html",
-      "rows": 11,
-      "rows_missing_official_source": 0,
-      "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -396,31 +235,27 @@
       "rows": 10,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
       "path": "decision-lab/questions.html",
-      "rows": 28,
+      "rows": 22,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
       "path": "decision-lab/requirements.html",
-      "rows": 26,
+      "rows": 17,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
       "path": "decision-lab/sources.html",
-      "rows": 34,
+      "rows": 22,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -428,15 +263,13 @@
       "rows": 11,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
       "path": "decision-lab/suggestions.html",
-      "rows": 27,
+      "rows": 12,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -444,15 +277,6 @@
       "rows": 15,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
-      "local_errors": []
-    },
-    {
-      "path": "decision-lab/verification.html",
-      "rows": 301,
-      "rows_missing_official_source": 0,
-      "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -460,7 +284,6 @@
       "rows": 11,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -468,15 +291,13 @@
       "rows": 9,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
       "path": "index.html",
-      "rows": 17,
+      "rows": 12,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -484,7 +305,6 @@
       "rows": 15,
       "rows_missing_official_source": 15,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -492,7 +312,6 @@
       "rows": 13,
       "rows_missing_official_source": 13,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -500,7 +319,6 @@
       "rows": 8,
       "rows_missing_official_source": 8,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -508,7 +326,6 @@
       "rows": 10,
       "rows_missing_official_source": 10,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -516,7 +333,6 @@
       "rows": 16,
       "rows_missing_official_source": 16,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -524,7 +340,6 @@
       "rows": 0,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -532,7 +347,6 @@
       "rows": 70,
       "rows_missing_official_source": 70,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -540,7 +354,6 @@
       "rows": 118,
       "rows_missing_official_source": 10,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -548,7 +361,6 @@
       "rows": 80,
       "rows_missing_official_source": 80,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -556,7 +368,6 @@
       "rows": 32,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -564,7 +375,6 @@
       "rows": 5,
       "rows_missing_official_source": 5,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -572,7 +382,6 @@
       "rows": 25,
       "rows_missing_official_source": 25,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -580,7 +389,6 @@
       "rows": 19,
       "rows_missing_official_source": 19,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -588,7 +396,6 @@
       "rows": 16,
       "rows_missing_official_source": 4,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -596,7 +403,6 @@
       "rows": 40,
       "rows_missing_official_source": 8,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -604,7 +410,6 @@
       "rows": 12,
       "rows_missing_official_source": 12,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -612,7 +417,6 @@
       "rows": 18,
       "rows_missing_official_source": 18,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -620,7 +424,6 @@
       "rows": 8,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -628,7 +431,6 @@
       "rows": 9,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -636,7 +438,6 @@
       "rows": 17,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -644,7 +445,6 @@
       "rows": 91,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -652,7 +452,6 @@
       "rows": 11,
       "rows_missing_official_source": 11,
       "rows_community_only": 11,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -660,7 +459,6 @@
       "rows": 16,
       "rows_missing_official_source": 16,
       "rows_community_only": 16,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -668,7 +466,6 @@
       "rows": 7,
       "rows_missing_official_source": 7,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -676,7 +473,6 @@
       "rows": 3,
       "rows_missing_official_source": 3,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -684,7 +480,6 @@
       "rows": 28,
       "rows_missing_official_source": 28,
       "rows_community_only": 28,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -692,7 +487,6 @@
       "rows": 10,
       "rows_missing_official_source": 7,
       "rows_community_only": 5,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -700,7 +494,6 @@
       "rows": 24,
       "rows_missing_official_source": 20,
       "rows_community_only": 19,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -708,7 +501,6 @@
       "rows": 21,
       "rows_missing_official_source": 18,
       "rows_community_only": 18,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -716,7 +508,6 @@
       "rows": 15,
       "rows_missing_official_source": 15,
       "rows_community_only": 9,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -724,7 +515,6 @@
       "rows": 15,
       "rows_missing_official_source": 15,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -732,7 +522,6 @@
       "rows": 4,
       "rows_missing_official_source": 1,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -740,7 +529,6 @@
       "rows": 8,
       "rows_missing_official_source": 3,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -748,7 +536,6 @@
       "rows": 11,
       "rows_missing_official_source": 4,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -756,7 +543,6 @@
       "rows": 6,
       "rows_missing_official_source": 2,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -764,7 +550,6 @@
       "rows": 8,
       "rows_missing_official_source": 6,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -772,7 +557,6 @@
       "rows": 9,
       "rows_missing_official_source": 5,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -780,7 +564,6 @@
       "rows": 10,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -788,7 +571,6 @@
       "rows": 8,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -796,7 +578,6 @@
       "rows": 6,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -804,7 +585,6 @@
       "rows": 15,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -812,7 +592,6 @@
       "rows": 4,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -820,7 +599,41 @@
       "rows": 15,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "verification-lab/index.html",
+      "rows": 20,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "local_errors": []
+    },
+    {
+      "path": "verification-lab/methods.html",
+      "rows": 21,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "local_errors": []
+    },
+    {
+      "path": "verification-lab/questions.html",
+      "rows": 21,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "local_errors": []
+    },
+    {
+      "path": "verification-lab/queue.html",
+      "rows": 16,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "local_errors": []
+    },
+    {
+      "path": "verification-lab/register.html",
+      "rows": 34,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
       "local_errors": []
     }
   ],

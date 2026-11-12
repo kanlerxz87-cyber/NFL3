@@ -27,7 +27,8 @@ EXTRA_OFFICIAL = {
     "www.denverbroncos.com", "www.houstontexans.com", "www.colts.com", "www.jaguars.com",
     "www.chiefs.com", "www.raiders.com", "www.chargers.com", "www.patriots.com",
     "www.newyorkjets.com", "www.steelers.com", "www.tennesseetitans.com", "www.miamidolphins.com",
-    "www.giants.com",
+    "www.giants.com", "www.itl.nist.gov", "itl.nist.gov", "scikit-learn.org",
+    "nextgenstats.nfl.com", "support.nfl.com",
 }
 CLAIM_PATTERNS = [
     re.compile(r"official\s+nflverse", re.I),
