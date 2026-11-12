@@ -154,3 +154,9 @@ order; F-09 no leg-level outcome data; F-10 'Questionable' calibration unmeasure
 `line-lab/pages/flagged.html`.
 
 **Publication record.** PR: _pending at time of writing_ — updated below after merge.
+
+### Final result — f445c027 (recorded 2026-11-12 UTC)
+- **PR #10** (follow-up fixes) — **merged** as `1b713ce76866ca5e4eaffeb43d3d764c6fdfa75d` (merge commit). Its first Pages run was cancelled by a newer `main` push (PR #11, another session); the run on the following commit `94b0518` completed **success** (`pages build and deployment` 43156630277; `Validate and deploy GitHub Pages` 43156630287).
+- **Live verification (fetched 2026-11-12):** https://kanlerxz87-cyber.github.io/NFL3/dashboard/ shows R-06 corrected, R-16 marked UNVERIFIED, and the Flagged count (27).
+- **Dashboard status:** 10 pages, 254 injury rows, 14 games, 19 headlines, 0 of 12 strategies validated, 13 proposals awaiting decision, 27 flagged items. Checks: `dashboard/scripts/check.mjs` OK; root `tests/check_site.py` and `scripts/validate_site.py` OK.
+- **Still open (for owner review):** second line-by-line pass on the 254 injury rows; Seattle/Darnold reconciliation (Q09); Rams Garrett/McDuffie labels (Q10); DEN/CHI/PHI/TB Week 10 status (Q11); official depth-chart source (Q02); odds and historical results (Q04/Q05); NFL primary prop-bet memo (Q13); Ksa licence rules (Q12); root navigation link to `dashboard/` (integration request).
