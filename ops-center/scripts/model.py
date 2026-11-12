@@ -500,6 +500,14 @@ def build_questions() -> list[dict]:
             "line-lab/" + q.get("id", ""),
             [src_by_id.get(s, "") for s in q.get("source_ids", [])])
 
+    vlq = ROOT / "verification-lab" / "data" / "questions.json"
+    if vlq.exists():
+        for q in json.loads(vlq.read_text()).get("questions", []):
+            add(q.get("area", ""), q.get("question", ""), q.get("known", ""),
+                "" if q.get("blocking") else q.get("known", ""),
+                q.get("unknown", ""), q.get("discovery", ""), bool(q.get("blocking")),
+                "verification-lab/" + q.get("id", ""), [q.get("source_url", "")])
+
     with (ROOT / "dashboard" / "data" / "questions.csv").open(newline="", encoding="utf-8") as fh:
         for q in csv.DictReader(fh):
             add("Dashboard", q.get("question", ""), q.get("what_we_known") or q.get("what_we_know", ""),
@@ -566,6 +574,14 @@ def build_suggestions() -> list[dict]:
             s.get("impact", ""), ", ".join(s.get("dependencies", []) or []), "",
             s.get("recommendation", ""), "line-lab/" + s.get("id", ""),
             [lsrc.get(x, "") for x in s.get("source_ids", [])])
+
+    vlq2 = ROOT / "verification-lab" / "data" / "queue.json"
+    if vlq2.exists():
+        for s2 in json.loads(vlq2.read_text()).get("items", []):
+            add(s2.get("title", ""), s2.get("kind", ""), s2.get("why", ""),
+                s2.get("priority", ""), s2.get("effort", ""), s2.get("fixes", ""),
+                "", "", s2.get("acceptance", ""), "verification-lab/" + s2.get("id", ""),
+                [s2.get("source_url", "")])
 
     with (ROOT / "dashboard" / "data" / "suggestions.csv").open(newline="", encoding="utf-8") as fh:
         for s in csv.DictReader(fh):

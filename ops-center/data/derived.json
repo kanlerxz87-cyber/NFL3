@@ -11877,6 +11877,54 @@
    "id": "Q-17"
   },
   {
+   "area": "Data capture",
+   "question": "Does the capture pipeline distinguish 'no injuries reported' from 'no rows parsed'?",
+   "known": "The pipeline can emit an explicit no-injury section from the page text, and it also emits zero rows when a table fails to parse. The two states reached the same rendered output for Seattle and Cincinnati.",
+   "answer": "",
+   "missing": "",
+   "discovery": "Separate the states in the data model (no_injury_reported vs not_captured) and render them differently, with a visible warning for not_captured.",
+   "blocking": true,
+   "provenance": [
+    "verification-lab/VQ-03"
+   ],
+   "sources": [
+    "https://www.nfl.com/injuries/league/2026/REG10"
+   ],
+   "id": "Q-18"
+  },
+  {
+   "area": "Data capture",
+   "question": "How do we detect a silently truncated scrape before it is published?",
+   "known": "Twenty of twenty-four published per-club counts matched the live report; the staged capture timestamp and the current page disagree, and no check compared them.",
+   "answer": "",
+   "missing": "",
+   "discovery": "Add a parse assertion that counts player rows per club section and fails the build when a club has zero rows but its section exists, or when the sum differs from a recorded expectation by more than zero. This is deterministic and needs no judgement.",
+   "blocking": true,
+   "provenance": [
+    "verification-lab/VQ-02"
+   ],
+   "sources": [
+    "https://www.nfl.com/injuries/league/2026/REG10"
+   ],
+   "id": "Q-19"
+  },
+  {
+   "area": "Data capture",
+   "question": "Which official capture is the current source of truth for Week 10 availability?",
+   "known": "The published snapshot was captured 2026-11-12T06:32:36Z and holds 254 injury rows and 4 no-injury sections (VR-04, VR-07).",
+   "answer": "",
+   "missing": "",
+   "discovery": "Re-run the capture now, diff it row by row against the published snapshot, and publish whichever one matches the live page with its own timestamp. Then make capture age visible on every injury-derived page.",
+   "blocking": true,
+   "provenance": [
+    "verification-lab/VQ-01"
+   ],
+   "sources": [
+    "https://www.nfl.com/injuries/league/2026/REG10"
+   ],
+   "id": "Q-20"
+  },
+  {
    "area": "Depth authority",
    "question": "Which depth charts are official guidance, unofficial lists or confirmed lineups?",
    "known": "Commanders/Giants publish club depth pages; Colts explicitly labels its Week 10 chart unofficial.",
@@ -11890,7 +11938,7 @@
    "sources": [
     "https://www.colts.com/news/colts-release-unofficial-depth-chart-for-week-10"
    ],
-   "id": "Q-18"
+   "id": "Q-21"
   },
   {
    "area": "Depth extraction",
@@ -11906,7 +11954,7 @@
    "sources": [
     "https://www.packers.com/team/depth-chart"
    ],
-   "id": "Q-19"
+   "id": "Q-22"
   },
   {
    "area": "Depth extraction",
@@ -11922,7 +11970,7 @@
    "sources": [
     "https://www.houstontexans.com/team/depth-chart"
    ],
-   "id": "Q-20"
+   "id": "Q-23"
   },
   {
    "area": "Depth staleness",
@@ -11938,7 +11986,7 @@
    "sources": [
     "https://www.colts.com/news/colts-release-unofficial-depth-chart-for-week-10"
    ],
-   "id": "Q-21"
+   "id": "Q-24"
   },
   {
    "area": "Grading",
@@ -11952,7 +12000,7 @@
     "line-lab/Q-07"
    ],
    "sources": [],
-   "id": "Q-22"
+   "id": "Q-25"
   },
   {
    "area": "Injuries & depth",
@@ -11966,7 +12014,7 @@
     "line-lab/Q-21"
    ],
    "sources": [],
-   "id": "Q-23"
+   "id": "Q-26"
   },
   {
    "area": "Injuries & depth",
@@ -11980,7 +12028,7 @@
     "line-lab/Q-10"
    ],
    "sources": [],
-   "id": "Q-24"
+   "id": "Q-27"
   },
   {
    "area": "Injuries & depth",
@@ -11997,7 +12045,7 @@
     "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693",
     "https://www.nfl.com/injuries/"
    ],
-   "id": "Q-25"
+   "id": "Q-28"
   },
   {
    "area": "Injuries & depth",
@@ -12014,7 +12062,7 @@
     "https://www.nfl.com/injuries/",
     "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693"
    ],
-   "id": "Q-26"
+   "id": "Q-29"
   },
   {
    "area": "Injuries & depth",
@@ -12030,7 +12078,7 @@
    "sources": [
     "https://www.nfl.com/teams/washington-commanders/roster"
    ],
-   "id": "Q-27"
+   "id": "Q-30"
   },
   {
    "area": "Leaderboard Rewards",
@@ -12046,7 +12094,7 @@
    "sources": [
     "https://scikit-learn.org/stable/modules/cross_validation.html"
    ],
-   "id": "Q-28"
+   "id": "Q-31"
   },
   {
    "area": "Legal & Jurisdiction",
@@ -12062,7 +12110,7 @@
    "sources": [
     "https://kansspelautoriteit.nl/"
    ],
-   "id": "Q-29"
+   "id": "Q-32"
   },
   {
    "area": "Line origination",
@@ -12078,7 +12126,39 @@
    "sources": [
     "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html"
    ],
-   "id": "Q-30"
+   "id": "Q-33"
+  },
+  {
+   "area": "Market",
+   "question": "What permissioned market history is required before an originated line can be scored?",
+   "known": "The NFL serves odds from FanDuel, Caesars and DraftKings through partner widgets and redirects betting to the bookmaker; it does not publish a historical price archive (VR-28).",
+   "answer": "",
+   "missing": "",
+   "discovery": "Obtain written terms for historical prices, timestamps, limits and redistribution from at least one provider. Until then, keep all market cells blank.",
+   "blocking": true,
+   "provenance": [
+    "verification-lab/VQ-10"
+   ],
+   "sources": [
+    "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL"
+   ],
+   "id": "Q-34"
+  },
+  {
+   "area": "Market",
+   "question": "What settles a bet, and which official page proves it?",
+   "known": "Official NFL game pages and schedules carry final scores and status; settlement rules (pushes, voids, stat corrections) are bookmaker terms, not NFL content.",
+   "answer": "",
+   "missing": "",
+   "discovery": "Define a settlement contract per market, name the official source for each field, and store the bookmaker rule reference separately from the NFL fact.",
+   "blocking": true,
+   "provenance": [
+    "verification-lab/VQ-11"
+   ],
+   "sources": [
+    "https://www.nfl.com/schedules/2026/by-week/week-10"
+   ],
+   "id": "Q-35"
   },
   {
    "area": "Market & odds",
@@ -12092,7 +12172,7 @@
     "line-lab/Q-05"
    ],
    "sources": [],
-   "id": "Q-31"
+   "id": "Q-36"
   },
   {
    "area": "Market & odds",
@@ -12106,7 +12186,7 @@
     "line-lab/Q-06"
    ],
    "sources": [],
-   "id": "Q-32"
+   "id": "Q-37"
   },
   {
    "area": "Market & odds",
@@ -12123,7 +12203,7 @@
     "https://www.nfl.com/odds/",
     "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL"
    ],
-   "id": "Q-33"
+   "id": "Q-38"
   },
   {
    "area": "Market Pricing & Settlement",
@@ -12139,7 +12219,7 @@
    "sources": [
     "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL"
    ],
-   "id": "Q-34"
+   "id": "Q-39"
   },
   {
    "area": "Market taxonomy",
@@ -12155,7 +12235,7 @@
    "sources": [
     "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook/"
    ],
-   "id": "Q-35"
+   "id": "Q-40"
   },
   {
    "area": "Measurement",
@@ -12171,7 +12251,7 @@
    "sources": [
     "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm"
    ],
-   "id": "Q-36"
+   "id": "Q-41"
   },
   {
    "area": "Model",
@@ -12187,7 +12267,7 @@
    "sources": [
     "https://www.nfl.com/standings/"
    ],
-   "id": "Q-37"
+   "id": "Q-42"
   },
   {
    "area": "Model",
@@ -12203,7 +12283,23 @@
    "sources": [
     "https://www.nfl.com/standings/"
    ],
-   "id": "Q-38"
+   "id": "Q-43"
+  },
+  {
+   "area": "Model",
+   "question": "How do we stop combo and prop research from leaking across a game?",
+   "known": "Time-ordered splitting prevents training on future data (VR-29); legs from the same game are not independent samples and need game-level grouping.",
+   "answer": "",
+   "missing": "",
+   "discovery": "Group folds by game and by week, and require matched joint outcomes for every leg before computing a combo probability.",
+   "blocking": true,
+   "provenance": [
+    "verification-lab/VQ-13"
+   ],
+   "sources": [
+    "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html"
+   ],
+   "id": "Q-44"
   },
   {
    "area": "Model",
@@ -12219,7 +12315,39 @@
    "sources": [
     "https://www.nfl.com/standings/"
    ],
-   "id": "Q-39"
+   "id": "Q-45"
+  },
+  {
+   "area": "Model",
+   "question": "What is the minimum honest sample for a personnel-dropoff signal?",
+   "known": "The tooling already requires at least 256 graded games, 2 seasons, 3 folds and 128 shadow games before a strategy can be ranked; uncertainty widens as the sample shrinks (VR-30).",
+   "answer": "",
+   "missing": "",
+   "discovery": "Pre-register the threshold before looking at results, then run the ablation. Do not tune the threshold to make a result appear.",
+   "blocking": true,
+   "provenance": [
+    "verification-lab/VQ-12"
+   ],
+   "sources": [
+    "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm"
+   ],
+   "id": "Q-46"
+  },
+  {
+   "area": "Model",
+   "question": "Which tracking metrics are defensible for a personnel signal?",
+   "known": "Next Gen Stats defines Completion Probability, Expected Completion Percentage, Aggressiveness (defender within 1 yard), Average Separation and Cushion (VR-31). None of these are captured in this repository.",
+   "answer": "",
+   "missing": "",
+   "discovery": "Determine whether any authorised tracking feed is obtainable at all; if not, restrict the signal set to official box-score fields and say so on the page.",
+   "blocking": true,
+   "provenance": [
+    "verification-lab/VQ-14"
+   ],
+   "sources": [
+    "https://nextgenstats.nfl.com/glossary"
+   ],
+   "id": "Q-47"
   },
   {
    "area": "Multiple testing",
@@ -12235,7 +12363,7 @@
    "sources": [
     "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html"
    ],
-   "id": "Q-40"
+   "id": "Q-48"
   },
   {
    "area": "Odds rights",
@@ -12251,7 +12379,7 @@
    "sources": [
     "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL"
    ],
-   "id": "Q-41"
+   "id": "Q-49"
   },
   {
    "area": "Official outcomes",
@@ -12267,7 +12395,7 @@
    "sources": [
     "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook/"
    ],
-   "id": "Q-42"
+   "id": "Q-50"
   },
   {
    "area": "Operations",
@@ -12281,7 +12409,7 @@
     "line-lab/Q-23"
    ],
    "sources": [],
-   "id": "Q-43"
+   "id": "Q-51"
   },
   {
    "area": "Parlay pricing",
@@ -12297,7 +12425,55 @@
    "sources": [
     "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook/"
    ],
-   "id": "Q-44"
+   "id": "Q-52"
+  },
+  {
+   "area": "Personnel",
+   "question": "How is a replacement confirmed rather than inferred from a depth rank?",
+   "known": "The weekly report lists status only. The NFL separately publishes announced starter changes: Drew Lock expected to start for Seattle (VR-24), Kyle McCord in line for a first start in Miami (VR-25), Jacoby Brissett acquired and installed in Baltimore (VR-17).",
+   "answer": "",
+   "missing": "",
+   "discovery": "Add an 'announced starter' evidence field populated only from dated NFL or club articles, kept separate from depth rank and from the injury report. Never derive it from rank arithmetic.",
+   "blocking": true,
+   "provenance": [
+    "verification-lab/VQ-05"
+   ],
+   "sources": [
+    "https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again"
+   ],
+   "id": "Q-53"
+  },
+  {
+   "area": "Personnel",
+   "question": "Is absence from the weekly injury report evidence that a player is available?",
+   "known": "Malik Willis does not appear on the Week 10 injury report and is on injured reserve, ineligible until Dec 13 (VR-25).",
+   "answer": "",
+   "missing": "",
+   "discovery": "Capture the official reserve list and transactions pages alongside the weekly report, and encode 'not listed' as unknown rather than available.",
+   "blocking": true,
+   "provenance": [
+    "verification-lab/VQ-06"
+   ],
+   "sources": [
+    "https://www.nfl.com/transactions/league/reserve-list/2026/11"
+   ],
+   "id": "Q-54"
+  },
+  {
+   "area": "Personnel",
+   "question": "What do we do when a club chart is stale relative to transactions?",
+   "known": "Baltimore's published chart still lists Lamar Jackson first and Tyler Huntley second; the live chart now lists Brissett, Fagnano and Slovis (VR-17), consistent with the Nov 5 IR moves and the Nov 6 trade.",
+   "answer": "",
+   "missing": "",
+   "discovery": "Join each depth capture to the official transactions log by date; when a listed player has a later transaction, mark the row stale instead of silently publishing it.",
+   "blocking": true,
+   "provenance": [
+    "verification-lab/VQ-07"
+   ],
+   "sources": [
+    "https://www.nfl.com/transactions/"
+   ],
+   "id": "Q-55"
   },
   {
    "area": "Player props",
@@ -12313,7 +12489,7 @@
    "sources": [
     "https://nextgenstats.nfl.com/glossary"
    ],
-   "id": "Q-45"
+   "id": "Q-56"
   },
   {
    "area": "Point-in-time data",
@@ -12329,7 +12505,7 @@
    "sources": [
     "https://www.nfl.com/injuries/league/2026/REG10"
    ],
-   "id": "Q-46"
+   "id": "Q-57"
   },
   {
    "area": "Practice Squad Elevations",
@@ -12345,7 +12521,7 @@
    "sources": [
     "https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language"
    ],
-   "id": "Q-47"
+   "id": "Q-58"
   },
   {
    "area": "Pregame Timing Cutoff",
@@ -12361,7 +12537,23 @@
    "sources": [
     "https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep"
    ],
-   "id": "Q-48"
+   "id": "Q-59"
+  },
+  {
+   "area": "Product",
+   "question": "Who is the audience, and are stakes ever handled?",
+   "known": "The site is static, collects no accounts and states it is research-only; no reward funding or legal review exists.",
+   "answer": "",
+   "missing": "",
+   "discovery": "Answer in writing before any reward or advice feature. Default stays analytics-only and recognition-only.",
+   "blocking": true,
+   "provenance": [
+    "verification-lab/VQ-15"
+   ],
+   "sources": [
+    "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL"
+   ],
+   "id": "Q-60"
   },
   {
    "area": "Product scope",
@@ -12377,7 +12569,7 @@
    "sources": [
     "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL"
    ],
-   "id": "Q-49"
+   "id": "Q-61"
   },
   {
    "area": "Rewards",
@@ -12393,7 +12585,7 @@
    "sources": [
     "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL"
    ],
-   "id": "Q-50"
+   "id": "Q-62"
   },
   {
    "area": "Risk & staking",
@@ -12407,7 +12599,7 @@
     "line-lab/Q-16"
    ],
    "sources": [],
-   "id": "Q-51"
+   "id": "Q-63"
   },
   {
    "area": "Scheduling context",
@@ -12423,7 +12615,7 @@
    "sources": [
     "https://www.nfl.com/games/patriots-at-lions-2026-reg-10"
    ],
-   "id": "Q-52"
+   "id": "Q-64"
   },
   {
    "area": "Validation Thresholds",
@@ -12439,7 +12631,23 @@
    "sources": [
     "https://scikit-learn.org/stable/modules/calibration.html"
    ],
-   "id": "Q-53"
+   "id": "Q-65"
+  },
+  {
+   "area": "Verification",
+   "question": "How does a live re-check become repeatable instead of a one-off manual pass?",
+   "known": "This pass re-checked 32 claims by opening each source; the CI gates check structure and local links only and cannot see a stale or truncated capture.",
+   "answer": "",
+   "missing": "",
+   "discovery": "Record an expected value with each verified claim, then diff live captures against it on a schedule and publish the diff. Turn each confirmed structural defect into a regression test.",
+   "blocking": true,
+   "provenance": [
+    "verification-lab/VQ-16"
+   ],
+   "sources": [
+    "https://www.nfl.com/injuries/league/2026/REG10"
+   ],
+   "id": "Q-66"
   },
   {
    "area": "Weather & International Venues",
@@ -12455,7 +12663,7 @@
    "sources": [
     "https://www.weather.gov/documentation/services-web-api"
    ],
-   "id": "Q-54"
+   "id": "Q-67"
   },
   {
    "area": "Automation",
@@ -12471,7 +12679,7 @@
    "sources": [
     "https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages"
    ],
-   "id": "Q-55"
+   "id": "Q-68"
   },
   {
    "area": "Competition & rewards",
@@ -12485,7 +12693,7 @@
     "line-lab/Q-13"
    ],
    "sources": [],
-   "id": "Q-56"
+   "id": "Q-69"
   },
   {
    "area": "Competition & rewards",
@@ -12499,7 +12707,7 @@
     "line-lab/Q-24"
    ],
    "sources": [],
-   "id": "Q-57"
+   "id": "Q-70"
   },
   {
    "area": "Correlation & parlays",
@@ -12513,7 +12721,7 @@
     "line-lab/Q-15"
    ],
    "sources": [],
-   "id": "Q-58"
+   "id": "Q-71"
   },
   {
    "area": "Dashboard",
@@ -12529,7 +12737,7 @@
    "sources": [
     "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693"
    ],
-   "id": "Q-59"
+   "id": "Q-72"
   },
   {
    "area": "Dashboard",
@@ -12545,7 +12753,7 @@
    "sources": [
     "https://www.nfl.com/teams/los-angeles-rams/roster"
    ],
-   "id": "Q-60"
+   "id": "Q-73"
   },
   {
    "area": "Dashboard",
@@ -12561,7 +12769,7 @@
    "sources": [
     "https://www.nfl.com/"
    ],
-   "id": "Q-61"
+   "id": "Q-74"
   },
   {
    "area": "Dashboard",
@@ -12577,7 +12785,7 @@
    "sources": [
     "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693"
    ],
-   "id": "Q-62"
+   "id": "Q-75"
   },
   {
    "area": "Dashboard",
@@ -12591,7 +12799,7 @@
     "dashboard/Q12"
    ],
    "sources": [],
-   "id": "Q-63"
+   "id": "Q-76"
   },
   {
    "area": "Dashboard",
@@ -12605,7 +12813,7 @@
     "dashboard/Q04"
    ],
    "sources": [],
-   "id": "Q-64"
+   "id": "Q-77"
   },
   {
    "area": "Dashboard",
@@ -12621,7 +12829,7 @@
    "sources": [
     "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693"
    ],
-   "id": "Q-65"
+   "id": "Q-78"
   },
   {
    "area": "Dashboard",
@@ -12635,7 +12843,7 @@
     "dashboard/Q15"
    ],
    "sources": [],
-   "id": "Q-66"
+   "id": "Q-79"
   },
   {
    "area": "Dashboard",
@@ -12651,7 +12859,7 @@
    "sources": [
     "https://www.nfl.com/injuries/"
    ],
-   "id": "Q-67"
+   "id": "Q-80"
   },
   {
    "area": "Dashboard",
@@ -12667,7 +12875,7 @@
    "sources": [
     "https://www.nfl.com/schedules/2026/by-week/week-10"
    ],
-   "id": "Q-68"
+   "id": "Q-81"
   },
   {
    "area": "Dashboard",
@@ -12681,7 +12889,7 @@
     "dashboard/Q14"
    ],
    "sources": [],
-   "id": "Q-69"
+   "id": "Q-82"
   },
   {
    "area": "Dashboard",
@@ -12697,7 +12905,7 @@
    "sources": [
     "https://www.baltimoreravens.com/team/depth-chart"
    ],
-   "id": "Q-70"
+   "id": "Q-83"
   },
   {
    "area": "Dashboard",
@@ -12713,7 +12921,7 @@
    "sources": [
     "https://sports.yahoo.com/article/nfl-says-worked-ban-more-152200232.html"
    ],
-   "id": "Q-71"
+   "id": "Q-84"
   },
   {
    "area": "Dashboard",
@@ -12729,7 +12937,7 @@
    "sources": [
     "https://www.nfl.com/injuries/"
    ],
-   "id": "Q-72"
+   "id": "Q-85"
   },
   {
    "area": "Dashboard",
@@ -12745,7 +12953,7 @@
    "sources": [
     "https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again"
    ],
-   "id": "Q-73"
+   "id": "Q-86"
   },
   {
    "area": "Data & licensing",
@@ -12762,7 +12970,23 @@
     "https://www.nfl.com/standings/",
     "https://www.nfl.com/teams/washington-commanders/"
    ],
-   "id": "Q-74"
+   "id": "Q-87"
+  },
+  {
+   "area": "Data capture",
+   "question": "Which clubs publish a depth chart as an image rather than text, and how should that be handled?",
+   "known": "Houston publishes the chart as an image with no player names in text (VR-15). Green Bay publishes a full text table and was wrongly reported as unparseable (VR-14).",
+   "answer": "Houston publishes the chart as an image with no player names in text (VR-15). Green Bay publishes a full text table and was wrongly reported as unparseable (VR-14).",
+   "missing": "",
+   "discovery": "Probe each club page and classify: text table, image only, or absent. Record the classification with a timestamp instead of a generic parse error.",
+   "blocking": false,
+   "provenance": [
+    "verification-lab/VQ-04"
+   ],
+   "sources": [
+    "https://www.houstontexans.com/team/depth-chart"
+   ],
+   "id": "Q-88"
   },
   {
    "area": "Injury semantics",
@@ -12778,7 +13002,7 @@
    "sources": [
     "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693"
    ],
-   "id": "Q-75"
+   "id": "Q-89"
   },
   {
    "area": "Leaderboard score",
@@ -12794,7 +13018,7 @@
    "sources": [
     "https://scikit-learn.org/stable/modules/calibration.html"
    ],
-   "id": "Q-76"
+   "id": "Q-90"
   },
   {
    "area": "Luck vs skill",
@@ -12810,7 +13034,39 @@
    "sources": [
     "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm"
    ],
-   "id": "Q-77"
+   "id": "Q-91"
+  },
+  {
+   "area": "Personnel",
+   "question": "How are two players sharing one published slot represented?",
+   "known": "Seattle lists Cooper Kupp and Rashid Shaheed inside the same first-string WR cell (VR-23); Washington leaves an empty second slot between Frankie Luvu and Kain Medrano (VR-21).",
+   "answer": "Seattle lists Cooper Kupp and Rashid Shaheed inside the same first-string WR cell (VR-23); Washington leaves an empty second slot between Frankie Luvu and Kain Medrano (VR-21).",
+   "missing": "",
+   "discovery": "Model a slot as a set plus an explicit empty-slot token, and render shared slots as shared. Validate by player name, never by row count.",
+   "blocking": false,
+   "provenance": [
+    "verification-lab/VQ-08"
+   ],
+   "sources": [
+    "https://www.seahawks.com/team/depth-chart/"
+   ],
+   "id": "Q-92"
+  },
+  {
+   "area": "Personnel",
+   "question": "Which clubs were on bye, and should their absence be reported as a gap?",
+   "known": "The Week 10 schedule lists Chicago, Denver, Philadelphia and Tampa Bay on bye (VR-16); these are exactly the four depth-only clubs.",
+   "answer": "The Week 10 schedule lists Chicago, Denver, Philadelphia and Tampa Bay on bye (VR-16); these are exactly the four depth-only clubs.",
+   "missing": "",
+   "discovery": "Capture the official schedule and annotate bye clubs so coverage differences have a cause instead of an alarm.",
+   "blocking": false,
+   "provenance": [
+    "verification-lab/VQ-09"
+   ],
+   "sources": [
+    "https://www.nfl.com/schedules/2026/by-week/week-10"
+   ],
+   "id": "Q-93"
   },
   {
    "area": "Review workflow",
@@ -12826,7 +13082,7 @@
    "sources": [
     "https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages"
    ],
-   "id": "Q-78"
+   "id": "Q-94"
   },
   {
    "area": "Security/privacy",
@@ -12842,7 +13098,7 @@
    "sources": [
     "https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages"
    ],
-   "id": "Q-79"
+   "id": "Q-95"
   },
   {
    "area": "Source conflicts",
@@ -12858,7 +13114,7 @@
    "sources": [
     "https://www.nfl.com/news/nfl-week-10-injury-report-2026-season"
    ],
-   "id": "Q-80"
+   "id": "Q-96"
   },
   {
    "area": "Validation thresholds",
@@ -12874,7 +13130,7 @@
    "sources": [
     "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm"
    ],
-   "id": "Q-81"
+   "id": "Q-97"
   },
   {
    "area": "Verification",
@@ -12890,7 +13146,7 @@
    "sources": [
     "https://www.nfl.com/standings/"
    ],
-   "id": "Q-82"
+   "id": "Q-98"
   },
   {
    "area": "Verification",
@@ -12904,7 +13160,7 @@
     "line-lab/Q-18"
    ],
    "sources": [],
-   "id": "Q-83"
+   "id": "Q-99"
   }
  ],
  "suggestions": [
@@ -13432,6 +13688,24 @@
    "id": "SG-29"
   },
   {
+   "title": "Add an announced-starter evidence field (not an inferred replacement)",
+   "area": "decision",
+   "summary": "The blank replacement columns are correct for the report page, but the NFL does publish dated starter changes for Lock, McCord and Brissett (VR-24, VR-25; VQ-05).",
+   "priority": "P1",
+   "effort": "Medium",
+   "impact": "VR-24, VR-25",
+   "depends": "",
+   "path": "",
+   "recommendation": "Every populated value links to a specific dated article, and the field is absent where no announcement exists.",
+   "provenance": [
+    "verification-lab/VQ-R07"
+   ],
+   "sources": [
+    "https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start"
+   ],
+   "id": "SG-30"
+  },
+  {
    "title": "Add an official depth-chart register with date and source per row",
    "area": "Depth / starters",
    "summary": "Required to flag backups replacing starters on offense and defense",
@@ -13445,7 +13719,7 @@
     "dashboard/SG-02"
    ],
    "sources": [],
-   "id": "SG-30"
+   "id": "SG-31"
   },
   {
    "title": "Add search and filter to each table page (already started on Injuries)",
@@ -13461,7 +13735,7 @@
     "dashboard/SG-10"
    ],
    "sources": [],
-   "id": "SG-31"
+   "id": "SG-32"
   },
   {
    "title": "Archive weekly injury reports for past seasons (for Q06)",
@@ -13479,7 +13753,7 @@
    "sources": [
     "https://www.nfl.com/injuries/"
    ],
-   "id": "SG-32"
+   "id": "SG-33"
   },
   {
    "title": "Automated Official-Domain Allowlist & Empty-Cell Integrity Pre-Commit Hook",
@@ -13497,7 +13771,7 @@
    "sources": [
     "https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages"
    ],
-   "id": "SG-33"
+   "id": "SG-34"
   },
   {
    "title": "Automated link and verification check on every build (in place: scripts/check.mjs)",
@@ -13513,7 +13787,7 @@
     "dashboard/SG-12"
    ],
    "sources": [],
-   "id": "SG-34"
+   "id": "SG-35"
   },
   {
    "title": "Calibrate what \"Questionable\" means empirically instead of using old percentages",
@@ -13531,7 +13805,7 @@
    "sources": [
     "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693"
    ],
-   "id": "SG-35"
+   "id": "SG-36"
   },
   {
    "title": "Cap position-value weights at what can be defended",
@@ -13549,7 +13823,25 @@
    "sources": [
     "https://www.nfl.com/injuries/"
    ],
-   "id": "SG-36"
+   "id": "SG-37"
+  },
+  {
+   "title": "Capture the reserve list so 'not listed' never means 'available'",
+   "area": "decision",
+   "summary": "Malik Willis is absent from the weekly report because he is on injured reserve, not because he is healthy (VR-25; VQ-06).",
+   "priority": "P1",
+   "effort": "Medium",
+   "impact": "VR-25",
+   "depends": "",
+   "path": "",
+   "recommendation": "No feature can treat a reserve-list player as available.",
+   "provenance": [
+    "verification-lab/VQ-R08"
+   ],
+   "sources": [
+    "https://www.nfl.com/transactions/league/reserve-list/2026/11"
+   ],
+   "id": "SG-38"
   },
   {
    "title": "Choose one licensed odds source with opening and closing timestamps",
@@ -13565,7 +13857,25 @@
     "dashboard/SG-05"
    ],
    "sources": [],
-   "id": "SG-37"
+   "id": "SG-39"
+  },
+  {
+   "title": "Correct the Colts depth rows and the Packers coverage error",
+   "area": "fix",
+   "summary": "One Colts row merges two players, another duplicates a player, and Green Bay is published as unparseable although it publishes a full text table (VR-14, VR-18, VR-19, VR-20).",
+   "priority": "P0",
+   "effort": "Low",
+   "impact": "VR-14, VR-18, VR-19, VR-20",
+   "depends": "",
+   "path": "",
+   "recommendation": "Player-name validation passes for every Colts row and the Packers club appears with its published chart.",
+   "provenance": [
+    "verification-lab/VQ-R04"
+   ],
+   "sources": [
+    "https://www.colts.com/news/colts-release-unofficial-depth-chart-for-week-10"
+   ],
+   "id": "SG-40"
   },
   {
    "title": "Do not price parlays or props until leg-level correlation is estimated",
@@ -13581,7 +13891,25 @@
     "line-lab/SG-11"
    ],
    "sources": [],
-   "id": "SG-38"
+   "id": "SG-41"
+  },
+  {
+   "title": "Flag stale depth rows against the official transactions log",
+   "area": "fix",
+   "summary": "Baltimore still publishes Lamar Jackson and Tyler Huntley at QB after both went on injured reserve and a replacement was traded in (VR-17, VR-26; VQ-07).",
+   "priority": "P1",
+   "effort": "Medium",
+   "impact": "VR-17, VR-26",
+   "depends": "",
+   "path": "",
+   "recommendation": "No depth row is displayed as current when a later dated transaction exists, without an explicit stale badge.",
+   "provenance": [
+    "verification-lab/VQ-R05"
+   ],
+   "sources": [
+    "https://www.nfl.com/transactions/"
+   ],
+   "id": "SG-42"
   },
   {
    "title": "Freeze a rule before it sees data (pre-registration)",
@@ -13597,7 +13925,7 @@
     "line-lab/SG-08"
    ],
    "sources": [],
-   "id": "SG-39"
+   "id": "SG-43"
   },
   {
    "title": "Interactive Offense vs. Defense Matchup Deficiency Matrix (1st\u20134th String)",
@@ -13615,7 +13943,7 @@
    "sources": [
     "https://www.patriots.com/team/depth-chart"
    ],
-   "id": "SG-40"
+   "id": "SG-44"
   },
   {
    "title": "Joint-Simulation Correlation Explorer with Confidence Intervals",
@@ -13633,7 +13961,7 @@
    "sources": [
     "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm"
    ],
-   "id": "SG-41"
+   "id": "SG-45"
   },
   {
    "title": "Keep a written record of every rejected idea and every trial count",
@@ -13649,7 +13977,7 @@
     "line-lab/SG-07"
    ],
    "sources": [],
-   "id": "SG-42"
+   "id": "SG-46"
   },
   {
    "title": "Keep the site analysis-only; no picks or recommendations",
@@ -13665,7 +13993,43 @@
     "dashboard/SG-13"
    ],
    "sources": [],
-   "id": "SG-43"
+   "id": "SG-47"
+  },
+  {
+   "title": "Label the REG9 capture by its body week, not its document title",
+   "area": "fix",
+   "summary": "The REG9 page's document title says Week 10 while its heading and first game say Week 9, so a citation keyed on the title mis-dates the capture (VR-02).",
+   "priority": "P2",
+   "effort": "Low",
+   "impact": "VR-02",
+   "depends": "",
+   "path": "",
+   "recommendation": "Any citation of REG9 shows week 9 from the heading plus the observed title text, or shows a conflict badge.",
+   "provenance": [
+    "verification-lab/VQ-R12"
+   ],
+   "sources": [
+    "https://www.nfl.com/injuries/league/2026/REG9"
+   ],
+   "id": "SG-48"
+  },
+  {
+   "title": "Make a failed parse look different from a clean result",
+   "area": "fix",
+   "summary": "A zero-row club and a genuinely injury-free club render identically today; that is how Seattle and Cincinnati passed review (VQ-03).",
+   "priority": "P0",
+   "effort": "Low",
+   "impact": "VR-05, VR-06, VR-07",
+   "depends": "",
+   "path": "",
+   "recommendation": "The build fails when a scheduled club yields zero parsed rows without a no-injury marker on the page.",
+   "provenance": [
+    "verification-lab/VQ-R02"
+   ],
+   "sources": [
+    "https://www.nfl.com/injuries/league/2026/REG10"
+   ],
+   "id": "SG-49"
   },
   {
    "title": "Make closing-line value the headline metric, not ROI",
@@ -13681,7 +14045,7 @@
     "line-lab/SG-03"
    ],
    "sources": [],
-   "id": "SG-44"
+   "id": "SG-50"
   },
   {
    "title": "Point-in-Time Snapshot Ledger for Injuries, Depth Charts & Inactives",
@@ -13699,7 +14063,25 @@
    "sources": [
     "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693"
    ],
-   "id": "SG-45"
+   "id": "SG-51"
+  },
+  {
+   "title": "Populate the three missing Lions game-status designations",
+   "area": "fix",
+   "summary": "Kerby Joseph, Cade Mays and D.J. Reed are published with a blank game-status cell while the official article lists all three as Out (VR-08, VR-12).",
+   "priority": "P0",
+   "effort": "Low",
+   "impact": "VR-08, VR-12",
+   "depends": "",
+   "path": "",
+   "recommendation": "Every player listed Out/Questionable/Doubtful in the official article shows that designation, with a citation to the article.",
+   "provenance": [
+    "verification-lab/VQ-R03"
+   ],
+   "sources": [
+    "https://www.nfl.com/news/nfl-week-10-injury-report-2026-season"
+   ],
+   "id": "SG-52"
   },
   {
    "title": "Pre-Registered Strategy Registry & Deflated Multiple-Testing Audit Log",
@@ -13717,7 +14099,7 @@
    "sources": [
     "https://scikit-learn.org/stable/modules/cross_validation.html"
    ],
-   "id": "SG-46"
+   "id": "SG-53"
   },
   {
    "title": "Pre-register each strategy (definition frozen before results are seen)",
@@ -13733,7 +14115,43 @@
     "dashboard/SG-07"
    ],
    "sources": [],
-   "id": "SG-47"
+   "id": "SG-54"
+  },
+  {
+   "title": "Pre-register the personnel ablation and its sample threshold",
+   "area": "decision",
+   "summary": "Without a frozen threshold, a '2nd-string dropoff' result is a fishing expedition (VQ-12, VQ-13).",
+   "priority": "P2",
+   "effort": "Medium",
+   "impact": "",
+   "depends": "",
+   "path": "",
+   "recommendation": "The pre-registration is published and dated earlier than the first result table.",
+   "provenance": [
+    "verification-lab/VQ-R11"
+   ],
+   "sources": [
+    "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm"
+   ],
+   "id": "SG-55"
+  },
+  {
+   "title": "Promote the verification register to a build-time contract",
+   "area": "decision",
+   "summary": "Nothing prevents a future capture from silently breaking a claim that was verified by hand today (VQ-16).",
+   "priority": "P1",
+   "effort": "Medium",
+   "impact": "",
+   "depends": "",
+   "path": "",
+   "recommendation": "A structural break in a source shows up as a failed verification row in the deployed build, not as an empty table.",
+   "provenance": [
+    "verification-lab/VQ-R09"
+   ],
+   "sources": [
+    "https://www.nfl.com/injuries/league/2026/REG10"
+   ],
+   "id": "SG-56"
   },
   {
    "title": "Publish a weekly 'what changed' diff instead of a static snapshot",
@@ -13749,7 +14167,7 @@
     "line-lab/SG-12"
    ],
    "sources": [],
-   "id": "SG-48"
+   "id": "SG-57"
   },
   {
    "title": "Publish every model total twice until one wins",
@@ -13767,7 +14185,7 @@
    "sources": [
     "https://www.nfl.com/standings/"
    ],
-   "id": "SG-49"
+   "id": "SG-58"
   },
   {
    "title": "Publish the unverified items as a first-class page, not a footnote",
@@ -13783,7 +14201,25 @@
     "line-lab/SG-18"
    ],
    "sources": [],
-   "id": "SG-50"
+   "id": "SG-59"
+  },
+  {
+   "title": "Re-capture and republish the Week 10 injury tables",
+   "area": "fix",
+   "summary": "Published counts are stale: 254 rows and 4 no-injury sections versus 279 rows and 2 sections live; Seattle and Cincinnati are shown as injury-free while listing 15 and 4 players (VR-04, VR-05, VR-06, VR-07).",
+   "priority": "P0",
+   "effort": "Low",
+   "impact": "VR-04, VR-05, VR-06, VR-07, VR-13",
+   "depends": "",
+   "path": "",
+   "recommendation": "Every club section in the rebuilt table has the same player count as the live report, and no club shows 'No Injuries Reported' unless the page says so.",
+   "provenance": [
+    "verification-lab/VQ-R01"
+   ],
+   "sources": [
+    "https://www.nfl.com/injuries/league/2026/REG10"
+   ],
+   "id": "SG-60"
   },
   {
    "title": "Reject: deriving depth order from jersey number, experience or salary",
@@ -13801,7 +14237,7 @@
    "sources": [
     "https://www.nfl.com/teams/washington-commanders/roster"
    ],
-   "id": "SG-51"
+   "id": "SG-61"
   },
   {
    "title": "Reject: ranking strategies by season-long ROI",
@@ -13817,7 +14253,25 @@
     "line-lab/SG-13"
    ],
    "sources": [],
-   "id": "SG-52"
+   "id": "SG-62"
+  },
+  {
+   "title": "Represent shared and empty depth slots faithfully",
+   "area": "fix",
+   "summary": "Seattle puts two players in one slot and Washington leaves a slot empty; both are currently indistinguishable from a ranked list (VR-21, VR-23; VQ-08).",
+   "priority": "P1",
+   "effort": "Medium",
+   "impact": "VR-21, VR-23",
+   "depends": "",
+   "path": "",
+   "recommendation": "No consumer of the data can compute 'starter = rank 1' without handling a multi-player slot.",
+   "provenance": [
+    "verification-lab/VQ-R06"
+   ],
+   "sources": [
+    "https://www.seahawks.com/team/depth-chart/"
+   ],
+   "id": "SG-63"
   },
   {
    "title": "Resolve the depth-order source before building the backup-deficiency feature",
@@ -13835,7 +14289,7 @@
    "sources": [
     "https://www.nfl.com/teams/washington-commanders/roster"
    ],
-   "id": "SG-53"
+   "id": "SG-64"
   },
   {
    "title": "Score injury-designation reliability before using it as a feature",
@@ -13854,7 +14308,25 @@
     "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693",
     "https://www.nfl.com/injuries/"
    ],
-   "id": "SG-54"
+   "id": "SG-65"
+  },
+  {
+   "title": "Settle the market-data decision before any line work",
+   "area": "decision",
+   "summary": "No originated line can be scored without permissioned historical prices and a settlement contract (VR-28; VQ-10, VQ-11).",
+   "priority": "P2",
+   "effort": "High",
+   "impact": "",
+   "depends": "",
+   "path": "",
+   "recommendation": "A written decision exists either way; the site states which one is in force.",
+   "provenance": [
+    "verification-lab/VQ-R10"
+   ],
+   "sources": [
+    "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL"
+   ],
+   "id": "SG-66"
   },
   {
    "title": "Snapshot the nfl.com injury report every Wed, Thu and Fri and keep a dated history",
@@ -13872,7 +14344,7 @@
    "sources": [
     "https://www.nfl.com/injuries/"
    ],
-   "id": "SG-55"
+   "id": "SG-67"
   },
   {
    "title": "Split data into train, validation and final holdout seasons",
@@ -13888,7 +14360,7 @@
     "dashboard/SG-08"
    ],
    "sources": [],
-   "id": "SG-56"
+   "id": "SG-68"
   },
   {
    "title": "Split the site into a public analysis layer and a private data layer",
@@ -13904,7 +14376,7 @@
     "line-lab/SG-09"
    ],
    "sources": [],
-   "id": "SG-57"
+   "id": "SG-69"
   },
   {
    "title": "Stadium Roof/Surface & NWS Hourly Wind/Precipitation Overlay",
@@ -13922,7 +14394,7 @@
    "sources": [
     "https://www.weather.gov/documentation/services-web-api"
    ],
-   "id": "SG-58"
+   "id": "SG-70"
   },
   {
    "title": "Treat the injury report as a timestamped series, not a weekly snapshot",
@@ -13940,7 +14412,7 @@
    "sources": [
     "https://www.nfl.com/injuries/"
    ],
-   "id": "SG-59"
+   "id": "SG-71"
   },
   {
    "title": "Two-Stage Skill Leaderboard (Proper-Score Qualification -> Prospective CLV/ROI Escrow)",
@@ -13958,7 +14430,7 @@
    "sources": [
     "https://scikit-learn.org/stable/modules/calibration.html"
    ],
-   "id": "SG-60"
+   "id": "SG-72"
   },
   {
    "title": "Unified Root Navigation Bridging Parallel Session Workspaces",
@@ -13976,7 +14448,7 @@
    "sources": [
     "https://github.com/kanlerxz87-cyber/NFL3"
    ],
-   "id": "SG-61"
+   "id": "SG-73"
   },
   {
    "title": "Use snap counts as the starter proxy when the depth chart is unavailable",
@@ -13992,7 +14464,7 @@
     "dashboard/SG-03"
    ],
    "sources": [],
-   "id": "SG-62"
+   "id": "SG-74"
   },
   {
    "title": "Vig-Free Market Consensus vs. Originated Fair-Line Decomposition View",
@@ -14010,7 +14482,7 @@
    "sources": [
     "https://www.gaming.nv.gov/contentassets/a7958398526e4e309d248ea35a2a20dd/september-2025-monthly-revenue-report.pdf"
    ],
-   "id": "SG-63"
+   "id": "SG-75"
   }
  ],
  "strategies": [
