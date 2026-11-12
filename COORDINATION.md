@@ -536,3 +536,57 @@ order; F-09 no leg-level outcome data; F-10 'Questionable' calibration unmeasure
   - `FLG-08`–`FLG-09`: Repo audit citation bugs in root `decisions.html` (GitHub Pages docs cited for betting jurisdictions) and `dashboard/data/repo_review.csv` (empty `R-05` link and third-party blog URLs on `R-11`–`R-13`).
   - `BLK-01`–`BLK-06`: All unconfirmed pre-decision answers, empirical correlations (`rho`), strategy skill scores/CLV/ranks, unlisted 3rd/4th strings, and EPA drop-offs intentionally left blank (`""`).
 >>>>>>> origin/main
+
+
+## Result log — arena-f9dd481e (integration)
+
+**PR:** [#24](https://github.com/kanlerxz87-cyber/NFL3/pull/24) — merged into `main` with `--merge`, no approval wait, as instructed.
+Merge commit: `badc9a3`. Deployed from `ba5eeb1`.
+
+**CI on main after merge**
+
+| Run | Workflow | Result |
+|---|---|---|
+| 43160868695 | Validate and deploy GitHub Pages | success |
+| 43160868660 | data-refresh | success |
+| 43160930132 | pages build and deployment | success (build + deploy) |
+
+**Live verification** (fetched after the CDN caught up)
+
+| URL | State |
+|---|---|
+| `/` (root) | 200, existing sections intact |
+| `/research-desk/index.html` | 200, 10 metrics + leaderboard extract |
+| `/research-desk/strategies.html` | 200, 9 strategies × 7 gates |
+| `/research-desk/availability.html` | 200, starter/2nd/3rd/4th-string replacement rows |
+| `/research-desk/flagged.html` | 200, F01–F07 |
+
+### Merge conflicts and how they were resolved
+
+| File | Type | Resolution |
+|---|---|---|
+| `COORDINATION.md` | add/add | main's board kept verbatim; this session's claim, plan and logs appended below it |
+| `README.md` | content | rewritten to route to all six workspaces; no session's description dropped |
+| `tests/check_site.py` | add/add | main's root checker kept at that path; the desk's stricter checker moved to `tests/check_research_desk.py` and `research-desk/scripts/check.py` |
+
+### Two integration hazards caught and fixed before merge
+
+1. **Two Pages publishers.** This branch's workflow uploaded its own Pages artifact. On `main` that
+   would have raced `pages.yml` and replaced the whole published site with `research-desk/` alone.
+   Removed the deploy job and the `pages`/`id-token` permissions; the workflow now only refreshes data
+   and commits. `pages.yml` remains the single publisher from the repository root.
+2. **Root-only validation.** `scripts/validate_site.py` globbed `*.html` at the root only, so moving any
+   workspace into a folder would have silently stopped validating it. It now delegates each sub-site to
+   that sub-site's own checker (recognising `check_site.py`, `check.py`, `check.mjs`, `verify*.py`), and
+   applies the root rule to any sub-site that has none.
+
+### Site layout after integration
+
+| Path | Owner | Checker |
+|---|---|---|
+| `/` (root pages) | overview session | `scripts/validate_site.py` |
+| `dashboard/` | dashboard session | `dashboard/scripts/check.mjs` |
+| `line-lab/` | line-lab session | own |
+| `decision-hub/` | decision-hub session | own |
+| `research-workspace/` | research workspace session | own |
+| `research-desk/` | **this session** | `research-desk/scripts/check.py` |
