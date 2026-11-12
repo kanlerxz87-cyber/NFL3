@@ -21,6 +21,9 @@ OFFICIAL_HOSTS = {
     "media.nfl.com", "static.www.nfl.com", "www.commanders.com", "www.giants.com", "www.colts.com",
     "www.baltimoreravens.com", "www.patriots.com", "www.detroitlions.com", "www.denverbroncos.com",
     "www.seahawks.com", "www.itl.nist.gov", "itl.nist.gov", "scikit-learn.org", "docs.github.com",
+    # Club depth-chart publishers added in the 2026-11-12 verification pass. They are
+    # first-party club sites listed by the official NFL team directory.
+    "www.houstontexans.com", "www.packers.com", "www.49ers.com", "www.buffalobills.com",
 }
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
 REQUIRED = (

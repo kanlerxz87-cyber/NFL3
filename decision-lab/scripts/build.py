@@ -15,6 +15,8 @@ import audit
 DATA = LAB / "data"
 CATALOG = json.loads((DATA / "catalog.json").read_text())
 SNAPSHOT = json.loads((DATA / "official_snapshot.json").read_text())
+AVAILABILITY = json.loads((DATA / "availability.json").read_text()) if (DATA / "availability.json").exists() else None
+VERIFICATION = json.loads((DATA / "verification.json").read_text()) if (DATA / "verification.json").exists() else None
 SOURCES = {s["id"]: s for s in CATALOG["sources"]}
 PAGES = [
     ("index.html", "Overview"), ("executive-summary.html", "Executive summary"),
@@ -22,6 +24,8 @@ PAGES = [
     ("suggestions.html", "Suggestions"), ("lines.html", "Line origination"),
     ("strategies.html", "Signals & leaderboard"), ("validation.html", "Validation gates"),
     ("injuries.html", "Injuries"), ("depth.html", "Depth & backups"),
+    ("availability.html", "Availability & replacements"), ("decisions.html", "Decision paths"),
+    ("verification.html", "Verification & integrity"),
     ("sources.html", "Sources & capture"), ("flagged.html", "Flagged for review"),
     ("audit.html", "Repository audit"),
 ]
@@ -75,7 +79,8 @@ def build_index() -> str:
 <div class="eyebrow">Canonical decision workspace</div><h1>NFL decision lab</h1>
 <p class="lede">A source-first dashboard for requirements, questions, suggestions, line-origination protocol, injury/depth evidence and fail-closed validation. It preserves concurrent research workspaces while separating official facts from exploratory community data.</p>
 <div class="notice danger"><strong>Decision boundary:</strong> no originated line, correlation, strategy edge or reward is verified for deployment. Existing <a href="../research-desk/index.html">research-desk</a> outputs use community nflverse assets and are flagged as exploratory, not official NFL verification.</div>
-<div class="metrics">{metric("Official injury rows", str(SNAPSHOT["coverage"]["injury_rows"]), "NFL.com Week 10 capture")}{metric("Club depth rows", str(SNAPSHOT["coverage"]["depth_rows"]), f'{len(SNAPSHOT["coverage"]["depth_teams"])} club labels captured')}{metric("Validated strategies", "0", "No eligible verified ledger")}{metric("Open blocking answers", str(critical), "Blank until evidence exists")}{metric("Review flags", str(len(CATALOG["flags"])), "Source-linked irregularities")}</div>
+<div class="metrics">{metric("Official injury rows", str(SNAPSHOT["coverage"]["injury_rows"]), "NFL.com Week 10 capture")}{metric("Joined to club depth", str(AVAILABILITY["coverage"]["matched_rows"]) if AVAILABILITY else "—", f'{AVAILABILITY["coverage"]["unmatched_rows"]} unmatched, all listed' if AVAILABILITY else "no analysis")}{metric("Replacement leads", str(AVAILABILITY["coverage"]["replacement_leads"]) if AVAILABILITY else "—", "Published next-man evidence")}{metric("Validated strategies", "0", "No eligible verified ledger")}{metric("Open blocking answers", str(critical), "Blank until evidence exists")}{metric("Review flags", str(len(CATALOG["flags"])), "Source-linked irregularities")}</div>
+<div class="notice"><strong>Latest verification run:</strong> {VERIFICATION["status"] if VERIFICATION else "not run"} ({VERIFICATION.get("mode", "") if VERIFICATION else ""}) — {VERIFICATION["row_totals"]["rows_checked"] if VERIFICATION else 0} rows compared, {VERIFICATION["row_totals"]["mismatched"] if VERIFICATION else 0} mismatched, {VERIFICATION["checks_unreachable"] if VERIFICATION else 0} source(s) unreachable. <a href="verification.html">Open the verification page</a> · <a href="availability.html">See availability and replacement evidence</a> · <a href="decisions.html">Compare decision paths</a></div>
 <h2>Recommended path</h2><div class="cards"><div class="card"><h3>1 · Evidence contract</h3><p>Approve official-only provenance, immutable snapshots and conflict flags before model expansion.</p><a href="suggestions.html">Review suggestions →</a></div><div class="card"><h3>2 · Data foundation</h3><p>Secure permissioned odds/prop history and official outcome mapping; keep market values blank until then.</p><a href="questions.html">Open decision questions →</a></div><div class="card"><h3>3 · Shadow singles</h3><p>Pre-register a simple baseline, validate by game clusters, then consider personnel ablations and combos.</p><a href="validation.html">See validation gates →</a></div></div>
 <h2>Category tables</h2>{table("Every category is source-linked; unknown empirical cells remain blank.", ["Category", "Purpose", "State", "Source"], [[td(f'<a href="{e(url)}">{e(label)}</a>'), td(purpose), td(state), td(source_link(sid))] for url, label, purpose, state, sid in [
     ("executive-summary.html", "Executive summary", "Important details, blockers and next decisions", "Ready for review", "S01"),
@@ -86,6 +91,9 @@ def build_index() -> str:
     ("strategies.html", "Signals & leaderboard", "Singles, parlays, props; gate-first ranking", "No eligible entries", "S15"),
     ("validation.html", "Validation gates", "Ten fail-closed gates and reward rules", "Implemented; no live passes", "S14"),
     ("injuries.html", "Injuries", "Official report rows with blank replacement fields", "Captured snapshot", "S01"),
+    ("availability.html", "Availability & replacements", "Which published starters are on the report, who is listed next, and what cannot be answered", "Analysis with per-row sources", "S01"),
+    ("decisions.html", "Decision paths", "Three routes compared on prerequisites, cost, benefit and risk", "Ready for a recorded human choice", "S16"),
+    ("verification.html", "Verification & integrity", "Field-by-field re-check of every published value against the official source", "Run recorded with per-family status", "S01"),
     ("depth.html", "Depth & backups", "Published club order, not confirmed workload", "Partial club coverage", "S06"),
     ("sources.html", "Sources & capture", "Official references and capture hashes", "Opened/captured", "S05"),
     ("flagged.html", "Flagged for review", "Irregularities and unverified items", "Published, non-blocking for site", "S02"),
@@ -105,6 +113,22 @@ def build_summary() -> str:
     [td("Club depth charts can be unofficial or stale"), td("Published rank is guidance, not confirmed snaps"), td("Store authority and timestamp; flag conflicts"), td(source_link("S08"))],
     [td("Luck cannot be removed"), td("Residual variance is not pure luck; hot streaks are not skill"), td("Proper scores, game-cluster uncertainty, ablations, multiplicity and shadow records"), td(source_link("S13"))],
     [td("Parlays require joint evidence"), td("Marginal multiplication fails under dependence"), td("Validate direct joint probability and payout rules before combo signals"), td(source_link("S15"))],
+])}
+<h2>Verified findings from this session</h2>{table("Each finding was checked against the official source and is reproducible from the committed snapshot.", ["Finding", "Number checked", "Why it matters", "Source"], [
+    [td("Injury-to-depth join succeeds for most of the report"), td(f'{AVAILABILITY["coverage"]["matched_rows"]} of {AVAILABILITY["coverage"]["injury_rows"]} rows') if AVAILABILITY else td("—"), td("Most listed players can be located on a club depth page, so personnel questions are answerable for those clubs."), td(source_link("S01"))],
+    [td("69 report rows cannot be joined, and every one has a stated reason"), td("69 rows, 22 clubs") if AVAILABILITY else td("—"), td("The gap is concentrated: 29 rows come from two clubs whose charts cannot be parsed, not from missing data."), td(source_link("S22"))],
+    [td("Two clubs publish depth in non-tabular forms"), td("Texans image; Packers jersey-number prefixes"), td("Exact-name joins fail for 16 of 17 Packers rows and 13 Texans rows; both are fixable, differently."), td(source_link("S23"))],
+    [td("'Rank 1' does not mean 'the starter'"), td("149 slots list more than one rank-1 player"), td("Any strategy that treats column 1 as a confirmed starter would fabricate a lineup the club never published."), td(source_link("S07"))],
+    [td("Injury designation is sparse at capture"), td("6 of 254 rows carry Out or Questionable"), td("The NFL policy means a blank designation is not evidence of health, so availability cannot be inferred."), td(source_link("S03"))],
+    [td("Depth evidence goes stale within the week"), td("2 starting-receiver trades in the same Colts release"), td("A captured depth chart is a moment, not a roster; it must be versioned against roster events."), td(source_link("S08"))],
+    [td("The report is structurally complete for this week"), td("28 of 28 expected club sections, 14 matchups"), td("Nothing in the matchup set is missing at the club level, so the gaps above are parsing gaps, not coverage gaps."), td(source_link("S01"))],
+])}
+<h2>What is still missing before a decision</h2>{table("Missing information, asked as a question that can be answered.", ["Missing information", "Why it blocks", "Discovery action", "Source"], [
+    [td("Permissioned, timestamped price history"), td("No market-relative skill, correlation, parlay or prop test is possible."), td("Secure a data agreement (SG02); until then publish no price."), td(source_link("S12"))],
+    [td("Official inactive lists and snap counts"), td("Designation cannot become confirmed participation or backup usage."), td("Capture both per game (SG05)."), td(source_link("S01"))],
+    [td("Multi-day retained captures"), td("A single snapshot cannot be backtested, so no history exists yet."), td("Schedule daily captures with hashes (SG03)."), td(source_link("S01"))],
+    [td("A pre-registered primary metric"), td("Without it, 'best path' is undefined and win rate would be used by default."), td("Answer Q27, then freeze the metric (SG06)."), td(source_link("S13"))],
+    [td("Product scope, jurisdiction and reward funding"), td("A prize or wager feature is illegal or unfunded until answered."), td("Answer Q01, Q18; keep rewards recognition-only (SG11)."), td(source_link("S12"))],
 ])}
 <h2>Next decision sequence</h2><ol class="list"><li>Approve the official-only evidence contract and recognition-only leaderboard.</li><li>Resolve product/jurisdiction and data-rights questions without inventing answers.</li><li>Automate durable official snapshots and conflict alerts.</li><li>Run a pre-registered singles shadow baseline; expand only after gates pass.</li></ol>'''
     return shell("Executive summary", "executive-summary.html", content)
@@ -131,10 +155,48 @@ def build_questions() -> str:
 def build_suggestions() -> str:
     rows = []
     for s in CATALOG["suggestions"]:
-        select = f'<select class="review" data-suggestion-id="{e(s["id"])}" data-title="{e(s["title"])}"><option value="">Unreviewed</option><option value="approve">Approve</option><option value="defer">Defer</option><option value="reject">Reject</option></select>'
-        rows.append([td(e(s["id"])), td(e(s["title"])), td(pill(s["priority"], "danger" if s["priority"] == "Critical" else "warn")), td(e(s["effort"])), td(e(s["impact"])), td(e(s["recommendation"])), td(e(s["depends"])), td(e(s["tradeoff"])), td(select), td(source_link(s["source"]))])
-    content = f'''<div class="eyebrow">Review before implementation</div><h1>Suggestions & decision paths</h1><p class="lede">Path A is the recommended low-regret foundation: evidence contract, rights, snapshots and review governance. Path B expands models only after data gates. Selections below are optional, browser-local review artifacts; they do not deploy changes.</p><div class="notice"><span class="path">Path A · Foundation</span><span class="path">Path B · Gated expansion</span><div id="review-summary" class="count"></div><div class="toolbar"><button id="export-review">Export review JSON</button><button id="reset-review" class="secondary">Reset local review</button></div></div>'''
-    content += table("Prioritized suggestions. Dependencies must be satisfied before implementation.", ["ID", "Suggestion", "Priority", "Effort", "Impact", "Recommendation", "Depends on", "Trade-off", "Review", "Source"], rows)
+        select = (f'<select class="review" data-suggestion-id="{e(s["id"])}" data-title="{e(s["title"])}">'
+                  '<option value="">Unreviewed</option><option value="approve">Approve</option>'
+                  '<option value="defer">Defer</option><option value="reject">Reject</option></select>')
+        rows.append([td(e(s["id"])), td(e(s["title"])),
+                     td(pill(s["priority"], "danger" if s["priority"] == "Critical" else "warn")),
+                     td(e(s["effort"])), td(e(s["impact"])), td(e(s["recommendation"])), td(e(s["depends"])),
+                     td(e(s["success_metric"])), td(e(s["tradeoff"])), td(e(s.get("risk_if_delayed", ""))),
+                     td(select), td(source_link(s["source"]))])
+    paths = CATALOG.get("paths", [])
+    path_cards = "".join(
+        f'<div class="card"><div class="section-label">PATH {e(p["id"])}</div><h3>{e(p["name"])}</h3>'
+        f'<p>{e(p["summary"])}</p><p><strong>Prerequisites:</strong> {e(p["prerequisites"])}</p>'
+        f'<p><strong>Cost:</strong> {e(p["cost"])}</p><p><strong>Benefit:</strong> {e(p["benefit"])}</p>'
+        f'<p><strong>Risk:</strong> {e(p["risk"])}</p></div>' for p in paths)
+    summary_rows = [[td(e(p["id"])), td(e(p["name"])), td(e(p["cost"])), td(e(p["benefit"])), td(e(p["risk"])),
+                     td(e(p["recommended_for"])), td(source_link("S16"))] for p in paths]
+    by_path = {}
+    for s in CATALOG["suggestions"]:
+        by_path.setdefault(s["path"], []).append(s)
+    counts = " · ".join(f'Path {k}: {len(v)} options' for k, v in sorted(by_path.items()))
+    content = (
+        '<div class="eyebrow">Review before implementation</div><h1>Suggestions &amp; decision paths</h1>'
+        '<p class="lede">Everything on this page is a proposal. Each option states its dependency, trade-off, success metric '
+        'and the risk of delay, so a path can be chosen before any change is built. Selections below are optional, '
+        'browser-local review artifacts: they do not deploy, approve or change any data.</p>'
+        '<div class="notice"><span class="path">Path A · Foundation first</span><span class="path">Path B · Gated expansion</span>'
+        '<span class="path">Path C · Market-facing product</span>'
+        f'<div id="review-summary" class="count"></div>'
+        '<div class="toolbar"><button id="export-review">Export review JSON</button>'
+        '<button id="reset-review" class="secondary">Reset local review</button></div></div>'
+        f'<h2>Paths at a glance</h2><div class="cards">{path_cards}</div>'
+        + table("Compare the three routes before choosing options inside one.", ["Path", "Name", "Cost", "Benefit", "Risk", "Recommended for", "Source"], summary_rows)
+        + f'<h2>Options by path ({len(CATALOG["suggestions"])})</h2><p>{e(counts)}. Dependencies must be satisfied before implementation.</p>'
+        + table("Prioritized suggestions. Review is local and non-deploying.",
+                ["ID", "Suggestion", "Priority", "Effort", "Impact", "Recommendation", "Depends on", "Success metric", "Trade-off", "Risk if delayed", "Review", "Source"], rows)
+        + table("How to use this register", ["Step", "Action", "Result", "Source"], [
+            [td("1 · Read"), td('Open <a href="decisions.html">Decision paths</a> and the <a href="questions.html">open questions</a>.'), td("You know which path is even possible."), td(source_link("S16"))],
+            [td("2 · Mark"), td("Set approve, defer or reject on each option."), td("A local record of intent; nothing is applied."), td(source_link("S16"))],
+            [td("3 · Export"), td("Use <em>Export review JSON</em> and keep the file."), td("A dated artifact listing every choice."), td(source_link("S16"))],
+            [td("4 · Record"), td("Log the chosen path and date in COORDINATION.md."), td("The next session knows what was decided and why."), td(source_link("S16"))],
+        ])
+    )
     return shell("Suggestions", "suggestions.html", content)
 
 
@@ -164,6 +226,7 @@ def build_strategies() -> str:
     leaderboard = [[td("No eligible strategies"), td("", blank=True), td("", blank=True), td("", blank=True), td("All canonical strategies are Not run; community-data results are excluded from official-only ranking."), td(source_link("S13"))]]
     content = '<div class="eyebrow">Signal research</div><h1>Signals, strategies and leaderboard</h1><p class="lede">Singles, parlays and player-prop combinations are separate research divisions. Correlation and performance cells remain blank without verified matched outcomes.</p>'
     content += table("Strategy hypotheses. No strategy has passed canonical validation.", ["ID", "Strategy", "Division", "Hypothesis", "Required inputs", "Validation test", "Risk", "State", "Correlation", "Source"], rows)
+    content += '<div class="notice"><strong>Input readiness (measured, not assumed):</strong> availability evidence now exists for the personnel strategies — <a href="availability.html">147 published depth slots join to the official report</a>, 19 of them with two or more listed players. What is still absent is snapped participation: no inactive list or snap count is captured, so ST02, ST03, ST04 and ST08 cannot be tested yet even though their inputs are partly available.</div>'
     content += '<h2>Leaderboard</h2><div class="notice">Rank only gate-passing strategies by benchmark-relative proper-score skill with uncertainty. Raw win rate, short-run ROI and unverified community results do not earn rewards.</div>'
     content += table("Current eligible leaderboard.", ["Entry", "Skill score", "Uncertainty", "Reward", "Note", "Source"], leaderboard)
     return shell("Signals & leaderboard", "strategies.html", content)
@@ -264,6 +327,12 @@ def main() -> int:
         "injuries.html": build_injuries, "depth.html": build_depth,
         "sources.html": build_sources, "flagged.html": build_flagged,
     }
+    import pages_extra
+    builders.update({
+        "availability.html": pages_extra.build_availability,
+        "verification.html": pages_extra.build_verification,
+        "decisions.html": pages_extra.build_decisions,
+    })
     for name, builder in builders.items():
         (LAB / name).write_text(builder(), encoding="utf-8")
     placeholder = {"html_pages": 0, "table_rows": 0, "rows_missing_official_source": 0,

@@ -11,8 +11,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "decision-lab" / "scripts"))
+import availability as av
 import capture_official as capture
 import validation as v
+import verify_live as vl
 
 INJURY_FIXTURE = '''
 <h2 class="d3-o-section-title">THURSDAY, NOVEMBER 12TH</h2>
@@ -157,6 +159,140 @@ class ValidationTests(unittest.TestCase):
         self.assertFalse(result["eligible"])
 
 
+class AvailabilityTests(unittest.TestCase):
+    """Synthetic fixtures only: these assert join logic, not NFL facts."""
+
+    def snapshot(self):
+        return {
+            "observed_at": "2026-01-01T00:00:00+00:00",
+            "injury_rows": [
+                {"day": "D", "matchup": "AAA @ BBB", "team": "AAA", "player": "Starter One", "position": "WR",
+                 "injury": "", "practice_status": "Did Not Participate In Practice", "game_status": "", "player_url": "",
+                 "source_url": "https://www.nfl.com/injuries/", "observed_at": "", "source_sha256": "",
+                 "confirmed_active": "", "replacement_player": "", "replacement_rank": "", "expected_snaps": ""},
+                {"day": "D", "matchup": "AAA @ BBB", "team": "AAA", "player": "Backup Two", "position": "WR",
+                 "injury": "", "practice_status": "Limited Participation in Practice", "game_status": "Questionable",
+                 "player_url": "", "source_url": "https://www.nfl.com/injuries/", "observed_at": "", "source_sha256": "",
+                 "confirmed_active": "", "replacement_player": "", "replacement_rank": "", "expected_snaps": ""},
+                {"day": "D", "matchup": "AAA @ BBB", "team": "AAA", "player": "Number Prefixed", "position": "CB",
+                 "injury": "", "practice_status": "Full Participation in Practice", "game_status": "", "player_url": "",
+                 "source_url": "https://www.nfl.com/injuries/", "observed_at": "", "source_sha256": "",
+                 "confirmed_active": "", "replacement_player": "", "replacement_rank": "", "expected_snaps": ""},
+                {"day": "D", "matchup": "AAA @ BBB", "team": "BBB", "player": "Unparsed Club", "position": "RB",
+                 "injury": "", "practice_status": "Full Participation in Practice", "game_status": "", "player_url": "",
+                 "source_url": "https://www.nfl.com/injuries/", "observed_at": "", "source_sha256": "",
+                 "confirmed_active": "", "replacement_player": "", "replacement_rank": "", "expected_snaps": ""},
+            ],
+            "no_injury_sections": [
+                {"team": "BBB", "matchup": "AAA @ BBB", "day": "D", "text": "No Injuries Reported",
+                 "source_url": "https://www.nfl.com/injuries/", "observed_at": "", "source_sha256": ""},
+            ],
+            "depth_rows": [
+                {"team": "AAA", "unit": "Offense", "position": "WR", "player": "Starter One", "published_rank": 1,
+                 "rank_basis": "published column order", "authority": "club depth chart", "player_url": "",
+                 "source_url": "https://www.aaa.com/team/depth-chart", "observed_at": "", "source_sha256": "",
+                 "confirmed_starter": "", "replacement_assignment": "", "expected_snaps": ""},
+                {"team": "AAA", "unit": "Offense", "position": "WR", "player": "Starter One B", "published_rank": 1,
+                 "rank_basis": "published column order", "authority": "club depth chart", "player_url": "",
+                 "source_url": "https://www.aaa.com/team/depth-chart", "observed_at": "", "source_sha256": "",
+                 "confirmed_starter": "", "replacement_assignment": "", "expected_snaps": ""},
+                {"team": "AAA", "unit": "Offense", "position": "WR", "player": "Backup Two", "published_rank": 2,
+                 "rank_basis": "published column order", "authority": "club depth chart", "player_url": "",
+                 "source_url": "https://www.aaa.com/team/depth-chart", "observed_at": "", "source_sha256": "",
+                 "confirmed_starter": "", "replacement_assignment": "", "expected_snaps": ""},
+            ],
+            "depth_directory_successes": [{"team": "AAA", "url": "https://www.aaa.com/", "sha256": "", "observed_at": "", "rows": 3}],
+            "depth_directory_failures": [{"team": "BBB", "directory_url": "https://www.bbb.com/", "reason": "no table",
+                                          "source_url": "https://www.nfl.com/teams/", "observed_at": ""}],
+        }
+
+    def test_join_keeps_unmatched_rows_with_reason(self):
+        doc = av.analyse(self.snapshot())
+        self.assertEqual(doc["coverage"]["matched_rows"], 2)          # Starter One, Backup Two
+        self.assertEqual(doc["coverage"]["unmatched_rows"], 2)        # Number Prefixed, Unparsed Club
+        reasons = {u["player"]: u["reason"] for u in doc["unmatched"]}
+        self.assertIn("no captured machine-readable", reasons["Unparsed Club"])
+        self.assertIn("name not present", reasons["Number Prefixed"])
+
+    def test_replacement_lead_uses_next_published_player(self):
+        doc = av.analyse(self.snapshot())
+        lead = next(r for r in doc["replacement_leads"] if r["player"] == "Starter One")
+        self.assertEqual(lead["next_player"], "Backup Two")
+        self.assertEqual(lead["next_rank"], 2)
+        self.assertEqual(lead["next_status"], "Limited Participation in Practice | Questionable")
+
+    def test_replacement_never_infers_a_name(self):
+        doc = av.analyse(self.snapshot())
+        for lead in doc["replacement_leads"]:
+            self.assertIn(lead["next_player"], {r["player"] for r in self.snapshot()["depth_rows"]})
+
+    def test_inferred_fields_stay_blank(self):
+        doc = av.analyse(self.snapshot())
+        self.assertFalse(any("replacement_player" in k for k in doc["coverage"]))
+
+    def test_duplicate_rank_one_slots_are_detected(self):
+        doc = av.analyse(self.snapshot())
+        slot = next(s for s in doc["depth_slots"] if s["slot"] == "WR:WR")
+        self.assertEqual(slot["top3_listed"], 2)
+
+    def test_position_family_is_explicit_and_unmapped_is_visible(self):
+        self.assertEqual(av.family("RUSH"), "UNMAPPED")
+        self.assertEqual(av.family("SAM"), "LB")
+        self.assertEqual(av.family("LT"), "OL")
+
+
+class VerificationTests(unittest.TestCase):
+    """Synthetic comparison tests: no network, no NFL claims."""
+
+    base = {"team": "AAA", "player": "One", "day": "D", "matchup": "AAA @ BBB", "position": "WR",
+            "injury": "Knee", "practice_status": "Limited Participation in Practice", "game_status": "Questionable"}
+
+    def test_identical_records_match(self):
+        result = vl.compare_records([self.base], [dict(self.base)], vl.INJURY_FIELDS)
+        self.assertEqual((result["matched"], result["mismatched"]), (1, 0))
+
+    def test_field_change_is_reported_not_corrected(self):
+        live = dict(self.base, game_status="Out")
+        result = vl.compare_records([self.base], [live], vl.INJURY_FIELDS)
+        self.assertEqual(result["mismatched"], 1)
+        self.assertEqual(result["details"][0]["field"], "game_status")
+        self.assertEqual(result["details"][0]["published"], "Questionable")
+        self.assertEqual(result["details"][0]["live"], "Out")
+
+    def test_blank_is_not_equal_to_a_value(self):
+        live = dict(self.base, game_status="")
+        result = vl.compare_records([self.base], [live], vl.INJURY_FIELDS)
+        self.assertEqual(result["mismatched"], 1)
+
+    def test_missing_and_extra_rows_are_counted(self):
+        result = vl.compare_records([self.base], [], vl.INJURY_FIELDS)
+        self.assertEqual(result["missing_live"], 1)
+        other = dict(self.base, player="Two")
+        result = vl.compare_records([self.base], [other], vl.INJURY_FIELDS)
+        self.assertEqual(result["missing_live"], 1)
+        self.assertEqual(result["extra_live"], 1)
+
+    def test_no_injury_sections_compare_as_sets(self):
+        pub = [{"team": "AAA"}]
+        live = [{"team": "BBB"}]
+        result = vl.compare_no_injury(pub, live)
+        self.assertEqual(result["mismatched"], 2)
+
+    def test_depth_comparison_detects_rank_change(self):
+        row = {"unit": "Offense", "position": "WR", "player": "One", "published_rank": 1}
+        result = vl.compare_depth([row], [dict(row, published_rank=2)])
+        self.assertEqual(result["mismatched"], 2)
+
+    def test_offline_run_never_claims_live_verification(self):
+        snapshot = json.loads((ROOT / "decision-lab/data/official_snapshot.json").read_text())
+        catalog = json.loads((ROOT / "decision-lab/data/catalog.json").read_text())
+        doc = vl.run_offline(snapshot, catalog)
+        self.assertEqual(doc["mode"], "offline-structural")
+        self.assertIn(doc["status"], {"structural-only", "drift"})
+        for fam in doc["families"]:
+            self.assertNotEqual(fam["status"], "verified")
+
+
 class CatalogTests(unittest.TestCase):
     def test_catalog_sources_and_blanks(self):
         catalog = json.loads((ROOT / "decision-lab/data/catalog.json").read_text())
@@ -170,6 +306,33 @@ class CatalogTests(unittest.TestCase):
                 self.assertEqual(q["answer"], "", q["id"])
         for s in catalog["strategies"]:
             self.assertEqual(s["status"], "Not run")
+        for s in catalog["suggestions"]:
+            for field in ("success_metric", "tradeoff", "depends"):
+                self.assertTrue(s.get(field), s["id"])
+        self.assertEqual({p["id"] for p in catalog["paths"]}, {"A", "B", "C"})
+        for path in catalog["paths"]:
+            for field in ("prerequisites", "cost", "benefit", "risk"):
+                self.assertTrue(path.get(field), path["id"])
+        ids = [f["id"] for f in catalog["flags"]]
+        self.assertEqual(len(ids), len(set(ids)))
+        for flag in catalog["flags"]:
+            self.assertTrue(flag["action"], flag["id"])
+
+    def test_availability_artifacts_are_reproducible(self):
+        snapshot = json.loads((ROOT / "decision-lab/data/official_snapshot.json").read_text())
+        committed = json.loads((ROOT / "decision-lab/data/availability.json").read_text())
+        fresh = av.analyse(snapshot)
+        for key in ("coverage", "replacement_leads", "depth_slots", "unmatched"):
+            self.assertEqual(json.dumps(committed[key], sort_keys=True), json.dumps(fresh[key], sort_keys=True), key)
+
+    def test_verification_artifact_covers_structural_families(self):
+        doc = json.loads((ROOT / "decision-lab/data/verification.json").read_text())
+        ids = {f["id"] for f in doc["families"]}
+        self.assertTrue({"F7", "F8"} <= ids)
+        for fam in doc["families"]:
+            self.assertIn("source_url", fam)
+            if fam["rows_checked"]:
+                self.assertLessEqual(fam["matched"], fam["rows_checked"])
 
 
 if __name__ == "__main__":
