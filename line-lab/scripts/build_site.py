@@ -243,10 +243,13 @@ def build_dashboard(D):
     inj_rows = len(inj["rows"])
     withgs = sum(1 for r in inj["rows"] if r["gs"])
     blocking_flags = sum(1 for f in fl if f["severity"] in ("critical", "high"))
+    n200 = sum(1 for x in src if x.get("http_status") == 200)
+    n404 = sum(1 for x in src if x.get("http_status") == 404)
+    nother = len(src) - n200 - n404
 
     cards = f"""
 <div class="grid k4">
-  <div class="card accent"><div class="k">Official sources</div><div class="v">{len(src)}</div><div class="s">{sum(1 for s in src if s.get('http_status')==200)} resolving · {sum(1 for s in src if s.get('http_status')==404)} recorded broken</div></div>
+  <div class="card accent"><div class="k">Official sources</div><div class="v">{len(src)}</div><div class="s">{n200} resolving · {n404} recorded broken · {nother} not fetched</div></div>
   <div class="card accent"><div class="k">Clubs verified</div><div class="v">32<span style="font-size:14px;color:var(--muted)">/32</span></div><div class="s">2026 REG, all four integrity checks pass</div></div>
   <div class="card accent"><div class="k">Injury rows</div><div class="v">{inj_rows}</div><div class="s">{withgs} carry a game status · 10 complete club reports</div></div>
   <div class="card bad"><div class="k">Scored strategies</div><div class="v">0</div><div class="s">blocked at gate G0 — no odds source</div></div>
@@ -259,7 +262,7 @@ def build_dashboard(D):
 </div>
 """
 
-    blockers = [q for q in q if q["priority"] == "P0"]
+    blockers = [q for q in q if q["priority"] == "P0" and q["status"] != "answered"]
     brows = []
     for x in blockers:
         brows.append({"cells": [
@@ -295,9 +298,18 @@ def build_dashboard(D):
 </section>
 
 <section>
-<h3>Hard blockers — all priority P0</h3>
+<h3>Hard blockers — open priority P0 items</h3>
 <p class="tbl-note" style="margin-bottom:10px">A P0 item invalidates everything downstream. These are the questions that must close before a product decision means anything. Full register on <a href="pages/questions.html">Questions &amp; gaps</a>.</p>
 {btable}
+</section>
+
+<section>
+<h3>Critical path — do these first, whatever the score</h3>
+<p class="tbl-note" style="margin-bottom:10px">The ratio score ranks cost-efficiency, not sequencing, so the two items that unblock everything else score low. They are called out here so the ranking cannot hide them.</p>
+<div class="grid k2">
+  <div class="card bad"><div class="k">SG-01 · unblocks everything</div><h4 style="margin:4px 0 6px;text-transform:none;letter-spacing:0;font-size:14.5px;color:var(--ink)">Buy an odds archive before building anything else</h4><p style="font-size:13px;margin:0">Without a price there is no closing line, no CLV and no score. Every gate from G2 onward is dead until this happens. Score 6.67 — last on the table, first in importance.</p></div>
+  <div class="card warn"><div class="k">SG-02 · makes the model a model</div><h4 style="margin:4px 0 6px;text-transform:none;letter-spacing:0;font-size:14.5px;color:var(--ink)">Ingest game-level results for opponent-aware ratings</h4><p style="font-size:13px;margin:0">Converts three declared assumptions into estimated parameters. Until then the rating is a season-average, not a signal.</p></div>
+</div>
 </section>
 
 <section>
@@ -886,7 +898,7 @@ def build_suggestions(D):
         rec_cls = {"Adopt now": "ok", "Pilot": "warn", "Defer": "muted", "Reject": "bad"}.get(s["recommendation"], "muted")
         rows.append({"cells": [
             f'<strong>{esc(s["id"])}</strong>',
-            esc(s["title"]) + (f'<div class="tbl-note" style="margin-top:4px">{esc(s["problem"])}</div>' if s["problem"] else ""),
+            esc(s["title"]) + (badge("critical path", "bad") if s.get("critical_path") else "") + (f'<div class="tbl-note" style="margin-top:4px">{esc(s["problem"])}</div>' if s["problem"] else ""),
             esc(s["category"]),
             num(s["impact"], 0), num(s["confidence"], 0), num(s["effort"], 0), num(s["risk"], 0),
             f'<strong>{num(score,2)}</strong>',
@@ -927,7 +939,7 @@ def build_suggestions(D):
 <h3>Scoring</h3>
 <p>Four declared inputs, one ratio, and the formula is printed on every row so it can be argued with:</p>
 <div class="formula">score = impact × confidence ÷ ( effort × (1 + 0.25 × risk) )</div>
-<p class="tbl-note">Impact and confidence are about decision quality. Effort is 1 for a single sitting of scripted work and 5 for weeks or a purchase. Risk counts the damage if the idea is wrong — a proposal that could produce confidently wrong signals scores 5.</p>
+<p class="tbl-note"><strong>What the score does not capture:</strong> dependency chains and sequencing. SG-01 scores 6.67 and ranks last, yet it blocks every other measurement on this site. Critical-path items are flagged in the table and called out on the dashboard rather than allowed to sink. Impact and confidence are about decision quality. Effort is 1 for a single sitting of scripted work and 5 for weeks or a purchase. Risk counts the damage if the idea is wrong — a proposal that could produce confidently wrong signals scores 5.</p>
 
 {t}
 
