@@ -36,6 +36,41 @@ CLAIM_PATTERNS = [
     re.compile(r"verified\s+official\s+data", re.I),
 ]
 CONFLICT = re.compile(r"^(<<<<<<<|=======|>>>>>>>)", re.M)
+ROW = re.compile(r"<tr[^>]*>(.*?)</tr>", re.S)
+ELEMENT_ID = re.compile(r'id="([^"]+)"')
+HTTPS_LINK = re.compile(r'href="(https://[^"]+)"')
+_REGISTER_CACHE: dict[str, dict[str, list[str]]] = {}
+
+
+def register_index(path: Path) -> dict[str, list[str]]:
+    """Map every element id in a page to the https links of its table row.
+
+    Several workspaces cite a source by its registry id (``sources.html#S06``)
+    instead of repeating the URL. Resolving those anchors shows whether the row
+    really points at an official source or only at a community one.
+    """
+    key = str(path)
+    if key in _REGISTER_CACHE:
+        return _REGISTER_CACHE[key]
+    mapping: dict[str, list[str]] = {}
+    try:
+        text = path.read_text(encoding="utf-8")
+    except (OSError, UnicodeDecodeError):
+        _REGISTER_CACHE[key] = mapping
+        return mapping
+    for row in ROW.findall(text):
+        urls = HTTPS_LINK.findall(row)
+        for element_id in ELEMENT_ID.findall(row):
+            mapping.setdefault(element_id, urls)
+    _REGISTER_CACHE[key] = mapping
+    return mapping
+
+
+def resolve_anchor(path: Path, fragment: str) -> list[str]:
+    """Return the https links that a ``page.html#id`` citation points at."""
+    if not fragment:
+        return []
+    return register_index(path).get(fragment, [])
 
 
 def is_community(url: str) -> bool:
@@ -70,6 +105,9 @@ class TableAudit(HTMLParser):
         self.missing = 0
         self.community_only = 0
         self.internal_source_rows = 0
+        self.official_direct = 0
+        self.official_via_register = 0
+        self.unsourced = 0
         self.links: list[str] = []
         self.ids: set[str] = set()
         self.duplicate_ids: list[str] = []
@@ -106,21 +144,43 @@ class TableAudit(HTMLParser):
                 if not target.exists():
                     self.errors.append(f"broken local link {href}")
 
+    def _classify_row(self) -> None:
+        https = [u for u in self.row_links if urlparse(u).scheme == "https"]
+        direct = [u for u in https if (urlparse(u).hostname or "") in self.allowed and not is_community(u)]
+        # A row that cites this audit's own implementation or output is internally
+        # sourced: the count comes from the audit, not from an external publisher.
+        local_provenance = (
+            self.path.relative_to(ROOT).as_posix() == "decision-lab/audit.html"
+            and any(urlparse(u).path in {"scripts/audit.py", "data/audit.json"} for u in self.row_links)
+        )
+        if local_provenance:
+            self.internal_source_rows += 1
+            return
+        resolved: list[str] = []
+        for link in self.row_links:
+            parsed = urlparse(link)
+            if parsed.scheme or not parsed.fragment:
+                continue
+            target = (self.path.parent / unquote(parsed.path)).resolve() if parsed.path else self.path
+            for url in resolve_anchor(target, parsed.fragment):
+                if (urlparse(url).hostname or "") in self.allowed and not is_community(url):
+                    resolved.append(url)
+        if direct:
+            self.official_direct += 1
+            return
+        if resolved:
+            self.official_via_register += 1
+            return
+        self.missing += 1
+        if https and all(is_community(u) for u in https):
+            self.community_only += 1
+        elif not https:
+            self.unsourced += 1
+
     def handle_endtag(self, tag):
         if tag == "tr" and self.in_row:
             self.rows += 1
-            https = [u for u in self.row_links if urlparse(u).scheme == "https"]
-            official = [u for u in https if (urlparse(u).hostname or "") in self.allowed and not is_community(u)]
-            local_provenance = (
-                self.path.relative_to(ROOT).as_posix() == "decision-lab/audit.html"
-                and any(urlparse(u).path in {"scripts/audit.py", "data/audit.json"} for u in self.row_links)
-            )
-            if local_provenance:
-                self.internal_source_rows += 1
-            if not official and not local_provenance:
-                self.missing += 1
-                if https and all(is_community(u) for u in https):
-                    self.community_only += 1
+            self._classify_row()
             self.in_row = False
         elif tag == "tbody":
             self.in_tbody = False
@@ -156,8 +216,11 @@ def scan_repo() -> dict:
             parser.finish()
             pages.append({"path": str(path.relative_to(ROOT)), "rows": parser.rows,
                           "rows_missing_official_source": parser.missing,
+                          "rows_official_direct": parser.official_direct,
+                          "rows_official_via_register": parser.official_via_register,
                           "rows_community_only": parser.community_only,
                           "rows_with_internal_audit_source": parser.internal_source_rows,
+                          "rows_without_any_link": parser.unsourced,
                           "local_errors": parser.errors})
             if str(path.relative_to(ROOT)).startswith("research-desk/") and any(p.search(text) for p in CLAIM_PATTERNS):
                 claim_files.append(str(path.relative_to(ROOT)))
@@ -173,9 +236,16 @@ def scan_repo() -> dict:
                          "detail": f"{len(conflict_files)} file(s) contain conflict separators.", "files": conflict_files[:20], "source": "LOCAL_AUDIT"})
     missing = sum(p["rows_missing_official_source"] for p in pages)
     community = sum(p["rows_community_only"] for p in pages)
+    direct = sum(p["rows_official_direct"] for p in pages)
+    via_register = sum(p["rows_official_via_register"] for p in pages)
+    no_link = sum(p["rows_without_any_link"] for p in pages)
     if missing:
         findings.append({"id": "AUD-03", "severity": "High", "title": "Table rows without an official-source link",
-                         "detail": f"{missing} row(s) across the repository lack an official HTTPS source; {community} cite only community sources.",
+                         "detail": (f"{missing} row(s) across the repository have no official source, either directly or "
+                                    f"through a registered source id; {community} of them cite only community sources and "
+                                    f"{no_link} carry no https link at all. {direct} rows cite an official source directly and "
+                                    f"{via_register} cite one through a source-register id. The counts are produced by this "
+                                    f"local audit, not by an external publisher."),
                          "files": [p["path"] for p in pages if p["rows_missing_official_source"]][:20], "source": "LOCAL_AUDIT"})
     local_errors = [(p["path"], e) for p in pages for e in p["local_errors"]]
     if local_errors:
@@ -183,8 +253,11 @@ def scan_repo() -> dict:
                          "detail": f"{len(local_errors)} local reference error(s).", "files": [f"{p}: {e}" for p, e in local_errors[:20]], "source": "LOCAL_AUDIT"})
     return {"html_pages": len(pages), "table_rows": sum(p["rows"] for p in pages),
             "rows_missing_official_source": missing, "rows_community_only": community,
+            "rows_official_direct": direct, "rows_official_via_register": via_register,
+            "rows_without_any_link": no_link,
             "rows_with_internal_audit_source": sum(p["rows_with_internal_audit_source"] for p in pages),
             "conflict_files": conflict_files, "authority_claim_files": claim_files,
+            "community_claim_files": claim_files,
             "local_errors": local_errors, "findings": findings, "pages": pages}
 
 

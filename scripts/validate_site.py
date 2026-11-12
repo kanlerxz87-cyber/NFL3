@@ -1,12 +1,41 @@
 #!/usr/bin/env python3
-"""Validate local links and HTTPS source citations in this static site."""
+"""Validate local links and HTTPS source citations in this static site.
+
+The authority list is shared with the canonical decision lab
+(``decision-lab/scripts/validation.py``) plus the official club hosts found in
+the committed capture, so one definition of "official source" governs the whole
+repository. Community and secondary hosts are deliberately excluded from that
+list: a row may still link to one, but it may not be presented as an official
+source link.
+"""
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlparse
+import json
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-OFFICIAL_HOSTS = {"nfl.com", "www.nfl.com", "operations.nfl.com"}
+sys.path.insert(0, str(ROOT / "decision-lab" / "scripts"))
+import validation as canonical  # noqa: E402
+
+EXTRA_OFFICIAL = {
+    "www.weather.gov", "weather.gov", "www.gaming.nv.gov", "gaming.nv.gov",
+    "kansspelautoriteit.nl", "www.kansspelautoriteit.nl",
+}
+OFFICIAL_HOSTS = set(canonical.OFFICIAL_HOSTS) | EXTRA_OFFICIAL
+
+_snapshot_path = ROOT / "decision-lab" / "data" / "official_snapshot.json"
+if _snapshot_path.is_file():
+    _snapshot = json.loads(_snapshot_path.read_text(encoding="utf-8"))
+    for _row in _snapshot.get("depth_rows", []):
+        _host = urlparse(_row.get("source_url", "")).hostname
+        if _host:
+            OFFICIAL_HOSTS.add(_host)
+    for _item in _snapshot.get("depth_directory_successes", []):
+        _host = urlparse(_item.get("url", "")).hostname
+        if _host:
+            OFFICIAL_HOSTS.add(_host)
+
 errors: list[str] = []
 
 
@@ -39,9 +68,9 @@ class SiteParser(HTMLParser):
                 if not target.exists():
                     errors.append(f"{self.path}: broken local link: {href} -> {target.relative_to(ROOT)}")
             if self.in_tbody and self.in_row:
-                # The pre-existing dashboard also cites authoritative primary
-                # sources outside the NFL domain (for example NWS and GitHub).
-                # New source-class links are additionally constrained above.
+                # A row counts as sourced when it carries an HTTPS link. Rows that
+                # present a community source say so in the cell text and never use
+                # the official "source" class.
                 if parsed.scheme == "https" and parsed.hostname:
                     self.row_has_source = True
         elif tag in {"script", "link"}:
@@ -66,10 +95,17 @@ def main() -> int:
     # The root glob alone would silently stop validating the workspaces under dashboard/, line-lab/,
     # decision-hub/, research-workspace/ and research-desk/ as soon as one was moved into a folder.
     pages = sorted(ROOT.glob("*.html"))
-    expected = {"index.html", "requirements.html", "signals.html", "lineup.html", "validation.html", "suggestions.html", "review.html", "sources.html"}
+    expected = {
+        "index.html", "executive-summary.html", "questions.html", "decisions.html", "signals.html",
+        "strategies.html", "validation.html", "lineups.html", "lineup.html", "suggestions.html",
+        "flagged.html", "review.html", "sources.html", "verification.html",
+    }
     missing = expected - {page.name for page in pages}
     if missing:
         errors.append(f"missing expected pages: {', '.join(sorted(missing))}")
+    stale = {page.name for page in pages} - expected
+    if stale:
+        errors.append(f"unexpected root pages: {', '.join(sorted(stale))}")
     for page in pages:
         parser = SiteParser(page)
         parser.feed(page.read_text(encoding="utf-8"))
@@ -95,10 +131,13 @@ def main() -> int:
             parser = SiteParser(page)
             parser.feed(page.read_text(encoding="utf-8"))
             parser.close()
-    js = (ROOT / "assets/site.js").read_text(encoding="utf-8")
+
+    # The navigation is defined once, in the generator, and every page is built from it.
+    builder = (ROOT / "scripts" / "build_root.py").read_text(encoding="utf-8")
     for name in sorted(expected):
-        if f"'{name}'" not in js:
-            errors.append(f"assets/site.js: navigation missing {name}")
+        if f'"{name}"' not in builder:
+            errors.append(f"scripts/build_root.py: navigation missing {name}")
+
     if errors:
         print("Site validation failed:")
         print("\n".join(f"- {item}" for item in errors))

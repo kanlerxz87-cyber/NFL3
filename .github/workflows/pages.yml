@@ -23,16 +23,22 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-      - name: Validate root pages, local links and table citations
-        run: python3 scripts/validate_site.py
-      - name: Existing root site checks
-        run: python3 tests/check_site.py
       - name: Decision lab offline tests
         run: python3 tests/test_decision_lab.py
       - name: Build canonical decision lab
         run: python3 decision-lab/scripts/build.py
       - name: Independent source/link audit
         run: python3 decision-lab/scripts/audit.py
+      - name: Build the root site from the canonical register
+        run: python3 scripts/build_root.py
+      - name: Validate root pages, local links and table citations
+        run: python3 scripts/validate_site.py
+      - name: Existing root site checks
+        run: python3 tests/check_site.py
+      - name: Verify the published capture against the recorded live readings
+        run: python3 scripts/verify_sources.py
+      - name: Rebuild the root site with the verification result
+        run: python3 scripts/build_root.py
 
   deploy:
     if: github.event_name != 'pull_request'
@@ -56,6 +62,11 @@ jobs:
         run: |
           python3 decision-lab/scripts/build.py
           python3 decision-lab/scripts/audit.py
+      - name: Verify the capture against the official pages (full population)
+        continue-on-error: true
+        run: python3 scripts/verify_sources.py --recapture
+      - name: Build the root site from the refreshed register
+        run: python3 scripts/build_root.py
       - name: Validate combined root site
         run: python3 scripts/validate_site.py
       - name: Configure Pages

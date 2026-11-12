@@ -144,30 +144,68 @@ def sample_mode(snapshot: dict) -> dict:
     }
 
 
+def compare_depth_all(live: list[dict], snapshot: list[dict]) -> dict:
+    """Compare every published depth row, not only one club's chart."""
+    live_index = {depth_key(row): row for row in live}
+    snap_index = {depth_key(row): row for row in snapshot}
+    matched, changed, added, removed = [], [], [], []
+    for key in sorted(snap_index):
+        snap_row, live_row = snap_index[key], live_index.get(key)
+        if live_row is None:
+            removed.append({"team": snap_row.get("team", ""), "unit": key[0], "position": key[1],
+                            "rank": key[2], "player": key[3],
+                            "note": "present in the committed snapshot, absent from the live capture"})
+            continue
+        diffs = {field: [snap_row.get(field, ""), live_row.get(field, "")] for field in DEPTH_FIELDS
+                 if str(snap_row.get(field, "")) != str(live_row.get(field, ""))}
+        if diffs:
+            changed.append({"team": snap_row.get("team", ""), "unit": key[0], "player": key[3], "fields": diffs})
+        else:
+            matched.append({"team": snap_row.get("team", ""), "unit": key[0], "player": key[3]})
+    for key in sorted(live_index):
+        if key not in snap_index:
+            added.append({"team": live_index[key].get("team", ""), "unit": key[0], "position": key[1],
+                          "rank": key[2], "player": key[3],
+                          "note": "present in the live capture, absent from the committed snapshot"})
+    return {"rows_compared": len(matched), "rows_matched": len(matched),
+            "rows_changed": changed, "rows_added_since_capture": added,
+            "rows_removed_since_capture": removed}
+
+
 def recapture_mode(snapshot: dict) -> dict:
     sys.path.insert(0, str(LAB / "scripts"))
     import capture_official as capture  # noqa: PLC0415 - optional dependency path
 
     observed_at = datetime.now(timezone.utc).isoformat()
-    fresh = capture.build_snapshot(capture.load_captures(Path("/tmp/nfl3-capture")), observed_at=observed_at)
+    captures: dict[str, tuple[bytes, str]] = {}
+    pages = []
+    for name, (url, hosts) in capture.SOURCES.items():
+        try:
+            captures[name] = capture.fetch(url, hosts, 45)
+            pages.append({"url": url, "publisher": "official", "read_at": observed_at, "teams_read_in_full": []})
+        except Exception as error:  # noqa: BLE001 - one unreachable page must not hide the rest
+            pages.append({"url": url, "publisher": "official", "read_at": observed_at,
+                          "error": f"{type(error).__name__}: {error}"})
+    if not captures:
+        raise RuntimeError("no official page could be fetched from this machine")
+    fresh = capture.build_snapshot(captures, observed_at)
     live_injuries = fresh["injury_rows"]
     teams = {row["team"] for row in live_injuries}
     injury_result = compare_injuries(live_injuries, snapshot["injury_rows"], teams)
-    depth_result = compare_depth(fresh["depth_rows"], snapshot["depth_rows"], "Commanders")
+    depth_result = compare_depth_all(fresh["depth_rows"], snapshot["depth_rows"])
+    for page in pages:
+        page["teams_read_in_full"] = sorted(teams)
     return {
         "mode": "recapture",
         "method": ("Official pages re-fetched from this machine, re-parsed with the capture parser and "
                    "compared with the committed snapshot across the full population."),
-        "pages_read": [
-            {"url": url, "publisher": "official", "read_at": observed_at, "teams_read_in_full": []}
-            for url in capture.SOURCES
-        ],
+        "pages_read": pages,
         "injuries": injury_result,
         "depth": depth_result,
         "coverage": {
             "snapshot_injury_rows": len(snapshot["injury_rows"]),
             "rows_read_live": len(live_injuries),
-            "snapshot_teams": len(teams),
+            "snapshot_teams": len({row["team"] for row in snapshot["injury_rows"]}),
             "teams_read_live": len(teams),
             "snapshot_depth_rows": len(snapshot["depth_rows"]),
             "depth_rows_read_live": len(fresh["depth_rows"]),

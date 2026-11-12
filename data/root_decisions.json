@@ -1,0 +1,1800 @@
+{
+ "note": "Root-site content migrated from the hand-written root pages on 2026-11-12 so that every published table is generated from a single data file. Each row keeps the official source links it had; nothing was invented during the migration.",
+ "sections": {
+  "signals": {
+   "columns": [
+    "Candidate",
+    "Potential signal",
+    "Required observations",
+    "Target / test",
+    "Known risk / control",
+    "Result",
+    "Official NFL source"
+   ],
+   "rows": [
+    {
+     "Candidate": "Team strength baseline",
+     "Potential signal": "Rolling offense and defense performance; separate pass/rush and home/away context. Normalize for opponent and game situation before claiming predictive value.",
+     "Required observations": "Dated team-level game stats, game identifiers, opponent, score, possessions/context and as-of timestamp.",
+     "Target / test": "Forecast spread and total probabilities; chronological walk-forward test against a frozen market baseline.",
+     "Known risk / control": "Small samples, opponent strength, garbage-time effects and changing personnel. Avoid same-game outcome leakage; compare simple baseline first.",
+     "Result": "Not run Estimate: \u2014",
+     "Official NFL source": "NFL team stats",
+     "_links": {
+      "Official NFL source": [
+       "https://www.nfl.com/stats/team-stats/"
+      ]
+     }
+    },
+    {
+     "Candidate": "Quarterback availability / performance",
+     "Potential signal": "Starting QB confirmation and historical team/player performance may matter; do not map questionable status directly to a numeric adjustment without evidence.",
+     "Required observations": "Official report snapshots, confirmed starter, role, game stats and prices captured at the same decision time.",
+     "Target / test": "Test incremental log-loss / calibration change versus a model without status feature, within out-of-sample periods.",
+     "Known risk / control": "Report status is not a probability of playing. Status changes are time-dependent; preserve report times and test leakage.",
+     "Result": "Not run Adjustment: \u2014",
+     "Official NFL source": "NFL injury report \u00b7 Player stats",
+     "_links": {
+      "Official NFL source": [
+       "https://www.nfl.com/injuries/",
+       "https://www.nfl.com/stats/player-stats/"
+      ]
+     }
+    },
+    {
+     "Candidate": "Line / defensive replacement depth",
+     "Potential signal": "Observed starting/backup role and actual participation could inform a matchup feature when multiple starters are unavailable.",
+     "Required observations": "Dated depth-chart evidence, active/inactive list, participation/snap counts, position and matchup outcomes. None currently included.",
+     "Target / test": "Compare against healthy-lineup baseline; test interaction by position group and actual role, not assumed \u201cstring\u201d labels.",
+     "Known risk / control": "Depth labels can be stale or ambiguous; replacements differ in skill and usage. Require dated primary evidence and confidence.",
+     "Result": "Not run Depth/correlation: \u2014",
+     "Official NFL source": "NFL team directory \u00b7 Injury report",
+     "_links": {
+      "Official NFL source": [
+       "https://www.nfl.com/teams/",
+       "https://www.nfl.com/injuries/"
+      ]
+     }
+    },
+    {
+     "Candidate": "Player prop opportunity",
+     "Potential signal": "Usage/opportunity counts and role are more directly testable than raw recent output: e.g. targets, carries, routes or participation, where official data is available.",
+     "Required observations": "Player game statistics, snap/participation data, market line, quote time and settlement definition.",
+     "Target / test": "Estimate a full outcome distribution; assess calibration and pricing error on out-of-sample props.",
+     "Known risk / control": "Role volatility, injury-limited participation, selection bias and multiple props. Do not extrapolate a short streak.",
+     "Result": "Not run Prop probability: \u2014",
+     "Official NFL source": "NFL player stats",
+     "_links": {
+      "Official NFL source": [
+       "https://www.nfl.com/stats/player-stats/"
+      ]
+     }
+    },
+    {
+     "Candidate": "Defense by position / matchup",
+     "Potential signal": "Opponent performance split by play type or position could add information only after accounting for opponent quality, pace and opportunities.",
+     "Required observations": "Official team/player outcomes, stable definitions and sample counts; no split estimates have been produced here.",
+     "Target / test": "Test feature ablation and calibration versus a simpler opponent-adjusted baseline.",
+     "Known risk / control": "Small subgroup samples and schedule confounding; shrink unstable estimates and show uncertainty.",
+     "Result": "Not run Split values: \u2014",
+     "Official NFL source": "NFL team stats \u00b7 NFL player stats",
+     "_links": {
+      "Official NFL source": [
+       "https://www.nfl.com/stats/team-stats/",
+       "https://www.nfl.com/stats/player-stats/"
+      ]
+     }
+    },
+    {
+     "Candidate": "Single-bet value",
+     "Potential signal": "Only consider if the independently estimated probability differs enough from a fair, timestamped market probability after uncertainty and costs.",
+     "Required observations": "Forecast probability, market price(s), market definition, vig handling, timestamp, settlement and stake rules.",
+     "Target / test": "Evaluate proper scoring, calibration, price improvement and risk-adjusted returns after costs; report uncertainty.",
+     "Known risk / control": "A single realized result is noisy; never promote based on win/loss or apparent short-run ROI alone.",
+     "Result": "Not testable Fair line / edge: \u2014",
+     "Official NFL source": "NFL outcome data (not prices)",
+     "_links": {
+      "Official NFL source": [
+       "https://www.nfl.com/stats/team-stats/"
+      ]
+     }
+    },
+    {
+     "Candidate": "Parlay / same-game combo",
+     "Potential signal": "Do not multiply leg probabilities assuming independence unless independence is tested. Estimate joint outcome probability and compare to a valid combined payout.",
+     "Required observations": "All component outcomes, same-game context, historical prices/payout rules, leg inclusion/correlation and push/void rules.",
+     "Target / test": "Compare joint-probability model to independence baseline on held-out combinations; stratify by relationship and game conditions.",
+     "Known risk / control": "Combinatorial sparsity, selection bias and correlated game scripts. Limit complexity; no combo rewards until dependence validation passes.",
+     "Result": "No dependence data Correlation: \u2014",
+     "Official NFL source": "NFL player outcomes \u00b7 Official rulebook",
+     "_links": {
+      "Official NFL source": [
+       "https://www.nfl.com/stats/player-stats/",
+       "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook"
+      ]
+     }
+    },
+    {
+     "Candidate": "Player prop combinations",
+     "Potential signal": "Joint props (including teammate or opposing-player combinations) may share volume, pace, score-state or matchup drivers; test rather than assume direction.",
+     "Required observations": "Joint historical player outcomes, opportunity/participation, contemporaneous lines and exact settlement.",
+     "Target / test": "Estimate pairwise and conditional dependence with out-of-sample validation; evaluate full combo probability and calibration.",
+     "Known risk / control": "Raw correlation may hide role, opponent and game-state structure; correlations do not establish causality. Values currently blank.",
+     "Result": "Not testable \u03c1 / joint probability: \u2014",
+     "Official NFL source": "NFL player stats",
+     "_links": {
+      "Official NFL source": [
+       "https://www.nfl.com/stats/player-stats/"
+      ]
+     }
+    }
+   ]
+  },
+  "strategy_candidates": {
+   "columns": [
+    "Candidate",
+    "Proposed signal",
+    "Key dependency",
+    "Status",
+    "Source / context"
+   ],
+   "rows": [
+    {
+     "Candidate": "Single: team strength",
+     "Proposed signal": "Estimate scoring distributions using pregame team performance and availability.",
+     "Key dependency": "Historical official game data and timestamped lineup inputs.",
+     "Status": "Not tested",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/stats/"
+      ]
+     }
+    },
+    {
+     "Candidate": "Single: player usage",
+     "Proposed signal": "Estimate player opportunities and outcomes against opponent context.",
+     "Key dependency": "Official historical player stats, roles and market lines.",
+     "Status": "Not tested",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/stats/"
+      ]
+     }
+    },
+    {
+     "Candidate": "Parlay: joint game outcomes",
+     "Proposed signal": "Model joint outcomes from shared game scenarios instead of multiplying marginal probabilities.",
+     "Key dependency": "Matched historical outcomes and actual parlay pricing / rules.",
+     "Status": "Not tested",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://scikit-learn.org/stable/modules/cross_validation.html"
+      ]
+     }
+    },
+    {
+     "Candidate": "Player prop combinations",
+     "Proposed signal": "Model correlated player opportunities within the same game.",
+     "Key dependency": "Player-level joint outcomes, prices and settlement terms.",
+     "Status": "Not tested",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/stats/"
+      ]
+     }
+    }
+   ]
+  },
+  "strategy_gates": {
+   "columns": [
+    "Gate",
+    "Requirement",
+    "Failure condition",
+    "Source / context"
+   ],
+   "rows": [
+    {
+     "Gate": "1 \u00b7 Provenance",
+     "Requirement": "Record source, availability time, retrieval time, rights and version for every input.",
+     "Failure condition": "Missing, stale, retrospective or unlicensed inputs.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/injuries/"
+      ]
+     }
+    },
+    {
+     "Gate": "2 \u00b7 Leakage",
+     "Requirement": "Freeze features at prediction time; split chronologically and group related bets by game.",
+     "Failure condition": "Future information or related outcomes cross folds.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://scikit-learn.org/stable/modules/cross_validation.html"
+      ]
+     }
+    },
+    {
+     "Gate": "3 \u00b7 Baselines",
+     "Requirement": "Compare against a frozen simple baseline and a timestamped market benchmark where licensed.",
+     "Failure condition": "No comparable benchmark or reproducibility.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://scikit-learn.org/stable/modules/cross_validation.html"
+      ]
+     }
+    },
+    {
+     "Gate": "4 \u00b7 Calibration",
+     "Requirement": "Evaluate held-out log loss, Brier score and calibration by market with uncertainty intervals.",
+     "Failure condition": "Predeclared calibration or sample requirements not met.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://scikit-learn.org/stable/modules/cross_validation.html"
+      ]
+     }
+    },
+    {
+     "Gate": "5 \u00b7 Economics",
+     "Requirement": "Backtest fixed stakes with fees, spreads, pushes, voids and available prices.",
+     "Failure condition": "Results cannot be settled or independently reproduced.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://scikit-learn.org/stable/modules/cross_validation.html"
+      ]
+     }
+    },
+    {
+     "Gate": "6 \u00b7 Robustness",
+     "Requirement": "Use multiple seasons and game-clustered intervals; correct for multiple strategy searches.",
+     "Failure condition": "Intervals too wide or evidence disappears in untouched holdout.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://scikit-learn.org/stable/modules/cross_validation.html"
+      ]
+     }
+    },
+    {
+     "Gate": "7 \u00b7 Shadow",
+     "Requirement": "Freeze rules and score prospective predictions before considering real-money use.",
+     "Failure condition": "No independent prospective record.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://scikit-learn.org/stable/modules/cross_validation.html"
+      ]
+     }
+    }
+   ]
+  },
+  "leaderboard": {
+   "columns": [
+    "Item",
+    "Value",
+    "Method / outstanding work",
+    "Source / context"
+   ],
+   "rows": [
+    {
+     "Item": "Leg correlation",
+     "Value": "",
+     "Method / outstanding work": "Compute Pearson correlation of settled binary leg outcomes on matched games; report sample count, period and game-clustered uncertainty. Conditional joint probability is needed for pricing.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://scikit-learn.org/stable/modules/cross_validation.html"
+      ]
+     }
+    },
+    {
+     "Item": "Fair line",
+     "Value": "",
+     "Method / outstanding work": "Estimate win, loss, push and void probabilities from a calibrated predictive distribution; convert conditional win probability to fair odds only under explicit settlement rules.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/stats/"
+      ]
+     }
+    },
+    {
+     "Item": "Leaderboard rank",
+     "Value": "",
+     "Method / outstanding work": "Rank eligible frozen strategies by predeclared out-of-sample proper score versus baseline; display ROI and uncertainty separately, not just win rate.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://scikit-learn.org/stable/modules/cross_validation.html"
+      ]
+     }
+    },
+    {
+     "Item": "Rewards",
+     "Value": "",
+     "Method / outstanding work": "Specify eligibility, prize pool, tie rules and minimum sample before launch. No rewards are currently funded.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://scikit-learn.org/stable/modules/cross_validation.html"
+      ]
+     }
+    }
+   ]
+  },
+  "lineup_schema": {
+   "columns": [
+    "Field",
+    "Required treatment",
+    "What a source can establish",
+    "What it cannot establish alone",
+    "Official source"
+   ],
+   "rows": [
+    {
+     "Field": "Player identity / team / position",
+     "Required treatment": "Stable player identifier; retain display name, team, position, source and observed-at time.",
+     "What a source can establish": "NFL injury report tables list player and position for entries in the report.",
+     "What it cannot establish alone": "That a player is absent from a report does not establish full health, active status or participation.",
+     "Official source": "NFL injury report",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/injuries/"
+      ]
+     }
+    },
+    {
+     "Field": "Injury report entry",
+     "Required treatment": "Store report date, status, injury text exactly as published, retrieval time, page URL and correction history.",
+     "What a source can establish": "NFL reports list injury, practice status and game status for listed players.",
+     "What it cannot establish alone": "Diagnosis, probability of playing, severity, recovery timeline or expected role must not be inferred.",
+     "Official source": "NFL injury report",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/injuries/"
+      ]
+     }
+    },
+    {
+     "Field": "Game availability",
+     "Required treatment": "Keep report game status separate from official inactive / active confirmation and observed participation.",
+     "What a source can establish": "The report has a \u201cGame Status\u201d field. An explicit status is a report-state observation at a time.",
+     "What it cannot establish alone": "Questionable is not a quantified probability. \u201cNo status shown\u201d must not be converted to active.",
+     "Official source": "NFL injury report",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/injuries/"
+      ]
+     }
+    },
+    {
+     "Field": "Depth-chart rank",
+     "Required treatment": "Store rank, position group, effective date and evidence source only if a dated source explicitly lists the order.",
+     "What a source can establish": "NFL team directory provides official team pages, useful starting points for team-published material.",
+     "What it cannot establish alone": "The directory itself does not prove current first/second/third/fourth string ordering.",
+     "Official source": "NFL team directory",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/teams/"
+      ]
+     }
+    },
+    {
+     "Field": "Replacement identity and role",
+     "Required treatment": "Link the absent player to replacement only from dated lineup/depth evidence; distinguish starter, rotational and emergency use.",
+     "What a source can establish": "Official NFL player/team statistics can support observed game production where published.",
+     "What it cannot establish alone": "Prior stats alone do not prove who will replace a starter or how they will be used in the next game.",
+     "Official source": "NFL player stats",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/stats/player-stats/"
+      ]
+     }
+    },
+    {
+     "Field": "Participation / workload",
+     "Required treatment": "Capture snaps, starts and role by game if a verified, licensed source explicitly supports those fields.",
+     "What a source can establish": "NFL's stats pages establish an official statistics starting point.",
+     "What it cannot establish alone": "This implementation has not verified comprehensive snap counts, historical endpoint access or availability rights.",
+     "Official source": "NFL player stats",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/stats/player-stats/"
+      ]
+     }
+    },
+    {
+     "Field": "Defensive / offensive replacement exposure",
+     "Required treatment": "Aggregate confirmed missing players by position group and role, with separate offense and defense views.",
+     "What a source can establish": "NFL injury reports and player stats can be referenced as starting evidence for listed players and observed outcomes.",
+     "What it cannot establish alone": "Cannot assume several listed injuries have equal impact or that a named backup is a deficiency without role/quality evidence.",
+     "Official source": "Injury report \u00b7 Team stats",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/injuries/",
+       "https://www.nfl.com/stats/team-stats/"
+      ]
+     }
+    },
+    {
+     "Field": "Freshness / uncertainty",
+     "Required treatment": "Display source timestamp, age, last update and confidence; mark stale data and suppress affected predictions.",
+     "What a source can establish": "Official report page is a public source to check at decision time.",
+     "What it cannot establish alone": "This site has not established an official report API, delivery SLA, or a complete historical snapshot archive.",
+     "Official source": "NFL injury report",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/injuries/"
+      ]
+     }
+    }
+   ]
+  },
+  "validation_gates": {
+   "columns": [
+    "Gate",
+    "Pass requirement (proposed)",
+    "Fail / hold condition",
+    "Evidence needed",
+    "Official source"
+   ],
+   "rows": [
+    {
+     "Gate": "0 \u00b7 Rights & provenance",
+     "Pass requirement (proposed)": "Every feature and price field has an allowed source, license scope, original timestamp and reproducible lineage.",
+     "Fail / hold condition": "Unknown rights, undocumented scraping, silent transformations or missing provenance \u2192 block use.",
+     "Evidence needed": "Source inventory, terms review, raw snapshots, lineage and change log.",
+     "Official source": "NFL official site (source starting point)",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/"
+      ]
+     }
+    },
+    {
+     "Gate": "1 \u00b7 Data quality",
+     "Pass requirement (proposed)": "Stable event/player IDs, explicit missingness, correction handling and time alignment; no duplicate or impossible values unexplained.",
+     "Fail / hold condition": "Missing critical price/outcome, stale status, identity mismatch, leakage or untracked correction \u2192 suppress forecast.",
+     "Evidence needed": "Automated schema checks and dated official stat/report snapshots.",
+     "Official source": "NFL injury report \u00b7 NFL team stats",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/injuries/",
+       "https://www.nfl.com/stats/team-stats/"
+      ]
+     }
+    },
+    {
+     "Gate": "2 \u00b7 Forecast timing / leakage",
+     "Pass requirement (proposed)": "Forecast is timestamped before the defined market cutoff; only information available at that instant is used.",
+     "Fail / hold condition": "Any post-cutoff lineup, outcome, revised statistic or future feature in training or evaluation \u2192 invalidate run.",
+     "Evidence needed": "Immutable forecast log, feature timestamps and reproducible chronological split.",
+     "Official source": "NFL report timing source",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/injuries/"
+      ]
+     }
+    },
+    {
+     "Gate": "3 \u00b7 Pre-registration",
+     "Pass requirement (proposed)": "Freeze hypothesis, feature set, target, benchmark, markets, scoring, filters and stop rules before the holdout.",
+     "Fail / hold condition": "Repeatedly trying variants on the holdout or changing criteria after results \u2192 no promotion.",
+     "Evidence needed": "Versioned model card and experiment ledger.",
+     "Official source": "NFL player stats (target data)",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/stats/player-stats/"
+      ]
+     }
+    },
+    {
+     "Gate": "4 \u00b7 Baseline & calibration",
+     "Pass requirement (proposed)": "Beat simple, disclosed baseline out of sample on a proper probability score; check probability calibration by meaningful slices.",
+     "Fail / hold condition": "Only wins/accuracy/ROI reported, poor calibration, or no benchmark \u2192 fail.",
+     "Evidence needed": "Predicted probabilities, outcome labels, calibration plots and score deltas.",
+     "Official source": "NFL official outcomes",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/stats/team-stats/"
+      ]
+     }
+    },
+    {
+     "Gate": "5 \u00b7 Walk-forward & uncertainty",
+     "Pass requirement (proposed)": "Evaluate strictly forward by time, preserve a final untouched period and report uncertainty / resampling method.",
+     "Fail / hold condition": "Random row split across games/seasons, repeated holdout peeking, or uncertain edge presented as certainty \u2192 fail.",
+     "Evidence needed": "Split timestamps, sample counts, confidence intervals and all market segments tested.",
+     "Official source": "NFL team outcomes",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/stats/team-stats/"
+      ]
+     }
+    },
+    {
+     "Gate": "6 \u00b7 Market price & execution",
+     "Pass requirement (proposed)": "Test against a documented timestamped market benchmark with vig, price, limits, latency, push/void and settlement treatment explicit.",
+     "Fail / hold condition": "No authorized odds history or no reproducible price / settlement \u2192 market edge and return are not testable.",
+     "Evidence needed": "Licensed odds snapshots and settlement definitions; none are in this repo.",
+     "Official source": "NFL official site (not a verified odds feed)",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/"
+      ]
+     }
+    },
+    {
+     "Gate": "7 \u00b7 Correlation / combinations",
+     "Pass requirement (proposed)": "For parlays/prop combos, validate joint probabilities and conditional dependence on held-out combinations; compare to independence baseline.",
+     "Fail / hold condition": "Multiplying leg probabilities without evidence, sparse combinations, or dependence estimates from test outcomes \u2192 fail.",
+     "Evidence needed": "Joint outcomes, prices, leg definitions and confidence intervals. Current correlations: \u2014.",
+     "Official source": "NFL player outcomes",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/stats/player-stats/"
+      ]
+     }
+    },
+    {
+     "Gate": "8 \u00b7 Injury / lineup robustness",
+     "Pass requirement (proposed)": "Availability features have dated primary evidence and remain useful in held-out cases; missing or conflicting sources trigger abstention.",
+     "Fail / hold condition": "Predictions rely on assumed depth order or inferred player availability \u2192 fail.",
+     "Evidence needed": "Report snapshots, verified lineup/replacement evidence and actual participation data.",
+     "Official source": "NFL injury report \u00b7 NFL teams",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/injuries/",
+       "https://www.nfl.com/teams/"
+      ]
+     }
+    },
+    {
+     "Gate": "9 \u00b7 Shadow run",
+     "Pass requirement (proposed)": "Freeze a version and record forecasts before any reward or user-facing recommendation; monitor freshness and calibration.",
+     "Fail / hold condition": "Drift, data-source failure, changed market definitions or too few observations \u2192 pause / recalibrate.",
+     "Evidence needed": "Prospective forecast ledger with outcomes and immutable release version.",
+     "Official source": "NFL player outcomes",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/stats/player-stats/"
+      ]
+     }
+    },
+    {
+     "Gate": "10 \u00b7 Leaderboard & rewards",
+     "Pass requirement (proposed)": "Rank only gate-passing strategies; use a predeclared score that rewards calibration/value and penalizes risk, with uncertainty and minimum activity.",
+     "Fail / hold condition": "Rewards based on raw win rate, volume-only staking, retrospective selection or unresolved disputes \u2192 withhold.",
+     "Evidence needed": "Published rules, reproducible score, sample eligibility, stake cap, audit trail and conflict process.",
+     "Official source": "NFL rulebook (official game rules; not reward rules)",
+     "_links": {
+      "Official source": [
+       "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook"
+      ]
+     }
+    }
+   ]
+  },
+  "luck_measures": {
+   "columns": [
+    "Measure",
+    "Use",
+    "Interpretation boundary",
+    "Source"
+   ],
+   "rows": [
+    {
+     "Measure": "Probability calibration",
+     "Use": "Compare stated probabilities with observed frequencies by bins or a reliability curve.",
+     "Interpretation boundary": "Good calibration alone does not prove a profitable advantage; disclose sample size and uncertainty.",
+     "Source": "NFL outcomes for labels",
+     "_links": {
+      "Source": [
+       "https://www.nfl.com/stats/player-stats/"
+      ]
+     }
+    },
+    {
+     "Measure": "Proper probability score",
+     "Use": "Use Brier score or log loss for probabilistic predictions; predeclare the scoring and handling of rare/extreme probabilities.",
+     "Interpretation boundary": "Lower score is better for the chosen definition; only compare on identical targets, samples and baselines.",
+     "Source": "NFL outcomes for labels",
+     "_links": {
+      "Source": [
+       "https://www.nfl.com/stats/team-stats/"
+      ]
+     }
+    },
+    {
+     "Measure": "Return / closing-line comparison",
+     "Use": "Evaluate only with licensed, timestamped odds and reproducible settlement. Report staking policy and costs.",
+     "Interpretation boundary": "Neither measure can be computed from NFL performance stats alone. No odds or return values are shown.",
+     "Source": "NFL official site (not verified odds source)",
+     "_links": {
+      "Source": [
+       "https://www.nfl.com/"
+      ]
+     }
+    },
+    {
+     "Measure": "Dependence",
+     "Use": "Show pairwise association and directly validated joint probability for combo strategies.",
+     "Interpretation boundary": "Correlation is sample- and context-dependent, not a causal claim and not equivalent to a parlay payout probability.",
+     "Source": "NFL player outcomes",
+     "_links": {
+      "Source": [
+       "https://www.nfl.com/stats/player-stats/"
+      ]
+     }
+    }
+   ]
+  },
+  "paths": {
+   "columns": [
+    "Path",
+    "What to do next",
+    "Advantages",
+    "Trade-offs / missing decision",
+    "Recommendation",
+    "Official source reference"
+   ],
+   "rows": [
+    {
+     "Path": "A \u00b7 Data foundation first",
+     "What to do next": "Define event/market/settlement schema; review data licenses; secure a permissioned odds-history feed and official outcome sources; build immutable snapshots and validation.",
+     "Advantages": "Makes price comparison, no-vig benchmarks, timing controls and meaningful backtests possible; supports no-manual-entry automation.",
+     "Trade-offs / missing decision": "Vendor selection, budget, rights, retained history, books, prop coverage and geo scope remain unknown.",
+     "Recommendation": "Recommended First priority",
+     "Official source reference": "NFL team stats \u00b7 NFL injury report",
+     "_links": {
+      "Official source reference": [
+       "https://www.nfl.com/stats/team-stats/",
+       "https://www.nfl.com/injuries/"
+      ]
+     }
+    },
+    {
+     "Path": "B \u00b7 Injury / lineup pipeline",
+     "What to do next": "Build timestamped report ingestion and source history; investigate dated, verifiable lineup/depth and participation evidence; present missing/stale fields rather than guessing.",
+     "Advantages": "Addresses the user's explicit need to understand missing starters and replacement roles on offense and defense.",
+     "Trade-offs / missing decision": "Official report does not by itself prove rank, starter identity or expected workload; source and usage rights for deeper participation data must be found.",
+     "Recommendation": "Recommended parallel after A scope",
+     "Official source reference": "NFL report \u00b7 NFL teams",
+     "_links": {
+      "Official source reference": [
+       "https://www.nfl.com/injuries/",
+       "https://www.nfl.com/teams/"
+      ]
+     }
+    },
+    {
+     "Path": "C \u00b7 Singles-only baseline",
+     "What to do next": "Once A is satisfied, start with a simple pre-registered game-line model and shadow forecasts; pass all validation gates before real recommendations.",
+     "Advantages": "Limits initial dependence complexity; gives one clean baseline for comparing additional features.",
+     "Trade-offs / missing decision": "Still needs data, market definition, legal scope, sample threshold and frozen evaluation design.",
+     "Recommendation": "Next after data readiness",
+     "Official source reference": "NFL team stats",
+     "_links": {
+      "Official source reference": [
+       "https://www.nfl.com/stats/team-stats/"
+      ]
+     }
+    },
+    {
+     "Path": "D \u00b7 Parlays / prop combinations first",
+     "What to do next": "Start immediately with multi-leg combos and leaderboard rewards.",
+     "Advantages": "Directly explores requested product types.",
+     "Trade-offs / missing decision": "Joint outcomes, price/payout data and correlation are absent; highest risk of implicit independence, combinatorial overfit and confusing luck with skill.",
+     "Recommendation": "Not recommended now Block until gate 7",
+     "Official source reference": "NFL player stats (outcomes only)",
+     "_links": {
+      "Official source reference": [
+       "https://www.nfl.com/stats/player-stats/"
+      ]
+     }
+    }
+   ]
+  },
+  "discovery_checklist": {
+   "columns": [
+    "Decision area",
+    "Question to resolve",
+    "What is confirmed / what is not",
+    "Discovery action",
+    "Official source"
+   ],
+   "rows": [
+    {
+     "Decision area": "Product & audience",
+     "Question to resolve": "Is this private research, a public information product, a betting recommendation service, or a wagering operator?",
+     "What is confirmed / what is not": "Not established by repository. Applicable legal obligations depend on jurisdiction, distribution, and activity; no legal conclusion is made here.",
+     "Discovery action": "Record intended users, geographies, monetization, and whether stakes or transactions are ever handled; get qualified legal review.",
+     "Official source": "NFL official site",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/"
+      ]
+     }
+    },
+    {
+     "Decision area": "Market scope",
+     "Question to resolve": "Which leagues, seasons, game types, and markets are in scope: spread, total, moneyline, team totals, player props?",
+     "What is confirmed / what is not": "Only the research goal is known. No market definition, price history, book coverage or settlement rules are in the repo.",
+     "Discovery action": "Specify market taxonomy, event IDs, kickoff cutoffs, odds format, void/push rules, overtime treatment and accepted books.",
+     "Official source": "Official NFL stats",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/stats/player-stats/"
+      ]
+     }
+    },
+    {
+     "Decision area": "Data rights",
+     "Question to resolve": "Which source may legally provide/retain historical and real-time odds, props, lineup and play-by-play data?",
+     "What is confirmed / what is not": "No odds-feed source, contract, API, license or retention rights were found. The NFL stats site is not evidence of odds rights.",
+     "Discovery action": "Identify candidate providers and obtain written scope, latency, retention, redistribution, derived-data and price-history terms before integration.",
+     "Official source": "NFL official site",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/"
+      ]
+     }
+    },
+    {
+     "Decision area": "Game outcomes",
+     "Question to resolve": "What authoritative source and version will settle each market and label model targets?",
+     "What is confirmed / what is not": "NFL provides official stats and a rulebook; exact vendor settlement treatment by market is not defined here.",
+     "Discovery action": "Document outcome source, correction window, player/team identity mapping, market grading and disputed/void handling.",
+     "Official source": "Official NFL team stats",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/stats/team-stats/"
+      ]
+     }
+    },
+    {
+     "Decision area": "Availability",
+     "Question to resolve": "When do official injury reports become available, and how do we distinguish missing report, healthy, inactive, limited and uncertain?",
+     "What is confirmed / what is not": "The NFL injury report page includes player, position, injuries, practice status and game status in published tables. Completeness/time snapshots and historical API rights are unverified.",
+     "Discovery action": "Capture source URL, fetch timestamp, report date, status vocabulary, corrections and blank vs not-listed distinction.",
+     "Official source": "NFL injury report",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/injuries/"
+      ]
+     }
+    },
+    {
+     "Decision area": "Depth / replacements",
+     "Question to resolve": "Who is the next man up, is he second/third/fourth string, and what role / snaps should be expected?",
+     "What is confirmed / what is not": "Not supplied by repo or established by an injury report alone. NFL team pages and player profiles may identify players but do not establish a current authoritative depth order in this review.",
+     "Discovery action": "Find dated team-published depth charts or licensed participation data; store the evidence and mark unofficial consensus separately.",
+     "Official source": "NFL team directory",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/teams/"
+      ]
+     }
+    },
+    {
+     "Decision area": "Market comparison",
+     "Question to resolve": "What is the reference price, how is vig removed, and what timestamp represents the actionable market?",
+     "What is confirmed / what is not": "No prices exist in the repo. Official NFL data pages do not provide a verified odds baseline here.",
+     "Discovery action": "Choose an eligible price source and book set; preserve raw odds, quote time, limits if licensed, and closing price definition.",
+     "Official source": "NFL official site (not an odds feed)",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/"
+      ]
+     }
+    },
+    {
+     "Decision area": "Correlation",
+     "Question to resolve": "Which outcomes depend on each other within a game or across legs, and under what conditional game script?",
+     "What is confirmed / what is not": "No historical market/outcome sample or estimated correlation values are present. Values are intentionally blank.",
+     "Discovery action": "Define paired outcomes and conditional groups; estimate dependence from training data only, with held-out checks and uncertainty intervals.",
+     "Official source": "Official player stats (outcome data)",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/stats/player-stats/"
+      ]
+     }
+    },
+    {
+     "Decision area": "Risk & rewards",
+     "Question to resolve": "What bankroll unit, exposure cap, payout rules, leaderboard score, minimum sample and reward budget apply?",
+     "What is confirmed / what is not": "No bankroll, reward pool, account model or scoring rule has been set.",
+     "Discovery action": "Choose transparent, pre-registered risk-adjusted rewards; prohibit credit for unsubmitted/late forecasts and disclose uncertainty.",
+     "Official source": "NFL rulebook (game rules only)",
+     "_links": {
+      "Official source": [
+       "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook"
+      ]
+     }
+    },
+    {
+     "Decision area": "Automation",
+     "Question to resolve": "How will the system ingest, validate, timestamp, correct and monitor data without manual user entry?",
+     "What is confirmed / what is not": "No backend, feeds, credentials, scheduler, database, or monitoring is in this repository.",
+     "Discovery action": "After rights review, design scheduled ingestion, schema, source lineage, freshness checks, alerting, replay and audited correction workflow.",
+     "Official source": "NFL injury report (source endpoint)",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/injuries/"
+      ]
+     }
+    },
+    {
+     "Decision area": "Privacy / security",
+     "Question to resolve": "Will any user account, wagering activity, payment or sensitive data be collected?",
+     "What is confirmed / what is not": "No accounts or personal data collection exist in this static research site. Future-system scope is unknown.",
+     "Discovery action": "Minimize personal data, threat-model access, retention and secrets; secure storage and obtain legal/privacy review as applicable.",
+     "Official source": "NFL official site",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/"
+      ]
+     }
+    },
+    {
+     "Decision area": "Success criteria",
+     "Question to resolve": "What evidence is enough to say a strategy works and merits recognition?",
+     "What is confirmed / what is not": "No tested strategies or performance observations have been supplied.",
+     "Discovery action": "Pre-register forecast timing, benchmark, scoring, evaluation windows, uncertainty and minimum evidence before looking at results.",
+     "Official source": "Official stats for outcome labels",
+     "_links": {
+      "Official source": [
+       "https://www.nfl.com/stats/player-stats/"
+      ]
+     }
+    }
+   ]
+  },
+  "fact_boundaries": {
+   "columns": [
+    "Item",
+    "Status",
+    "Fact boundary",
+    "Reference"
+   ],
+   "rows": [
+    {
+     "Item": "Official injury report categories",
+     "Status": "Observed",
+     "Fact boundary": "Inspected NFL report table lists player, position, injuries, practice status and game status. This does not imply depth order, guaranteed availability, or an API/service-level guarantee.",
+     "Reference": "NFL injury reports",
+     "_links": {
+      "Reference": [
+       "https://www.nfl.com/injuries/"
+      ]
+     }
+    },
+    {
+     "Item": "Official player/team stat pages",
+     "Status": "Observed",
+     "Fact boundary": "Official NFL player and team statistical pages exist. No particular dataset was copied into the repo; completeness, historical exports and licensing are not assumed.",
+     "Reference": "NFL player stats \u00b7 NFL team stats",
+     "_links": {
+      "Reference": [
+       "https://www.nfl.com/stats/player-stats/",
+       "https://www.nfl.com/stats/team-stats/"
+      ]
+     }
+    },
+    {
+     "Item": "Official playing rules",
+     "Status": "Observed",
+     "Fact boundary": "NFL Football Operations publishes the NFL rulebook. Use the season-specific edition and confirm the applicable rule for any settlement or feature.",
+     "Reference": "NFL rulebook",
+     "_links": {
+      "Reference": [
+       "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook"
+      ]
+     }
+    },
+    {
+     "Item": "Market odds and price histories",
+     "Status": "Missing",
+     "Fact boundary": "No odds or prices were in this repository; no official NFL odds feed is verified here.",
+     "Reference": "NFL official site (not verified as odds source)",
+     "_links": {
+      "Reference": [
+       "https://www.nfl.com/"
+      ]
+     }
+    },
+    {
+     "Item": "Model performance, probabilities, correlations",
+     "Status": "Missing",
+     "Fact boundary": "No trained model, forecasts, bet outcomes, correlation values, backtest or live results were present.",
+     "Reference": "Official stats source for future labels",
+     "_links": {
+      "Reference": [
+       "https://www.nfl.com/stats/player-stats/"
+      ]
+     }
+    }
+   ]
+  },
+  "flags": {
+   "columns": [
+    "ID",
+    "Flag",
+    "Missing / irregular information",
+    "Why it matters",
+    "How to resolve",
+    "Official source for review"
+   ],
+   "rows": [
+    {
+     "ID": "F-01",
+     "Flag": "Blocking data",
+     "Missing / irregular information": "Historical and real-time sportsbook prices for moneyline, spread, totals and player props; no feed or records supplied.",
+     "Why it matters": "No independent line comparison, market benchmark, closing-price analysis or expected value can be computed.",
+     "How to resolve": "Obtain a licensed provider, validate coverage, timestamp rules, retention and settlement; keep raw snapshots and price history.",
+     "Official source for review": "NFL official site \u2014 not verified as an odds source",
+     "_links": {
+      "Official source for review": [
+       "https://www.nfl.com/"
+      ]
+     }
+    },
+    {
+     "ID": "F-02",
+     "Flag": "Blocking data",
+     "Missing / irregular information": "Odds data rights, retention permission, redistribution scope and API access are unknown.",
+     "Why it matters": "A data source being publicly visible does not establish permitted automated reuse or derived-data rights.",
+     "How to resolve": "Review vendor terms and applicable law before collection; record approval and permitted uses.",
+     "Official source for review": "NFL official site (source rights require separate review)",
+     "_links": {
+      "Official source for review": [
+       "https://www.nfl.com/"
+      ]
+     }
+    },
+    {
+     "ID": "F-03",
+     "Flag": "Unverified",
+     "Missing / irregular information": "Official, time-stamped second/third/fourth-string depth ranks and starter replacements for each team.",
+     "Why it matters": "Injury status alone does not confirm who starts or replacement quality/workload; line adjustments would be speculative.",
+     "How to resolve": "Find dated primary team depth-chart/lineup evidence or rights-cleared participation data; leave rank blank where absent.",
+     "Official source for review": "NFL team directory \u00b7 NFL injuries",
+     "_links": {
+      "Official source for review": [
+       "https://www.nfl.com/teams/",
+       "https://www.nfl.com/injuries/"
+      ]
+     }
+    },
+    {
+     "ID": "F-04",
+     "Flag": "Unverified",
+     "Missing / irregular information": "Historical official injury-report snapshots, correction history, availability service endpoint and timing guarantees.",
+     "Why it matters": "Current pages may change; without snapshots, point-in-time backtests risk using information unavailable at forecast time.",
+     "How to resolve": "Archive permitted snapshots with retrieval time and source page; confirm whether an official API/archive exists.",
+     "Official source for review": "NFL injury reports",
+     "_links": {
+      "Official source for review": [
+       "https://www.nfl.com/injuries/"
+      ]
+     }
+    },
+    {
+     "ID": "F-05",
+     "Flag": "Unverified",
+     "Missing / irregular information": "Snap counts / participation datasets, including history and usage rights, were not verified for this implementation.",
+     "Why it matters": "Replacement depth and player role cannot be established from roster identity or box-score production alone.",
+     "How to resolve": "Verify official or licensed data coverage and schema before using it; preserve player/game identifiers.",
+     "Official source for review": "NFL player stats",
+     "_links": {
+      "Official source for review": [
+       "https://www.nfl.com/stats/player-stats/"
+      ]
+     }
+    },
+    {
+     "ID": "F-06",
+     "Flag": "No results",
+     "Missing / irregular information": "Backtest, prospective run, predictions, edge estimates, calibration, performance, sample size and uncertainty.",
+     "Why it matters": "No basis to claim any strategy is profitable or skill-based.",
+     "How to resolve": "Acquire data, pre-register hypotheses, run walk-forward/holdout validation, publish complete metrics including null results.",
+     "Official source for review": "NFL team stats \u00b7 NFL player stats",
+     "_links": {
+      "Official source for review": [
+       "https://www.nfl.com/stats/team-stats/",
+       "https://www.nfl.com/stats/player-stats/"
+      ]
+     }
+    },
+    {
+     "ID": "F-07",
+     "Flag": "Blank by design",
+     "Missing / irregular information": "Pairwise and conditional correlations, joint parlay probabilities and player-prop dependence.",
+     "Why it matters": "Assuming independence can misstate combo probabilities. No joint sample or market settlement is present.",
+     "How to resolve": "Build a joint-outcome dataset, define pairs/conditions before testing, estimate uncertainty, validate on held-out data.",
+     "Official source for review": "NFL player stats",
+     "_links": {
+      "Official source for review": [
+       "https://www.nfl.com/stats/player-stats/"
+      ]
+     }
+    },
+    {
+     "ID": "F-08",
+     "Flag": "Decision needed",
+     "Missing / irregular information": "Product jurisdiction, user type, legal status, licensing, reward design and risk policy.",
+     "Why it matters": "System scope, data rights and permissible recommendations can vary; no legal or compliance assessment is asserted.",
+     "How to resolve": "Define product and jurisdictions; request qualified professional review before public recommendations or rewards.",
+     "Official source for review": "NFL official site (not a legal authority)",
+     "_links": {
+      "Official source for review": [
+       "https://www.nfl.com/"
+      ]
+     }
+    },
+    {
+     "ID": "F-09",
+     "Flag": "Decision needed",
+     "Missing / irregular information": "Leaderboard score, strategy eligibility, minimum data volume, tie-breaking, award budget and dispute process.",
+     "Why it matters": "Without fixed prospective rules, participants can optimize to noise or selection bias.",
+     "How to resolve": "Approve the protocol before accepting strategies; publish model version, timestamp and score calculation.",
+     "Official source for review": "NFL rulebook (not leaderboard rules)",
+     "_links": {
+      "Official source for review": [
+       "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook"
+      ]
+     }
+    },
+    {
+     "ID": "F-10",
+     "Flag": "Not implemented",
+     "Missing / irregular information": "Automated feed ingestion, scheduler, persistence, source monitoring, user interface for current data and security.",
+     "Why it matters": "This Pages site is static documentation; it cannot collect or update data automatically.",
+     "How to resolve": "Build a rights-cleared backend after data discovery; never expose vendor credentials in a browser or repository.",
+     "Official source for review": "NFL injury report (potential input only)",
+     "_links": {
+      "Official source for review": [
+       "https://www.nfl.com/injuries/"
+      ]
+     }
+    }
+   ]
+  },
+  "decision_questions": {
+   "columns": [
+    "Question",
+    "What we know",
+    "Missing answer",
+    "How to discover",
+    "Source / context"
+   ],
+   "rows": [
+    {
+     "Question": "Which markets and jurisdictions?",
+     "What we know": "Singles, parlays and player props are requested.",
+     "Missing answer": "",
+     "How to discover": "Document permitted markets, jurisdiction, settlement and legal constraints.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages"
+      ]
+     }
+    },
+    {
+     "Question": "Which official data can be reused automatically?",
+     "What we know": "NFL publishes injury reports and statistics.",
+     "Missing answer": "",
+     "How to discover": "Assess access terms, historical coverage, availability times and rate limits with rights holders.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/injuries/"
+      ]
+     }
+    },
+    {
+     "Question": "Which price is actionable?",
+     "What we know": "A model price needs a comparable market quote.",
+     "Missing answer": "",
+     "How to discover": "Obtain licensed, timestamped historical and executable quotes, including limits and void rules.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/stats/"
+      ]
+     }
+    },
+    {
+     "Question": "Who actually replaces an unavailable player?",
+     "What we know": "Roster status alone is not a depth chart.",
+     "Missing answer": "",
+     "How to discover": "Archive team depth charts, inactive lists and participation with publication timestamps.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/teams/denver-broncos/roster"
+      ]
+     }
+    },
+    {
+     "Question": "Does the signal generalize?",
+     "What we know": "Training and testing on the same data can overfit.",
+     "Missing answer": "",
+     "How to discover": "Reserve a final time-ordered holdout and record all experiments.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://scikit-learn.org/stable/modules/cross_validation.html"
+      ]
+     }
+    },
+    {
+     "Question": "What reward and risk policy?",
+     "What we know": "Performance must be measured after costs and uncertainty.",
+     "Missing answer": "",
+     "How to discover": "Define budget, eligibility, prizes, risk limits and independent audit before the competition.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://scikit-learn.org/stable/modules/cross_validation.html"
+      ]
+     }
+    },
+    {
+     "Question": "What weather was known before kickoff?",
+     "What we know": "NWS provides forecasts and observations.",
+     "Missing answer": "",
+     "How to discover": "Archive timestamped forecasts and venue/roof status; verify non-US coverage separately.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.weather.gov/documentation/services-web-api"
+      ]
+     }
+    }
+   ]
+  },
+  "decision_suggestions": {
+   "columns": [
+    "Suggestion",
+    "Why it matters",
+    "Trade-off / prerequisite",
+    "Source / context"
+   ],
+   "rows": [
+    {
+     "Suggestion": "Point-in-time source ledger",
+     "Why it matters": "Makes every feature reproducible and auditable.",
+     "Trade-off / prerequisite": "Historical snapshots and usage rights required.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/injuries/"
+      ]
+     }
+    },
+    {
+     "Suggestion": "Availability impact board",
+     "Why it matters": "Shows verified injury status, chart order and uncertainty together.",
+     "Trade-off / prerequisite": "Do not infer replacements from injury status alone.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/teams/denver-broncos/roster"
+      ]
+     }
+    },
+    {
+     "Suggestion": "Shadow leaderboard",
+     "Why it matters": "Tests candidates without financial exposure.",
+     "Trade-off / prerequisite": "Need frozen rules and sufficient independent observations.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://scikit-learn.org/stable/modules/cross_validation.html"
+      ]
+     }
+    },
+    {
+     "Suggestion": "Decision and experiment journal",
+     "Why it matters": "Preserves rejected ideas, versions and review decisions.",
+     "Trade-off / prerequisite": "Requires durable storage beyond a static site.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages"
+      ]
+     }
+    }
+   ]
+  },
+  "availability_samples": {
+   "columns": [
+    "Team / player",
+    "Position",
+    "Injury",
+    "Practice",
+    "Game status",
+    "Source / context"
+   ],
+   "rows": [
+    {
+     "Team / player": "Washington \u00b7 Lucas Patrick",
+     "Position": "C",
+     "Injury": "Concussion",
+     "Practice": "Did Not Participate In Practice",
+     "Game status": "Out",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/injuries/"
+      ]
+     }
+    },
+    {
+     "Team / player": "Washington \u00b7 Colson Yankoff",
+     "Position": "TE",
+     "Injury": "Knee",
+     "Practice": "Did Not Participate In Practice",
+     "Game status": "Out",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/injuries/"
+      ]
+     }
+    },
+    {
+     "Team / player": "NY Giants \u00b7 Malik Harrison",
+     "Position": "LB",
+     "Injury": "Groin",
+     "Practice": "Limited Participation in Practice",
+     "Game status": "Questionable",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/injuries/"
+      ]
+     }
+    },
+    {
+     "Team / player": "New England \u00b7 Carlton Davis III",
+     "Position": "CB",
+     "Injury": "Knee",
+     "Practice": "Did Not Participate In Practice",
+     "Game status": "Out",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/injuries/"
+      ]
+     }
+    },
+    {
+     "Team / player": "Detroit \u00b7 D.J. Reed",
+     "Position": "CB",
+     "Injury": "",
+     "Practice": "Did Not Participate In Practice",
+     "Game status": "",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/injuries/"
+      ]
+     }
+    }
+   ]
+  },
+  "availability_fields": {
+   "columns": [
+    "Required field",
+    "Verified value",
+    "How to establish",
+    "Source / context"
+   ],
+   "rows": [
+    {
+     "Required field": "Starter and replacement",
+     "Verified value": "",
+     "How to establish": "Archive official team depth charts and game-day inactive lists; reconcile with official participation data.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/teams/denver-broncos/roster"
+      ]
+     }
+    },
+    {
+     "Required field": "Second, third or fourth string",
+     "Verified value": "",
+     "How to establish": "Verify team-published chart order as of the relevant time. Chart order does not prove actual snaps.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/teams/denver-broncos/roster"
+      ]
+     }
+    },
+    {
+     "Required field": "Defensive or offensive impact",
+     "Verified value": "",
+     "How to establish": "Estimate with historical, time-stamped participation and opponent-adjusted outcomes; report uncertainty.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/stats/"
+      ]
+     }
+    },
+    {
+     "Required field": "Refresh and change history",
+     "Verified value": "",
+     "How to establish": "Build a scheduled collector with source timestamps, freshness checks, logs and alerts; do not silently overwrite snapshots.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/injuries/"
+      ]
+     }
+    }
+   ]
+  },
+  "root_sources": {
+   "columns": [
+    "Source",
+    "Observed use",
+    "Limitation",
+    "Source / context"
+   ],
+   "rows": [
+    {
+     "Source": "NFL injury report",
+     "Observed use": "Practice and game designations.",
+     "Limitation": "Current page changes; historical point-in-time access not established.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/injuries/"
+      ]
+     }
+    },
+    {
+     "Source": "NFL player statistics",
+     "Observed use": "League player statistics by category and season.",
+     "Limitation": "Automated historical access and reuse terms not established.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/stats/"
+      ]
+     }
+    },
+    {
+     "Source": "NFL team roster example",
+     "Observed use": "Player roster and status.",
+     "Limitation": "Not evidence of actual starter or replacement.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/teams/denver-broncos/roster"
+      ]
+     }
+    },
+    {
+     "Source": "National Weather Service API",
+     "Observed use": "Forecasts and observations; API documentation.",
+     "Limitation": "Venue mapping, snapshots and non-US coverage require investigation.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.weather.gov/documentation/services-web-api"
+      ]
+     }
+    },
+    {
+     "Source": "scikit-learn cross-validation documentation",
+     "Observed use": "Holdout and overfitting guidance.",
+     "Limitation": "Statistical guidance, not proof of betting profitability.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://scikit-learn.org/stable/modules/cross_validation.html"
+      ]
+     }
+    },
+    {
+     "Source": "GitHub Pages documentation",
+     "Observed use": "Static hosting and project-site structure.",
+     "Limitation": "Does not provide a continuously running backend.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages"
+      ]
+     }
+    }
+   ]
+  },
+  "root_flagged": {
+   "columns": [
+    "Irregularity or gap",
+    "Verified value",
+    "Impact / next step",
+    "Source / context"
+   ],
+   "rows": [
+    {
+     "Irregularity or gap": "Automated injury and roster ingestion",
+     "Verified value": "",
+     "Impact / next step": "This static site does not collect or refresh player data. Assess official access, rights and scheduling.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/injuries/"
+      ]
+     }
+    },
+    {
+     "Irregularity or gap": "Depth charts and replacements",
+     "Verified value": "",
+     "Impact / next step": "A roster is not a game-day depth chart. Verify charts, inactives and actual participation before assigning roles.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/teams/denver-broncos/roster"
+      ]
+     }
+    },
+    {
+     "Irregularity or gap": "Live and historical market prices",
+     "Verified value": "",
+     "Impact / next step": "No licensed quote source, limits, vig or settlement rules established; no actionable edge can be computed.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/stats/"
+      ]
+     }
+    },
+    {
+     "Irregularity or gap": "Correlations and performance",
+     "Verified value": "",
+     "Impact / next step": "No matched dataset, experiments or holdout results; do not rank strategies or assert skill.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://scikit-learn.org/stable/modules/cross_validation.html"
+      ]
+     }
+    },
+    {
+     "Irregularity or gap": "Competition rules and rewards",
+     "Verified value": "",
+     "Impact / next step": "Eligibility, prize funding, incentives, sample sizes and review process remain undefined.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://scikit-learn.org/stable/modules/cross_validation.html"
+      ]
+     }
+    },
+    {
+     "Irregularity or gap": "Historical source timestamps",
+     "Verified value": "",
+     "Impact / next step": "Do not use today\u2019s corrected report as a historical pregame snapshot; establish archive coverage.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/injuries/"
+      ]
+     }
+    },
+    {
+     "Irregularity or gap": "Source completeness",
+     "Verified value": "",
+     "Impact / next step": "The injury snapshot contains selected rows only, not all teams or all players; it may become stale.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/injuries/"
+      ]
+     }
+    },
+    {
+     "Irregularity or gap": "Depth chart link irregularity",
+     "Verified value": "",
+     "Impact / next step": "NFL.com /teams/denver-broncos/depth-chart returned a page displaying 404 during review; find a valid official team chart.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://www.nfl.com/teams/denver-broncos/roster"
+      ]
+     }
+    },
+    {
+     "Irregularity or gap": "Deployment verification",
+     "Verified value": "",
+     "Impact / next step": "GitHub Pages deploy status must be independently checked after merge.",
+     "Source / context": "Review source \u2197",
+     "_links": {
+      "Source / context": [
+       "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages"
+      ]
+     }
+    }
+   ]
+  }
+ },
+ "site_suggestions": {
+  "columns": [
+   "ID",
+   "Change to make",
+   "Why it improves a decision",
+   "Effort",
+   "Impact",
+   "Depends on",
+   "Status",
+   "Official source (context)"
+  ],
+  "rows": [
+   {
+    "ID": "SI-01",
+    "Change to make": "Show the capture time on every data table and add a changed-since-capture diff.",
+    "Why it improves a decision": "In the 12 Nov 2026 verification, 43 of the 151 rows read from the live NFL injury page had changed since the committed 06:32 UTC capture (22 added, 21 practice-status revisions). A reader who cannot see the age of the data can mistake a stale row for a current one.",
+    "Effort": "Medium",
+    "Impact": "High",
+    "Depends on": "SI-02",
+    "Status": "Proposed",
+    "Official source (context)": "https://www.nfl.com/injuries/"
+   },
+   {
+    "ID": "SI-02",
+    "Change to make": "Re-capture the official sources on every deployment, store the SHA-256 of each captured document and print the hash on the source register.",
+    "Why it improves a decision": "A dated, hashed capture is what makes a snapshot auditable and lets a reviewer prove that a published row came from the official page rather than from memory or from a community mirror.",
+    "Effort": "Low",
+    "Impact": "High",
+    "Depends on": "-",
+    "Status": "Proposed",
+    "Official source (context)": "https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages"
+   },
+   {
+    "ID": "SI-03",
+    "Change to make": "Add a client-side search box and status filter to the injury and depth tables.",
+    "Why it improves a decision": "The published snapshot holds 254 injury rows and 1,745 depth rows. Without filtering, researching one club's availability or one position group means scrolling the whole league.",
+    "Effort": "Low",
+    "Impact": "Medium",
+    "Depends on": "-",
+    "Status": "Proposed",
+    "Official source (context)": "https://www.nfl.com/injuries/"
+   },
+   {
+    "ID": "SI-04",
+    "Change to make": "Add a depth-string view that shows each player's published rank inside the position group, for both units.",
+    "Why it improves a decision": "The stated need is to know when a second, third or fourth-string player must start. Club charts publish an order inside each position group; the snapshot stores that rank but the site does not yet surface it as a depth string.",
+    "Effort": "Medium",
+    "Impact": "High",
+    "Depends on": "-",
+    "Status": "Proposed",
+    "Official source (context)": "https://www.commanders.com/team/depth-chart"
+   },
+   {
+    "ID": "SI-05",
+    "Change to make": "Build an availability impact matrix that joins injury status to published depth rank and leaves every unconfirmed cell blank.",
+    "Why it improves a decision": "The injury report and the club depth chart are the two official documents that exist. Joining them answers 'who replaces him, and at what string' without inventing a replacement workload that no source establishes.",
+    "Effort": "High",
+    "Impact": "High",
+    "Depends on": "SI-02, SI-04",
+    "Status": "Proposed",
+    "Official source (context)": "https://www.nfl.com/injuries/"
+   },
+   {
+    "ID": "SI-06",
+    "Change to make": "Show the leaderboard score with its sample size and confidence interval on every strategy row.",
+    "Why it improves a decision": "A rank without n and an interval is a scoreboard, not evidence. Showing the interval next to the rank is what separates repeatable skill from a short winning streak.",
+    "Effort": "Medium",
+    "Impact": "High",
+    "Depends on": "-",
+    "Status": "Proposed",
+    "Official source (context)": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm"
+   },
+   {
+    "ID": "SI-07",
+    "Change to make": "Name the failing validation gate on every strategy row instead of a single status word.",
+    "Why it improves a decision": "A strategy that fails on provenance and a strategy that fails on sample size need completely different work. Naming the gate turns the leaderboard into a task list.",
+    "Effort": "Medium",
+    "Impact": "Medium",
+    "Depends on": "-",
+    "Status": "Proposed",
+    "Official source (context)": "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html"
+   },
+   {
+    "ID": "SI-08",
+    "Change to make": "Publish a correlation page that lists only empirically measured pairs, each with n and an interval, and prints 'not measurable yet' for every other pair.",
+    "Why it improves a decision": "Correlation between legs is the input that decides whether a parlay price is real. Publishing an empty matrix with the measurement protocol is safer than publishing a number that cannot be defended.",
+    "Effort": "Medium",
+    "Impact": "High",
+    "Depends on": "SI-02",
+    "Status": "Proposed",
+    "Official source (context)": "https://scikit-learn.org/stable/modules/calibration.html"
+   },
+   {
+    "ID": "SI-09",
+    "Change to make": "Label every published value with its evidence class: official league, official club, official regulator, methodology authority, secondary or unverified.",
+    "Why it improves a decision": "The single largest error risk in this repository so far was community data described with official language. A visible evidence class makes that mistake obvious at a glance instead of in an audit.",
+    "Effort": "Medium",
+    "Impact": "High",
+    "Depends on": "-",
+    "Status": "Proposed",
+    "Official source (context)": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL"
+   },
+   {
+    "ID": "SI-10",
+    "Change to make": "Add a review protocol that records each suggestion as accept, defer or reject with a date and a reason, and show the history on the suggestion row.",
+    "Why it improves a decision": "The request is to review suggestions and choose a path before implementing. A record of who chose what, and why, is what turns a list of ideas into a decision trail.",
+    "Effort": "Low",
+    "Impact": "Medium",
+    "Depends on": "-",
+    "Status": "Proposed",
+    "Official source (context)": "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages"
+   },
+   {
+    "ID": "SI-11",
+    "Change to make": "Add one plain-language line to every page stating what that page can and cannot establish.",
+    "Why it improves a decision": "Injury designations are report states, not probabilities, and depth order is guidance, not participation. Saying so on the page prevents the most likely misreading before it happens.",
+    "Effort": "Low",
+    "Impact": "Medium",
+    "Depends on": "-",
+    "Status": "Proposed",
+    "Official source (context)": "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693"
+   },
+   {
+    "ID": "SI-12",
+    "Change to make": "Keep one canonical register of requirements, questions, suggestions, gates and flags, and generate every page from it.",
+    "Why it improves a decision": "The repository now holds six workspaces that were written independently. A single generated register stops two pages from stating different facts about the same item.",
+    "Effort": "High",
+    "Impact": "High",
+    "Depends on": "-",
+    "Status": "Partly done \u2014 the root pages and the canonical decision lab are generated; the preserved archives still carry their own text.",
+    "Official source (context)": "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages"
+   },
+   {
+    "ID": "SI-13",
+    "Change to make": "Publish the verified tables as JSON and CSV alongside the HTML.",
+    "Why it improves a decision": "A machine-readable copy lets another tool consume only the rows that carry an official source, without re-parsing a rendered page.",
+    "Effort": "Low",
+    "Impact": "Medium",
+    "Depends on": "SI-12",
+    "Status": "Proposed",
+    "Official source (context)": "https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages"
+   }
+  ]
+ },
+ "executive_notes": {
+  "columns": [
+   "Finding",
+   "Evidence",
+   "Consequence for a decision",
+   "Official source"
+  ],
+  "rows": [
+   {
+    "Finding": "The official Week 10 injury report was captured row by row and re-read line by line; 108 of the 108 comparable rows matched exactly.",
+    "Evidence": "151 rows transcribed from https://www.nfl.com/injuries/ on 12 Nov 2026 and compared with the committed snapshot field by field.",
+    "Consequence for a decision": "The published availability table is faithful to the official page as of its capture time.",
+    "Official source": "https://www.nfl.com/injuries/"
+   },
+   {
+    "Finding": "The published snapshot is not a historical archive: 43 of the 151 rows read had changed since the 06:32 UTC capture.",
+    "Evidence": "22 rows were added (Seattle Seahawks and Cincinnati Bengals gained full tables, plus two new 49ers and one new Cardinals row) and 21 practice designations were revised.",
+    "Consequence for a decision": "Use the capture time, not today's page, when reasoning about what was known before kickoff. Re-capture before relying on a row.",
+    "Official source": "https://www.nfl.com/injuries/"
+   },
+   {
+    "Finding": "Club depth charts publish an order inside each position group, and that order matched the capture exactly.",
+    "Evidence": "All 60 rows of the Washington Commanders chart matched on unit, position group, published rank and player.",
+    "Consequence for a decision": "A published rank can be published as published order. It still does not establish a confirmed starter, an assignment or expected snaps.",
+    "Official source": "https://www.commanders.com/team/depth-chart"
+   },
+   {
+    "Finding": "No licensed historical odds or player-prop feed is established anywhere in the repository.",
+    "Evidence": "No provider, contract, API or retention permission for historical prices has been found or recorded.",
+    "Consequence for a decision": "No independent line can be compared with a market price, so no expected value, correlation between legs or leaderboard score can be computed yet.",
+    "Official source": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL"
+   },
+   {
+    "Finding": "Ten fail-closed gates are defined and none has been passed.",
+    "Evidence": "Gate G01 requires an official URL, a raw hash and an official outcome confirmation for every record; no record set in this repository satisfies it.",
+    "Consequence for a decision": "The leaderboard has zero eligible entries by design. Nothing here shows a profitable strategy.",
+    "Official source": "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html"
+   },
+   {
+    "Finding": "Fourteen of the twenty-two registered questions are blocking and only two have an answer.",
+    "Evidence": "Questions Q16 and Q20 are answered from methodology and authority evidence; the rest are open by design and keep a blank answer cell.",
+    "Consequence for a decision": "Any path that starts with model building before the data-rights and price questions are answered will be measuring noise.",
+    "Official source": "https://www.nfl.com/"
+   }
+  ]
+ },
+ "workspaces": {
+  "columns": [
+   "Workspace",
+   "What it contains",
+   "Evidence boundary",
+   "Official source"
+  ],
+  "rows": [
+   {
+    "Workspace": "Canonical decision lab",
+    "What it contains": "Requirements, questions, suggestions, gates, injury and depth snapshot, audit.",
+    "Evidence boundary": "Official NFL and club sources only; unverified values stay blank.",
+    "Official source": "https://www.nfl.com/injuries/"
+   },
+   {
+    "Workspace": "Dashboard",
+    "What it contains": "Week 10 injury, game, starter-headline, strategy and source tables with row-level citations.",
+    "Evidence boundary": "Preserved concurrent workspace; some rows cite community or secondary sources and are marked unverified there.",
+    "Official source": "https://www.nfl.com/injuries/"
+   },
+   {
+    "Workspace": "Line lab",
+    "What it contains": "Standings-based ratings, model-implied lines, correlation and luck research.",
+    "Evidence boundary": "Model-implied estimates, not sportsbook lines and not validated betting results.",
+    "Official source": "https://www.nfl.com/standings/"
+   },
+   {
+    "Workspace": "Decision hub",
+    "What it contains": "Requirements, origination protocol, depth and injury evidence, questions and suggestions.",
+    "Evidence boundary": "Concurrent workspace; empirical cells remain blank where unverified.",
+    "Official source": "https://www.nfl.com/teams/"
+   },
+   {
+    "Workspace": "Research desk",
+    "What it contains": "Exploratory line, strategy, correlation and injury studies on community release assets.",
+    "Evidence boundary": "Community data. A matching digest proves byte integrity, not NFL authorship, so it is not official-only validation.",
+    "Official source": "https://github.com/nflverse/nflverse-data/releases"
+   },
+   {
+    "Workspace": "Research workspace",
+    "What it contains": "Supplemental sourced research pages preserved alongside the canonical lab.",
+    "Evidence boundary": "Supplemental; the canonical flagged-review and audit pages define the integration boundary.",
+    "Official source": "https://www.nfl.com/injuries/"
+   }
+  ]
+ },
+ "review_protocol": [
+  {
+   "Step": "1 \u00b7 Read the flag",
+   "Action": "Open the flagged item and its official source link. The link is the starting point for investigation, not a certificate that the answer is there.",
+   "Source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "Step": "2 \u00b7 Check the register",
+   "Action": "Look for the matching question in the questions register. A flag without a registered question is a new item that should be added.",
+   "Source": "https://www.nfl.com/"
+  },
+  {
+   "Step": "3 \u00b7 Choose a path",
+   "Action": "Mark a suggestion as accept, defer or reject with a reason. Implementation starts only after that mark exists.",
+   "Source": "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages"
+  },
+  {
+   "Step": "4 \u00b7 Record the decision",
+   "Action": "Open a change request on the repository with the flag ID, the source that closes it and the expected effect on the affected tables.",
+   "Source": "https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages"
+  },
+  {
+   "Step": "5 \u00b7 Re-verify",
+   "Action": "The next deployment re-captures the official sources and re-runs the verification. The flag stays published until the evidence supports closing it.",
+   "Source": "https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages"
+  }
+ ]
+}
