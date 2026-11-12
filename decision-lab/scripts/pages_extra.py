@@ -47,7 +47,7 @@ def build_availability() -> str:
             [td("1 · Capture"), td("Official NFL report plus each club's published depth page, hashed at capture time."), td(source_link("S01"))],
             [td("2 · Join"), td(e(A["method"]["join_key"])), td(source_link("S05"))],
             [td("3 · Families"), td(e(A["method"]["position_families"])), td(source_link("S29"))],
-            [td("3b · Non-tabular charts"), td("Two clubs do not publish a parseable table: the Texans publish an image, the Packers prepend jersey numbers."), td(source_link("S28") + "<br>" + source_link("S29"))],
+            [td("3b · Two clubs are not parsed yet"), td("The Texans publish their chart as an image and the Packers page uses a layout the parser does not read (jersey numbers inside cells, one player repeated across slots). Neither is a confirmed absence of data."), td(source_link("S28") + "<br>" + source_link("S29"))],
             [td("4 · Replacement lead"), td(e(A["method"]["replacement_rule"])), td(source_link("S06"))],
             [td("5 · Blanks"), td("A blank game designation is not 'active': the policy says a player certain to play is not listed in the game-status report."), td(source_link("S03"))],
         ])
