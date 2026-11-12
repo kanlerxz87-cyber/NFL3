@@ -1,1 +1,7 @@
-# NFL3
+# NFL3 research desk
+
+A static, source-linked NFL decision dashboard for GitHub Pages. Open `index.html` locally or serve the repository root with `python3 -m http.server`. Navigation uses relative paths for project-site hosting.
+
+This is a research foundation, **not** an automated data pipeline, live injury tracker, betting model, leaderboard, or source of betting advice. The injury table is a small, dated snapshot, not a complete report. See the site's Flagged for Review page for unverified gaps and the decision journal for proposed next steps. Source links provide context for proposals and are not endorsements.
+
+Run `python3 tests/check_site.py` to validate internal links, HTML parsing, and a source link on each table row. External links were manually inspected at research time; content may change.
