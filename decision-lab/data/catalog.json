@@ -183,6 +183,46 @@
     },
     {
       "id": "S19",
+      "title": "Pittsburgh Steelers club depth chart",
+      "url": "https://www.steelers.com/team/depth-chart/",
+      "publisher": "Pittsburgh Steelers (official club site)",
+      "checked": "2026-11-12",
+      "status": "opened",
+      "scope": "Published depth order; TE1 cell lists two players together.",
+      "limit": "Club order is not confirmed starter status or snap count."
+    },
+    {
+      "id": "S20",
+      "title": "New England Patriots unofficial depth chart",
+      "url": "https://www.patriots.com/team/depth-chart",
+      "publisher": "New England Patriots (official club site)",
+      "checked": "2026-11-12",
+      "status": "opened",
+      "scope": "Published depth order. The page states the chart is unofficial and written by Patriots.com writers.",
+      "limit": "Explicitly unofficial; reflects site writers' opinions, not the organization's."
+    },
+    {
+      "id": "S21",
+      "title": "Seattle Seahawks club depth chart",
+      "url": "https://www.seahawks.com/team/depth-chart/",
+      "publisher": "Seattle Seahawks (official club site)",
+      "checked": "2026-11-12",
+      "status": "opened",
+      "scope": "Published depth order; WR1 cell lists two players together.",
+      "limit": "Club order is not confirmed starter status or snap count."
+    },
+    {
+      "id": "S22",
+      "title": "Denver Broncos club depth chart",
+      "url": "https://www.denverbroncos.com/team/depth-chart/",
+      "publisher": "Denver Broncos (official club site)",
+      "checked": "2026-11-12",
+      "status": "opened",
+      "scope": "Published depth order with no unofficial caveat on the page.",
+      "limit": "Club order is not confirmed starter status or snap count."
+    },
+    {
+      "id": "S24",
       "title": "NFL scores and schedule, 2026 Week 10",
       "publisher": "NFL",
       "url": "https://www.nfl.com/scores/2026/week-10",
@@ -191,7 +231,7 @@
       "limit": "A rendered scores page is not a machine-readable schedule API; kickoff times are shown in the reader's timezone and can move."
     },
     {
-      "id": "S20",
+      "id": "S25",
       "title": "NFL game page: Commanders at Giants, 2026 REG 10",
       "publisher": "NFL",
       "url": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
@@ -200,7 +240,7 @@
       "limit": "In-progress and post-game content changes during the game; settlement must use a captured final box score."
     },
     {
-      "id": "S21",
+      "id": "S26",
       "title": "NFL game page: Patriots at Lions, 2026 REG 10 (International Game)",
       "publisher": "NFL",
       "url": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10",
@@ -209,7 +249,7 @@
       "limit": "Travel/venue effects on personnel and performance are not quantified by the label."
     },
     {
-      "id": "S22",
+      "id": "S27",
       "title": "NFL game page: Vikings at Packers, 2026 REG 10",
       "publisher": "NFL",
       "url": "https://www.nfl.com/games/vikings-at-packers-2026-reg-10",
@@ -218,7 +258,7 @@
       "limit": "Does not publish a machine-readable depth chart or active list."
     },
     {
-      "id": "S23",
+      "id": "S28",
       "title": "Houston Texans depth chart page",
       "publisher": "Houston Texans",
       "url": "https://www.houstontexans.com/team/depth-chart",
@@ -227,7 +267,7 @@
       "limit": "The chart is published as an image, not a table, so no player/rank values can be extracted; 13 Texans report rows therefore cannot be joined."
     },
     {
-      "id": "S24",
+      "id": "S29",
       "title": "Green Bay Packers depth chart page",
       "publisher": "Green Bay Packers",
       "url": "https://www.packers.com/team/depth-chart",
@@ -236,7 +276,7 @@
       "limit": "Jersey numbers prepended to names break exact-name joins; the parse needs number stripping, which is not yet implemented."
     },
     {
-      "id": "S25",
+      "id": "S30",
       "title": "NFL on-field video: rule and officiating library",
       "publisher": "NFL Football Operations",
       "url": "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook/",
@@ -388,7 +428,7 @@
       "state": "implemented",
       "evidence": "Availability analysis reports 254 report rows, 185 exact joins, 69 unmatched with a per-club reason and 117 published replacement leads.",
       "next": "Re-run the join once the Texans image chart and Packers number-prefixed chart are parsed.",
-      "source": "S23"
+      "source": "S28"
     },
     {
       "id": "R19",
@@ -436,7 +476,7 @@
       "state": "partial",
       "evidence": "The NFL scores page labels the Patriots at Lions Week 10 matchup as an International Game; no official turnover or roster-transaction feed is captured.",
       "next": "Capture official transaction and inactive reports so personnel change is measured, not assumed.",
-      "source": "S21"
+      "source": "S26"
     },
     {
       "id": "R25",
@@ -707,7 +747,7 @@
       "missing": "Whether the club or the league exposes a structured depth feed, and who is authorized to transcribe an image into data.",
       "discovery": "Ask the club/league for a structured feed; until then leave the 13 Texans rows unmatched rather than transcribing by eye.",
       "blocking": true,
-      "source": "S23"
+      "source": "S28"
     },
     {
       "id": "Q24",
@@ -718,7 +758,7 @@
       "missing": "A documented, reversible rule plus a stored original string for audit.",
       "discovery": "Add number-stripping with the raw published string preserved, and unit-test both forms.",
       "blocking": true,
-      "source": "S24"
+      "source": "S29"
     },
     {
       "id": "Q25",
@@ -740,7 +780,7 @@
       "missing": "Any evidence of a measurable travel/venue effect on personnel usage or performance.",
       "discovery": "Model it as an explicit covariate and test whether it adds skill; do not add a fixed penalty without evidence.",
       "blocking": true,
-      "source": "S21"
+      "source": "S26"
     },
     {
       "id": "Q27",
@@ -775,6 +815,186 @@
       "recommendation": "Approve first",
       "path": "A",
       "depends": "\u2014",
+      "detail": "Separate source authority, byte integrity and model validation. Community data may be exploratory only; canonical decision values require official confirmation.",
+      "tradeoff": "Some existing exploratory numbers become non-decision evidence.",
+      "source": "S12",
+      "success_metric": "Accepts the contract in a recorded decision and shows it on the site's decision page.",
+      "risk_if_delayed": "Every decision row carries an official source or is blank and flagged."
+    },
+    {
+      "id": "SG02",
+      "title": "Secure permissioned odds and prop history",
+      "priority": "Critical",
+      "effort": "High",
+      "impact": "Enables market comparison and settlement",
+      "recommendation": "Approve after rights review",
+      "path": "A",
+      "depends": "SG01",
+      "detail": "Obtain written terms for historical/live prices, limits, timestamps, props, retention and derived data.",
+      "tradeoff": "Cost and vendor selection remain unresolved; do not scrape around rights.",
+      "source": "S12",
+      "success_metric": "Names the provider and the permitted uses in a recorded decision.",
+      "risk_if_delayed": "A signed agreement exists and a timestamped price can be stored."
+    },
+    {
+      "id": "SG03",
+      "title": "Build immutable official availability snapshots",
+      "priority": "High",
+      "effort": "Medium",
+      "impact": "Removes hindsight from injury/depth features",
+      "recommendation": "Approve",
+      "path": "A",
+      "depends": "SG01",
+      "detail": "Scheduled capture of NFL injury reports, club depth pages and inactive evidence with raw hashes, timestamps and conflict flags.",
+      "tradeoff": "Public pages can change or block automation; durable storage needs review.",
+      "source": "S01",
+      "success_metric": "Approves daily capture with retained hashes.",
+      "risk_if_delayed": "At least one capture per day per source, never silently overwritten."
+    },
+    {
+      "id": "SG04",
+      "title": "Start with a singles-only shadow baseline",
+      "priority": "High",
+      "effort": "Medium",
+      "impact": "Creates a clean benchmark before complexity",
+      "recommendation": "Approve after data gates",
+      "path": "B",
+      "depends": "SG02, SG03",
+      "detail": "Pre-register a simple team-strength model, freeze versions and record forecasts before kickoff.",
+      "tradeoff": "No immediate betting recommendations or rewards.",
+      "source": "S14",
+      "success_metric": "Approves a singles-only prospective trial.",
+      "risk_if_delayed": "A frozen pre-registration plus a complete prospective ledger."
+    },
+    {
+      "id": "SG05",
+      "title": "Add injury/depth ablations, not fixed penalties",
+      "priority": "High",
+      "effort": "Medium",
+      "impact": "Tests whether personnel information adds skill",
+      "recommendation": "Approve after SG03",
+      "path": "B",
+      "depends": "SG03, SG04",
+      "detail": "Compare identical models with and without verified availability features using chronological holdouts.",
+      "tradeoff": "Sparse replacement cases may force abstention.",
+      "source": "S09",
+      "success_metric": "Approves the ablation study design.",
+      "risk_if_delayed": "An ablation delta is reported with a cluster lower bound."
+    },
+    {
+      "id": "SG06",
+      "title": "Delay parlays until joint outcomes validate",
+      "priority": "High",
+      "effort": "Medium",
+      "impact": "Avoids independence and combinatorial overfit",
+      "recommendation": "Defer multi-leg launch",
+      "path": "B",
+      "depends": "SG04",
+      "detail": "Require matched leg outcomes, direct joint calibration, game-cluster uncertainty and book payout rules.",
+      "tradeoff": "Slower expansion into requested combo markets.",
+      "source": "S15",
+      "success_metric": "Keeps combos blocked until joint evidence exists.",
+      "risk_if_delayed": "Zero combo rows without a joint probability and settlement rule."
+    },
+    {
+      "id": "SG07",
+      "title": "Use proper-score leaderboard divisions",
+      "priority": "Medium",
+      "effort": "Medium",
+      "impact": "Reduces reward for lucky streaks",
+      "recommendation": "Approve design",
+      "path": "B",
+      "depends": "SG04",
+      "detail": "Separate singles, game parlays, same-game parlays and prop combos; rank eligible strategies by benchmark-relative skill with uncertainty.",
+      "tradeoff": "Requires minimum sample and complete trial registry.",
+      "source": "S15",
+      "success_metric": "Approves proper-score ranking by division.",
+      "risk_if_delayed": "No entry ranked without an interval and a trial count."
+    },
+    {
+      "id": "SG08",
+      "title": "Keep rewards recognition-only until approved",
+      "priority": "Critical",
+      "effort": "Low",
+      "impact": "Avoids unfunded or non-compliant incentives",
+      "recommendation": "Approve",
+      "path": "A",
+      "depends": "\u2014",
+      "detail": "No money, credits or stake handling until budget, jurisdiction and legal review are verified.",
+      "tradeoff": "No monetary competition at launch.",
+      "source": "S12",
+      "success_metric": "Records the recognition-only policy.",
+      "risk_if_delayed": "No live page promises a prize or accepts stakes."
+    },
+    {
+      "id": "SG09",
+      "title": "Publish a conflict-aware review queue",
+      "priority": "High",
+      "effort": "Low",
+      "impact": "Makes irregularities actionable",
+      "recommendation": "Approve",
+      "path": "A",
+      "depends": "\u2014",
+      "detail": "Flag source lags, authority gaps, missing ranks and unsupported claims with official links and discovery actions.",
+      "tradeoff": "Flags do not block publication but block affected decisions.",
+      "source": "S02",
+      "success_metric": "Approves the review queue with sources.",
+      "risk_if_delayed": "Every flag has a source link, an action and a severity."
+    },
+    {
+      "id": "SG10",
+      "title": "Automate build, citation and link gates",
+      "priority": "High",
+      "effort": "Low",
+      "impact": "Prevents broken or sourceless publication",
+      "recommendation": "Approve",
+      "path": "A",
+      "depends": "\u2014",
+      "detail": "Fail CI on missing row sources, broken local links, duplicate IDs, conflict markers or unsupported verified badges.",
+      "tradeoff": "External content still needs scheduled re-verification.",
+      "source": "S16",
+      "success_metric": "Approves the automated gates.",
+      "risk_if_delayed": "Every deployment runs the citation and link checks and fails closed."
+    },
+    {
+      "id": "SG11",
+      "title": "Add durable snapshot storage and alerts",
+      "priority": "Medium",
+      "effort": "Medium",
+      "impact": "Supports long-run tracking and replay",
+      "recommendation": "Review after retention policy",
+      "path": "B",
+      "depends": "SG03",
+      "detail": "Store immutable captures outside the static site, monitor freshness and alert on source/schema changes.",
+      "tradeoff": "Hosting, retention and access controls need a decision.",
+      "source": "S16",
+      "success_metric": "Approves storage scope and cost.",
+      "risk_if_delayed": "A verified change event triggers a timestamped notification."
+    },
+    {
+      "id": "SG12",
+      "title": "Expand to player-prop combinations last",
+      "priority": "Medium",
+      "effort": "High",
+      "impact": "Addresses the hardest requested market safely",
+      "recommendation": "Defer",
+      "path": "B",
+      "depends": "SG02, SG05, SG06",
+      "detail": "Require verified participation, prop settlement, joint dependence and held-out calibration before any combo signal.",
+      "tradeoff": "Highest data and overfit burden; no launch date is promised.",
+      "source": "S09",
+      "success_metric": "Defers props until singles and combos are validated.",
+      "risk_if_delayed": "No prop row is published without permissioned prop and settlement data."
+    },
+    {
+      "id": "SG13",
+      "title": "Adopt an official-only evidence contract",
+      "priority": "Critical",
+      "effort": "Low",
+      "impact": "Prevents false verification claims",
+      "recommendation": "Approve first",
+      "path": "A",
+      "depends": "\u2014",
       "detail": "Separate three different claims: source authority (who published it), capture integrity (did the bytes change) and model validity (does it forecast). Only official NFL/club pages may support a decision value; community data stays exploratory.",
       "tradeoff": "Some existing exploratory numbers stop counting as decision evidence.",
       "success_metric": "100% of decision rows carry an official HTTPS source or are blank and listed on the flagged page.",
@@ -782,14 +1002,14 @@
       "source": "S12"
     },
     {
-      "id": "SG02",
+      "id": "SG14",
       "title": "Secure permissioned odds and prop history",
       "priority": "Critical",
       "effort": "High",
       "impact": "Unlocks any market-relative test",
       "recommendation": "Start only if product scope is legal",
       "path": "A",
-      "depends": "SG01, Q01, Q03",
+      "depends": "SG13, Q01, Q03",
       "detail": "Any line origination or leaderboard needs a timestamped price series with documented redistribution rights. Without it, skill can only be measured against a baseline, not against the market.",
       "tradeoff": "Cost and legal review; may not be obtainable at all.",
       "success_metric": "A signed data agreement plus a stored, timestamped price per market and event.",
@@ -797,14 +1017,14 @@
       "source": "S12"
     },
     {
-      "id": "SG03",
+      "id": "SG15",
       "title": "Automate immutable multi-day availability snapshots",
       "priority": "High",
       "effort": "Medium",
       "impact": "Turns a single snapshot into a time series",
       "recommendation": "Implement before any availability model",
       "path": "A",
-      "depends": "SG01",
+      "depends": "SG13",
       "detail": "Capture the official report and club depth pages at least daily with retained hashes, so practice designations can be replayed as they were known. Today the site holds one capture, which cannot support backtesting.",
       "tradeoff": "Storage and rate-limit care; stale pages must be versioned, not overwritten.",
       "success_metric": "At least one capture per day per source with a retained hash and no silent overwrite.",
@@ -812,7 +1032,7 @@
       "source": "S01"
     },
     {
-      "id": "SG04",
+      "id": "SG16",
       "title": "Fix the two depth-parsing failures before widening coverage",
       "priority": "High",
       "effort": "Low",
@@ -824,17 +1044,17 @@
       "tradeoff": "Image transcription is manual and non-authoritative if done carelessly.",
       "success_metric": "Unmatched rows fall from 69 to at most 40 with every remaining row explained per club.",
       "risk_if_delayed": "Availability signals silently under-represent two clubs.",
-      "source": "S24"
+      "source": "S29"
     },
     {
-      "id": "SG05",
+      "id": "SG17",
       "title": "Capture official inactive lists and snap counts",
       "priority": "High",
       "effort": "Medium",
       "impact": "Separates designation from actual usage",
       "recommendation": "Approve; it is the missing link",
       "path": "A",
-      "depends": "SG03",
+      "depends": "SG15",
       "detail": "Only 6 of 254 report rows carry a game designation, and no active list or snap share is captured. Without them a backup's replacement of a starter cannot be confirmed, only suspected.",
       "tradeoff": "Most data arrives after kickoff, so pre-game decisions cannot use it.",
       "success_metric": "Every played game has an inactive list and snap shares stored per player.",
@@ -842,14 +1062,14 @@
       "source": "S01"
     },
     {
-      "id": "SG06",
+      "id": "SG18",
       "title": "Start with a singles-only shadow baseline",
       "priority": "High",
       "effort": "Medium",
       "impact": "Creates the first honest skill measurement",
       "recommendation": "Approve after SG01/SG05",
       "path": "B",
-      "depends": "SG01, SG05, Q27",
+      "depends": "SG13, SG17, Q27",
       "detail": "Pre-register one simple opponent/context baseline, log forecasts prospectively before kickoff, and score with proper scores and game-cluster intervals. No stake, no payout, no posting a leaderboard position yet.",
       "tradeoff": "Slow: needs 128+ shadow games before any eligibility claim.",
       "success_metric": "A frozen pre-registration plus a complete prospective ledger with zero post-hoc edits.",
@@ -857,7 +1077,7 @@
       "source": "S13"
     },
     {
-      "id": "SG07",
+      "id": "SG19",
       "title": "Model depth slots as groups, not a single starter",
       "priority": "High",
       "effort": "Low",
@@ -872,14 +1092,14 @@
       "source": "S07"
     },
     {
-      "id": "SG08",
+      "id": "SG20",
       "title": "Add injury and personnel ablations instead of fixed penalties",
       "priority": "High",
       "effort": "Medium",
       "impact": "Measures whether replacements actually matter",
       "recommendation": "Approve after SG05",
       "path": "B",
-      "depends": "SG05, SG06",
+      "depends": "SG17, SG18",
       "detail": "Instead of subtracting a fixed number of points for a missing starter, test the same model with and without the personnel features and report the difference with uncertainty.",
       "tradeoff": "Requires enough games to detect a small effect; may find no effect.",
       "success_metric": "A reported ablation delta with a cluster lower bound, positive or negative.",
@@ -887,14 +1107,14 @@
       "source": "S13"
     },
     {
-      "id": "SG09",
+      "id": "SG21",
       "title": "Keep parlays and prop combos behind a joint-evidence gate",
       "priority": "High",
       "effort": "Low",
       "impact": "Prevents independence-shortcut errors",
       "recommendation": "Keep as-is",
       "path": "B",
-      "depends": "SG02",
+      "depends": "SG14",
       "detail": "Multiplying marginal probabilities is invalid under dependence. A combo may only be ranked when a directly validated joint probability and the operator's void/push rules are both available.",
       "tradeoff": "Some attractive-looking combos are simply not rankable.",
       "success_metric": "Zero combo rows without a joint probability and a settlement rule.",
@@ -902,14 +1122,14 @@
       "source": "S12"
     },
     {
-      "id": "SG10",
+      "id": "SG22",
       "title": "Rank with proper scores and uncertainty, not win rate",
       "priority": "Medium",
       "effort": "Low",
       "impact": "Makes the leaderboard resistant to luck",
       "recommendation": "Approve",
       "path": "B",
-      "depends": "SG06",
+      "depends": "SG18",
       "detail": "Rank by benchmark-relative Brier skill with a game-cluster lower bound and a multiplicity adjustment for the number of trials. Raw win rate and short-run ROI cannot distinguish skill from variance.",
       "tradeoff": "Fewer entries qualify at first; a leaderboard may look empty.",
       "success_metric": "No entry is ranked without an interval and a trial count.",
@@ -917,7 +1137,7 @@
       "source": "S14"
     },
     {
-      "id": "SG11",
+      "id": "SG23",
       "title": "Keep rewards recognition-only until funded and reviewed",
       "priority": "Critical",
       "effort": "Low",
@@ -932,14 +1152,14 @@
       "source": "S12"
     },
     {
-      "id": "SG12",
+      "id": "SG24",
       "title": "Publish a conflict-aware review queue with sources",
       "priority": "High",
       "effort": "Low",
       "impact": "Makes disagreement visible instead of hidden",
       "recommendation": "Approve",
       "path": "A",
-      "depends": "SG01",
+      "depends": "SG13",
       "detail": "Every irregularity, unreachable source and unverified cell is published with its source link and an action, and none of them silently blocks publication.",
       "tradeoff": "A visibly imperfect site.",
       "success_metric": "Every flag has a source link, an action and a severity.",
@@ -947,14 +1167,14 @@
       "source": "S16"
     },
     {
-      "id": "SG13",
+      "id": "SG25",
       "title": "Automate verification in CI, including a live re-fetch",
       "priority": "High",
       "effort": "Medium",
       "impact": "Detects source drift without manual work",
       "recommendation": "Approve",
       "path": "A",
-      "depends": "SG03",
+      "depends": "SG15",
       "detail": "Run the offline structural checks on every pull request and the live field-by-field re-fetch on a schedule and before deployment, publishing the result as an artifact and a page.",
       "tradeoff": "Live checks can fail for transient network reasons; they must report unreachable, not failed-match.",
       "success_metric": "Every deployment carries a verification artifact with per-family status.",
@@ -962,14 +1182,14 @@
       "source": "S16"
     },
     {
-      "id": "SG14",
+      "id": "SG26",
       "title": "Add durable storage and change alerts",
       "priority": "Medium",
       "effort": "High",
       "impact": "Enables alerting instead of manual checks",
       "recommendation": "Defer",
       "path": "B",
-      "depends": "SG03",
+      "depends": "SG15",
       "detail": "Static hosting has no database. Durable storage plus a scheduled job is required before an alert on an injury or depth change can be sent.",
       "tradeoff": "Adds infrastructure and cost beyond GitHub Pages.",
       "success_metric": "A verified change event triggers a timestamped notification.",
@@ -977,14 +1197,14 @@
       "source": "S16"
     },
     {
-      "id": "SG15",
+      "id": "SG27",
       "title": "Treat roster turnover as a first-class data event",
       "priority": "High",
       "effort": "Medium",
       "impact": "Keeps depth evidence from going stale",
       "recommendation": "Approve with SG03",
       "path": "A",
-      "depends": "SG03",
+      "depends": "SG15",
       "detail": "The Colts' Week 10 release documents two starting-receiver trades in the same article as its depth chart. Depth, availability and lineup evidence must be versioned against the last official roster event, not trusted as durable.",
       "tradeoff": "More frequent re-capture and reconciliation work.",
       "success_metric": "Every depth capture records the roster event that most recently preceded it.",
@@ -1276,21 +1496,37 @@
     {
       "id": "F13",
       "severity": "High",
-      "title": "Texans depth chart is an image, so 13 report rows cannot be joined",
-      "finding": "The Houston Texans publish 'Unofficial Depth Chart' as a rendered image with no player/rank table. 13 Texans report rows therefore have no captured depth evidence, and 29 of the 69 unmatched rows come from the Texans and Packers alone.",
-      "action": "Keep those rows unmatched and visibly flagged. Request a structured feed; add image transcription only with an authorized, auditable process.",
-      "source": "S23"
+      "title": "Depth cells with two players were joined into one name",
+      "finding": "The depth capturer concatenated the text of each published table cell. Some club pages publish two players in one cell (for example Steelers TE1 'Pat Freiermuth' and 'Darnell Washington'; Seahawks WR1 'Cooper Kupp' and 'Rashid Shaheed'). Published rows therefore contained non-existent players such as 'Pat Freiermuth Darnell Washington'. 22 captured rows are affected.",
+      "action": "The parser now emits one row per published anchor. Already-captured rows are kept exactly as published and flagged as unverified on the Verification log; they are not split, because splitting on whitespace cannot tell a second player from a suffix or an initial. A fresh capture clears them.",
+      "source": "S19"
     },
     {
       "id": "F14",
       "severity": "High",
-      "title": "Packers depth chart breaks name matching with jersey-number prefixes",
-      "finding": "The Packers chart lists '9 Christian Watson', and includes duplicated players across slots (for example Kitan Oladapo at both safety slots). Exact-name joins fail for 16 of 17 Packers report rows.",
-      "action": "Implement reversible number stripping that stores the raw published string, then re-run the join and re-verify.",
-      "source": "S24"
+      "title": "Self-declared unofficial depth charts were labelled plain official charts",
+      "finding": "The Patriots depth page states its 2026 chart 'is unofficial and is published by the writers of Patriots.com'. Its 62 captured rows carried the same plain 'club depth chart' authority label as charts with no such caveat. The Colts rows were already labelled UNOFFICIAL, so the label existed but was not applied consistently.",
+      "action": "The capturer now reads the page's own wording and labels such charts UNOFFICIAL, storing the page's sentence as an authority caveat. Already-captured rows keep their recorded label until a fresh capture.",
+      "source": "S20"
     },
     {
       "id": "F15",
+      "severity": "High",
+      "title": "Texans depth chart is an image, so 13 report rows cannot be joined",
+      "finding": "The Houston Texans publish 'Unofficial Depth Chart' as a rendered image with no player/rank table. 13 Texans report rows therefore have no captured depth evidence, and 29 of the 69 unmatched rows come from the Texans and Packers alone.",
+      "action": "Keep those rows unmatched and visibly flagged. Request a structured feed; add image transcription only with an authorized, auditable process.",
+      "source": "S28"
+    },
+    {
+      "id": "F16",
+      "severity": "High",
+      "title": "Packers depth chart breaks name matching with jersey-number prefixes",
+      "finding": "The Packers chart lists '9 Christian Watson', and includes duplicated players across slots (for example Kitan Oladapo at both safety slots). Exact-name joins fail for 16 of 17 Packers report rows.",
+      "action": "Implement reversible number stripping that stores the raw published string, then re-run the join and re-verify.",
+      "source": "S29"
+    },
+    {
+      "id": "F17",
       "severity": "Medium",
       "title": "Published depth rank is ambiguous across 149 slots",
       "finding": "149 club/unit/position slots list more than one rank-1 player (for example three wide receivers all at rank 1, and three inside linebackers all at rank 1). 'Rank 1' therefore means 'first column', not 'the single starter'.",
@@ -1298,7 +1534,7 @@
       "source": "S07"
     },
     {
-      "id": "F16",
+      "id": "F18",
       "severity": "Medium",
       "title": "Injury designation is sparse at capture, so absence cannot be inferred",
       "finding": "Only 6 of 254 published rows carry a game designation (5 Out, 1 Questionable). The NFL policy says a player certain to play is not listed in the game status report, so a blank designation is not evidence of health.",
@@ -1306,7 +1542,7 @@
       "source": "S03"
     },
     {
-      "id": "F17",
+      "id": "F19",
       "severity": "Medium",
       "title": "Availability analysis is a snapshot, not a point-in-time archive",
       "finding": "The captured report is a single moment in Week 10. Practice designations change daily and the page is not a historical archive; a single capture cannot support backtesting.",
@@ -1314,7 +1550,7 @@
       "source": "S01"
     },
     {
-      "id": "F18",
+      "id": "F20",
       "severity": "Low",
       "title": "Position-family mapping is an editorial choice",
       "finding": "The availability join maps published position labels to families (for example RUSH, SAM, WILL and MIKE to LB/DL). 'RUSH' is currently unmapped and is reported rather than forced into a family.",
@@ -1322,7 +1558,7 @@
       "source": "S06"
     },
     {
-      "id": "F19",
+      "id": "F21",
       "severity": "Medium",
       "title": "Colts depth names use a different name format than the NFL report",
       "finding": "The Colts article lists 'AJ Haulcy' while the NFL report lists 'A.J. Haulcy'; the two Colts rows that fail the join are name-format differences, not missing players.",
@@ -1330,7 +1566,7 @@
       "source": "S08"
     },
     {
-      "id": "F20",
+      "id": "F22",
       "severity": "High",
       "title": "Roster turnover invalidates depth evidence the moment it is published",
       "finding": "The same Colts release that publishes the Week 10 depth chart states the club traded two starting wide receivers (Keenan Allen to the 49ers, Josh Downs to the Chiefs) and signed a receiver from the practice squad. A captured depth page is therefore stale relative to roster moves and cannot be assumed current.",

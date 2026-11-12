@@ -46,8 +46,8 @@ def build_availability() -> str:
         + table("Method, stated so it can be attacked.", ["Step", "Rule", "Source"], [
             [td("1 · Capture"), td("Official NFL report plus each club's published depth page, hashed at capture time."), td(source_link("S01"))],
             [td("2 · Join"), td(e(A["method"]["join_key"])), td(source_link("S05"))],
-            [td("3 · Families"), td(e(A["method"]["position_families"])), td(source_link("S24"))],
-            [td("3b · Non-tabular charts"), td("Two clubs do not publish a parseable table: the Texans publish an image, the Packers prepend jersey numbers."), td(source_link("S23") + "<br>" + source_link("S24"))],
+            [td("3 · Families"), td(e(A["method"]["position_families"])), td(source_link("S29"))],
+            [td("3b · Non-tabular charts"), td("Two clubs do not publish a parseable table: the Texans publish an image, the Packers prepend jersey numbers."), td(source_link("S28") + "<br>" + source_link("S29"))],
             [td("4 · Replacement lead"), td(e(A["method"]["replacement_rule"])), td(source_link("S06"))],
             [td("5 · Blanks"), td("A blank game designation is not 'active': the policy says a player certain to play is not listed in the game-status report."), td(source_link("S03"))],
         ])
@@ -55,7 +55,7 @@ def build_availability() -> str:
         + table("Every unmatched row has a stated reason.", ["Clubs on report", "Clubs with parsed depth", "Unmatched rows",
                                                             "Clubs without parsed depth", "Source"], [
             [td(str(cov["clubs_on_report"])), td(str(cov["clubs_with_depth"])), td(str(cov["unmatched_rows"])),
-             td(", ".join(cov["clubs_on_report_without_depth"]) or "none"), td(source_link("S19"))],
+             td(", ".join(cov["clubs_on_report_without_depth"]) or "none"), td(source_link("S24"))],
         ])
     )
     unmatched_rows = [[td(e(u["team"])), td(e(u["player"])), td(e(u["position"])), td(e(u["practice_status"])),
@@ -93,20 +93,20 @@ def build_availability() -> str:
     content += ('<div class="notice warn"><strong>What this page cannot do:</strong> it cannot say who will start, who will be '
                 'inactive, how many snaps a backup will play, or how much a replacement changes the score. Those require the '
                 'inactive list, snap counts and measured performance. See <a href="questions.html">questions Q23–Q28</a> and '
-                '<a href="flagged.html">flagged items F13–F20</a>.</div>')
+                '<a href="flagged.html">flagged items F15–F22</a>.</div>')
     content += table("No-injury sections are evidence too.", ["Team", "Matchup", "Published text", "Source"],
                      [[td(e(r["team"])), td(e(r["matchup"])), td(e(r["text"])), td(raw_source(r["source_url"], "NFL report"))]
                       for r in A["no_injury_sections"]])
     return shell("Availability & replacements", "availability.html", content)
 
 
-def build_verification() -> str:
+def build_integrity() -> str:
     B = _ui()
     e, td, table, shell, metric, pill, raw_source = B.e, B.td, B.table, B.shell, B.metric, B.pill, B.raw_source
     doc = B.VERIFICATION
     if not doc:
-        return shell("Verification & integrity", "verification.html",
-                     '<div class="eyebrow">Verification</div><h1>No verification run recorded</h1>'
+        return shell("Verification & integrity", "integrity.html",
+                     '<div class="eyebrow">Verification</div><h1>No automated verification run recorded</h1>'
                      '<p class="lede">Run <code>python3 decision-lab/scripts/verify_live.py</code> (live) or with <code>--offline</code>.</p>')
     totals = doc["row_totals"]
     metrics = "".join([
@@ -119,7 +119,8 @@ def build_verification() -> str:
     content = (
         '<div class="eyebrow">Line-by-line integrity</div><h1>Verification &amp; integrity</h1>'
         '<p class="lede">Every published value is re-derived from the official source and compared field by field. A source '
-        'that cannot be reached is reported as unreachable and is never counted as a pass.</p>'
+        'that cannot be reached is reported as unreachable and is never counted as a pass. This page is the automated live '
+        'check; the independent hand-checked transcription lives on the <a href="verification.html">Verification log</a>.</p>'
         f'<div class="notice"><strong>Run at</strong> {e(doc["run_at"])} · <strong>snapshot captured</strong> '
         f'{e(doc["snapshot_observed_at"])} · <strong>method</strong> {e(doc.get("mode", "live"))} re-parse with the same parser '
         'that produced the snapshot, then a field-by-field comparison.</div>'
@@ -159,9 +160,9 @@ def build_verification() -> str:
         [td("It proves agreement at one moment."), td("A page edited after capture is drift, not a data error; a page edited before capture is invisible."), td(B.source_link("S01"))],
         [td("A hash proves bytes, not truth."), td("Capture integrity never establishes factual accuracy, authorship or reuse rights."), td(B.source_link("S12"))],
         [td("Parsers can agree with themselves."), td("The live check re-uses the same parser, so a bug shared by both runs is invisible; structural families plus manual page reads are the cross-check."), td(B.source_link("S16"))],
-        [td("Depth rank is not usage."), td("Verification confirms a club published a name in a column. It says nothing about snaps."), td(B.source_link("S24"))],
+        [td("Depth rank is not usage."), td("Verification confirms a club published a name in a column. It says nothing about snaps."), td(B.source_link("S29"))],
     ])
-    return shell("Verification & integrity", "verification.html", content)
+    return shell("Verification & integrity", "integrity.html", content)
 
 
 def build_decisions() -> str:
@@ -190,16 +191,16 @@ def build_decisions() -> str:
         + '<h2>What blocks what</h2>'
         + table("Dependency chain. A blocked node cannot start until its prerequisite is answered.",
                 ["Order", "Decision needed", "Blocks", "Tracked at", "Source"], [
-            [td("1"), td("Official-only evidence contract (SG01)"), td("Every downstream number"), td('<a href="suggestions.html">SG01</a>'), td(source_link("S12"))],
+            [td("1"), td("Official-only evidence contract (SG13)"), td("Every downstream number"), td('<a href="suggestions.html">SG13</a>'), td(source_link("S12"))],
             [td("2"), td("Product scope and jurisdiction (Q01, Q18)"), td("Any reward, wager or paid feature"), td('<a href="questions.html">Q01, Q18</a>'), td(source_link("S12"))],
             [td("3"), td("Price and settlement rights (Q03, Q04)"), td("Line origination, market-relative skill, parlays, props"), td('<a href="questions.html">Q03, Q04</a>'), td(source_link("S12"))],
-            [td("4"), td("Automated multi-day capture (SG03)"), td("Any historical availability study"), td('<a href="suggestions.html">SG03</a>'), td(source_link("S01"))],
-            [td("5"), td("Inactive list and snap counts (SG05)"), td("Confirmed replacement usage and ablations"), td('<a href="questions.html">Q25</a>'), td(source_link("S01"))],
-            [td("6"), td("Singles shadow baseline (SG06)"), td("Leaderboard eligibility"), td('<a href="strategies.html">Strategies</a>'), td(source_link("S13"))],
+            [td("4"), td("Automated multi-day capture (SG16)"), td("Any historical availability study"), td('<a href="suggestions.html">SG16</a>'), td(source_link("S01"))],
+            [td("5"), td("Inactive list and snap counts (SG18)"), td("Confirmed replacement usage and ablations"), td('<a href="questions.html">Q25</a>'), td(source_link("S01"))],
+            [td("6"), td("Singles shadow baseline (SG19)"), td("Leaderboard eligibility"), td('<a href="strategies.html">Strategies</a>'), td(source_link("S13"))],
         ])
-        + '<h2>Quick wins that need no new data</h2><ol class="list"><li>Fix jersey-number name matching to recover the Packers rows (SG04).</li>'
-          '<li>Model depth slots as groups rather than a single starter (SG07).</li>'
-          '<li>Keep the flagged-review queue and verification page published with sources (SG12, SG13).</li></ol>'
+        + '<h2>Quick wins that need no new data</h2><ol class="list"><li>Fix jersey-number name matching to recover the Packers rows (SG16).</li>'
+          '<li>Model depth slots as groups rather than a single starter (SG19).</li>'
+          '<li>Keep the flagged-review queue and verification page published with sources (SG24, SG25).</li></ol>'
         '<div class="callout"><div><div class="section-label">NEXT</div><h2>Record one decision.</h2>'
         '<p>Mark each option approve, defer or reject, export the review file, and log the chosen path and date in COORDINATION.md.</p></div>'
         '<a class="button" href="suggestions.html">Open the suggestions register →</a></div>'

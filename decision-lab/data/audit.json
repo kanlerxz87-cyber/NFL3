@@ -1,6 +1,6 @@
 {
-  "html_pages": 80,
-  "table_rows": 3921,
+  "html_pages": 81,
+  "table_rows": 3940,
   "rows_missing_official_source": 531,
   "rows_community_only": 106,
   "rows_with_internal_audit_source": 7,
@@ -241,7 +241,7 @@
     },
     {
       "path": "decision-lab/executive-summary.html",
-      "rows": 17,
+      "rows": 19,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -249,7 +249,7 @@
     },
     {
       "path": "decision-lab/flagged.html",
-      "rows": 20,
+      "rows": 22,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -257,7 +257,7 @@
     },
     {
       "path": "decision-lab/index.html",
-      "rows": 15,
+      "rows": 16,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -266,6 +266,14 @@
     {
       "path": "decision-lab/injuries.html",
       "rows": 258,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-lab/integrity.html",
+      "rows": 11,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -297,7 +305,7 @@
     },
     {
       "path": "decision-lab/sources.html",
-      "rows": 30,
+      "rows": 34,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -313,7 +321,7 @@
     },
     {
       "path": "decision-lab/suggestions.html",
-      "rows": 22,
+      "rows": 27,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -329,7 +337,7 @@
     },
     {
       "path": "decision-lab/verification.html",
-      "rows": 11,
+      "rows": 4,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -353,7 +361,7 @@
     },
     {
       "path": "index.html",
-      "rows": 15,
+      "rows": 16,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,

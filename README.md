@@ -10,7 +10,8 @@ Nothing here is betting advice, a sportsbook, or an approved wagering system.
 | Workspace | What it is | Entry point |
 |---|---|---|
 | **Canonical decision lab** | Official-source decision dashboard: requirements, questions, suggestions, line-origination protocol, injury/depth snapshots, fail-closed validation gates, flagged review and independent audit. Unknown values stay blank. | [`decision-lab/index.html`](decision-lab/index.html) |
-| **Verification & integrity** | Field-by-field re-check of every published value against the official source, with per-family status, recorded mismatches and unreachable sources. | [`decision-lab/verification.html`](decision-lab/verification.html) |
+| **Verification log** | Independent hand-checked transcription with counted exceptions: every value either matches, or is explicitly counted as unverified. | [`decision-lab/verification.html`](decision-lab/verification.html) |
+| **Verification & integrity (automated)** | Automated re-fetch that compares each published field with the live official source; drift and unreachable sources are reported, never counted as passes. | [`decision-lab/integrity.html`](decision-lab/integrity.html) |
 | **Availability & replacements** | Which published starters are on the official report, who the club lists next, and where the data cannot answer the question (185 of 254 report rows joined; 69 unmatched, each with a reason). | [`decision-lab/availability.html`](decision-lab/availability.html) |
 | **Decision paths** | Three routes (foundation, gated research, market-facing) compared on prerequisites, cost, benefit and risk, with the options register to record a choice. | [`decision-lab/decisions.html`](decision-lab/decisions.html) |
 | Overview | Root landing page and links to preserved concurrent workspaces | [`index.html`](index.html) |
