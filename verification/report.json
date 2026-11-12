@@ -1,0 +1,606 @@
+{
+  "generated_by": "verification/verify.py (session arena/e0b5058a-nfl3)",
+  "day_matchup_context_diffs_A_vs_B": [],
+  "sources": {
+    "A_live": {
+      "name": "live official report (independent markdown extraction)",
+      "url": "https://www.nfl.com/injuries/",
+      "observed_at": "2026-11-12T22:34:14Z",
+      "rows": 279
+    },
+    "B_snapshot": {
+      "name": "decision-lab committed capture",
+      "url": "https://www.nfl.com/injuries/",
+      "observed_at": "2026-11-12T06:32:36.211205+00:00",
+      "rows": 254,
+      "no_injury_sections": [
+        {
+          "team": "Seahawks",
+          "text": "No Injuries Reported",
+          "day": "SUNDAY, NOVEMBER 15TH"
+        },
+        {
+          "team": "Bengals",
+          "text": "No Injuries Reported",
+          "day": "SUNDAY, NOVEMBER 15TH"
+        },
+        {
+          "team": "Chargers",
+          "text": "No Injuries Reported",
+          "day": "MONDAY, NOVEMBER 16TH"
+        },
+        {
+          "team": "Ravens",
+          "text": "No Injuries Reported",
+          "day": "MONDAY, NOVEMBER 16TH"
+        }
+      ]
+    },
+    "C_dashboard": {
+      "name": "dashboard committed CSV",
+      "url": "https://www.nfl.com/injuries/",
+      "rows": 254
+    }
+  },
+  "pairs": {
+    "B_vs_C": {
+      "a": "B_snapshot",
+      "b": "C_dashboard",
+      "a_rows": 254,
+      "b_rows": 254,
+      "matched_keys": 254,
+      "only_in_a": [],
+      "only_in_b": [],
+      "field_diffs": [],
+      "duplicate_keys_a": [],
+      "duplicate_keys_b": [],
+      "exact_matches": 254,
+      "summary": "254/254 matched keys agree on all fields; 0 only in B_snapshot; 0 only in C_dashboard; 0 field-level differences"
+    },
+    "A_vs_B": {
+      "a": "A_live",
+      "b": "B_snapshot",
+      "a_rows": 279,
+      "b_rows": 254,
+      "matched_keys": 254,
+      "only_in_a": [
+        {
+          "key": [
+            "49ers",
+            "Christian McCaffrey",
+            "RB"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "49ers",
+            "Dre Greenlaw",
+            "LB"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Bengals",
+            "DJ Turner II",
+            "CB"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Bengals",
+            "Dylan Fairchild",
+            "G"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Bengals",
+            "Jonathan Allen",
+            "DT"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Bengals",
+            "Kyle Dugger",
+            "S"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Cardinals",
+            "Andrew Wingard",
+            "S"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Colts",
+            "CJ Allen",
+            "LB"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Colts",
+            "Grover Stewart",
+            "DT"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Jaguars",
+            "BJ Green II",
+            "DE"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "AJ Barner",
+            "TE"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Anthony Bradford",
+            "G"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Brandon Pili",
+            "DT"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Charles Cross",
+            "T"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Connor O'Toole",
+            "LB"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Derick Hall",
+            "LB"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Drew Lock",
+            "QB"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Jarran Reed",
+            "DT"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Jaxon Smith-Njigba",
+            "WR"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Leonard Williams",
+            "DT"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Patrick O'Connell",
+            "LB"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Quenton Nelson",
+            "G"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Rashid Shaheed",
+            "WR"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Sam Darnold",
+            "QB"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Uchenna Nwosu",
+            "LB"
+          ],
+          "rows": 1
+        }
+      ],
+      "only_in_b": [],
+      "field_diffs": [
+        {
+          "key": [
+            "Colts",
+            "A.J. Haulcy",
+            "S"
+          ],
+          "diffs": {
+            "practice_status": {
+              "A_live": "Full Participation in Practice",
+              "B_snapshot": "Did Not Participate In Practice"
+            }
+          }
+        },
+        {
+          "key": [
+            "Colts",
+            "Charvarius Ward",
+            "CB"
+          ],
+          "diffs": {
+            "practice_status": {
+              "A_live": "Full Participation in Practice",
+              "B_snapshot": "Did Not Participate In Practice"
+            }
+          }
+        },
+        {
+          "key": [
+            "Colts",
+            "Jerry Tillery",
+            "DT"
+          ],
+          "diffs": {
+            "practice_status": {
+              "A_live": "Did Not Participate In Practice",
+              "B_snapshot": "Limited Participation in Practice"
+            }
+          }
+        },
+        {
+          "key": [
+            "Colts",
+            "Jonathan Taylor",
+            "RB"
+          ],
+          "diffs": {
+            "practice_status": {
+              "A_live": "Full Participation in Practice",
+              "B_snapshot": "Limited Participation in Practice"
+            }
+          }
+        }
+      ],
+      "duplicate_keys_a": [],
+      "duplicate_keys_b": [],
+      "exact_matches": 250,
+      "summary": "250/254 matched keys agree on all fields; 25 only in A_live; 0 only in B_snapshot; 4 field-level differences"
+    },
+    "A_vs_C": {
+      "a": "A_live",
+      "b": "C_dashboard",
+      "a_rows": 279,
+      "b_rows": 254,
+      "matched_keys": 254,
+      "only_in_a": [
+        {
+          "key": [
+            "49ers",
+            "Christian McCaffrey",
+            "RB"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "49ers",
+            "Dre Greenlaw",
+            "LB"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Bengals",
+            "DJ Turner II",
+            "CB"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Bengals",
+            "Dylan Fairchild",
+            "G"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Bengals",
+            "Jonathan Allen",
+            "DT"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Bengals",
+            "Kyle Dugger",
+            "S"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Cardinals",
+            "Andrew Wingard",
+            "S"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Colts",
+            "CJ Allen",
+            "LB"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Colts",
+            "Grover Stewart",
+            "DT"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Jaguars",
+            "BJ Green II",
+            "DE"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "AJ Barner",
+            "TE"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Anthony Bradford",
+            "G"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Brandon Pili",
+            "DT"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Charles Cross",
+            "T"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Connor O'Toole",
+            "LB"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Derick Hall",
+            "LB"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Drew Lock",
+            "QB"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Jarran Reed",
+            "DT"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Jaxon Smith-Njigba",
+            "WR"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Leonard Williams",
+            "DT"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Patrick O'Connell",
+            "LB"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Quenton Nelson",
+            "G"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Rashid Shaheed",
+            "WR"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Sam Darnold",
+            "QB"
+          ],
+          "rows": 1
+        },
+        {
+          "key": [
+            "Seahawks",
+            "Uchenna Nwosu",
+            "LB"
+          ],
+          "rows": 1
+        }
+      ],
+      "only_in_b": [],
+      "field_diffs": [
+        {
+          "key": [
+            "Colts",
+            "A.J. Haulcy",
+            "S"
+          ],
+          "diffs": {
+            "practice_status": {
+              "A_live": "Full Participation in Practice",
+              "C_dashboard": "Did Not Participate In Practice"
+            }
+          }
+        },
+        {
+          "key": [
+            "Colts",
+            "Charvarius Ward",
+            "CB"
+          ],
+          "diffs": {
+            "practice_status": {
+              "A_live": "Full Participation in Practice",
+              "C_dashboard": "Did Not Participate In Practice"
+            }
+          }
+        },
+        {
+          "key": [
+            "Colts",
+            "Jerry Tillery",
+            "DT"
+          ],
+          "diffs": {
+            "practice_status": {
+              "A_live": "Did Not Participate In Practice",
+              "C_dashboard": "Limited Participation in Practice"
+            }
+          }
+        },
+        {
+          "key": [
+            "Colts",
+            "Jonathan Taylor",
+            "RB"
+          ],
+          "diffs": {
+            "practice_status": {
+              "A_live": "Full Participation in Practice",
+              "C_dashboard": "Limited Participation in Practice"
+            }
+          }
+        }
+      ],
+      "duplicate_keys_a": [],
+      "duplicate_keys_b": [],
+      "exact_matches": 250,
+      "summary": "250/254 matched keys agree on all fields; 25 only in A_live; 0 only in C_dashboard; 4 field-level differences"
+    }
+  },
+  "totals": {
+    "evidence_rows": 279,
+    "snapshot_rows": 254,
+    "dashboard_rows": 254,
+    "evidence_no_injury_teams": [
+      "Chargers",
+      "Ravens"
+    ]
+  }
+}
