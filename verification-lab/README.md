@@ -8,7 +8,7 @@ official page it cites?**
 
 - **Live page:** https://kanlerxz87-cyber.github.io/NFL3/verification-lab/
 - **Checked:** 2026-11-12 (UTC), session `arena/0619a74f-nfl3`
-- **Scope:** 32 claim-level records, 16 blocking questions, 13 queued proposals
+- **Scope:** 31 claim-level records, 16 questions (13 blocking), 13 queued proposals
 
 ## What it found
 
