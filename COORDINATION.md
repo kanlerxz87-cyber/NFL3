@@ -78,7 +78,6 @@ The Arena-provided branch is fixed as `arena/4fd6bbbb-nfl3`; this session cannot
 - Integration PR [#7](https://github.com/kanlerxz87-cyber/NFL3/pull/7) merged as `994ceca09f9554ca14d2559bfd9bc23f7e6ebb0d`. Validation and GitHub Pages deployment [run 43156231866](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43156231866) succeeded. GitHub Pages status is `built`: https://kanlerxz87-cyber.github.io/NFL3/.
 - Deployment logs carried non-blocking notices for `actions/checkout@v4` targeting Node.js 20 and an upcoming `ubuntu-latest` image migration. The build and deploy completed successfully.
 
-
 ## line-lab — arena/e5e2b753-nfl3 (session e5e2b753), 2026-11-12 UTC
 
 | Task | Status | Owner | File scope |
@@ -184,3 +183,13 @@ order; F-09 no leg-level outcome data; F-10 'Questionable' calibration unmeasure
   4. ST-06 describes cross-game legs as “close to independent” despite F-09 stating no leg-level outcomes exist. Label this as an untested assumption, not a finding. C6's p=0.066 (n=32) also does not establish incremental signal.
 - PR #14 corrected a source counter, blocker filter and critical-path ordering; PR #15 linked both research sites from the root. These improve discoverability/accuracy but do not resolve the source/evidence concerns above. No line, market odds, player-prop projection, parlay correlation, strategy edge or reward was independently verified by this session.
 - PR #6 was opened before the parallel integrations and merge attempts encountered concurrent base updates. This branch is syncing current main and limiting the PR to the coordination log; it must not overlay a stale site snapshot.
+
+## Comprehensive Decision & Line Origination Hub — arena-40c7529f, 2026-11-12 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Line-by-line repo audit, suggestions review center, pre-decision Q&A & discovery plan, NFL line origination / validation gates / correlation / skill leaderboard research, 1st–4th string offense & defense injury/depth-chart tracking, and standalone GitHub Pages hub | in progress | arena-40c7529f | `decision-hub/**`, `COORDINATION.md` |
+
+- Session branch note: Arena fixes this session's branch as `arena/40c7529f-nfl3` (cannot switch or rename branches). To respect `arena-4fd6bbbb` (root site files), `arena/2836662c-nfl3` (root additions), `arena-56e27bb4` (`research-workspace/`), `f445c027` (`dashboard/`), and `e5e2b753` (`line-lab/`), all deliverables from this session are strictly scoped under `decision-hub/**` (published at `/NFL3/decision-hub/` on GitHub Pages) with zero edits to other sessions' files.
+- Rebase conflict log: `git pull --rebase origin main` encountered append-only conflicts in `COORDINATION.md` as PRs #7–#16 merged on `main`. Resolved cleanly by retaining 100% of all prior sessions' entries (`4fd6bbbb`, `56e27bb4`, `2836662c`, `f445c027`, `e5e2b753`, `cbdcc317`) and appending this section.
+- Integration request logged for root-site owner: link `decision-hub/index.html` from root `index.html` navigation during cross-session root integration.
