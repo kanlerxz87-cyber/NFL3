@@ -96,7 +96,12 @@ def _club_hosts() -> set[str]:
         return set()
 
 
-CLUB_HOSTS = _club_hosts()
+# The capture currently reaches 30 of 32 clubs; the two missing ones are still
+# official club domains when another workspace cites them.
+CLUB_HOSTS = _club_hosts() | {
+    "greenbaypackers.com", "packers.com",
+    "houstontexans.com", "texans.com",
+}
 
 
 def source_class(url: str) -> str:
@@ -371,6 +376,16 @@ def page_availability(ctx: dict) -> str:
             ("No club depth captured", str(sum(1 for c in ch if c["chain_status"] == "no-depth-capture-for-club")), "clubs outside the capture"),
             ("Confirmed replacements", "0", "no official source names one"),
         ]),
+        notice("ok",
+               "<b>Reconciliation with the canonical lab's availability page.</b> "
+               "<a href=\"../decision-lab/availability.html\">Decision lab &rarr; Availability &amp; "
+               "replacements</a> joins the same two official sources by exact club-and-player name and "
+               "reports 185 of 254 report rows joined, 69 unmatched. This page joins by club and "
+               "<i>position family</i> instead of name, and uses the fresher 279-row view rather than the "
+               "254-row capture. On the same 254 rows this method resolves 173 chains and leaves 39 players "
+               "unlisted at their position, 29 rows for the two clubs with no depth capture and 13 rows where "
+               "no depth is published at that position. The two numbers differ because the join keys differ, "
+               "not because one is wrong; read both before relying on either."),
         filter_box("chain-table", "club, player or position"),
         ('<p class="fine">Practice status is shown in full; in the "also on report" column it is '
          'abbreviated: <b>DNP</b> = Did Not Participate, <b>limited</b> = Limited Participation, '
