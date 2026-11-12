@@ -1,0 +1,61 @@
+unit,position,published_rank,player,player_url
+Offense,WR,1,Terry McLaurin,https://www.commanders.com/team/players-roster/terry-mclaurin/
+Offense,WR,2,Treylon Burks,https://www.commanders.com/team/players-roster/treylon-burks/
+Offense,LT,1,Brandon Coleman,https://www.commanders.com/team/players-roster/brandon-coleman/
+Offense,LT,2,Andrew Wylie,https://www.commanders.com/team/players-roster/andrew-wylie/
+Offense,LG,1,Chris Paul,https://www.commanders.com/team/players-roster/chris-paul/
+Offense,LG,2,Tanoa Togiai,https://www.commanders.com/team/players-roster/tanoa-togiai/
+Offense,C,1,Nick Allegretti,https://www.commanders.com/team/players-roster/nick-allegretti/
+Offense,C,2,Matt Gulbin,https://www.commanders.com/team/players-roster/matt-gulbin/
+Offense,RG,1,Sam Cosmi,https://www.commanders.com/team/players-roster/sam-cosmi/
+Offense,RG,2,Tanoa Togiai,https://www.commanders.com/team/players-roster/tanoa-togiai/
+Offense,RT,1,Josh Conerly Jr.,https://www.commanders.com/team/players-roster/josh-conerly-jr/
+Offense,RT,2,Andrew Wylie,https://www.commanders.com/team/players-roster/andrew-wylie/
+Offense,TE,1,Chig Okonkwo,https://www.commanders.com/team/players-roster/chigoziem-okonkwo/
+Offense,TE,2,Ben Sinnott,https://www.commanders.com/team/players-roster/ben-sinnott/
+Offense,TE,1,John Bates,https://www.commanders.com/team/players-roster/john-bates/
+Offense,TE,2,Colson Yankoff,https://www.commanders.com/team/players-roster/colson-yankoff/
+Offense,WR,1,Stefon Diggs,https://www.commanders.com/team/players-roster/stefon-diggs/
+Offense,WR,2,Jaylin Lane,https://www.commanders.com/team/players-roster/jaylin-lane/
+Offense,WR,1,Dyami Brown,https://www.commanders.com/team/players-roster/dyami-brown/
+Offense,WR,2,Antonio Williams,https://www.commanders.com/team/players-roster/antonio-williams/
+Offense,WR,3,Luke McCaffrey,https://www.commanders.com/team/players-roster/luke-mccaffrey/
+Offense,QB,1,Jayden Daniels,https://www.commanders.com/team/players-roster/jayden-daniels/
+Offense,QB,2,Marcus Mariota,https://www.commanders.com/team/players-roster/marcus-mariota/
+Offense,QB,3,Athan Kaliakmanis,https://www.commanders.com/team/players-roster/athan-kaliakmanis/
+Offense,RB,1,Jacory Croskey-Merritt,https://www.commanders.com/team/players-roster/jacory-croskey-merritt/
+Offense,RB,2,Rachaad White,https://www.commanders.com/team/players-roster/rachaad-white/
+Offense,RB,3,Austin Ekeler,https://www.commanders.com/team/players-roster/austin-ekeler/
+Defense,DL,1,Daron Payne,https://www.commanders.com/team/players-roster/daron-payne/
+Defense,DL,1,Tim Settle,https://www.commanders.com/team/players-roster/tim-settle/
+Defense,DL,2,Shy Tuttle,https://www.commanders.com/team/players-roster/shy-tuttle/
+Defense,DL,1,Javon Kinlaw,https://www.commanders.com/team/players-roster/javon-kinlaw/
+Defense,DL,2,Charles Omenihu,https://www.commanders.com/team/players-roster/charles-omenihu/
+Defense,OLB,1,Odafe Oweh,https://www.commanders.com/team/players-roster/odafe-owehi/
+Defense,OLB,2,Joshua Josephs,https://www.commanders.com/team/players-roster/joshua-josephs/
+Defense,LB,1,Sonny Styles,https://www.commanders.com/team/players-roster/sonny-styles/
+Defense,LB,2,Kain Medrano,https://www.commanders.com/team/players-roster/kain-medrano/
+Defense,LB,1,Frankie Luvu,https://www.commanders.com/team/players-roster/frankie-luvu/
+Defense,LB,3,Kain Medrano,https://www.commanders.com/team/players-roster/kain-medrano/
+Defense,OLB,1,K'Lavon Chaisson,https://www.commanders.com/team/players-roster/k-lavon-chaisson/
+Defense,OLB,2,Dorance Armstrong,https://www.commanders.com/team/players-roster/dorance-armstrong/
+Defense,OLB,3,Javontae Jean-Baptiste,https://www.commanders.com/team/players-roster/javontae-jean-baptiste/
+Defense,CB,1,Amik Robertson,https://www.commanders.com/team/players-roster/amik-robertson/
+Defense,CB,2,Rasul Douglas,https://www.commanders.com/team/players-roster/rasul-douglas/
+Defense,CB,1,Mike Sainristil,https://www.commanders.com/team/players-roster/mike-sainristil/
+Defense,CB,2,Fabian Moreau,https://www.commanders.com/team/players-roster/fabian-moreau/
+Defense,SS,1,Nick Cross,https://www.commanders.com/team/players-roster/nick-cross/
+Defense,SS,2,Tyler Owens,https://www.commanders.com/team/players-roster/tyler-owens/
+Defense,FS,1,Jeremy Reaves,https://www.commanders.com/team/players-roster/jeremy-reaves/
+Defense,FS,2,Quan Martin,https://www.commanders.com/team/players-roster/jartavius-martin/
+Defense,FS,3,Percy Butler,https://www.commanders.com/team/players-roster/percy-butler/
+Special Teams,P,1,Tress Way,https://www.commanders.com/team/players-roster/tress-way/
+Special Teams,K,1,Drew Stevens,https://www.commanders.com/team/players-roster/drew-stevens/
+Special Teams,H,1,Tress Way,https://www.commanders.com/team/players-roster/tress-way/
+Special Teams,LS,1,Tyler Ott,https://www.commanders.com/team/players-roster/tyler-ott/
+Special Teams,KR,1,Luke McCaffrey,https://www.commanders.com/team/players-roster/luke-mccaffrey/
+Special Teams,KR,2,Jaylin Lane,https://www.commanders.com/team/players-roster/jaylin-lane/
+Special Teams,KR,3,Dyami Brown,https://www.commanders.com/team/players-roster/dyami-brown/
+Special Teams,PR,1,Jaylin Lane,https://www.commanders.com/team/players-roster/jaylin-lane/
+Special Teams,PR,2,Luke McCaffrey,https://www.commanders.com/team/players-roster/luke-mccaffrey/
+Special Teams,PR,3,Treylon Burks,https://www.commanders.com/team/players-roster/treylon-burks/

@@ -1,0 +1,391 @@
+{
+  "mode": "sample",
+  "method": "Rows transcribed field by field from the live official pages on 2026-11-12 and compared with the committed snapshot. Not a byte-level re-fetch: the build agent has no direct HTTPS egress to nfl.com.",
+  "pages_read": [
+    {
+      "url": "https://www.nfl.com/injuries/",
+      "publisher": "NFL",
+      "read_at": "2026-11-12T22:25Z",
+      "teams_read_in_full": [
+        "49ers",
+        "Bengals",
+        "Browns",
+        "Cardinals",
+        "Commanders",
+        "Cowboys",
+        "Giants",
+        "Lions",
+        "Patriots",
+        "Raiders",
+        "Rams",
+        "Seahawks",
+        "Steelers",
+        "Texans"
+      ]
+    },
+    {
+      "url": "https://www.commanders.com/team/depth-chart",
+      "publisher": "Washington Commanders",
+      "read_at": "2026-11-12T22:30Z",
+      "teams_read_in_full": [
+        "Commanders"
+      ]
+    }
+  ],
+  "injuries": {
+    "rows_compared": 108,
+    "rows_matched": 108,
+    "rows_changed": [
+      {
+        "team": "49ers",
+        "player": "C.J. West",
+        "fields": {
+          "practice_status": [
+            "Limited Participation in Practice",
+            "Did Not Participate In Practice"
+          ]
+        }
+      },
+      {
+        "team": "49ers",
+        "player": "Deebo Samuel Sr.",
+        "fields": {
+          "practice_status": [
+            "Limited Participation in Practice",
+            "Full Participation in Practice"
+          ]
+        }
+      },
+      {
+        "team": "49ers",
+        "player": "Upton Stout",
+        "fields": {
+          "practice_status": [
+            "Limited Participation in Practice",
+            "Did Not Participate In Practice"
+          ]
+        }
+      },
+      {
+        "team": "Browns",
+        "player": "Carson Schwesinger",
+        "fields": {
+          "practice_status": [
+            "Limited Participation in Practice",
+            "Did Not Participate In Practice"
+          ]
+        }
+      },
+      {
+        "team": "Browns",
+        "player": "Denzel Ward",
+        "fields": {
+          "practice_status": [
+            "Limited Participation in Practice",
+            "Did Not Participate In Practice"
+          ]
+        }
+      },
+      {
+        "team": "Browns",
+        "player": "Harold Fannin Jr.",
+        "fields": {
+          "practice_status": [
+            "Limited Participation in Practice",
+            "Did Not Participate In Practice"
+          ]
+        }
+      },
+      {
+        "team": "Browns",
+        "player": "Maliek Collins",
+        "fields": {
+          "practice_status": [
+            "Limited Participation in Practice",
+            "Did Not Participate In Practice"
+          ]
+        }
+      },
+      {
+        "team": "Browns",
+        "player": "Quincy Williams",
+        "fields": {
+          "practice_status": [
+            "Limited Participation in Practice",
+            "Did Not Participate In Practice"
+          ]
+        }
+      },
+      {
+        "team": "Browns",
+        "player": "Tytus Howard",
+        "fields": {
+          "practice_status": [
+            "Limited Participation in Practice",
+            "Did Not Participate In Practice"
+          ]
+        }
+      },
+      {
+        "team": "Cardinals",
+        "player": "Bam Knight",
+        "fields": {
+          "practice_status": [
+            "Limited Participation in Practice",
+            "Did Not Participate In Practice"
+          ]
+        }
+      },
+      {
+        "team": "Cardinals",
+        "player": "Dante Stills",
+        "fields": {
+          "practice_status": [
+            "Limited Participation in Practice",
+            "Did Not Participate In Practice"
+          ]
+        }
+      },
+      {
+        "team": "Cardinals",
+        "player": "Jayden Williams",
+        "fields": {
+          "practice_status": [
+            "Limited Participation in Practice",
+            "Did Not Participate In Practice"
+          ]
+        }
+      },
+      {
+        "team": "Cardinals",
+        "player": "Max Melton",
+        "fields": {
+          "practice_status": [
+            "Limited Participation in Practice",
+            "Did Not Participate In Practice"
+          ]
+        }
+      },
+      {
+        "team": "Cowboys",
+        "player": "Devin Moore",
+        "fields": {
+          "practice_status": [
+            "Full Participation in Practice",
+            "Did Not Participate In Practice"
+          ]
+        }
+      },
+      {
+        "team": "Cowboys",
+        "player": "George Pickens",
+        "fields": {
+          "practice_status": [
+            "Limited Participation in Practice",
+            "Did Not Participate In Practice"
+          ]
+        }
+      },
+      {
+        "team": "Cowboys",
+        "player": "KaVontae Turpin",
+        "fields": {
+          "practice_status": [
+            "Limited Participation in Practice",
+            "Full Participation in Practice"
+          ]
+        }
+      },
+      {
+        "team": "Rams",
+        "player": "Colby Parkinson",
+        "fields": {
+          "practice_status": [
+            "Limited Participation in Practice",
+            "Did Not Participate In Practice"
+          ]
+        }
+      },
+      {
+        "team": "Rams",
+        "player": "Myles Garrett",
+        "fields": {
+          "practice_status": [
+            "Limited Participation in Practice",
+            "Did Not Participate In Practice"
+          ]
+        }
+      },
+      {
+        "team": "Steelers",
+        "player": "Derrick Harmon",
+        "fields": {
+          "practice_status": [
+            "Limited Participation in Practice",
+            "Full Participation in Practice"
+          ]
+        }
+      },
+      {
+        "team": "Texans",
+        "player": "Jaylin Smith",
+        "fields": {
+          "practice_status": [
+            "Limited Participation in Practice",
+            "Did Not Participate In Practice"
+          ]
+        }
+      },
+      {
+        "team": "Texans",
+        "player": "Wyatt Teller",
+        "fields": {
+          "practice_status": [
+            "Limited Participation in Practice",
+            "Did Not Participate In Practice"
+          ]
+        }
+      }
+    ],
+    "rows_added_since_capture": [
+      {
+        "team": "49ers",
+        "player": "Christian McCaffrey",
+        "note": "on the live page at read time, absent from the committed snapshot"
+      },
+      {
+        "team": "49ers",
+        "player": "Dre Greenlaw",
+        "note": "on the live page at read time, absent from the committed snapshot"
+      },
+      {
+        "team": "Bengals",
+        "player": "DJ Turner II",
+        "note": "on the live page at read time, absent from the committed snapshot"
+      },
+      {
+        "team": "Bengals",
+        "player": "Dylan Fairchild",
+        "note": "on the live page at read time, absent from the committed snapshot"
+      },
+      {
+        "team": "Bengals",
+        "player": "Jonathan Allen",
+        "note": "on the live page at read time, absent from the committed snapshot"
+      },
+      {
+        "team": "Bengals",
+        "player": "Kyle Dugger",
+        "note": "on the live page at read time, absent from the committed snapshot"
+      },
+      {
+        "team": "Cardinals",
+        "player": "Andrew Wingard",
+        "note": "on the live page at read time, absent from the committed snapshot"
+      },
+      {
+        "team": "Seahawks",
+        "player": "AJ Barner",
+        "note": "on the live page at read time, absent from the committed snapshot"
+      },
+      {
+        "team": "Seahawks",
+        "player": "Anthony Bradford",
+        "note": "on the live page at read time, absent from the committed snapshot"
+      },
+      {
+        "team": "Seahawks",
+        "player": "Brandon Pili",
+        "note": "on the live page at read time, absent from the committed snapshot"
+      },
+      {
+        "team": "Seahawks",
+        "player": "Charles Cross",
+        "note": "on the live page at read time, absent from the committed snapshot"
+      },
+      {
+        "team": "Seahawks",
+        "player": "Connor O'Toole",
+        "note": "on the live page at read time, absent from the committed snapshot"
+      },
+      {
+        "team": "Seahawks",
+        "player": "Derick Hall",
+        "note": "on the live page at read time, absent from the committed snapshot"
+      },
+      {
+        "team": "Seahawks",
+        "player": "Drew Lock",
+        "note": "on the live page at read time, absent from the committed snapshot"
+      },
+      {
+        "team": "Seahawks",
+        "player": "Jarran Reed",
+        "note": "on the live page at read time, absent from the committed snapshot"
+      },
+      {
+        "team": "Seahawks",
+        "player": "Jaxon Smith-Njigba",
+        "note": "on the live page at read time, absent from the committed snapshot"
+      },
+      {
+        "team": "Seahawks",
+        "player": "Leonard Williams",
+        "note": "on the live page at read time, absent from the committed snapshot"
+      },
+      {
+        "team": "Seahawks",
+        "player": "Patrick O'Connell",
+        "note": "on the live page at read time, absent from the committed snapshot"
+      },
+      {
+        "team": "Seahawks",
+        "player": "Quenton Nelson",
+        "note": "on the live page at read time, absent from the committed snapshot"
+      },
+      {
+        "team": "Seahawks",
+        "player": "Rashid Shaheed",
+        "note": "on the live page at read time, absent from the committed snapshot"
+      },
+      {
+        "team": "Seahawks",
+        "player": "Sam Darnold",
+        "note": "on the live page at read time, absent from the committed snapshot"
+      },
+      {
+        "team": "Seahawks",
+        "player": "Uchenna Nwosu",
+        "note": "on the live page at read time, absent from the committed snapshot"
+      }
+    ],
+    "rows_removed_since_capture": [],
+    "duplicate_keys": []
+  },
+  "depth": {
+    "rows_compared": 60,
+    "rows_matched": 60,
+    "rows_changed": [],
+    "rows_added_since_capture": [],
+    "rows_removed_since_capture": []
+  },
+  "coverage": {
+    "snapshot_injury_rows": 254,
+    "rows_read_live": 151,
+    "snapshot_teams": 24,
+    "teams_read_live": 14,
+    "snapshot_depth_rows": 1745,
+    "depth_rows_read_live": 60
+  },
+  "summary": {
+    "verified_at": "2026-11-12T22:24:44.722662+00:00",
+    "snapshot_observed_at": "2026-11-12T06:32:36.211205+00:00",
+    "injury_rows_matched": 108,
+    "injury_rows_compared": 108,
+    "depth_rows_matched": 60,
+    "depth_rows_compared": 60,
+    "drift_rows": 43,
+    "drift_detected": true,
+    "verdict": "Live official pages have changed since the committed capture; see the drift rows."
+  }
+}
