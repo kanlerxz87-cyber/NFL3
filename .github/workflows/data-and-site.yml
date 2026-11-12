@@ -13,11 +13,8 @@ on:
     - cron: '23 10 * * *'   # daily refresh of the official snapshot
   push:
     branches: ['main', 'arena/f9dd481e-nfl3']
-    paths:
-      - 'pipeline/**'
-      - 'engine/**'
-      - 'lab/assets/**'
-      - '.github/workflows/data-and-site.yml'
+    # no path filter: GitHub skips schedule runs entirely when a workflow has a path filter, and a
+    # reliable daily refresh matters more than skipping a few no-op builds
   workflow_dispatch:
 
 permissions:
