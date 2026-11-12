@@ -1,0 +1,22 @@
+:root{--ink:#1d2433;--muted:#5b6474;--line:#dfe3ea;--bg:#f7f8fa;--brand:#0b5cad;--warn:#b26a00;--warnbg:#fff4e0;--ok:#1b7f3b;--okbg:#e8f6ee}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+header.top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:12px 20px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:2}
+.brand{font-weight:700;color:var(--ink);text-decoration:none;font-size:17px}
+nav{display:flex;flex-wrap:wrap;gap:4px}nav a{padding:6px 10px;border-radius:6px;color:var(--brand);text-decoration:none;font-size:14px}
+nav a:hover{background:#eaf2fb}nav a.active{background:var(--brand);color:#fff}
+main{max-width:1200px;margin:0 auto;padding:20px}h1{font-size:24px;margin:8px 0 12px}h2{font-size:18px;margin:26px 0 8px}
+footer{max-width:1200px;margin:0 auto;padding:10px 20px 30px;color:var(--muted);font-size:13px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:4px}
+.card b{font-size:28px;color:var(--brand)}.card span{color:var(--muted);font-size:13px}.card.warn b{color:var(--warn)}.card:hover{border-color:var(--brand)}
+.findings li,.links li{margin:6px 0}
+.tablewrap{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:13.5px}th,td{padding:7px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:#f0f3f8;position:sticky;top:0;font-weight:600}tr:nth-child(even) td{background:#fafbfd}
+input.filter{width:100%;max-width:420px;padding:8px 10px;border:1px solid #c9d0db;border-radius:6px;margin:8px 0;font-size:14px}
+.count{color:var(--muted);font-size:13px}
+.badge{display:inline-block;padding:1px 7px;border-radius:999px;background:#eef1f5;font-size:12px;white-space:nowrap}
+.badge.warn{background:var(--warnbg);color:var(--warn)}.badge.ok{background:var(--okbg);color:var(--ok)}
+.flag{color:var(--warn);font-weight:600}
+.notice{background:var(--warnbg);border:1px solid #f1d7a6;border-radius:8px;padding:10px 14px;margin:8px 0}
+a{color:var(--brand)}

@@ -38,3 +38,30 @@ The Arena-provided branch is fixed as `arena/4fd6bbbb-nfl3`; this session cannot
 - Added supplementary requirements/questions, signal hypotheses, lineup/injury evidence schema, validation gates, prioritized suggestions and extended flagged items. The previously published landing and source register were preserved; a research-deep-dives table links the additions from the overview. Official NFL injury, player-stat, team-stat, team-directory and 2026 rulebook pages were opened on 2026-11-12 UTC. No live values were copied; unknowns remain flagged.
 - Verification: `python3 scripts/validate_site.py` passed across 12 HTML pages (local links/assets and citation links); `python3 tests/check_site.py` passed for the existing dashboard; `git diff --check` passed. These checks do not crawl external links or guarantee future source content.
 - Unresolved market-feed/rights, historical price, depth-chart, model, correlation, automated ingestion and leaderboard policy gaps remain visible on Flagged for Review. No verified strategy or automated injury pipeline was produced by this session.
+
+## Dashboard — arena/f445c027-nfl3 (session f445c027), 2026-11-12 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| T1 Repo review & irregularities | done – needs review (6 flags) | f445c027 | `dashboard/data/repo_review.csv` |
+| T2 Injury tracking, Week 10 2026 (official nfl.com) + starter-replacement headlines | done – second line-by-line pass recommended | f445c027 | `dashboard/data/injuries_2026_w10.csv`, `games_2026_w10.csv`, `news_signals_2026_w10.csv` |
+| T3 Strategy lab: leaderboard, validation gates, correlation framework | done – 0 validated (no odds/results data) | f445c027 | `dashboard/data/strategies.csv`, `validation_gates.csv`, `correlation_framework.csv` |
+| T4 Information gaps (Q&A) and suggestions (decision-only) | done – awaiting owner decisions | f445c027 | `dashboard/data/questions.csv`, `suggestions.csv` |
+| T5 Source registry, executive summary, dashboard site | done – build and check pass | f445c027 | `dashboard/` (all of it) |
+| T6 Integration: merge to main, Pages deploy | in progress | f445c027 | this log |
+
+**Scope:** everything the dashboard touches is under `dashboard/`. Root files (`index.html`, other root pages, `assets/`, `scripts/validate_site.py`, `tests/`, `research-workspace/`, `.github/workflows/pages.yml`, `README.md`) were **not** edited by this session.
+
+**Integration request to the root-site owner (not actioned here):** add a link to `dashboard/index.html` (live: https://kanlerxz87-cyber.github.io/NFL3/dashboard/) from the root navigation. The dashboard has a "Main NFL3 site" link back to `../index.html`.
+
+**Overlap noted:** this session first merged into `main` after PR #5 and #7 were merged; main's `COORDINATION.md` and `README.md` were kept as published and this section appended. Other sessions' branches (`arena/2836662c-nfl3`, `arena/4fd6bbbb-nfl3`, `arena/56e27bb4-nfl3`, `arena/cbdcc317-nfl3`) were not modified.
+
+**Sources (all fetched 2026-11-12):**
+- NFL.com 2026 Week 10 injury report — https://www.nfl.com/injuries/ (254 rows, 14 matchups, 19 headlines)
+- NFL.com injury-policy article — https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693
+- NFL 2026 schedule announcement — https://media.nfl.com/football-information/2026/news/2026-nfl-schedule-announced
+- Kansspelautoriteit (NL) — https://kansspelautoriteit.nl/
+- Secondary, UNVERIFIED: Yahoo Sports (https://sports.yahoo.com/article/nfl-says-worked-ban-more-152200232.html) and LA Mag (https://lamag.com/sports/nfl-gambling-november-13-memo-prop-bets-limit/) reports on an NFL prop-bet memo.
+- Excluded (not official): statrankings.com, fsroundup.com, sticktothemodel.com (depth charts).
+
+**Flagged irregularities** (published on the dashboard's Flagged for Review page): R-06 Seattle "No Injuries Reported" vs. headline that Sam Darnold is ruled out; R-07 Garrett/McDuffie listed under Rams; R-10 DEN/CHI/PHI/TB not on the page; R-11 no official depth-chart source; R-12 prop-memo source secondary; R-03/R-04/R-05 branch and board overlap.
