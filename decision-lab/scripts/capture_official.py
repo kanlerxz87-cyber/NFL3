@@ -113,8 +113,58 @@ def parse_injuries(raw: str, source_url: str, observed_at: str, digest: str) -> 
     return rows, no_results
 
 
+def cell_entries(inner: str) -> list[tuple[str, str]]:
+    """Split one published table cell into (player name, player url) entries.
+
+    Several official club pages put more than one player in a single published
+    cell (for example Steelers TE1 lists "Pat Freiermuth" and "Darnell
+    Washington" together). Concatenating the cell text would invent a player
+    who does not exist, so each anchor is treated as one player. A cell with no
+    anchor falls back to its full cleaned text as a single unnamed-source entry.
+
+    Returns an empty list for a genuinely blank cell: blank stays blank.
+    """
+    anchors = re.findall(r"<a\b([^>]*)>(.*?)</a>", inner, re.S)
+    if anchors:
+        entries = []
+        for attrs, body in anchors:
+            name = clean(body)
+            if not name:
+                continue
+            href = re.search(r'href="([^"]+)"', attrs)
+            entries.append((name, href.group(1) if href else ""))
+        if entries:
+            return entries
+    text = clean(inner)
+    return [(text, "")] if text else []
+
+
+def page_authority(raw: str, default: str = "club depth chart") -> tuple[str, str]:
+    """Read the page's own wording about how authoritative its chart is.
+
+    Some clubs publish a chart that they explicitly call *unofficial*, written by
+    site writers rather than the coaching staff. That caveat changes what the
+    rows can support, so it is captured instead of assumed away. The exact page
+    sentence is returned so it can be published alongside the rows.
+
+    Returns (authority label, the page's own caveat sentence or "").
+    """
+    text = html.unescape(TAG.sub(" ", raw))
+    text = re.sub(r"\s+", " ", text)
+    for sentence in re.split(r"(?<=[.!?])\s+", text):
+        low = sentence.lower()
+        if "unofficial" in low and ("depth" in low or "chart" in low):
+            if "not necessarily reflect" in low or "opinions" in low or "writers" in low:
+                return "club-published UNOFFICIAL depth chart", sentence.strip()[:400]
+            return "club-published UNOFFICIAL depth chart", sentence.strip()[:400]
+    return default, ""
+
+
 def parse_depth_tables(raw: str, team: str, source_url: str, observed_at: str, digest: str,
-                       authority: str = "club depth chart") -> list[dict]:
+                       authority: str | None = None) -> list[dict]:
+    caveat = ""
+    if authority is None:
+        authority, caveat = page_authority(raw)
     rows: list[dict] = []
     for table_match in re.finditer(r"<table([^>]*)>(.*?)</table>", raw, re.S):
         attrs = table_match.group(1)
@@ -136,20 +186,22 @@ def parse_depth_tables(raw: str, team: str, source_url: str, observed_at: str, d
             if not headers or headers[0].lower() != "position":
                 continue
             position = values[0]
-            for index, player in enumerate(values[1:], start=1):
-                if not player:
-                    continue
-                href = HREF.search(cells[index][1]) if index < len(cells) else None
-                player_url = href.group(1) if href else ""
-                if player_url.startswith("/"):
-                    player_url = urlparse(source_url).scheme + "://" + urlparse(source_url).hostname + player_url
-                rows.append({
-                    "team": team, "unit": unit, "position": position, "player": player,
-                    "published_rank": index, "rank_basis": "explicit tier header" if headers[index].lower() in {"first", "second", "third", "fourth", "fifth", "sixth"} else "published column order",
-                    "authority": authority, "player_url": player_url, "source_url": source_url,
-                    "observed_at": observed_at, "source_sha256": digest,
-                    "confirmed_starter": "", "replacement_assignment": "", "expected_snaps": "",
-                })
+            rank = 0
+            for column, cell in enumerate(cells[1:], start=1):
+                for player, href in cell_entries(cell[1]):
+                    rank += 1
+                    player_url = href
+                    if player_url.startswith("/"):
+                        player_url = urlparse(source_url).scheme + "://" + urlparse(source_url).hostname + player_url
+                    header = headers[column].lower() if column < len(headers) else ""
+                    rows.append({
+                        "team": team, "unit": unit, "position": position, "player": player,
+                        "published_rank": rank, "rank_basis": "explicit tier header" if header in {"first", "second", "third", "fourth", "fifth", "sixth"} else "published column order",
+                        "authority": authority, "player_url": player_url, "source_url": source_url,
+                        "observed_at": observed_at, "source_sha256": digest,
+                        "authority_caveat": caveat,
+                        "confirmed_starter": "", "replacement_assignment": "", "expected_snaps": "",
+                    })
     return rows
 
 
@@ -182,7 +234,8 @@ def parse_colts_article(raw: str, source_url: str, observed_at: str, digest: str
             if player:
                 rows.append({"team": "Colts", "unit": unit, "position": position, "player": player,
                              "published_rank": rank, "rank_basis": "published list order",
-                             "authority": "club-published UNOFFICIAL depth chart", "player_url": "",
+                             "authority": "club-published UNOFFICIAL depth chart",
+                             "authority_caveat": "club article headline labels the chart unofficial", "player_url": "",
                              "source_url": source_url, "observed_at": observed_at, "source_sha256": digest,
                              "confirmed_starter": "", "replacement_assignment": "", "expected_snaps": ""})
     return rows

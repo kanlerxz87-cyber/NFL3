@@ -180,6 +180,46 @@
       "status": "opened",
       "scope": "NFL.com player-statistics pages, used here as an example of a directly NFL-published statistics source.",
       "limit": "Does not establish the authorship, accuracy, authorization or reuse rights of data hosted by third parties."
+    },
+    {
+      "id": "S19",
+      "title": "Pittsburgh Steelers club depth chart",
+      "url": "https://www.steelers.com/team/depth-chart/",
+      "publisher": "Pittsburgh Steelers (official club site)",
+      "checked": "2026-11-12",
+      "status": "opened",
+      "scope": "Published depth order; TE1 cell lists two players together.",
+      "limit": "Club order is not confirmed starter status or snap count."
+    },
+    {
+      "id": "S20",
+      "title": "New England Patriots unofficial depth chart",
+      "url": "https://www.patriots.com/team/depth-chart",
+      "publisher": "New England Patriots (official club site)",
+      "checked": "2026-11-12",
+      "status": "opened",
+      "scope": "Published depth order. The page states the chart is unofficial and written by Patriots.com writers.",
+      "limit": "Explicitly unofficial; reflects site writers' opinions, not the organization's."
+    },
+    {
+      "id": "S21",
+      "title": "Seattle Seahawks club depth chart",
+      "url": "https://www.seahawks.com/team/depth-chart/",
+      "publisher": "Seattle Seahawks (official club site)",
+      "checked": "2026-11-12",
+      "status": "opened",
+      "scope": "Published depth order; WR1 cell lists two players together.",
+      "limit": "Club order is not confirmed starter status or snap count."
+    },
+    {
+      "id": "S22",
+      "title": "Denver Broncos club depth chart",
+      "url": "https://www.denverbroncos.com/team/depth-chart/",
+      "publisher": "Denver Broncos (official club site)",
+      "checked": "2026-11-12",
+      "status": "opened",
+      "scope": "Published depth order with no unofficial caveat on the page.",
+      "limit": "Club order is not confirmed starter status or snap count."
     }
   ],
   "requirements": [
@@ -1002,6 +1042,22 @@
       "finding": "Public NFL/club pages establish facts for review but do not by themselves grant redistribution, API or commercial rights.",
       "action": "Confirm terms before bulk republication or commercial automation.",
       "source": "S05"
+    },
+    {
+      "id": "F13",
+      "severity": "High",
+      "title": "Depth cells with two players were joined into one name",
+      "finding": "The depth capturer concatenated the text of each published table cell. Some club pages publish two players in one cell (for example Steelers TE1 'Pat Freiermuth' and 'Darnell Washington'; Seahawks WR1 'Cooper Kupp' and 'Rashid Shaheed'). Published rows therefore contained non-existent players such as 'Pat Freiermuth Darnell Washington'. 22 captured rows are affected.",
+      "action": "The parser now emits one row per published anchor. Already-captured rows are kept exactly as published and flagged as unverified on the Verification log; they are not split, because splitting on whitespace cannot tell a second player from a suffix or an initial. A fresh capture clears them.",
+      "source": "S19"
+    },
+    {
+      "id": "F14",
+      "severity": "High",
+      "title": "Self-declared unofficial depth charts were labelled plain official charts",
+      "finding": "The Patriots depth page states its 2026 chart 'is unofficial and is published by the writers of Patriots.com'. Its 62 captured rows carried the same plain 'club depth chart' authority label as charts with no such caveat. The Colts rows were already labelled UNOFFICIAL, so the label existed but was not applied consistently.",
+      "action": "The capturer now reads the page's own wording and labels such charts UNOFFICIAL, storing the page's sentence as an authority caveat. Already-captured rows keep their recorded label until a fresh capture.",
+      "source": "S20"
     }
   ]
 }

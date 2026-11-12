@@ -86,6 +86,56 @@ class CaptureTests(unittest.TestCase):
         self.assertEqual(rows[0]["confirmed_starter"], "")
         self.assertEqual(rows[1]["expected_snaps"], "")
 
+    def test_multi_player_cell_is_split_not_concatenated(self):
+        """Regression: two players published in one cell must not become one fake name.
+
+        The Steelers publish "Pat Freiermuth" and "Darnell Washington" together in
+        the TE1 cell. Concatenating the cell text produced the non-existent player
+        "Pat Freiermuth Darnell Washington" in published rows.
+        """
+        raw = ('<table summary="Offense"><caption>Offense</caption>'
+               '<thead><tr><th>Position</th><th>First</th><th>Second</th></tr></thead><tbody>'
+               '<tr><td>TE</td>'
+               '<td><a href="/team/players-roster/pat-freiermuth/">Pat Freiermuth</a> '
+               '<a href="/team/players-roster/darnell-washington/">Darnell Washington</a></td>'
+               '<td><a href="/team/players-roster/robert-tonyan/">Robert Tonyan</a></td></tr>'
+               '</tbody></table>')
+        rows = capture.parse_depth_tables(raw, "Steelers", "https://www.steelers.com/team/depth-chart/", "2026-11-12T00:00:00+00:00", "0"*64)
+        self.assertEqual([r["player"] for r in rows], ["Pat Freiermuth", "Darnell Washington", "Robert Tonyan"])
+        self.assertEqual([r["published_rank"] for r in rows], [1, 2, 3])
+        self.assertEqual(rows[1]["player_url"], "https://www.steelers.com/team/players-roster/darnell-washington/")
+        self.assertNotIn("Pat Freiermuth Darnell Washington", [r["player"] for r in rows])
+
+    def test_blank_depth_cell_stays_blank(self):
+        rows = capture.parse_depth_tables(DEPTH_FIXTURE, "Commanders", "https://www.commanders.com/team/depth-chart", "2026-11-12T00:00:00+00:00", "0"*64)
+        self.assertEqual(len(rows), 2)
+        self.assertTrue(all(r["player"].strip() for r in rows))
+
+    def test_self_declared_unofficial_chart_is_labelled(self):
+        """Regression: a page that calls its own chart unofficial must say so.
+
+        The Patriots 2026 depth chart states it "is unofficial and is published by
+        the writers of Patriots.com"; those rows were labelled plainly
+        "club depth chart", the same as charts carrying no such caveat.
+        """
+        raw = ('<h1>New England Patriots Unofficial Depth Chart</h1>'
+               '<p>The 2026 depth chart is unofficial and is published by the writers of Patriots.com. '
+               'The depth chart reflects the opinions of the Patriots.com writers and do not '
+               'necessarily reflect those of the organization.</p>'
+               '<table summary="Offense"><caption>Offense</caption>'
+               '<thead><tr><th>Position</th><th>First</th></tr></thead><tbody>'
+               '<tr><td>QB</td><td><a href="/team/players-roster/drake-maye/">Drake Maye</a></td></tr>'
+               '</tbody></table>')
+        rows = capture.parse_depth_tables(raw, "Patriots", "https://www.patriots.com/team/depth-chart", "2026-11-12T00:00:00+00:00", "0"*64)
+        self.assertTrue(rows[0]["authority"].startswith("club-published UNOFFICIAL"))
+        self.assertIn("writers", rows[0]["authority_caveat"])
+
+    def test_authoritative_chart_is_not_relabelled(self):
+        """A chart with no unofficial caveat keeps the plain authority label."""
+        rows = capture.parse_depth_tables(DEPTH_FIXTURE, "Commanders", "https://www.commanders.com/team/depth-chart", "2026-11-12T00:00:00+00:00", "0"*64)
+        self.assertEqual(rows[0]["authority"], "club depth chart")
+        self.assertEqual(rows[0]["authority_caveat"], "")
+
     def test_colts_unofficial_authority(self):
         raw = f'<script type="application/ld+json">{COLTS_FIXTURE}</script>'
         rows = capture.parse_colts_article(raw, "https://www.colts.com/news/x", "2026-11-12T00:00:00+00:00", "0"*64)
@@ -155,6 +205,50 @@ class ValidationTests(unittest.TestCase):
         result = v.assess(synthetic_records(400), policy(funding_verified=False))
         self.assertFalse(result["gates"]["G10"]["pass"])
         self.assertFalse(result["eligible"])
+
+
+class VerificationTests(unittest.TestCase):
+    """The independent verifier must be able to fail, or it proves nothing."""
+
+    def setUp(self):
+        import verify_sources
+        self.verify = verify_sources
+        self.baseline = json.loads((ROOT / "decision-lab/data/verification_baseline.json").read_text())
+        self.published = ROOT / "line-lab/data/standings_2026.json"
+        self.original = self.published.read_text()
+
+    def tearDown(self):
+        self.published.write_text(self.original)
+
+    def test_baseline_covers_every_club(self):
+        data = json.loads(self.original)
+        for team in data["teams"]:
+            self.assertIn(team["abbr"], self.baseline["standings"], team["abbr"])
+
+    def test_published_standings_match_transcription(self):
+        result = self.verify.check_standings(self.baseline)
+        self.assertEqual(result["summary"]["mismatch"], 0)
+        self.assertGreater(result["summary"]["match"], 0)
+
+    def test_mutated_value_is_caught(self):
+        """Negative control: a wrong published number must be reported."""
+        data = json.loads(self.original)
+        for team in data["teams"]:
+            if team["abbr"] == "KC":
+                team["pf"] = 999
+        self.published.write_text(json.dumps(data))
+        result = self.verify.check_standings(self.baseline)
+        bad = [r for r in result["rows"] if r["status"] == "mismatch"]
+        self.assertEqual(len(bad), 1)
+        self.assertEqual((bad[0]["label"], bad[0]["field"]), ("KC", "pf"))
+        self.assertEqual(bad[0]["reference"], "202")
+
+    def test_absent_reference_is_unverified_not_guessed(self):
+        """A club with no transcription is unverified; it is never assumed correct."""
+        result = self.verify.check_standings({"standings": {}})
+        self.assertEqual(result["summary"]["match"], 0)
+        self.assertEqual(result["summary"]["mismatch"], 0)
+        self.assertGreater(result["summary"]["unverified"], 0)
 
 
 class CatalogTests(unittest.TestCase):

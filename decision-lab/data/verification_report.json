@@ -1,0 +1,5281 @@
+{
+  "generated": "2026-11-12",
+  "session": "arena/dc6c67cf-nfl3",
+  "method": "Published values in this repository are compared with an independent transcription of the official page and with the page's own arithmetic identities. Nothing is fetched at run time, so an unreachable network cannot masquerade as a pass.",
+  "transcribed_by": "arena/dc6c67cf-nfl3, read directly from the official pages linked per row",
+  "transcribed_at": "2026-11-12",
+  "totals": {
+    "match": 314,
+    "mismatch": 0,
+    "unverified": 265
+  },
+  "sections": [
+    {
+      "page": "line-lab/data/standings_2026.json",
+      "present": true,
+      "rows": [
+        {
+          "label": "BUF",
+          "field": "w",
+          "published": "7",
+          "reference": "7",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "BUF",
+          "field": "l",
+          "published": "1",
+          "reference": "1",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "BUF",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "BUF",
+          "field": "pf",
+          "published": "256",
+          "reference": "256",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "BUF",
+          "field": "pa",
+          "published": "187",
+          "reference": "187",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "BUF",
+          "field": "net",
+          "published": "69",
+          "reference": "69",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NE",
+          "field": "w",
+          "published": "5",
+          "reference": "5",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NE",
+          "field": "l",
+          "published": "4",
+          "reference": "4",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NE",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NE",
+          "field": "pf",
+          "published": "211",
+          "reference": "211",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NE",
+          "field": "pa",
+          "published": "207",
+          "reference": "207",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NE",
+          "field": "net",
+          "published": "4",
+          "reference": "4",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NYJ",
+          "field": "w",
+          "published": "2",
+          "reference": "2",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NYJ",
+          "field": "l",
+          "published": "7",
+          "reference": "7",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NYJ",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NYJ",
+          "field": "pf",
+          "published": "182",
+          "reference": "182",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NYJ",
+          "field": "pa",
+          "published": "223",
+          "reference": "223",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NYJ",
+          "field": "net",
+          "published": "-41",
+          "reference": "-41",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "MIA",
+          "field": "w",
+          "published": "1",
+          "reference": "1",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "MIA",
+          "field": "l",
+          "published": "7",
+          "reference": "7",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "MIA",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "MIA",
+          "field": "pf",
+          "published": "126",
+          "reference": "126",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "MIA",
+          "field": "pa",
+          "published": "200",
+          "reference": "200",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "MIA",
+          "field": "net",
+          "published": "-74",
+          "reference": "-74",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "PIT",
+          "field": "w",
+          "published": "6",
+          "reference": "6",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "PIT",
+          "field": "l",
+          "published": "2",
+          "reference": "2",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "PIT",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "PIT",
+          "field": "pf",
+          "published": "180",
+          "reference": "180",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "PIT",
+          "field": "pa",
+          "published": "144",
+          "reference": "144",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "PIT",
+          "field": "net",
+          "published": "36",
+          "reference": "36",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CIN",
+          "field": "w",
+          "published": "6",
+          "reference": "6",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CIN",
+          "field": "l",
+          "published": "2",
+          "reference": "2",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CIN",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CIN",
+          "field": "pf",
+          "published": "240",
+          "reference": "240",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CIN",
+          "field": "pa",
+          "published": "175",
+          "reference": "175",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CIN",
+          "field": "net",
+          "published": "65",
+          "reference": "65",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CLE",
+          "field": "w",
+          "published": "5",
+          "reference": "5",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CLE",
+          "field": "l",
+          "published": "4",
+          "reference": "4",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CLE",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CLE",
+          "field": "pf",
+          "published": "161",
+          "reference": "161",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CLE",
+          "field": "pa",
+          "published": "196",
+          "reference": "196",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CLE",
+          "field": "net",
+          "published": "-35",
+          "reference": "-35",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "BAL",
+          "field": "w",
+          "published": "4",
+          "reference": "4",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "BAL",
+          "field": "l",
+          "published": "5",
+          "reference": "5",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "BAL",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "BAL",
+          "field": "pf",
+          "published": "189",
+          "reference": "189",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "BAL",
+          "field": "pa",
+          "published": "236",
+          "reference": "236",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "BAL",
+          "field": "net",
+          "published": "-47",
+          "reference": "-47",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "JAX",
+          "field": "w",
+          "published": "6",
+          "reference": "6",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "JAX",
+          "field": "l",
+          "published": "2",
+          "reference": "2",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "JAX",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "JAX",
+          "field": "pf",
+          "published": "229",
+          "reference": "229",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "JAX",
+          "field": "pa",
+          "published": "121",
+          "reference": "121",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "JAX",
+          "field": "net",
+          "published": "108",
+          "reference": "108",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "HOU",
+          "field": "w",
+          "published": "3",
+          "reference": "3",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "HOU",
+          "field": "l",
+          "published": "5",
+          "reference": "5",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "HOU",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "HOU",
+          "field": "pf",
+          "published": "209",
+          "reference": "209",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "HOU",
+          "field": "pa",
+          "published": "192",
+          "reference": "192",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "HOU",
+          "field": "net",
+          "published": "17",
+          "reference": "17",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "IND",
+          "field": "w",
+          "published": "2",
+          "reference": "2",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "IND",
+          "field": "l",
+          "published": "7",
+          "reference": "7",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "IND",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "IND",
+          "field": "pf",
+          "published": "184",
+          "reference": "184",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "IND",
+          "field": "pa",
+          "published": "249",
+          "reference": "249",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "IND",
+          "field": "net",
+          "published": "-65",
+          "reference": "-65",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "TEN",
+          "field": "w",
+          "published": "1",
+          "reference": "1",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "TEN",
+          "field": "l",
+          "published": "7",
+          "reference": "7",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "TEN",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "TEN",
+          "field": "pf",
+          "published": "144",
+          "reference": "144",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "TEN",
+          "field": "pa",
+          "published": "199",
+          "reference": "199",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "TEN",
+          "field": "net",
+          "published": "-55",
+          "reference": "-55",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "DEN",
+          "field": "w",
+          "published": "7",
+          "reference": "7",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "DEN",
+          "field": "l",
+          "published": "2",
+          "reference": "2",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "DEN",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "DEN",
+          "field": "pf",
+          "published": "198",
+          "reference": "198",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "DEN",
+          "field": "pa",
+          "published": "186",
+          "reference": "186",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "DEN",
+          "field": "net",
+          "published": "12",
+          "reference": "12",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "KC",
+          "field": "w",
+          "published": "6",
+          "reference": "6",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "KC",
+          "field": "l",
+          "published": "2",
+          "reference": "2",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "KC",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "KC",
+          "field": "pf",
+          "published": "202",
+          "reference": "202",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "KC",
+          "field": "pa",
+          "published": "143",
+          "reference": "143",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "KC",
+          "field": "net",
+          "published": "59",
+          "reference": "59",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "LV",
+          "field": "w",
+          "published": "4",
+          "reference": "4",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "LV",
+          "field": "l",
+          "published": "5",
+          "reference": "5",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "LV",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "LV",
+          "field": "pf",
+          "published": "238",
+          "reference": "238",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "LV",
+          "field": "pa",
+          "published": "268",
+          "reference": "268",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "LV",
+          "field": "net",
+          "published": "-30",
+          "reference": "-30",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "LAC",
+          "field": "w",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "LAC",
+          "field": "l",
+          "published": "8",
+          "reference": "8",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "LAC",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "LAC",
+          "field": "pf",
+          "published": "121",
+          "reference": "121",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "LAC",
+          "field": "pa",
+          "published": "219",
+          "reference": "219",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "LAC",
+          "field": "net",
+          "published": "-98",
+          "reference": "-98",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NYG",
+          "field": "w",
+          "published": "5",
+          "reference": "5",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NYG",
+          "field": "l",
+          "published": "2",
+          "reference": "2",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NYG",
+          "field": "t",
+          "published": "1",
+          "reference": "1",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NYG",
+          "field": "pf",
+          "published": "182",
+          "reference": "182",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NYG",
+          "field": "pa",
+          "published": "172",
+          "reference": "172",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NYG",
+          "field": "net",
+          "published": "10",
+          "reference": "10",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "DAL",
+          "field": "w",
+          "published": "4",
+          "reference": "4",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "DAL",
+          "field": "l",
+          "published": "5",
+          "reference": "5",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "DAL",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "DAL",
+          "field": "pf",
+          "published": "246",
+          "reference": "246",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "DAL",
+          "field": "pa",
+          "published": "236",
+          "reference": "236",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "DAL",
+          "field": "net",
+          "published": "10",
+          "reference": "10",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "WAS",
+          "field": "w",
+          "published": "2",
+          "reference": "2",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "WAS",
+          "field": "l",
+          "published": "5",
+          "reference": "5",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "WAS",
+          "field": "t",
+          "published": "1",
+          "reference": "1",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "WAS",
+          "field": "pf",
+          "published": "172",
+          "reference": "172",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "WAS",
+          "field": "pa",
+          "published": "202",
+          "reference": "202",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "WAS",
+          "field": "net",
+          "published": "-30",
+          "reference": "-30",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "PHI",
+          "field": "w",
+          "published": "2",
+          "reference": "2",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "PHI",
+          "field": "l",
+          "published": "7",
+          "reference": "7",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "PHI",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "PHI",
+          "field": "pf",
+          "published": "148",
+          "reference": "148",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "PHI",
+          "field": "pa",
+          "published": "221",
+          "reference": "221",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "PHI",
+          "field": "net",
+          "published": "-73",
+          "reference": "-73",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CHI",
+          "field": "w",
+          "published": "7",
+          "reference": "7",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CHI",
+          "field": "l",
+          "published": "2",
+          "reference": "2",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CHI",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CHI",
+          "field": "pf",
+          "published": "241",
+          "reference": "241",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CHI",
+          "field": "pa",
+          "published": "184",
+          "reference": "184",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CHI",
+          "field": "net",
+          "published": "57",
+          "reference": "57",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "DET",
+          "field": "w",
+          "published": "6",
+          "reference": "6",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "DET",
+          "field": "l",
+          "published": "2",
+          "reference": "2",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "DET",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "DET",
+          "field": "pf",
+          "published": "222",
+          "reference": "222",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "DET",
+          "field": "pa",
+          "published": "189",
+          "reference": "189",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "DET",
+          "field": "net",
+          "published": "33",
+          "reference": "33",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "MIN",
+          "field": "w",
+          "published": "6",
+          "reference": "6",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "MIN",
+          "field": "l",
+          "published": "2",
+          "reference": "2",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "MIN",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "MIN",
+          "field": "pf",
+          "published": "146",
+          "reference": "146",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "MIN",
+          "field": "pa",
+          "published": "116",
+          "reference": "116",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "MIN",
+          "field": "net",
+          "published": "30",
+          "reference": "30",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "GB",
+          "field": "w",
+          "published": "6",
+          "reference": "6",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "GB",
+          "field": "l",
+          "published": "3",
+          "reference": "3",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "GB",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "GB",
+          "field": "pf",
+          "published": "216",
+          "reference": "216",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "GB",
+          "field": "pa",
+          "published": "191",
+          "reference": "191",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "GB",
+          "field": "net",
+          "published": "25",
+          "reference": "25",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CAR",
+          "field": "w",
+          "published": "3",
+          "reference": "3",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CAR",
+          "field": "l",
+          "published": "5",
+          "reference": "5",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CAR",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CAR",
+          "field": "pf",
+          "published": "199",
+          "reference": "199",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CAR",
+          "field": "pa",
+          "published": "219",
+          "reference": "219",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CAR",
+          "field": "net",
+          "published": "-20",
+          "reference": "-20",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NO",
+          "field": "w",
+          "published": "3",
+          "reference": "3",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NO",
+          "field": "l",
+          "published": "5",
+          "reference": "5",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NO",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NO",
+          "field": "pf",
+          "published": "185",
+          "reference": "185",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NO",
+          "field": "pa",
+          "published": "216",
+          "reference": "216",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NO",
+          "field": "net",
+          "published": "-31",
+          "reference": "-31",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "TB",
+          "field": "w",
+          "published": "3",
+          "reference": "3",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "TB",
+          "field": "l",
+          "published": "6",
+          "reference": "6",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "TB",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "TB",
+          "field": "pf",
+          "published": "202",
+          "reference": "202",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "TB",
+          "field": "pa",
+          "published": "178",
+          "reference": "178",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "TB",
+          "field": "net",
+          "published": "24",
+          "reference": "24",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "ATL",
+          "field": "w",
+          "published": "3",
+          "reference": "3",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "ATL",
+          "field": "l",
+          "published": "6",
+          "reference": "6",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "ATL",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "ATL",
+          "field": "pf",
+          "published": "188",
+          "reference": "188",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "ATL",
+          "field": "pa",
+          "published": "223",
+          "reference": "223",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "ATL",
+          "field": "net",
+          "published": "-35",
+          "reference": "-35",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "SF",
+          "field": "w",
+          "published": "7",
+          "reference": "7",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "SF",
+          "field": "l",
+          "published": "1",
+          "reference": "1",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "SF",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "SF",
+          "field": "pf",
+          "published": "235",
+          "reference": "235",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "SF",
+          "field": "pa",
+          "published": "156",
+          "reference": "156",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "SF",
+          "field": "net",
+          "published": "79",
+          "reference": "79",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "SEA",
+          "field": "w",
+          "published": "5",
+          "reference": "5",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "SEA",
+          "field": "l",
+          "published": "4",
+          "reference": "4",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "SEA",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "SEA",
+          "field": "pf",
+          "published": "202",
+          "reference": "202",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "SEA",
+          "field": "pa",
+          "published": "162",
+          "reference": "162",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "SEA",
+          "field": "net",
+          "published": "40",
+          "reference": "40",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "LA",
+          "field": "w",
+          "published": "5",
+          "reference": "5",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "LA",
+          "field": "l",
+          "published": "4",
+          "reference": "4",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "LA",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "LA",
+          "field": "pf",
+          "published": "214",
+          "reference": "214",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "LA",
+          "field": "pa",
+          "published": "181",
+          "reference": "181",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "LA",
+          "field": "net",
+          "published": "33",
+          "reference": "33",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "AZ",
+          "field": "w",
+          "published": "3",
+          "reference": "3",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "AZ",
+          "field": "l",
+          "published": "6",
+          "reference": "6",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "AZ",
+          "field": "t",
+          "published": "0",
+          "reference": "0",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "AZ",
+          "field": "pf",
+          "published": "178",
+          "reference": "178",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "AZ",
+          "field": "pa",
+          "published": "255",
+          "reference": "255",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "AZ",
+          "field": "net",
+          "published": "-77",
+          "reference": "-77",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        }
+      ],
+      "summary": {
+        "match": 192,
+        "mismatch": 0,
+        "unverified": 0
+      }
+    },
+    {
+      "page": "line-lab/data/standings_2026.json (arithmetic)",
+      "present": true,
+      "rows": [
+        {
+          "label": "BUF",
+          "field": "PF-PA=NET",
+          "published": "256-187=69",
+          "reference": "69",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "BUF",
+          "field": "W+L+T consistent",
+          "published": "7/1/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 8; splits are checked below."
+        },
+        {
+          "label": "NE",
+          "field": "PF-PA=NET",
+          "published": "211-207=4",
+          "reference": "4",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NE",
+          "field": "W+L+T consistent",
+          "published": "5/4/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 9; splits are checked below."
+        },
+        {
+          "label": "NYJ",
+          "field": "PF-PA=NET",
+          "published": "182-223=-41",
+          "reference": "-41",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NYJ",
+          "field": "W+L+T consistent",
+          "published": "2/7/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 9; splits are checked below."
+        },
+        {
+          "label": "MIA",
+          "field": "PF-PA=NET",
+          "published": "126-200=-74",
+          "reference": "-74",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "MIA",
+          "field": "W+L+T consistent",
+          "published": "1/7/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 8; splits are checked below."
+        },
+        {
+          "label": "PIT",
+          "field": "PF-PA=NET",
+          "published": "180-144=36",
+          "reference": "36",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "PIT",
+          "field": "W+L+T consistent",
+          "published": "6/2/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 8; splits are checked below."
+        },
+        {
+          "label": "CIN",
+          "field": "PF-PA=NET",
+          "published": "240-175=65",
+          "reference": "65",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CIN",
+          "field": "W+L+T consistent",
+          "published": "6/2/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 8; splits are checked below."
+        },
+        {
+          "label": "CLE",
+          "field": "PF-PA=NET",
+          "published": "161-196=-35",
+          "reference": "-35",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CLE",
+          "field": "W+L+T consistent",
+          "published": "5/4/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 9; splits are checked below."
+        },
+        {
+          "label": "BAL",
+          "field": "PF-PA=NET",
+          "published": "189-236=-47",
+          "reference": "-47",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "BAL",
+          "field": "W+L+T consistent",
+          "published": "4/5/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 9; splits are checked below."
+        },
+        {
+          "label": "JAX",
+          "field": "PF-PA=NET",
+          "published": "229-121=108",
+          "reference": "108",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "JAX",
+          "field": "W+L+T consistent",
+          "published": "6/2/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 8; splits are checked below."
+        },
+        {
+          "label": "HOU",
+          "field": "PF-PA=NET",
+          "published": "209-192=17",
+          "reference": "17",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "HOU",
+          "field": "W+L+T consistent",
+          "published": "3/5/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 8; splits are checked below."
+        },
+        {
+          "label": "IND",
+          "field": "PF-PA=NET",
+          "published": "184-249=-65",
+          "reference": "-65",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "IND",
+          "field": "W+L+T consistent",
+          "published": "2/7/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 9; splits are checked below."
+        },
+        {
+          "label": "TEN",
+          "field": "PF-PA=NET",
+          "published": "144-199=-55",
+          "reference": "-55",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "TEN",
+          "field": "W+L+T consistent",
+          "published": "1/7/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 8; splits are checked below."
+        },
+        {
+          "label": "DEN",
+          "field": "PF-PA=NET",
+          "published": "198-186=12",
+          "reference": "12",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "DEN",
+          "field": "W+L+T consistent",
+          "published": "7/2/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 9; splits are checked below."
+        },
+        {
+          "label": "KC",
+          "field": "PF-PA=NET",
+          "published": "202-143=59",
+          "reference": "59",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "KC",
+          "field": "W+L+T consistent",
+          "published": "6/2/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 8; splits are checked below."
+        },
+        {
+          "label": "LV",
+          "field": "PF-PA=NET",
+          "published": "238-268=-30",
+          "reference": "-30",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "LV",
+          "field": "W+L+T consistent",
+          "published": "4/5/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 9; splits are checked below."
+        },
+        {
+          "label": "LAC",
+          "field": "PF-PA=NET",
+          "published": "121-219=-98",
+          "reference": "-98",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "LAC",
+          "field": "W+L+T consistent",
+          "published": "0/8/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 8; splits are checked below."
+        },
+        {
+          "label": "NYG",
+          "field": "PF-PA=NET",
+          "published": "182-172=10",
+          "reference": "10",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NYG",
+          "field": "W+L+T consistent",
+          "published": "5/2/1",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 8; splits are checked below."
+        },
+        {
+          "label": "DAL",
+          "field": "PF-PA=NET",
+          "published": "246-236=10",
+          "reference": "10",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "DAL",
+          "field": "W+L+T consistent",
+          "published": "4/5/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 9; splits are checked below."
+        },
+        {
+          "label": "WAS",
+          "field": "PF-PA=NET",
+          "published": "172-202=-30",
+          "reference": "-30",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "WAS",
+          "field": "W+L+T consistent",
+          "published": "2/5/1",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 8; splits are checked below."
+        },
+        {
+          "label": "PHI",
+          "field": "PF-PA=NET",
+          "published": "148-221=-73",
+          "reference": "-73",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "PHI",
+          "field": "W+L+T consistent",
+          "published": "2/7/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 9; splits are checked below."
+        },
+        {
+          "label": "CHI",
+          "field": "PF-PA=NET",
+          "published": "241-184=57",
+          "reference": "57",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CHI",
+          "field": "W+L+T consistent",
+          "published": "7/2/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 9; splits are checked below."
+        },
+        {
+          "label": "DET",
+          "field": "PF-PA=NET",
+          "published": "222-189=33",
+          "reference": "33",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "DET",
+          "field": "W+L+T consistent",
+          "published": "6/2/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 8; splits are checked below."
+        },
+        {
+          "label": "MIN",
+          "field": "PF-PA=NET",
+          "published": "146-116=30",
+          "reference": "30",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "MIN",
+          "field": "W+L+T consistent",
+          "published": "6/2/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 8; splits are checked below."
+        },
+        {
+          "label": "GB",
+          "field": "PF-PA=NET",
+          "published": "216-191=25",
+          "reference": "25",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "GB",
+          "field": "W+L+T consistent",
+          "published": "6/3/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 9; splits are checked below."
+        },
+        {
+          "label": "CAR",
+          "field": "PF-PA=NET",
+          "published": "199-219=-20",
+          "reference": "-20",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "CAR",
+          "field": "W+L+T consistent",
+          "published": "3/5/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 8; splits are checked below."
+        },
+        {
+          "label": "NO",
+          "field": "PF-PA=NET",
+          "published": "185-216=-31",
+          "reference": "-31",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "NO",
+          "field": "W+L+T consistent",
+          "published": "3/5/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 8; splits are checked below."
+        },
+        {
+          "label": "TB",
+          "field": "PF-PA=NET",
+          "published": "202-178=24",
+          "reference": "24",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "TB",
+          "field": "W+L+T consistent",
+          "published": "3/6/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 9; splits are checked below."
+        },
+        {
+          "label": "ATL",
+          "field": "PF-PA=NET",
+          "published": "188-223=-35",
+          "reference": "-35",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "ATL",
+          "field": "W+L+T consistent",
+          "published": "3/6/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 9; splits are checked below."
+        },
+        {
+          "label": "SF",
+          "field": "PF-PA=NET",
+          "published": "235-156=79",
+          "reference": "79",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "SF",
+          "field": "W+L+T consistent",
+          "published": "7/1/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 8; splits are checked below."
+        },
+        {
+          "label": "SEA",
+          "field": "PF-PA=NET",
+          "published": "202-162=40",
+          "reference": "40",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "SEA",
+          "field": "W+L+T consistent",
+          "published": "5/4/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 9; splits are checked below."
+        },
+        {
+          "label": "LA",
+          "field": "PF-PA=NET",
+          "published": "214-181=33",
+          "reference": "33",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "LA",
+          "field": "W+L+T consistent",
+          "published": "5/4/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 9; splits are checked below."
+        },
+        {
+          "label": "AZ",
+          "field": "PF-PA=NET",
+          "published": "178-255=-77",
+          "reference": "-77",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "AZ",
+          "field": "W+L+T consistent",
+          "published": "3/6/0",
+          "reference": "same total in every split record",
+          "source": "https://www.nfl.com/standings/",
+          "status": "match",
+          "note": "Games played = 9; splits are checked below."
+        }
+      ],
+      "summary": {
+        "match": 64,
+        "mismatch": 0,
+        "unverified": 0
+      }
+    },
+    {
+      "page": "decision-lab/data/official_snapshot.json (injury_rows)",
+      "present": true,
+      "rows": [
+        {
+          "label": "Commanders / John Bates",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Commanders / Treylon Burks",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Commanders / Jayden Daniels",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Commanders / Matt Gulbin",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Commanders / Chig Okonkwo",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Commanders / Lucas Patrick",
+          "field": "position",
+          "published": "C",
+          "reference": "C",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Commanders / Lucas Patrick",
+          "field": "injury",
+          "published": "Concussion",
+          "reference": "Concussion",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Commanders / Lucas Patrick",
+          "field": "practice_status",
+          "published": "Did Not Participate In Practice",
+          "reference": "Did Not Participate In Practice",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Commanders / Lucas Patrick",
+          "field": "game_status",
+          "published": "Out",
+          "reference": "Out",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Commanders / Amik Robertson",
+          "field": "position",
+          "published": "CB",
+          "reference": "CB",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Commanders / Amik Robertson",
+          "field": "injury",
+          "published": "",
+          "reference": "",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Commanders / Amik Robertson",
+          "field": "practice_status",
+          "published": "Limited Participation in Practice",
+          "reference": "Limited Participation in Practice",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Commanders / Amik Robertson",
+          "field": "game_status",
+          "published": "",
+          "reference": "",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Commanders / Shy Tuttle",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Commanders / Colson Yankoff",
+          "field": "position",
+          "published": "TE",
+          "reference": "TE",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Commanders / Colson Yankoff",
+          "field": "injury",
+          "published": "Knee",
+          "reference": "Knee",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Commanders / Colson Yankoff",
+          "field": "practice_status",
+          "published": "Did Not Participate In Practice",
+          "reference": "Did Not Participate In Practice",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Commanders / Colson Yankoff",
+          "field": "game_status",
+          "published": "Out",
+          "reference": "Out",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Giants / Abdul Carter",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Giants / Jermaine Eluemunor",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Giants / Malik Harrison",
+          "field": "position",
+          "published": "LB",
+          "reference": "LB",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Giants / Malik Harrison",
+          "field": "injury",
+          "published": "Groin",
+          "reference": "Groin",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Giants / Malik Harrison",
+          "field": "practice_status",
+          "published": "Limited Participation in Practice",
+          "reference": "Limited Participation in Practice",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Giants / Malik Harrison",
+          "field": "game_status",
+          "published": "Questionable",
+          "reference": "Questionable",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Giants / Colton Hood",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Giants / Theo Johnson",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Giants / Charlie Jones",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Giants / J.J. McCarthy",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Giants / Darnell Mooney",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Giants / Malik Nabers",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Giants / Cam Skattebo",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Giants / Andrew Thomas",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Patriots / Ben Brown",
+          "field": "position",
+          "published": "C",
+          "reference": "C",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Patriots / Ben Brown",
+          "field": "injury",
+          "published": "Knee",
+          "reference": "Knee",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Patriots / Ben Brown",
+          "field": "practice_status",
+          "published": "Did Not Participate In Practice",
+          "reference": "Did Not Participate In Practice",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Patriots / Ben Brown",
+          "field": "game_status",
+          "published": "Out",
+          "reference": "Out",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Patriots / A.J. Brown",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Patriots / Kevin Byard",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Patriots / Carlton Davis III",
+          "field": "position",
+          "published": "CB",
+          "reference": "CB",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Patriots / Carlton Davis III",
+          "field": "injury",
+          "published": "Knee",
+          "reference": "Knee",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Patriots / Carlton Davis III",
+          "field": "practice_status",
+          "published": "Did Not Participate In Practice",
+          "reference": "Did Not Participate In Practice",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Patriots / Carlton Davis III",
+          "field": "game_status",
+          "published": "Out",
+          "reference": "Out",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Patriots / Reggie Gilliam",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Patriots / TreVeyon Henderson",
+          "field": "position",
+          "published": "RB",
+          "reference": "RB",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Patriots / TreVeyon Henderson",
+          "field": "injury",
+          "published": "Illness",
+          "reference": "Illness",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Patriots / TreVeyon Henderson",
+          "field": "practice_status",
+          "published": "Did Not Participate In Practice",
+          "reference": "Did Not Participate In Practice",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Patriots / TreVeyon Henderson",
+          "field": "game_status",
+          "published": "Out",
+          "reference": "Out",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Patriots / Hunter Henry",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Patriots / Cameron Latu",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Patriots / Drake Maye",
+          "field": "position",
+          "published": "QB",
+          "reference": "QB",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Patriots / Drake Maye",
+          "field": "injury",
+          "published": "",
+          "reference": "",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Patriots / Drake Maye",
+          "field": "practice_status",
+          "published": "Full Participation in Practice",
+          "reference": "Full Participation in Practice",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Patriots / Drake Maye",
+          "field": "game_status",
+          "published": "",
+          "reference": "",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Patriots / Morgan Moses",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Patriots / Walter Rouse",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Patriots / Brenden Schooler",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Patriots / Rhamondre Stevenson",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Patriots / Greg Van Roten",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Patriots / Charles Woods",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Lions / Brian Branch",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Lions / Jared Goff",
+          "field": "position",
+          "published": "QB",
+          "reference": "QB",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Lions / Jared Goff",
+          "field": "injury",
+          "published": "",
+          "reference": "",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Lions / Jared Goff",
+          "field": "practice_status",
+          "published": "Limited Participation in Practice",
+          "reference": "Limited Participation in Practice",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Lions / Jared Goff",
+          "field": "game_status",
+          "published": "",
+          "reference": "",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Lions / Kerby Joseph",
+          "field": "position",
+          "published": "S",
+          "reference": "S",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Lions / Kerby Joseph",
+          "field": "injury",
+          "published": "",
+          "reference": "",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Lions / Kerby Joseph",
+          "field": "practice_status",
+          "published": "Limited Participation in Practice",
+          "reference": "Limited Participation in Practice",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Lions / Kerby Joseph",
+          "field": "game_status",
+          "published": "",
+          "reference": "",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Lions / Cade Mays",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Lions / D.J. Reed",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Lions / Jacob Saylors",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Lions / Amon-Ra St. Brown",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Lions / Sione Vaki",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Lions / DJ Wonnum",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Chiefs / Jeffrey Bassa",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Chiefs / Mansoor Delane",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Chiefs / Justin Fields",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Chiefs / Jaden Hicks",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Chiefs / Travis Kelce",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Chiefs / Patrick Mahomes",
+          "field": "position",
+          "published": "QB",
+          "reference": "QB",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Chiefs / Patrick Mahomes",
+          "field": "injury",
+          "published": "",
+          "reference": "",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Chiefs / Patrick Mahomes",
+          "field": "practice_status",
+          "published": "Full Participation in Practice",
+          "reference": "Full Participation in Practice",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Chiefs / Patrick Mahomes",
+          "field": "game_status",
+          "published": "",
+          "reference": "",
+          "source": "https://www.nfl.com/injuries/",
+          "status": "match",
+          "note": ""
+        },
+        {
+          "label": "Chiefs / Jaylon Moore",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Chiefs / Omarr Norman-Lott",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Chiefs / Rashee Rice",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Chiefs / Peter Woods",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Chiefs / Xavier Worthy",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Falcons / Zachariah Branch",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Falcons / Divine Deablo",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Falcons / Gervon Dexter Sr.",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Falcons / James Pearce Jr.",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Falcons / Za'Darius Smith",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Falcons / Josh Woods",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Vikings / Blake Cashman",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Vikings / T.J. Hockenson",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Vikings / Tyrion Ingram-Dawkins",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Vikings / Theo Jackson",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Vikings / Jauan Jennings",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Vikings / Kyler Murray",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Vikings / Kyle Van Noy",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Vikings / Jay Ward",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Vikings / Carson Wentz",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Packers / Aaron Banks",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Packers / Chris Brooks",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Packers / Javon Bullard",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Packers / Zaire Franklin",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Packers / Travis Glover",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Packers / Ty'Ron Hopper",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Packers / Josh Jacobs",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Packers / Bo Melton",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Packers / Skyy Moore",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Packers / Micah Parsons",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Packers / Sean Rhyan",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Packers / Trey Smack",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Packers / Lukas Van Ness",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Packers / Josh Whyle",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Packers / Savion Williams",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Packers / Kevin Zeitler",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Jaguars / Jessie Bates",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Jaguars / Ezra Cleveland",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Jaguars / Branson Combs",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Jaguars / Jordan Davis",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Jaguars / Robert Hainsey",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Jaguars / Antonio Johnson",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Jaguars / Jakobi Meyers",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Jaguars / Chris Rodriguez Jr.",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Jaguars / Bhayshul Tuten",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Jaguars / Travon Walker",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Titans / Cody Barton",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Titans / John Franklin-Myers",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Titans / Marcus Harris",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Titans / Anthony Hill Jr.",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Titans / Jaylon Jones",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Titans / JC Latham",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Titans / Tony Pollard",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Titans / Peter Skoronski",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Titans / Tyjae Spears",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Titans / Carnell Tate",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Titans / Tommy Townsend",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Titans / Kevin Winston Jr.",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Bills / Alec Anderson",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Bills / Christian Benford",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Bills / Spencer Brown",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Bills / Dion Dawkins",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Bills / Greg Gaines",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Bills / Jordan Hancock",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Bills / Dalton Kincaid",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Bills / Connor McGovern",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Bills / Ar'maj Reed-Adams",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Bills / T.J. Sanders",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Bills / Tyrell Shavers",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Jets / Omar Cooper Jr.",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Jets / Joseph Ossai",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Jets / VJ Payne",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Jets / Harrison Phillips",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Jets / Trevin Wallace",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Jets / Garrett Wilson",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Jets / Nahshon Wright",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Dolphins / Tucker Addington",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Dolphins / Kaytron Allen",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Dolphins / Darrell Baker Jr.",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Dolphins / Chris Bell",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Dolphins / Aaron Brewer",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Dolphins / Malik Herring",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Dolphins / Will Kacmarek",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Dolphins / Michael Taaffe",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Dolphins / Dante Trader Jr.",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Dolphins / Jaylen Wright",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Colts / Mo Alie-Cox",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Colts / Jaylon Carlies",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Colts / Akeem Davis-Gaither",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Colts / A.J. Haulcy",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Colts / Arden Key",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Colts / Luke Rhodes",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Colts / Jonathan Taylor",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Colts / Jerry Tillery",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Colts / Jalen Travis",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Colts / Justin Walley",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Colts / Charvarius Ward",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Panthers / Jonathon Brooks",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Panthers / Brady Christensen",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Panthers / Trevor Etienne",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Panthers / Chuba Hubbard",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Panthers / Lee Hunter",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Panthers / Mike Jackson",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Panthers / Will Lee III",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Panthers / Xavier Legette",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Panthers / Damien Lewis",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Panthers / Bobby Okereke",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Panthers / Jaelan Phillips",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Panthers / Torricelli Simpkins III",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Saints / Kelvin Banks Jr.",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Saints / CJ Donaldson",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Saints / David Edwards",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Saints / Martin Emerson",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Saints / Travis Etienne",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Saints / Noah Fant",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Saints / Alvin Kamara",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Saints / Erik McCoy",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Saints / Christen Miller",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Saints / Asim Richards",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Texans / Azeez Al-Shaair",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Texans / Reed Blankenship",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Texans / Tank Dell",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Texans / Blake Fisher",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Texans / Marvin Harrison Jr.",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Texans / Jacob Hummel",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Texans / Brevin Jordan",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Texans / Woody Marks",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Texans / David Montgomery",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Texans / Keylan Rutledge",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Texans / Jaylin Smith",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Texans / Wyatt Teller",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Texans / Tommy Togiai",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Browns / Austin Barber",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Browns / Denzel Boston",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Browns / Michael Burton",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Browns / Maliek Collins",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Browns / Harold Fannin Jr.",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Browns / Ronnie Hickman Jr.",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Browns / Tytus Howard",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Browns / Elgton Jenkins",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Browns / Carson Schwesinger",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Browns / Denzel Ward",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Browns / Quincy Williams",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Rams / Davis Allen",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Rams / Steve Avila",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Rams / Joe Cardona",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Rams / Kam Curl",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Rams / Terrance Ferguson",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Rams / Myles Garrett",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Rams / Trent McDuffie",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Rams / Puka Nacua",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Rams / Colby Parkinson",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Rams / Matthew Stafford",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cardinals / Budda Baker",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cardinals / Zachary Carter",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cardinals / Hjalte Froholdt",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cardinals / Jon Gaines II",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cardinals / Bam Knight",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cardinals / Hunter Long",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cardinals / Roy Lopez",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cardinals / Max Melton",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cardinals / Isaac Seumalo",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cardinals / Dante Stills",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cardinals / Josh Sweat",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cardinals / Jayden Williams",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cardinals / Mack Wilson",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Raiders / Thomas Booker",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Raiders / Foley Fatukasi",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Raiders / Ian Thomas",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Raiders / Trey Zuhn III",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "49ers / Mike Evans",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "49ers / Renardo Green",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "49ers / Nate Hobbs",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "49ers / Deommodore Lenoir",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "49ers / Siran Neal",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "49ers / Demarcus Robinson",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "49ers / Deebo Samuel Sr.",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "49ers / Upton Stout",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "49ers / C.J. West",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "49ers / Trent Williams",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cowboys / Jonathan Bullard",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cowboys / Donovan Ezeiruaku",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cowboys / Jake Ferguson",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cowboys / Tyler Goodson",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cowboys / Malik Hooker",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cowboys / Marist Liufau",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cowboys / P.J. Locke",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cowboys / Von Miller",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cowboys / Jonathan Mingo",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cowboys / Devin Moore",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cowboys / DeMarvion Overshown",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cowboys / George Pickens",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cowboys / Joey Porter Jr.",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cowboys / Luke Schoonmaker",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cowboys / Brevyn Spann-Ford",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Cowboys / KaVontae Turpin",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Steelers / Brandin Echols",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Steelers / DeShon Elliott",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Steelers / Derrick Harmon",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Steelers / Cameron Heyward",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Steelers / Ben Skowronek",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Steelers / Doneiko Slaughter",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Steelers / Darnell Washington",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        },
+        {
+          "label": "Steelers / T.J. Watt",
+          "field": "*",
+          "published": "",
+          "reference": null,
+          "source": "https://www.nfl.com/injuries/",
+          "status": "unverified",
+          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."
+        }
+      ],
+      "summary": {
+        "match": 44,
+        "mismatch": 0,
+        "unverified": 243
+      }
+    },
+    {
+      "page": "decision-lab/data/official_snapshot.json (depth_rows)",
+      "present": true,
+      "rows": [
+        {
+          "label": "Cardinals OLB #1",
+          "field": "player cell",
+          "published": "Zaven Collins Baron Browning",
+          "reference": "cell published more than one player",
+          "source": "https://www.azcardinals.com/team/depth-chart",
+          "status": "unverified",
+          "note": "Joined cell. Not split here because splitting cannot separate a second player from a suffix or an initial; excluded from conclusions."
+        },
+        {
+          "label": "Bengals TE #3",
+          "field": "player cell",
+          "published": "Jack Endries Cam Grandy",
+          "reference": "cell published more than one player",
+          "source": "https://www.bengals.com/team/depth-chart",
+          "status": "unverified",
+          "note": "Joined cell. Not split here because splitting cannot separate a second player from a suffix or an initial; excluded from conclusions."
+        },
+        {
+          "label": "Bengals DT #3",
+          "field": "player cell",
+          "published": "Kris Jenkins Jr. Landon Robinson",
+          "reference": "cell published more than one player",
+          "source": "https://www.bengals.com/team/depth-chart",
+          "status": "unverified",
+          "note": "Joined cell. Not split here because splitting cannot separate a second player from a suffix or an initial; excluded from conclusions."
+        },
+        {
+          "label": "Chargers WR #3",
+          "field": "player cell",
+          "published": "Derius Davis Theo Wease Jr.",
+          "reference": "cell published more than one player",
+          "source": "https://www.chargers.com/team/depth-chart",
+          "status": "unverified",
+          "note": "Joined cell. Not split here because splitting cannot separate a second player from a suffix or an initial; excluded from conclusions."
+        },
+        {
+          "label": "Colts TE #4",
+          "field": "player cell",
+          "published": "Will Mallory Pharaoh Brown",
+          "reference": "cell published more than one player",
+          "source": "https://www.colts.com/team/depth-chart",
+          "status": "unverified",
+          "note": "Joined cell. Not split here because splitting cannot separate a second player from a suffix or an initial; excluded from conclusions."
+        },
+        {
+          "label": "Cowboys TE #1",
+          "field": "player cell",
+          "published": "Jake Ferguson Brevyn Spann-Ford",
+          "reference": "cell published more than one player",
+          "source": "https://www.dallascowboys.com/team/depth-chart",
+          "status": "unverified",
+          "note": "Joined cell. Not split here because splitting cannot separate a second player from a suffix or an initial; excluded from conclusions."
+        },
+        {
+          "label": "Cowboys LB #1",
+          "field": "player cell",
+          "published": "Shemar James Jaishawn Barham",
+          "reference": "cell published more than one player",
+          "source": "https://www.dallascowboys.com/team/depth-chart",
+          "status": "unverified",
+          "note": "Joined cell. Not split here because splitting cannot separate a second player from a suffix or an initial; excluded from conclusions."
+        },
+        {
+          "label": "Cowboys S #1",
+          "field": "player cell",
+          "published": "P.J. Locke Markquese Bell",
+          "reference": "cell published more than one player",
+          "source": "https://www.dallascowboys.com/team/depth-chart",
+          "status": "unverified",
+          "note": "Joined cell. Not split here because splitting cannot separate a second player from a suffix or an initial; excluded from conclusions."
+        },
+        {
+          "label": "Jaguars RB #1",
+          "field": "player cell",
+          "published": "Bhayshul Tuten Chris Rodriguez Jr.",
+          "reference": "cell published more than one player",
+          "source": "https://www.jaguars.com/team/depth-chart",
+          "status": "unverified",
+          "note": "Joined cell. Not split here because splitting cannot separate a second player from a suffix or an initial; excluded from conclusions."
+        },
+        {
+          "label": "Jaguars LB #1",
+          "field": "player cell",
+          "published": "Ventrell Miller Branson Combs",
+          "reference": "cell published more than one player",
+          "source": "https://www.jaguars.com/team/depth-chart",
+          "status": "unverified",
+          "note": "Joined cell. Not split here because splitting cannot separate a second player from a suffix or an initial; excluded from conclusions."
+        },
+        {
+          "label": "Saints EDGE #1",
+          "field": "player cell",
+          "published": "Chase Young Carl Granderson",
+          "reference": "cell published more than one player",
+          "source": "https://www.neworleanssaints.com/team/depth-chart",
+          "status": "unverified",
+          "note": "Joined cell. Not split here because splitting cannot separate a second player from a suffix or an initial; excluded from conclusions."
+        },
+        {
+          "label": "Philadelphia Eagles EDGE #1",
+          "field": "player cell",
+          "published": "Jalyx Hunt Jonathan Greenard",
+          "reference": "cell published more than one player",
+          "source": "https://www.philadelphiaeagles.com/team/depth-chart",
+          "status": "unverified",
+          "note": "Joined cell. Not split here because splitting cannot separate a second player from a suffix or an initial; excluded from conclusions."
+        },
+        {
+          "label": "Philadelphia Eagles EDGE #1",
+          "field": "player cell",
+          "published": "Nolan Smith Jr. Jonathan Greenard",
+          "reference": "cell published more than one player",
+          "source": "https://www.philadelphiaeagles.com/team/depth-chart",
+          "status": "unverified",
+          "note": "Joined cell. Not split here because splitting cannot separate a second player from a suffix or an initial; excluded from conclusions."
+        },
+        {
+          "label": "Raiders WR #3",
+          "field": "player cell",
+          "published": "Dareke Young Cody White",
+          "reference": "cell published more than one player",
+          "source": "https://www.raiders.com/team/depth-chart",
+          "status": "unverified",
+          "note": "Joined cell. Not split here because splitting cannot separate a second player from a suffix or an initial; excluded from conclusions."
+        },
+        {
+          "label": "Seahawks WR #1",
+          "field": "player cell",
+          "published": "Cooper Kupp Rashid Shaheed",
+          "reference": "cell published more than one player",
+          "source": "https://www.seahawks.com/team/depth-chart/",
+          "status": "unverified",
+          "note": "Joined cell. Not split here because splitting cannot separate a second player from a suffix or an initial; excluded from conclusions."
+        },
+        {
+          "label": "Steelers TE #1",
+          "field": "player cell",
+          "published": "Pat Freiermuth Darnell Washington",
+          "reference": "cell published more than one player",
+          "source": "https://www.steelers.com/team/depth-chart/",
+          "status": "unverified",
+          "note": "Joined cell. Not split here because splitting cannot separate a second player from a suffix or an initial; excluded from conclusions."
+        },
+        {
+          "label": "Titans TE #3",
+          "field": "player cell",
+          "published": "David Martin-Robinson Kylen Granson",
+          "reference": "cell published more than one player",
+          "source": "https://www.tennesseetitans.com/team/depth-chart",
+          "status": "unverified",
+          "note": "Joined cell. Not split here because splitting cannot separate a second player from a suffix or an initial; excluded from conclusions."
+        },
+        {
+          "label": "Titans RB #2",
+          "field": "player cell",
+          "published": "Tyjae Spears Nick Singleton",
+          "reference": "cell published more than one player",
+          "source": "https://www.tennesseetitans.com/team/depth-chart",
+          "status": "unverified",
+          "note": "Joined cell. Not split here because splitting cannot separate a second player from a suffix or an initial; excluded from conclusions."
+        },
+        {
+          "label": "Titans RB #3",
+          "field": "player cell",
+          "published": "Julius Chestnut Michael Carter",
+          "reference": "cell published more than one player",
+          "source": "https://www.tennesseetitans.com/team/depth-chart",
+          "status": "unverified",
+          "note": "Joined cell. Not split here because splitting cannot separate a second player from a suffix or an initial; excluded from conclusions."
+        },
+        {
+          "label": "Rams TE #1",
+          "field": "player cell",
+          "published": "Davis Allen Tyler Higbee",
+          "reference": "cell published more than one player",
+          "source": "https://www.therams.com/team/depth-chart",
+          "status": "unverified",
+          "note": "Joined cell. Not split here because splitting cannot separate a second player from a suffix or an initial; excluded from conclusions."
+        },
+        {
+          "label": "Rams CB #1",
+          "field": "player cell",
+          "published": "Emmanuel Forbes Jr. Josh Wallace",
+          "reference": "cell published more than one player",
+          "source": "https://www.therams.com/team/depth-chart",
+          "status": "unverified",
+          "note": "Joined cell. Not split here because splitting cannot separate a second player from a suffix or an initial; excluded from conclusions."
+        },
+        {
+          "label": "Vikings RB #1",
+          "field": "player cell",
+          "published": "Aaron Jones Sr. Jordan Mason",
+          "reference": "cell published more than one player",
+          "source": "https://www.vikings.com/team/depth-chart",
+          "status": "unverified",
+          "note": "Joined cell. Not split here because splitting cannot separate a second player from a suffix or an initial; excluded from conclusions."
+        }
+      ],
+      "summary": {
+        "match": 0,
+        "mismatch": 0,
+        "unverified": 22
+      }
+    },
+    {
+      "page": "decision-lab/data/catalog.json (sources)",
+      "present": true,
+      "rows": [
+        {
+          "label": "docs.github.com",
+          "field": "source host",
+          "published": "S16",
+          "reference": "https",
+          "source": "https://docs.github.com/",
+          "status": "match",
+          "note": "Registered official reference."
+        },
+        {
+          "label": "nextgenstats.nfl.com",
+          "field": "source host",
+          "published": "S09",
+          "reference": "https",
+          "source": "https://nextgenstats.nfl.com/",
+          "status": "match",
+          "note": "Registered official reference."
+        },
+        {
+          "label": "operations.nfl.com",
+          "field": "source host",
+          "published": "S04, S10, S11",
+          "reference": "https",
+          "source": "https://operations.nfl.com/",
+          "status": "match",
+          "note": "Registered official reference."
+        },
+        {
+          "label": "scikit-learn.org",
+          "field": "source host",
+          "published": "S14, S15",
+          "reference": "https",
+          "source": "https://scikit-learn.org/",
+          "status": "match",
+          "note": "Registered official reference."
+        },
+        {
+          "label": "support.nfl.com",
+          "field": "source host",
+          "published": "S12",
+          "reference": "https",
+          "source": "https://support.nfl.com/",
+          "status": "match",
+          "note": "Registered official reference."
+        },
+        {
+          "label": "www.colts.com",
+          "field": "source host",
+          "published": "S08",
+          "reference": "https",
+          "source": "https://www.colts.com/",
+          "status": "match",
+          "note": "Registered official reference."
+        },
+        {
+          "label": "www.commanders.com",
+          "field": "source host",
+          "published": "S06",
+          "reference": "https",
+          "source": "https://www.commanders.com/",
+          "status": "match",
+          "note": "Registered official reference."
+        },
+        {
+          "label": "www.denverbroncos.com",
+          "field": "source host",
+          "published": "S22",
+          "reference": "https",
+          "source": "https://www.denverbroncos.com/",
+          "status": "match",
+          "note": "Registered official reference."
+        },
+        {
+          "label": "www.giants.com",
+          "field": "source host",
+          "published": "S07",
+          "reference": "https",
+          "source": "https://www.giants.com/",
+          "status": "match",
+          "note": "Registered official reference."
+        },
+        {
+          "label": "www.itl.nist.gov",
+          "field": "source host",
+          "published": "S13",
+          "reference": "https",
+          "source": "https://www.itl.nist.gov/",
+          "status": "match",
+          "note": "Registered official reference."
+        },
+        {
+          "label": "www.nfl.com",
+          "field": "source host",
+          "published": "S01, S02, S03, S05, S17, S18",
+          "reference": "https",
+          "source": "https://www.nfl.com/",
+          "status": "match",
+          "note": "Registered official reference."
+        },
+        {
+          "label": "www.patriots.com",
+          "field": "source host",
+          "published": "S20",
+          "reference": "https",
+          "source": "https://www.patriots.com/",
+          "status": "match",
+          "note": "Registered official reference."
+        },
+        {
+          "label": "www.seahawks.com",
+          "field": "source host",
+          "published": "S21",
+          "reference": "https",
+          "source": "https://www.seahawks.com/",
+          "status": "match",
+          "note": "Registered official reference."
+        },
+        {
+          "label": "www.steelers.com",
+          "field": "source host",
+          "published": "S19",
+          "reference": "https",
+          "source": "https://www.steelers.com/",
+          "status": "match",
+          "note": "Registered official reference."
+        }
+      ],
+      "summary": {
+        "match": 14,
+        "mismatch": 0,
+        "unverified": 0
+      }
+    }
+  ],
+  "passed": true
+}

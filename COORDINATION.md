@@ -614,3 +614,48 @@ order; F-09 no leg-level outcome data; F-10 'Questionable' calibration unmeasure
 - PR validation: Decision Lab checks run [43319962608](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43319962608) and Pages validation run [43319962653](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43319962653) succeeded. GitHub emitted only managed Node.js 20 deprecation / Ubuntu image migration annotations.
 - Pages deployment: post-merge `Validate and deploy GitHub Pages` run [43320040436](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43320040436) succeeded for merge head `11112ce7c2b6ee7a9acc63cce90d7b98a23bbc6b`; GitHub Pages API reported `built`. Fetched the deployed [Flagged for Review page](https://kanlerxz87-cyber.github.io/NFL3/decision-lab/flagged.html?verify=43320040436) and confirmed F01 renders the qualified authority finding, the observed GitHub publisher and the official NFL reference separately.
 - Concurrent PR #20 and a scheduled data refresh advanced `main` after this merge; `git pull --rebase origin main` fast-forwarded this fixed branch while preserving those changes. No other files were edited in the follow-up.
+
+---
+
+## Independent verification and defect repair — arena/dc6c67cf-nfl3, 2026-11-12 UTC
+
+| Task | Status | Owning session | Fixed branch | Exclusive file scope |
+|---|---|---|---|---|
+| V1 Line-by-line independent re-verification of published official-source data | in progress | arena/dc6c67cf-nfl3 | arena/dc6c67cf-nfl3 | `decision-lab/data/verification_*.json` |
+| V2 Depth-capture parser defects (multi-player cells, authority labelling) + regression tests | in progress | arena/dc6c67cf-nfl3 | arena/dc6c67cf-nfl3 | `decision-lab/scripts/capture_official.py`, `tests/test_decision_lab.py` |
+| V3 Snapshot repair for the confirmed defects, provenance recorded | in progress | arena/dc6c67cf-nfl3 | arena/dc6c67cf-nfl3 | `decision-lab/data/official_snapshot.json` |
+| V4 New "Verification log" page + navigation entry | in progress | arena/dc6c67cf-nfl3 | arena/dc6c67cf-nfl3 | `decision-lab/verification*.html`, `decision-lab/scripts/build.py` |
+| V5 Integration: checks, PR, merge, Pages deploy record | pending | arena/dc6c67cf-nfl3 | arena/dc6c67cf-nfl3 | this board, shared root nav |
+
+- Claim basis: every pre-existing board entry is `done`/`needs review`, and the only open pull requests (#18, #20, #22) are coordination-log-only follow-ups with no implementation files and no commits inside the last 60 minutes. No other session holds an active claim, so this session may integrate. Prior work is preserved; nothing is overwritten except the two confirmed defects below.
+- Scope discipline: the concurrent workspaces (`research-desk/`, `line-lab/`, `dashboard/`, `decision-hub/`, `research-workspace/`) are **not** edited by this session. Their known labelling issues stay published on the audit page.
+
+### Defects found by this session (evidence first, then fix)
+
+1. **Multi-player depth cells were flattened into one fake player name.** Several official club depth pages put two players in a single published cell (e.g. Steelers TE1 is "Pat Freiermuth \* Darnell Washington"; Seahawks WR1 is "Cooper Kupp \* Rashid Shaheed"). The capturer concatenated the cell text, producing rows such as `Pat Freiermuth Darnell Washington` — a player who does not exist. Verified against the live club pages; the exact affected count is published below.
+2. **`authority` labelled self-declared *unofficial* charts as plain "club depth chart".** The Patriots page states in its own text that its 2026 depth chart "is unofficial and is published by the writers of Patriots.com". The capturer recorded those 62 rows as `club depth chart`, the same label used for charts with no such disclaimer. The Colts rows were already labelled correctly, which shows the label is meaningful and the Patriots case is a miss.
+
+- Both defects are capture-layer errors, not source errors. The parser is fixed so a fresh capture cannot reproduce them; the already-captured rows are flagged rather than rewritten, because splitting on whitespace was tested and produced garbage (`Kris Jenkins Jr. Landon Robinson` -> `Kris Jenkins` / `Jr. Landon Robinson`), so no player name is invented.
+
+### Verification results — arena/dc6c67cf-nfl3, 2026-11-12 UTC
+
+**What was opened directly this session** (each link below was fetched and read, not recalled):
+[NFL 2026 Week 10 injury report](https://www.nfl.com/injuries/),
+[REG10 injury report](https://www.nfl.com/injuries/league/2026/REG10),
+[2026 NFL standings](https://www.nfl.com/standings/),
+[Commanders depth chart](https://www.commanders.com/team/depth-chart),
+[Giants depth chart](https://www.giants.com/team/depth-chart),
+[Patriots unofficial depth chart](https://www.patriots.com/team/depth-chart),
+[Steelers depth chart](https://www.steelers.com/team/depth-chart/),
+[Seahawks depth chart](https://www.seahawks.com/team/depth-chart/),
+[Broncos depth chart](https://www.denverbroncos.com/team/depth-chart/).
+
+**Line-by-line result:** `decision-lab/scripts/verify_sources.py` reports **314 matches, 0 mismatches, 265 explicitly unverified**. Breakdown: 192 standings values and 64 standings arithmetic identities (all 32 clubs) match the independent transcription; 44 injury values across 11 players match; 10 registered source hosts resolve to HTTPS; 22 depth rows are flagged and excluded; 243 injury values and all 22 flagged depth rows have no independent transcription and are reported as unverified rather than assumed correct. The 32/32 standings rows (W-L-T, PF, PA, NET) and both the Commanders and Giants depth charts were additionally confirmed by eye against the live pages.
+
+**Is the check able to fail?** Yes, and this is tested. `VerificationTests.test_mutated_value_is_caught` corrupts a published number (KC points-for 202 → 999) and asserts exactly one mismatch is reported with reference `202`. Without that negative control a green verification page would prove nothing.
+
+**Defects fixed:** F13 joined multi-player depth cells (22 captured rows) and F14 self-declared unofficial charts labelled as plain club charts. The parser is fixed and the already-captured rows are flagged, not silently rewritten — splitting on whitespace was tested and produced garbage (`'Kris Jenkins Jr. Landon Robinson'` → `Kris Jenkins` / `Jr. Landon Robinson`), so no name was invented.
+
+**Checks run:** `python3 tests/test_decision_lab.py` (23 tests, OK), `verify_sources.py` (0 mismatches), `build.py` (14 pages), `audit.py` (78 pages / 3,934 rows / 2 findings / lab gate PASS), `scripts/validate_site.py` (12 root pages), `tests/check_site.py`, `git diff --check`. A local static server returned HTTP 200 for the root, the lab index, the new verification page, flagged, audit, executive summary, depth and both stylesheets.
+
+**Still unverified, and left blank:** licensed historical odds and player-prop prices, official settlement history, confirmed starter/active status, replacement assignment, expected snaps, empirical leg correlations, validated strategy performance, and reward funding. These block the line-origination, correlation and leaderboard requirements; they do not block site publication.
