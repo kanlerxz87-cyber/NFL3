@@ -1,7 +1,7 @@
-"""Load the verified official snapshots from data/raw/ (gzip kept in the repo).
+"""Load the digest-verified snapshots from data/raw/ (gzip kept in the repo).
 
 Every loader returns plain dicts/lists so the engine stays dependency-free, and every loader
-records which official asset it came from so the published tables can carry a real source link.
+records which release asset it came from so the published tables can carry a real source link.
 """
 from __future__ import annotations
 
@@ -49,7 +49,7 @@ def available(basename: str) -> bool:
 
 
 def asset_url(basename: str) -> str | None:
-    """Resolve the official release URL for a stored file name."""
+    """Resolve the release URL for a stored file name."""
     m = manifest().get("files", {})
     for rec in m.values():
         if rec.get("stored_as", "").endswith(basename) or os.path.basename(rec.get("asset_url", "")) == basename:
@@ -180,7 +180,7 @@ def rosters() -> list[dict]:
 
 
 def depth_rows_for_season(season: int) -> list[dict]:
-    """Depth chart rows for any season, normalised across the two official schemas.
+    """Depth chart rows for any season, normalised across the two release schemas.
 
     Pre-2025 files:  season, club_code, week, game_type, depth_team, formation, gsis_id, position,
                      depth_position, full_name
@@ -218,7 +218,7 @@ def depth_rows_for_season(season: int) -> list[dict]:
 
 
 def injuries_for_season(season: int) -> list[dict]:
-    """Official injury-report rows for any season, from the same release family."""
+    """Injury-report rows for any season, from the same release family."""
     out = []
     for r in rows(f"injuries_{season}.csv"):
         out.append({

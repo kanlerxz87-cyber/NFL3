@@ -12,9 +12,10 @@ def build_questions(D, C) -> str:
     fam = C.get("family", [])
     nav = lambda h: f'<a href="{h}">detail</a>'
     rows = [
-        ["Q01", "Which official data can be used, and can we prove the bytes are the official ones?",
-         f"Answered. {len(D['files'])} official nflverse release assets are fetched by CI and each one is "
-         "verified against the SHA-256 digest GitHub publishes for that asset.",
+        ["Q01", "Which data can be used, and can we prove the bytes are unchanged since release?",
+         f"Answered. {len(D['files'])} nflverse community release assets are fetched by CI and each one is "
+         "matched against the SHA-256 digest GitHub publishes for that asset. A digest match proves "
+         "transport integrity, not NFL authorship.",
          "Redistribution terms for derived tables at scale.",
          "Keep the digest manifest per run and publish it with the results.",
          "Whether any data may be reused",
@@ -51,7 +52,7 @@ def build_questions(D, C) -> str:
          link("https://github.com/nflverse/nflverse-data/releases/tag/schedules", "games.csv")],
         ["Q06", "Does losing starters change the number, and does the market already know?",
          (f"First look only. {fmt((inj.get('market_vs_def_injuries') or {}).get('n'))} games this season "
-          "joined to the week's official report." if inj.get("ok") else "Not established."),
+          "joined to the week's report." if inj.get("ok") else "Not established."),
          "Historical injury reports and depth charts joined across several seasons, so the sample can "
          "separate signal from noise.",
          "Run the same join for 2021-2025 using the depth_team schema and pool the seasons.",
@@ -87,9 +88,9 @@ def build_questions(D, C) -> str:
     return f"""
 <h1>Questions, information and answers</h1>
 <p class="lede">Every decision that has to be made, what is already known, what is still missing, and the
-concrete step that would close the gap. Nothing is confirmed unless its official source is linked.</p>
+concrete step that would close the gap. Nothing is confirmed unless its source is linked.</p>
 {table(["ID", "Question", "What we know", "What is missing", "How to discover it",
-        "Decision it unblocks", "Official source"], rows,
+        "Decision it unblocks", "Source"], rows,
        caption="Q01-Q04 are answered by this build; Q05-Q10 remain open")}
 <h2>Reading the register</h2>
 <ul class="bullets">
@@ -149,7 +150,7 @@ def build_suggestions(D, C) -> str:
          "Medium.",
          "Line movement does not predict results.",
          "Candidate", "Medium", "G2", "lines.html"],
-        ["S10", "Fail the build automatically if any table row lacks an official source link",
+        ["S10", "Fail the build automatically if any table row lacks a source link",
          "tests/check_site.py enforces it and CI runs the check on every push.",
          "Low.",
          "A row without a source link ships, which fails the build.",
@@ -165,7 +166,7 @@ A suggestion that cannot fail a test is an opinion, not an experiment.</div>
         "Status", "Effort", "Gate", "Detail"], rows, cls="data method",
        caption="Implemented = already shipped in this build; Recommended next = highest evidence per unit of cost. "
                "This table records proposals and their evidence status, so its rows carry a detail-page link "
-               "rather than an official data value.")}
+               "rather than a data value.")}
 <h2>Decision record template</h2>
 <p class="sub">When a suggestion is accepted, record the decision so the next session inherits the
 reasoning instead of re-litigating it.</p>
@@ -187,7 +188,7 @@ def build_sources(D, C) -> str:
         rows.append([esc(name), fmt(rec.get("bytes")),
                      f'<code>{esc(rec.get("sha256", "")[:23])}…</code>',
                      esc(rec.get("release_asset_updated_utc", "")),
-                     link(rec.get("asset_url", "#"), "official asset"),
+                     link(rec.get("asset_url", "#"), "release asset"),
                      '<span class="pill pill-pass">verified</span>'])
     for f in man.get("failures", []):
         rows.append([esc(f.get("name")), "—", "—", "—",
@@ -204,32 +205,32 @@ def build_sources(D, C) -> str:
         ["nflreadr data dictionaries", "Field definitions for every nflverse table",
          link("https://nflreadr.nflverse.com/", "nflreadr.nflverse.com"),
          "depth_team, report_status and the spread_line sign convention"],
-        ["nflverse-data releases", "The official machine-readable files themselves",
+        ["nflverse-data releases (community)", "The machine-readable files themselves, published by the nflverse community project",
          link("https://github.com/nflverse/nflverse-data/releases", "GitHub releases"),
          "Primary source for every computed value"],
     ]
     return f"""
-<h1>Official sources and verification register</h1>
+<h1>Sources and verification register</h1>
 <p class="lede">Every computed number traces back to a file on this page, and every file was checked
 byte-for-byte against the SHA-256 digest GitHub publishes for that release asset.</p>
 <div class="notice ok"><b>Why a digest is sufficient.</b> GitHub computes the digest server-side from
-the stored asset, so a match proves the local copy is identical to the official asset at the recorded
+the stored asset, so a match proves the local copy is identical to the asset published in the release at the recorded
 time, not merely similar.</div>
 <h2>Ingested assets</h2>
 {table(["Asset", "Bytes", "SHA-256 (prefix)", "Asset updated (UTC)", "Source", "Integrity"], rows,
        cls="data method",
        caption="Produced by pipeline/fetch_official.py into data/raw/manifest.json. This table IS the "
-               "source register: each row links the official asset it documents.")}
+               "source register: each row links the release asset it documents.")}
 <h2>Reference sources used for definitions and cross-checks</h2>
 {table(["Source", "Used for", "Link", "What was verified against it"], extra, cls="data method",
-       caption="Reference sources. Each row links the official page it documents.")}
+       caption="Reference sources. Each row links the source page it documents.")}
 <h2>What "verified" does not mean</h2>
 <ul class="bullets">
-<li>It does not mean the NFL's own feed is error-free. It means we copied the official asset faithfully
+<li>It does not mean the NFL's own feed is error-free. It means we copied the release asset faithfully
 and can prove it.</li>
 <li>It does not survive a future refresh: a new asset gets a new digest. The timestamp column is the
 point-in-time reference.</li>
-<li>Values that would need an official source we cannot reach are left blank and listed on
+<li>Values that would need an official NFL source we cannot reach are left blank and listed on
 {link("flagged.html", "Flagged for review")}.</li>
 </ul>
 """
@@ -239,14 +240,14 @@ def build_flagged(D, C) -> str:
     man = D["manifest"]
     items = []
     for f in man.get("failures", []):
-        items.append([esc(f.get("name", "")), "Official asset not retrieved or digest mismatch",
+        items.append([esc(f.get("name", "")), "Release asset not retrieved or digest mismatch",
                       esc(str(f.get("reason"))[:200]), "Blocked until a verified copy exists",
                       "data refresh"])
     items += [
         ["Closing lines", "A single consensus closing line, not a best-of-market price",
          "Beating a consensus close is not the same as beating the best available number.",
          "Benchmark only", "lines.html"],
-        ["Injury severity", "The official report has no expected-games-missed field",
+        ["Injury severity", "The report has no expected-games-missed field",
          "Any severity number would be a model output, not a sourced fact.",
          "Left blank", "availability.html"],
         ["Player props", "No verified player-prop history or closing price in the snapshot",
@@ -267,7 +268,7 @@ def build_flagged(D, C) -> str:
     rows = [[f"F{i + 1:02d}", a, b, c, d, e] for i, (a, b, c, d, e) in enumerate(items)]
     return f"""
 <h1>Flagged for review</h1>
-<p class="lede">Everything that could not be confirmed from an official source, or was confirmed only
+<p class="lede">Everything that could not be confirmed from a linked source, or was confirmed only
 partially. None of it blocks publication; all of it blocks a claim.</p>
 <div class="notice warn"><b>Read this before trusting a number.</b> A blank cell elsewhere on the site
 usually maps to a row here.</div>
@@ -277,7 +278,7 @@ usually maps to a row here.</div>
                "page where the item appears.")}
 <h2>How an item gets cleared</h2>
 <ol class="bullets">
-<li>A verified official source is added to the pipeline and digested.</li>
+<li>A source that can carry the claim - an official NFL page or a re-digested release asset - is added and linked.</li>
 <li>The value is regenerated by CI from that source, never typed in by hand.</li>
 <li>The row is removed only when both the source link and the digest are present.</li>
 </ol>
@@ -289,14 +290,14 @@ def build_review(D, C) -> str:
     for name, rec in sorted(D["files"].items()):
         checks.append([f"<code>{esc(name)}</code>", "Downloaded by pipeline/fetch_official.py",
                        f'sha256 {esc(rec.get("sha256", "")[:16])}… · {fmt(rec.get("bytes"))} bytes',
-                       '<span class="pill pill-pass">matches official digest</span>',
+                       '<span class="pill pill-pass">matches published digest</span>',
                        link(rec.get("asset_url", "#"), "open asset")])
     season = D.get("season_games") or []
     played = [g for g in season if g["home_score"] is not None]
     lines_missing = [g for g in played if g["spread_line"] is None]
     inj_weeks = sorted({r["week"] for r in (D.get("injuries") or [])})
     checks += [
-        ["2026 schedule rows", f"{len(season)} rows parsed from the official schedule",
+        ["2026 schedule rows", f"{len(season)} rows parsed from the schedule release",
          f"{len(played)} already played", '<span class="pill pill-pass">parsed</span>',
          link("https://github.com/nflverse/nflverse-data/releases/tag/schedules", "games.csv")],
         ["Completed games with a closing line",
@@ -315,17 +316,17 @@ def build_review(D, C) -> str:
     ]
     return f"""
 <h1>Repository and data review</h1>
-<p class="lede">Line by line: what was checked, against which official source, and what was flagged.
+<p class="lede">Line by line: what was checked, against which source, and what was flagged.
 Every row links to the artefact so it can be verified by hand.</p>
 <h2>Data integrity</h2>
 {table(["Item", "What was done", "Evidence", "Result", "Manual check"], checks,
        caption="Results from the current verified snapshot")}
 <h2>Irregularities found during the review</h2>
 <ul class="bullets">
-<li>The 2025 and later official depth charts no longer carry <code>depth_team</code>; they use
+<li>The 2025 and later depth-chart releases no longer carry <code>depth_team</code>; they use
 <code>pos_slot</code> and <code>pos_rank</code>. The 1st/2nd/3rd-string field exists only for
 2021-2024, so any multi-season backup study must run on that window.</li>
-<li>The official schedule's <code>spread_line</code> sign convention is <b>positive = home
+<li>The schedule file's <code>spread_line</code> sign convention is <b>positive = home
 favoured</b>, the opposite of the common sportsbook display. The engine converts it in exactly one
 place so a sign error cannot silently flip every graded bet.</li>
 <li>Team codes differ between sources for a few franchises (WSH/WAS, JAC/JAX, LA/LAR). One
@@ -337,9 +338,10 @@ availability measure therefore uses game status only and treats a blank as "not 
 why every number on this site is generated rather than quoted.</li>
 </ul>
 <h2>Cross-check against the NFL's own pages</h2>
-<p class="sub">The official nfl.com pages are the public face of the same feeds. They are used to
+<p class="sub">The official nfl.com pages are the league's own public pages. They are used to
 confirm field semantics and to spot-check values, not as a bulk source: a live page cannot be cited as
-permanent evidence for a historical number.</p>
+permanent evidence for a historical number. nflverse releases are community-published files, not NFL
+publications.</p>
 {table(["Check", "Result", "Official link"],
        [["Injury report lists a game status per player (Out / Doubtful / Questionable)",
          '<span class="pill pill-pass">confirmed</span>', link("https://www.nfl.com/injuries/", "nfl.com/injuries")],

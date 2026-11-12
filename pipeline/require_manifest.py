@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail the data refresh when an official source could not be fetched and verified."""
+"""Fail the data refresh when a release asset could not be fetched and verified."""
 from __future__ import annotations
 
 import argparse
@@ -24,9 +24,9 @@ def main() -> int:
     for f in hard:
         print(f"  ERR {f['name']}: {f['reason']}")
     if hard or len(files) < args.min_files:
-        print("RESULT: FAILED - official sources missing or unverified")
+        print("RESULT: FAILED - release assets missing or unverified")
         return 1
-    print("RESULT: OK - every ingested file matches its official SHA-256 digest")
+    print("RESULT: OK - every ingested file matches the SHA-256 digest published with its release")
     return 0
 
 

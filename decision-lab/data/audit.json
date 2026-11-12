@@ -1,37 +1,13 @@
 {
-  "html_pages": 95,
-  "table_rows": 4900,
+  "html_pages": 100,
+  "table_rows": 5005,
   "rows_missing_official_source": 533,
   "rows_community_only": 106,
   "rows_with_internal_audit_source": 7,
   "conflict_files": [],
-  "authority_claim_files": [
-    "engine/_pages_tail.py",
-    "engine/build.py",
-    "engine/conventions.py",
-    "engine/test_engine.py",
-    "research-desk/executive-summary.html",
-    "research-desk/index.html",
-    "research-desk/questions.html"
-  ],
+  "authority_claim_files": [],
   "local_errors": [],
   "findings": [
-    {
-      "id": "AUD-01",
-      "severity": "Critical",
-      "title": "NFL authority is unverified for GitHub-hosted data",
-      "detail": "7 file(s) describe nflverse GitHub releases as official or verified. Their local manifest checks GitHub-published digests, which verifies byte integrity only; this scan found no NFL authorship/authorization evidence in those files. This is not a finding that the data are inaccurate.",
-      "files": [
-        "engine/_pages_tail.py",
-        "engine/build.py",
-        "engine/conventions.py",
-        "engine/test_engine.py",
-        "research-desk/executive-summary.html",
-        "research-desk/index.html",
-        "research-desk/questions.html"
-      ],
-      "source": "S18"
-    },
     {
       "id": "AUD-03",
       "severity": "High",
@@ -361,7 +337,7 @@
     },
     {
       "path": "decision-lab/flagged.html",
-      "rows": 23,
+      "rows": 22,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -385,7 +361,7 @@
     },
     {
       "path": "decision-lab/integrity.html",
-      "rows": 16,
+      "rows": 11,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -401,7 +377,7 @@
     },
     {
       "path": "decision-lab/questions.html",
-      "rows": 29,
+      "rows": 28,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -818,6 +794,46 @@
     {
       "path": "validation.html",
       "rows": 15,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "verification-lab/index.html",
+      "rows": 20,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "verification-lab/methods.html",
+      "rows": 21,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "verification-lab/questions.html",
+      "rows": 21,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "verification-lab/queue.html",
+      "rows": 16,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "verification-lab/register.html",
+      "rows": 34,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,

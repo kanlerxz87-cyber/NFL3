@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Collect official NFL data from the nflverse-data releases with integrity verification.
+"""Collect community-published NFL-derived data from the nflverse-data releases with integrity verification.
 
-Sources (official, machine-readable, maintained by nflverse from NFL data feeds):
+Sources (machine-readable community releases, maintained by nflverse; not published by the NFL):
 
   * games / schedules  -> https://github.com/nflverse/nflverse-data/releases/tag/schedules
   * injuries           -> https://github.com/nflverse/nflverse-data/releases/tag/injuries
@@ -12,7 +12,7 @@ Sources (official, machine-readable, maintained by nflverse from NFL data feeds)
 
 Every download is checked against the SHA-256 digest that GitHub publishes on the release asset.
 GitHub computes that digest server-side from the stored asset, so a matching digest proves the
-local bytes are byte-identical to the official asset at the recorded time.  A mismatch is fatal.
+local bytes are byte-identical to the asset published in the release at the recorded time.  A mismatch is fatal.
 
 Usage:
     python3 pipeline/fetch_official.py [--dest data/raw] [--only games,injuries]
@@ -145,7 +145,7 @@ def main() -> int:
                 asset = alt
         if a is None:
             manifest["failures"].append({"name": name, "tag": tag, "asset": asset,
-                                         "reason": "asset not found in official release"})
+                                         "reason": "asset not found in the release"})
             print(f"  !! {name}: asset {asset} not present in release '{tag}'")
             continue
         dest = os.path.join(args.dest, asset)

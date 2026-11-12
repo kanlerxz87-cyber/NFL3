@@ -3,8 +3,8 @@
 
 Main's tests/check_site.py validates the root site and expects the root page set. This checker is the
 equivalent for the research desk sub-site and enforces its stronger rule: every data-table row must
-carry a link to an OFFICIAL source (nfl.com / nflverse), or to a page of the desk that holds the
-verification register.
+carry a link to a source (an official nfl.com page or a digest-verified nflverse release), or to a
+page of the desk that holds the verification register.
 
 Usage: python3 tests/check_research_desk.py research-desk
 """
@@ -15,7 +15,7 @@ import re
 import sys
 from html.parser import HTMLParser
 
-OFFICIAL_PREFIXES = (
+SOURCE_PREFIXES = (
     "https://www.nfl.com/", "https://nfl.com/", "https://operations.nfl.com/",
     "https://github.com/nflverse/", "https://nflreadr.nflverse.com/",
 )
@@ -112,19 +112,19 @@ def check(root: str) -> int:
         for rows in p.rows:
             for cells, links in rows:
                 table_rows += 1
-                ok = any(l.startswith(OFFICIAL_PREFIXES) for l in links) or \
+                ok = any(l.startswith(SOURCE_PREFIXES) for l in links) or \
                      any(l.split("#")[0] in LOCAL_OK for l in links)
                 if ok:
                     sourced_rows += 1
                 else:
-                    problems.append(f"{name}: table row without an official source link: "
+                    problems.append(f"{name}: table row without a source link: "
                                     f"{' | '.join(c[:40] for c in cells)[:120]}")
         if re.search(r">\s*TBD\s*<", html):
             problems.append(f"{name}: contains a bare 'TBD' placeholder")
     pct = (sourced_rows / table_rows * 100) if table_rows else 0
     print(f"pages: {len(pages)}")
     print(f"data-table rows: {table_rows}")
-    print(f"rows with an official source link: {sourced_rows} ({pct:.1f}%)")
+    print(f"rows with a source link: {sourced_rows} ({pct:.1f}%)")
     if problems:
         print(f"\nFAIL: {len(problems)} problem(s)")
         for pr in problems[:40]:
