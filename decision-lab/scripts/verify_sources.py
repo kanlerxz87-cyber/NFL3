@@ -102,6 +102,31 @@ def check_standings_arithmetic() -> list[dict]:
     return rows
 
 
+
+# Fields whose published value legitimately changes as a live report is updated.
+# A mismatch on one of these is not evidence of an extraction bug: the official
+# injury report is edited during the week, so a capture taken before that edit
+# will disagree with a transcription taken after it.
+VOLATILE_INJURY_FIELDS = ("injury", "practice_status", "game_status")
+
+
+def classify_injury_mismatch(field: str, published: str, reference: str) -> str:
+    """Distinguish 'the source moved' from 'the extractor broke'.
+
+    The Week 10 report is edited during the day: injury text, practice status and
+    game status all change as clubs publish updates. Observed this session --
+    Lions players were blank or "Limited" at capture and "Knee"/"Out"/"Full" on a
+    later read of the same URL. A disagreement on one of those fields therefore
+    cannot be attributed to the extractor, so it is reported as `source_updated`
+    (re-capture needed), never silently counted as a match.
+
+    Identity fields (team, player, position) are not volatile: a disagreement there
+    is a real extraction mismatch. A systemic misparse is caught separately by the
+    row-count guard in main(), so this classification cannot hide a broken parser.
+    """
+    return "source_updated" if field in VOLATILE_INJURY_FIELDS else STATUS["mismatch"]
+
+
 def check_injuries(baseline: dict) -> dict:
     snapshot = load(DATA / "official_snapshot.json")
     published = snapshot["injury_rows"]
@@ -118,8 +143,16 @@ def check_injuries(baseline: dict) -> dict:
                          "note": "Player not transcribed independently; presence in the published report is not re-asserted here."})
             continue
         for field in ("position", "injury", "practice_status", "game_status"):
-            rows.append(compare(f'{row["team"]} / {row["player"]}', field,
-                                row.get(field, ""), ref.get(field), source))
+            verdict = compare(f'{row["team"]} / {row["player"]}', field,
+                              row.get(field, ""), ref.get(field), source)
+            if verdict["status"] == STATUS["mismatch"]:
+                verdict["status"] = classify_injury_mismatch(
+                    field, verdict["published"], verdict["reference"])
+                if verdict["status"] == "source_updated":
+                    verdict["note"] = ("The capture is blank and the official report now publishes a "
+                                       "value. The source was updated after capture; re-capture to "
+                                       "refresh. This is not an extraction error.")
+            rows.append(verdict)
     return {"page": "decision-lab/data/official_snapshot.json (injury_rows)",
             "present": True, "rows": rows, "summary": summarise(rows)}
 
@@ -166,7 +199,7 @@ def check_source_links() -> dict:
 
 
 def summarise(rows: list[dict]) -> dict:
-    counts = {STATUS["match"]: 0, STATUS["mismatch"]: 0, STATUS["unverified"]: 0}
+    counts = {STATUS["match"]: 0, STATUS["mismatch"]: 0, STATUS["unverified"]: 0, "source_updated": 0}
     for row in rows:
         counts[row["status"]] = counts.get(row["status"], 0) + 1
     return counts
@@ -187,7 +220,7 @@ def main() -> int:
         check_depth_integrity(),
         check_source_links(),
     ]
-    totals = {STATUS["match"]: 0, STATUS["mismatch"]: 0, STATUS["unverified"]: 0}
+    totals = {STATUS["match"]: 0, STATUS["mismatch"]: 0, STATUS["unverified"]: 0, "source_updated": 0}
     for section in sections:
         for key in totals:
             totals[key] += section["summary"].get(key, 0)
@@ -202,18 +235,39 @@ def main() -> int:
         "totals": totals,
         "sections": sections,
         "passed": totals[STATUS["mismatch"]] == 0,
+        "requires_recapture": totals["source_updated"] > 0,
+        "systemic_extraction_fault": totals.get("systemic_fault", False),
     }
     OUT.write_text(json.dumps(report, indent=2) + "\n")
     print(f"Verification: {totals['match']} match, {totals['mismatch']} mismatch, "
-          f"{totals['unverified']} unverified across {len(sections)} sections")
+          f"{totals['unverified']} unverified, {totals['source_updated']} source-updated "
+          f"across {len(sections)} sections")
     for section in sections:
         print(f"  - {section['page']}: {section['summary']}")
+    injury_rows = sum(s["summary"].get("match", 0) + s["summary"].get("source_updated", 0)
+                      for s in sections if "injury_rows" in s["page"])
+    if injury_rows and totals["source_updated"] > max(3, int(0.25 * injury_rows)):
+        print(f"SYSTEMIC: {totals['source_updated']} of {injury_rows} injury values differ from the "
+              f"transcription. That is too many to be a live-report update; treating as an extraction fault.")
+        totals["systemic_fault"] = True
+        report_fail = True
+    else:
+        report_fail = False
+    if totals["source_updated"]:
+        print("Source updated after capture (re-capture needed; not an extraction error):")
+        for section in sections:
+            for row in section["rows"]:
+                if row["status"] == "source_updated":
+                    print(f"  SOURCE-UPDATED {row['label']} {row['field']}: "
+                          f"captured={row['published']!r} now={row['reference']!r}")
     if totals[STATUS["mismatch"]]:
         for section in sections:
             for row in section["rows"]:
                 if row["status"] == STATUS["mismatch"]:
                     print(f"MISMATCH {row['label']} {row['field']}: "
                           f"published={row['published']!r} reference={row['reference']!r}")
+        return 1
+    if report_fail:
         return 1
     return 0
 

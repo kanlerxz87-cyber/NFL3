@@ -1,9 +1,9 @@
 {
-  "html_pages": 81,
-  "table_rows": 4241,
+  "html_pages": 95,
+  "table_rows": 4893,
   "rows_missing_official_source": 533,
   "rows_community_only": 106,
-  "rows_with_internal_audit_source": 8,
+  "rows_with_internal_audit_source": 7,
   "conflict_files": [],
   "authority_claim_files": [
     "engine/_pages_tail.py",
@@ -144,6 +144,118 @@
       "local_errors": []
     },
     {
+      "path": "decision-desk/audit.html",
+      "rows": 11,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/decisions.html",
+      "rows": 24,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/flagged.html",
+      "rows": 20,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/index.html",
+      "rows": 27,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/injuries.html",
+      "rows": 180,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/lines.html",
+      "rows": 141,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/luck.html",
+      "rows": 74,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/questions.html",
+      "rows": 35,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/requirements.html",
+      "rows": 18,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/sources.html",
+      "rows": 22,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/strategies.html",
+      "rows": 25,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/suggestions.html",
+      "rows": 34,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/summary.html",
+      "rows": 16,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "decision-desk/validation.html",
+      "rows": 20,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
       "path": "decision-hub/depth-injuries.html",
       "rows": 27,
       "rows_missing_official_source": 0,
@@ -209,10 +321,10 @@
     },
     {
       "path": "decision-lab/audit.html",
-      "rows": 9,
+      "rows": 8,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 8,
+      "rows_with_internal_audit_source": 7,
       "local_errors": []
     },
     {
@@ -337,7 +449,7 @@
     },
     {
       "path": "decision-lab/verification.html",
-      "rows": 296,
+      "rows": 301,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -361,7 +473,7 @@
     },
     {
       "path": "index.html",
-      "rows": 16,
+      "rows": 17,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
