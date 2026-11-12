@@ -46,7 +46,8 @@ def build_availability() -> str:
         + table("Method, stated so it can be attacked.", ["Step", "Rule", "Source"], [
             [td("1 · Capture"), td("Official NFL report plus each club's published depth page, hashed at capture time."), td(source_link("S01"))],
             [td("2 · Join"), td(e(A["method"]["join_key"])), td(source_link("S05"))],
-            [td("3 · Families"), td(e(A["method"]["position_families"])), td(source_link("S23"))],
+            [td("3 · Families"), td(e(A["method"]["position_families"])), td(source_link("S24"))],
+            [td("3b · Non-tabular charts"), td("Two clubs do not publish a parseable table: the Texans publish an image, the Packers prepend jersey numbers."), td(source_link("S23") + "<br>" + source_link("S24"))],
             [td("4 · Replacement lead"), td(e(A["method"]["replacement_rule"])), td(source_link("S06"))],
             [td("5 · Blanks"), td("A blank game designation is not 'active': the policy says a player certain to play is not listed in the game-status report."), td(source_link("S03"))],
         ])
@@ -54,7 +55,7 @@ def build_availability() -> str:
         + table("Every unmatched row has a stated reason.", ["Clubs on report", "Clubs with parsed depth", "Unmatched rows",
                                                             "Clubs without parsed depth", "Source"], [
             [td(str(cov["clubs_on_report"])), td(str(cov["clubs_with_depth"])), td(str(cov["unmatched_rows"])),
-             td(", ".join(cov["clubs_on_report_without_depth"]) or "none"), td(source_link("S22"))],
+             td(", ".join(cov["clubs_on_report_without_depth"]) or "none"), td(source_link("S19"))],
         ])
     )
     unmatched_rows = [[td(e(u["team"])), td(e(u["player"])), td(e(u["position"])), td(e(u["practice_status"])),
@@ -158,7 +159,7 @@ def build_verification() -> str:
         [td("It proves agreement at one moment."), td("A page edited after capture is drift, not a data error; a page edited before capture is invisible."), td(B.source_link("S01"))],
         [td("A hash proves bytes, not truth."), td("Capture integrity never establishes factual accuracy, authorship or reuse rights."), td(B.source_link("S12"))],
         [td("Parsers can agree with themselves."), td("The live check re-uses the same parser, so a bug shared by both runs is invisible; structural families plus manual page reads are the cross-check."), td(B.source_link("S16"))],
-        [td("Depth rank is not usage."), td("Verification confirms a club published a name in a column. It says nothing about snaps."), td(B.source_link("S23"))],
+        [td("Depth rank is not usage."), td("Verification confirms a club published a name in a column. It says nothing about snaps."), td(B.source_link("S24"))],
     ])
     return shell("Verification & integrity", "verification.html", content)
 

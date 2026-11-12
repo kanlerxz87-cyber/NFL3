@@ -1,6 +1,6 @@
 {
   "schema": "nfl3-availability/v1",
-  "generated_at": "2026-11-12T22:22:51.398538+00:00",
+  "generated_at": "2026-11-12T22:29:01.844062+00:00",
   "snapshot_observed_at": "2026-11-12T06:32:36.211205+00:00",
   "method": {
     "join_key": "exact (club, player name) match between the NFL report and the club depth page",
