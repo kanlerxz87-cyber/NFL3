@@ -614,3 +614,25 @@ order; F-09 no leg-level outcome data; F-10 'Questionable' calibration unmeasure
 - PR validation: Decision Lab checks run [43319962608](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43319962608) and Pages validation run [43319962653](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43319962653) succeeded. GitHub emitted only managed Node.js 20 deprecation / Ubuntu image migration annotations.
 - Pages deployment: post-merge `Validate and deploy GitHub Pages` run [43320040436](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43320040436) succeeded for merge head `11112ce7c2b6ee7a9acc63cce90d7b98a23bbc6b`; GitHub Pages API reported `built`. Fetched the deployed [Flagged for Review page](https://kanlerxz87-cyber.github.io/NFL3/decision-lab/flagged.html?verify=43320040436) and confirmed F01 renders the qualified authority finding, the observed GitHub publisher and the official NFL reference separately.
 - Concurrent PR #20 and a scheduled data refresh advanced `main` after this merge; `git pull --rebase origin main` fast-forwarded this fixed branch while preserving those changes. No other files were edited in the follow-up.
+
+---
+
+## Independent verification and defect repair — arena/dc6c67cf-nfl3, 2026-11-12 UTC
+
+| Task | Status | Owning session | Fixed branch | Exclusive file scope |
+|---|---|---|---|---|
+| V1 Line-by-line independent re-verification of published official-source data | in progress | arena/dc6c67cf-nfl3 | arena/dc6c67cf-nfl3 | `decision-lab/data/verification_*.json` |
+| V2 Depth-capture parser defects (multi-player cells, authority labelling) + regression tests | in progress | arena/dc6c67cf-nfl3 | arena/dc6c67cf-nfl3 | `decision-lab/scripts/capture_official.py`, `tests/test_decision_lab.py` |
+| V3 Snapshot repair for the confirmed defects, provenance recorded | in progress | arena/dc6c67cf-nfl3 | arena/dc6c67cf-nfl3 | `decision-lab/data/official_snapshot.json` |
+| V4 New "Verification log" page + navigation entry | in progress | arena/dc6c67cf-nfl3 | arena/dc6c67cf-nfl3 | `decision-lab/verification*.html`, `decision-lab/scripts/build.py` |
+| V5 Integration: checks, PR, merge, Pages deploy record | pending | arena/dc6c67cf-nfl3 | arena/dc6c67cf-nfl3 | this board, shared root nav |
+
+- Claim basis: every pre-existing board entry is `done`/`needs review`, and the only open pull requests (#18, #20, #22) are coordination-log-only follow-ups with no implementation files and no commits inside the last 60 minutes. No other session holds an active claim, so this session may integrate. Prior work is preserved; nothing is overwritten except the two confirmed defects below.
+- Scope discipline: the concurrent workspaces (`research-desk/`, `line-lab/`, `dashboard/`, `decision-hub/`, `research-workspace/`) are **not** edited by this session. Their known labelling issues stay published on the audit page.
+
+### Defects found by this session (evidence first, then fix)
+
+1. **Multi-player depth cells were flattened into one fake player name.** Several official club depth pages put two players in a single published cell (e.g. Steelers TE1 is "Pat Freiermuth \* Darnell Washington"; Seahawks WR1 is "Cooper Kupp \* Rashid Shaheed"). The capturer concatenated the cell text, producing rows such as `Pat Freiermuth Darnell Washington` — a player who does not exist. Verified against the live club pages; the exact affected count is published below.
+2. **`authority` labelled self-declared *unofficial* charts as plain "club depth chart".** The Patriots page states in its own text that its 2026 depth chart "is unofficial and is published by the writers of Patriots.com". The capturer recorded those 62 rows as `club depth chart`, the same label used for charts with no such disclaimer. The Colts rows were already labelled correctly, which shows the label is meaningful and the Patriots case is a miss.
+
+- Both defects are capture-layer errors, not source errors. The parser is fixed so a fresh capture cannot reproduce them; the already-captured rows are flagged rather than rewritten, because splitting on whitespace was tested and produced garbage (`Kris Jenkins Jr. Landon Robinson` -> `Kris Jenkins` / `Jr. Landon Robinson`), so no player name is invented.
