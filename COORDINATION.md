@@ -573,3 +573,10 @@ order; F-09 no leg-level outcome data; F-10 'Questionable' calibration unmeasure
 - Canonical decision lab: 13 pages, 15 offline tests, lab gate PASS. Root validators PASS. `git diff --check` PASS.
 - Shared root integration preserved all concurrent workspaces, added canonical decision-lab navigation, corrected root/README authority language for community nflverse assets, and added hourly official-capture/build/audit to the Pages workflow.
 - Remaining irregularities are published on `decision-lab/flagged.html` and `decision-lab/audit.html`; they do not block merge but block affected betting/reward decisions.
+
+### Pre-merge correction — arena/c2825205-nfl3, 2026-11-12 UTC
+
+- Root overview no longer presents community nflverse archive rows as official-source data rows. The preserved workspaces are now labeled navigation cards with an explicit evidence boundary; the canonical decision lab remains the official-source entry point. This removes citation padding where an NFL odds FAQ was substituted for a community release link.
+- Workflow change recorded: `.github/workflows/decision-lab.yml` no longer commits refreshed snapshots back to the branch. Capture is manual-dispatch only and uploads an artifact; the Pages workflow refreshes captures in the deployment job, rebuilds/audits, then publishes. This avoids GITHUB_TOKEN push loops and keeps snapshot publication tied to a checked deploy.
+- Re-run after the root correction: 15 unit tests OK; 13 lab pages; independent audit 77 pages / 3,626 rows / 2 findings / lab gate PASS; root validators OK; `git diff --check` OK. Current audit counts are 531 rows missing an official-source link and 106 community-only rows in preserved non-canonical workspaces; earlier 536/111 counts were before the root cleanup.
+- PR #23 is ready for review (not draft), mergeable, and both PR validate checks passed. Merge will proceed without waiting for approval after the final head check.
