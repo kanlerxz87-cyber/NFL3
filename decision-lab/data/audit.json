@@ -1,10 +1,11 @@
 {
   "html_pages": 77,
-  "table_rows": 3626,
+  "table_rows": 3628,
   "rows_missing_official_source": 531,
   "rows_community_only": 106,
+  "rows_with_internal_audit_source": 7,
   "conflict_files": [],
-  "community_claim_files": [
+  "authority_claim_files": [
     "engine/_pages_tail.py",
     "engine/build.py",
     "engine/conventions.py",
@@ -18,8 +19,8 @@
     {
       "id": "AUD-01",
       "severity": "Critical",
-      "title": "Community-source authority mislabeled as official",
-      "detail": "7 file(s) use official/verified language for nflverse/community assets. Digest integrity is not NFL factual verification.",
+      "title": "NFL authority is unverified for GitHub-hosted data",
+      "detail": "7 file(s) describe nflverse GitHub releases as official or verified. Their local manifest checks GitHub-published digests, which verifies byte integrity only; this scan found no NFL authorship/authorization evidence in those files. This is not a finding that the data are inaccurate.",
       "files": [
         "engine/_pages_tail.py",
         "engine/build.py",
@@ -29,7 +30,7 @@
         "research-desk/index.html",
         "research-desk/questions.html"
       ],
-      "source": "S12"
+      "source": "S18"
     },
     {
       "id": "AUD-03",
@@ -58,7 +59,7 @@
         "line-lab/pages/standings.html",
         "line-lab/pages/strategies.html"
       ],
-      "source": "S12"
+      "source": "LOCAL_AUDIT"
     }
   ],
   "pages": [
@@ -67,6 +68,7 @@
       "rows": 27,
       "rows_missing_official_source": 15,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -74,6 +76,7 @@
       "rows": 14,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -81,6 +84,7 @@
       "rows": 0,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -88,6 +92,7 @@
       "rows": 254,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -95,6 +100,7 @@
       "rows": 18,
       "rows_missing_official_source": 8,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -102,6 +108,7 @@
       "rows": 16,
       "rows_missing_official_source": 4,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -109,6 +116,7 @@
       "rows": 11,
       "rows_missing_official_source": 6,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -116,6 +124,7 @@
       "rows": 43,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -123,6 +132,7 @@
       "rows": 27,
       "rows_missing_official_source": 14,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -130,6 +140,7 @@
       "rows": 14,
       "rows_missing_official_source": 10,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -137,6 +148,7 @@
       "rows": 27,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -144,6 +156,7 @@
       "rows": 6,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -151,6 +164,7 @@
       "rows": 18,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -158,6 +172,7 @@
       "rows": 10,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -165,6 +180,7 @@
       "rows": 33,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -172,6 +188,7 @@
       "rows": 12,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -179,6 +196,7 @@
       "rows": 28,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -186,13 +204,15 @@
       "rows": 10,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
       "path": "decision-lab/audit.html",
-      "rows": 7,
+      "rows": 8,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 7,
       "local_errors": []
     },
     {
@@ -200,6 +220,7 @@
       "rows": 1747,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -207,6 +228,7 @@
       "rows": 5,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -214,6 +236,7 @@
       "rows": 12,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -221,6 +244,7 @@
       "rows": 12,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -228,6 +252,7 @@
       "rows": 258,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -235,6 +260,7 @@
       "rows": 10,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -242,6 +268,7 @@
       "rows": 22,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -249,13 +276,15 @@
       "rows": 17,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
       "path": "decision-lab/sources.html",
-      "rows": 22,
+      "rows": 23,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -263,6 +292,7 @@
       "rows": 11,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -270,6 +300,7 @@
       "rows": 12,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -277,6 +308,7 @@
       "rows": 15,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -284,6 +316,7 @@
       "rows": 11,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -291,6 +324,7 @@
       "rows": 9,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -298,6 +332,7 @@
       "rows": 12,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -305,6 +340,7 @@
       "rows": 15,
       "rows_missing_official_source": 15,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -312,6 +348,7 @@
       "rows": 13,
       "rows_missing_official_source": 13,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -319,6 +356,7 @@
       "rows": 8,
       "rows_missing_official_source": 8,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -326,6 +364,7 @@
       "rows": 10,
       "rows_missing_official_source": 10,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -333,6 +372,7 @@
       "rows": 16,
       "rows_missing_official_source": 16,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -340,6 +380,7 @@
       "rows": 0,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -347,6 +388,7 @@
       "rows": 70,
       "rows_missing_official_source": 70,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -354,6 +396,7 @@
       "rows": 118,
       "rows_missing_official_source": 10,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -361,6 +404,7 @@
       "rows": 80,
       "rows_missing_official_source": 80,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -368,6 +412,7 @@
       "rows": 32,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -375,6 +420,7 @@
       "rows": 5,
       "rows_missing_official_source": 5,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -382,6 +428,7 @@
       "rows": 25,
       "rows_missing_official_source": 25,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -389,6 +436,7 @@
       "rows": 19,
       "rows_missing_official_source": 19,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -396,6 +444,7 @@
       "rows": 16,
       "rows_missing_official_source": 4,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -403,6 +452,7 @@
       "rows": 40,
       "rows_missing_official_source": 8,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -410,6 +460,7 @@
       "rows": 12,
       "rows_missing_official_source": 12,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -417,6 +468,7 @@
       "rows": 18,
       "rows_missing_official_source": 18,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -424,6 +476,7 @@
       "rows": 8,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -431,6 +484,7 @@
       "rows": 9,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -438,6 +492,7 @@
       "rows": 17,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -445,6 +500,7 @@
       "rows": 91,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -452,6 +508,7 @@
       "rows": 11,
       "rows_missing_official_source": 11,
       "rows_community_only": 11,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -459,6 +516,7 @@
       "rows": 16,
       "rows_missing_official_source": 16,
       "rows_community_only": 16,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -466,6 +524,7 @@
       "rows": 7,
       "rows_missing_official_source": 7,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -473,6 +532,7 @@
       "rows": 3,
       "rows_missing_official_source": 3,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -480,6 +540,7 @@
       "rows": 28,
       "rows_missing_official_source": 28,
       "rows_community_only": 28,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -487,6 +548,7 @@
       "rows": 10,
       "rows_missing_official_source": 7,
       "rows_community_only": 5,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -494,6 +556,7 @@
       "rows": 24,
       "rows_missing_official_source": 20,
       "rows_community_only": 19,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -501,6 +564,7 @@
       "rows": 21,
       "rows_missing_official_source": 18,
       "rows_community_only": 18,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -508,6 +572,7 @@
       "rows": 15,
       "rows_missing_official_source": 15,
       "rows_community_only": 9,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -515,6 +580,7 @@
       "rows": 15,
       "rows_missing_official_source": 15,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -522,6 +588,7 @@
       "rows": 4,
       "rows_missing_official_source": 1,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -529,6 +596,7 @@
       "rows": 8,
       "rows_missing_official_source": 3,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -536,6 +604,7 @@
       "rows": 11,
       "rows_missing_official_source": 4,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -543,6 +612,7 @@
       "rows": 6,
       "rows_missing_official_source": 2,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -550,6 +620,7 @@
       "rows": 8,
       "rows_missing_official_source": 6,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -557,6 +628,7 @@
       "rows": 9,
       "rows_missing_official_source": 5,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -564,6 +636,7 @@
       "rows": 10,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -571,6 +644,7 @@
       "rows": 8,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -578,6 +652,7 @@
       "rows": 6,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -585,6 +660,7 @@
       "rows": 15,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -592,6 +668,7 @@
       "rows": 4,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
     {
@@ -599,6 +676,7 @@
       "rows": 15,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
       "local_errors": []
     }
   ],

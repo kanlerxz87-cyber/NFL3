@@ -16,7 +16,7 @@ The repository now has a publishable, source-first decision dashboard. It is **n
 | Signals, parlays and player-prop combos | Hypotheses only | Singles first; combos require joint outcomes, dependence and settlement evidence. | [Next Gen Stats glossary](https://nextgenstats.nfl.com/glossary), [scikit-learn calibration](https://scikit-learn.org/stable/modules/calibration.html) |
 | Validation gates and leaderboard | Implemented fail-closed; 0 eligible strategies | Rank only gate-passing strategies; rewards withheld without policy/funding. | [NIST confidence intervals](https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm), [TimeSeriesSplit](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html) |
 | Luck removal | Not possible as stated | Quantify uncertainty and reduce false confidence; do not call residual variance pure luck. | [NIST confidence intervals](https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm) |
-| Community-data mislabeling | Flagged critical | nflverse GitHub digests prove bytes, not NFL authorship; exclude from official-only decisions. | [NFL odds-widget boundary](https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL) |
+| NFL authority unverified for GitHub-hosted nflverse inputs | Flagged critical | Local digests establish byte integrity against GitHub-published hashes only; this review found no NFL authorship/authorization record and does not conclude the data are inaccurate. Keep the inputs out of official-only gates until confirmed. | [Observed publisher: nflverse GitHub releases](https://github.com/nflverse/nflverse-data/releases) · [Official NFL.com player statistics reference](https://www.nfl.com/stats/player-stats/) |
 
 ## Recommended path
 
@@ -28,9 +28,9 @@ The repository now has a publishable, source-first decision dashboard. It is **n
 ## Verification performed
 
 - 15 offline unit tests passed for capture parsing, blank preservation, odds/vig math, multiplicity, small-sample failure, community-source rejection, future-leak rejection, combo joint evidence and reward withholding.
-- Canonical lab build produced 13 pages; every lab table row has an official-source link and local links/fragments pass.
+- Canonical lab build produced 13 pages. NFL factual rows have official-source links; generated repository-audit metrics instead link to their local reproducible audit code and output. Local links/fragments pass.
 - The 254 parsed NFL injury rows matched the existing dashboard CSV on key status fields with 0 differences.
-- Independent repository audit flags preserved community-source authority issues and sourceless rows elsewhere; these are published for review and do not block site publication.
+- Independent repository audit flags unsupported NFL-authority wording and rows elsewhere without external official links; calculated findings link to local audit code/output. These remain published for review and do not block site publication.
 
 ## Hard blockers before any betting decision
 

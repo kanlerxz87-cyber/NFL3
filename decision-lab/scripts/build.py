@@ -100,7 +100,7 @@ def build_summary() -> str:
 <div class="notice ok"><strong>Delivered:</strong> clean category dashboard; full requirements/questions/suggestions registers; official injury capture ({SNAPSHOT["coverage"]["injury_rows"]} rows); club depth capture ({SNAPSHOT["coverage"]["depth_rows"]} rows); fail-closed validation gates; source-linked flagged-review page; automated capture/build workflow.</div>
 <div class="notice danger"><strong>Blocked:</strong> licensed historical odds/props, official-only outcome settlement, confirmed replacement workload, empirical correlations, validated strategy performance, reward funding/legal approval. These values remain blank.</div>
 <h2>Important findings</h2>{table("Executive findings with official review links.", ["Finding", "Implication", "Action", "Source"], [
-    [td("Community data was labeled official in an existing workspace"), td("Digest matching proves bytes, not NFL authorship or factual accuracy"), td("Use canonical official-only tables; treat research-desk as exploratory"), td(source_link("S12"))],
+    [td("NFL authority is unverified for GitHub-hosted nflverse inputs"), td("Manifest digests verify bytes only; this review found no NFL authorship/authorization record and does not judge data accuracy"), td("Keep these outputs out of official-only gates until provenance and data-use permission are independently confirmed"), td('Observed publisher: ' + raw_source("https://github.com/nflverse/nflverse-data/releases", "nflverse GitHub releases") + '<br>Official reference: ' + source_link("S18"))],
     [td("Injury status is not depth or workload"), td("Questionable/Out cannot identify a 2nd/3rd/4th-string replacement by itself"), td("Join dated club depth, inactive and participation evidence; blank missing fields"), td(source_link("S03"))],
     [td("Club depth charts can be unofficial or stale"), td("Published rank is guidance, not confirmed snaps"), td("Store authority and timestamp; flag conflicts"), td(source_link("S08"))],
     [td("Luck cannot be removed"), td("Residual variance is not pure luck; hot streaks are not skill"), td("Proper scores, game-cluster uncertainty, ablations, multiplicity and shadow records"), td(source_link("S13"))],
@@ -225,21 +225,33 @@ def build_sources() -> str:
 
 
 def build_flagged() -> str:
-    rows = [[td(e(f["id"])), td(pill(f["severity"], "danger" if f["severity"] == "Critical" else "warn")), td(e(f["title"])), td(e(f["finding"])), td(e(f["action"])), td(source_link(f["source"]))] for f in CATALOG["flags"]]
-    content = '<div class="eyebrow">Published irregularities</div><h1>Flagged for review</h1><p class="lede">These items do not block site publication, but they block affected decisions. Each flag includes an official review link and a discovery/remediation action.</p>'
-    content += table("Flagged review register.", ["ID", "Severity", "Issue", "Finding", "Action", "Source"], rows)
+    rows = []
+    for f in CATALOG["flags"]:
+        if f["id"] == "F01":
+            provenance = ('Observed publisher: ' + raw_source("https://github.com/nflverse/nflverse-data/releases", "nflverse GitHub releases") + '<br>Official reference: ' + source_link("S18"))
+        else:
+            provenance = source_link(f["source"])
+        rows.append([td(e(f["id"])), td(pill(f["severity"], "danger" if f["severity"] == "Critical" else "warn")), td(e(f["title"])), td(e(f["finding"])), td(e(f["action"])), td(provenance)])
+    content = '<div class="eyebrow">Published irregularities</div><h1>Flagged for review</h1><p class="lede">These items do not block site publication, but they block affected decisions. External links identify the reviewed source or official reference; they do not imply authority beyond the stated scope.</p>'
+    content += table("Flagged review register.", ["ID", "Severity", "Issue", "Finding", "Action", "Source trail"], rows)
     return shell("Flagged for review", "flagged.html", content)
 
 
 def build_audit(audit_doc: dict) -> str:
     findings = audit_doc["findings"]
-    rows = [[td(e(f["id"])), td(pill(f["severity"], "danger" if f["severity"] == "Critical" else "warn")), td(e(f["title"])), td(e(f["detail"])), td(e(", ".join(f.get("files", [])[:8]))), td(source_link(f["source"]))] for f in findings]
+    local_audit = '<a href="scripts/audit.py">Audit code</a> · <a href="data/audit.json">Generated audit data</a>'
+    official_context = 'Official context only (not a count source): ' + source_link("S18")
+    rows = []
+    for f in findings:
+        source = local_audit + '<br>' + official_context if f["source"] == "LOCAL_AUDIT" else source_link(f["source"])
+        rows.append([td(e(f["id"])), td(pill(f["severity"], "danger" if f["severity"] == "Critical" else "warn")), td(e(f["title"])), td(e(f["detail"])), td(e(", ".join(f.get("files", [])[:8]))), td(source)])
     if not rows:
-        rows = [[td("None"), td(pill("OK", "ok")), td("No audit findings"), td("Canonical lab gate passed; repository scan found no flagged source/link issues."), td(""), td(source_link("S16"))]]
-    summary = [[td("HTML pages scanned"), td(str(audit_doc["html_pages"])), td(source_link("S16"))], [td("Table rows scanned"), td(str(audit_doc["table_rows"])), td(source_link("S16"))], [td("Rows missing official source"), td(str(audit_doc["rows_missing_official_source"])), td(source_link("S12"))], [td("Community-only rows"), td(str(audit_doc["rows_community_only"])), td(source_link("S12"))], [td("Canonical lab gate"), td(pill("PASS" if audit_doc["lab_gate_passed"] else "FAIL", "ok" if audit_doc["lab_gate_passed"] else "danger")), td(source_link("S16"))]]
-    content = '<div class="eyebrow">Independent verification</div><h1>Repository audit</h1><p class="lede">This audit scans published workspaces for source authority, table citations, local links and conflict markers. It does not overwrite other sessions’ work; findings are routed to review.</p><div class="notice warn"><strong>Key boundary:</strong> GitHub release digests verify transport integrity. They do not make community nflverse data official NFL data.</div>'
-    content += table("Audit summary.", ["Measure", "Value", "Source"], summary)
-    content += table("Audit findings.", ["ID", "Severity", "Finding", "Detail", "Example files", "Source"], rows)
+        rows = [[td("None"), td(pill("OK", "ok")), td("No audit findings"), td("Canonical lab gate passed; repository scan found no flagged source/link issues."), td(""), td(local_audit + '<br>' + official_context)]]
+    provenance = local_audit + '<br>' + official_context
+    summary = [[td("HTML pages scanned"), td(str(audit_doc["html_pages"])), td(provenance)], [td("Table rows scanned"), td(str(audit_doc["table_rows"])), td(provenance)], [td("Rows missing official source"), td(str(audit_doc["rows_missing_official_source"])), td(provenance)], [td("Rows citing community hosts only"), td(str(audit_doc["rows_community_only"])), td(provenance)], [td("Rows sourced to local audit code/data"), td(str(audit_doc.get("rows_with_internal_audit_source", 0))), td(provenance)], [td("Canonical lab gate"), td(pill("PASS" if audit_doc["lab_gate_passed"] else "FAIL", "ok" if audit_doc["lab_gate_passed"] else "danger")), td(provenance)]]
+    content = '<div class="eyebrow">Independent verification</div><h1>Repository audit</h1><p class="lede">This audit scans published workspaces for source authority, table citations, local links and conflict markers. It does not overwrite other sessions’ work; findings are routed to review. The counts on this page are generated by the linked local audit script/data; they are not externally reported NFL statistics.</p><div class="notice warn"><strong>Key boundary:</strong> GitHub release digests verify captured bytes against a publisher-provided digest. They do not establish NFL authorship, authorization, data accuracy or reuse rights. The audit does not determine those claims.</div>'
+    content += table("Repository-derived audit counts. Local links provide provenance for each calculated value. The official NFL statistics link is context only and does not substantiate these counts.", ["Measure", "Value", "Provenance / context"], summary)
+    content += table("Audit findings.", ["ID", "Severity", "Finding", "Detail", "Example files", "Provenance / context"], rows)
     return shell("Repository audit", "audit.html", content)
 
 
@@ -255,7 +267,8 @@ def main() -> int:
     for name, builder in builders.items():
         (LAB / name).write_text(builder(), encoding="utf-8")
     placeholder = {"html_pages": 0, "table_rows": 0, "rows_missing_official_source": 0,
-                   "rows_community_only": 0, "findings": [], "lab_gate_passed": True, "lab_gate_errors": []}
+                   "rows_community_only": 0, "rows_with_internal_audit_source": 0,
+                   "findings": [], "lab_gate_passed": True, "lab_gate_errors": []}
     (LAB / "audit.html").write_text(build_audit(placeholder), encoding="utf-8")
     audit_doc = audit.scan_repo()
     audit_doc["lab_gate_passed"] = True

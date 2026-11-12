@@ -69,6 +69,7 @@ class TableAudit(HTMLParser):
         self.rows = 0
         self.missing = 0
         self.community_only = 0
+        self.internal_source_rows = 0
         self.links: list[str] = []
         self.ids: set[str] = set()
         self.duplicate_ids: list[str] = []
@@ -110,7 +111,13 @@ class TableAudit(HTMLParser):
             self.rows += 1
             https = [u for u in self.row_links if urlparse(u).scheme == "https"]
             official = [u for u in https if (urlparse(u).hostname or "") in self.allowed and not is_community(u)]
-            if not official:
+            local_provenance = (
+                self.path.relative_to(ROOT).as_posix() == "decision-lab/audit.html"
+                and any(urlparse(u).path in {"scripts/audit.py", "data/audit.json"} for u in self.row_links)
+            )
+            if local_provenance:
+                self.internal_source_rows += 1
+            if not official and not local_provenance:
                 self.missing += 1
                 if https and all(is_community(u) for u in https):
                     self.community_only += 1
@@ -150,6 +157,7 @@ def scan_repo() -> dict:
             pages.append({"path": str(path.relative_to(ROOT)), "rows": parser.rows,
                           "rows_missing_official_source": parser.missing,
                           "rows_community_only": parser.community_only,
+                          "rows_with_internal_audit_source": parser.internal_source_rows,
                           "local_errors": parser.errors})
             if str(path.relative_to(ROOT)).startswith("research-desk/") and any(p.search(text) for p in CLAIM_PATTERNS):
                 claim_files.append(str(path.relative_to(ROOT)))
@@ -157,25 +165,26 @@ def scan_repo() -> dict:
             claim_files.append(str(path.relative_to(ROOT)))
     findings = []
     if claim_files:
-        findings.append({"id": "AUD-01", "severity": "Critical", "title": "Community-source authority mislabeled as official",
-                         "detail": f"{len(claim_files)} file(s) use official/verified language for nflverse/community assets. Digest integrity is not NFL factual verification.",
-                         "files": claim_files[:20], "source": "S12"})
+        findings.append({"id": "AUD-01", "severity": "Critical", "title": "NFL authority is unverified for GitHub-hosted data",
+                         "detail": f"{len(claim_files)} file(s) describe nflverse GitHub releases as official or verified. Their local manifest checks GitHub-published digests, which verifies byte integrity only; this scan found no NFL authorship/authorization evidence in those files. This is not a finding that the data are inaccurate.",
+                         "files": claim_files[:20], "source": "S18"})
     if conflict_files:
         findings.append({"id": "AUD-02", "severity": "High", "title": "Merge-conflict markers remain in repository text",
-                         "detail": f"{len(conflict_files)} file(s) contain conflict separators.", "files": conflict_files[:20], "source": "S16"})
+                         "detail": f"{len(conflict_files)} file(s) contain conflict separators.", "files": conflict_files[:20], "source": "LOCAL_AUDIT"})
     missing = sum(p["rows_missing_official_source"] for p in pages)
     community = sum(p["rows_community_only"] for p in pages)
     if missing:
         findings.append({"id": "AUD-03", "severity": "High", "title": "Table rows without an official-source link",
                          "detail": f"{missing} row(s) across the repository lack an official HTTPS source; {community} cite only community sources.",
-                         "files": [p["path"] for p in pages if p["rows_missing_official_source"]][:20], "source": "S12"})
+                         "files": [p["path"] for p in pages if p["rows_missing_official_source"]][:20], "source": "LOCAL_AUDIT"})
     local_errors = [(p["path"], e) for p in pages for e in p["local_errors"]]
     if local_errors:
         findings.append({"id": "AUD-04", "severity": "High", "title": "Local link/asset or fragment errors",
-                         "detail": f"{len(local_errors)} local reference error(s).", "files": [f"{p}: {e}" for p, e in local_errors[:20]], "source": "S16"})
+                         "detail": f"{len(local_errors)} local reference error(s).", "files": [f"{p}: {e}" for p, e in local_errors[:20]], "source": "LOCAL_AUDIT"})
     return {"html_pages": len(pages), "table_rows": sum(p["rows"] for p in pages),
             "rows_missing_official_source": missing, "rows_community_only": community,
-            "conflict_files": conflict_files, "community_claim_files": claim_files,
+            "rows_with_internal_audit_source": sum(p["rows_with_internal_audit_source"] for p in pages),
+            "conflict_files": conflict_files, "authority_claim_files": claim_files,
             "local_errors": local_errors, "findings": findings, "pages": pages}
 
 

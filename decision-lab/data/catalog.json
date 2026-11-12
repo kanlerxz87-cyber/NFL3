@@ -170,6 +170,16 @@
       "status": "opened",
       "scope": "Player identity, position and roster status.",
       "limit": "Roster status is not depth order or confirmed game-day active status."
+    },
+    {
+      "id": "S18",
+      "title": "NFL.com player statistics",
+      "url": "https://www.nfl.com/stats/player-stats/",
+      "publisher": "NFL.com",
+      "checked": "2026-11-12",
+      "status": "opened",
+      "scope": "NFL.com player-statistics pages, used here as an example of a directly NFL-published statistics source.",
+      "limit": "Does not establish the authorship, accuracy, authorization or reuse rights of data hosted by third parties."
     }
   ],
   "requirements": [
@@ -900,10 +910,10 @@
     {
       "id": "F01",
       "severity": "Critical",
-      "title": "Community data labeled official in an existing workspace",
-      "finding": "pipeline/fetch_official.py and research-desk describe nflverse GitHub assets as official NFL data. Digest matching verifies bytes, not NFL authorship or factual accuracy.",
-      "action": "Treat those outputs as exploratory/unverified; do not use them for official-only decisions or rewards.",
-      "source": "S12"
+      "title": "NFL authority is unverified for GitHub-hosted data",
+      "finding": "Repository code describes nflverse GitHub release assets as official NFL data. The local manifest checks GitHub-published SHA-256 digests, which confirms byte integrity only; this review did not find NFL authorship or authorization evidence. This is not a finding that the data are inaccurate.",
+      "action": "Treat these outputs as authority-unverified and exploratory; exclude them from official-only gates/rewards unless NFL provenance and data-use permission are independently confirmed.",
+      "source": "S18"
     },
     {
       "id": "F02",
