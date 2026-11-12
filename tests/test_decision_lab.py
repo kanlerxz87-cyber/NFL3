@@ -86,6 +86,56 @@ class CaptureTests(unittest.TestCase):
         self.assertEqual(rows[0]["confirmed_starter"], "")
         self.assertEqual(rows[1]["expected_snaps"], "")
 
+    def test_multi_player_cell_is_split_not_concatenated(self):
+        """Regression: two players published in one cell must not become one fake name.
+
+        The Steelers publish "Pat Freiermuth" and "Darnell Washington" together in
+        the TE1 cell. Concatenating the cell text produced the non-existent player
+        "Pat Freiermuth Darnell Washington" in published rows.
+        """
+        raw = ('<table summary="Offense"><caption>Offense</caption>'
+               '<thead><tr><th>Position</th><th>First</th><th>Second</th></tr></thead><tbody>'
+               '<tr><td>TE</td>'
+               '<td><a href="/team/players-roster/pat-freiermuth/">Pat Freiermuth</a> '
+               '<a href="/team/players-roster/darnell-washington/">Darnell Washington</a></td>'
+               '<td><a href="/team/players-roster/robert-tonyan/">Robert Tonyan</a></td></tr>'
+               '</tbody></table>')
+        rows = capture.parse_depth_tables(raw, "Steelers", "https://www.steelers.com/team/depth-chart/", "2026-11-12T00:00:00+00:00", "0"*64)
+        self.assertEqual([r["player"] for r in rows], ["Pat Freiermuth", "Darnell Washington", "Robert Tonyan"])
+        self.assertEqual([r["published_rank"] for r in rows], [1, 2, 3])
+        self.assertEqual(rows[1]["player_url"], "https://www.steelers.com/team/players-roster/darnell-washington/")
+        self.assertNotIn("Pat Freiermuth Darnell Washington", [r["player"] for r in rows])
+
+    def test_blank_depth_cell_stays_blank(self):
+        rows = capture.parse_depth_tables(DEPTH_FIXTURE, "Commanders", "https://www.commanders.com/team/depth-chart", "2026-11-12T00:00:00+00:00", "0"*64)
+        self.assertEqual(len(rows), 2)
+        self.assertTrue(all(r["player"].strip() for r in rows))
+
+    def test_self_declared_unofficial_chart_is_labelled(self):
+        """Regression: a page that calls its own chart unofficial must say so.
+
+        The Patriots 2026 depth chart states it "is unofficial and is published by
+        the writers of Patriots.com"; those rows were labelled plainly
+        "club depth chart", the same as charts carrying no such caveat.
+        """
+        raw = ('<h1>New England Patriots Unofficial Depth Chart</h1>'
+               '<p>The 2026 depth chart is unofficial and is published by the writers of Patriots.com. '
+               'The depth chart reflects the opinions of the Patriots.com writers and do not '
+               'necessarily reflect those of the organization.</p>'
+               '<table summary="Offense"><caption>Offense</caption>'
+               '<thead><tr><th>Position</th><th>First</th></tr></thead><tbody>'
+               '<tr><td>QB</td><td><a href="/team/players-roster/drake-maye/">Drake Maye</a></td></tr>'
+               '</tbody></table>')
+        rows = capture.parse_depth_tables(raw, "Patriots", "https://www.patriots.com/team/depth-chart", "2026-11-12T00:00:00+00:00", "0"*64)
+        self.assertTrue(rows[0]["authority"].startswith("club-published UNOFFICIAL"))
+        self.assertIn("writers", rows[0]["authority_caveat"])
+
+    def test_authoritative_chart_is_not_relabelled(self):
+        """A chart with no unofficial caveat keeps the plain authority label."""
+        rows = capture.parse_depth_tables(DEPTH_FIXTURE, "Commanders", "https://www.commanders.com/team/depth-chart", "2026-11-12T00:00:00+00:00", "0"*64)
+        self.assertEqual(rows[0]["authority"], "club depth chart")
+        self.assertEqual(rows[0]["authority_caveat"], "")
+
     def test_colts_unofficial_authority(self):
         raw = f'<script type="application/ld+json">{COLTS_FIXTURE}</script>'
         rows = capture.parse_colts_article(raw, "https://www.colts.com/news/x", "2026-11-12T00:00:00+00:00", "0"*64)
