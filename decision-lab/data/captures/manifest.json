@@ -1,0 +1,42 @@
+[
+  {
+    "id": "nfl-injuries",
+    "url": "https://www.nfl.com/injuries/",
+    "final_url": "https://www.nfl.com/injuries/",
+    "observed_at": "2026-11-12T05:39:27.579597+00:00",
+    "sha256": "dfbbafd9fa239ec94fc8d4a0c34c0326595d35bfa0e07c643659d30ab0ab73b5",
+    "bytes": 382618
+  },
+  {
+    "id": "colts-depth",
+    "url": "https://www.colts.com/news/colts-release-unofficial-depth-chart-for-week-10",
+    "final_url": "https://www.colts.com/news/colts-release-unofficial-depth-chart-for-week-10",
+    "observed_at": "2026-11-12T05:39:28.000185+00:00",
+    "sha256": "70fb6e213ea7a9b9b9ee7f204bc24bcb076315d7acd3b7acd2fed1e7914ce938",
+    "bytes": 331417
+  },
+  {
+    "id": "nfl-teams",
+    "url": "https://www.nfl.com/teams/",
+    "final_url": "https://www.nfl.com/teams/",
+    "observed_at": "2026-11-12T05:39:28.096322+00:00",
+    "sha256": "c2644c4fbd1fd34889319c936d64dfafc4161213dd52070ec40a08e166e38a1b",
+    "bytes": 284196
+  },
+  {
+    "id": "commanders-depth",
+    "url": "https://www.commanders.com/team/depth-chart",
+    "final_url": "https://www.commanders.com/team/depth-chart",
+    "observed_at": "2026-11-12T05:39:28.344689+00:00",
+    "sha256": "2ba9fbd1fbbde19f5fc9b387686f5d80d3571f34d7b780ef2014e48d52e75e3a",
+    "bytes": 295773
+  },
+  {
+    "id": "giants-depth",
+    "url": "https://www.giants.com/team/depth-chart",
+    "final_url": "https://www.giants.com/team/depth-chart",
+    "observed_at": "2026-11-12T05:39:28.577665+00:00",
+    "sha256": "f4618507800cdb35743d8aa307a311e8ea867c07e5759a7457e474ce0a17155b",
+    "bytes": 289649
+  }
+]
