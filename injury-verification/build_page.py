@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Build verification/index.html from report.json + the evidence TSV.
+"""Build injury-verification/index.html from report.json + the evidence TSV.
 
 Deterministic: re-running produces the same page. Every table body row carries
 an official https://www.nfl.com/ citation. Unverified values stay blank and are
 listed on the page; nothing is inferred.
 
-Run: python3 verification/build_page.py
+Run: python3 injury-injury-verification/build_page.py
 """
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-VER = ROOT / "verification"
+VER = ROOT / "injury-verification"
 REPORT = VER / "report.json"
 EVIDENCE = VER / "evidence" / "live_injuries_2026_w10.tsv"
 OUT = VER / "index.html"
@@ -124,7 +124,7 @@ def main() -> None:
 <p>The live <a href="{SRC_REPORT}" target="_blank" rel="noopener noreferrer">official NFL Week 10 injury report ↗</a>
 was fetched at {esc(report['sources']['A_live']['observed_at'])} through a markdown rendering path and transcribed
 row by row ({len(evidence)} rows) — a different parser path than the repository's regex-on-HTML capture.
-Evidence file: <code>verification/evidence/live_injuries_2026_w10.tsv</code>.</p></div>
+Evidence file: <code>injury-verification/evidence/live_injuries_2026_w10.tsv</code>.</p></div>
 <div><div class="card-kicker">SOURCE B — COMMITTED CAPTURE</div><h3>decision-lab snapshot</h3>
 <p><code>decision-lab/data/official_snapshot.json</code>, observed
 {esc(report['sources']['B_snapshot']['observed_at'])} (16h before source A), {report['sources']['B_snapshot']['rows']} rows,
@@ -135,7 +135,10 @@ different session with its own parser. Same official URL as sources A and B.</p>
 <div><div class="card-kicker">LIMITS</div><h3>What this does not prove</h3>
 <p>One fetch, one day: this is not a link crawler, not a historical archive, and not proof the page will
 stay unchanged. Field values were never inferred — where the page is blank, the row is blank. Game-status
-columns fill in as game time approaches; timing effects are flagged below, not filled in.</p></div>
+columns fill in as game time approaches; timing effects are flagged below, not filled in. Related
+verification workspaces cover other angles: <code>verification-lab/</code> re-checks published claims
+claim by claim, and <code>decision-lab/verification.html</code> logs capture-time checks; this page adds
+the three-way extractor comparison and its captured evidence file.</p></div>
 </div>""")
 
     # Pairwise results
@@ -200,33 +203,36 @@ columns fill in as game time approaches; timing effects are flagged below, not f
         f'<td><a href="{SRC_REPORT}" target="_blank" rel="noopener noreferrer">Official report ↗</a></td></tr>')
     parts.append("</tbody></table></div>")
 
-    # Resolutions of prior flags
+    # Independent confirmation of flags another session already resolved
     parts.append("""
-<div class="section-head"><div><div class="section-label">04 / PRIOR FLAGS RESOLVED</div>
-<h2>Open questions closed with official sources</h2></div>
-<p>Checked this session against official pages.</p></div>
+<div class="section-head"><div><div class="section-label">04 / INDEPENDENT CONFIRMATION</div>
+<h2>Re-check of flags resolved by the second-pass session</h2></div>
+<p>Dashboard Q09/Q10/Q11 were resolved by session 22802aed on 2026-11-12. This pass reached the same
+answers from its own fetch, 4–9 minutes later — corroboration, not a new claim.</p></div>
 <div class="table-wrap"><table><thead><tr>
-<th scope="col">Prior flag</th><th scope="col">Question</th><th scope="col">Answer found</th>
+<th scope="col">Prior flag</th><th scope="col">Question</th><th scope="col">Answer found independently</th>
 <th scope="col">Status</th><th scope="col">Source</th></tr></thead><tbody>""")
     parts.append(
-        "<tr><td>Dashboard R-10</td><td>Why are DEN, CHI, PHI and TB absent from the Week 10 injury page?</td>"
+        "<tr><td>Dashboard R-10 / Q11</td><td>Why are DEN, CHI, PHI and TB absent from the Week 10 injury page?</td>"
         "<td>They are on Week 10 bye. The official schedule’s “Teams on Bye” section lists exactly "
-        "CHI, DEN, PHI, TB; the other 28 teams fill the 14 published matchups.</td>"
-        "<td>Resolved</td>"
+        "CHI, DEN, PHI, TB; the other 28 teams fill the 14 published matchups — matching the second-pass "
+        "resolution against the same official page.</td>"
+        "<td>Confirmed (resolved by 22802aed)</td>"
         f'<td><a href="{SRC_SCHEDULE}" target="_blank" rel="noopener noreferrer">Official Week 10 schedule ↗</a></td></tr>')
     parts.append(
         "<tr><td>Dashboard R-07 / Q10</td><td>Are Myles Garrett and Trent McDuffie really Rams — the injury "
         "report lists them under Los Angeles?</td>"
         "<td>Yes. The official Rams roster lists Myles Garrett (#95, LB, ACT) and Trent McDuffie (#22, CB, ACT) "
-        "as 2026 Rams. The injury-report labels are consistent with the roster.</td>"
-        "<td>Resolved</td>"
+        "as 2026 Rams — matching the second-pass resolution against the same official roster.</td>"
+        "<td>Confirmed (resolved by 22802aed)</td>"
         f'<td><a href="{SRC_RAMS_ROSTER}" target="_blank" rel="noopener noreferrer">Official Rams roster ↗</a></td></tr>')
     parts.append(
-        "<tr><td>Dashboard R-06</td><td>Seattle shows “No Injuries Reported” while a headline says "
+        "<tr><td>Dashboard R-06 / Q09</td><td>Seattle shows “No Injuries Reported” while a headline says "
         "Sam Darnold is ruled out.</td>"
-        "<td>Partially resolved: the live report now carries a 15-row Seahawks table (the blank section is gone). "
-        "The game-status gap itself persists — see new flag V-F01.</td>"
-        "<td>Updated, see V-F01</td>"
+        "<td>Confirmed the report lag is gone: at 22:34Z the live report carries a 15-row Seahawks table "
+        "(Sam Darnold, DNP practice). The formal Game Status cell is still blank while the league’s own "
+        "article says he will not play — tracked as new flag V-F01, not re-filled here.</td>"
+        "<td>Confirmed, with residual V-F01</td>"
         f'<td><a href="{SRC_REPORT}" target="_blank" rel="noopener noreferrer">Official report ↗</a></td></tr>')
     parts.append("</tbody></table></div>")
 
@@ -240,11 +246,12 @@ columns fill in as game time approaches; timing effects are flagged below, not f
 <th scope="col">Handling</th><th scope="col">Sources</th></tr></thead><tbody>""")
     parts.append(
         "<tr><td>V-F01</td>"
-        "<td>NFL-internal inconsistency: an official article says Sam Darnold will not play Week 10 "
-        "(coach statement), but his row on the official injury report has an empty Game Status as of "
-        "2026-11-12T22:34Z.</td>"
-        "<td>A model reading only the report table would treat his availability as unknown while the "
-        "league’s own newsroom states he is out.</td>"
+        "<td>NFL-internal gap: an official article states Sam Darnold will not play Week 10 (coach statement), "
+        "and his report row shows Did Not Participate in Practice — but the Game Status cell on that row is "
+        "empty as of 2026-11-12T22:34Z.</td>"
+        "<td>Practice status is consistent with the article; the formal game designation is missing from the "
+        "table. A consumer keying on Game Status alone would read “unknown” while the league’s newsroom "
+        "states he is out.</td>"
         "<td>Both recorded; the blank Game Status cell is left blank, not filled from the article.</td>"
         f'<td><a href="{SRC_DARNOLD}" target="_blank" rel="noopener noreferrer">Official article ↗</a> · '
         f'<a href="{SRC_REPORT}" target="_blank" rel="noopener noreferrer">Official report ↗</a></td></tr>')
@@ -296,11 +303,11 @@ columns fill in as game time approaches; timing effects are flagged below, not f
 <div class="table-wrap"><table><thead><tr>
 <th scope="col">Step</th><th scope="col">Command</th><th scope="col">Result</th>
 <th scope="col">Source / context</th></tr></thead><tbody>
-<tr><td>1. Compare all three sources</td><td><code>python3 verification/verify.py</code></td>
-<td>Writes <code>verification/report.json</code>; prints every difference</td>
+<tr><td>1. Compare all three sources</td><td><code>python3 injury-injury-verification/verify.py</code></td>
+<td>Writes <code>injury-verification/report.json</code>; prints every difference</td>
 <td><a href="{SRC_REPORT}" target="_blank" rel="noopener noreferrer">Official report ↗</a></td></tr>
-<tr><td>2. Rebuild this page</td><td><code>python3 verification/build_page.py</code></td>
-<td>Regenerates <code>verification/index.html</code> from report.json + evidence</td>
+<tr><td>2. Rebuild this page</td><td><code>python3 injury-injury-verification/build_page.py</code></td>
+<td>Regenerates <code>injury-verification/index.html</code> from report.json + evidence</td>
 <td><a href="{SRC_REPORT}" target="_blank" rel="noopener noreferrer">Official report ↗</a></td></tr>
 <tr><td>3. Site-wide citation gate</td><td><code>python3 scripts/validate_site.py</code></td>
 <td>Asserts every table row on this page carries an official source link</td>

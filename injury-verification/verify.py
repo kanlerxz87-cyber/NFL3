@@ -3,7 +3,7 @@
 
 Three sources are compared field by field:
 
-  A. verification/evidence/live_injuries_2026_w10.tsv
+  A. injury-verification/evidence/live_injuries_2026_w10.tsv
      An independent extraction of the live official report
      (https://www.nfl.com/injuries/) taken through a different rendering path
      (fetch_page markdown) by session arena/e0b5058a-nfl3 at
@@ -24,7 +24,7 @@ Rules:
   * Every reported item carries the official source URL.
 
 Exit code 0 always (this is a reporting tool); the verify gate for the site is
-tests/check_site.py. Run:  python3 verification/verify.py
+tests/check_site.py. Run:  python3 injury-injury-verification/verify.py
 """
 from __future__ import annotations
 
@@ -35,10 +35,10 @@ from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-EVIDENCE = ROOT / "verification" / "evidence" / "live_injuries_2026_w10.tsv"
+EVIDENCE = ROOT / "injury-verification" / "evidence" / "live_injuries_2026_w10.tsv"
 SNAPSHOT = ROOT / "decision-lab" / "data" / "official_snapshot.json"
 DASH_CSV = ROOT / "dashboard" / "data" / "injuries_2026_w10.csv"
-OUT = ROOT / "verification" / "report.json"
+OUT = ROOT / "injury-verification" / "report.json"
 
 SOURCE_LIVE = "https://www.nfl.com/injuries/"
 FIELDS = ("injury", "practice_status", "game_status")
@@ -147,7 +147,7 @@ def main() -> int:
                 ctx_diffs.append({"key": k, "A_live": live_ctx, "B_snapshot": snap_ctx[k]})
 
     results = {
-        "generated_by": "verification/verify.py (session arena/e0b5058a-nfl3)",
+        "generated_by": "injury-verification/verify.py (session arena/e0b5058a-nfl3)",
         "day_matchup_context_diffs_A_vs_B": ctx_diffs,
         "sources": {
             "A_live": {

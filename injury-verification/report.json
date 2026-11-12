@@ -1,5 +1,5 @@
 {
-  "generated_by": "verification/verify.py (session arena/e0b5058a-nfl3)",
+  "generated_by": "injury-verification/verify.py (session arena/e0b5058a-nfl3)",
   "day_matchup_context_diffs_A_vs_B": [],
   "sources": {
     "A_live": {
