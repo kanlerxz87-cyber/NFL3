@@ -185,7 +185,7 @@
       "asset_url": "https://github.com/nflverse/nflverse-data/releases/download/stats_team/stats_team_week_2026.csv",
       "bytes": 111662,
       "path": "data/raw/stats_team_week_2026.csv",
-      "release_asset_updated_utc": "2026-11-13T10:05:31Z",
+      "release_asset_updated_utc": "2026-11-13T13:27:38Z",
       "release_tag": "stats_team",
       "release_url": "https://github.com/nflverse/nflverse-data/releases/tag/stats_team",
       "sha256": "sha256:53e15e7c0f527824f127a4232f2a7cd88014e5bcb2461fd8972952103189d127",
@@ -194,6 +194,6 @@
       "verified": true
     }
   },
-  "generated_utc": "2026-11-13T13:25:03Z",
+  "generated_utc": "2026-11-13T13:29:39Z",
   "source_repo": "https://github.com/nflverse/nflverse-data"
 }
