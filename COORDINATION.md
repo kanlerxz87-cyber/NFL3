@@ -1233,3 +1233,23 @@ This session branched from `0bea864` before the T7 fix landed and independently 
 - **Merge commit:** PENDING
 - **Pages deployment run:** PENDING
 - **Live root fetch after deploy:** PENDING
+
+## Integration reconciliation claim — arena/2d52c84c-nfl3 — 2026-11-13 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| T7a Add discoverable legacy research routes and refresh the generated audit after upstream homepage repair | in progress | arena/2d52c84c-nfl3 | `index.html`, `decision-lab/audit.html`, `decision-lab/data/audit.json`, this log |
+
+Handoff: upstream PR #51/#52 and publication records #55/#54 are preserved. This branch contains only additive legacy-page navigation and a corrected repository audit; its structural homepage fix is superseded. The rebase conflict in this append-only board was resolved without dropping concurrent verification or requirement-coverage records.
+
+### T7a result — arena/2d52c84c-nfl3 — 2026-11-13 UTC
+
+- Preserved the upstream homepage repair and conflict-marker gate from PR #51/#52. Added direct, labeled links to the existing root-level legacy research pages in the archive table so requirements, signals, lineups, validation, suggestions and review routes are discoverable without restoring duplicate homepage content. Regenerated the decision-lab audit page/data after the conflict removal; it now reports the current repository scan (5,963 rows, AUD-03 only, no AUD-02). These are structural/navigation and repository-derived changes, not new NFL-source verification.
+- Verification: root `scripts/validate_site.py`, `tests/check_site.py`, `tests/test_decision_lab.py` (34 tests), decision-lab build/audit, and `git diff --check` pass. Conflict-marker scan is also inherited from main's validated gate. The ops-centre artifact caveat is recorded below; it was not refreshed to a build date that would overstate the Nov 12 source snapshot.
+- During rebase onto origin/main, overlapping `COORDINATION.md` and `index.html` changes conflicted because PR #51 had already repaired the same homepage. Resolved by keeping the complete upstream history and content, then layering only legacy links and the current audit refresh; no upstream changes were discarded.
+- `ops-center/scripts/verify.py` still reports nine date-determinism failures when run against committed Nov 12 capture on Nov 13 (10 warnings also surfaced); `build.py && verify.py` passes only after changing the displayed snapshot date to the build date. This is logged for review, not altered here. Repository-wide AUD-03 source-coverage finding (615 rows missing an official link, 112 community-only) remains flagged.
+- Status: complete for this additive integration; PR/deploy status will be recorded after reconciliation with the already-merged upstream homepage fix.
+
+### PR reconciliation — arena/2d52c84c-nfl3 — 2026-11-13 UTC
+
+- PR #53 was closed by the repository owner as duplicate after upstream PR #51 merged the structural homepage repair. After rebase, this branch retained distinct legacy-route links and a regenerated repository audit (the main-branch audit still showed AUD-02 and stale counts), so the distinct changes were submitted as PR [#57](https://github.com/kanlerxz87-cyber/NFL3/pull/57). PR #57 is open; checks/deploy and merge are pending and will be recorded once complete.
