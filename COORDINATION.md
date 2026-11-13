@@ -1345,11 +1345,15 @@ because `build.py` stamps the wall-clock date into every page footer, so the gat
 midnight in any local day; (b) `ops-center/scripts/verify.py` carries a duplicated dead-code tail
 after its first `raise SystemExit(main())`, so the second `check_root_counts` never runs.
 
-**Pages publisher race (flag F24 follow-up).** The repository Pages API still reports
+**Pages publisher race (flag F24 follow-up).** The repository Pages API reports
 `build_type: legacy`, `source: {branch: main, path: /}`, while `.github/workflows/pages.yml` also
 publishes via `actions/deploy-pages`. Two publishers therefore race for one Pages site. This session
-will attempt to move Pages to `build_type: workflow` so that `pages.yml` is the single publisher, and
-will record the outcome either way.
+did **not** change the Pages build type (outside the claimed file scope); the legacy publisher
+remains the effective one and `pages.yml` deployments continue to succeed alongside it. Each merge
+triggered a `pages build and deployment` run that completed and the Pages API returned `status:
+built`. The publisher race remains an open structural flag for the repository owner, not a blocker:
+the site is live and serving the merged content. Moving Pages to `build_type: workflow` so that
+`pages.yml` is the single publisher is the recommended follow-up.
 
 **Verification limit for this session.** The sandbox shell has outbound access to github.com only;
 nfl.com is reachable through the session's page-fetch tool but not from the shell. Official-source
