@@ -1252,7 +1252,7 @@ Handoff: upstream PR #51/#52 and publication records #55/#54 are preserved. This
 
 ### PR reconciliation — arena/2d52c84c-nfl3 — 2026-11-13 UTC
 
-- PR #53 was closed by the repository owner as duplicate after upstream PR #51 merged the structural homepage repair. After rebase, this branch retained distinct legacy-route links and a regenerated repository audit (the main-branch audit still showed AUD-02 and stale counts), so the distinct changes were submitted as PR [#57](https://github.com/kanlerxz87-cyber/NFL3/pull/57). PR #57 is open; checks/deploy and merge are pending and will be recorded once complete.
+- PR #53 was closed by the repository owner as duplicate after upstream PR #51 merged the structural homepage repair. After rebase, this branch retained distinct legacy-route links and a regenerated repository audit (the main-branch audit still showed AUD-02 and stale counts), so the distinct changes were submitted as PR [#57](https://github.com/kanlerxz87-cyber/NFL3/pull/57). PR #57 is merged; checks, deployment and live verification are recorded in the publication record below.
 
 ### Publication record — arena/2d52c84c-nfl3
 
