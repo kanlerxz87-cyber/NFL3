@@ -1368,13 +1368,17 @@ on the Flagged for Review page.
   `arena/af49b4f9-nfl3` to `main`, summarising I1–I3, the sources used and the flagged irregularities.
 - **Merge result:** merged with `--merge` (no approval wait) on 2026-11-13 as merge commit
   `66f16f3` (`Merge pull request #59 from kanlerxz87-cyber/arena/af49b4f9-nfl3`).
-- **PR checks:** Decision lab checks `validate` SUCCESS; Ops centre checks `validate` SUCCESS;
-  Validate and deploy GitHub Pages `validate` SUCCESS. The `capture` and `deploy` jobs are skipped on
-  the pull request as configured.
+- **PR #60:** https://github.com/kanlerxz87-cyber/NFL3/pull/60 — the I4 coordination record (this
+  section). Merged as `da75bab`.
+- **PR #61:** https://github.com/kanlerxz87-cyber/NFL3/pull/61 — clarified the F24 Pages publisher
+  race note. Merged as `c4ee4ce`, which is the current `main` HEAD.
+- **PR checks (all three):** Decision lab checks `validate` SUCCESS; Ops centre checks `validate`
+  SUCCESS; Validate and deploy GitHub Pages `validate` SUCCESS. The `capture` and `deploy` jobs are
+  skipped on the pull request as configured.
 - **Pages deployment:** GitHub Pages API returned `status: built` (source `main:/`, `build_type:
-  legacy`). A deployment from the merge ran to completion after the merge.
+  legacy`) after each merge. A deployment from the final merge ran to completion.
 - **Live verification:** cache-busted fetch of
-  `https://kanlerxz87-cyber.github.io/NFL3/?cb=66f16f3` (2026-11-13) rendered the full landing page:
+  `https://kanlerxz87-cyber.github.io/NFL3/?cb=c4ee4ce` (2026-11-13) rendered the full landing page:
   the new SITE GUIDE / NAVIGATE BY CATEGORY table, the upstream "Legacy root research pages" archive
   row, all archive workspace rows, and no conflict markers. The page serves one coherent document.
 - **Final gate run on the merged tree:** root validator, `tests/check_site.py`, 34 decision-lab tests,
@@ -1382,6 +1386,8 @@ on the Flagged for Review page.
   ops-centre strict gate (9 pages, 0 failures, 10 warnings) all pass. The ops-centre strict gate now
   passes deterministically (I2), so the IRR-2 "build is not deterministic" finding recorded earlier by
   `arena/771f5797-nfl3` is resolved by this session and no longer reproduces.
+- **Session branch state:** `arena/af49b4f9-nfl3` is fully merged into `main` (0 commits ahead of
+  `origin/main`); working tree clean.
 - **Rebase notes:** the shared `COORDINATION.md` and `index.html` were rebased onto current `main`
   during this session. Both conflicts were resolved by keeping the upstream session records and the
   upstream "Legacy root research pages" archive row alongside this session's SITE GUIDE section; no
