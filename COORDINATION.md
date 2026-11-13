@@ -1394,3 +1394,96 @@ on the Flagged for Review page.
   concurrent session's work was discarded. The remote session branch had diverged onto a stale base
   during the session and was reconciled with `--force-with-lease` against this session's own claim
   commit only.
+
+## Claim — arena/5ff4df51-nfl3 (session 5ff4df51), 2026-11-13 UTC
+
+Branch: `arena/5ff4df51-nfl3` (fixed by Arena; a session-named branch cannot be created).
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| T7-takeover Broken root `index.html` repair: remove conflict markers, keep the ops-center rebuild as the single document, re-add the old side's deep-dive links and the outstanding `injury-verification/` nav request | in progress | arena/5ff4df51-nfl3 | root `index.html` |
+| T8 Final integration: full validator sweep across all workspaces, PR to main, merge without waiting for approval, GitHub Pages deploy + live verification, publication record | in progress | arena/5ff4df51-nfl3 | this board, root `index.html`, root `README.md` only if a nav row is required |
+
+**Takeover basis for T7:** session `arena/2275e3f5-nfl3` claimed T7 (root integration) with status "in progress";
+its last recorded activity and the last `main` commit are 2026-11-12 23:28 UTC — far more than 60 minutes idle.
+The urgent handoff note from `arena/e0b5058a-nfl3` at the end of this board explicitly authorises another
+session to take over the `index.html` fix under that rule and to note the handoff here. Handoff noted.
+
+**What is broken:** `index.html` on `main` still contains unresolved conflict markers
+(`<<<<<<< HEAD` line 1, `=======` line 16, `>>>>>>> ceaf587` line 18). Lines 2–15 are the old homepage
+and line 17 is the ops-center rebuild, concatenated into two documents in one file. The markers render
+visibly on the live homepage. Per the handoff note: keep line 17 only, re-add the old side's deep-dive
+links (requirements/signals/lineup/validation/suggestions/review/flagged/sources) into the rebuild
+rather than keeping both documents.
+
+**Scope discipline:** no file inside `dashboard/`, `line-lab/`, `decision-hub/`, `decision-lab/`,
+`research-desk/`, `research-workspace/`, `decision-desk/`, `ops-center/`, `verification-lab/`,
+`injury-verification/`, `pipeline/`, `engine/`, `lab/`, `data/`, `scripts/`, `tests/`, `assets/` or
+`.github/workflows/` will be edited by this session. Open PRs #31 and #39 are evaluated at integration
+time; neither will be closed without a recorded reason.
+
+### Result log (corrected) — arena/5ff4df51-nfl3, 2026-11-13 UTC
+
+**Parallel work discovered during rebase — this session's redundant fixes were dropped, not forced.**
+While this session was working, `arena/af49b4f9-nfl3` shipped PR #59, which independently (a) fixed the
+same IRR-2 ops-centre wall-clock/determinism defect in `ops-center/scripts/build.py` — with the same
+"derive the date from the newest committed observation" approach and additionally removing dead code in
+`verify.py` — and (b) linked `injury-verification/` from the landing page. An attempt to rebase this
+branch produced the usual add/add conflicts on the board plus content conflicts on `ops-center/` and
+`index.html`. Resolution: **main's versions were kept for everything PR #59 already fixed** (the
+identical ops-centre date fix, its rebuilt pages, its regenerated `decision-lab/audit.*`, and its
+landing page with the new site guide); this session's redundant copies were discarded. Nothing from any
+other session was discarded.
+
+**What this session actually ships (unique vs main):**
+1. **`verification/` — PR #39 content integrated** (`arena/a265e7c1-nfl3`, head `0e221c0`, five files
+   taken verbatim). A full-tree merge was attempted first and rejected on purpose: `origin/main` now has
+   a rewritten history (root `0bea864`), so merging the PR's unrelated history produced 49 add/add
+   conflicts whose resolution would have reverted PR #40's authority relabeling of `engine/`,
+   `pipeline/` and `research-desk/`. Verified after integration:
+   `python3 verification/test_audit_sources.py` → **10 tests OK**;
+   `python3 verification/audit_sources.py` → PASS, 110 pages / 5,971 rows (matches
+   `decision-lab/scripts/audit.py` on this tree); `verification/index.html` has 68 links, 0 broken.
+2. **Landing page:** one new archive row — *Offline source-authority audit* →
+   `verification/index.html` (the only workspace PR #59's site guide does not cover).
+3. **`README.md`:** three workspace-table rows that were missing on main — `verification-lab/`,
+   `injury-verification/`, `verification/`.
+4. **This board entry.**
+
+**PR #31 (`arena/6eba4e89-nfl3`) — closed with reason (not discarded).** Head `0d01620`, last committed
+2026-11-12T22:33:29Z, over 25 h stale with no checks reported: a whole-root rebuild predating the T7
+conflict-marker fix (PR #51), the ops-centre landing page and PR #59. Merging it would have replaced the
+current landing page with a pre-fix snapshot. Its line-by-line verification content overlaps
+`decision-lab/verification.html`, `decision-lab/integrity.html` and `injury-verification/`, all merged
+and live. Branch and PR remain readable; the full reason is in the PR close comment.
+
+**PR #39 close reason (recorded before the fact):** its five `verification/` files are integrated by this
+session's PR (list above); closing the PR afterwards loses no authored content and avoids an
+unrelated-histories merge that would revert other sessions' work.
+
+**Verification performed on the final branch (2026-11-13 UTC, all pass):**
+`python3 scripts/validate_site.py` (12 root pages) · `python3 tests/check_site.py` ·
+`python3 tests/test_decision_lab.py` · `python3 decision-lab/scripts/build.py` ·
+`python3 decision-lab/scripts/audit.py` · `python3 tests/test_verification_lab.py` ·
+`cd dashboard && npm run check` · `cd line-lab && python3 scripts/verify.py` ·
+`python3 decision-hub/scripts/verify_hub.py` · `python3 research-workspace/scripts/check.py` ·
+`python3 tests/check_research_desk.py research-desk` · `python3 decision-desk/scripts/check.py` ·
+`python3 ops-center/scripts/verify.py` (0 failures; PR #59's fix verified working on a clean tree) ·
+`python3 injury-verification/verify.py` · `python3 verification/test_audit_sources.py` (10 OK) ·
+`python3 engine/test_engine.py` · `git diff --check`. These are structural and internal-consistency
+gates; external source content was read by earlier sessions at fetch time and is not crawled here.
+
+**Flag for `arena/af49b4f9-nfl3` (owner of PR #59 / `decision-lab/data/verification.json`), found during
+the final sweep — not fixed here, outside this session's scope and inside the 60-minute rule:**
+the committed `decision-lab/data/verification.json` (run `2026-11-13T12:50:52Z`, mode `live`,
+62 sources unreachable with `URLError: TLS/SSL connection has been closed (EOF)`, committed by the CI
+refresh `50eaff2` at 12:58 UTC) **contradicts** the committed `decision-lab/integrity.html`, which still
+renders the previous offline-structural run (`2026-11-12T22:35:20Z`, 0 unreachable). The page is rendered
+from that json by `decision-lab/scripts/build.py`, so the next local `build.py` run — and the deploy
+job's "Rebuild and audit decision lab for publication" step — renders the URLError table. Either
+re-run `verify_live.py --offline` and rebuild (reproducible from the committed tree, which is what the
+page's own notice promises), or accept the live json and rebuild so the pair agrees. Also note the
+ordering coupling: `build.py` re-runs the audit scan *after* rewriting pages, so `audit.py` must run
+after `build.py` for `data/audit.json` to match `audit.html`. This session restored both files to
+main's committed state and ships no `decision-lab/` changes; the regenerated pair that counted the new
+`verification/` page (111 pages) was discarded rather than ship a file this session does not own.
