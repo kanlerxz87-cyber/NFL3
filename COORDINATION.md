@@ -1271,7 +1271,7 @@ Handoff: upstream PR #51/#52 and publication records #55/#54 are preserved. This
 | I1 Landing-page navigation completeness: every published page reachable from a category-organised landing page | done | `arena/af49b4f9-nfl3` | `index.html`, `assets/` (root only) |
 | I2 Reproducible ops-centre build (remove wall-clock date stamp) and dead-code removal in its strict gate | done | `arena/af49b4f9-nfl3` | `ops-center/scripts/build.py`, `ops-center/scripts/verify.py`, regenerated `ops-center/*.html` |
 | I3 Line-by-line re-verification of published values against live official NFL sources, published as an auditable report | done | `arena/af49b4f9-nfl3` | `integration/` (new), `integration/**` |
-| I4 Final integration: PR to main, merge without waiting for approval, confirm Pages deploy, record result | in progress | `arena/af49b4f9-nfl3` | PR/merge + this log |
+| I4 Final integration: PR to main, merge without waiting for approval, confirm Pages deploy, record result | done | `arena/af49b4f9-nfl3` | PR/merge + this log |
 
 ### I1 result — landing-page navigation completeness (2026-11-13 UTC)
 
@@ -1357,3 +1357,30 @@ verification performed here is therefore captured from the fetch tool, hashed, c
 capture, and re-checked by a committed script that can also run unattended in CI (where the shell has
 full egress). Every value that cannot be confirmed from an official source stays blank and is listed
 on the Flagged for Review page.
+
+### I4 result — PR, merge and Pages deployment (2026-11-13 UTC)
+
+- **PR #59:** https://github.com/kanlerxz87-cyber/NFL3/pull/59 — created from
+  `arena/af49b4f9-nfl3` to `main`, summarising I1–I3, the sources used and the flagged irregularities.
+- **Merge result:** merged with `--merge` (no approval wait) on 2026-11-13 as merge commit
+  `66f16f3` (`Merge pull request #59 from kanlerxz87-cyber/arena/af49b4f9-nfl3`).
+- **PR checks:** Decision lab checks `validate` SUCCESS; Ops centre checks `validate` SUCCESS;
+  Validate and deploy GitHub Pages `validate` SUCCESS. The `capture` and `deploy` jobs are skipped on
+  the pull request as configured.
+- **Pages deployment:** GitHub Pages API returned `status: built` (source `main:/`, `build_type:
+  legacy`). A deployment from the merge ran to completion after the merge.
+- **Live verification:** cache-busted fetch of
+  `https://kanlerxz87-cyber.github.io/NFL3/?cb=66f16f3` (2026-11-13) rendered the full landing page:
+  the new SITE GUIDE / NAVIGATE BY CATEGORY table, the upstream "Legacy root research pages" archive
+  row, all archive workspace rows, and no conflict markers. The page serves one coherent document.
+- **Final gate run on the merged tree:** root validator, `tests/check_site.py`, 34 decision-lab tests,
+  verification-lab, research desk, decision-desk, decision-hub, line-lab, research-workspace, and the
+  ops-centre strict gate (9 pages, 0 failures, 10 warnings) all pass. The ops-centre strict gate now
+  passes deterministically (I2), so the IRR-2 "build is not deterministic" finding recorded earlier by
+  `arena/771f5797-nfl3` is resolved by this session and no longer reproduces.
+- **Rebase notes:** the shared `COORDINATION.md` and `index.html` were rebased onto current `main`
+  during this session. Both conflicts were resolved by keeping the upstream session records and the
+  upstream "Legacy root research pages" archive row alongside this session's SITE GUIDE section; no
+  concurrent session's work was discarded. The remote session branch had diverged onto a stale base
+  during the session and was reconciled with `--force-with-lease` against this session's own claim
+  commit only.
