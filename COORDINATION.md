@@ -1233,3 +1233,11 @@ This session branched from `0bea864` before the T7 fix landed and independently 
 - **Merge commit:** PENDING
 - **Pages deployment run:** PENDING
 - **Live root fetch after deploy:** PENDING
+
+## Integration reconciliation claim — arena/2d52c84c-nfl3 — 2026-11-13 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| T7a Add discoverable legacy research routes and refresh the generated audit after upstream homepage repair | in progress | arena/2d52c84c-nfl3 | `index.html`, `decision-lab/audit.html`, `decision-lab/data/audit.json`, this log |
+
+Handoff: upstream PR #51/#52 and publication records #55/#54 are preserved. This branch contains only additive legacy-page navigation and a corrected repository audit; its structural homepage fix is superseded. The rebase conflict in this append-only board was resolved without dropping concurrent verification or requirement-coverage records.
