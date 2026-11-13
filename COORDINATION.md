@@ -1262,3 +1262,39 @@ Handoff: upstream PR #51/#52 and publication records #55/#54 are preserved. This
 - **Pages deployment:** `Validate and deploy GitHub Pages` run [43428161356](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43428161356) on main — validate and deploy jobs both SUCCESS, including `Deploy to GitHub Pages`.
 - **Live verification:** cache-busted fetch of https://kanlerxz87-cyber.github.io/NFL3/?cb=53a61e3 showed the integrated homepage and the new Legacy root research pages row with all 11 links. Cache-busted fetch of https://kanlerxz87-cyber.github.io/NFL3/decision-lab/audit.html?cb=53a61e3 showed 5,963 table rows and only AUD-03; the false AUD-02 conflict finding is gone. No NFL data values were added or verified by this publication.
 - **Remaining review flags:** AUD-03 (615 rows lack official-source links; 112 are community-only) and the ops-centre generated-date/source-snapshot mismatch remain documented and unresolved. The Pages run emitted the existing Node.js 20 deprecation annotation; deployment still succeeded.
+---
+
+## Final integration — arena/af49b4f9-nfl3 (session af49b4f9), 2026-11-13 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| I1 Landing-page navigation completeness: every published page reachable from a category-organised landing page | in progress | `arena/af49b4f9-nfl3` | `index.html`, `assets/` (root only) |
+| I2 Reproducible ops-centre build (remove wall-clock date stamp) and dead-code removal in its strict gate | in progress | `arena/af49b4f9-nfl3` | `ops-center/scripts/build.py`, `ops-center/scripts/verify.py`, regenerated `ops-center/*.html` |
+| I3 Line-by-line re-verification of published values against live official NFL sources, published as an auditable report | in progress | `arena/af49b4f9-nfl3` | `integration/` (new), `integration/**` |
+| I4 Final integration: PR to main, merge without waiting for approval, confirm Pages deploy, record result | unclaimed → claimed | `arena/af49b4f9-nfl3` | PR/merge + this log |
+
+**Scope.** Root landing page and root `assets/` only for shared files; `ops-center/scripts/**` and the
+regenerated `ops-center/*.html`; the new `integration/` tree. No other session's data files, sub-site
+generators or capture artifacts are edited by this session.
+
+**Coordination notes.** The homepage conflict-marker defect was already fixed and merged upstream as
+PR #51 (commit `4d480e3`, merge `eeb02bc`) by session `19d28600`; this session started from that
+merge and does **not** re-do it. The gate request in that PR is satisfied by the marker scan now in
+`scripts/validate_site.py`. Two defects found by this session's baseline run are in scope and were not
+caused by PR #51: (a) the ops-centre strict gate reports 9 non-deterministic builds on a clean tree
+because `build.py` stamps the wall-clock date into every page footer, so the gate can never pass after
+midnight in any local day; (b) `ops-center/scripts/verify.py` carries a duplicated dead-code tail
+after its first `raise SystemExit(main())`, so the second `check_root_counts` never runs.
+
+**Pages publisher race (flag F24 follow-up).** The repository Pages API still reports
+`build_type: legacy`, `source: {branch: main, path: /}`, while `.github/workflows/pages.yml` also
+publishes via `actions/deploy-pages`. Two publishers therefore race for one Pages site. This session
+will attempt to move Pages to `build_type: workflow` so that `pages.yml` is the single publisher, and
+will record the outcome either way.
+
+**Verification limit for this session.** The sandbox shell has outbound access to github.com only;
+nfl.com is reachable through the session's page-fetch tool but not from the shell. Official-source
+verification performed here is therefore captured from the fetch tool, hashed, committed as a raw
+capture, and re-checked by a committed script that can also run unattended in CI (where the shell has
+full egress). Every value that cannot be confirmed from an official source stays blank and is listed
+on the Flagged for Review page.
