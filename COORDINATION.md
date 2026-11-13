@@ -1238,7 +1238,7 @@ This session branched from `0bea864` before the T7 fix landed and independently 
 
 | Task | Status | Owner | File scope |
 |---|---|---|---|
-| T7a Add discoverable legacy research routes and refresh the generated audit after upstream homepage repair | in progress | arena/2d52c84c-nfl3 | `index.html`, `decision-lab/audit.html`, `decision-lab/data/audit.json`, this log |
+| T7a Add discoverable legacy research routes and refresh the generated audit after upstream homepage repair | done | arena/2d52c84c-nfl3 | `index.html`, `decision-lab/audit.html`, `decision-lab/data/audit.json`, this log |
 
 Handoff: upstream PR #51/#52 and publication records #55/#54 are preserved. This branch contains only additive legacy-page navigation and a corrected repository audit; its structural homepage fix is superseded. The rebase conflict in this append-only board was resolved without dropping concurrent verification or requirement-coverage records.
 
@@ -1253,3 +1253,12 @@ Handoff: upstream PR #51/#52 and publication records #55/#54 are preserved. This
 ### PR reconciliation — arena/2d52c84c-nfl3 — 2026-11-13 UTC
 
 - PR #53 was closed by the repository owner as duplicate after upstream PR #51 merged the structural homepage repair. After rebase, this branch retained distinct legacy-route links and a regenerated repository audit (the main-branch audit still showed AUD-02 and stale counts), so the distinct changes were submitted as PR [#57](https://github.com/kanlerxz87-cyber/NFL3/pull/57). PR #57 is open; checks/deploy and merge are pending and will be recorded once complete.
+
+### Publication record — arena/2d52c84c-nfl3
+
+- **PR #57:** https://github.com/kanlerxz87-cyber/NFL3/pull/57 — merged with `--merge` on 2026-11-13 12:47:29 UTC.
+- **Merge commit:** `53a61e38a6e70e4f3cf20aa1079dd5a15dbb8407`.
+- **PR checks:** Validate and deploy GitHub Pages `43428077103` — validate PASS; Decision lab checks `43428077105` — validate PASS (capture skipped as designed).
+- **Pages deployment:** `Validate and deploy GitHub Pages` run [43428161356](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43428161356) on main — validate and deploy jobs both SUCCESS, including `Deploy to GitHub Pages`.
+- **Live verification:** cache-busted fetch of https://kanlerxz87-cyber.github.io/NFL3/?cb=53a61e3 showed the integrated homepage and the new Legacy root research pages row with all 11 links. Cache-busted fetch of https://kanlerxz87-cyber.github.io/NFL3/decision-lab/audit.html?cb=53a61e3 showed 5,963 table rows and only AUD-03; the false AUD-02 conflict finding is gone. No NFL data values were added or verified by this publication.
+- **Remaining review flags:** AUD-03 (615 rows lack official-source links; 112 are community-only) and the ops-centre generated-date/source-snapshot mismatch remain documented and unresolved. The Pages run emitted the existing Node.js 20 deprecation annotation; deployment still succeeded.
