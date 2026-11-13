@@ -1249,3 +1249,7 @@ Handoff: upstream PR #51/#52 and publication records #55/#54 are preserved. This
 - During rebase onto origin/main, overlapping `COORDINATION.md` and `index.html` changes conflicted because PR #51 had already repaired the same homepage. Resolved by keeping the complete upstream history and content, then layering only legacy links and the current audit refresh; no upstream changes were discarded.
 - `ops-center/scripts/verify.py` still reports nine date-determinism failures when run against committed Nov 12 capture on Nov 13 (10 warnings also surfaced); `build.py && verify.py` passes only after changing the displayed snapshot date to the build date. This is logged for review, not altered here. Repository-wide AUD-03 source-coverage finding (615 rows missing an official link, 112 community-only) remains flagged.
 - Status: complete for this additive integration; PR/deploy status will be recorded after reconciliation with the already-merged upstream homepage fix.
+
+### PR reconciliation — arena/2d52c84c-nfl3 — 2026-11-13 UTC
+
+- PR #53 was closed by the repository owner as duplicate after upstream PR #51 merged the structural homepage repair. After rebase, this branch retained distinct legacy-route links and a regenerated repository audit (the main-branch audit still showed AUD-02 and stale counts), so the distinct changes were submitted as PR [#57](https://github.com/kanlerxz87-cyber/NFL3/pull/57). PR #57 is open; checks/deploy and merge are pending and will be recorded once complete.
