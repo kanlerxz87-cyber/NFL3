@@ -1,0 +1,1253 @@
+{
+ "schema_version": 1,
+ "generated_by": "integration/scripts/verify_live_capture.py (session arena/af49b4f9-nfl3)",
+ "capture": {
+  "url": "https://www.nfl.com/injuries/",
+  "label": "Official NFL injury report, 2026 Week 10 - third observation",
+  "file": "integration/data/captures/2026-11-13-nfl-injuries/nfl-injuries-2026-11-13.md",
+  "bytes": 54883,
+  "sha256": "9b5e6923259c4da235aae34d31724923eb2638a23c4f8c032fff05a8d77622ca",
+  "observed_at": "2026-11-13T12:40:00Z",
+  "method": "Page fetched and rendered to text by the session's page-fetch tool, then stored verbatim in the seven chunk files in this directory. The chunk files concatenate byte-for-byte into nfl-injuries-2026-11-13.md."
+ },
+ "counts": {
+  "published_rows": 279,
+  "live_rows": 296,
+  "matched": 185,
+  "drifted": 94,
+  "published_not_on_live_page": 0,
+  "on_live_page_not_published": 17,
+  "teams_reporting_no_injuries_published": 4,
+  "teams_reporting_no_injuries_live": 2
+ },
+ "drift": [
+  {
+   "team": "Patriots",
+   "player": "Cameron Latu",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Patriots",
+   "player": "Walter Rouse",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Patriots",
+   "player": "Brenden Schooler",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Patriots",
+   "player": "Rhamondre Stevenson",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Lions",
+   "player": "Brian Branch",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Lions",
+   "player": "Jared Goff",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Lions",
+   "player": "Kerby Joseph",
+   "origin": "06:32Z capture",
+   "differences": {
+    "injury": {
+     "published": "",
+     "live": "Knee"
+    },
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Full Participation in Practice"
+    },
+    "game_status": {
+     "published": "",
+     "live": "Out"
+    }
+   }
+  },
+  {
+   "team": "Lions",
+   "player": "Cade Mays",
+   "origin": "06:32Z capture",
+   "differences": {
+    "injury": {
+     "published": "",
+     "live": "Ankle"
+    },
+    "game_status": {
+     "published": "",
+     "live": "Out"
+    }
+   }
+  },
+  {
+   "team": "Lions",
+   "player": "D.J. Reed",
+   "origin": "06:32Z capture",
+   "differences": {
+    "injury": {
+     "published": "",
+     "live": "Hip"
+    },
+    "game_status": {
+     "published": "",
+     "live": "Out"
+    }
+   }
+  },
+  {
+   "team": "Falcons",
+   "player": "Divine Deablo",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "Falcons",
+   "player": "Gervon Dexter Sr.",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Falcons",
+   "player": "James Pearce Jr.",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Falcons",
+   "player": "Za'Darius Smith",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Falcons",
+   "player": "Josh Woods",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Vikings",
+   "player": "Carson Wentz",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Packers",
+   "player": "Zaire Franklin",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Packers",
+   "player": "Travis Glover",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Packers",
+   "player": "Skyy Moore",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Packers",
+   "player": "Trey Smack",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Packers",
+   "player": "Lukas Van Ness",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Jaguars",
+   "player": "Robert Hainsey",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "Jaguars",
+   "player": "Antonio Johnson",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Jaguars",
+   "player": "Jakobi Meyers",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Jaguars",
+   "player": "Chris Rodriguez Jr.",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Jaguars",
+   "player": "Bhayshul Tuten",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Titans",
+   "player": "Tony Pollard",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Full Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "Titans",
+   "player": "Peter Skoronski",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Titans",
+   "player": "Carnell Tate",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Bills",
+   "player": "Spencer Brown",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "Bills",
+   "player": "Dion Dawkins",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "Bills",
+   "player": "Jordan Hancock",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Full Participation in Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Bills",
+   "player": "Ar'maj Reed-Adams",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Full Participation in Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Bills",
+   "player": "Tyrell Shavers",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Full Participation in Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Jets",
+   "player": "Garrett Wilson",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "Dolphins",
+   "player": "Chris Bell",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "Dolphins",
+   "player": "Aaron Brewer",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Dolphins",
+   "player": "Will Kacmarek",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Dolphins",
+   "player": "Michael Taaffe",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Full Participation in Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Colts",
+   "player": "Jaylon Carlies",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Colts",
+   "player": "A.J. Haulcy",
+   "origin": "22:25Z re-check (status changed)",
+   "differences": {
+    "practice_status": {
+     "published": "Full Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "Colts",
+   "player": "Arden Key",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Full Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "Colts",
+   "player": "Jonathan Taylor",
+   "origin": "22:25Z re-check (status changed)",
+   "differences": {
+    "practice_status": {
+     "published": "Full Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "Colts",
+   "player": "Justin Walley",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Full Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "Colts",
+   "player": "Charvarius Ward",
+   "origin": "22:25Z re-check (status changed)",
+   "differences": {
+    "practice_status": {
+     "published": "Full Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "Panthers",
+   "player": "Brady Christensen",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Full Participation in Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Panthers",
+   "player": "Trevor Etienne",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Full Participation in Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Panthers",
+   "player": "Chuba Hubbard",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Panthers",
+   "player": "Lee Hunter",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Full Participation in Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Panthers",
+   "player": "Mike Jackson",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Full Participation in Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Panthers",
+   "player": "Will Lee III",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Full Participation in Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Panthers",
+   "player": "Xavier Legette",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Full Participation in Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Panthers",
+   "player": "Jaelan Phillips",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Full Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "Panthers",
+   "player": "Torricelli Simpkins III",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Full Participation in Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Saints",
+   "player": "Noah Fant",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Saints",
+   "player": "Alvin Kamara",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Saints",
+   "player": "Christen Miller",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "Texans",
+   "player": "Woody Marks",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Texans",
+   "player": "Tommy Togiai",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Full Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "Browns",
+   "player": "Maliek Collins",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "Browns",
+   "player": "Harold Fannin Jr.",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "Browns",
+   "player": "Tytus Howard",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "Browns",
+   "player": "Elgton Jenkins",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Browns",
+   "player": "Carson Schwesinger",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "Browns",
+   "player": "Quincy Williams",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "Cardinals",
+   "player": "Budda Baker",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Cardinals",
+   "player": "Zachary Carter",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "Cardinals",
+   "player": "Roy Lopez",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Cardinals",
+   "player": "Josh Sweat",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Cardinals",
+   "player": "Mack Wilson",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Raiders",
+   "player": "Foley Fatukasi",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "49ers",
+   "player": "Nate Hobbs",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Full Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "49ers",
+   "player": "Siran Neal",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "49ers",
+   "player": "Demarcus Robinson",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Full Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "49ers",
+   "player": "C.J. West",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "Cowboys",
+   "player": "Malik Hooker",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Cowboys",
+   "player": "Marist Liufau",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Full Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "Cowboys",
+   "player": "P.J. Locke",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Cowboys",
+   "player": "Jonathan Mingo",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Cowboys",
+   "player": "Devin Moore",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Full Participation in Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Cowboys",
+   "player": "George Pickens",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "Cowboys",
+   "player": "Joey Porter Jr.",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Cowboys",
+   "player": "Luke Schoonmaker",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Full Participation in Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Cowboys",
+   "player": "Brevyn Spann-Ford",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Full Participation in Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Steelers",
+   "player": "DeShon Elliott",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Steelers",
+   "player": "Derrick Harmon",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Steelers",
+   "player": "Darnell Washington",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Steelers",
+   "player": "T.J. Watt",
+   "origin": "06:32Z capture",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Seahawks",
+   "player": "Drew Lock",
+   "origin": "22:25Z re-check (row published during the day)",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Seahawks",
+   "player": "Uchenna Nwosu",
+   "origin": "22:25Z re-check (row published during the day)",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "Seahawks",
+   "player": "Connor O'Toole",
+   "origin": "22:25Z re-check (row published during the day)",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "team": "Seahawks",
+   "player": "Jarran Reed",
+   "origin": "22:25Z re-check (row published during the day)",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Seahawks",
+   "player": "Leonard Williams",
+   "origin": "22:25Z re-check (row published during the day)",
+   "differences": {
+    "practice_status": {
+     "published": "Did Not Participate In Practice",
+     "live": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Bengals",
+   "player": "Dylan Fairchild",
+   "origin": "22:25Z re-check (row published during the day)",
+   "differences": {
+    "practice_status": {
+     "published": "Limited Participation in Practice",
+     "live": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "team": "Colts",
+   "player": "CJ Allen",
+   "origin": "22:25Z re-check (row published during the day)",
+   "differences": {
+    "practice_status": {
+     "published": "Full Participation in Practice",
+     "live": "Did Not Participate In Practice"
+    }
+   }
+  }
+ ],
+ "published_not_on_live_page": [],
+ "on_live_page_not_published": [
+  {
+   "team": "Chiefs",
+   "player": "Jaydn Ott",
+   "position": "RB",
+   "injury": "",
+   "practice_status": "Limited Participation in Practice",
+   "game_status": "",
+   "player_url": "https://www.nfl.com/players/jaydn-ott/"
+  },
+  {
+   "team": "Falcons",
+   "player": "Kendal Daniels",
+   "position": "LB",
+   "injury": "",
+   "practice_status": "Limited Participation in Practice",
+   "game_status": "",
+   "player_url": "https://www.nfl.com/players/kendal-daniels/"
+  },
+  {
+   "team": "Falcons",
+   "player": "Jawaan Taylor",
+   "position": "T",
+   "injury": "",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": "",
+   "player_url": "https://www.nfl.com/players/jawaan-taylor/"
+  },
+  {
+   "team": "Falcons",
+   "player": "Cameron Thomas",
+   "position": "DE",
+   "injury": "",
+   "practice_status": "Limited Participation in Practice",
+   "game_status": "",
+   "player_url": "https://www.nfl.com/players/cameron-thomas/"
+  },
+  {
+   "team": "Bills",
+   "player": "Sam Franklin Jr.",
+   "position": "S",
+   "injury": "",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": "",
+   "player_url": "https://www.nfl.com/players/sam-franklin/"
+  },
+  {
+   "team": "Jets",
+   "player": "Jarvis Brownlee Jr.",
+   "position": "CB",
+   "injury": "",
+   "practice_status": "Limited Participation in Practice",
+   "game_status": "",
+   "player_url": "https://www.nfl.com/players/jarvis-brownlee-jr/"
+  },
+  {
+   "team": "Dolphins",
+   "player": "Jared Wayne",
+   "position": "WR",
+   "injury": "",
+   "practice_status": "Full Participation in Practice",
+   "game_status": "",
+   "player_url": "https://www.nfl.com/players/jared-wayne/"
+  },
+  {
+   "team": "Saints",
+   "player": "Taliese Fuaga",
+   "position": "T",
+   "injury": "",
+   "practice_status": "Limited Participation in Practice",
+   "game_status": "",
+   "player_url": "https://www.nfl.com/players/taliese-fuaga/"
+  },
+  {
+   "team": "Saints",
+   "player": "Quincy Riley",
+   "position": "CB",
+   "injury": "",
+   "practice_status": "Full Participation in Practice",
+   "game_status": "",
+   "player_url": "https://www.nfl.com/players/quincy-riley/"
+  },
+  {
+   "team": "Browns",
+   "player": "Donovan McMillon",
+   "position": "S",
+   "injury": "",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": "",
+   "player_url": "https://www.nfl.com/players/donovan-mcmillon-2/"
+  },
+  {
+   "team": "Cardinals",
+   "player": "Darius Robinson",
+   "position": "DT",
+   "injury": "",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": "",
+   "player_url": "https://www.nfl.com/players/darius-robinson-2/"
+  },
+  {
+   "team": "Cowboys",
+   "player": "Alijah Clark",
+   "position": "S",
+   "injury": "",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": "",
+   "player_url": "https://www.nfl.com/players/alijah-clark/"
+  },
+  {
+   "team": "Cowboys",
+   "player": "Juanyeh Thomas",
+   "position": "S",
+   "injury": "",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": "",
+   "player_url": "https://www.nfl.com/players/juanyeh-thomas/"
+  },
+  {
+   "team": "Bengals",
+   "player": "Jalen Davis",
+   "position": "CB",
+   "injury": "",
+   "practice_status": "Full Participation in Practice",
+   "game_status": "",
+   "player_url": "https://www.nfl.com/players/jalen-davis/"
+  },
+  {
+   "team": "Bengals",
+   "player": "B.J. Hill",
+   "position": "DT",
+   "injury": "",
+   "practice_status": "Limited Participation in Practice",
+   "game_status": "",
+   "player_url": "https://www.nfl.com/players/b-j-hill/"
+  },
+  {
+   "team": "Bengals",
+   "player": "Andrei Iosivas",
+   "position": "WR",
+   "injury": "",
+   "practice_status": "Full Participation in Practice",
+   "game_status": "",
+   "player_url": "https://www.nfl.com/players/andrei-iosivas/"
+  },
+  {
+   "team": "Bengals",
+   "player": "Brian Parker II",
+   "position": "G",
+   "injury": "",
+   "practice_status": "Full Participation in Practice",
+   "game_status": "",
+   "player_url": "https://www.nfl.com/players/brian-parker-ii/"
+  }
+ ],
+ "no_injury_sections": {
+  "published": [
+   "Bengals",
+   "Chargers",
+   "Ravens",
+   "Seahawks"
+  ],
+  "live": [
+   "Chargers",
+   "Ravens"
+  ],
+  "still_no_injuries": [
+   "Chargers",
+   "Ravens"
+  ],
+  "now_reporting_players": [
+   "Bengals",
+   "Seahawks"
+  ],
+  "newly_no_injuries": []
+ },
+ "boundary": "A difference here is a difference between two observations of a mutable official page, not an error in either. The published view is not corrected by this script; the difference is published so a reviewer can decide."
+}

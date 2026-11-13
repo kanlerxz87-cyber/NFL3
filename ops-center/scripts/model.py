@@ -17,6 +17,7 @@ import csv
 import json
 import re
 from collections import defaultdict
+from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -110,16 +111,37 @@ def load_recheck() -> dict:
 # ---------------------------------------------------------------------------
 # Replacement chains
 # ---------------------------------------------------------------------------
+def _observed_at_is_newer(candidate: str, reference: str) -> bool:
+    """True when `candidate` is a strictly later observation than `reference`.
+
+    Both are ISO-8601 timestamps written by the capture scripts, so a plain
+    string comparison is correct; the parsed comparison is used when both
+    strings parse, and the string comparison is the fallback.
+    """
+    if not candidate or not reference:
+        return False
+    try:
+        return datetime.fromisoformat(candidate) > datetime.fromisoformat(reference)
+    except ValueError:
+        return candidate > reference
+
+
 def merge_recheck(snapshot: dict, recheck: dict) -> list[dict]:
     """The freshest official injury picture available to this repository.
 
-    Starts from the 06:32Z capture and applies the 22:25Z re-observation:
-    changed practice statuses are overwritten, rows published during the day are
-    appended. Every returned row records which observation it came from, so the
-    table can show it.
+    Starts from the captured report and applies the re-observation, but only
+    when the re-observation is the later of the two. The deployment workflow
+    refreshes the capture on every publish, so a committed re-observation can
+    end up older than the capture it would be layered on. Applying it then
+    would overwrite newer published statuses with older ones, which is the one
+    thing a mutable official page must never be allowed to do.
+
+    Every returned row records which observation it came from, so the table can
+    show it.
     """
     base_at = snapshot["injury_rows"][0]["observed_at"]
     re_at = recheck["reobservation"]["observed_at"]
+    recheck_applies = _observed_at_is_newer(re_at, base_at)
 
     changes = {(c["team"], norm_name(c["player"])): c for c in recheck["practice_status_changes"]}
     known = {(r["team"], norm_name(r["player"])) for r in snapshot["injury_rows"]}
@@ -129,7 +151,7 @@ def merge_recheck(snapshot: dict, recheck: dict) -> list[dict]:
         out = dict(row)
         out["observed_at"] = base_at
         out["origin"] = "06:32Z capture"
-        change = changes.get((row["team"], norm_name(row["player"])))
+        change = changes.get((row["team"], norm_name(row["player"]))) if recheck_applies else None
         if change:
             out["practice_status"] = change["reobserved_practice_status"]
             out["baseline_practice_status"] = change["baseline_practice_status"]
@@ -138,6 +160,8 @@ def merge_recheck(snapshot: dict, recheck: dict) -> list[dict]:
         rows.append(out)
 
     for row in recheck["added_rows"]:
+        if not recheck_applies:
+            break
         if (row["team"], norm_name(row["player"])) in known:
             continue
         out = dict(row)
