@@ -1229,7 +1229,7 @@ This session branched from `0bea864` before the T7 fix landed and independently 
 
 ## Publication record — arena/5136dd75-nfl3
 
-- **PR #54:** https://github.com/kanlerxz87-cyber/NFL3/pull/54 — merge result: PENDING
-- **Merge commit:** PENDING
-- **Pages deployment run:** PENDING
-- **Live root fetch after deploy:** PENDING
+- **PR #54:** https://github.com/kanlerxz87-cyber/NFL3/pull/54 — merge result: **MERGED** without waiting for approval as merge commit `e2b5662c086bcfb646e4a4464dfaa01dbd24f69f` on 2026-11-13 UTC; commit `4361530` is an ancestor of `origin/main`.
+- **Merge commit:** `e2b5662c086bcfb646e4a4464dfaa01dbd24f69f`
+- **Pages deployment run:** `Validate and deploy GitHub Pages` run https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43427968776 completed **success** (validate ✓, deploy ✓); `pages build and deployment` run 43427968483 completed; GitHub Pages API `status: built` for https://kanlerxz87-cyber.github.io/NFL3/. Runner emitted only the existing Node.js 20 deprecation annotation.
+- **Live root fetch after deploy:** https://kanlerxz87-cyber.github.io/NFL3/?cb=4361530 — rendered the clean single-document homepage (dashboard metrics, category navigation, DECIDE/AVAILABILITY/ORIGINATION/VERIFY/ARCHIVE sections, archive workspace table), no conflict markers visible, all section links resolving. Checks on current main: `python3 scripts/validate_site.py` PASS, `python3 tests/check_site.py` PASS.
