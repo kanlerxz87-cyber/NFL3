@@ -1,25 +1,13 @@
 {
   "html_pages": 110,
-  "table_rows": 5986,
+  "table_rows": 5963,
   "rows_missing_official_source": 615,
   "rows_community_only": 112,
-  "rows_with_internal_audit_source": 8,
-  "conflict_files": [
-    "index.html"
-  ],
+  "rows_with_internal_audit_source": 7,
+  "conflict_files": [],
   "authority_claim_files": [],
   "local_errors": [],
   "findings": [
-    {
-      "id": "AUD-02",
-      "severity": "High",
-      "title": "Merge-conflict markers remain in repository text",
-      "detail": "1 file(s) contain conflict separators.",
-      "files": [
-        "index.html"
-      ],
-      "source": "LOCAL_AUDIT"
-    },
     {
       "id": "AUD-03",
       "severity": "High",
@@ -309,10 +297,10 @@
     },
     {
       "path": "decision-lab/audit.html",
-      "rows": 8,
+      "rows": 7,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
-      "rows_with_internal_audit_source": 8,
+      "rows_with_internal_audit_source": 7,
       "local_errors": []
     },
     {
@@ -461,7 +449,7 @@
     },
     {
       "path": "index.html",
-      "rows": 36,
+      "rows": 14,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
