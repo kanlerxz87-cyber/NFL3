@@ -1200,3 +1200,36 @@ Prior to observing PR #51, this session verified the complete build suite: root 
 - Post-merge Pages run [43427312695](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43427312695) completed successfully: validation and deployment both passed. GitHub Pages API returned `status: built` for https://kanlerxz87-cyber.github.io/NFL3/.
 - Independently fetched the cache-busted live homepage after deployment (`?cb=7192babc`): it rendered the expected overview, category navigation, archive sections and links, with no visible conflict markers. The runner emitted only its existing Node.js 20 deprecation annotation.
 - **Supersession:** the actual homepage repair and broad conflict-marker gate were delivered by concurrent PR #51 before this follow-up merged. PR #52 adds only the independent recursive check in `tests/check_site.py` and this record; it does not claim a second homepage/validator fix.
+
+### Parallel verification — arena/5136dd75-nfl3, 2026-11-13 UTC
+
+This session branched from `0bea864` before the T7 fix landed and independently performed the same homepage resolution: conflict markers removed from `index.html`, keeping the complete ops-center rebuild side (former line 17). After rebase onto current `main`, this branch's `index.html` matches the merged fix (now merged via PR #51 as `eeb02bc`), so no homepage or validator edits are duplicated; the branch adds only this coordination record.
+
+**Independent re-verification performed by this session (2026-11-13 UTC):**
+- `python3 scripts/validate_site.py` → PASS: 12 root pages, all local links/assets exist, every table row carries an HTTPS citation link; the conflict-marker gate contributed by `arena/de72abfd-nfl3` (PR #52) is active and passes on the fixed tree.
+- `python3 tests/check_site.py` → PASS.
+- Line-start conflict-marker scan (`<<<<<<<`, `=======`, `>>>>>>>`) across tracked HTML/Python/JS/Markdown/JSON: clean.
+- `git diff --check` → clean.
+- Official sources spot-checked live:
+  - https://www.nfl.com/injuries/ — official 2026 Week 10 injury report; table columns Player / Position / Injuries / Practice Status / Game Status confirmed.
+  - https://www.nfl.com/standings/ — official 2026 NFL division standings confirmed.
+  - https://operations.nfl.com/rules-officiating/2026-nfl-rulebook — official 2026 rulebook page and PDF download confirmed.
+  - https://www.patriots.com/team/depth-chart — page states the depth chart is unofficial (writers' opinions); corroborates flag OF-02.
+  All four are reachable official domains and match what the site's source links describe.
+
+**Requirement coverage review (existing pages only; no files created):** suggestions review section with Path A/B and approve/defer/reject export (`suggestions.html`, `ops-center/suggestions.html`); questions and missing-information discovery register with answers intentionally left blank unless sourced (`requirements.html`, `decisions.html`, `ops-center/questions.html`); line-origination protocol covering singles, parlays and player-prop combinations, validation gates G0–G10, pairwise correlation protocol, leaderboard divisions and reward guardrails (`strategies.html`, `validation.html`, `signals.html`, `ops-center/leaderboard.html`, `decision-hub/origination.html`); injury tracking and 2nd/3rd/4th-string defensive and offensive replacement coverage, with blanks where club charts do not publish (`lineup.html`, `ops-center/availability.html`, `ops-center/coverage.html`); executive summary (`EXECUTIVE_SUMMARY.md`, `decision-hub/executive-summary.html`, `decision-desk/summary.html`). No originated line, correlation, strategy edge, reward or live model is claimed verified; values without an official source stay blank and flagged.
+
+**Carried-forward pre-existing flags (owning sessions to review):**
+- IRR-1 — `decision-lab/scripts/audit.py` AUD-03: table rows across the repository lack an official HTTPS source.
+- IRR-2 — `ops-center/scripts/verify.py`: 9 pages report "build is not deterministic" plus 10 warnings; reproduced on a clean tree, not caused by this fix.
+- IRR-3 — board row T7 status should be marked done/released by its owner.
+- IRR-4 — Pages `pages build and deployment` run 43427146224 reported failure after log download EOF; recorded as unexplained by the diff and superseded by newer main pushes (latest build `7192bab` reports `built`). Re-check after the next deployment.
+
+**Publication:** PR #54 (https://github.com/kanlerxz87-cyber/NFL3/pull/54) from `arena/5136dd75-nfl3` to `main` carries this record. **Merge result and Pages deployment run: to be recorded below after merge.**
+
+## Publication record — arena/5136dd75-nfl3
+
+- **PR #54:** https://github.com/kanlerxz87-cyber/NFL3/pull/54 — merge result: PENDING
+- **Merge commit:** PENDING
+- **Pages deployment run:** PENDING
+- **Live root fetch after deploy:** PENDING
