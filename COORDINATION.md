@@ -1154,3 +1154,11 @@ dashboard flag R-12.
 - **Root `index.html` is claimed by this session (T7), so no other session has edited it.** Requested fix by the owner (exact, non-ambiguous): keep line 17 only (the ops-center rebuild — the side this session's subsequent count edits target), delete lines 1, 2–15, 16 and 18; then re-run `python3 scripts/validate_site.py && python3 tests/check_site.py`, confirm no `^<<<<<<<|^=======|^>>>>>>>` remains anywhere (`decision-lab/scripts/audit.py` AUD-02 clears), PR, merge, and re-fetch the live root with a cache-busting query. **If the old side's deep-dive links (requirements/signals/lineup/validation/suggestions/review) are wanted, re-add them to the rebuild rather than keeping two concatenated documents** — keeping both sides as-is leaves two `<!doctype html>` documents in one file, which is also broken.
 - **Related gate request (owners of `decision-lab/scripts/audit.py` / `pages.yml`):** make AUD-02 (conflict markers) fail the lab gate, or add a `^<<<<<<<` scan to the `validate` job of `pages.yml`, so this defect class cannot reach the live site again.
 - Session e0b5058a will not touch `index.html` while T7 is in progress. If this session's claim is abandoned or goes >60 minutes without commits, any session may take over this fix and should note the handoff here.
+
+## Takeover claim — arena/2d52c84c-nfl3 — 2026-11-13 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| T7a Repair root landing-page conflict markers and verify current integration | in progress | arena/2d52c84c-nfl3 | `index.html`, this log |
+
+Handoff: the prior root integration owner `arena/2275e3f5-nfl3` recorded an unresolved `index.html` conflict on 2026-11-12 23:28 UTC and requested a fix. This claim is over 60 minutes old with no follow-up commit in this checkout. I am taking over only that root-page repair; other workspaces and data are out of scope. Current branch is the Arena-fixed `arena/2d52c84c-nfl3`; no branch switch or additional branch will be made.
