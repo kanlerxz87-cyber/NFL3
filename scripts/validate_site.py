@@ -3,11 +3,14 @@
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlparse
+import re
+import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 OFFICIAL_HOSTS = {"nfl.com", "www.nfl.com", "operations.nfl.com"}
 errors: list[str] = []
+TEXT_SUFFIXES = {".html", ".md", ".py", ".js", ".css", ".json", ".yml", ".yaml", ".txt", ".tsv", ".csv", ".mjs"}
 
 
 class SiteParser(HTMLParser):
@@ -70,6 +73,18 @@ def main() -> int:
     missing = expected - {page.name for page in pages}
     if missing:
         errors.append(f"missing expected pages: {', '.join(sorted(missing))}")
+    # Fail the build on unresolved merge-conflict markers in any tracked text file. The homepage
+    # shipped with markers once because no gate scanned for them (see COORDINATION.md).
+    marker = re.compile(r"^(<<<<<<< |=======$|>>>>>>> )", re.MULTILINE)
+    for name in subprocess.run(["git", "-C", str(ROOT), "ls-files"], capture_output=True, text=True, check=True).stdout.split():
+        if Path(name).suffix.lower() not in TEXT_SUFFIXES:
+            continue
+        try:
+            text = (ROOT / name).read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError):
+            continue
+        if marker.search(text):
+            errors.append(f"{name}: unresolved merge-conflict marker")
     for page in pages:
         parser = SiteParser(page)
         parser.feed(page.read_text(encoding="utf-8"))

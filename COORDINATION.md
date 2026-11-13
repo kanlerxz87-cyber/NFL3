@@ -1154,3 +1154,28 @@ dashboard flag R-12.
 - **Root `index.html` is claimed by this session (T7), so no other session has edited it.** Requested fix by the owner (exact, non-ambiguous): keep line 17 only (the ops-center rebuild — the side this session's subsequent count edits target), delete lines 1, 2–15, 16 and 18; then re-run `python3 scripts/validate_site.py && python3 tests/check_site.py`, confirm no `^<<<<<<<|^=======|^>>>>>>>` remains anywhere (`decision-lab/scripts/audit.py` AUD-02 clears), PR, merge, and re-fetch the live root with a cache-busting query. **If the old side's deep-dive links (requirements/signals/lineup/validation/suggestions/review) are wanted, re-add them to the rebuild rather than keeping two concatenated documents** — keeping both sides as-is leaves two `<!doctype html>` documents in one file, which is also broken.
 - **Related gate request (owners of `decision-lab/scripts/audit.py` / `pages.yml`):** make AUD-02 (conflict markers) fail the lab gate, or add a `^<<<<<<<` scan to the `validate` job of `pages.yml`, so this defect class cannot reach the live site again.
 - Session e0b5058a will not touch `index.html` while T7 is in progress. If this session's claim is abandoned or goes >60 minutes without commits, any session may take over this fix and should note the handoff here.
+
+## Takeover — arena/19d28600-nfl3 (session 19d28600), 2026-11-13 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| T7-fix Repair live homepage conflict markers (takeover of stale T7 claim by `arena/2275e3f5-nfl3`) and add a conflict-marker gate | done — needs review | `arena/19d28600-nfl3` | `index.html`, `scripts/validate_site.py`, this log |
+
+**Handoff.** The T7 claim by `arena/2275e3f5-nfl3` was last committed at 2026-11-12 23:10 UTC (`94aa646`), more than 60 minutes before this session, with no further commits. Per the takeover rule, this session took over the fix and followed the owner's exact instructions in the URGENT note above.
+
+**Change.** `index.html` now holds only the ops-center rebuild (former line 17); the old side (lines 1–16 and 18) was removed. The old side's links to root pages (`requirements`, `signals`, `lineup`, `validation`, `suggestions`, `review`, `sources`, `strategies`, `flagged`, `decisions`) are still reachable from other pages, so none are orphaned. The homepage still has only one `<!doctype html>`.
+
+**Gate added.** `scripts/validate_site.py` now fails when any tracked text file contains a line-start `<<<<<<<`, `=======`, or `>>>>>>>` marker. Negative test: appending markers to `index.html` makes the validator exit 1 with `unresolved merge-conflict marker`; the fixed tree exits 0.
+
+**Verification performed (2026-11-13 UTC):**
+- `python3 scripts/validate_site.py` → pass (12 root pages; local links; citation links).
+- `python3 tests/check_site.py` → pass.
+- `python3 tests/test_decision_lab.py` → OK.
+- `python3 decision-lab/scripts/audit.py` → lab gate PASS; AUD-02 (conflict markers) no longer reported on the fixed tree.
+- `git diff --check` → clean.
+- Live site: the Pages deploy and a cache-busting fetch are recorded in the publication line below.
+
+**Irregularities recorded for review (not fixed here, outside this scope):**
+- **IRR-1 (pre-existing, unresolved).** `decision-lab/scripts/audit.py` reports AUD-03: 615 table rows across the repository lack an official HTTPS source; 112 cite only community sources. This conflicts with the "every table row has an official source link" requirement and needs its owners' review. Files are listed in the audit output.
+- **IRR-2 (pre-existing, unresolved).** `ops-center/scripts/verify.py` reports `9 pages, 9 failures, 10 warnings` ("build is not deterministic" for sources, suggestions and others). Reproduced on a clean tree, so this is not caused by this fix. Its owner should review.
+- **IRR-3.** The `T7` line in the board stays "in progress" under `arena/2275e3f5-nfl3`. Its owner should mark it done or released.
