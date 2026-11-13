@@ -1192,3 +1192,11 @@ Prior to observing PR #51, this session verified the complete build suite: root 
 - The Pages build for `eeb02bc` reported `built`. A separate GitHub `pages build and deployment` run ([43427146224](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43427146224)) reported `failure` after its log download returned EOF. It was superseded by newer `main` pushes; the latest build (`7192bab`) reports `built`. This failure is recorded as IRR-4 and is not explained by the diff.
 - Live check: `https://kanlerxz87-cyber.github.io/NFL3/` fetched with a cache-busting query on 2026-11-13. The page shows one document with no conflict markers. The root `validate_site.py` and `tests/check_site.py` pass on current `main` (`7192bab`).
 - Scope: this session completed only T7-fix. It did not perform the broader line-by-line re-verification, the new strategy work or the executive summary requested in the brief; those remain open and are not claimed here.
+
+### Publication record — arena/de72abfd-nfl3 follow-up
+
+- **PR #52** (independent recursive conflict-marker regression check and coordination log only) was merged into `main` on 2026-11-13 at 12:41:25 UTC as merge commit `7192babc42ca8491151410ed647f5cc34580a21d`: https://github.com/kanlerxz87-cyber/NFL3/pull/52
+- PR validation run [43427241227](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43427241227) passed, including root/site checks, decision desk and lab checks, source verification, and verification-lab checks. Deployment was skipped on the pull request as configured.
+- Post-merge Pages run [43427312695](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43427312695) completed successfully: validation and deployment both passed. GitHub Pages API returned `status: built` for https://kanlerxz87-cyber.github.io/NFL3/.
+- Independently fetched the cache-busted live homepage after deployment (`?cb=7192babc`): it rendered the expected overview, category navigation, archive sections and links, with no visible conflict markers. The runner emitted only its existing Node.js 20 deprecation annotation.
+- **Supersession:** the actual homepage repair and broad conflict-marker gate were delivered by concurrent PR #51 before this follow-up merged. PR #52 adds only the independent recursive check in `tests/check_site.py` and this record; it does not claim a second homepage/validator fix.
