@@ -1,19 +1,449 @@
 {
   "schema": "nfl3-verification/v2",
-  "run_at": "2026-11-12T22:35:20.477953+00:00",
+  "run_at": "2026-11-13T12:50:52.973338+00:00",
   "snapshot_observed_at": "2026-11-12T06:32:36.211205+00:00",
-  "status": "drift",
-  "checks_run": 3,
-  "checks_compared": 3,
-  "checks_drift": 1,
-  "checks_unreachable": 0,
+  "status": "partial",
+  "checks_run": 38,
+  "checks_compared": 4,
+  "checks_drift": 2,
+  "checks_row_set_differs": 0,
+  "checks_unreachable": 62,
   "row_totals": {
-    "rows_checked": 314,
+    "rows_checked": 343,
     "matched": 243,
-    "mismatched": 2
+    "mismatched": 31
   },
-  "mode": "offline-structural",
+  "mode": "live",
   "families": [
+    {
+      "id": "F1",
+      "name": "Injury report rows",
+      "method": "re-fetch NFL.com report and compare every published field",
+      "source_url": "https://www.nfl.com/injuries/",
+      "compared": false,
+      "status": "unreachable",
+      "note": "1 report URL(s) unreachable: https://www.nfl.com/injuries/ (URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>)",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F2",
+      "name": "No-injury sections",
+      "method": "re-fetch NFL.com report and compare explicit empty sections",
+      "source_url": "https://www.nfl.com/injuries/",
+      "compared": false,
+      "status": "unreachable",
+      "note": "depends on the F1 capture",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-49ers",
+      "name": "Depth chart: 49ers",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.49ers.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Falcons",
+      "name": "Depth chart: Falcons",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.atlantafalcons.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Cardinals",
+      "name": "Depth chart: Cardinals",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.azcardinals.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Ravens",
+      "name": "Depth chart: Ravens",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.baltimoreravens.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Bengals",
+      "name": "Depth chart: Bengals",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.bengals.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Tampa Bay Buccaneers",
+      "name": "Depth chart: Tampa Bay Buccaneers",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.buccaneers.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Bills",
+      "name": "Depth chart: Bills",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.buffalobills.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Chargers",
+      "name": "Depth chart: Chargers",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.chargers.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Chicago Bears",
+      "name": "Depth chart: Chicago Bears",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.chicagobears.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Chiefs",
+      "name": "Depth chart: Chiefs",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.chiefs.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Browns",
+      "name": "Depth chart: Browns",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.clevelandbrowns.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Colts",
+      "name": "Depth chart: Colts",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.colts.com/news/colts-release-unofficial-depth-chart-for-week-10",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Colts",
+      "name": "Depth chart: Colts",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.colts.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Commanders",
+      "name": "Depth chart: Commanders",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.commanders.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Cowboys",
+      "name": "Depth chart: Cowboys",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.dallascowboys.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Denver Broncos",
+      "name": "Depth chart: Denver Broncos",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.denverbroncos.com/team/depth-chart/",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Lions",
+      "name": "Depth chart: Lions",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.detroitlions.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Giants",
+      "name": "Depth chart: Giants",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.giants.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Jaguars",
+      "name": "Depth chart: Jaguars",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.jaguars.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Dolphins",
+      "name": "Depth chart: Dolphins",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.miamidolphins.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Saints",
+      "name": "Depth chart: Saints",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.neworleanssaints.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Jets",
+      "name": "Depth chart: Jets",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.newyorkjets.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Panthers",
+      "name": "Depth chart: Panthers",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.panthers.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Patriots",
+      "name": "Depth chart: Patriots",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.patriots.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Philadelphia Eagles",
+      "name": "Depth chart: Philadelphia Eagles",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.philadelphiaeagles.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Raiders",
+      "name": "Depth chart: Raiders",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.raiders.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Seahawks",
+      "name": "Depth chart: Seahawks",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.seahawks.com/team/depth-chart/",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Steelers",
+      "name": "Depth chart: Steelers",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.steelers.com/team/depth-chart/",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Titans",
+      "name": "Depth chart: Titans",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.tennesseetitans.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Rams",
+      "name": "Depth chart: Rams",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.therams.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F3-Vikings",
+      "name": "Depth chart: Vikings",
+      "method": "re-fetch club page and compare unit/position/player/rank",
+      "source_url": "https://www.vikings.com/team/depth-chart",
+      "compared": false,
+      "status": "unreachable",
+      "note": "not compared: URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
     {
       "id": "F4",
       "name": "Matchup completeness",
@@ -27,7 +457,34 @@
       "mismatched": 0,
       "coverage": "28/28",
       "extra_live": 0,
-      "missing_live": 0
+      "missing_live": 0,
+      "row_differences": 0
+    },
+    {
+      "id": "F5",
+      "name": "Status vocabulary",
+      "method": "compare published status literals with the NFL injury-policy text",
+      "source_url": "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693",
+      "compared": false,
+      "status": "unreachable",
+      "note": "unreachable (URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>)",
+      "rows_checked": 0,
+      "matched": 0,
+      "mismatched": 0,
+      "coverage": ""
+    },
+    {
+      "id": "F6",
+      "name": "Source register reachability",
+      "method": "HTTPS fetch of every registered source URL (live run only)",
+      "source_url": "https://www.nfl.com/",
+      "compared": true,
+      "status": "drift",
+      "note": "reachability is not reuse permission and not content verification",
+      "rows_checked": 29,
+      "matched": 0,
+      "mismatched": 29,
+      "coverage": "0/29"
     },
     {
       "id": "F8",
@@ -62,10 +519,348 @@
       "unmatched_rows": 69
     }
   ],
-  "skipped_offline": [
-    "F1 injury report field-by-field, F2 no-injury sections, F3 club depth charts, F5 status vocabulary and F6 source reachability need outbound HTTPS and are run by the scheduled publication workflow"
+  "skipped_offline": [],
+  "unreachable": [
+    {
+      "family": "F1",
+      "url": "https://www.nfl.com/injuries/",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.49ers.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.atlantafalcons.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.azcardinals.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.baltimoreravens.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.bengals.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.buccaneers.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.buffalobills.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.chargers.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.chicagobears.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.chiefs.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.clevelandbrowns.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.colts.com/news/colts-release-unofficial-depth-chart-for-week-10",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.colts.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.commanders.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.dallascowboys.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.denverbroncos.com/team/depth-chart/",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.detroitlions.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.giants.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.jaguars.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.miamidolphins.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.neworleanssaints.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.newyorkjets.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.panthers.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.patriots.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.philadelphiaeagles.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.raiders.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.seahawks.com/team/depth-chart/",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.steelers.com/team/depth-chart/",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.tennesseetitans.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.therams.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F3",
+      "url": "https://www.vikings.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F5",
+      "url": "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "family": "F6",
+      "url": "https://www.nfl.com/injuries/league/2026/REG10",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S01"
+    },
+    {
+      "family": "F6",
+      "url": "https://www.nfl.com/news/nfl-week-10-injury-report-2026-season",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S02"
+    },
+    {
+      "family": "F6",
+      "url": "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S03"
+    },
+    {
+      "family": "F6",
+      "url": "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook/",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S04"
+    },
+    {
+      "family": "F6",
+      "url": "https://www.nfl.com/teams/",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S05"
+    },
+    {
+      "family": "F6",
+      "url": "https://www.commanders.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S06"
+    },
+    {
+      "family": "F6",
+      "url": "https://www.giants.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S07"
+    },
+    {
+      "family": "F6",
+      "url": "https://www.colts.com/news/colts-release-unofficial-depth-chart-for-week-10",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S08"
+    },
+    {
+      "family": "F6",
+      "url": "https://nextgenstats.nfl.com/glossary",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S09"
+    },
+    {
+      "family": "F6",
+      "url": "https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep/",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S10"
+    },
+    {
+      "family": "F6",
+      "url": "https://operations.nfl.com/game-operations-logistics/game-day-assistants/at-spotters",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S11"
+    },
+    {
+      "family": "F6",
+      "url": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S12"
+    },
+    {
+      "family": "F6",
+      "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S13"
+    },
+    {
+      "family": "F6",
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S14"
+    },
+    {
+      "family": "F6",
+      "url": "https://scikit-learn.org/stable/modules/calibration.html",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S15"
+    },
+    {
+      "family": "F6",
+      "url": "https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S16"
+    },
+    {
+      "family": "F6",
+      "url": "https://www.nfl.com/teams/washington-commanders/roster",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S17"
+    },
+    {
+      "family": "F6",
+      "url": "https://www.nfl.com/stats/player-stats/",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S18"
+    },
+    {
+      "family": "F6",
+      "url": "https://www.steelers.com/team/depth-chart/",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S19"
+    },
+    {
+      "family": "F6",
+      "url": "https://www.patriots.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S20"
+    },
+    {
+      "family": "F6",
+      "url": "https://www.seahawks.com/team/depth-chart/",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S21"
+    },
+    {
+      "family": "F6",
+      "url": "https://www.denverbroncos.com/team/depth-chart/",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S22"
+    },
+    {
+      "family": "F6",
+      "url": "https://www.nfl.com/scores/2026/week-10",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S24"
+    },
+    {
+      "family": "F6",
+      "url": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S25"
+    },
+    {
+      "family": "F6",
+      "url": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S26"
+    },
+    {
+      "family": "F6",
+      "url": "https://www.nfl.com/games/vikings-at-packers-2026-reg-10",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S27"
+    },
+    {
+      "family": "F6",
+      "url": "https://www.houstontexans.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S28"
+    },
+    {
+      "family": "F6",
+      "url": "https://www.packers.com/team/depth-chart",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S29"
+    },
+    {
+      "family": "F6",
+      "url": "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook/",
+      "error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+      "source_id": "S30"
+    }
   ],
-  "unreachable": [],
   "mismatches": [],
   "mismatch_count": 0
 }

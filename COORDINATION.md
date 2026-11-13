@@ -1262,3 +1262,98 @@ Handoff: upstream PR #51/#52 and publication records #55/#54 are preserved. This
 - **Pages deployment:** `Validate and deploy GitHub Pages` run [43428161356](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43428161356) on main — validate and deploy jobs both SUCCESS, including `Deploy to GitHub Pages`.
 - **Live verification:** cache-busted fetch of https://kanlerxz87-cyber.github.io/NFL3/?cb=53a61e3 showed the integrated homepage and the new Legacy root research pages row with all 11 links. Cache-busted fetch of https://kanlerxz87-cyber.github.io/NFL3/decision-lab/audit.html?cb=53a61e3 showed 5,963 table rows and only AUD-03; the false AUD-02 conflict finding is gone. No NFL data values were added or verified by this publication.
 - **Remaining review flags:** AUD-03 (615 rows lack official-source links; 112 are community-only) and the ops-centre generated-date/source-snapshot mismatch remain documented and unresolved. The Pages run emitted the existing Node.js 20 deprecation annotation; deployment still succeeded.
+---
+
+## Final integration — arena/af49b4f9-nfl3 (session af49b4f9), 2026-11-13 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| I1 Landing-page navigation completeness: every published page reachable from a category-organised landing page | done | `arena/af49b4f9-nfl3` | `index.html`, `assets/` (root only) |
+| I2 Reproducible ops-centre build (remove wall-clock date stamp) and dead-code removal in its strict gate | done | `arena/af49b4f9-nfl3` | `ops-center/scripts/build.py`, `ops-center/scripts/verify.py`, regenerated `ops-center/*.html` |
+| I3 Line-by-line re-verification of published values against live official NFL sources, published as an auditable report | done | `arena/af49b4f9-nfl3` | `integration/` (new), `integration/**` |
+| I4 Final integration: PR to main, merge without waiting for approval, confirm Pages deploy, record result | in progress | `arena/af49b4f9-nfl3` | PR/merge + this log |
+
+### I1 result — landing-page navigation completeness (2026-11-13 UTC)
+
+The landing page previously exposed only three static root links (`decisions.html`, `strategies.html`,
+`index.html`); the remaining root pages were reachable only through the JavaScript-injected nav, so a
+static link checker and any reader without JavaScript could not reach them. Added a **SITE GUIDE /
+NAVIGATE BY CATEGORY** section to `index.html` that groups every root page and sub-site by purpose
+(Overview, Decide, Availability, Origination, Verify, Review, Sources) with a direct link and a source
+link on every row. A static crawl from `index.html` now reaches **all 110 HTML pages** (previously 103;
+7 unreachable: `lineup.html`, `requirements.html`, `review.html`, `signals.html`, `suggestions.html`,
+`validation.html`, `injury-verification/index.html`). Added `scripts/sync_landing_metrics.py`, which
+derives the headline metric numbers from the published data and fails closed if a number cannot be
+computed, so the landing page cannot drift from the tables it summarises. Root validator passes; the
+metrics were confirmed already in sync.
+
+### I2 result — reproducible ops-centre build (2026-11-13 UTC)
+
+`ops-center/scripts/build.py` now derives its date from committed official observations
+(`official_snapshot.json` + `live_recheck.json`) instead of `datetime.now()`; `derived.json` records
+`observation_date` = `2026-11-12`. The duplicate unreachable tail in `ops-center/scripts/verify.py`
+(the second `check_root_counts` and second `__main__` after the first `raise SystemExit`) was removed.
+Two consecutive builds are byte-identical; the strict gate reports **9 pages, 0 failures, 10 known
+source-policy warnings**. Separately, a staleness defect was fixed in `ops-center/scripts/model.py`:
+`merge_recheck` now applies a re-observation only when it is the **strictly later** observation, so a
+capture refreshed on deploy can never be overwritten by an older committed re-observation. Verified by
+a guard test that feeds a newer capture and confirms the older re-observation is not applied.
+
+### I3 result — line-by-line re-verification against live official NFL sources (2026-11-13 UTC)
+
+The official NFL Week 10 injury report (`https://www.nfl.com/injuries/`) was fetched in full and
+persisted as a canonical raw capture:
+
+- `integration/data/captures/2026-11-13-nfl-injuries/nfl-injuries-2026-11-13.md` (830 lines,
+  **SHA-256 `9b5e6923259c4da235aae34d31724923eb2638a23c4f8c032fff05a8d77622ca`**), assembled
+  byte-for-byte from the seven committed chunk fragments `chunk-00.md`–`chunk-06.md`.
+- `manifest.json` records the source URL, observation time (`2026-11-13T12:40:00Z`), publisher
+  (NFL.com), method, and the two files it is compared against.
+
+`integration/scripts/verify_live_capture.py` re-parses a fresh capture and compares it field by field
+against the published view (`decision-lab/data/official_snapshot.json` merged with
+`ops-center/data/live_recheck.json`). Result, written to `integration/data/verification.json`:
+
+| Measure | Value |
+|---|---|
+| Live capture rows | 296 |
+| Published rows | 279 |
+| Identical | 185 |
+| Drifted (practice/game status or injury differs) | 94 |
+| Published but not on the live page | 0 |
+| On the live page but not published | 17 |
+| Teams now reporting players that published "No Injuries Reported" | Bengals, Seahawks |
+
+**Nothing was inferred or overwritten.** The published view is not corrected by this script; every
+difference is reported so a reviewer can decide. The 17 not-yet-published rows are published players
+whose names first appeared on the official page after the committed snapshot/re-observation. The
+drift is consistent with the page being mutable point-in-time data and was independently corroborated
+by `decision-lab/scripts/verify_sources.py`, which reported the same Lions changes (Goff
+Limited→Full, Kerby Joseph added with Knee/Out). The difference between the two observations is itself
+an irregularity for review, not an error to be papered over.
+
+**Scope.** Root landing page and root `assets/` only for shared files; `ops-center/scripts/**` and the
+regenerated `ops-center/*.html`; the new `integration/` tree. No other session's data files, sub-site
+generators or capture artifacts are edited by this session.
+
+**Coordination notes.** The homepage conflict-marker defect was already fixed and merged upstream as
+PR #51 (commit `4d480e3`, merge `eeb02bc`) by session `19d28600`; this session started from that
+merge and does **not** re-do it. The gate request in that PR is satisfied by the marker scan now in
+`scripts/validate_site.py`. Two defects found by this session's baseline run are in scope and were not
+caused by PR #51: (a) the ops-centre strict gate reports 9 non-deterministic builds on a clean tree
+because `build.py` stamps the wall-clock date into every page footer, so the gate can never pass after
+midnight in any local day; (b) `ops-center/scripts/verify.py` carries a duplicated dead-code tail
+after its first `raise SystemExit(main())`, so the second `check_root_counts` never runs.
+
+**Pages publisher race (flag F24 follow-up).** The repository Pages API still reports
+`build_type: legacy`, `source: {branch: main, path: /}`, while `.github/workflows/pages.yml` also
+publishes via `actions/deploy-pages`. Two publishers therefore race for one Pages site. This session
+will attempt to move Pages to `build_type: workflow` so that `pages.yml` is the single publisher, and
+will record the outcome either way.
+
+**Verification limit for this session.** The sandbox shell has outbound access to github.com only;
+nfl.com is reachable through the session's page-fetch tool but not from the shell. Official-source
+verification performed here is therefore captured from the fetch tool, hashed, committed as a raw
+capture, and re-checked by a committed script that can also run unattended in CI (where the shell has
+full egress). Every value that cannot be confirmed from an official source stays blank and is listed
+on the Flagged for Review page.

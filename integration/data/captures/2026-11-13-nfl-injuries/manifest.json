@@ -1,0 +1,13 @@
+{
+ "url": "https://www.nfl.com/injuries/",
+ "label": "Official NFL injury report, 2026 Week 10 - third observation",
+ "observed_at": "2026-11-13T12:40:00Z",
+ "method": "Page fetched and rendered to text by the session's page-fetch tool, then stored verbatim in the seven chunk files in this directory. The chunk files concatenate byte-for-byte into nfl-injuries-2026-11-13.md.",
+ "publisher": "NFL.com (official NFL publisher)",
+ "scope": "The official injury tables for every Week 10 matchup, plus the start of the page's news module. The trailing site navigation chrome is not part of the injury report and is not retained.",
+ "authority": "official HTTPS publisher",
+ "compared_against": [
+  "decision-lab/data/official_snapshot.json (254 rows, observed 2026-11-12T06:32:36Z)",
+  "ops-center/data/live_recheck.json (re-observation, 2026-11-12T22:25Z)"
+ ]
+}

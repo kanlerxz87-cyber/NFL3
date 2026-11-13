@@ -11,7 +11,6 @@ import html
 import json
 import re
 import sys
-from datetime import datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -23,7 +22,34 @@ ROOT = Path(__file__).resolve().parents[2]
 OPS = ROOT / "ops-center"
 PAGES = OPS
 DATA = OPS / "data"
-BUILD_DATE = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+ISO_DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
+
+
+def observation_date() -> str:
+    """The date of the newest official observation this site is built from.
+
+    Derived from the committed captures, never from the wall clock. A rebuild on
+    any later day must produce byte-identical pages, otherwise the strict gate's
+    determinism check reports a failure every time it runs after midnight and
+    stops testing anything at all. If no capture carries a date the field stays
+    empty rather than being filled with today's date, because a build date is not
+    an observation date.
+    """
+    stamps: list[str] = []
+    try:
+        stamps.append(str(model.load_snapshot().get("observed_at", "")))
+    except (OSError, ValueError):
+        pass
+    try:
+        stamps.append(str(model.load_recheck()["reobservation"].get("observed_at", "")))
+    except (OSError, ValueError, KeyError):
+        pass
+    found = [m for s in stamps for m in ISO_DATE.findall(s)]
+    return max(found) if found else ""
+
+
+BUILD_DATE = observation_date()
 
 NAV = [
     ("index.html", "Overview"),
@@ -205,7 +231,7 @@ def shell(title: str, active: str, content: str, subtitle: str = "") -> str:
     <h1>{e(title)}</h1>{sub}
     {content}
   </div>
-  <footer>NFL3 ops centre &middot; built {e(BUILD_DATE)} &middot; values are copied from official pages or counted from official rows; nothing is inferred.</footer>
+  <footer>NFL3 ops centre &middot; official observations through {e(BUILD_DATE or "unknown")} &middot; values are copied from official pages or counted from official rows; nothing is inferred.</footer>
 </main>
 </div>
 <script src="assets/app.js" defer></script>
@@ -908,7 +934,7 @@ def main() -> int:
     }
 
     (DATA / "derived.json").write_text(json.dumps({
-        "generated": BUILD_DATE,
+        "observation_date": BUILD_DATE,
         "injury_rows_current": len(current),
         "chains": chains,
         "coverage": coverage,
