@@ -20,7 +20,12 @@ class Check(HTMLParser):
             if self.in_row and not self.header and not self.source: self.errors.append('table row missing source')
             self.in_row = False
 errors = []
-for path in ROOT.glob('*.html'):
-    p = Check(path); p.feed(path.read_text()); errors += [f'{path.name}: {e}' for e in p.errors]
+for path in ROOT.rglob('*.html'):
+    content = path.read_text(encoding='utf-8')
+    for line_number, line in enumerate(content.splitlines(), 1):
+        if line.startswith(('<<<<<<<', '=======', '>>>>>>>')):
+            errors.append(f'{path.relative_to(ROOT)}:{line_number}: unresolved merge-conflict marker')
+    if path.parent == ROOT:
+        p = Check(path); p.feed(content); errors += [f'{path.name}: {e}' for e in p.errors]
 if errors: raise SystemExit('\n'.join(errors))
 print('Site checks passed: local links and source links in table rows.')
