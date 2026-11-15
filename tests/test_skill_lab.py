@@ -105,6 +105,16 @@ class TestArtifact(unittest.TestCase):
         self.assertRegex(commit, r"^[0-9a-f]{40}$")
         if not full_history():
             self.skipTest("full git history unavailable (shallow clone); the ordering check needs it")
+        # The registration commit is re-resolved from the current history: a rebase rewrites the
+        # hash without changing a byte of the protocol.  A stale artifact must fail, not pass.
+        resolved = subprocess.run(
+            ["git", "-C", str(ROOT), "log", "--diff-filter=A", "--format=%H", "--",
+             self.meta["protocol_path"]], capture_output=True, text=True).stdout.strip().splitlines()
+        self.assertTrue(resolved, "the protocol file has no creating commit in the history")
+        self.assertEqual(resolved[0], commit,
+                         "the artifact records a stale registration commit; rebuild it")
+        if not full_history():
+            self.skipTest("full git history unavailable (shallow clone); the ordering check needs it")
         out = subprocess.run(["git", "-C", str(ROOT), "cat-file", "-e", f"{commit}^{{commit}}"],
                              capture_output=True, text=True)
         self.assertEqual(out.returncode, 0, "the registered commit must exist in the history")

@@ -4,15 +4,15 @@
   "protocol_path": "docs/SKILL_LAB_PRE_REGISTRATION.md",
   "amendment_path": "docs/SKILL_LAB_PRE_REGISTRATION_AMENDMENT.md",
   "amendment_2_path": "docs/SKILL_LAB_PRE_REGISTRATION_AMENDMENT_02.md",
-  "pre_registration_commit": "ae5d5797da46e3712aa351802c4cf624c17799db",
-  "pre_registration_commit_date": "2026-11-15T13:52:05+00:00",
+  "pre_registration_commit": "a60261fa0f9a015aa55fbfe713abe65aa81093d8",
+  "pre_registration_commit_date": "2026-11-15T13:55:51+00:00",
   "pre_registration_reachable_from_head": true,
   "pre_registration_file_sha256": "4338c168e2fbd1bc56fc1f1747099e919fd962e920c2086735ca7c883cc0f59d",
   "pre_registration_content_unchanged": true,
   "pre_registration_note": "",
   "pre_registration_history": [
    {
-    "commit": "ae5d5797da46e3712aa351802c4cf624c17799db",
+    "commit": "a60261fa0f9a015aa55fbfe713abe65aa81093d8",
     "reachable_from_head": true,
     "file_sha256": "4338c168e2fbd1bc56fc1f1747099e919fd962e920c2086735ca7c883cc0f59d",
     "same_content_as_registered": true
@@ -24,12 +24,12 @@
     "same_content_as_registered": true
    }
   ],
-  "amendment_commit": "0876f9d5024b9caa6289aef628fa206c5a89f4a5",
-  "amendment_2_commit": "a2081ef6a5151c88d2a83c54eaaa245d75c2ff87",
+  "amendment_commit": "8f72c27a8166230c08963f669912339afa28705b",
+  "amendment_2_commit": "a3780a4f3b27970390a6b6342d5b5c6f0047779f",
   "amendment_2_reachable_from_head": true,
-  "code_commit": "9018379779e57a9620f25f095d20ec4c32e5d2ae",
+  "code_commit": "615f353e2b3607901ee7d52a13fa9e8cbcea1e23",
   "branch": "HEAD",
-  "generated_at_utc": "2026-11-15T13:55:27+00:00",
+  "generated_at_utc": "2026-11-15T13:58:37+00:00",
   "primary_corpus": {
    "season": 2026,
    "weeks": "1-9",

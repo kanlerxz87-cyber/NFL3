@@ -102,6 +102,19 @@ def registration(path: str) -> dict:
             "unchanged": committed == working, "note": note, "history": history}
 
 
+def registration_commit_for(path: str) -> str:
+    """The commit that added ``path``, resolved against the CURRENT history.
+
+    The published artifact records a commit hash, and a rebase rewrites that hash even though the
+    registered bytes do not change.  The verification therefore re-resolves the registration
+    commit from the history rather than trusting the recorded string, and then checks that the
+    file at that commit still hashes to the recorded digest.  A stale artifact is therefore a
+    failure with a clear message, not a silent pass.
+    """
+    commits = [c for c in git("log", "--diff-filter=A", "--format=%H", "--", path).splitlines() if c]
+    return commits[0] if commits else ""
+
+
 def git(*args: str) -> str:
     try:
         return subprocess.run(["git", "-C", str(ROOT), *args], capture_output=True,
