@@ -110,6 +110,15 @@ def correlation_entry(name, a_label, b_label, xs, ys, use, n_note=""):
     }
 
 
+def _round_floats(value, places):
+    if isinstance(value, float):
+        return round(value, places)
+    if isinstance(value, dict):
+        return {k: _round_floats(v, places) for k, v in value.items()}
+    if isinstance(value, list):
+        return [_round_floats(v, places) for v in value]
+    return value
+
 def main() -> int:
     games = load_games()
     standings = load_standings()
@@ -250,7 +259,7 @@ def main() -> int:
         )
     )
 
-    result = {
+    result = _round_floats({
         "generated_from": {
             "corpus": "official-verify/data/games_2026_official.csv",
             "standings": "official-verify/data/standings_2026_official.csv",
@@ -283,7 +292,7 @@ def main() -> int:
             "note": "Buckets with n below the readable threshold are published but marked unreadable.",
         },
         "correlations": corr,
-    }
+    }, 6)
     OUT.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     print(f"Luck share of club-win dispersion: {luck_share:.3f} (n={len(scored)} clubs)")
     print(f"Calibration bins: {len(cal)}, scored games: {ev['n_games_scored']}")

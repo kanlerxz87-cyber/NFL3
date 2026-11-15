@@ -158,6 +158,21 @@ def cluster_bootstrap(diffs, draws=BOOTSTRAP_DRAWS, seed=BOOTSTRAP_SEED):
     return lo, hi
 
 
+def _round_floats(value, places):
+    """Round every float in a nested structure to a fixed precision.
+
+    Determinism matters more than the last digit here: the output is committed,
+    so an unpinned float would make CI compare two different strings.
+    """
+    if isinstance(value, float):
+        return round(value, places)
+    if isinstance(value, dict):
+        return {k: _round_floats(v, places) for k, v in value.items()}
+    if isinstance(value, list):
+        return [_round_floats(v, places) for v in value]
+    return value
+
+
 def main() -> int:
     gate = subprocess.run(
         [sys.executable, str(ROOT / "official-verify/scripts/check_prereg.py")],
@@ -303,6 +318,11 @@ def main() -> int:
             "closing-line value or vig claim is made or implied."
         ),
     }
+    # Every derived float is rounded to a fixed number of places before it is
+    # written. Two reasons: the JSON is committed, so an unrounded float would
+    # differ across platforms and machines, and a reviewer should not be invited
+    # to read more precision than a 89-game sample can carry.
+    result = _round_floats(result, 6)
     OUT.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
 
     print(f"Scored {result['n_games_scored']} out-of-sample games (Weeks 4-10).")

@@ -21,24 +21,24 @@
   "sigma_total": 13.5,
   "ridge_lambda": 2.0,
   "brier": {
-    "model": 0.22445902105882035,
-    "control_home_base_rate": 0.254685207759508,
-    "control_coin_flip": 0.24719101123595505,
-    "control_favourites": 0.3848314606741573
+    "model": 0.224459,
+    "control_home_base_rate": 0.254685,
+    "control_coin_flip": 0.247191,
+    "control_favourites": 0.384831
   },
   "log_loss": {
-    "model": 0.6503441097852827,
-    "control_home_base_rate": 0.7082131888898173,
-    "control_coin_flip": 0.6931471805599457,
-    "control_favourites": 10.71090666360507
+    "model": 0.650344,
+    "control_home_base_rate": 0.708213,
+    "control_coin_flip": 0.693147,
+    "control_favourites": 10.710907
   },
-  "skill_vs_home_base_rate": 0.11868057421391098,
-  "skill_vs_coin_flip": 0.09196123298931769,
-  "skill_vs_favourites": 0.41673422265007265,
-  "mean_paired_improvement_vs_base": 0.02934499831556405,
+  "skill_vs_home_base_rate": 0.118681,
+  "skill_vs_coin_flip": 0.091961,
+  "skill_vs_favourites": 0.416734,
+  "mean_paired_improvement_vs_base": 0.029345,
   "cluster_bootstrap_95": [
-    -0.009892608445316673,
-    0.069105180733559
+    -0.009893,
+    0.069105
   ],
   "bootstrap": {
     "draws": 2000,
@@ -47,7 +47,7 @@
   },
   "gate_G_CLUSTER_lower_bound_above_zero": false,
   "accuracy": {
-    "model_straight_up": 0.6741573033707865
+    "model_straight_up": 0.674157
   },
   "per_week": [
     {
@@ -55,11 +55,11 @@
       "week_label": "Week 4",
       "fit_games": 48,
       "test_games": 16,
-      "brier_model": 0.18866943390308863,
-      "brier_base": 0.2569444444444445,
+      "brier_model": 0.188669,
+      "brier_base": 0.256944,
       "brier_flip": 0.25,
       "brier_fav": 0.4375,
-      "base_home_rate": 0.5833333333333334,
+      "base_home_rate": 0.583333,
       "mu": 23.23,
       "hfa": 0.529
     },
@@ -68,9 +68,9 @@
       "week_label": "Week 5",
       "fit_games": 64,
       "test_games": 15,
-      "brier_model": 0.22947207990018115,
-      "brier_base": 0.25390625,
-      "brier_flip": 0.23333333333333334,
+      "brier_model": 0.229472,
+      "brier_base": 0.253906,
+      "brier_flip": 0.233333,
       "brier_fav": 0.35,
       "base_home_rate": 0.5625,
       "mu": 23.318,
@@ -81,11 +81,11 @@
       "week_label": "Week 6",
       "fit_games": 79,
       "test_games": 14,
-      "brier_model": 0.26062126740496966,
-      "brier_base": 0.25432046585892737,
+      "brier_model": 0.260621,
+      "brier_base": 0.25432,
       "brier_flip": 0.25,
-      "brier_fav": 0.35714285714285715,
-      "base_home_rate": 0.5256410256410257,
+      "brier_fav": 0.357143,
+      "base_home_rate": 0.525641,
       "mu": 23.705,
       "hfa": 0.151
     },
@@ -94,11 +94,11 @@
       "week_label": "Week 7",
       "fit_games": 93,
       "test_games": 14,
-      "brier_model": 0.25576568711708686,
-      "brier_base": 0.2532237375101269,
+      "brier_model": 0.255766,
+      "brier_base": 0.253224,
       "brier_flip": 0.25,
-      "brier_fav": 0.5714285714285714,
-      "base_home_rate": 0.5108695652173914,
+      "brier_fav": 0.571429,
+      "base_home_rate": 0.51087,
       "mu": 23.379,
       "hfa": -0.087
     },
@@ -107,11 +107,11 @@
       "week_label": "Week 8",
       "fit_games": 107,
       "test_games": 14,
-      "brier_model": 0.24921388351361795,
-      "brier_base": 0.2541321263286375,
+      "brier_model": 0.249214,
+      "brier_base": 0.254132,
       "brier_flip": 0.25,
-      "brier_fav": 0.35714285714285715,
-      "base_home_rate": 0.49056603773584906,
+      "brier_fav": 0.357143,
+      "base_home_rate": 0.490566,
       "mu": 23.343,
       "hfa": -0.664
     },
@@ -120,11 +120,11 @@
       "week_label": "Week 9",
       "fit_games": 121,
       "test_games": 15,
-      "brier_model": 0.13661338271755016,
-      "brier_base": 0.25583333333333336,
+      "brier_model": 0.136613,
+      "brier_base": 0.255833,
       "brier_flip": 0.25,
       "brier_fav": 0.2,
-      "base_home_rate": 0.5166666666666667,
+      "base_home_rate": 0.516667,
       "mu": 23.315,
       "hfa": -0.093
     },
@@ -133,11 +133,11 @@
       "week_label": "Week 10",
       "fit_games": 136,
       "test_games": 1,
-      "brier_model": 0.7484482600201794,
-      "brier_base": 0.24631001371742112,
+      "brier_model": 0.748448,
+      "brier_base": 0.24631,
       "brier_flip": 0.25,
       "brier_fav": 1.0,
-      "base_home_rate": 0.4962962962962963,
+      "base_home_rate": 0.496296,
       "mu": 23.145,
       "hfa": -0.478
     }

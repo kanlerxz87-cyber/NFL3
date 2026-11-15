@@ -173,8 +173,30 @@ class EvaluationOutput(unittest.TestCase):
         self.assertEqual(self.ev["gate_G_CLUSTER_lower_bound_above_zero"], lo > 0)
 
     def test_skill_is_reported_relative_to_a_benchmark(self):
+        # Published values are rounded to six places, so the identity is checked
+        # at that precision rather than at full float precision.
         expected = 1 - self.ev["brier"]["model"] / self.ev["brier"]["control_home_base_rate"]
-        self.assertAlmostEqual(self.ev["skill_vs_home_base_rate"], expected, places=9)
+        self.assertAlmostEqual(self.ev["skill_vs_home_base_rate"], expected, places=5)
+
+    def test_published_floats_are_pinned_to_a_fixed_precision(self):
+        """Committed output must be byte-identical across machines.
+
+        An unrounded float would differ in its last digit between platforms,
+        which would make CI compare two different strings and fail for no reason.
+        """
+        def deepest(value, depth=0):
+            if isinstance(value, dict):
+                return max([deepest(v, depth + 1) for v in value.values()] or [depth])
+            if isinstance(value, list):
+                return max([deepest(v, depth + 1) for v in value] or [depth])
+            if isinstance(value, float):
+                text = repr(value)
+                self.assertLessEqual(
+                    len(text.split(".")[1]) if "." in text else 0, 6,
+                    f"unpinned float in published output: {text}",
+                )
+            return depth
+        deepest(self.ev)
 
     def test_no_roi_or_price_claim_is_made(self):
         blob = json.dumps(self.ev).lower()
