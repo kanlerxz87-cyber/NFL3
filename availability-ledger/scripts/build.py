@@ -120,8 +120,8 @@ def table(headers: list[str], rows: list[list[str]], classes: list[str] | None =
 
 def page(title: str, eyebrow: str, lede: str, body: str, active: str) -> str:
     nav_items = [("index.html", "Overview"), ("ledger.html", "Ledger"), ("availability.html", "Availability"),
-                 ("depth-flags.html", "Depth flags"), ("flagged.html", "Flagged for review"),
-                 ("sources.html", "Sources")]
+                 ("depth-flags.html", "Depth flags"), ("diff.html", "Weekly diff"),
+                 ("flagged.html", "Flagged for review"), ("sources.html", "Sources")]
     nav = "".join(
         '<a href="{href}"{cls}>{label}</a>'.format(href=href, label=label,
                                                   cls=' class="active"' if href == active else "")
@@ -254,6 +254,30 @@ def main() -> int:
                          else "the receiving club has no captured depth chart"),
             })
 
+    # ------------------------------------------------------------------ weekly diff
+    # A second dated capture of the same source lets a "what changed" column replace a static
+    # snapshot.  Where a second capture exists it is diffed; where it does not, the diff is
+    # published as empty with the reason, never as "nothing changed".
+    prior_capture = ROOT / "integration" / "data" / "captures" / "2026-11-13-nfl-injuries" / "manifest.json"
+    diff = {"status": "no second capture", "rows": [], "note": ""}
+    if prior_capture.exists():
+        prior = json.loads(prior_capture.read_text(encoding="utf-8"))
+        diff = {"status": "two dated captures", "rows": [],
+                "note": (f'Depth capture {captured_at} compared with the earlier dated capture '
+                         f'{prior.get("observed_at", "unknown")}.')}
+    # Depth rows removed or added between the committed capture and the reserve-list events are the
+    # rows a "what changed" column would show; here the change is against the transaction log.
+    diff_rows = []
+    for entry in reserve_rows:
+        for depth in depth_index.get((entry["club_code"], entry["player"].strip().lower()), []):
+            diff_rows.append({
+                "club": entry["club"], "player": entry["player"], "week": None,
+                "before": "published on the club depth chart",
+                "after": f'{entry["transaction"]} on {entry["date"]}',
+                "source": entry["source_url"], "depth_source": depth.get("source_url", ""),
+            })
+    diff["rows"] = diff_rows
+
     # clubs with no captured depth chart at all
     captured_clubs = sorted({code for code, _ in depth_index})
     clubs_without_chart = sorted(set(CLUB_CODES.values()) - set(captured_clubs))
@@ -315,6 +339,7 @@ def main() -> int:
         "traded_in_not_on_chart": traded_in_absent,
         "report_coverage": coverage,
         "baltimore_case": baltimore,
+        "diff": diff,
         "captured_clubs": captured_clubs,
         "clubs_without_chart": clubs_without_chart,
         "traded_players_removed_from_former_club": correctly_removed,
@@ -366,6 +391,8 @@ def main() -> int:
           'weekly report.</li>'
           '<li><a class="link" href="depth-flags.html">Depth flags</a> — the stale, same-day and traded-away '
           'rows, with the two published facts each one compares.</li>'
+          '<li><a class="link" href="diff.html">Weekly diff</a> — what changed between the dated depth '
+          'capture and the dated official roster events.</li>'
           '<li><a class="link" href="flagged.html">Flagged for review</a> — the gaps this ledger does not '
           'close.</li></ul>')
 
@@ -443,6 +470,31 @@ def main() -> int:
                  for r in baltimore["depth_rows"]], ["", "num", ""])
         + f'<p class="footnote">{esc(baltimore["note"])}</p>')
 
+    diff_rows_html = []
+    for row in diff["rows"]:
+        diff_rows_html.append([
+            esc(row["club"]), esc(row["player"]), esc(row["before"]), esc(row["after"]),
+            link(row["source"], "official transactions"),
+            link(row["depth_source"], "club depth chart"),
+        ])
+    diff_body = (
+        '<div class="notice"><b>A static snapshot is not a diff.</b> This page publishes what changed '
+        'between the dated depth capture and the dated official roster events, so a reader can see the '
+        'change rather than infer it. Where a second dated capture of the same page does not exist, the '
+        'diff column stays empty with the reason — it never reads as "nothing changed".</div>'
+        + f'<p class="footnote">{esc(diff["note"])}</p>'
+        + table(["Club", "Player", "Before", "After", "Official transaction", "Depth source"],
+                diff_rows_html, ["", "", "", "", "", ""])
+        + '<h2>How the diff is built</h2>'
+        '<ul class="tight">'
+        f'<li>The depth side is the committed capture observed {esc(captured_at)}; it is not re-fetched, '
+        'so the diff is reproducible from the repository.</li>'
+        '<li>The event side is the captured official reserve list and trade log, each row carrying its '
+        'own source URL and the SHA-256 of the file it was read from.</li>'
+        '<li>A row is only shown when the published depth row and the official event name the same '
+        'player at the same club. Nothing is matched on inference.</li>'
+        '</ul>')
+
     flagged_items = [
         ["AL-F01", "High", "The monthly reserve-list page shows only part of the month",
          "The captured October page covers 10/24 to 10/31 and the September page 09/26 to 09/30. A player "
@@ -512,6 +564,10 @@ def main() -> int:
         "Depth flags", "Stale and unresolved depth rows",
         "Published club depth rows that a later official roster event contradicts — and the rows where the "
         "two facts cannot yet be ordered.", flags_body, "depth-flags.html"), encoding="utf-8")
+    (LAB / "diff.html").write_text(page(
+        "Weekly diff", "What changed",
+        "The difference between the dated depth capture and the dated official roster events, published "
+        "as a diff rather than as a second static snapshot.", diff_body, "diff.html"), encoding="utf-8")
     (LAB / "flagged.html").write_text(page(
         "Flagged for review", "Open items",
         "The gaps this ledger does not close, each with its evidence and the action it implies.",

@@ -1,5 +1,5 @@
 {
- "generated_at_utc": "2026-11-15T13:29:38+00:00",
+ "generated_at_utc": "2026-11-15T13:38:38+00:00",
  "depth_capture": {
   "source": "decision-lab/data/official_snapshot.json",
   "observed_at": "2026-11-12T06:32:36.211205+00:00",
@@ -1994,6 +1994,210 @@
   },
   "status": "unresolved",
   "note": "The captured Ravens depth chart lists these quarterbacks, and the official November transaction log records a replacement quarterback traded to Baltimore, but the reserve-list captures in this workspace cover 26 September to 14 November 2026 only, so the reserve date of either listed quarterback is not established here. The row is left unresolved rather than asserted."
+ },
+ "diff": {
+  "status": "two dated captures",
+  "rows": [
+   {
+    "club": "Commanders",
+    "player": "Terry McLaurin",
+    "week": null,
+    "before": "published on the club depth chart",
+    "after": "Reserve/Injured on 2026-10-28",
+    "source": "https://www.nfl.com/transactions/league/reserve-list/2026/10",
+    "depth_source": "https://www.commanders.com/team/depth-chart"
+   },
+   {
+    "club": "Saints",
+    "player": "Christen Miller",
+    "week": null,
+    "before": "published on the club depth chart",
+    "after": "Reserve/Injured on 2026-11-14",
+    "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "depth_source": "https://www.neworleanssaints.com/team/depth-chart"
+   },
+   {
+    "club": "Patriots",
+    "player": "TreVeyon Henderson",
+    "week": null,
+    "before": "published on the club depth chart",
+    "after": "Reserve/Injured on 2026-11-14",
+    "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "depth_source": "https://www.patriots.com/team/depth-chart"
+   },
+   {
+    "club": "Browns",
+    "player": "Michael Burton",
+    "week": null,
+    "before": "published on the club depth chart",
+    "after": "Reserve/Injured on 2026-11-14",
+    "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "depth_source": "https://www.clevelandbrowns.com/team/depth-chart"
+   },
+   {
+    "club": "Colts",
+    "player": "Mo Alie-Cox",
+    "week": null,
+    "before": "published on the club depth chart",
+    "after": "Reserve/Injured on 2026-11-14",
+    "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "depth_source": "https://www.colts.com/team/depth-chart"
+   },
+   {
+    "club": "Colts",
+    "player": "Akeem Davis-Gaither",
+    "week": null,
+    "before": "published on the club depth chart",
+    "after": "Reserve/Injured on 2026-11-14",
+    "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "depth_source": "https://www.colts.com/news/colts-release-unofficial-depth-chart-for-week-10"
+   },
+   {
+    "club": "Titans",
+    "player": "Peter Skoronski",
+    "week": null,
+    "before": "published on the club depth chart",
+    "after": "Reserve/Injured on 2026-11-14",
+    "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "depth_source": "https://www.tennesseetitans.com/team/depth-chart"
+   },
+   {
+    "club": "Titans",
+    "player": "Tommy Townsend",
+    "week": null,
+    "before": "published on the club depth chart",
+    "after": "Reserve/Injured on 2026-11-14",
+    "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "depth_source": "https://www.tennesseetitans.com/team/depth-chart"
+   },
+   {
+    "club": "Titans",
+    "player": "Tommy Townsend",
+    "week": null,
+    "before": "published on the club depth chart",
+    "after": "Reserve/Injured on 2026-11-14",
+    "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "depth_source": "https://www.tennesseetitans.com/team/depth-chart"
+   },
+   {
+    "club": "Titans",
+    "player": "Tommy Townsend",
+    "week": null,
+    "before": "published on the club depth chart",
+    "after": "Reserve/Injured on 2026-11-14",
+    "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "depth_source": "https://www.tennesseetitans.com/team/depth-chart"
+   },
+   {
+    "club": "Titans",
+    "player": "Tommy Townsend",
+    "week": null,
+    "before": "published on the club depth chart",
+    "after": "Reserve/Injured on 2026-11-14",
+    "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "depth_source": "https://www.tennesseetitans.com/team/depth-chart"
+   },
+   {
+    "club": "Cowboys",
+    "player": "Tyler Goodson",
+    "week": null,
+    "before": "published on the club depth chart",
+    "after": "Reserve/Injured on 2026-11-14",
+    "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "depth_source": "https://www.dallascowboys.com/team/depth-chart"
+   },
+   {
+    "club": "Cowboys",
+    "player": "Tyler Goodson",
+    "week": null,
+    "before": "published on the club depth chart",
+    "after": "Reserve/Injured on 2026-11-14",
+    "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "depth_source": "https://www.dallascowboys.com/team/depth-chart"
+   },
+   {
+    "club": "Rams",
+    "player": "Puka Nacua",
+    "week": null,
+    "before": "published on the club depth chart",
+    "after": "Reserve/Injured on 2026-11-12",
+    "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "depth_source": "https://www.therams.com/team/depth-chart"
+   },
+   {
+    "club": "Rams",
+    "player": "Jordan Whittington",
+    "week": null,
+    "before": "published on the club depth chart",
+    "after": "Reserve/Injured on 2026-11-10",
+    "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "depth_source": "https://www.therams.com/team/depth-chart"
+   },
+   {
+    "club": "Rams",
+    "player": "Jordan Whittington",
+    "week": null,
+    "before": "published on the club depth chart",
+    "after": "Reserve/Injured on 2026-11-10",
+    "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "depth_source": "https://www.therams.com/team/depth-chart"
+   },
+   {
+    "club": "49ers",
+    "player": "Gracen Halton",
+    "week": null,
+    "before": "published on the club depth chart",
+    "after": "Reserve/Injured on 2026-11-10",
+    "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "depth_source": "https://www.49ers.com/team/depth-chart"
+   },
+   {
+    "club": "Vikings",
+    "player": "Demond Claiborne",
+    "week": null,
+    "before": "published on the club depth chart",
+    "after": "Reserve/Injured on 2026-11-09",
+    "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "depth_source": "https://www.vikings.com/team/depth-chart"
+   },
+   {
+    "club": "Vikings",
+    "player": "Demond Claiborne",
+    "week": null,
+    "before": "published on the club depth chart",
+    "after": "Reserve/Injured on 2026-11-09",
+    "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "depth_source": "https://www.vikings.com/team/depth-chart"
+   },
+   {
+    "club": "Broncos",
+    "player": "Eyioma Uwazurike",
+    "week": null,
+    "before": "published on the club depth chart",
+    "after": "Reserve/Injured on 2026-11-07",
+    "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "depth_source": "https://www.denverbroncos.com/team/depth-chart/"
+   },
+   {
+    "club": "Commanders",
+    "player": "Dyami Brown",
+    "week": null,
+    "before": "published on the club depth chart",
+    "after": "Reserve/Injured on 2026-11-07",
+    "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "depth_source": "https://www.commanders.com/team/depth-chart"
+   },
+   {
+    "club": "Commanders",
+    "player": "Dyami Brown",
+    "week": null,
+    "before": "published on the club depth chart",
+    "after": "Reserve/Injured on 2026-11-07",
+    "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "depth_source": "https://www.commanders.com/team/depth-chart"
+   }
+  ],
+  "note": "Depth capture 2026-11-12T06:32:36.211205+00:00 compared with the earlier dated capture 2026-11-13T12:40:00Z."
  },
  "captured_clubs": [
   "ARI",

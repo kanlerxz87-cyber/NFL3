@@ -18,8 +18,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 LAB = ROOT / "skill-lab"
 RESULTS = LAB / "data" / "results.json"
-PAGES = ["index.html", "leaderboard.html", "controls.html", "staking.html", "dependence.html",
-         "graded.html", "methodology.html", "flagged.html", "sources.html"]
+PAGES = ["index.html", "leaderboard.html", "mind-change.html", "controls.html", "staking.html",
+         "dependence.html", "graded.html", "methodology.html", "flagged.html", "sources.html"]
 
 errors: list[str] = []
 notes: list[str] = []

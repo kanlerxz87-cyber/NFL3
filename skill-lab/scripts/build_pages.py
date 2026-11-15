@@ -19,6 +19,7 @@ RESULTS = DATA / "results.json"
 PAGES = [
     ("index.html", "Overview"),
     ("leaderboard.html", "Leaderboard"),
+    ("mind-change.html", "What would change our mind"),
     ("controls.html", "Controls &amp; luck"),
     ("staking.html", "Staking view"),
     ("dependence.html", "Dependence"),
@@ -299,6 +300,12 @@ def build_leaderboard(res: dict) -> str:
         ["G7 Price realism", "The signal verdict does not depend on a price; the staking verdict under a "
                              "10% worse price is published separately"],
     ]
+    out.append('<h2>What would change our mind</h2>')
+    out.append('<p class="footnote">Every row above carries a two-sided falsification field, frozen in '
+               'SL-PRE-01b for the next evaluation window: one side that would move the row towards '
+               'belief and one side that would move it towards rejection. It is published forward, so it '
+               'does not reinterpret the completed run.</p>')
+    out.append('<p><a class="link" href="mind-change.html">Read the field for every row →</a></p>')
     out.append('<h2>Gates (fail-closed)</h2>')
     out.append(table(["Gate", "Test", "Source"],
                      [g + [link(PROTOCOL_DOC, "protocol §9")] for g in gates], ["", "", ""]))
@@ -370,6 +377,44 @@ def build_controls(res: dict) -> str:
                'on every market, so a lucky staking run and a real edge look identical in the return column. '
                'Only the signal columns above can tell them apart, and on this corpus the signal columns are '
                'negative for every registered row.</div>')
+    return body
+
+
+def build_mind_change(res: dict) -> str:
+    """The two-sided 'what would change our mind' field, published for every registered row."""
+    meta = res["meta"]
+    rows = []
+    for row in res["runs"]["primary"]["rows"]:
+        belief = ("A pre-registered evaluation on a corpus the model has never seen, of at least the "
+                  "registered sample size, in which the 95% game-cluster lower bound on Brier skill is "
+                  "above zero, the row beats the random-pick control's 95th percentile, the row survives "
+                  "Benjamini–Hochberg correction inside its family, and the calibration error is at or "
+                  "below 0.05 — all four, on the same corpus, in one run.")
+        reject = ("A pre-registered evaluation on an equally sized unseen corpus in which the Brier skill "
+                  "is at or below zero, or the 95% lower bound is below zero, or the row fails to beat "
+                  "the random-pick control's 95th percentile, or it fails the multiplicity control, or "
+                  "its calibration error exceeds 0.05. Any one of these is sufficient, and a second "
+                  "consecutive such result demotes the row to paper status.")
+        observed = ("Observed in this run: skill "
+                    f'{fmt(row.get("skill_brier"), 4, signed=True)}, lower bound '
+                    f'{fmt(row.get("bootstrap", {}).get("lower95"), 4, signed=True)}, '
+                    f'{row.get("gates_passed", 0)}/{row.get("gates_total", 0)} gates.')
+        rows.append([
+            esc(row["strategy"]), esc(row.get("name", "")), belief, reject, observed,
+            link(PROTOCOL_DOC, "SL-PRE-01"),
+            link("https://github.com/kanlerxz87-cyber/NFL3/blob/main/docs/"
+                 "SKILL_LAB_PRE_REGISTRATION_AMENDMENT_02.md", "SL-PRE-01b"),
+        ])
+    body = ('<div class="notice"><b>The field is written forward.</b> It was frozen in '
+            '<a href="https://github.com/kanlerxz87-cyber/NFL3/blob/main/docs/'
+            'SKILL_LAB_PRE_REGISTRATION_AMENDMENT_02.md">SL-PRE-01b</a> for the next evaluation window '
+            '(2026 weeks 10 onward). It is not applied to the completed run below: the run is published '
+            'as what it was, a negative result. The belief side requires four conditions at once; the '
+            'rejection side requires one.</div>'
+            '<h2>Every registered row, and what would move it</h2>'
+            + table(["Strategy", "Definition", "Would move this towards belief",
+                     "Would move this towards rejection", "What this run showed", "Protocol", "Field"],
+                    rows, ["", "", "", "", "", "", ""]))
     return body
 
 
@@ -640,6 +685,7 @@ def build_sources(res: dict) -> str:
 BUILDERS = {
     "index.html": build_overview,
     "leaderboard.html": build_leaderboard,
+    "mind-change.html": build_mind_change,
     "controls.html": build_controls,
     "staking.html": build_staking,
     "dependence.html": build_dependence,
@@ -653,6 +699,9 @@ TITLES = {
     "index.html": ("Overview", "Skill lab",
                    "Benchmark-relative proper scores, control baselines, game-cluster uncertainty and "
                    "multiplicity control for every line this project originates."),
+    "mind-change.html": ("What would change our mind", "Two-sided falsification field",
+                         "For every registered row: the evidence that would move it towards belief, the "
+                         "evidence that would move it towards rejection, and what this run actually showed."),
     "leaderboard.html": ("Leaderboard", "Signal leaderboard",
                          "Every registered strategy row scored with a proper score against the market's own "
                          "probability, with an interval that treats one game as one observation."),

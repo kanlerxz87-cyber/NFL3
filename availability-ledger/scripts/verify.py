@@ -15,8 +15,8 @@ ROOT = Path(__file__).resolve().parents[2]
 LAB = ROOT / "availability-ledger"
 LEDGER = LAB / "data" / "ledger.json"
 SNAPSHOT = ROOT / "decision-lab" / "data" / "official_snapshot.json"
-PAGES = ["index.html", "ledger.html", "availability.html", "depth-flags.html", "flagged.html",
-         "sources.html"]
+PAGES = ["index.html", "ledger.html", "availability.html", "depth-flags.html", "diff.html",
+         "flagged.html", "sources.html"]
 OFFICIAL_HOSTS = ("https://www.nfl.com/", "https://www.baltimoreravens.com/",
                   "https://www.colts.com/", "https://www.commanders.com/")
 

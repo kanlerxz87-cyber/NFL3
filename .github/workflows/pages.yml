@@ -62,6 +62,14 @@ jobs:
         run: python3 origination/scripts/build.py
       - name: Origination fail-closed verification (sources, links, determinism, gates)
         run: python3 origination/scripts/verify.py
+      - name: Skill-lab regression tests (protocol, scores, published pages)
+        run: python3 tests/test_skill_lab.py
+      - name: Skill-lab fail-closed verification
+        run: python3 skill-lab/scripts/verify.py
+      - name: Availability-ledger regression tests (capture digests, joins, published pages)
+        run: python3 tests/test_availability_ledger.py
+      - name: Availability-ledger fail-closed verification
+        run: python3 availability-ledger/scripts/verify.py
 
   deploy:
     if: github.event_name != 'pull_request'
