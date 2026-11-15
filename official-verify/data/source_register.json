@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "register": "official-verify source register",
+  "access_date": "2026-11-15",
+  "access_method": "Page fetched live by the session page-fetch tool on 2026-11-15 UTC and read line by line. The sandbox bash/curl egress blocked nfl.com (HTTP 000); the page-fetch tool did not. Every sentence transcribed below was copied from the fetched page text, never inferred.",
+  "publisher": "NFL.com (official NFL publisher) and NFL club sites",
+  "sources": [
+    {
+      "id": "OV-S01",
+      "url": "https://www.nfl.com/schedules/2026/by-week/week-1",
+      "title": "NFL Week 1 Schedule 2026: Games, Times, Matchups & Tickets",
+      "observed_at_utc": "2026-11-15",
+      "used_for": "Weeks 1 schedules/results; 16 games; final scores and the Wednesday/Sep 9 anomaly",
+      "verified_by": "read line by line; every result line copied with its final score",
+      "evidence": "Result lines such as \"Patriots 10, Seahawks 13, FINAL, Wednesday, September 9th\"; the page also prints the weekday as \"Wednesday\" in the heading \"Sunday Night Football, September 9th\". The weekday/date combination is an official-source irregularity, recorded on the Flagged for Review page."
+    },
+    {
+      "id": "OV-S02",
+      "url": "https://www.nfl.com/schedules/2026/by-week/week-2",
+      "title": "NFL Week 2 Schedule 2026: Games, Times, Matchups & Tickets",
+      "observed_at_utc": "2026-11-15",
+      "used_for": "Week 2 results; the game the repository had recorded as a hidden/blank score",
+      "verified_by": "read line by line",
+      "evidence": "\"Commanders 20, Cowboys 37, FINAL, Sunday, September 20th\" and the Game Center page for the same match print 20 and 37 with per-quarter scoring. The committed repository value was blank; this session publishes the official value with this source."
+    },
+    {
+      "id": "OV-S03",
+      "url": "https://www.nfl.com/schedules/2026/by-week/week-3",
+      "title": "NFL Week 3 Schedule 2026: Games, Times, Matchups & Tickets",
+      "observed_at_utc": "2026-11-15",
+      "used_for": "Week 3 results (16 games), including the Rio de Janeiro international game",
+      "verified_by": "read line by line",
+      "evidence": "Result lines copied verbatim. International game block names \"Rio de Janeiro\" for Ravens at Cowboys."
+    },
+    {
+      "id": "OV-S04",
+      "url": "https://www.nfl.com/schedules/2026/by-week/week-4",
+      "title": "NFL Week 4 Schedule 2026: Games, Times, Matchups & Tickets",
+      "observed_at_utc": "2026-11-15",
+      "used_for": "Week 4 results (16 games), including the London international game",
+      "verified_by": "read line by line",
+      "evidence": "Result lines copied verbatim; London block names the international game Colts at Commanders."
+    },
+    {
+      "id": "OV-S05",
+      "url": "https://www.nfl.com/schedules/2026/by-week/week-5",
+      "title": "NFL Week 5 Schedule 2026: Games, Times, Matchups & Tickets",
+      "observed_at_utc": "2026-11-15",
+      "used_for": "Week 5 results (15 games) and the official bye list for the week",
+      "verified_by": "read line by line",
+      "evidence": "Result lines copied verbatim; page reports \"Teams on Bye CAR, KC\"; Weather module reports \"Clear night\"."
+    },
+    {
+      "id": "OV-S06",
+      "url": "https://www.nfl.com/schedules/2026/by-week/week-6",
+      "title": "NFL Week 6 Schedule 2026: Games, Times, Matchups & Tickets",
+      "observed_at_utc": "2026-11-15",
+      "used_for": "Week 6 results (14 games) and the official bye list",
+      "verified_by": "read line by line",
+      "evidence": "Result lines copied verbatim; page reports \"Teams on Bye CIN, DET, MIA, MIN\"."
+    },
+    {
+      "id": "OV-S07",
+      "url": "https://www.nfl.com/schedules/2026/by-week/week-7",
+      "title": "NFL Week 7 Schedule 2026: Games, Times, Matchups & Tickets",
+      "observed_at_utc": "2026-11-15",
+      "used_for": "Week 7 results (14 games), the Saint-Denis international game and the official bye list",
+      "verified_by": "read line by line",
+      "evidence": "Result lines copied verbatim; page reports \"Teams on Bye BUF, JAX, LAC, WAS\"."
+    },
+    {
+      "id": "OV-S08",
+      "url": "https://www.nfl.com/schedules/2026/by-week/week-8",
+      "title": "NFL Week 8 Schedule 2026: Games, Times, Matchups & Tickets",
+      "observed_at_utc": "2026-11-15",
+      "used_for": "Week 8 results (14 games) and the official bye list",
+      "verified_by": "read line by line",
+      "evidence": "Result lines copied verbatim; page reports \"Teams on Bye HOU, NO, NYG, SF\"."
+    },
+    {
+      "id": "OV-S09",
+      "url": "https://www.nfl.com/schedules/2026/by-week/week-9",
+      "title": "NFL Week 9 Schedule 2026: Games, Times, Matchups & Tickets",
+      "observed_at_utc": "2026-11-15",
+      "used_for": "Week 9 results (15 games) and the official bye list",
+      "verified_by": "read line by line",
+      "evidence": "Result lines copied verbatim; page reports \"Teams on Bye PIT, TEN\"; Madrid block names the international game Bengals at Falcons."
+    },
+    {
+      "id": "OV-S10",
+      "url": "https://www.nfl.com/standings/",
+      "title": "2026 NFL Division Standings",
+      "observed_at_utc": "2026-11-15",
+      "used_for": "Official win/loss/tie record, points for, points against and net points for all 32 clubs, used as an independent cross-check on the game log",
+      "verified_by": "read line by line; all 32 club rows transcribed",
+      "evidence": "Each division table prints club, W, L, T, PCT, PF, PA, NET PTS. All 32 rows are transcribed into decisions data."
+    },
+    {
+      "id": "OV-S11",
+      "url": "https://www.nfl.com/injuries/",
+      "title": "Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season",
+      "observed_at_utc": "2026-11-15",
+      "used_for": "Availability: practice status and game status per listed player; current-state only",
+      "verified_by": "read line by line; the sample rows on the Flagged page are quoted verbatim",
+      "evidence": "Per-matchup tables with columns Player / Position / Injuries / Practice Status / Game Status. Many rows carry a practice status with a blank Game Status; blank cells are published as blank. This page is a current-state page, not a dated archive: it cannot by itself support a point-in-time backtest."
+    },
+    {
+      "id": "OV-S12",
+      "url": "https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2",
+      "title": "Washington Commanders at Dallas Cowboys 2026 REG 2 - Game Center",
+      "observed_at_utc": "2026-11-15",
+      "used_for": "Independent confirmation of a single game's score, quarter break-down, venue and stadium, and the existence of an official Game Book PDF",
+      "verified_by": "read line by line",
+      "evidence": "Final 20-37; quarter table 0/10/3/7 for WAS and 10/7/10/10 for DAL; Game Info gives Location ARLINGTON, TX and Stadium AT&T STADIUM; the page links \"Download Game Book (PDF)\" at a static.www.nfl.com URL."
+    },
+    {
+      "id": "OV-S13",
+      "url": "https://www.nfl.com/games/patriots-at-seahawks-2026-reg-1",
+      "title": "New England Patriots at Seattle Seahawks 2026 REG 1 - Game Center",
+      "observed_at_utc": "2026-11-15",
+      "used_for": "Venue/stadium evidence for one fixture; Game Book availability",
+      "verified_by": "read line by line",
+      "evidence": "Final 10-13; Game Info gives Location SEATTLE, WA and Stadium LUMEN FIELD; Game Book PDF link present."
+    },
+    {
+      "id": "OV-S14",
+      "url": "https://www.nfl.com/teams/detroit-lions/depth-chart",
+      "title": "nfl.com club depth-chart route (tested)",
+      "observed_at_utc": "2026-11-15",
+      "used_for": "Negative evidence: the league site does not publish a route at this path",
+      "verified_by": "fetched; the page returns the NFL 404 page \"404 - Flag on the Play.\"",
+      "evidence": "HTTP content is the league's 404 template. Recorded because a published claim about depth ordering depends on where the official source actually lives. This is a negative result, not a value."
+    },
+    {
+      "id": "OV-S15",
+      "url": "https://www.nfl.com/stats/player-stats/category/snap-counts/2026/reg/",
+      "title": "nfl.com snap-count player-stat category (tested)",
+      "observed_at_utc": "2026-11-15",
+      "used_for": "Negative evidence: this snap-count path returns 404",
+      "verified_by": "fetched; 404 template",
+      "evidence": "The league's 404 template was returned. No official snap-count table was obtained at this URL, so no snap-share value is published anywhere in this workspace."
+    },
+    {
+      "id": "OV-S16",
+      "url": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
+      "title": "Washington Commanders at New York Giants 2026 REG 10 - Game Center",
+      "observed_at_utc": "2026-11-15",
+      "used_for": "One Week 10 result, needed to reconcile standings arithmetic",
+      "verified_by": "read line by line",
+      "evidence": "Final 24-21; WEEK 10 / Nov 12; quarter table 0/10/7/7 for WAS and 0/7/7/7 for NYG; Game Info Location EAST RUTHERFORD, NJ, Stadium METLIFE STADIUM. The committed repository schedule stops at Week 9 and does not contain this game."
+    }
+  ],
+  "blocked": [
+    {
+      "id": "OV-B01",
+      "what": "Official market prices (closing lines, moneylines, totals) for 2026 games",
+      "status": "not obtained",
+      "detail": "NFL.com pages fetched here publish results and schedules, not historical prices. No licensed price archive is available to this session. The origination board therefore publishes our own number with the market column blank and flag OV-F02. No backtest ROI, closing-line value or vig decomposition is published."
+    },
+    {
+      "id": "OV-B02",
+      "what": "Official depth-chart ordering by club",
+      "status": "not obtained",
+      "detail": "The nfl.com depth-chart route 404s (OV-S14). Club depth pages are owned by other sessions' captures and were not re-fetched by this session. No depth rank, starter/backup label or replacement order is asserted in this workspace."
+    },
+    {
+      "id": "OV-B03",
+      "what": "Official snap counts and inactive lists",
+      "status": "not obtained",
+      "detail": "The tested league snap-count route 404s (OV-S15). Snap share and inactive lists are therefore absent; the workspace does not infer them."
+    },
+    {
+      "id": "OV-B04",
+      "what": "Point-in-time (dated) official availability series",
+      "status": "not obtained",
+      "detail": "The injury report page is a current-state page. One capture cannot be replayed, so no availability feature is used in any model published here."
+    }
+  ]
+}
