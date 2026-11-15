@@ -77,19 +77,47 @@ def score_rows(rows: list[dict]) -> dict:
 
 
 def paired_skill(rows: list[dict], n_boot: int = 2000) -> dict:
-    """Paired game-cluster bootstrap of the Brier **advantage**: benchmark error minus model error.
+    """Paired game-cluster bootstrap of the **Brier Skill Score** against the benchmark.
 
-    Sign convention, fixed here and asserted in tests: a POSITIVE value means the model's Brier error
-    is smaller than the benchmark's, i.e. the model is better. Using (model - benchmark) instead would
-    publish a negative result as a positive one; the unit tests pin the direction.
+    The quantity resampled is the skill score itself, not a raw error difference, so the published
+    interval is on the same scale as the point estimate printed beside it. Resampling the raw Brier
+    difference instead would put a number like -0.027 next to a skill score of -0.106, and a reader
+    would be right to call that a contradiction.
+
+    Per cluster g (a game), the skill score is  1 - sum_model(g) / sum_bench(g), so the bootstrap
+    recomputes that ratio on the resampled clusters. Clusters are games, because legs inside a game are
+    dependent. Sign convention: positive means the model beat the benchmark.
     """
     graded = [r for r in rows if r.get("won") is not None]
     if len(graded) < 5:
-        return {"point": None, "lo": None, "hi": None, "n_clusters": 0}
-    benchmark = [C.brier(r["p_bench"], int(r["won"])) for r in graded]
-    model = [C.brier(r["p"], int(r["won"])) for r in graded]
-    groups = [r.get("event_id") or r.get("game_id") for r in graded]
-    return C.cluster_bootstrap_ci(benchmark, model, groups, n_boot=n_boot)
+        return {"point": None, "lo": None, "hi": None, "n_clusters": 0, "n_boot": 0}
+    by_group: dict[object, list[tuple[float, float]]] = {}
+    for r in graded:
+        g = r.get("event_id") or r.get("game_id")
+        by_group.setdefault(g, []).append((C.brier(r["p"], int(r["won"])),
+                                           C.brier(r["p_bench"], int(r["won"]))))
+    keys = list(by_group)
+    model_all = [m for k in keys for m, _ in by_group[k]]
+    bench_all = [b for k in keys for _, b in by_group[k]]
+    point = 1.0 - (sum(model_all) / sum(bench_all))
+    import random
+    rng = random.Random(20261115)
+    samples = []
+    for _ in range(n_boot):
+        sm = sb = 0.0
+        for _ in keys:
+            k = keys[rng.randrange(len(keys))]
+            for m, b in by_group[k]:
+                sm += m
+                sb += b
+        if sb > 0:
+            samples.append(1.0 - sm / sb)
+    samples.sort()
+    lo = samples[int(0.025 * (len(samples) - 1))]
+    hi = samples[int(0.975 * (len(samples) - 1))]
+    return {"point": point, "lo": lo, "hi": hi, "n_clusters": len(keys),
+            "n_boot": len(samples), "seed": 20261115,
+            "quantity": "Brier skill score (same scale as the published point estimate)"}
 
 
 def wilson(k: int, n: int, z: float = 1.96) -> tuple[float, float]:

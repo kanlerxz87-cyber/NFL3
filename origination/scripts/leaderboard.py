@@ -238,7 +238,13 @@ def evaluate_strategy(strategy: dict, rows: list[dict]) -> dict:
             graded.append({**r, "p": p, "p_bench": p_bench, "pick_home": pick_home, **g})
     summary = scoring.score_rows(graded)
     if graded:
-        summary.update(scoring.paired_skill(graded))
+        boot = scoring.paired_skill(graded)
+        summary.update(boot)
+        # The bootstrap point estimate and the analytic skill score are two routes to the same quantity;
+        # a disagreement beyond rounding means one of them is wrong, so it is asserted here rather than
+        # published as two different numbers under one label.
+        if boot.get("point") is not None and summary.get("bss") is not None:
+            summary["point_check"] = abs(boot["point"] - summary["bss"])
         summary["wilson"] = scoring.wilson(sum(1 for x in graded if x.get("won")),
                                           sum(1 for x in graded if x.get("won") is not None))
     return {"strategy": strategy, "rows": graded, "summary": summary}

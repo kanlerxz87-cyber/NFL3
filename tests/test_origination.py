@@ -51,7 +51,29 @@ class SignConvention(unittest.TestCase):
         summary = scoring.score_rows(rows)
         self.assertLess(ci["point"], 0)
         self.assertLess(summary["bss"], 0)
-        self.assertAlmostEqual(ci["point"], summary["bench_brier"] - summary["brier"], places=9)
+        # The bootstrap resamples the skill score itself, so its point estimate must reproduce 1 - B/B0.
+        self.assertAlmostEqual(ci["point"], 1 - summary["brier"] / summary["bench_brier"], places=9)
+        self.assertAlmostEqual(ci["point"], summary["bss"], places=9)
+
+    def test_interval_is_on_the_same_scale_as_the_point_estimate(self):
+        """A published interval must describe the number printed next to it.
+
+        Regression: the bootstrap once resampled a raw Brier *difference* (-0.027) and it was rendered in
+        a column headed "Brier skill" beside a skill score of -0.106. Both were negative, so no verdict
+        changed, but the two numbers were not the same quantity and a reader could not reconcile them.
+        """
+        import json
+        board = json.loads((DATA / "leaderboard.json").read_text(encoding="utf-8"))
+        for row in board["results"]:
+            s = row["summary"]
+            if s.get("lo") is None:
+                continue
+            self.assertAlmostEqual(s["point"], s["bss"], places=9,
+                                   msg=f"{row['id']}: bootstrap point and analytic skill disagree")
+            self.assertLessEqual(s["lo"], s["point"] + 1e-12,
+                                 msg=f"{row['id']}: interval lower bound is above the point estimate")
+            self.assertGreaterEqual(s["hi"], s["point"] - 1e-12,
+                                    msg=f"{row['id']}: interval upper bound is below the point estimate")
 
     def test_control_arm_skill_is_exactly_zero(self):
         rows = [{"p": 0.5, "p_bench": 0.5, "won": bool(i % 2), "game_id": f"g{i}"} for i in range(20)]
