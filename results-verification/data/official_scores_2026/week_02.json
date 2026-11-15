@@ -1,0 +1,26 @@
+{
+  "week": 2,
+  "url": "https://www.nfl.com/scores/2026/week-2",
+  "observed_at": "2026-11-15T13:05:00Z",
+  "observed_at_note": "Approximate wall-clock time (UTC) at which the page was read with the page-fetch tool. The page was read in three sequential chunks ending at this time.",
+  "publisher": "NFL.com (official NFL publisher)",
+  "authority": "official HTTPS publisher",
+  "games": [
+    {"away_team": "DET", "away_score": 31, "home_team": "BUF", "home_score": 41, "context": "Thursday Night Football, September 17th", "slug": "lions-at-bills"},
+    {"away_team": "CAR", "away_score": 34, "home_team": "ATL", "home_score": 3, "context": "Sunday, September 20th", "slug": "panthers-at-falcons"},
+    {"away_team": "NO", "away_score": 24, "home_team": "BAL", "home_score": 17, "context": "Sunday, September 20th", "slug": "saints-at-ravens"},
+    {"away_team": "MIN", "away_score": 9, "home_team": "CHI", "home_score": 3, "context": "Sunday, September 20th", "slug": "vikings-at-bears"},
+    {"away_team": "CIN", "away_score": 20, "home_team": "HOU", "home_score": 6, "context": "Sunday, September 20th", "slug": "bengals-at-texans"},
+    {"away_team": "PIT", "away_score": 3, "home_team": "NE", "home_score": 20, "context": "Sunday, September 20th", "slug": "steelers-at-patriots"},
+    {"away_team": "GB", "away_score": 20, "home_team": "NYJ", "home_score": 17, "context": "Sunday, September 20th", "slug": "packers-at-jets"},
+    {"away_team": "CLE", "away_score": 23, "home_team": "TB", "home_score": 19, "context": "Sunday, September 20th", "slug": "browns-at-buccaneers"},
+    {"away_team": "PHI", "away_score": 24, "home_team": "TEN", "home_score": 20, "context": "Sunday, September 20th", "slug": "eagles-at-titans"},
+    {"away_team": "JAX", "away_score": 13, "home_team": "DEN", "home_score": 20, "context": "Sunday, September 20th", "slug": "jaguars-at-broncos"},
+    {"away_team": "LV", "away_score": 26, "home_team": "LAC", "home_score": 14, "context": "Sunday, September 20th", "slug": "raiders-at-chargers"},
+    {"away_team": "SEA", "away_score": 31, "home_team": "AZ", "home_score": 7, "context": "Sunday, September 20th", "slug": "seahawks-at-cardinals"},
+    {"away_team": "WAS", "away_score": 20, "home_team": "DAL", "home_score": 37, "context": "Sunday, September 20th", "slug": "commanders-at-cowboys"},
+    {"away_team": "MIA", "away_score": 13, "home_team": "SF", "home_score": 35, "context": "Sunday, September 20th", "slug": "dolphins-at-49ers"},
+    {"away_team": "IND", "away_score": 30, "home_team": "KC", "home_score": 33, "context": "Sunday Night Football, September 20th", "slug": "colts-at-chiefs"},
+    {"away_team": "NYG", "away_score": 6, "home_team": "LA", "home_score": 28, "context": "Monday Night Football, September 21st", "slug": "giants-at-rams"}
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "week": 5,
+  "url": "https://www.nfl.com/scores/2026/week-5",
+  "observed_at": "2026-11-15T13:22:00Z",
+  "observed_at_note": "Approximate wall-clock time (UTC) at which the page was read with the page-fetch tool. The page was read in two sequential chunks (the third chunk contains only the site news module, no scoreboard rows).",
+  "publisher": "NFL.com (official NFL publisher)",
+  "authority": "official HTTPS publisher",
+  "games": [
+    {"away_team": "TB", "away_score": 24, "home_team": "DAL", "home_score": 16, "context": "Thursday Night Football, October 8th", "slug": "buccaneers-at-cowboys"},
+    {"away_team": "PHI", "away_score": 17, "home_team": "JAX", "home_score": 19, "context": "Sunday, October 11th, International Game (London)", "slug": "eagles-at-jaguars"},
+    {"away_team": "CIN", "away_score": 31, "home_team": "MIA", "home_score": 24, "context": "Sunday, October 11th", "slug": "bengals-at-dolphins"},
+    {"away_team": "LV", "away_score": 17, "home_team": "NE", "home_score": 45, "context": "Sunday, October 11th", "slug": "raiders-at-patriots"},
+    {"away_team": "MIN", "away_score": 23, "home_team": "NO", "home_score": 13, "context": "Sunday, October 11th", "slug": "vikings-at-saints"},
+    {"away_team": "CLE", "away_score": 12, "home_team": "NYJ", "home_score": 17, "context": "Sunday, October 11th", "slug": "browns-at-jets"},
+    {"away_team": "IND", "away_score": 22, "home_team": "PIT", "home_score": 34, "context": "Sunday, October 11th", "slug": "colts-at-steelers"},
+    {"away_team": "HOU", "away_score": 26, "home_team": "TEN", "home_score": 3, "context": "Sunday, October 11th", "slug": "texans-at-titans"},
+    {"away_team": "NYG", "away_score": 27, "home_team": "WAS", "home_score": 27, "context": "Sunday, October 11th (tie)", "slug": "giants-at-commanders"},
+    {"away_team": "CHI", "away_score": 7, "home_team": "GB", "home_score": 31, "context": "Sunday, October 11th", "slug": "bears-at-packers"},
+    {"away_team": "DEN", "away_score": 23, "home_team": "LAC", "home_score": 17, "context": "Sunday, October 11th", "slug": "broncos-at-chargers"},
+    {"away_team": "DET", "away_score": 45, "home_team": "AZ", "home_score": 21, "context": "Sunday, October 11th", "slug": "lions-at-cardinals"},
+    {"away_team": "SF", "away_score": 32, "home_team": "SEA", "home_score": 29, "context": "Sunday, October 11th", "slug": "49ers-at-seahawks"},
+    {"away_team": "BAL", "away_score": 30, "home_team": "ATL", "home_score": 23, "context": "Sunday Night Football, October 11th", "slug": "ravens-at-falcons"},
+    {"away_team": "BUF", "away_score": 37, "home_team": "LA", "home_score": 34, "context": "Monday Night Football, October 12th", "slug": "bills-at-rams"}
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "week": 3,
+  "url": "https://www.nfl.com/scores/2026/week-3",
+  "observed_at": "2026-11-15T13:11:00Z",
+  "observed_at_note": "Approximate wall-clock time (UTC) at which the page was read with the page-fetch tool. The page was read in two sequential chunks (the third chunk contains only the site news module, no scoreboard rows).",
+  "publisher": "NFL.com (official NFL publisher)",
+  "authority": "official HTTPS publisher",
+  "games": [
+    {"away_team": "ATL", "away_score": 35, "home_team": "GB", "home_score": 14, "context": "Thursday Night Football, September 24th", "slug": "falcons-at-packers"},
+    {"away_team": "LAC", "away_score": 16, "home_team": "BUF", "home_score": 24, "context": "Sunday, September 27th", "slug": "chargers-at-bills"},
+    {"away_team": "CAR", "away_score": 18, "home_team": "CLE", "home_score": 21, "context": "Sunday, September 27th", "slug": "panthers-at-browns"},
+    {"away_team": "NYJ", "away_score": 24, "home_team": "DET", "home_score": 31, "context": "Sunday, September 27th", "slug": "jets-at-lions"},
+    {"away_team": "HOU", "away_score": 17, "home_team": "IND", "home_score": 19, "context": "Sunday, September 27th", "slug": "texans-at-colts"},
+    {"away_team": "NE", "away_score": 6, "home_team": "JAX", "home_score": 35, "context": "Sunday, September 27th", "slug": "patriots-at-jaguars"},
+    {"away_team": "KC", "away_score": 24, "home_team": "MIA", "home_score": 10, "context": "Sunday, September 27th", "slug": "chiefs-at-dolphins"},
+    {"away_team": "TEN", "away_score": 7, "home_team": "NYG", "home_score": 12, "context": "Sunday, September 27th", "slug": "titans-at-giants"},
+    {"away_team": "CIN", "away_score": 27, "home_team": "PIT", "home_score": 30, "context": "Sunday, September 27th", "slug": "bengals-at-steelers"},
+    {"away_team": "SEA", "away_score": 31, "home_team": "WAS", "home_score": 33, "context": "Sunday, September 27th", "slug": "seahawks-at-commanders"},
+    {"away_team": "AZ", "away_score": 30, "home_team": "SF", "home_score": 36, "context": "Sunday, September 27th", "slug": "cardinals-at-49ers"},
+    {"away_team": "MIN", "away_score": 23, "home_team": "TB", "home_score": 16, "context": "Sunday, September 27th", "slug": "vikings-at-buccaneers"},
+    {"away_team": "LV", "away_score": 35, "home_team": "NO", "home_score": 27, "context": "Sunday, September 27th", "slug": "raiders-at-saints"},
+    {"away_team": "BAL", "away_score": 34, "home_team": "DAL", "home_score": 31, "context": "Sunday, September 27th, International Game (Rio de Janeiro)", "slug": "ravens-at-cowboys"},
+    {"away_team": "LA", "away_score": 26, "home_team": "DEN", "home_score": 30, "context": "Sunday Night Football, September 27th", "slug": "rams-at-broncos"},
+    {"away_team": "PHI", "away_score": 7, "home_team": "CHI", "home_score": 27, "context": "Monday Night Football, September 28th", "slug": "eagles-at-bears"}
+  ]
+}

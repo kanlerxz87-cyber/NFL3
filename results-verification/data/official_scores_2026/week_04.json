@@ -1,0 +1,26 @@
+{
+  "week": 4,
+  "url": "https://www.nfl.com/scores/2026/week-4",
+  "observed_at": "2026-11-15T13:16:00Z",
+  "observed_at_note": "Approximate wall-clock time (UTC) at which the page was read with the page-fetch tool. The page was read in two sequential chunks (the third chunk contains only the site news module, no scoreboard rows).",
+  "publisher": "NFL.com (official NFL publisher)",
+  "authority": "official HTTPS publisher",
+  "games": [
+    {"away_team": "PIT", "away_score": 24, "home_team": "CLE", "home_score": 27, "context": "Thursday Night Football, October 1st", "slug": "steelers-at-browns"},
+    {"away_team": "IND", "away_score": 30, "home_team": "WAS", "home_score": 13, "context": "Sunday, October 4th, International Game (London)", "slug": "colts-at-commanders"},
+    {"away_team": "TEN", "away_score": 18, "home_team": "BAL", "home_score": 24, "context": "Sunday, October 4th", "slug": "titans-at-ravens"},
+    {"away_team": "NE", "away_score": 29, "home_team": "BUF", "home_score": 26, "context": "Sunday, October 4th", "slug": "patriots-at-bills"},
+    {"away_team": "NYJ", "away_score": 12, "home_team": "CHI", "home_score": 23, "context": "Sunday, October 4th", "slug": "jets-at-bears"},
+    {"away_team": "JAX", "away_score": 22, "home_team": "CIN", "home_score": 17, "context": "Sunday, October 4th", "slug": "jaguars-at-bengals"},
+    {"away_team": "DAL", "away_score": 34, "home_team": "HOU", "home_score": 30, "context": "Sunday, October 4th", "slug": "cowboys-at-texans"},
+    {"away_team": "AZ", "away_score": 24, "home_team": "NYG", "home_score": 36, "context": "Sunday, October 4th", "slug": "cardinals-at-giants"},
+    {"away_team": "LA", "away_score": 24, "home_team": "PHI", "home_score": 20, "context": "Sunday, October 4th", "slug": "rams-at-eagles"},
+    {"away_team": "GB", "away_score": 17, "home_team": "TB", "home_score": 14, "context": "Sunday, October 4th", "slug": "packers-at-buccaneers"},
+    {"away_team": "MIA", "away_score": 10, "home_team": "MIN", "home_score": 15, "context": "Sunday, October 4th", "slug": "dolphins-at-vikings"},
+    {"away_team": "KC", "away_score": 30, "home_team": "LV", "home_score": 27, "context": "Sunday, October 4th", "slug": "chiefs-at-raiders"},
+    {"away_team": "LAC", "away_score": 23, "home_team": "SEA", "home_score": 30, "context": "Sunday, October 4th", "slug": "chargers-at-seahawks"},
+    {"away_team": "DEN", "away_score": 14, "home_team": "SF", "home_score": 24, "context": "Sunday, October 4th", "slug": "broncos-at-49ers"},
+    {"away_team": "DET", "away_score": 26, "home_team": "CAR", "home_score": 32, "context": "Sunday Night Football, October 4th", "slug": "lions-at-panthers"},
+    {"away_team": "ATL", "away_score": 45, "home_team": "NO", "home_score": 24, "context": "Monday Night Football, October 5th", "slug": "falcons-at-saints"}
+  ]
+}
