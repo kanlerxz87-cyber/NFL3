@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overview · NFL3 availability ledger</title>
+<meta name="description" content="NFL3 availability ledger — official reserve-list and trade captures joined to published club depth rows and the official injury report, with every row sourced.">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="top"><div class="wrap"><div class="brand">
+<div class="brand-mark">N3</div><div><h1>Availability ledger — official roster events</h1>
+<p>Reserve list, trades, published depth rows and the weekly report, compared row by row</p></div>
+<div class="status-strip"><span>official sources only</span><span>captured 2026-11-15</span>
+<span>blanks stay blank</span></div></div></div></header>
+<nav class="sections"><div class="wrap"><a href="index.html" class="active">Overview</a><a href="ledger.html">Ledger</a><a href="availability.html">Availability</a><a href="depth-flags.html">Depth flags</a><a href="flagged.html">Flagged for review</a><a href="sources.html">Sources</a></div></nav>
+<main><div class="wrap">
+<div class="page-head"><div class="eyebrow">Availability</div><h1>Overview</h1>
+<p class="lede">Official reserve-list and trade captures joined to the published club depth rows, so that a player who is unavailable can never be read as available because a report did not list them.</p></div>
+<div class="metrics"><div><span>OFFICIAL CAPTURES</span><strong>3</strong><small>each with source URL, retrieval time and SHA-256</small></div><div><span>RESERVE-LIST ENTRIES</span><strong>50</strong><small>players the league placed on the reserve list</small></div><div><span>TRADE EVENTS</span><strong>12</strong><small>league trade log, November 2026</small></div><div><span>STALE DEPTH ROWS</span><strong>9</strong><small>published after the event they should have reflected</small></div></div><div class="notice"><b>Why this exists.</b> The weekly injury report only lists players who are on it. A player who has been placed on the reserve list is unavailable and may not appear on the report at all, so "not listed" must never be read as "available". This ledger joins the official reserve list and trade log to the published club depth rows so that the gap is visible instead of silent.</div><h2>What the captures cover</h2><div class="table-wrap"><table><thead><tr><th class="">Capture</th><th class="">Source</th><th class="num">Rows</th><th class="">Window covered</th><th class="">SHA-256</th></tr></thead><tbody><tr><td>2026-11-15-nfl-reserve-list-2026-10.txt</td><td><a href="https://www.nfl.com/transactions/league/reserve-list/2026/10">nfl.com</a></td><td>25</td><td>the reserve-list transaction table exactly as published. Site navigation and club…</td><td><code>622deba37e838d23…</code></td></tr><tr><td>2026-11-15-nfl-reserve-list-2026-11.txt</td><td><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11">nfl.com</a></td><td>25</td><td>the reserve-list transaction table exactly as published. Site navigation and club…</td><td><code>1a189c020eac2f1e…</code></td></tr><tr><td>2026-11-15-nfl-trades-2026-11.txt</td><td><a href="https://www.nfl.com/transactions/">nfl.com</a></td><td>12</td><td>the November 2026 trades table exactly as published. Site navigation and club logo…</td><td><code>4a468ff1876b8c7c…</code></td></tr></tbody></table></div><h2>The three findings</h2><div class="cards"><div><h3>Stale depth rows</h3><p>9 published club depth rows name a player who had already been placed on the reserve list before the chart was captured. A depth chart that still shows a player who is unavailable will make the next man look like a starter.</p></div><div><h3>Traded-away rows</h3><p>0 published depth rows name a player the club traded away before the chart was captured. Depth that is not versioned against the roster log becomes a fiction within days.</p></div><div><h3>Report coverage</h3><p>40 of 50 reserve-listed players do not appear on the captured weekly report at all. Their unavailability is established by the reserve list, not by the report.</p></div></div><h2>Where to go next</h2><ul class="tight"><li><a class="link" href="ledger.html">Ledger</a> — every reserve-list placement and trade, with its official link.</li><li><a class="link" href="availability.html">Availability</a> — reserve-listed players against the weekly report.</li><li><a class="link" href="depth-flags.html">Depth flags</a> — the stale, same-day and traded-away rows, with the two published facts each one compares.</li><li><a class="link" href="flagged.html">Flagged for review</a> — the gaps this ledger does not close.</li></ul>
+</div></main>
+<footer><div class="wrap">NFL3 RESEARCH DESK — AVAILABILITY LEDGER
+<span>Built for informed decisions, not guaranteed outcomes.</span></div></footer>
+</body>
+</html>

@@ -1,0 +1,21 @@
+# NFL3 official capture — league trades, November 2026
+# source_url: https://www.nfl.com/transactions/
+# page_title: 2026 NFL League Transactions - Trades Waivers, Signings & more. | NFL.com
+# retrieved_at_utc: 2026-11-15T12:55:00Z
+# retrieval_method: session fetch tool, rendered page text (markdown)
+# capture_scope: the November 2026 trades table exactly as published. Site navigation and club logo
+#   markup are omitted; every published field of every row is retained.
+# row_format: date | from club | to club | player | transaction
+--- body ---
+11/10 | Falcons | Jaguars | Jessie Bates | Traded
+11/10 | Eagles | Jaguars | Jordan Davis | Traded
+11/10 | Titans | Bills | Amani Hooker | Traded
+11/10 | Colts | 49ers | Keenan Allen | Traded
+11/10 | Raiders | Vikings | Kirk Cousins | Traded
+11/10 | Chargers | Broncos | Daiyan Henley | Traded
+11/10 | Colts | Chiefs | Josh Downs | Traded
+11/10 | Falcons | Ravens | Ryan Neuzil | Traded
+11/10 | Ravens | Falcons | Andrew Vorhees | Traded
+11/09 | Jets | Lions | Andre Cisco | Traded
+11/09 | Saints | Jaguars | Davon Godchaux | Traded
+11/06 | Cardinals | Ravens | Jacoby Brissett | Traded

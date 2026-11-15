@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flagged for review · NFL3 availability ledger</title>
+<meta name="description" content="NFL3 availability ledger — official reserve-list and trade captures joined to published club depth rows and the official injury report, with every row sourced.">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="top"><div class="wrap"><div class="brand">
+<div class="brand-mark">N3</div><div><h1>Availability ledger — official roster events</h1>
+<p>Reserve list, trades, published depth rows and the weekly report, compared row by row</p></div>
+<div class="status-strip"><span>official sources only</span><span>captured 2026-11-15</span>
+<span>blanks stay blank</span></div></div></div></header>
+<nav class="sections"><div class="wrap"><a href="index.html">Overview</a><a href="ledger.html">Ledger</a><a href="availability.html">Availability</a><a href="depth-flags.html">Depth flags</a><a href="flagged.html" class="active">Flagged for review</a><a href="sources.html">Sources</a></div></nav>
+<main><div class="wrap">
+<div class="page-head"><div class="eyebrow">Open items</div><h1>Flagged for review</h1>
+<p class="lede">The gaps this ledger does not close, each with its evidence and the action it implies.</p></div>
+<p class="footnote">Published for review. These items do not block the site; they are the gaps this ledger does not close.</p><div class="table-wrap"><table><thead><tr><th class="">ID</th><th class="">Severity</th><th class="">Finding</th><th class="">Evidence</th><th class="">Source</th><th class="">Action</th></tr></thead><tbody><tr><td>AL-F01</td><td>High</td><td>The monthly reserve-list page shows only part of the month</td><td>The captured October page covers 10/24 to 10/31 and the September page 09/26 to 09/30. A player who is absent from a capture is therefore not evidence of being available.</td><td><a href="https://www.nfl.com/transactions/league/reserve-list/">reserve list</a></td><td>Capture the month pages daily, or use a per-club or per-player transaction source that is not truncated.</td></tr><tr><td>AL-F02</td><td>High</td><td>A depth chart can name a player the club already traded away</td><td>0 published depth rows in the committed capture name a player whose club had already traded them before the capture.</td><td><a href="https://www.nfl.com/teams/">club pages</a></td><td>Version every depth row against the last official roster event, and re-capture the affected clubs.</td></tr><tr><td>AL-F03</td><td>Medium</td><td>The Ravens quarter-back depth row is unresolved, not confirmed stale</td><td>The captured chart lists two quarterbacks whose reserve dates fall outside the captured windows, and the official trade log records a replacement. Nothing here proves when either quarterback was placed on the reserve list.</td><td><a href="https://www.nfl.com/transactions/">transactions</a></td><td>Extend the reserve-list capture backwards to cover the placement date, then re-run.</td></tr><tr><td>AL-F04</td><td>Medium</td><td>Reserve-listed players are missing from the weekly report</td><td>40 reserve-listed players do not appear on the captured report, so the report alone cannot answer whether they are available.</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td><td>Join every model availability feature to this ledger instead of to the report alone.</td></tr><tr><td>AL-F05</td><td>Low</td><td>Two clubs have no captured depth chart</td><td>The committed capture has no depth rows for GB, HOU, so their players cannot be flagged against the reserve list at all.</td><td><a href="https://www.nfl.com/teams/">club directory</a></td><td>Resolve the two parsing failures and capture both clubs.</td></tr></tbody></table></div>
+</div></main>
+<footer><div class="wrap">NFL3 RESEARCH DESK — AVAILABILITY LEDGER
+<span>Built for informed decisions, not guaranteed outcomes.</span></div></footer>
+</body>
+</html>

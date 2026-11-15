@@ -1,0 +1,35 @@
+# NFL3 official capture — reserve list, October 2026
+# source_url: https://www.nfl.com/transactions/league/reserve-list/2026/10
+# page_title: 2026 NFL reserve-list by month | NFL.com
+# retrieved_at_utc: 2026-11-15T12:56:00Z
+# retrieval_method: session fetch tool, rendered page text (markdown), read in full across both chunks
+# capture_scope: the reserve-list transaction table exactly as published. Site navigation and club
+#   logo markup are omitted; every published field of every row is retained. The table on this page
+#   covers 10/24 to 10/31 only.
+# row_format: date | club | player | transaction | player link
+--- body ---
+10/31 | Chiefs | L'Jarius Sneed | Reserve/Injured | https://www.nfl.com/players/l-jarius-sneed/
+10/31 | Jets | T'Vondre Sweat | Reserve/Injured | https://www.nfl.com/players/t-vondre-sweat/
+10/31 | Raiders | Patrick Johnson | Reserve/Injured | https://www.nfl.com/players/patrick-johnson/
+10/31 | Broncos | RJ Harvey | Reserve/Injured | https://www.nfl.com/players/rj-harvey/
+10/31 | Chargers | Derwin James | Reserve/Injured | https://www.nfl.com/players/derwin-james/
+10/29 | Panthers | Akayleb Evans | Reserve/Injured | https://www.nfl.com/players/akayleb-evans/
+10/28 | Commanders | Terry McLaurin | Reserve/Injured | https://www.nfl.com/players/terry-mclaurin/
+10/28 | Texans | Jaylin Noel | Reserve/Injured | https://www.nfl.com/players/jaylin-noel/
+10/28 | Eagles | Dameon Pierce | Reserve/Injured | https://www.nfl.com/players/dameon-pierce/
+10/27 | Panthers | Taylor Moton | Reserve/Injured | https://www.nfl.com/players/taylor-moton/
+10/27 | Bengals | Erick All | Reserve/Injured | https://www.nfl.com/players/erick-all/
+10/27 | Giants | Tyrone Tracy Jr. | Reserve/Injured | https://www.nfl.com/players/tyrone-tracy-jr/
+10/27 | Colts | Cam Taylor-Britt | Reserve/Injured | https://www.nfl.com/players/cam-taylor-britt/
+10/27 | Cardinals | Jalen Brooks | Reserve/Injured | https://www.nfl.com/players/jalen-brooks/
+10/26 | Bills | C.J. Gardner-Johnson | Reserve/Suspended By Commissioner-Less than One Year | https://www.nfl.com/players/chauncey-gardner-johnson/
+10/26 | Packers | Jacob Monk | Reserve/Injured | https://www.nfl.com/players/jacob-monk/
+10/24 | Falcons | Michael Jerrell | Reserve/Injured | https://www.nfl.com/players/michael-jerrell/
+10/24 | Panthers | Thomas Incoom | Reserve/Injured | https://www.nfl.com/players/thomas-incoom/
+10/24 | Browns | Teven Jenkins | Reserve/Injured | https://www.nfl.com/players/teven-jenkins/
+10/24 | Chiefs | Brashard Smith | Reserve/Injured | https://www.nfl.com/players/brashard-smith/
+10/24 | Giants | Tremaine Edmunds | Reserve/Injured | https://www.nfl.com/players/tremaine-edmunds/
+10/24 | Jets | Francisco Mauigoa | Reserve/Injured | https://www.nfl.com/players/francisco-mauigoa/
+10/24 | Broncos | Tyler Badie | Reserve/Injured | https://www.nfl.com/players/tyler-badie/
+10/24 | Broncos | Jonah Elliss | Reserve/Injured | https://www.nfl.com/players/jonah-elliss/
+10/24 | Ravens | Tavius Robinson | Reserve/Injured | https://www.nfl.com/players/tavius-robinson/
