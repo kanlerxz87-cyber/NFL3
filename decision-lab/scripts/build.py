@@ -20,7 +20,7 @@ VERIFICATION = json.loads((DATA / "verification.json").read_text()) if (DATA / "
 SOURCES = {s["id"]: s for s in CATALOG["sources"]}
 PAGES = [
     ("index.html", "Overview"), ("executive-summary.html", "Executive summary"),
-    ("requirements.html", "Requirements"), ("readiness.html", "Decision readiness"), ("questions.html", "Questions & gaps"),
+    ("requirements.html", "Requirements"), ("questions.html", "Questions & gaps"),
     ("suggestions.html", "Suggestions"), ("lines.html", "Line origination"),
     ("strategies.html", "Signals & leaderboard"), ("validation.html", "Validation gates"),
     ("injuries.html", "Injuries"), ("depth.html", "Depth & backups"),
@@ -84,7 +84,6 @@ def build_index() -> str:
 <h2>Category tables</h2>{table("Every category is source-linked; unknown empirical cells remain blank.", ["Category", "Purpose", "State", "Source"], [[td(f'<a href="{e(url)}">{e(label)}</a>'), td(purpose), td(state), td(source_link(sid))] for url, label, purpose, state, sid in [
     ("executive-summary.html", "Executive summary", "Important details, blockers and next decisions", "Ready for review", "S01"),
     ("requirements.html", "Requirements", "Full requested scope and delivery state", "Partial where data is missing", "S16"),
-    ("readiness.html", "Decision readiness", "Each requirement, its blocker, clearance condition and numeric threshold status", "Unknown thresholds stay blank and flagged", "S01"),
     ("questions.html", "Questions & gaps", "Known / missing / answer / discovery action", "Blocking answers blank", "S12"),
     ("suggestions.html", "Suggestions", "Review paths before implementation", "Optional browser-local review", "S16"),
     ("lines.html", "Line origination", "Independent-number protocol and blank current lines", "Blocked by market data", "S12"),
