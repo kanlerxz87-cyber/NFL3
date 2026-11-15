@@ -73,6 +73,8 @@ def page_index(art):
     board, luck, gates, results = art["board"], art["luck"], art["gates"], art["results"]
     corr, avail, abl = art["corr"], art["avail"], art["ablation"]
     policies = art["ledger"]
+    moved_cells = sum(1 for e in policies["events"] for c in e["markets"].values()
+                      if c.get("moved_since_opening"))
     top = sorted(board["results"], key=lambda r: (r["summary"].get("bss") is None,
                                                   -(r["summary"].get("bss") or -9)))
     best = top[0] if top else None
@@ -85,7 +87,7 @@ def page_index(art):
   <div><span>OFFICIAL RECONCILIATION</span><strong>{results['counts']['team_fields_matching']}/{results['counts']['team_fields_checked']}</strong>
     <small>club × field checks match</small></div>
   <div><span>PRICE SNAPSHOTS</span><strong>{policies['counts']['snapshots']}</strong>
-    <small>{policies['counts']['with_pre_kickoff_opening']} pre-kickoff market cells</small></div>
+    <small>{moved_cells} of {policies['counts']['with_pre_kickoff_opening']} pre-kickoff cells moved</small></div>
   <div><span>STRATEGIES SCORED</span><strong>{len(board['results'])}</strong>
     <small>{len(gates['demoted'])} demoted by their own kill rule</small></div>
   <div><span>VALIDATED</span><strong>0</strong>
@@ -109,8 +111,9 @@ to it.</li>
 a control arm.</li>
 </ul></div>
 <div class="card bad"><h3>What is not</h3><ul>
-<li><b>No price history.</b> One community observation exists. Weeks 1-9 kicked off before it, so their
-numbers are post-hoc and cannot support a closing-line claim.</li>
+<li><b>Thin price history.</b> Two captures exist and 7 of 78 pre-kickoff cells moved between them. Weeks
+1-9 kicked off before the first capture, so their numbers are post-hoc and cannot support a
+closing-line claim.</li>
 <li><b>No validated strategy.</b> Every scored rule has a Brier-skill interval that includes zero or sits
 below it. Two have already failed their own kill rule.</li>
 <li><b>No measured injury effect.</b> The personnel ablation's holdout interval is
@@ -398,6 +401,8 @@ def page_prices(art):
     policy = (C.DATA / "prices" / "POLICY.md").read_text(encoding="utf-8")
     body = [BANNER]
     c = ledger["counts"]
+    moved_total = sum(1 for e in ledger["events"] for m in e["markets"].values()
+                      if m.get("moved_since_opening"))
     body.append(f"""<div class="section-head"><div><div class="section-label">PRICE STORE</div>
 <h2>Opening and closing numbers for every market we originate — recorded, not estimated</h2></div>
 <p>One immutable snapshot per observation, each with its own hash and the upstream release digest.
@@ -406,6 +411,7 @@ A market with no pre-kickoff observation keeps a blank opening and closing.</p><
 <div><span>SNAPSHOTS</span><strong>{c['snapshots']}</strong><small>immutable, hashed</small></div>
 <div><span>EVENT × MARKET CELLS</span><strong>{c['market_cells']}</strong><small>272 events × 3 markets</small></div>
 <div><span>WITH PRE-KICKOFF OPENING</span><strong>{c['with_pre_kickoff_opening']}</strong><small>the only usable cell set</small></div>
+<div><span>MOVED BETWEEN CAPTURES</span><strong>{moved_total}</strong><small>market cells whose price changed</small></div>
 <div><span>POST-HOC ONLY</span><strong>{c['post_hoc_only']}</strong><small>shown, never graded as a close</small></div>
 <div><span>NO OBSERVATION</span><strong>{c['no_observation_at_all']}</strong><small>blank, by rule</small></div>
 </div>""")
@@ -446,7 +452,41 @@ Week 10 game. Opening/closing are blank wherever no pre-kickoff observation exis
 <td>{link(C.G['schedules'], 'price')}</td></tr>""")
             shown += 1
     body.append("</tbody></table></div>")
-    body.append(f"""<div class="section-head"><div><div class="section-label">POLICY</div>
+
+    moved_rows = []
+    for event in ledger["events"]:
+        for market in ("spread", "total", "moneyline"):
+            cell = event["markets"][market]
+            if not cell.get("moved_since_opening"):
+                continue
+            o, c = cell.get("opening") or {}, cell.get("closing") or {}
+            changed = [k for k in sorted(set(o) | set(c))
+                       if (o.get(k) is None) != (c.get(k) is None)
+                       or (o.get(k) is not None and c.get(k) is not None
+                           and abs(float(o[k]) - float(c[k])) > 1e-9)]
+            shown = ", ".join(f"{C.esc(k)} {C.esc(o.get(k))} → {C.esc(c.get(k))}" for k in changed)
+            def pack(payload):
+                return " / ".join(f"{C.esc(k)} {C.esc(v)}" for k, v in sorted(payload.items())
+                                  if v is not None)
+            moved_rows.append(
+                f"<tr><td>{C.esc(event['away'])} @ {C.esc(event['home'])}</td>"
+                f"<td>{C.esc(market)}</td><td>{pack(o)}</td><td>{pack(c)}</td>"
+                f"<td>{shown}</td><td>{cell.get('n_pre_kickoff', 0)}</td>"
+                f"<td>{link(C.G['schedules'], 'release')}</td></tr>")
+    movement_rows = "".join(moved_rows) or (
+        "<tr><td colspan='7'><span class='blank'>No component moved between the captures held.</span></td></tr>")
+
+    body.append(f"""<div class="section-head"><div><div class="section-label">MEASURED MOVEMENT</div>
+<h2>What actually moved between two captures</h2></div>
+<p>Two reads of the same community release, about 30 minutes apart on 2026-11-15, are both retained. This
+is the first evidence in the repository that a stored number can move before kickoff — which is exactly
+what an opening and a closing are supposed to measure.</p></div>
+<div class="table-wrap"><table><caption>Only the components that changed are shown. A line that did not
+move is as informative as one that did: no handicap or total line moved in these captures, only the
+price attached to them.</caption>
+<thead><tr><th>Event</th><th>Market</th><th>Opening</th><th>Latest</th><th>Components that moved</th>
+<th>Observations</th><th>Source</th></tr></thead><tbody>{movement_rows}</tbody></table></div>
+<div class="section-head"><div><div class="section-label">POLICY</div>
 <h2>Decided before any backtest was published</h2></div>
 <p>Policy hash <code>{C.esc((ledger.get('policy_sha256') or '')[:32])}…</code> is written into the ledger,
 so a later edit is visible as a changed hash rather than a silent change.</p>

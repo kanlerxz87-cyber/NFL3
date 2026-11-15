@@ -10,7 +10,7 @@
    "question": "Is every input to a scored strategy traceable to a named source and digest?",
    "status": "pass",
    "decided_by": "Every price row carries a release SHA-256 in data/raw/manifest.json; every outcome row carries the reconciliation record; every availability row carries the capture hash.",
-   "number": "272 events, 1 snapshot(s), 160 club checks",
+   "number": "272 events, 2 snapshot(s), 160 club checks",
    "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
    "consequence": "Scored rows may be published with a source class on each row."
   },
@@ -44,9 +44,9 @@
   {
    "id": "G05",
    "question": "Does a market have both a pre-kickoff opening and a pre-kickoff close?",
-   "status": "blocked",
-   "decided_by": "The price store holds one observation, so opening and closing are the same number everywhere a pre-kickoff price exists. A CLV study is impossible until a second pre-kickoff capture lands.",
-   "number": "78 pre-kickoff market cells of 816; 1 snapshot(s)",
+   "status": "pass",
+   "decided_by": "A closing needs a pre-kickoff number that differs from the opening. The store now holds two captures, and some cells did move, so a genuine opening-to-latest interval exists for those. It is still far too thin for a CLV study: most cells have a single observation.",
+   "number": "78 pre-kickoff market cells of 816; 2 snapshot(s); 7 cell(s) moved between captures",
    "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
    "consequence": "Blocks every closing-line-value claim. Grades on the stored number only."
   },
@@ -97,9 +97,9 @@
   }
  ],
  "summary": {
-  "pass": 6,
+  "pass": 7,
   "fail": 1,
-  "blocked": 3
+  "blocked": 2
  },
  "demoted": [
   "S01",
@@ -107,7 +107,6 @@
  ],
  "passed": false,
  "blocking": [
-  "G05",
   "G07",
   "G08",
   "G10"

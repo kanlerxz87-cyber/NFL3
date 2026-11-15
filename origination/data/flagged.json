@@ -4,9 +4,9 @@
   {
    "id": "F01",
    "severity": "high",
-   "title": "Only one price observation exists",
-   "issue": "Weeks 1-9 had kicked off before the observation, so their stored numbers are post-hoc and cannot define an opening, a close or closing-line value. Week 10's unplayed games have one pre-kickoff observation each, so opening equals closing by construction.",
-   "resolve": "A second pre-kickoff capture, then a third. Policy P04 sets the schedule.",
+   "title": "Price history is two captures deep, not a series",
+   "issue": "Weeks 1-9 had kicked off before the first observation, so their stored numbers are post-hoc and cannot define an opening, a close or closing-line value. Two captures now exist and 7 of the 78 pre-kickoff market cells moved between them, so a real opening-to-latest interval exists for those cells only. The remaining 71 pre-kickoff cells still have a single observation.",
+   "resolve": "A scheduled capture at T-60 before every kickoff, so every graded cell has its own interval. Policy P04 sets the schedule.",
    "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
    "source_label": "nflverse schedules (COMMUNITY)"
   },

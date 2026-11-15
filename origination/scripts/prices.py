@@ -105,20 +105,33 @@ def snapshot_from_schedule(games: list[dict], observed_at: str, manifest_entry: 
 
 
 def write_snapshots() -> list[Path]:
+    """Append a snapshot for the current manifest state, keeping every earlier capture.
+
+    A second observation of the same release is a genuinely new observation: the release is refreshed
+    hourly during the season, so its prices can move between reads. Each distinct capture is written to
+    its own immutable file and named by its observation time, and the earlier files are never touched.
+    Two captures of a byte-identical release are not duplicated: the payload hash decides.
+    """
     SNAP_DIR.mkdir(parents=True, exist_ok=True)
     entry = inputs_manifest_entry("games")
-    observed_at = entry.get("release_asset_updated_utc") or "2026-11-15T12:36:23Z"
-    observed_at = observed_at.replace("Z", "+00:00").replace("+00:00", "Z")
+    observed_at = (entry.get("release_asset_updated_utc") or "2026-11-15T12:36:23Z")
+    observed_at = observed_at.replace("+00:00", "Z")
+    if not observed_at.endswith("Z"):
+        observed_at += "Z"
     payload = snapshot_from_schedule(inputs.games(), observed_at, entry)
-    name = observed_at.replace(":", "").replace("Z", "Z")
-    path = SNAP_DIR / f"{name}.json"
     encoded = (C.json.dumps(payload, indent=1) + "\n").encode()
     payload_sha = C.sha256_bytes(encoded)
-    if path.exists():
-        existing = C.read_json(path)
+    for existing_path in sorted(SNAP_DIR.glob("*.json")):
+        existing = C.read_json(existing_path)
         if existing.get("snapshot_sha256") == payload_sha:
-            return [path]
+            return [existing_path]
     payload["snapshot_sha256"] = payload_sha
+    name = observed_at.replace(":", "").replace("-", "")
+    base = SNAP_DIR / f"{name}.json"
+    path, n = base, 1
+    while path.exists():
+        path = SNAP_DIR / f"{base.stem}-{n}.json"
+        n += 1
     path.write_bytes((C.json.dumps(payload, indent=1) + "\n").encode())
     return [path]
 
@@ -129,6 +142,21 @@ def inputs_manifest_entry(key: str) -> dict:
 
 def load_snapshots() -> list[dict]:
     return [C.read_json(p) for p in sorted(SNAP_DIR.glob("*.json"))]
+
+
+def opening_values_differ(opening: dict | None, latest: dict | None) -> bool:
+    """Did any published component of this market move between the opening and the latest observation?"""
+    if not opening or not latest:
+        return False
+    for key in set(opening) | set(latest):
+        a, b = opening.get(key), latest.get(key)
+        if a is None or b is None:
+            if a != b:
+                return True
+            continue
+        if abs(float(a) - float(b)) > 1e-9:
+            return True
+    return False
 
 
 def build_ledger() -> dict:
@@ -182,6 +210,10 @@ def build_ledger() -> dict:
             cell["closing_observed_at"] = pre[-1]["observed_at"] if pre else None
             cell["closing_definition"] = ("single pre-kickoff observation: opening and closing are the "
                                           "same number until a second pre-kickoff capture exists")
+            if len(pre) >= 2:
+                cell["closing_definition"] = ("latest pre-kickoff observation; with two or more captures "
+                                              "the opening and the closing are distinct numbers")
+                cell["moved_since_opening"] = opening_values_differ(pre[0]["values"], pre[-1]["values"])
             cell["post_hoc"] = post[0]["values"] if post else None
             cell["post_hoc_observed_at"] = post[0]["observed_at"] if post else None
             cell["post_hoc_usable_for"] = ("reference only: recorded after kickoff, so it may not be used "

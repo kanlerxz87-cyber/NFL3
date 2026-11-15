@@ -134,6 +134,36 @@ class PricePolicy(unittest.TestCase):
                 if cell.get("post_hoc"):
                     self.assertIn("may not be used", cell.get("post_hoc_usable_for", ""))
 
+    def test_two_captures_are_both_retained(self):
+        ledger = json.loads((DATA / "prices" / "ledger.json").read_text(encoding="utf-8"))
+        self.assertGreaterEqual(len(ledger["snapshot_files"]), 2,
+                                "a second observation must be a new file, not an overwrite")
+        names = [s["path"] for s in ledger["snapshot_files"]]
+        self.assertEqual(len(names), len(set(names)))
+
+    def test_price_movement_is_measured_not_assumed(self):
+        ledger = json.loads((DATA / "prices" / "ledger.json").read_text(encoding="utf-8"))
+        moved = [cell for event in ledger["events"] for cell in event["markets"].values()
+                 if cell.get("moved_since_opening")]
+        for cell in moved:
+            self.assertGreaterEqual(cell["n_pre_kickoff"], 2,
+                                    "movement cannot be claimed from a single observation")
+            self.assertNotEqual(cell["opening"], cell["closing"])
+        self.assertGreaterEqual(len(moved), 1, "the two captures are expected to show some movement")
+
+    def test_g05_passes_only_with_a_measured_interval(self):
+        gates = json.loads((DATA / "gates.json").read_text(encoding="utf-8"))
+        g05 = next(g for g in gates["gates"] if g["id"] == "G05")
+        ledger = json.loads((DATA / "prices" / "ledger.json").read_text(encoding="utf-8"))
+        moved = sum(1 for e in ledger["events"] for c in e["markets"].values()
+                    if c.get("moved_since_opening"))
+        if moved == 0:
+            self.assertEqual(g05["status"], "blocked",
+                             "two captures of an unchanged number do not create a closing price")
+        else:
+            self.assertEqual(g05["status"], "pass")
+            self.assertIn("moved", g05["number"])
+
     def test_policy_is_frozen_by_hash(self):
         ledger = json.loads((DATA / "prices" / "ledger.json").read_text(encoding="utf-8"))
         self.assertTrue(ledger.get("policy_sha256"))

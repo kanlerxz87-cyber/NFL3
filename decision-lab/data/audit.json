@@ -1,8 +1,8 @@
 {
-  "html_pages": 126,
-  "table_rows": 6624,
-  "rows_missing_official_source": 738,
-  "rows_community_only": 234,
+  "html_pages": 137,
+  "table_rows": 7663,
+  "rows_missing_official_source": 739,
+  "rows_community_only": 235,
   "rows_with_internal_audit_source": 7,
   "conflict_files": [],
   "authority_claim_files": [],
@@ -12,7 +12,7 @@
       "id": "AUD-03",
       "severity": "High",
       "title": "Table rows without an official-source link",
-      "detail": "738 row(s) across the repository lack an official HTTPS source; 234 cite only community sources.",
+      "detail": "739 row(s) across the repository lack an official HTTPS source; 235 cite only community sources.",
       "files": [
         "dashboard/flagged.html",
         "dashboard/questions.html",
@@ -456,6 +456,14 @@
       "local_errors": []
     },
     {
+      "path": "injury-capture/index.html",
+      "rows": 648,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
       "path": "injury-verification/index.html",
       "rows": 295,
       "rows_missing_official_source": 0,
@@ -616,6 +624,86 @@
       "local_errors": []
     },
     {
+      "path": "official-verify/availability.html",
+      "rows": 11,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "official-verify/flagged.html",
+      "rows": 12,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "official-verify/index.html",
+      "rows": 5,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "official-verify/leaderboard.html",
+      "rows": 53,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "official-verify/origination.html",
+      "rows": 26,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "official-verify/questions.html",
+      "rows": 35,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "official-verify/requirements.html",
+      "rows": 67,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "official-verify/results.html",
+      "rows": 137,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "official-verify/sources.html",
+      "rows": 18,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "official-verify/suggestions.html",
+      "rows": 20,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
       "path": "ops-center/availability.html",
       "rows": 280,
       "rows_missing_official_source": 0,
@@ -753,9 +841,9 @@
     },
     {
       "path": "origination/prices.html",
-      "rows": 43,
-      "rows_missing_official_source": 43,
-      "rows_community_only": 43,
+      "rows": 44,
+      "rows_missing_official_source": 44,
+      "rows_community_only": 44,
       "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
@@ -953,7 +1041,7 @@
     },
     {
       "path": "review.html",
-      "rows": 18,
+      "rows": 24,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,

@@ -81,6 +81,8 @@ def requirements(art: dict) -> dict:
     validated = sum(1 for r in board["results"] if (r["summary"].get("lo") or -1) > 0
                     and (r["summary"].get("n") or 0) >= gates["floors"]["promote_min_n"])
     pre = ledger["counts"]["with_pre_kickoff_opening"]
+    moved_cells = sum(1 for e in ledger["events"] for c in e["markets"].values()
+                      if c.get("moved_since_opening"))
     n_hold = abl["headline"]["n_all"]
 
     R = []
@@ -91,12 +93,13 @@ def requirements(art: dict) -> dict:
 
     add("R01", "Price-snapshot store with opening and closing numbers for every market originated.",
         "partial" if pre else "blocked",
-        f"Immutable snapshot store built and hashed; ledger derives opening/latest/closing/post-hoc per "
-        f"event × market with a pre-registered policy.",
+        f"Immutable snapshot store with {ledger['counts']['snapshots']} retained captures; the ledger "
+        f"derives opening/latest/closing/post-hoc per event × market under a pre-registered policy, and "
+        f"{moved_cells} cells show a genuine opening-to-latest interval.",
         "G05 price coverage",
-        f"{pre} of {ledger['counts']['market_cells']} market cells have a pre-kickoff opening; "
-        f"clearance needs a second pre-kickoff capture per event.",
-        C.G["schedules"], "nflverse schedules (COMMUNITY)")
+        f"{pre} of {ledger['counts']['market_cells']} market cells have a pre-kickoff opening and "
+        f"{moved_cells} have moved; clearance needs a captured interval for every cell a strategy grades.",
+        C.G["schedules"], "nflverse schedules (COMMUNITY), two captures")
 
     add("R02", "Verified results feed so backtests and ROI can be computed at all.",
         "implemented" if results["passed"] else "blocked",
@@ -226,8 +229,8 @@ def requirements(art: dict) -> dict:
         f"total {C.r(wf['residual']['total_sd'])} pts sd). The schedule runs on every build, but pre-kickoff "
         f"publication needs a capture before kickoff, which only the unplayed Week 10 slate has.",
         "G05 price coverage",
-        f"{ledger['counts']['with_pre_kickoff_opening']} cells have a pre-kickoff number; clearance needs "
-        f"one pre-kickoff capture per event.",
+        f"{pre} cells have a pre-kickoff number and {moved_cells} show movement; clearance needs a "
+        f"captured interval for every graded cell.",
         C.G["schedules"], "nflverse schedules (COMMUNITY)")
 
     add("R19", "Turn the 136-game log into the pre-registered backtest corpus.",
@@ -848,11 +851,13 @@ def flagged(art: dict) -> dict:
         F.append({"id": id_, "severity": severity, "title": title, "issue": issue,
                   "resolve": resolve, "source": source, "source_label": label})
 
-    add("F01", "high", "Only one price observation exists",
-        "Weeks 1-9 had kicked off before the observation, so their stored numbers are post-hoc and cannot "
-        "define an opening, a close or closing-line value. Week 10's unplayed games have one pre-kickoff "
-        "observation each, so opening equals closing by construction.",
-        "A second pre-kickoff capture, then a third. Policy P04 sets the schedule.",
+    add("F01", "high", "Price history is two captures deep, not a series",
+        "Weeks 1-9 had kicked off before the first observation, so their stored numbers are post-hoc and "
+        "cannot define an opening, a close or closing-line value. Two captures now exist and 7 of the 78 "
+        "pre-kickoff market cells moved between them, so a real opening-to-latest interval exists for "
+        "those cells only. The remaining 71 pre-kickoff cells still have a single observation.",
+        "A scheduled capture at T-60 before every kickoff, so every graded cell has its own interval. "
+        "Policy P04 sets the schedule.",
         C.G["schedules"], "nflverse schedules (COMMUNITY)")
 
     add("F02", "high", "Two clubs publish no parseable depth chart",

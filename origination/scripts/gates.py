@@ -72,12 +72,24 @@ def evaluate() -> dict:
         f"PF {results['league_totals']['feed']['pf']} = official {results['league_totals']['official']['pf']}",
         C.S["standings"], "Settlement authority for every graded leg.")
 
-    market_status = "fail" if pre == 0 else ("blocked" if snapshots < 2 else "pass")
+    # A market is only gradable against an opening AND a closing when at least one cell shows a genuine
+    # opening-to-latest interval. Two captures of an unchanged number do not create a close, so having
+    # more than one snapshot file is necessary but not sufficient.
+    moved = sum(1 for event in ledger["events"] for cell in event["markets"].values()
+                if cell.get("moved_since_opening"))
+    if pre == 0:
+        market_status = "fail"
+    elif moved == 0:
+        market_status = "blocked"
+    else:
+        market_status = "pass"
     add("G05", "Does a market have both a pre-kickoff opening and a pre-kickoff close?",
         market_status,
-        "The price store holds one observation, so opening and closing are the same number everywhere "
-        "a pre-kickoff price exists. A CLV study is impossible until a second pre-kickoff capture lands.",
-        f"{pre} pre-kickoff market cells of {counts['market_cells']}; {snapshots} snapshot(s)",
+        "A closing needs a pre-kickoff number that differs from the opening. The store now holds two "
+        "captures, and some cells did move, so a genuine opening-to-latest interval exists for those. "
+        "It is still far too thin for a CLV study: most cells have a single observation.",
+        f"{pre} pre-kickoff market cells of {counts['market_cells']}; {snapshots} snapshot(s); "
+        f"{moved} cell(s) moved between captures",
         C.G["schedules"],
         "Blocks every closing-line-value claim. Grades on the stored number only.")
 

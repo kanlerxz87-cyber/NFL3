@@ -13,7 +13,7 @@ executive summary, and does all of it with every number traceable to a source.
 
 | Asked for | State | The evidence that decides it |
 |---|---|---|
-| Price-snapshot store with opening **and** closing numbers | **Partial** — store built, series one observation deep | 78 of 816 event × market cells hold a pre-kickoff number; 411 are post-hoc only; 327 are empty. Opening equals closing wherever it exists, and the ledger says so cell by cell. |
+| Price-snapshot store with opening **and** closing numbers | **Partial** — store built, two captures deep, 7 cells show a real interval | 78 of 816 event × market cells hold a pre-kickoff number; 411 are post-hoc only; 327 are empty. **7 cells moved** between the two captures held, which is the first genuine opening-to-latest interval in this repository. Every other cell still has one observation, and the ledger says so cell by cell. |
 | Verified results feed | **Done** | 137 played games, **160 of 160** club × field checks reproduce nfl.com's official standings; league points-for equals points-against at **6,291**. |
 | Side → total → moneyline, in that order | **Done** | Three separate fits, each graded before the next is trusted; the moneyline is a transform of the side model's residual scale. |
 | Fair line, market line, difference as separate columns | **Done** | All three columns on every played-game row, with an explicit blank where no price exists. |
@@ -36,15 +36,18 @@ executive summary, and does all of it with every number traceable to a source.
 
 ## 2. The three findings that matter
 
-**Finding 1 — There is no price history, and pretending otherwise would invalidate everything.**
-The repository holds one community price observation, taken after Weeks 1–9 had already kicked off.
-Those numbers are post-hoc: they can be displayed and compared, but they cannot define an opening, a
-close, or closing-line value. Weeks 10's unplayed games are the first genuine pre-kickoff numbers this
-project owns, and for them opening equals closing because only one capture exists. This is why **no CLV
-claim appears anywhere on the site** and why gate G05 is blocked.
+**Finding 1 — Price history begins here, with two captures and seven moved cells.**
+Two reads of the community release about 30 minutes apart on 2026-11-15 are both retained. Weeks 1-9 had
+already kicked off before the first read, so those numbers are post-hoc: displayable, comparable, and
+never usable as an opening or a close. The unplayed Week 10 games are the first genuine pre-kickoff
+numbers this project owns. Between the two captures, **7 of 78 pre-kickoff market cells moved** — all of
+them juice (a half-point total and a moneyline shift included), and no handicap or total line changed.
+That is the first evidence the repository holds that a stored number can move before kickoff, which is
+what an opening and a closing are supposed to measure. It is also far too thin to support a CLV claim,
+and **no such claim appears anywhere on the site**.
 
-*What closes it:* a scheduled capture (the script already exists) at T-60 minutes before kickoff, then a
-second and third capture. Two captures turn one number into an interval.
+*What closes it completely:* a scheduled capture at T-60 minutes before every kickoff, run every week, so
+every graded cell has its own interval rather than 7 of 78 having one.
 
 **Finding 2 — The model is measurably worse than the market, and that is published as the baseline.**
 On 137 games the ridge side model's mean absolute error is **10.48 points** against the market's
@@ -107,7 +110,7 @@ reasonable. All 20 are on `origination/decisions.html` with their discovery acti
 
 ## 6. Irregularities (published on `origination/flagged.html`)
 
-F01 one price observation · F02 two clubs without a parseable depth chart · F03 no inactive lists ·
+F01 thin price history (two captures, 7 of 78 cells with a measured interval) · F02 two clubs without a parseable depth chart · F03 no inactive lists ·
 F04 the ablation cannot resolve an effect · F05 team-code alias (AZ vs ARI) · F06 kickoff times carry no
 time zone · F07 two strategies already failed their kill rule · F08 no reward funding exists · F09 a
 club with no report section is not injury-free · F10 one correlation mixes a community price with an
