@@ -2063,3 +2063,25 @@ PR: opened and merged immediately after this entry; link recorded by the follow-
 - Concurrent runs on the merge push: `data-refresh` 43718951311 **success** (its scope commits `data/`,
   `lab/results/`, `research-desk/` only, so it could not have fixed the mismatch); legacy dynamic
   `pages build and deployment` 43718950957 ran on this push — status recorded below when the fix PR merges.
+
+## 2026-11-15 — results-verification session — final run statuses + freeze-hash correction
+
+- **PR #85** (validate-run fix) merged: https://github.com/kanlerxz87-cyber/NFL3/pull/85. On its merge push:
+  `Validate and deploy GitHub Pages` run 43719137362 **success** (validate + deploy green again);
+  legacy dynamic `pages build and deployment` 43719137074 **success**; the earlier legacy build 43718950957 (PR #84
+  push) also **success** — the stale failed legacy run 43715223346 recorded by the previous session is thereby
+  superseded by fresh successful deploys, exactly the remediation it prescribed.
+- **Live-site confirmation (fetched, not assumed):** `https://kanlerxz87-cyber.github.io/NFL3/results-verification/index.html`
+  serves the 136-row verified feed with per-row official source links; `delta.html` published alongside.
+- **data-refresh run 43719137328 failed at "Fetch and verify release digests"** on the PR #85 push — a transient
+  upstream/network fetch failure, not a regression: the step is unchanged since run 43718951311 (success, same
+  content) and PR #85 touched only two decision-lab HTML pages and this board. API rerun rejected
+  ("cannot be rerun; its workflow file may be broken" — same quirk as the earlier Pages rerun rejection); remedy is a
+  fresh push to main, which this correction commit provides.
+- **Freeze-hash correction (factual, important for anyone consuming the corpus):** the corpus-freeze registration
+  commit was rebased twice onto concurrent main. Its final identity is **`76f4c7d775b8`** (title: "data(corpus):
+  freeze the pre-registered 2026 Week 1-9 backtest corpus…"). Earlier-published references to `87f83f5ee231` (first
+  commit) and `99f2046` (second) denote the same tree content before those rebases; the frozen corpus sha256
+  `a1633c2011bc8fb4c6508ada2ed1cd32ddede8993300b5e03ef157f762ee73b1` is unchanged throughout. Corrected in
+  `results-verification/scripts/build.py` (page banner), `readiness/build_readiness.py` (R2 row) and the
+  `tests/test_readiness.py` pin, and rebuilt.

@@ -35,7 +35,7 @@ def main() -> None:
     rows = {r["id"]: r for r in csv.DictReader(register.splitlines())}
     assert len(rows) == 64, f"detailed register should hold 64 rows, found {len(rows)}"
     assert rows["R1"]["status"] == "Done" and "136/136" in rows["R1"]["current"], "R1 must record the 136/136 official verification"
-    assert rows["R2"]["status"] == "Partial" and "87f83f5ee231" in rows["R2"]["current"], "R2 must record the corpus freeze commit"
+    assert rows["R2"]["status"] == "Partial" and "76f4c7d775b8" in rows["R2"]["current"], "R2 must record the corpus freeze commit"
     assert "a1633c20" in rows["R2"]["current"], "R2 must record the frozen corpus hash"
     assert rows["A3"]["status"] == "Partial" and "139 game-status changes" in rows["A3"]["current"], "A3 must record the published per-player deltas"
     assert rows["A4"]["current"].count("20") >= 4 and "2026-11-15" in rows["A4"]["current"], "A4 must record four dated reads"
