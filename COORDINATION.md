@@ -1535,7 +1535,7 @@ Initial verification: `python3 ops-center/scripts/verify.py` passed with 0 failu
 
 ### Result — arena/3b1164e9-nfl3, 2026-11-15 UTC
 
-- Published: `readiness.html` (64 requirement rows, eight Flagged-for-Review irregularities), `readiness/build_readiness.py` (regenerates the page and `readiness/data/readiness.csv` from committed files; no network), navigation links in `index.html` and `assets/site.js`, and an update paragraph in `EXECUTIVE_SUMMARY.md`.
+- Published: `readiness.html` (64 requirement rows, nine Flagged-for-Review irregularities), `readiness/build_readiness.py` (regenerates the page and `readiness/data/readiness.csv` from committed files; no network), navigation links in `index.html` and `assets/site.js`, and an update paragraph in `EXECUTIVE_SUMMARY.md`.
 - Counts on the page are computed at build time. Status counts: 14 blocked, 29 not started, 18 partial, 1 decision recorded, 2 done.
 - Official sources linked on the page are ones already cited in this repository (`sources.csv`, `sources.html`, earlier board entries). **None was re-fetched today.** Reachability was checked on 2026-11-15: nfl.com, operations.nfl.com, support.nfl.com, packers.com and houstontexans.com each returned no HTTP response from the sandbox.
 - Verification performed: `scripts/validate_site.py` (13 root pages, local links, citation rule), `tests/check_site.py`, `tests/test_decision_lab.py`, `tests/test_verification_lab.py`. All pass. The decision-lab build was run and its unrelated regenerated files were reverted, so no tracked data changed.
@@ -1548,4 +1548,6 @@ Initial verification: `python3 ops-center/scripts/verify.py` passed with 0 failu
   - F6: strategy counts disagree (12 in `dashboard/data/strategies.csv`, 34 in ops-centre and the executive summary).
   - F7: `data/raw/manifest.json` marks nflverse community files `verified: true` on a digest basis; the 119 MB raw folder is public while the brief asks for a private raw layer.
   - F8: the brief asked for session-named branches; the session's fixed branch was used.
+  - F9: the landing page holds an 18-row decision-readiness table from session arena/1a306c91-nfl3 (PR #69, merged while this session worked). It uses different IDs and some different statuses from `readiness.html`. Both are kept; the integration step should reconcile them. This session could not re-check that session's official-source statements.
+- Merge note: the claim and result entries were rebased twice over concurrent board edits. Each conflict was resolved by keeping both sides; no other session's entry was removed.
 - Not done in this session (left Not started or Blocked on the page with its gate): price snapshots and the price-data policy, official Game Books and inactive lists, the depth-parser repairs, the 32-club roster/IR sweep, backtest corpus freeze, the two-sided strategy field, Brier-skill leaderboard, alerting and the private data layer. The sandbox cannot reach the official sources these need.
