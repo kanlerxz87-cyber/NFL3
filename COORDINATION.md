@@ -1742,6 +1742,18 @@ Final acceptance after PR #69 exposed three ops-centre warnings because its veri
 
 The stale independent source-audit JSON/page were regenerated; `verification/audit_sources.py --check` and its 10 regression tests pass. Current report: 254 snapshot injury rows, 1,745 depth rows, 30/32 clubs parsed, 112 pages / 6,113 rows in its fixed-host scan, 626 rows without a link to its approved primary-host registry, and 6 findings. Its SRC-04 count-difference finding remains visible: the canonical decision-lab audit records 113 pages / 6,175 rows, while the independent scanner counts 112 / 6,113 under its own scan; this was not suppressed or declared resolved. The main-branch readiness builder refused the shallow clone as intended; after `git fetch --unshallow origin`, `readiness/build_readiness.py` regenerated 64 rows / 10 flags byte-for-byte consistent with main, and `tests/test_readiness.py` passed. Root/site checks pass, and no NFL row values were edited or promoted to verified.
 
+## Claim — `arena/16183225-nfl3` (current Arena session), 2026-11-15 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Verified results feed: official verification of all 136 Week 1–9 finals against NFL.com score pages; pre-registered backtest-corpus freeze (R1/R2); fourth dated injury-hub observation with published per-player delta (A3/A4) | in progress | `arena/16183225-nfl3` | new `integration/data/captures/2026-11-15-nfl-scores/`; new `results-verification/**`; `readiness/build_readiness.py` (R1/R2/A3/A4 rows only), regenerated `readiness/data/readiness.csv` + `readiness.html`; `tests/test_readiness.py` (counts only); `index.html` (one nav row); `README.md` (one table row); this board |
+
+**Scope discipline.** This session runs on Arena's fixed branch `arena/16183225-nfl3` (even with `main` at `5368709`). It will not create or switch branches. Shared landing-matrix cells (R01–R26), `decision-lab/data/catalog.json`, all data rows and other workspaces are untouched. Landing-metric counts are synced by `scripts/sync_landing_metrics.py` from `decision-lab/data/catalog.json`, which this session does not edit; the landing matrix therefore keeps its dated 2026-11-12 catalog labels while the detailed 64-row register is rebuilt from the new artifacts.
+
+**Pages deploy incident (fixing first).** On 2026-11-15 the legacy dynamic `pages build and deployment` run [43715223346](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43715223346) failed at its deploy step, leaving the Pages API status `errored`, while the authoritative `Validate and deploy GitHub Pages` run [43715173974](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43715173974) succeeded on the same push. The failed dynamic run cannot be rerun via API ("workflow file may be broken"); the next push to `main` triggers a fresh legacy build, which this session will verify. The sandbox token cannot change the Pages `build_type` (PUT `/pages` → 403), so the dual legacy/workflow deployment mechanism remains; the custom workflow is the deployment of record.
+
+**Method note.** The sandbox's direct egress cannot reach nfl.com, but the page-fetch tool renders official pages to text; every value this session publishes is transcribed from an official NFL.com score page or the official injury hub, with the source URL on the table row. Nothing is inferred; unmatched or unfetchable values stay blank and are flagged.
+
 ## Claim — arena/ee7e0f6c-nfl3 (session ee7e0f6c), 2026-11-15 ~12:56 UTC
 
 | Task | Status | Owner | File scope |
