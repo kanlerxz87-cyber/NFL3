@@ -1,8 +1,8 @@
 {
-  "html_pages": 137,
-  "table_rows": 7663,
-  "rows_missing_official_source": 739,
-  "rows_community_only": 235,
+  "html_pages": 139,
+  "table_rows": 8146,
+  "rows_missing_official_source": 746,
+  "rows_community_only": 242,
   "rows_with_internal_audit_source": 7,
   "conflict_files": [],
   "authority_claim_files": [],
@@ -12,7 +12,7 @@
       "id": "AUD-03",
       "severity": "High",
       "title": "Table rows without an official-source link",
-      "detail": "739 row(s) across the repository lack an official HTTPS source; 235 cite only community sources.",
+      "detail": "746 row(s) across the repository lack an official HTTPS source; 242 cite only community sources.",
       "files": [
         "dashboard/flagged.html",
         "dashboard/questions.html",
@@ -449,7 +449,7 @@
     },
     {
       "path": "index.html",
-      "rows": 58,
+      "rows": 59,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -841,9 +841,9 @@
     },
     {
       "path": "origination/prices.html",
-      "rows": 44,
-      "rows_missing_official_source": 44,
-      "rows_community_only": 44,
+      "rows": 51,
+      "rows_missing_official_source": 51,
+      "rows_community_only": 51,
       "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
@@ -1035,6 +1035,22 @@
       "path": "research-workspace/pages/strategies.html",
       "rows": 9,
       "rows_missing_official_source": 5,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "results-verification/delta.html",
+      "rows": 330,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "results-verification/index.html",
+      "rows": 145,
+      "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
       "local_errors": []

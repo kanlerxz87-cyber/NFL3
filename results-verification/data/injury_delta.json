@@ -1,0 +1,4231 @@
+{
+ "schema_version": 1,
+ "generated_by": "results-verification/scripts/compute_delta.py (session arena/16183225-nfl3)",
+ "baseline": {
+  "file": "results-verification/data/injury_baseline_2026-11-13.json",
+  "observed_at": "2026-11-13T12:40:00Z",
+  "rows": 296,
+  "clubs": 26,
+  "sha256_of_source_page": "9b5e6923259c4da235aae34d31724923eb2638a23c4f8c032fff05a8d77622ca"
+ },
+ "observation": {
+  "file": "results-verification/data/injury_observation_2026-11-15.json",
+  "observed_at": "2026-11-15T14:05:00Z",
+  "rows": 347,
+  "clubs": 28,
+  "sha256_of_source_page": "ecd2573e7b84747d6705ffa0a61cb0e1971a5be4533c05b3843705f4a6e01d6b"
+ },
+ "counts": {
+  "players_on_both": 296,
+  "rows_with_changes": 217,
+  "rows_added_to_later_observation": 51,
+  "rows_removed_from_later_observation": 0,
+  "game_status_changes": 139,
+  "practice_status_changes": 140,
+  "club_reassignments": 0
+ },
+ "changes": [
+  {
+   "player": "A.J. Brown",
+   "player_url": "https://www.nfl.com/players/a-j-brown/",
+   "club": "Patriots",
+   "position": "WR",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Ankle, Knee"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Kevin Byard",
+   "player_url": "https://www.nfl.com/players/kevin-byard/",
+   "club": "Patriots",
+   "position": "S",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Chest"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Reggie Gilliam",
+   "player_url": "https://www.nfl.com/players/reggie-gilliam/",
+   "club": "Patriots",
+   "position": "FB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Knee"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Cameron Latu",
+   "player_url": "https://www.nfl.com/players/cameron-latu/",
+   "club": "Patriots",
+   "position": "TE",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Back"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Morgan Moses",
+   "player_url": "https://www.nfl.com/players/morgan-moses/",
+   "club": "Patriots",
+   "position": "T",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Walter Rouse",
+   "player_url": "https://www.nfl.com/players/walter-rouse/",
+   "club": "Patriots",
+   "position": "T",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Concussion"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Brenden Schooler",
+   "player_url": "https://www.nfl.com/players/brenden-schooler/",
+   "club": "Patriots",
+   "position": "S",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Hamstring"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Rhamondre Stevenson",
+   "player_url": "https://www.nfl.com/players/rhamondre-stevenson/",
+   "club": "Patriots",
+   "position": "RB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Knee"
+    },
+    "practice_status": {
+     "baseline": "Full Participation in Practice",
+     "observation": "Limited Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Greg Van Roten",
+   "player_url": "https://www.nfl.com/players/greg-van-roten/",
+   "club": "Patriots",
+   "position": "G",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Hamstring"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Charles Woods",
+   "player_url": "https://www.nfl.com/players/charles-woods/",
+   "club": "Patriots",
+   "position": "CB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Hamstring"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Kerby Joseph",
+   "player_url": "https://www.nfl.com/players/kerby-joseph/",
+   "club": "Lions",
+   "position": "S",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Full Participation in Practice",
+     "observation": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "player": "Amon-Ra St. Brown",
+   "player_url": "https://www.nfl.com/players/amon-ra-st-brown/",
+   "club": "Lions",
+   "position": "WR",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Rib"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Sione Vaki",
+   "player_url": "https://www.nfl.com/players/sione-vaki/",
+   "club": "Lions",
+   "position": "RB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Ankle"
+    },
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Limited Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Mansoor Delane",
+   "player_url": "https://www.nfl.com/players/mansoor-delane/",
+   "club": "Chiefs",
+   "position": "CB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Shoulder"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Jaylon Moore",
+   "player_url": "https://www.nfl.com/players/jaylon-moore-2/",
+   "club": "Chiefs",
+   "position": "T",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Ankle"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Omarr Norman-Lott",
+   "player_url": "https://www.nfl.com/players/omarr-norman-lott/",
+   "club": "Chiefs",
+   "position": "DT",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Knee"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Jaydn Ott",
+   "player_url": "https://www.nfl.com/players/jaydn-ott/",
+   "club": "Chiefs",
+   "position": "RB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Hamstring"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Peter Woods",
+   "player_url": "https://www.nfl.com/players/peter-woods/",
+   "club": "Chiefs",
+   "position": "DT",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Neck"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Zachariah Branch",
+   "player_url": "https://www.nfl.com/players/zachariah-branch/",
+   "club": "Falcons",
+   "position": "WR",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Hamstring"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Kendal Daniels",
+   "player_url": "https://www.nfl.com/players/kendal-daniels/",
+   "club": "Falcons",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Divine Deablo",
+   "player_url": "https://www.nfl.com/players/divine-deablo/",
+   "club": "Falcons",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Forearm"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Doubtful"
+    }
+   }
+  },
+  {
+   "player": "Gervon Dexter Sr.",
+   "player_url": "https://www.nfl.com/players/gervon-dexter/",
+   "club": "Falcons",
+   "position": "DT",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Illness"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "James Pearce Jr.",
+   "player_url": "https://www.nfl.com/players/james-pearce-jr/",
+   "club": "Falcons",
+   "position": "DE",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Back"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Jawaan Taylor",
+   "player_url": "https://www.nfl.com/players/jawaan-taylor/",
+   "club": "Falcons",
+   "position": "T",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Cameron Thomas",
+   "player_url": "https://www.nfl.com/players/cameron-thomas/",
+   "club": "Falcons",
+   "position": "DE",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Josh Woods",
+   "player_url": "https://www.nfl.com/players/josh-woods/",
+   "club": "Falcons",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Ankle"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Blake Cashman",
+   "player_url": "https://www.nfl.com/players/blake-cashman/",
+   "club": "Vikings",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Concussion"
+    },
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Limited Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "T.J. Hockenson",
+   "player_url": "https://www.nfl.com/players/t-j-hockenson/",
+   "club": "Vikings",
+   "position": "TE",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Wrist, Chest"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Tyrion Ingram-Dawkins",
+   "player_url": "https://www.nfl.com/players/tyrion-ingram-dawkins/",
+   "club": "Vikings",
+   "position": "DT",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Ankle"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Jauan Jennings",
+   "player_url": "https://www.nfl.com/players/jauan-jennings/",
+   "club": "Vikings",
+   "position": "WR",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Calf"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Kyler Murray",
+   "player_url": "https://www.nfl.com/players/kyler-murray/",
+   "club": "Vikings",
+   "position": "QB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Hamstring"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Kyle Van Noy",
+   "player_url": "https://www.nfl.com/players/kyle-van-noy/",
+   "club": "Vikings",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Calf"
+    },
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Limited Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Jay Ward",
+   "player_url": "https://www.nfl.com/players/jay-ward/",
+   "club": "Vikings",
+   "position": "S",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Chris Brooks",
+   "player_url": "https://www.nfl.com/players/christopher-brooks/",
+   "club": "Packers",
+   "position": "RB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Ankle"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Javon Bullard",
+   "player_url": "https://www.nfl.com/players/javon-bullard/",
+   "club": "Packers",
+   "position": "S",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Ankle, Knee"
+    },
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Limited Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Zaire Franklin",
+   "player_url": "https://www.nfl.com/players/zaire-franklin/",
+   "club": "Packers",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Shin"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Did Not Participate In Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Doubtful"
+    }
+   }
+  },
+  {
+   "player": "Travis Glover",
+   "player_url": "https://www.nfl.com/players/travis-glover/",
+   "club": "Packers",
+   "position": "G",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Knee"
+    },
+    "practice_status": {
+     "baseline": "Full Participation in Practice",
+     "observation": "Limited Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Ty'Ron Hopper",
+   "player_url": "https://www.nfl.com/players/ty-ron-hopper/",
+   "club": "Packers",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Josh Jacobs",
+   "player_url": "https://www.nfl.com/players/josh-jacobs-x3315/",
+   "club": "Packers",
+   "position": "RB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Finger"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Skyy Moore",
+   "player_url": "https://www.nfl.com/players/skyy-moore/",
+   "club": "Packers",
+   "position": "WR",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Ankle"
+    },
+    "practice_status": {
+     "baseline": "Full Participation in Practice",
+     "observation": "Limited Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Micah Parsons",
+   "player_url": "https://www.nfl.com/players/micah-parsons/",
+   "club": "Packers",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Knee, Illness"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Sean Rhyan",
+   "player_url": "https://www.nfl.com/players/sean-rhyan/",
+   "club": "Packers",
+   "position": "C",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Ankle"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Lukas Van Ness",
+   "player_url": "https://www.nfl.com/players/lukas-van-ness/",
+   "club": "Packers",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Back"
+    },
+    "practice_status": {
+     "baseline": "Full Participation in Practice",
+     "observation": "Limited Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Josh Whyle",
+   "player_url": "https://www.nfl.com/players/josh-whyle/",
+   "club": "Packers",
+   "position": "TE",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Concussion"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Kevin Zeitler",
+   "player_url": "https://www.nfl.com/players/kevin-zeitler/",
+   "club": "Packers",
+   "position": "G",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Ankle, Triceps"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Did Not Participate In Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Jessie Bates",
+   "player_url": "https://www.nfl.com/players/jessie-bates/",
+   "club": "Jaguars",
+   "position": "S",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Not injury related - resting player"
+    },
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Limited Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Ezra Cleveland",
+   "player_url": "https://www.nfl.com/players/ezra-cleveland/",
+   "club": "Jaguars",
+   "position": "G",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Branson Combs",
+   "player_url": "https://www.nfl.com/players/branson-combs/",
+   "club": "Jaguars",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Jordan Davis",
+   "player_url": "https://www.nfl.com/players/jordan-davis/",
+   "club": "Jaguars",
+   "position": "DT",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Not injury related - resting player"
+    },
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Limited Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "BJ Green II",
+   "player_url": "https://www.nfl.com/players/bj-green-ii/",
+   "club": "Jaguars",
+   "position": "DE",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Forearm"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Robert Hainsey",
+   "player_url": "https://www.nfl.com/players/robert-hainsey/",
+   "club": "Jaguars",
+   "position": "C",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Concussion"
+    },
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Limited Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Antonio Johnson",
+   "player_url": "https://www.nfl.com/players/antonio-johnson-3/",
+   "club": "Jaguars",
+   "position": "S",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Full Participation in Practice",
+     "observation": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Jakobi Meyers",
+   "player_url": "https://www.nfl.com/players/jakobi-meyers/",
+   "club": "Jaguars",
+   "position": "WR",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Full Participation in Practice",
+     "observation": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Chris Rodriguez Jr.",
+   "player_url": "https://www.nfl.com/players/chris-rodriguez-jr/",
+   "club": "Jaguars",
+   "position": "RB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Full Participation in Practice",
+     "observation": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Bhayshul Tuten",
+   "player_url": "https://www.nfl.com/players/bhayshul-tuten/",
+   "club": "Jaguars",
+   "position": "RB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Full Participation in Practice",
+     "observation": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Travon Walker",
+   "player_url": "https://www.nfl.com/players/travon-walker/",
+   "club": "Jaguars",
+   "position": "DE",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Cody Barton",
+   "player_url": "https://www.nfl.com/players/cody-barton/",
+   "club": "Titans",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Concussion"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Anthony Hill Jr.",
+   "player_url": "https://www.nfl.com/players/anthony-hill-jr/",
+   "club": "Titans",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Neck"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Tony Pollard",
+   "player_url": "https://www.nfl.com/players/tony-pollard/",
+   "club": "Titans",
+   "position": "RB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Peter Skoronski",
+   "player_url": "https://www.nfl.com/players/peter-skoronski/",
+   "club": "Titans",
+   "position": "G",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Hamstring"
+    },
+    "practice_status": {
+     "baseline": "Full Participation in Practice",
+     "observation": "Did Not Participate In Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Tyjae Spears",
+   "player_url": "https://www.nfl.com/players/tyjae-spears/",
+   "club": "Titans",
+   "position": "RB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Knee"
+    },
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Carnell Tate",
+   "player_url": "https://www.nfl.com/players/carnell-tate/",
+   "club": "Titans",
+   "position": "WR",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Shoulder"
+    },
+    "practice_status": {
+     "baseline": "Full Participation in Practice",
+     "observation": "Did Not Participate In Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Tommy Townsend",
+   "player_url": "https://www.nfl.com/players/tommy-townsend/",
+   "club": "Titans",
+   "position": "P",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Knee, Achilles"
+    },
+    "practice_status": {
+     "baseline": "Full Participation in Practice",
+     "observation": "Did Not Participate In Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Alec Anderson",
+   "player_url": "https://www.nfl.com/players/alec-anderson-2/",
+   "club": "Bills",
+   "position": "G",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Christian Benford",
+   "player_url": "https://www.nfl.com/players/christian-benford/",
+   "club": "Bills",
+   "position": "CB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Wrist"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Spencer Brown",
+   "player_url": "https://www.nfl.com/players/spencer-brown/",
+   "club": "Bills",
+   "position": "T",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Ankle"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Doubtful"
+    }
+   }
+  },
+  {
+   "player": "Dion Dawkins",
+   "player_url": "https://www.nfl.com/players/dion-dawkins/",
+   "club": "Bills",
+   "position": "T",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Sam Franklin Jr.",
+   "player_url": "https://www.nfl.com/players/sam-franklin/",
+   "club": "Bills",
+   "position": "S",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Shoulder"
+    },
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Limited Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Jordan Hancock",
+   "player_url": "https://www.nfl.com/players/jordan-hancock/",
+   "club": "Bills",
+   "position": "CB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Hamstring"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Dalton Kincaid",
+   "player_url": "https://www.nfl.com/players/dalton-kincaid/",
+   "club": "Bills",
+   "position": "TE",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Connor McGovern",
+   "player_url": "https://www.nfl.com/players/connor-mcgovern-2/",
+   "club": "Bills",
+   "position": "C",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Ar'maj Reed-Adams",
+   "player_url": "https://www.nfl.com/players/ar-maj-reed-adams/",
+   "club": "Bills",
+   "position": "G",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Tyrell Shavers",
+   "player_url": "https://www.nfl.com/players/tyrell-shavers/",
+   "club": "Bills",
+   "position": "WR",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Knee"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Jarvis Brownlee Jr.",
+   "player_url": "https://www.nfl.com/players/jarvis-brownlee-jr/",
+   "club": "Jets",
+   "position": "CB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Illness"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Omar Cooper Jr.",
+   "player_url": "https://www.nfl.com/players/omar-cooper-jr/",
+   "club": "Jets",
+   "position": "WR",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Ankle"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Joseph Ossai",
+   "player_url": "https://www.nfl.com/players/joseph-ossai/",
+   "club": "Jets",
+   "position": "DE",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Ankle"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "VJ Payne",
+   "player_url": "https://www.nfl.com/players/vj-payne/",
+   "club": "Jets",
+   "position": "S",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Knee"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Harrison Phillips",
+   "player_url": "https://www.nfl.com/players/harrison-phillips/",
+   "club": "Jets",
+   "position": "DT",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Ankle"
+    },
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Trevin Wallace",
+   "player_url": "https://www.nfl.com/players/trevin-wallace/",
+   "club": "Jets",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Groin"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Garrett Wilson",
+   "player_url": "https://www.nfl.com/players/garrett-wilson/",
+   "club": "Jets",
+   "position": "WR",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Concussion"
+    },
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Nahshon Wright",
+   "player_url": "https://www.nfl.com/players/nahshon-wright/",
+   "club": "Jets",
+   "position": "CB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Back"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Darrell Baker Jr.",
+   "player_url": "https://www.nfl.com/players/darrell-baker-jr/",
+   "club": "Dolphins",
+   "position": "CB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Knee"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Chris Bell",
+   "player_url": "https://www.nfl.com/players/chris-bell-2/",
+   "club": "Dolphins",
+   "position": "WR",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Knee"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Doubtful"
+    }
+   }
+  },
+  {
+   "player": "Aaron Brewer",
+   "player_url": "https://www.nfl.com/players/aaron-brewer-2/",
+   "club": "Dolphins",
+   "position": "C",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Concussion"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Did Not Participate In Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Malik Herring",
+   "player_url": "https://www.nfl.com/players/malik-herring/",
+   "club": "Dolphins",
+   "position": "DE",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Will Kacmarek",
+   "player_url": "https://www.nfl.com/players/will-kacmarek/",
+   "club": "Dolphins",
+   "position": "TE",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Michael Taaffe",
+   "player_url": "https://www.nfl.com/players/michael-taaffe/",
+   "club": "Dolphins",
+   "position": "S",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Jared Wayne",
+   "player_url": "https://www.nfl.com/players/jared-wayne/",
+   "club": "Dolphins",
+   "position": "WR",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Quadricep"
+    },
+    "practice_status": {
+     "baseline": "Full Participation in Practice",
+     "observation": "Did Not Participate In Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Mo Alie-Cox",
+   "player_url": "https://www.nfl.com/players/mo-alie-cox/",
+   "club": "Colts",
+   "position": "TE",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Groin"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "CJ Allen",
+   "player_url": "https://www.nfl.com/players/cj-allen/",
+   "club": "Colts",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Jaylon Carlies",
+   "player_url": "https://www.nfl.com/players/jaylon-carlies/",
+   "club": "Colts",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Neck"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Did Not Participate In Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Akeem Davis-Gaither",
+   "player_url": "https://www.nfl.com/players/akeem-davis-gaither/",
+   "club": "Colts",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Knee"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "A.J. Haulcy",
+   "player_url": "https://www.nfl.com/players/a-j-haulcy/",
+   "club": "Colts",
+   "position": "S",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Arden Key",
+   "player_url": "https://www.nfl.com/players/arden-key/",
+   "club": "Colts",
+   "position": "DE",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Luke Rhodes",
+   "player_url": "https://www.nfl.com/players/luke-rhodes/",
+   "club": "Colts",
+   "position": "LS",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Hamstring"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Grover Stewart",
+   "player_url": "https://www.nfl.com/players/grover-stewart/",
+   "club": "Colts",
+   "position": "DT",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Jonathan Taylor",
+   "player_url": "https://www.nfl.com/players/jonathan-taylor/",
+   "club": "Colts",
+   "position": "RB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Jerry Tillery",
+   "player_url": "https://www.nfl.com/players/jerry-tillery/",
+   "club": "Colts",
+   "position": "DT",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Calf"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Jalen Travis",
+   "player_url": "https://www.nfl.com/players/jalen-travis/",
+   "club": "Colts",
+   "position": "T",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Knee"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Justin Walley",
+   "player_url": "https://www.nfl.com/players/justin-walley/",
+   "club": "Colts",
+   "position": "CB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Charvarius Ward",
+   "player_url": "https://www.nfl.com/players/charvarius-ward/",
+   "club": "Colts",
+   "position": "CB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Jonathon Brooks",
+   "player_url": "https://www.nfl.com/players/jonathon-brooks/",
+   "club": "Panthers",
+   "position": "RB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Groin"
+    },
+    "practice_status": {
+     "baseline": "Full Participation in Practice",
+     "observation": "Limited Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Doubtful"
+    }
+   }
+  },
+  {
+   "player": "Brady Christensen",
+   "player_url": "https://www.nfl.com/players/brady-christensen/",
+   "club": "Panthers",
+   "position": "G",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Hamstring"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Trevor Etienne",
+   "player_url": "https://www.nfl.com/players/trevor-etienne/",
+   "club": "Panthers",
+   "position": "RB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Lee Hunter",
+   "player_url": "https://www.nfl.com/players/lee-hunter/",
+   "club": "Panthers",
+   "position": "DT",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Mike Jackson",
+   "player_url": "https://www.nfl.com/players/mike-jackson/",
+   "club": "Panthers",
+   "position": "CB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Groin"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Doubtful"
+    }
+   }
+  },
+  {
+   "player": "Will Lee III",
+   "player_url": "https://www.nfl.com/players/will-lee-iii/",
+   "club": "Panthers",
+   "position": "CB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Hamstring"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Xavier Legette",
+   "player_url": "https://www.nfl.com/players/xavier-legette/",
+   "club": "Panthers",
+   "position": "WR",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Knee"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Bobby Okereke",
+   "player_url": "https://www.nfl.com/players/bobby-okereke/",
+   "club": "Panthers",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Foot"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Jaelan Phillips",
+   "player_url": "https://www.nfl.com/players/jaelan-phillips/",
+   "club": "Panthers",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Hamstring"
+    },
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Torricelli Simpkins III",
+   "player_url": "https://www.nfl.com/players/torricelli-simpkins-iii/",
+   "club": "Panthers",
+   "position": "G",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Kelvin Banks Jr.",
+   "player_url": "https://www.nfl.com/players/kelvin-banks-jr/",
+   "club": "Saints",
+   "position": "T",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "CJ Donaldson",
+   "player_url": "https://www.nfl.com/players/cj-donaldson/",
+   "club": "Saints",
+   "position": "RB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Shoulder"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "David Edwards",
+   "player_url": "https://www.nfl.com/players/david-edwards-x1290/",
+   "club": "Saints",
+   "position": "G",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Martin Emerson",
+   "player_url": "https://www.nfl.com/players/martin-emerson/",
+   "club": "Saints",
+   "position": "CB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Shin"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Travis Etienne",
+   "player_url": "https://www.nfl.com/players/travis-etienne/",
+   "club": "Saints",
+   "position": "RB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Hamstring"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Taliese Fuaga",
+   "player_url": "https://www.nfl.com/players/taliese-fuaga/",
+   "club": "Saints",
+   "position": "T",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Knee"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Did Not Participate In Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Erik McCoy",
+   "player_url": "https://www.nfl.com/players/erik-mccoy/",
+   "club": "Saints",
+   "position": "C",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Biceps"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Christen Miller",
+   "player_url": "https://www.nfl.com/players/christen-miller/",
+   "club": "Saints",
+   "position": "DT",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Knee"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Azeez Al-Shaair",
+   "player_url": "https://www.nfl.com/players/azeez-al-shaair/",
+   "club": "Texans",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Groin, Not injury related - personal matter"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Reed Blankenship",
+   "player_url": "https://www.nfl.com/players/reed-blankenship/",
+   "club": "Texans",
+   "position": "S",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Tank Dell",
+   "player_url": "https://www.nfl.com/players/tank-dell/",
+   "club": "Texans",
+   "position": "WR",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Marvin Harrison Jr.",
+   "player_url": "https://www.nfl.com/players/marvin-harrison-jr/",
+   "club": "Texans",
+   "position": "WR",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Hamstring"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Did Not Participate In Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Jacob Hummel",
+   "player_url": "https://www.nfl.com/players/jake-hummel/",
+   "club": "Texans",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Groin"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Brevin Jordan",
+   "player_url": "https://www.nfl.com/players/brevin-jordan/",
+   "club": "Texans",
+   "position": "TE",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Finger, Foot"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "David Montgomery",
+   "player_url": "https://www.nfl.com/players/david-montgomery/",
+   "club": "Texans",
+   "position": "RB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Groin"
+    },
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Keylan Rutledge",
+   "player_url": "https://www.nfl.com/players/keylan-rutledge/",
+   "club": "Texans",
+   "position": "G",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Neck, Shoulder"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Jaylin Smith",
+   "player_url": "https://www.nfl.com/players/jaylin-smith/",
+   "club": "Texans",
+   "position": "CB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Hamstring"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Wyatt Teller",
+   "player_url": "https://www.nfl.com/players/wyatt-teller/",
+   "club": "Texans",
+   "position": "G",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Illness, Back"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Tommy Togiai",
+   "player_url": "https://www.nfl.com/players/tommy-togiai/",
+   "club": "Texans",
+   "position": "DT",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Austin Barber",
+   "player_url": "https://www.nfl.com/players/austin-barber/",
+   "club": "Browns",
+   "position": "T",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Denzel Boston",
+   "player_url": "https://www.nfl.com/players/denzel-boston/",
+   "club": "Browns",
+   "position": "WR",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Toe"
+    },
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Limited Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Michael Burton",
+   "player_url": "https://www.nfl.com/players/michael-burton/",
+   "club": "Browns",
+   "position": "FB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Calf"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Maliek Collins",
+   "player_url": "https://www.nfl.com/players/maliek-collins/",
+   "club": "Browns",
+   "position": "DT",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Harold Fannin Jr.",
+   "player_url": "https://www.nfl.com/players/harold-fannin-jr/",
+   "club": "Browns",
+   "position": "TE",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Ronnie Hickman Jr.",
+   "player_url": "https://www.nfl.com/players/ronnie-hickman-jr/",
+   "club": "Browns",
+   "position": "S",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Concussion"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Tytus Howard",
+   "player_url": "https://www.nfl.com/players/tytus-howard-x1979/",
+   "club": "Browns",
+   "position": "T",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Elgton Jenkins",
+   "player_url": "https://www.nfl.com/players/elgton-jenkins/",
+   "club": "Browns",
+   "position": "C",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Donovan McMillon",
+   "player_url": "https://www.nfl.com/players/donovan-mcmillon-2/",
+   "club": "Browns",
+   "position": "S",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Carson Schwesinger",
+   "player_url": "https://www.nfl.com/players/carson-schwesinger/",
+   "club": "Browns",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Quincy Williams",
+   "player_url": "https://www.nfl.com/players/quincy-williams/",
+   "club": "Browns",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Davis Allen",
+   "player_url": "https://www.nfl.com/players/davis-allen/",
+   "club": "Rams",
+   "position": "TE",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Oblique"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Steve Avila",
+   "player_url": "https://www.nfl.com/players/steve-avila/",
+   "club": "Rams",
+   "position": "G",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Hamstring"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Joe Cardona",
+   "player_url": "https://www.nfl.com/players/joe-cardona/",
+   "club": "Rams",
+   "position": "LS",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Ankle"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Kam Curl",
+   "player_url": "https://www.nfl.com/players/kamren-curl/",
+   "club": "Rams",
+   "position": "S",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Toe"
+    },
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Limited Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Terrance Ferguson",
+   "player_url": "https://www.nfl.com/players/terrance-ferguson-2/",
+   "club": "Rams",
+   "position": "TE",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Ankle, Hamstring"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Myles Garrett",
+   "player_url": "https://www.nfl.com/players/myles-garrett/",
+   "club": "Rams",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Knee, Not injury related - resting player"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Did Not Participate In Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Trent McDuffie",
+   "player_url": "https://www.nfl.com/players/trent-mcduffie/",
+   "club": "Rams",
+   "position": "CB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Back"
+    },
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Limited Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Colby Parkinson",
+   "player_url": "https://www.nfl.com/players/colby-parkinson/",
+   "club": "Rams",
+   "position": "TE",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Zachary Carter",
+   "player_url": "https://www.nfl.com/players/zachary-carter-x9168/",
+   "club": "Cardinals",
+   "position": "DT",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Knee"
+    },
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Limited Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Hjalte Froholdt",
+   "player_url": "https://www.nfl.com/players/hjalte-froholdt/",
+   "club": "Cardinals",
+   "position": "C",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Concussion"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Jon Gaines II",
+   "player_url": "https://www.nfl.com/players/jon-gaines-ii/",
+   "club": "Cardinals",
+   "position": "G",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Ankle"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Bam Knight",
+   "player_url": "https://www.nfl.com/players/bam-knight/",
+   "club": "Cardinals",
+   "position": "RB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Hunter Long",
+   "player_url": "https://www.nfl.com/players/hunter-long/",
+   "club": "Cardinals",
+   "position": "TE",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Knee"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Roy Lopez",
+   "player_url": "https://www.nfl.com/players/roy-lopez/",
+   "club": "Cardinals",
+   "position": "DT",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Toe, Ankle"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Max Melton",
+   "player_url": "https://www.nfl.com/players/max-melton/",
+   "club": "Cardinals",
+   "position": "CB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Knee, Hand"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Darius Robinson",
+   "player_url": "https://www.nfl.com/players/darius-robinson-2/",
+   "club": "Cardinals",
+   "position": "DT",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Wrist"
+    },
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Limited Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Isaac Seumalo",
+   "player_url": "https://www.nfl.com/players/isaac-seumalo/",
+   "club": "Cardinals",
+   "position": "G",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Dante Stills",
+   "player_url": "https://www.nfl.com/players/dante-stills/",
+   "club": "Cardinals",
+   "position": "DT",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Josh Sweat",
+   "player_url": "https://www.nfl.com/players/josh-sweat/",
+   "club": "Cardinals",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Jayden Williams",
+   "player_url": "https://www.nfl.com/players/jayden-williams/",
+   "club": "Cardinals",
+   "position": "T",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Knee"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Mack Wilson",
+   "player_url": "https://www.nfl.com/players/mack-wilson/",
+   "club": "Cardinals",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Andrew Wingard",
+   "player_url": "https://www.nfl.com/players/andrew-wingard/",
+   "club": "Cardinals",
+   "position": "S",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Groin"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Did Not Participate In Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Anthony Bradford",
+   "player_url": "https://www.nfl.com/players/anthony-bradford/",
+   "club": "Seahawks",
+   "position": "G",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Charles Cross",
+   "player_url": "https://www.nfl.com/players/charles-cross-2/",
+   "club": "Seahawks",
+   "position": "T",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Ankle"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Sam Darnold",
+   "player_url": "https://www.nfl.com/players/sam-darnold/",
+   "club": "Seahawks",
+   "position": "QB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Ribs, Quadricep"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Derick Hall",
+   "player_url": "https://www.nfl.com/players/derick-hall/",
+   "club": "Seahawks",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "player": "Drew Lock",
+   "player_url": "https://www.nfl.com/players/drew-lock/",
+   "club": "Seahawks",
+   "position": "QB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Full Participation in Practice",
+     "observation": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Quenton Nelson",
+   "player_url": "https://www.nfl.com/players/quenton-nelson/",
+   "club": "Seahawks",
+   "position": "G",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Knee"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Uchenna Nwosu",
+   "player_url": "https://www.nfl.com/players/uchenna-nwosu/",
+   "club": "Seahawks",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Patrick O'Connell",
+   "player_url": "https://www.nfl.com/players/patrick-o-connell/",
+   "club": "Seahawks",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Connor O'Toole",
+   "player_url": "https://www.nfl.com/players/connor-o-toole/",
+   "club": "Seahawks",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Brandon Pili",
+   "player_url": "https://www.nfl.com/players/brandon-pili/",
+   "club": "Seahawks",
+   "position": "DT",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Jarran Reed",
+   "player_url": "https://www.nfl.com/players/jarran-reed/",
+   "club": "Seahawks",
+   "position": "DT",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Jaxon Smith-Njigba",
+   "player_url": "https://www.nfl.com/players/jaxon-smith-njigba/",
+   "club": "Seahawks",
+   "position": "WR",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Leonard Williams",
+   "player_url": "https://www.nfl.com/players/leonard-williams/",
+   "club": "Seahawks",
+   "position": "DT",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Stinger"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Did Not Participate In Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Thomas Booker",
+   "player_url": "https://www.nfl.com/players/thomas-booker/",
+   "club": "Raiders",
+   "position": "DT",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Ankle"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Trey Zuhn III",
+   "player_url": "https://www.nfl.com/players/trey-zuhn-iii/",
+   "club": "Raiders",
+   "position": "C",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Mike Evans",
+   "player_url": "https://www.nfl.com/players/mike-evans/",
+   "club": "49ers",
+   "position": "WR",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Achilles"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Renardo Green",
+   "player_url": "https://www.nfl.com/players/renardo-green/",
+   "club": "49ers",
+   "position": "CB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Back"
+    },
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Limited Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Dre Greenlaw",
+   "player_url": "https://www.nfl.com/players/dre-greenlaw-x9042/",
+   "club": "49ers",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Knee"
+    },
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Limited Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Nate Hobbs",
+   "player_url": "https://www.nfl.com/players/nate-hobbs/",
+   "club": "49ers",
+   "position": "CB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Groin"
+    },
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Deommodore Lenoir",
+   "player_url": "https://www.nfl.com/players/deommodore-lenoir/",
+   "club": "49ers",
+   "position": "CB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Foot"
+    },
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Limited Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Christian McCaffrey",
+   "player_url": "https://www.nfl.com/players/christian-mccaffrey/",
+   "club": "49ers",
+   "position": "RB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Siran Neal",
+   "player_url": "https://www.nfl.com/players/siran-neal/",
+   "club": "49ers",
+   "position": "S",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Demarcus Robinson",
+   "player_url": "https://www.nfl.com/players/demarcus-robinson/",
+   "club": "49ers",
+   "position": "WR",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Deebo Samuel Sr.",
+   "player_url": "https://www.nfl.com/players/deebo-samuel/",
+   "club": "49ers",
+   "position": "WR",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Upton Stout",
+   "player_url": "https://www.nfl.com/players/upton-stout/",
+   "club": "49ers",
+   "position": "CB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Shoulder, Neck"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "C.J. West",
+   "player_url": "https://www.nfl.com/players/cj-west/",
+   "club": "49ers",
+   "position": "DT",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Knee"
+    },
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Trent Williams",
+   "player_url": "https://www.nfl.com/players/trent-williams/",
+   "club": "49ers",
+   "position": "T",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Shoulder"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Jonathan Bullard",
+   "player_url": "https://www.nfl.com/players/jonathan-bullard/",
+   "club": "Cowboys",
+   "position": "DT",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Calf"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Alijah Clark",
+   "player_url": "https://www.nfl.com/players/alijah-clark/",
+   "club": "Cowboys",
+   "position": "S",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Illness"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Donovan Ezeiruaku",
+   "player_url": "https://www.nfl.com/players/donovan-ezeiruaku/",
+   "club": "Cowboys",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Ankle"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Jake Ferguson",
+   "player_url": "https://www.nfl.com/players/jake-ferguson/",
+   "club": "Cowboys",
+   "position": "TE",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Knee, Ankle"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Tyler Goodson",
+   "player_url": "https://www.nfl.com/players/tyler-goodson/",
+   "club": "Cowboys",
+   "position": "RB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Ankle, Knee"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Malik Hooker",
+   "player_url": "https://www.nfl.com/players/malik-hooker/",
+   "club": "Cowboys",
+   "position": "S",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "player": "Marist Liufau",
+   "player_url": "https://www.nfl.com/players/marist-liufau/",
+   "club": "Cowboys",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "P.J. Locke",
+   "player_url": "https://www.nfl.com/players/p-j-locke/",
+   "club": "Cowboys",
+   "position": "S",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Concussion"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Did Not Participate In Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Jonathan Mingo",
+   "player_url": "https://www.nfl.com/players/jonathan-mingo/",
+   "club": "Cowboys",
+   "position": "WR",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Ankle"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Did Not Participate In Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "Devin Moore",
+   "player_url": "https://www.nfl.com/players/devin-moore-2/",
+   "club": "Cowboys",
+   "position": "CB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Hip"
+    },
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "DeMarvion Overshown",
+   "player_url": "https://www.nfl.com/players/demarvion-overshown/",
+   "club": "Cowboys",
+   "position": "LB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "George Pickens",
+   "player_url": "https://www.nfl.com/players/george-pickens/",
+   "club": "Cowboys",
+   "position": "WR",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Joey Porter Jr.",
+   "player_url": "https://www.nfl.com/players/joey-porter-jr/",
+   "club": "Cowboys",
+   "position": "CB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Ankle, Foot"
+    },
+    "practice_status": {
+     "baseline": "Full Participation in Practice",
+     "observation": "Limited Participation in Practice"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Luke Schoonmaker",
+   "player_url": "https://www.nfl.com/players/luke-schoonmaker/",
+   "club": "Cowboys",
+   "position": "TE",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Brevyn Spann-Ford",
+   "player_url": "https://www.nfl.com/players/brevyn-spann-ford/",
+   "club": "Cowboys",
+   "position": "TE",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Juanyeh Thomas",
+   "player_url": "https://www.nfl.com/players/juanyeh-thomas/",
+   "club": "Cowboys",
+   "position": "S",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Hamstring"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Doubtful"
+    }
+   }
+  },
+  {
+   "player": "KaVontae Turpin",
+   "player_url": "https://www.nfl.com/players/kavontae-turpin/",
+   "club": "Cowboys",
+   "position": "WR",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Derrick Harmon",
+   "player_url": "https://www.nfl.com/players/derrick-harmon-2/",
+   "club": "Steelers",
+   "position": "DT",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Foot"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Questionable"
+    }
+   }
+  },
+  {
+   "player": "Cameron Heyward",
+   "player_url": "https://www.nfl.com/players/cameron-heyward/",
+   "club": "Steelers",
+   "position": "DT",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Darnell Washington",
+   "player_url": "https://www.nfl.com/players/darnell-washington/",
+   "club": "Steelers",
+   "position": "TE",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Jonathan Allen",
+   "player_url": "https://www.nfl.com/players/jonathan-allen/",
+   "club": "Bengals",
+   "position": "DT",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Did Not Participate In Practice",
+     "observation": "Limited Participation in Practice"
+    }
+   }
+  },
+  {
+   "player": "Jalen Davis",
+   "player_url": "https://www.nfl.com/players/jalen-davis/",
+   "club": "Bengals",
+   "position": "CB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Hamstring"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Doubtful"
+    }
+   }
+  },
+  {
+   "player": "Kyle Dugger",
+   "player_url": "https://www.nfl.com/players/kyle-dugger/",
+   "club": "Bengals",
+   "position": "S",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Quadricep"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Out"
+    }
+   }
+  },
+  {
+   "player": "B.J. Hill",
+   "player_url": "https://www.nfl.com/players/b-j-hill/",
+   "club": "Bengals",
+   "position": "DT",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Did Not Participate In Practice"
+    }
+   }
+  },
+  {
+   "player": "Andrei Iosivas",
+   "player_url": "https://www.nfl.com/players/andrei-iosivas/",
+   "club": "Bengals",
+   "position": "WR",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Thumb"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Doubtful"
+    }
+   }
+  },
+  {
+   "player": "Brian Parker II",
+   "player_url": "https://www.nfl.com/players/brian-parker-ii/",
+   "club": "Bengals",
+   "position": "G",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "injuries": {
+     "baseline": "",
+     "observation": "Knee"
+    },
+    "game_status": {
+     "baseline": "",
+     "observation": "Doubtful"
+    }
+   }
+  },
+  {
+   "player": "DJ Turner II",
+   "player_url": "https://www.nfl.com/players/dj-turner-2/",
+   "club": "Bengals",
+   "position": "CB",
+   "baseline_observed_at": "2026-11-13T12:40:00Z",
+   "observation_observed_at": "2026-11-15T14:05:00Z",
+   "changes": {
+    "practice_status": {
+     "baseline": "Limited Participation in Practice",
+     "observation": "Full Participation in Practice"
+    }
+   }
+  }
+ ],
+ "added": [
+  {
+   "player": "Kenneth Walker III",
+   "club": "Chiefs",
+   "player_url": "https://www.nfl.com/players/kenneth-walker-iii/",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": "Questionable"
+  },
+  {
+   "player": "Jake Matthews",
+   "club": "Falcons",
+   "player_url": "https://www.nfl.com/players/jake-matthews/",
+   "practice_status": "Limited Participation in Practice",
+   "game_status": ""
+  },
+  {
+   "player": "Liam McCullough",
+   "club": "Falcons",
+   "player_url": "https://www.nfl.com/players/liam-mccullough/",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": ""
+  },
+  {
+   "player": "Jordan Addison",
+   "club": "Vikings",
+   "player_url": "https://www.nfl.com/players/jordan-addison/",
+   "practice_status": "Limited Participation in Practice",
+   "game_status": "Questionable"
+  },
+  {
+   "player": "Christian Darrisaw",
+   "club": "Vikings",
+   "player_url": "https://www.nfl.com/players/christian-darrisaw/",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": ""
+  },
+  {
+   "player": "Josh Metellus",
+   "club": "Vikings",
+   "player_url": "https://www.nfl.com/players/josh-metellus/",
+   "practice_status": "Limited Participation in Practice",
+   "game_status": "Questionable"
+  },
+  {
+   "player": "Harrison Smith",
+   "club": "Vikings",
+   "player_url": "https://www.nfl.com/players/harrison-smith/",
+   "practice_status": "Limited Participation in Practice",
+   "game_status": ""
+  },
+  {
+   "player": "Xavier McKinney",
+   "club": "Packers",
+   "player_url": "https://www.nfl.com/players/xavier-mckinney/",
+   "practice_status": "Limited Participation in Practice",
+   "game_status": "Questionable"
+  },
+  {
+   "player": "Terrel Bernard",
+   "club": "Bills",
+   "player_url": "https://www.nfl.com/players/terrel-bernard/",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": ""
+  },
+  {
+   "player": "Ed Oliver",
+   "club": "Bills",
+   "player_url": "https://www.nfl.com/players/ed-oliver/",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": ""
+  },
+  {
+   "player": "Adonai Mitchell",
+   "club": "Jets",
+   "player_url": "https://www.nfl.com/players/adonai-mitchell/",
+   "practice_status": "Full Participation in Practice",
+   "game_status": "Questionable"
+  },
+  {
+   "player": "Will Mallory",
+   "club": "Colts",
+   "player_url": "https://www.nfl.com/players/will-mallory/",
+   "practice_status": "Limited Participation in Practice",
+   "game_status": "Questionable"
+  },
+  {
+   "player": "Will Anderson Jr.",
+   "club": "Texans",
+   "player_url": "https://www.nfl.com/players/will-anderson-jr/",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": "Questionable"
+  },
+  {
+   "player": "Trent Brown",
+   "club": "Texans",
+   "player_url": "https://www.nfl.com/players/trent-brown/",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": "Questionable"
+  },
+  {
+   "player": "Danielle Hunter",
+   "club": "Texans",
+   "player_url": "https://www.nfl.com/players/danielle-hunter/",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": "Out"
+  },
+  {
+   "player": "Aaron Donald",
+   "club": "Rams",
+   "player_url": "https://www.nfl.com/players/aaron-donald/",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": ""
+  },
+  {
+   "player": "Braden Fiske",
+   "club": "Rams",
+   "player_url": "https://www.nfl.com/players/braden-fiske/",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": ""
+  },
+  {
+   "player": "Tyler Higbee",
+   "club": "Rams",
+   "player_url": "https://www.nfl.com/players/tyler-higbee/",
+   "practice_status": "Limited Participation in Practice",
+   "game_status": ""
+  },
+  {
+   "player": "Byron Young",
+   "club": "Rams",
+   "player_url": "https://www.nfl.com/players/byron-young-2/",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": ""
+  },
+  {
+   "player": "Dont'e Thornton Jr.",
+   "club": "Raiders",
+   "player_url": "https://www.nfl.com/players/dont-e-thornton-jr/",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": "Questionable"
+  },
+  {
+   "player": "DaRon Bland",
+   "club": "Cowboys",
+   "player_url": "https://www.nfl.com/players/daron-bland/",
+   "practice_status": "Limited Participation in Practice",
+   "game_status": "Questionable"
+  },
+  {
+   "player": "Dexter Lawrence",
+   "club": "Bengals",
+   "player_url": "https://www.nfl.com/players/dexter-lawrence/",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": ""
+  },
+  {
+   "player": "Kayode Awosika",
+   "club": "Chargers",
+   "player_url": "https://www.nfl.com/players/kayode-awosika/",
+   "practice_status": "Full Participation in Practice",
+   "game_status": "Questionable"
+  },
+  {
+   "player": "Bud Dupree",
+   "club": "Chargers",
+   "player_url": "https://www.nfl.com/players/bud-dupree/",
+   "practice_status": "Full Participation in Practice",
+   "game_status": ""
+  },
+  {
+   "player": "Justin Eboigbe",
+   "club": "Chargers",
+   "player_url": "https://www.nfl.com/players/justin-eboigbe/",
+   "practice_status": "Limited Participation in Practice",
+   "game_status": "Questionable"
+  },
+  {
+   "player": "Alex Harkey",
+   "club": "Chargers",
+   "player_url": "https://www.nfl.com/players/alex-harkey/",
+   "practice_status": "Full Participation in Practice",
+   "game_status": ""
+  },
+  {
+   "player": "Tre Harris",
+   "club": "Chargers",
+   "player_url": "https://www.nfl.com/players/tre-harris/",
+   "practice_status": "Full Participation in Practice",
+   "game_status": ""
+  },
+  {
+   "player": "Cam Hart",
+   "club": "Chargers",
+   "player_url": "https://www.nfl.com/players/cam-hart/",
+   "practice_status": "Full Participation in Practice",
+   "game_status": ""
+  },
+  {
+   "player": "Daiyan Henley",
+   "club": "Chargers",
+   "player_url": "https://www.nfl.com/players/daiyan-henley/",
+   "practice_status": "Full Participation in Practice",
+   "game_status": ""
+  },
+  {
+   "player": "Deane Leonard",
+   "club": "Chargers",
+   "player_url": "https://www.nfl.com/players/deane-leonard/",
+   "practice_status": "Full Participation in Practice",
+   "game_status": ""
+  },
+  {
+   "player": "Khalil Mack",
+   "club": "Chargers",
+   "player_url": "https://www.nfl.com/players/khalil-mack/",
+   "practice_status": "Full Participation in Practice",
+   "game_status": ""
+  },
+  {
+   "player": "Ladd McConkey",
+   "club": "Chargers",
+   "player_url": "https://www.nfl.com/players/ladd-mcconkey/",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": "Questionable"
+  },
+  {
+   "player": "Keaton Mitchell",
+   "club": "Chargers",
+   "player_url": "https://www.nfl.com/players/keaton-mitchell/",
+   "practice_status": "Full Participation in Practice",
+   "game_status": ""
+  },
+  {
+   "player": "David Njoku",
+   "club": "Chargers",
+   "player_url": "https://www.nfl.com/players/david-njoku/",
+   "practice_status": "Full Participation in Practice",
+   "game_status": "Questionable"
+  },
+  {
+   "player": "Denzel Perryman",
+   "club": "Chargers",
+   "player_url": "https://www.nfl.com/players/denzel-perryman/",
+   "practice_status": "Full Participation in Practice",
+   "game_status": "Questionable"
+  },
+  {
+   "player": "Trey Pipkins",
+   "club": "Chargers",
+   "player_url": "https://www.nfl.com/players/trey-pipkins/",
+   "practice_status": "Limited Participation in Practice",
+   "game_status": "Questionable"
+  },
+  {
+   "player": "Rodney Shelley",
+   "club": "Chargers",
+   "player_url": "https://www.nfl.com/players/rodney-shelley/",
+   "practice_status": "Full Participation in Practice",
+   "game_status": ""
+  },
+  {
+   "player": "Branson Taylor",
+   "club": "Chargers",
+   "player_url": "https://www.nfl.com/players/branson-taylor/",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": "Out"
+  },
+  {
+   "player": "Brenen Thompson",
+   "club": "Chargers",
+   "player_url": "https://www.nfl.com/players/brenen-thompson/",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": "Doubtful"
+  },
+  {
+   "player": "Isas Waxter",
+   "club": "Chargers",
+   "player_url": "https://www.nfl.com/players/isas-waxter/",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": "Out"
+  },
+  {
+   "player": "Kendall Williamson",
+   "club": "Chargers",
+   "player_url": "https://www.nfl.com/players/kendall-williamson/",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": "Out"
+  },
+  {
+   "player": "Rasheen Ali",
+   "club": "Ravens",
+   "player_url": "https://www.nfl.com/players/rasheen-ali/",
+   "practice_status": "Full Participation in Practice",
+   "game_status": ""
+  },
+  {
+   "player": "Rashod Bateman",
+   "club": "Ravens",
+   "player_url": "https://www.nfl.com/players/rashod-bateman/",
+   "practice_status": "Full Participation in Practice",
+   "game_status": ""
+  },
+  {
+   "player": "Calais Campbell",
+   "club": "Ravens",
+   "player_url": "https://www.nfl.com/players/calais-campbell/",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": ""
+  },
+  {
+   "player": "Kyle Hamilton",
+   "club": "Ravens",
+   "player_url": "https://www.nfl.com/players/kyle-hamilton/",
+   "practice_status": "Full Participation in Practice",
+   "game_status": ""
+  },
+  {
+   "player": "Jaylinn Hawkins",
+   "club": "Ravens",
+   "player_url": "https://www.nfl.com/players/jaylinn-hawkins/",
+   "practice_status": "Limited Participation in Practice",
+   "game_status": "Out"
+  },
+  {
+   "player": "Matthew Hibner",
+   "club": "Ravens",
+   "player_url": "https://www.nfl.com/players/matthew-hibner/",
+   "practice_status": "Full Participation in Practice",
+   "game_status": ""
+  },
+  {
+   "player": "Olaivavega Ioane",
+   "club": "Ravens",
+   "player_url": "https://www.nfl.com/players/olaivavega-ioane/",
+   "practice_status": "Full Participation in Practice",
+   "game_status": ""
+  },
+  {
+   "player": "Adam Randall",
+   "club": "Ravens",
+   "player_url": "https://www.nfl.com/players/adam-randall/",
+   "practice_status": "Full Participation in Practice",
+   "game_status": "Questionable"
+  },
+  {
+   "player": "Ronnie Stanley",
+   "club": "Ravens",
+   "player_url": "https://www.nfl.com/players/ronnie-stanley/",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": ""
+  },
+  {
+   "player": "Nate Wiggins",
+   "club": "Ravens",
+   "player_url": "https://www.nfl.com/players/nate-wiggins/",
+   "practice_status": "Full Participation in Practice",
+   "game_status": ""
+  }
+ ],
+ "removed": []
+}

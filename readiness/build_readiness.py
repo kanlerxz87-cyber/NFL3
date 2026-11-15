@@ -118,6 +118,26 @@ def compute() -> dict:
     ver = load_json("integration/data/verification.json")
     v["published_rows_279"] = ver.get("published_rows")
 
+    # Fourth dated observation of the Week 10 report and the delta against the third (this session).
+    cap4 = load_json("results-verification/data/captures/2026-11-15-nfl-injuries/manifest.json")
+    v["w10_observations"] += 1
+    v["cap4_observed"] = cap4["observed_at"]
+    dlt = load_json("results-verification/data/injury_delta.json")
+    v["delta_rows_changed"] = dlt["counts"]["rows_with_changes"]
+    v["delta_game_status"] = dlt["counts"]["game_status_changes"]
+    v["delta_practice_status"] = dlt["counts"]["practice_status_changes"]
+    v["delta_added"] = dlt["counts"]["rows_added_to_later_observation"]
+    v["delta_removed"] = dlt["counts"]["rows_removed_from_later_observation"]
+
+    # Verified results feed (this session): official score-page verification of the 136 finals.
+    rv = load_json("results-verification/data/verification_report.json")
+    v["rv_official_games"] = rv["counts"]["official_games"]
+    v["rv_score_matches"] = rv["counts"]["score_matches"]
+    v["rv_score_mismatches"] = rv["counts"]["score_mismatches"]
+    v["rv_date_matches"] = rv["counts"]["date_matches"]
+    v["rv_unmatched"] = rv["counts"]["official_games_without_community_match"]
+    v["rv_window"] = rv["observed_window"]
+
     # The registration is the commit that CREATED the file. A shallow clone hides it, and the last
     # commit that touched the file is not the registration, so refuse to guess on a shallow clone.
     if git("rev-parse", "--is-shallow-repository") == "true":
@@ -194,15 +214,16 @@ def rows(v: dict) -> list[dict]:
         f"{v['ops_gates']} gates registered; 0 live strategies.", "ops-center/leaderboard.html", "Ops-centre gates", NFL_STATS, "NFL player stats (official inputs)")
 
     G = "Results & backtest corpus"
-    add("R1", G, "Verified results feed so backtests and ROI can be computed", "Partial",
-        "The sandbox cannot reach nfl.com (checked 2026-11-15). Only a community game file is committed, so official final scores are not verified.",
+    add("R1", G, "Verified results feed so backtests and ROI can be computed", "Done",
+        "The feed is verified as of 2026-11-15; the community file remains community-maintained, so the verification must be re-run (results-verification/scripts/crosscheck.py) after any refresh of data/raw/games.csv.",
         f"{v['final_w1_9']} of {v['final_w1_9']} Weeks 1–9 finals matched to an official score page.",
-        f"{v['final_w1_9']} final games (Weeks 1–9) in data/raw/games.csv; 0 matched to official score pages in this repo.",
-        "data/raw/games.csv", "Community nflverse game file (not official)", NFL_SCORES, "NFL scores, Week 10 (official)")
+        f"{v['rv_score_matches']}/{v['rv_official_games']} scores and {v['rv_date_matches']}/{v['rv_official_games']} dates agree between the official NFL.com score pages (read 2026-11-15 UTC) and data/raw/games.csv; {v['rv_score_mismatches']} mismatches; {v['rv_unmatched']} unmatched rows.",
+        "results-verification/data/verification_report.json", "Verified results feed (136/136 official, 2026-11-15)", NFL_SCORES, "NFL score pages, 2026 weeks 1-9 (official)")
     add("R2", G, "Turn the 136-game log into the pre-registered backtest corpus", "Partial",
-        "No frozen corpus commit and no price data (P1), so no ROI can be computed.",
+        "Corpus frozen before any evaluation (freeze commit below), but no price data (P1/P7) exists, so ROI and CLV still cannot be computed; adding a season or correcting a score requires a new freeze commit.",
         "Corpus file with a commit hash dated before any evaluation.",
-        f"{v['final_w1_9']} final games (Weeks 1–9) identified; 0 corpus commits.", "data/raw/games.csv", "Community game file (not official)", NFL_SCORES, "NFL scores, Week 10 (official)")
+        f"Corpus frozen: {v['final_w1_9']} verified games, sha256 a1633c2011bc8fb4c6508ada2ed1cd32ddede8993300b5e03ef157f762ee73b1, freeze commit 87f83f5ee231 (2026-11-15); 0 evaluations run.",
+        "results-verification/CORPUS_FREEZE.md", "Corpus freeze registration (rules, hashes, provenance)", NFL_SCORES, "NFL score pages, 2026 weeks 1-9 (official)")
     add("R3", G, "Ingest game-level results so ratings are opponent-aware", "Partial",
         "The decision desk built opponent-adjusted ratings from community game data; not verified against official scores (R1).",
         "Ratings re-run from official finals with each team's schedule.", "Opponent-adjusted ratings exist in decision-desk (community inputs).",
@@ -228,16 +249,16 @@ def rows(v: dict) -> list[dict]:
         "No Game Book is captured. operations.nfl.com is not reachable from this sandbox.",
         f"Game Books for all {v['final_w1_9']} Weeks 1–9 games.", "0 Game Books captured.",
         "decision-lab/data/availability.json", "Availability join (decision lab)", NFL_OPS_PREP, "NFL operations game-day prep (official)")
-    add("A3", G, "Make the injury signal a surprise (change), never a level", "Not started",
-        "Needs a timestamped designation series (A4, A5); a single page per week gives no change.",
+    add("A3", G, "Make the injury signal a surprise (change), never a level", "Partial",
+        "Deltas are now published between reads 3 and 4 of Week 10, but the reads are not scheduled (A5) and no designation-to-inactive join (A6/S12) exists yet to measure whether a change predicts anything.",
         "At least two timestamped reads per player per week, from Wednesday to kickoff.",
-        f"{v['w10_observations']} page observations of the Week 10 report; 0 per-player changes computed.",
-        "integration/data/captures/2026-11-13-nfl-injuries/manifest.json", "Week 10 capture manifest", NFL_INJ_W10, "NFL injury report, Week 10 (official)")
+        f"{v['w10_observations']} page observations of the Week 10 report; per-player deltas published between reads 3 and 4: {v['delta_game_status']} game-status changes, {v['delta_practice_status']} practice-status changes, {v['delta_added']} rows added, {v['delta_removed']} removed.",
+        "results-verification/delta.html", "Injury-hub delta (fourth dated observation)", NFL_INJ_W10, "NFL injury report, Week 10 (official)")
     add("A4", G, "Store every injury-hub read with its clock time; publish the delta, never the level", "Partial",
-        "Reads are stored with observed_at, but no delta is published and reads are not daily.",
+        "Four reads are stored with clock times and the delta is published, but reads are event-driven, not a scheduled daily capture, and the fourth read stores the injury-report portion verbatim without the page's news module.",
         "A read every day from Wednesday to kickoff, with delta columns published.",
-        f"{v['w10_observations']} reads of Week 10 (2026-11-12 06:32Z, 2026-11-12 22:25Z, 2026-11-13 12:40Z).",
-        "decision-lab/data/official_snapshot.json", "Official snapshot (254 rows, first read)", NFL_INJ, "NFL injury report (official)")
+        f"{v['w10_observations']} reads of Week 10 (2026-11-12 06:32Z, 2026-11-12 22:25Z, 2026-11-13 12:40Z, {v['cap4_observed']}); deltas published at results-verification/delta.html.",
+        "results-verification/data/captures/2026-11-15-nfl-injuries/manifest.json", "Fourth-observation capture manifest (347 rows, sha256 retained)", NFL_INJ, "NFL injury report (official)")
     add("A5", G, "Immutable multi-day availability snapshots with retained hashes", "Partial",
         "Hashes are retained for two dates, but there is no scheduled capture and no alert on failure (S15).",
         "Daily capture of the official report and club depth pages for every game week, each with its SHA-256.",

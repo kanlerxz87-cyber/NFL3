@@ -1,0 +1,24 @@
+{
+  "week": 8,
+  "url": "https://www.nfl.com/scores/2026/week-8",
+  "observed_at": "2026-11-15T13:40:00Z",
+  "observed_at_note": "Approximate wall-clock time (UTC) at which the page was read with the page-fetch tool. The page was read in two sequential chunks (the third chunk contains only the site news module, no scoreboard rows).",
+  "publisher": "NFL.com (official NFL publisher)",
+  "authority": "official HTTPS publisher",
+  "games": [
+    {"away_team": "CAR", "away_score": 19, "home_team": "GB", "home_score": 27, "context": "Thursday Night Football, October 29th", "slug": "panthers-at-packers"},
+    {"away_team": "BAL", "away_score": 10, "home_team": "BUF", "home_score": 36, "context": "Sunday, November 1st", "slug": "ravens-at-bills"},
+    {"away_team": "TEN", "away_score": 36, "home_team": "CIN", "home_score": 43, "context": "Sunday, November 1st", "slug": "titans-at-bengals"},
+    {"away_team": "AZ", "away_score": 33, "home_team": "DAL", "home_score": 30, "context": "Sunday, November 1st", "slug": "cardinals-at-cowboys"},
+    {"away_team": "MIN", "away_score": 15, "home_team": "DET", "home_score": 19, "context": "Sunday, November 1st", "slug": "vikings-at-lions"},
+    {"away_team": "IND", "away_score": 7, "home_team": "JAX", "home_score": 42, "context": "Sunday, November 1st", "slug": "colts-at-jaguars"},
+    {"away_team": "LV", "away_score": 38, "home_team": "NYJ", "home_score": 33, "context": "Sunday, November 1st", "slug": "raiders-at-jets"},
+    {"away_team": "CLE", "away_score": 6, "home_team": "PIT", "home_score": 27, "context": "Sunday, November 1st", "slug": "browns-at-steelers"},
+    {"away_team": "ATL", "away_score": 0, "home_team": "TB", "home_score": 16, "context": "Sunday, November 1st", "slug": "falcons-at-buccaneers"},
+    {"away_team": "LAC", "away_score": 9, "home_team": "LA", "home_score": 24, "context": "Sunday, November 1st", "slug": "chargers-at-rams"},
+    {"away_team": "KC", "away_score": 24, "home_team": "DEN", "home_score": 28, "context": "Sunday, November 1st", "slug": "chiefs-at-broncos"},
+    {"away_team": "NE", "away_score": 24, "home_team": "MIA", "home_score": 19, "context": "Sunday, November 1st", "slug": "patriots-at-dolphins"},
+    {"away_team": "PHI", "away_score": 10, "home_team": "WAS", "home_score": 27, "context": "Sunday Night Football, November 1st", "slug": "eagles-at-commanders"},
+    {"away_team": "CHI", "away_score": 34, "home_team": "SEA", "home_score": 17, "context": "Monday Night Football, November 2nd", "slug": "bears-at-seahawks"}
+  ]
+}
