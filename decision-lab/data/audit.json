@@ -1,6 +1,6 @@
 {
-  "html_pages": 139,
-  "table_rows": 8146,
+  "html_pages": 145,
+  "table_rows": 8334,
   "rows_missing_official_source": 746,
   "rows_community_only": 242,
   "rows_with_internal_audit_source": 7,
@@ -449,7 +449,7 @@
     },
     {
       "path": "index.html",
-      "rows": 59,
+      "rows": 60,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -889,7 +889,7 @@
     },
     {
       "path": "repo-review.html",
-      "rows": 24,
+      "rows": 33,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -1057,7 +1057,55 @@
     },
     {
       "path": "review.html",
-      "rows": 24,
+      "rows": 26,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "shadow-board/backtest.html",
+      "rows": 50,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "shadow-board/forecasts.html",
+      "rows": 30,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "shadow-board/index.html",
+      "rows": 20,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "shadow-board/method.html",
+      "rows": 19,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "shadow-board/registers.html",
+      "rows": 12,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "shadow-board/sources.html",
+      "rows": 45,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
