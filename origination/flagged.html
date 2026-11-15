@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flagged for review | NFL3 origination workspace</title>
+<link rel="stylesheet" href="assets/origination.css"></head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="index.html"><b>N</b> NFL3 <span>/ origination</span></a>
+<nav aria-label="Origination navigation" data-current="flagged.html">
+<a href='index.html'>Overview</a><a href='requirements.html'>Requirements</a><a href='decisions.html'>Decisions &amp; questions</a><a href='strategies.html'>Strategy registry</a><a href='leaderboard.html'>Leaderboard</a><a href='lines.html'>Originated lines</a><a href='prices.html'>Price store</a><a href='availability.html'>Availability &amp; depth</a><a href='correlations.html'>Correlations</a><a href='luck.html'>Luck removal</a><a href='suggestions.html'>Suggestions</a><a href='flagged.html'>Flagged for review</a><a href='sources.html'>Sources</a>
+</nav></div></header>
+<main class="wrap">
+<div class="hrow"><div><p class="eyebrow">Open irregularities and unverified items</p><h1>Flagged for review</h1></div>
+<span class="badge warn">Research · not betting advice</span></div>
+
+<div class="notice"><b>Read this first.</b> This workspace originates its own numbers and grades them
+against a reconciled official results feed. It holds <b>one</b> community price observation, so no
+opening-line edge, closing-line value or validated strategy exists yet — and the leaderboard says so on
+every row. Prices are labelled <b>COMMUNITY</b>; standings and injury reports are labelled
+<b>OFFICIAL</b>; anything that could not be confirmed is blank and sits on
+<a href="flagged.html">Flagged for review</a>. Nothing here is betting advice.</div>
+
+<div class="section-head"><div><div class="section-label">FLAGGED FOR REVIEW</div>
+<h2>12 irregularities, each with its source</h2></div>
+<p>None of these block publication. Each one is a place where the honest answer is 'we do not know' or
+'this conflicts'. They are listed so the owner can review them after the site is live.</p></div>
+<div class="table-wrap"><table><caption>Severity is about consequence for a decision, not
+about effort. Every row carries the source that shows the issue.</caption>
+<thead><tr><th>ID</th><th>Severity</th><th>Item</th><th>What is irregular</th><th>What would resolve it</th>
+<th>Source</th></tr></thead><tbody>
+<tr><td><b>F01</b></td><td><span class='pill warn'>high</span></td>
+<td>Price history is two captures deep, not a series</td><td>Weeks 1-9 had kicked off before the first observation, so their stored numbers are post-hoc and cannot define an opening, a close or closing-line value. Two captures now exist and 7 of the 78 pre-kickoff market cells moved between them, so a real opening-to-latest interval exists for those cells only. The remaining 71 pre-kickoff cells still have a single observation.</td>
+<td>A scheduled capture at T-60 before every kickoff, so every graded cell has its own interval. Policy P04 sets the schedule.</td><td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>nflverse schedules (COMMUNITY) ↗</a></td></tr>
+<tr><td><b>F02</b></td><td><span class='pill warn'>high</span></td>
+<td>Two clubs publish no parseable depth chart</td><td>30 of 32 clubs yielded depth rows. The Packers prepend jersey numbers to names and the Texans publish the chart as an image. Both are recorded as failures rather than transcribed by eye.</td>
+<td>An authorised structured export per club, or a documented decision to accept the gap.</td><td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>NFL injury report (OFFICIAL); capture: decision-lab/data/official_snapshot.json ↗</a></td></tr>
+<tr><td><b>F03</b></td><td><span class='pill warn'>high</span></td>
+<td>No official inactive list is held</td><td>The captured report carries 6 game designations across 254 rows. Without inactive lists, a listed player&#x27;s participation cannot be confirmed and a replacement cannot be established.</td>
+<td>Capture official inactive lists per game with a timestamp before kickoff.</td><td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>NFL injury report (OFFICIAL) ↗</a></td></tr>
+<tr><td><b>F04</b></td><td><span class='pill warn'>high</span></td>
+<td>The personnel ablation cannot resolve an effect</td><td>The holdout interval spans zero for every λ in the published grid. This is a finding about the sample, not a claim that injuries do not matter.</td>
+<td>More pre-kickoff games and dated availability captures before re-testing.</td><td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>NFL injury report (OFFICIAL) ↗</a></td></tr>
+<tr><td><b>F05</b></td><td><span class='pill warn'>medium</span></td>
+<td>Team-code aliases differ between sources</td><td>nfl.com&#x27;s 2026 standings publish AZ for Arizona; the community schedule publishes ARI. Los Angeles is LA on both. The feed maps the alias explicitly and the reconciliation would fail if it did not.</td>
+<td>Keep the explicit alias map and assert it in tests; do not normalise silently.</td><td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>NFL standings (OFFICIAL) ↗</a></td></tr>
+<tr><td><b>F06</b></td><td><span class='pill warn'>medium</span></td>
+<td>Kickoff times carry no time zone</td><td>The schedule publishes kickoff in US Eastern but the field has no zone. The price store converts at a fixed UTC-4, which is up to 60 minutes wrong once Eastern Standard Time begins.</td>
+<td>Capture an explicit UTC kickoff, or store the observation as &#x27;pre-kickoff by minutes&#x27; instead of a boolean.</td><td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>nflverse schedules (COMMUNITY) ↗</a></td></tr>
+<tr><td><b>F07</b></td><td><span class='pill warn'>medium</span></td>
+<td>Two strategies already failed their kill rule</td><td>G10 demoted two scored rules whose Brier-skill interval sits entirely below zero. They remain on the leaderboard, labelled, with their numbers intact.</td>
+<td>Require a new registration hash before a demoted rule can return.</td><td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>NFL standings (OFFICIAL); gate artifact: origination/data/gates.json ↗</a></td></tr>
+<tr><td><b>F08</b></td><td><span class='pill warn'>medium</span></td>
+<td>No reward pool, rule set or funding source exists</td><td>The brief asks for a leaderboard competition with rewards for top performers. No funding source, jurisdiction or payout rule exists, so no reward is described as available.</td>
+<td>Decide jurisdiction and funding before any reward is announced.</td><td><a class='source' href='https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL' target='_blank' rel='noopener noreferrer'>NFL betting FAQ (OFFICIAL) ↗</a></td></tr>
+<tr><td><b>F09</b></td><td><span class='pill warn'>medium</span></td>
+<td>A club with no report section is not injury-free</td><td>4 clubs had no section on the captured report. Treating that as &#x27;no injuries&#x27; is the failure mode flagged earlier in this repository.</td>
+<td>Join each no-section club to its inactive list and its next published report.</td><td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>NFL injury report (OFFICIAL) ↗</a></td></tr>
+<tr><td><b>F10</b></td><td><span class='pill warn'>low</span></td>
+<td>Correlation C02 mixes a community price with an official score</td><td>It is published for transparency and excluded from every official-only gate. A reader who skims the table could mistake it for an official-input correlation.</td>
+<td>Keep the source-class badges on the row and the note in the caption.</td><td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>nflverse schedules (COMMUNITY) ↗</a></td></tr>
+<tr><td><b>F11</b></td><td><span class='pill warn'>low</span></td>
+<td>41 report rows could not be joined to a depth slot</td><td>4 correlation families and a set of report rows have no join target: a player can be on the report without appearing on his club&#x27;s published chart.</td>
+<td>Publish the unmatched count beside the joined count so the join rate is never implied as 100%.</td><td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>NFL injury report (OFFICIAL); capture: decision-lab/data/official_snapshot.json ↗</a></td></tr>
+<tr><td><b>F12</b></td><td><span class='pill warn'>low</span></td>
+<td>The site&#x27;s own model trails the market it compares against</td><td>The ridge side model&#x27;s MAE is worse than the stored market spread&#x27;s on the same games. It is published as a benchmark, and no strategy above it claims otherwise.</td>
+<td>Nothing to fix; it is the honest baseline. Any future model must beat this before claiming skill.</td><td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>NFL standings (OFFICIAL) ↗</a></td></tr>
+</tbody></table></div>
+</main>
+<footer class="wrap foot"><span><strong>NFL3 origination workspace</strong> · every row links to its source ·
+a value that could not be confirmed stays blank.</span>
+<span>Generated 2026-11-15</span></footer>
+</body></html>

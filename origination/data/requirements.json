@@ -1,0 +1,642 @@
+{
+ "built_at": "2026-11-15",
+ "summary": {
+  "total": 62,
+  "implemented": 33,
+  "partial": 21,
+  "blocked": 8,
+  "validated": 0
+ },
+ "rows": [
+  {
+   "id": "R01",
+   "text": "Price-snapshot store with opening and closing numbers for every market originated.",
+   "state": "partial",
+   "evidence": "Immutable snapshot store with 2 retained captures; the ledger derives opening/latest/closing/post-hoc per event \u00d7 market under a pre-registered policy, and 7 cells show a genuine opening-to-latest interval.",
+   "gate": "G05 price coverage",
+   "number": "78 of 816 market cells have a pre-kickoff opening and 7 have moved; clearance needs a captured interval for every cell a strategy grades.",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+   "source_label": "nflverse schedules (COMMUNITY), two captures"
+  },
+  {
+   "id": "R02",
+   "text": "Verified results feed so backtests and ROI can be computed at all.",
+   "state": "implemented",
+   "evidence": "Results feed reconciles to official standings on 160/160 club \u00d7 field checks over 137 played games.",
+   "gate": "G04 settlement",
+   "number": "160 of 160 checks must match \u2014 currently met.",
+   "source": "https://www.nfl.com/standings/",
+   "source_label": "NFL standings (OFFICIAL)"
+  },
+  {
+   "id": "R03",
+   "text": "Originate the side first, then the total, then the moneyline.",
+   "state": "implemented",
+   "evidence": "Three separate fits in that order; each market is graded before the next is trusted; the moneyline is explicitly a transform of the margin model's residual scale.",
+   "gate": "G06 sample size",
+   "number": "Order is enforced by construction and asserted in tests.",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+   "source_label": "nflverse schedules (COMMUNITY)"
+  },
+  {
+   "id": "R04",
+   "text": "Publish fair line, market line and difference as separate columns.",
+   "state": "implemented",
+   "evidence": "Every game row on the lines page carries model spread, market spread and difference, and the same three columns for the total.",
+   "gate": "G05 price coverage",
+   "number": "Every played game row has all three columns or an explicit blank.",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+   "source_label": "nflverse schedules (COMMUNITY)"
+  },
+  {
+   "id": "R05",
+   "text": "Separate signal from staking so a lucky staking run cannot mask a bad signal.",
+   "state": "implemented",
+   "evidence": "Leaderboard ranks on Brier skill with an interval; win rate appears in its own columns with a Wilson interval; no ROI column exists anywhere.",
+   "gate": "G09 multiplicity",
+   "number": "0 ROI rankings published; all ranks are proper-score based.",
+   "source": "https://www.nfl.com/standings/",
+   "source_label": "NFL standings (OFFICIAL)"
+  },
+  {
+   "id": "R06",
+   "text": "Track the depth of the replacement, not just the fact of a replacement.",
+   "state": "partial",
+   "evidence": "149 rank-1 slots hold \u22652 players; the graph keeps the published group and measures playing time, but no official source names an assignment.",
+   "gate": "G07 joint evidence (not applicable) / missing official assignment",
+   "number": "Clear when an official source names the starter for a slot; today 6 of 254 report rows even carry a game designation.",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL)"
+  },
+  {
+   "id": "R07",
+   "text": "Compute correlations only from officially sourced numbers and publish n with each value.",
+   "state": "implemented",
+   "evidence": "2 official-input correlations published with n and a Fisher-z interval; 4 withheld with a written reason.",
+   "gate": "G07 joint evidence for combos",
+   "number": "Every published value has n and a 95% interval.",
+   "source": "https://www.nfl.com/standings/",
+   "source_label": "NFL standings (OFFICIAL)"
+  },
+  {
+   "id": "R08",
+   "text": "Define a demotion gate that sends a live strategy back to paper.",
+   "state": "implemented",
+   "evidence": "Gate G10 demotes any strategy whose Brier-skill interval is entirely below zero. It demoted 2: S01, S03.",
+   "gate": "G10 demotion",
+   "number": "2 strategies demoted on this build.",
+   "source": "https://www.nfl.com/standings/",
+   "source_label": "NFL standings (OFFICIAL); gate artifact: origination/data/gates.json"
+  },
+  {
+   "id": "R09",
+   "text": "Pre-register every strategy; forbid backtest numbers from appearing on the leaderboard.",
+   "state": "implemented",
+   "evidence": "10 rules registered with a content hash; blocked rules are excluded from every score rather than shown as untested.",
+   "gate": "G02 pre-registration",
+   "number": "Every strategy row displays the hash it scored under.",
+   "source": "https://www.nfl.com/standings/",
+   "source_label": "NFL standings (OFFICIAL); artifact: origination/data/strategies.json"
+  },
+  {
+   "id": "R10",
+   "text": "Build the availability graph as a first-class dataset.",
+   "state": "implemented",
+   "evidence": "1,386 slots, 1,745 named players, 254 report rows, 400 reserve rows and 12,785 playing-time rows, each with a source.",
+   "gate": "G01 provenance",
+   "number": "Every node carries a source URL; missing edges are listed.",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL); capture: decision-lab/data/official_snapshot.json"
+  },
+  {
+   "id": "R11",
+   "text": "Do not model depth from jersey order; model it from playing time.",
+   "state": "implemented",
+   "evidence": "Depth order is compared with measured snap share in 46 groups; disagreement is published, not resolved.",
+   "gate": "G01 provenance",
+   "number": "0 depth rows derived from jersey number, experience or salary.",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/snap_counts",
+   "source_label": "nflverse snap counts (COMMUNITY)"
+  },
+  {
+   "id": "R12",
+   "text": "Make the injury signal a surprise, never a level.",
+   "state": "blocked",
+   "evidence": "A surprise needs a dated series to take a baseline from. Exactly one official report capture is held, so a baseline cannot be formed without lookahead.",
+   "gate": "G05-equivalent capture coverage",
+   "number": "Clear at \u22655 dated captures per week for 4 consecutive weeks.",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL)"
+  },
+  {
+   "id": "R13",
+   "text": "Run the 32-team roster and reserve sweep before any team-level model is trusted.",
+   "state": "partial",
+   "evidence": "Reserve list read for 32 clubs / 400 players from the roster release; the official transaction log is not held.",
+   "gate": "G01 provenance",
+   "number": "Clear when all 32 clubs' reserve status is confirmed against official pages.",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/rosters",
+   "source_label": "nflverse rosters (COMMUNITY)"
+  },
+  {
+   "id": "R14",
+   "text": "Fixture-context features built only from published schedule facts.",
+   "state": "implemented",
+   "evidence": "Rest, roof, surface, temperature, wind, division flag and kickoff are carried on every fixture row from the schedule release; no derived value is passed off as published.",
+   "gate": "G01 provenance",
+   "number": "Every context field traces to the schedule release.",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+   "source_label": "nflverse schedules (COMMUNITY)"
+  },
+  {
+   "id": "R15",
+   "text": "Store every model output as a probability plus its inputs, not just a pick.",
+   "state": "implemented",
+   "evidence": "Every row stores the ratings, home-field term, residual scale and the resulting probability for all three markets, for both estimators.",
+   "gate": "G02 pre-registration",
+   "number": "Every probability row names its inputs.",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+   "source_label": "nflverse schedules (COMMUNITY); artifact: origination/data/origination_walkforward.json"
+  },
+  {
+   "id": "R16",
+   "text": "Compute and publish the removal-of-luck panel on the site.",
+   "state": "implemented",
+   "evidence": "Sample-size arithmetic, Wilson intervals, paired bootstrap skill intervals and an exact binomial tail for every scored rule, on 137 games.",
+   "gate": "G09 multiplicity",
+   "number": "Every strategy carries an interval and a fluke probability.",
+   "source": "https://www.nfl.com/standings/",
+   "source_label": "NFL standings (OFFICIAL)"
+  },
+  {
+   "id": "R17",
+   "text": "Two-sided 'what would change our mind' field on every strategy entry.",
+   "state": "implemented",
+   "evidence": "Every registered strategy has a promote condition and a kill condition, and the kill condition is executed by gate G10.",
+   "gate": "G10 demotion",
+   "number": "10 of 10 entries carry both fields.",
+   "source": "https://www.nfl.com/standings/",
+   "source_label": "NFL standings (OFFICIAL); artifact: origination/data/strategies.json"
+  },
+  {
+   "id": "R18",
+   "text": "Price a line ourselves and publish the residual against the market, on a schedule.",
+   "state": "partial",
+   "evidence": "Residuals published for every played game (side 13.237 pts sd, total 14.051 pts sd). The schedule runs on every build, but pre-kickoff publication needs a capture before kickoff, which only the unplayed Week 10 slate has.",
+   "gate": "G05 price coverage",
+   "number": "78 cells have a pre-kickoff number and 7 show movement; clearance needs a captured interval for every graded cell.",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+   "source_label": "nflverse schedules (COMMUNITY)"
+  },
+  {
+   "id": "R19",
+   "text": "Turn the 136-game log into the pre-registered backtest corpus.",
+   "state": "implemented",
+   "evidence": "137 played games, reconciled. Every strategy is scored on the same corpus with the same benchmarks, and each row says which price class it used.",
+   "gate": "G04 settlement",
+   "number": "137 games available; 136 was the target.",
+   "source": "https://www.nfl.com/standings/",
+   "source_label": "NFL standings (OFFICIAL)"
+  },
+  {
+   "id": "R20",
+   "text": "Decide the price-data policy before any backtest is published.",
+   "state": "implemented",
+   "evidence": "A ten-point policy is committed with a content hash written into the ledger, covering opening versus closing, post-hoc exclusion, vig removal, push handling, settlement and time zones.",
+   "gate": "G02 pre-registration",
+   "number": "Policy hash present in the ledger and checked on every build.",
+   "source": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL",
+   "source_label": "NFL betting FAQ (OFFICIAL); policy: origination/data/prices/POLICY.md"
+  },
+  {
+   "id": "R21",
+   "text": "Store every injury-hub read with its clock time and publish the delta, never the level.",
+   "state": "partial",
+   "evidence": "Each capture carries an observation timestamp and SHA-256; the drift page publishes row-level deltas between captures rather than an aggregate count.",
+   "gate": "G05-equivalent capture coverage",
+   "number": "Clear at \u22652 captures per week across 4 weeks so deltas form a series.",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL)"
+  },
+  {
+   "id": "R22",
+   "text": "Decision-readiness table: one row per requirement, its blocking gate and the clearing number.",
+   "state": "implemented",
+   "evidence": "This page. 33 requirements, each with state, evidence, gate and the measurable number.",
+   "gate": "n/a",
+   "number": "Every row carries a gate or an explicit 'n/a' plus a number.",
+   "source": "https://www.nfl.com/standings/",
+   "source_label": "NFL standings (OFFICIAL)"
+  },
+  {
+   "id": "R23",
+   "text": "Ingest game-level results to make ratings opponent-aware.",
+   "state": "implemented",
+   "evidence": "Ratings are fitted on margins, so strength of schedule is implicit; the Elo estimator makes the opponent adjustment explicit and is published beside the ridge fit.",
+   "gate": "G06 sample size",
+   "number": "Two estimators, both opponent-aware, both published with their residuals.",
+   "source": "https://www.nfl.com/standings/",
+   "source_label": "NFL standings (OFFICIAL)"
+  },
+  {
+   "id": "R24",
+   "text": "Injury and personnel ablations instead of fixed penalties.",
+   "state": "implemented",
+   "evidence": "Ablation with and without the personnel term on a chronological holdout: MAE improvement -0.003 [-0.166, 0.179].",
+   "gate": "G06 sample size",
+   "number": "Interval published; no fixed penalty is used anywhere.",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL)"
+  },
+  {
+   "id": "R25",
+   "text": "Capture official inactive lists and snap counts.",
+   "state": "partial",
+   "evidence": "Snap counts are held and used (community). Official inactive lists are not held: the report publishes 6 game designations in total, so an active list cannot be reconstructed.",
+   "gate": "G01 provenance",
+   "number": "Clear when official inactive lists are captured for every played game of the evaluation window.",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL)"
+  },
+  {
+   "id": "R26",
+   "text": "Fix the depth-parsing failures before widening coverage.",
+   "state": "partial",
+   "evidence": "The two known failures are recorded, not papered over: the Packers' jersey-number prefix is stripped and the raw string retained; the Texans' image chart has no structured source and stays unparsed.",
+   "gate": "G01 provenance",
+   "number": "30/32 clubs parsed; clearance needs 32/32 with a structured source.",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL); capture: decision-lab/data/official_snapshot.json"
+  },
+  {
+   "id": "R27",
+   "text": "Model depth slots as groups, not a single starter.",
+   "state": "implemented",
+   "evidence": "149 rank-1 slots hold more than one player and are kept as groups; no slot is reduced to one name.",
+   "gate": "G01 provenance",
+   "number": "0 slots collapsed to a single starter.",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL); capture: decision-lab/data/official_snapshot.json"
+  },
+  {
+   "id": "R28",
+   "text": "Treat roster turnover as a first-class data event.",
+   "state": "partial",
+   "evidence": "Reserve/inactive status is read per player and joined to slots; the official transaction log with dates is not held, so turnover cannot yet be versioned against a roster event.",
+   "gate": "G01 provenance",
+   "number": "Clear when the official transactions log is captured with dates and joined to the graph.",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/rosters",
+   "source_label": "nflverse rosters (COMMUNITY)"
+  },
+  {
+   "id": "R29",
+   "text": "Start with a singles-only shadow baseline, frozen and recorded before kickoff.",
+   "state": "partial",
+   "evidence": "4 singles rules are frozen and scored; recording before kickoff needs a pre-kickoff capture, which exists for only part of the Week 10 slate.",
+   "gate": "G05 price coverage",
+   "number": "Clear when a shadow forecast is logged before every kickoff for 4 weeks.",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+   "source_label": "nflverse schedules (COMMUNITY)"
+  },
+  {
+   "id": "R30",
+   "text": "Keep parlays and prop combos behind a joint-evidence gate.",
+   "state": "implemented",
+   "evidence": "Both combo strategies are registered as BLOCKED with the reason; neither is scored and neither is described as promising.",
+   "gate": "G07 joint evidence + G08 settlement rules",
+   "number": "0 combos ranked; clearance needs a validated joint probability and operator rules.",
+   "source": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL",
+   "source_label": "NFL betting FAQ (OFFICIAL)"
+  },
+  {
+   "id": "R31",
+   "text": "Proper-score leaderboard divisions for singles, parlays, SGP and prop combos.",
+   "state": "implemented",
+   "evidence": "Every leaderboard row carries its family (singles / controls / parlays / player-props) and the divisions are never pooled into one rank.",
+   "gate": "G09 multiplicity",
+   "number": "Family label on every row.",
+   "source": "https://www.nfl.com/standings/",
+   "source_label": "NFL standings (OFFICIAL)"
+  },
+  {
+   "id": "R32",
+   "text": "Rank with proper scores and uncertainty, not win rate.",
+   "state": "implemented",
+   "evidence": "Ranking is Brier skill with a paired game-cluster bootstrap; the multiplicity adjustment covers 10 trials.",
+   "gate": "G09 multiplicity",
+   "number": "alpha per test 0.00500.",
+   "source": "https://www.nfl.com/standings/",
+   "source_label": "NFL standings (OFFICIAL)"
+  },
+  {
+   "id": "R33",
+   "text": "Durable snapshot storage and alerts for source/schema change.",
+   "state": "partial",
+   "evidence": "Snapshots are immutable and hashed and the build is deterministic. Freshness alerting exists only as a build-time gate, not as a monitored service.",
+   "gate": "G01 provenance",
+   "number": "Clear when a scheduled capture records misses and a drift alarm fires on a changed row count.",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL)"
+  },
+  {
+   "id": "R34",
+   "text": "Split the public analysis layer from a private data layer.",
+   "state": "partial",
+   "evidence": "The site publishes derived analysis and links to official pages; raw row-level data lives in repository data folders. Terms of reuse are not established, so this is not yet a rights split.",
+   "gate": "DATA-USE-01 (reuse terms)",
+   "number": "Clear when written reuse terms exist for each source class.",
+   "source": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL",
+   "source_label": "NFL betting FAQ (OFFICIAL)"
+  },
+  {
+   "id": "R35",
+   "text": "Per-team view: starters out, replacements named, net injury count.",
+   "state": "partial",
+   "evidence": "Per-club lost snap share and unavailable players are computed for 30 clubs; 'replacements named' stays blank because no official source names one.",
+   "gate": "G01 provenance",
+   "number": "Clear when an official source names the replacement, not just the next published name.",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL)"
+  },
+  {
+   "id": "R36",
+   "text": "Announced-starter evidence field rather than an inferred replacement.",
+   "state": "blocked",
+   "evidence": "No announced-starter source is held. The field exists and is blank by rule.",
+   "gate": "G01 provenance",
+   "number": "Clear when dated club announcements are captured and linked.",
+   "source": "https://www.nfl.com/teams/",
+   "source_label": "NFL teams directory (OFFICIAL)"
+  },
+  {
+   "id": "R37",
+   "text": "Official depth-chart register with date and source per row.",
+   "state": "implemented",
+   "evidence": "1,386 depth rows, each carrying its club URL, capture hash and observation timestamp.",
+   "gate": "G01 provenance",
+   "number": "Every row has date + source; 30/32 clubs covered.",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL); capture: decision-lab/data/official_snapshot.json"
+  },
+  {
+   "id": "R38",
+   "text": "Calibrate what 'Questionable' means empirically instead of using old percentages.",
+   "state": "blocked",
+   "evidence": "The captured report carries 6 game designations in total across 254 rows; there is no inactive list to join against.",
+   "gate": "G01 provenance + missing inactive lists",
+   "number": "Clear when designations are joined to official inactive lists over several seasons with CIs.",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL)"
+  },
+  {
+   "id": "R39",
+   "text": "Interactive offense/defense deficiency matrix (1st-4th string) on one screen.",
+   "state": "partial",
+   "evidence": "The deficiency view lists each Week 10 rank-1 slot with an official Out/Doubtful designation and the club's next published name. '4th string' is usually unpublished \u2014 500 of 676 position groups in the repository's earlier count have no third string.",
+   "gate": "G01 provenance",
+   "number": "Clear when a defender-side join and a published 3rd string exist for the matchup.",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL)"
+  },
+  {
+   "id": "R40",
+   "text": "Flag stale depth rows against the official transactions log.",
+   "state": "blocked",
+   "evidence": "No official transactions log is held, so staleness cannot be dated against a roster event.",
+   "gate": "G01 provenance",
+   "number": "Clear when the transactions log is captured with dates.",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/rosters",
+   "source_label": "nflverse rosters (COMMUNITY)"
+  },
+  {
+   "id": "R41",
+   "text": "Point-in-time snapshot ledger for injuries, depth and inactives.",
+   "state": "partial",
+   "evidence": "Every capture carries a timestamp and hash and is stored immutably; the series is one deep, so point-in-time replay is possible but has nothing to replay against.",
+   "gate": "G05-equivalent capture coverage",
+   "number": "Clear at \u22652 dated captures per week across a full month.",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL)"
+  },
+  {
+   "id": "R42",
+   "text": "Re-capture and republish the Week 10 injury tables when the source changes.",
+   "state": "partial",
+   "evidence": "The drift page publishes row-level differences between captures and never reconciles them by inference; the captured tables are those of 2026-11-12.",
+   "gate": "G05-equivalent capture coverage",
+   "number": "Clear when every capture in a week is retained and diffed.",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL)"
+  },
+  {
+   "id": "R43",
+   "text": "Reject deriving depth order from jersey number, experience or salary.",
+   "state": "implemented",
+   "evidence": "No such derivation exists in this workspace; depth order comes only from the club page, and measured order comes only from playing time.",
+   "gate": "n/a",
+   "number": "0 inferred depth rows; asserted in tests.",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL); capture: decision-lab/data/official_snapshot.json"
+  },
+  {
+   "id": "R44",
+   "text": "Represent shared and empty depth slots faithfully.",
+   "state": "implemented",
+   "evidence": "149 shared rank-1 slots are kept as groups; an empty slot stays empty.",
+   "gate": "G01 provenance",
+   "number": "0 slots silently collapsed or filled.",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL); capture: decision-lab/data/official_snapshot.json"
+  },
+  {
+   "id": "R45",
+   "text": "Score injury-designation reliability before using it as a feature.",
+   "state": "blocked",
+   "evidence": "Requires several seasons of designations joined to official inactive lists. Neither archive is held.",
+   "gate": "G01 provenance",
+   "number": "Clear when play rate per designation is measured with confidence intervals over \u22653 seasons.",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL)"
+  },
+  {
+   "id": "R46",
+   "text": "Snapshot the official report on Wed/Thu/Fri (and daily to kickoff) with a dated history.",
+   "state": "blocked",
+   "evidence": "The repository holds single captures, not a schedule of them. The capture script exists; the schedule does not yet run against the official page.",
+   "gate": "G05-equivalent capture coverage",
+   "number": "Clear at 3 captures per week for 4 consecutive weeks, each hashed and retained.",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL)"
+  },
+  {
+   "id": "R47",
+   "text": "Use snap counts as the starter proxy when the depth chart is unavailable.",
+   "state": "implemented",
+   "evidence": "Playing-time leaders are computed for 46 club/unit/position groups and published beside the published order.",
+   "gate": "G01 provenance",
+   "number": "Both orders published; disagreement is the datum.",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/snap_counts",
+   "source_label": "nflverse snap counts (COMMUNITY)"
+  },
+  {
+   "id": "R48",
+   "text": "Control baseline (random picks; favourites only) on every leaderboard run.",
+   "state": "implemented",
+   "evidence": "4 control arms are scored on the same rows as every model rule, with BSS exactly 0 by construction.",
+   "gate": "G09 multiplicity",
+   "number": "Every leaderboard run includes the controls.",
+   "source": "https://www.nfl.com/standings/",
+   "source_label": "NFL standings (OFFICIAL)"
+  },
+  {
+   "id": "R49",
+   "text": "Stadium roof, surface and weather context for totals and passing props.",
+   "state": "partial",
+   "evidence": "Roof, surface, temperature and wind are carried from the schedule release. No official hourly NWS forecast grid is held, so a forecast-versus-game-time overlay does not exist.",
+   "gate": "G01 provenance",
+   "number": "Clear when a dated forecast grid is captured beside the official roof designation.",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+   "source_label": "nflverse schedules (COMMUNITY)"
+  },
+  {
+   "id": "R50",
+   "text": "Two-stage skill leaderboard: proper-score qualification, then prospective CLV and ROI.",
+   "state": "partial",
+   "evidence": "Stage one runs. Stage two cannot: CLV needs a pre-kickoff close, which gate G05 blocks.",
+   "gate": "G05 price coverage",
+   "number": "Clear when pre-kickoff closes exist for a full evaluation window.",
+   "source": "https://www.nfl.com/standings/",
+   "source_label": "NFL standings (OFFICIAL)"
+  },
+  {
+   "id": "R51",
+   "text": "Vig-free market consensus versus originated fair-line decomposition.",
+   "state": "partial",
+   "evidence": "Two-way vig removal is implemented and applied to the stored moneyline, and the residual is published. A multi-book consensus cannot be computed from a single, book-less price.",
+   "gate": "G05 price coverage",
+   "number": "Clear when two or more independent prices per market exist.",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+   "source_label": "nflverse schedules (COMMUNITY)"
+  },
+  {
+   "id": "R52",
+   "text": "Weekly 'what changed' diff rather than a static snapshot.",
+   "state": "partial",
+   "evidence": "Deltas are published between the captures that exist. A weekly series needs weekly captures.",
+   "gate": "G05-equivalent capture coverage",
+   "number": "Clear at one capture per week across a month, diffed.",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL)"
+  },
+  {
+   "id": "R53",
+   "text": "Publish every model total twice until one wins on a walk-forward comparison.",
+   "state": "implemented",
+   "evidence": "The ridge total and the Elo-derived total are both published with their residuals; neither is collapsed into the other.",
+   "gate": "G06 sample size",
+   "number": "Both estimators on every row.",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+   "source_label": "nflverse schedules (COMMUNITY); artifact: origination/data/origination_elo.json"
+  },
+  {
+   "id": "R54",
+   "text": "A drift alarm on every scraper: expected row counts and required fields.",
+   "state": "partial",
+   "evidence": "The build fails closed when a required artifact is missing or a reconciliation breaks; the capture scripts do not yet pin per-source row-count expectations.",
+   "gate": "G03 completeness",
+   "number": "Clear when each capture records its expected row count and fails on a miss.",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL)"
+  },
+  {
+   "id": "R55",
+   "text": "Capture the reserve list so 'not listed' never means 'available'.",
+   "state": "implemented",
+   "evidence": "400 reserve/inactive players are read per club and joined to the availability graph.",
+   "gate": "G01 provenance",
+   "number": "Reserve status is a node in the graph, not an assumption.",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/rosters",
+   "source_label": "nflverse rosters (COMMUNITY)"
+  },
+  {
+   "id": "R56",
+   "text": "Reject ranking strategies by season-long ROI.",
+   "state": "implemented",
+   "evidence": "No ROI column exists. Ranking is proper-score based, and the luck page shows why realised return cannot separate skill from variance at this sample.",
+   "gate": "G09 multiplicity",
+   "number": "0 ROI-based ranks published.",
+   "source": "https://www.nfl.com/standings/",
+   "source_label": "NFL standings (OFFICIAL)"
+  },
+  {
+   "id": "R57",
+   "text": "Archive weekly injury reports for past seasons.",
+   "state": "blocked",
+   "evidence": "No official historical injury-report archive is held. nflverse publishes a community injury release, which is not official and cannot satisfy this requirement.",
+   "gate": "G01 provenance",
+   "number": "Clear when a dated official archive is captured with per-week hashes.",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL)"
+  },
+  {
+   "id": "R58",
+   "text": "Pre-register each strategy with a frozen definition before results are seen.",
+   "state": "implemented",
+   "evidence": "Content hashes on every rule; gate G02 checks presence; the leaderboard displays the hash.",
+   "gate": "G02 pre-registration",
+   "number": "All registered rules hashed.",
+   "source": "https://www.nfl.com/standings/",
+   "source_label": "NFL standings (OFFICIAL); artifact: origination/data/strategies.json"
+  },
+  {
+   "id": "R59",
+   "text": "Freeze a rule before it sees data; the commit hash is the registration.",
+   "state": "implemented",
+   "evidence": "Registrations are committed before scoring runs in the same build, and the hash covers the rule text, the market and the threshold.",
+   "gate": "G02 pre-registration",
+   "number": "Hash present for every strategy.",
+   "source": "https://www.nfl.com/standings/",
+   "source_label": "NFL standings (OFFICIAL); artifact: origination/data/strategies.json"
+  },
+  {
+   "id": "R60",
+   "text": "Split data into train, validation and final holdout seasons.",
+   "state": "partial",
+   "evidence": "The walk-forward design fits only on prior seasons, and the ablation has a chronological holdout of weeks 7-10. A season-level three-way split cannot be honoured on a single-season corpus.",
+   "gate": "G06 sample size",
+   "number": "Clear when at least three seasons of pre-kickoff prices exist.",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+   "source_label": "nflverse schedules (COMMUNITY)"
+  },
+  {
+   "id": "R61",
+   "text": "2026 kickoff and declared onside-kick regime priors filter.",
+   "state": "blocked",
+   "evidence": "Rule changes are documented in the rulebook, but no prior filter is fitted or validated; inventing a coefficient would be a fixed penalty, which the brief rejects.",
+   "gate": "G06 sample size",
+   "number": "Clear when a rule-change indicator is tested as an ablation with an interval.",
+   "source": "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook/",
+   "source_label": "NFL rulebook (OFFICIAL)"
+  },
+  {
+   "id": "R62",
+   "text": "Suggestions live in a dedicated review section so a path can be chosen before building.",
+   "state": "implemented",
+   "evidence": "9 suggestions ranked by what they unblock, each with cost, risk and the decision it needs.",
+   "gate": "n/a",
+   "number": "Every suggestion names the requirements it unblocks.",
+   "source": "https://www.nfl.com/standings/",
+   "source_label": "NFL standings (OFFICIAL)"
+  }
+ ],
+ "blocked_ids": [
+  "R12",
+  "R36",
+  "R38",
+  "R40",
+  "R45",
+  "R46",
+  "R57",
+  "R61"
+ ]
+}

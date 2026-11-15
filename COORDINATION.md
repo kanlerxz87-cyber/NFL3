@@ -1847,3 +1847,117 @@ correction made at the source rather than a rounding of the claim.
 **No claim added:** no ROI, closing-line value, vig, market residual, depth ordering, snap share,
 inactive list or validated strategy. The pre-registered model is published as **unvalidated**
 because its own gate fails.
+
+## Claim — `arena/99122105-nfl3` (session 99122105), 2026-11-15 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Origination workspace: price-snapshot store (opening/closing), verified results feed, line origination for side → total → moneyline with fair/market/difference columns, proper-score leaderboard with uncertainty + controls, pre-registration and demotion gates, correlations with n, luck-removal panel, availability/depth graph, decision-readiness table, suggestions review section, flagged items, executive summary, and the final integration + Pages publication for this pass | in progress | `arena/99122105-nfl3` | `origination/` (new), `data/prices/` (new), `tests/test_origination.py` (new), `COORDINATION.md`, and — as the final integration session — root `index.html` navigation block, `README.md` table row and `.github/workflows/pages.yml` step |
+
+**Board read first.** All prior claims are merged (PRs #1–#77); `main` at `5368709` is the starting point and the
+latest entries from `arena/2b0f3e11-nfl3` and `arena/b754ab1d-nfl3` are published. No other session is active, so no
+file below is owned by a live claim.
+
+**Scope discipline.** This session does not edit existing workspace data, the canonical `decision-lab` register, the
+ops-centre derived data, or any published NFL row. It *reads* `decision-lab/data/official_snapshot.json` and
+`decision-lab/data/catalog.json` as inputs. New numbers are computed only in `origination/data/`.
+Root navigation/README/workflow are touched only in the final integration step, after the new workspace builds.
+
+**Evidence rules for every number published here.**
+
+1. Official label ⇒ value came from `nfl.com` (or an official club page) and the row links to that page.
+2. Community label ⇒ value came from the repo's digest-verified nflverse snapshot; the row says so, links to the
+   release asset, and is excluded from every official-only gate.
+3. Cannot be confirmed ⇒ cell stays blank, the row says `unverified`, and the item is published on Flagged for Review.
+
+## Completion — `arena/99122105-nfl3` (session 99122105), 2026-11-15 UTC
+
+| Task | Status | Owner | File scope delivered |
+|---|---|---|---|
+| Origination workspace, price store, results feed, leaderboard, availability graph, registers and site | done — needs review for 12 flagged items | `arena/99122105-nfl3` | `origination/**` (new, 58 files), `tests/test_origination.py` (new), this board, root `index.html` (nav + one table row), `README.md` (one row), `.github/workflows/pages.yml` (three steps) |
+
+**What was built, and what it proves.**
+
+* `origination/data/prices/` — an immutable price-snapshot store plus a ten-point policy committed with a
+  content hash. One snapshot exists. 78 of 816 event × market cells have a pre-kickoff number; 411 are
+  post-hoc only and 327 are empty. Policy P02 forbids a post-hoc number from ever becoming an open, a
+  close, or closing-line-value evidence, and the ledger labels every cell.
+* `origination/data/results.json` — a verified results feed. 137 played games aggregated to 32 clubs;
+  **160/160** club × field checks reproduce nfl.com's official 2026 standings, and league points-for equals
+  points-against at **6,291**. An independent spot-check of 18 games read directly from nfl.com's week 1
+  and week 5 scoreboards matched 18/18.
+* `origination/data/origination_walkforward.json` — side, total then moneyline, fitted only on prior
+  seasons. The model trails the market (side MAE 10.48 vs 9.45; total 11.36 vs 10.55) and that is
+  published as the baseline rather than hidden.
+* `origination/data/leaderboard.json` + `gates.json` — 10 pre-registered rules hashed and scored on
+  proper scores with a paired game-cluster bootstrap, Wilson intervals, four control arms and a
+  multiplicity adjustment over 10 trials. Gate G10 demoted **S01 and S03**, two of this session's own
+  rules, because their skill intervals sit entirely below zero.
+* `origination/data/availability_graph.json` — 1,386 published slots over 30 clubs, 149 rank-1 slots that
+  name more than one player (kept as groups), 254 official report rows, 400 reserve rows, 12,785
+  playing-time rows. Depth is measured from snap share in 46 groups; disagreement with the published
+  order is published, not resolved.
+* `origination/data/ablation.json` — the injury/personnel ablation the brief asked for: same model with
+  and without availability features, chronological holdout (weeks 7–10), **λ not fitted**, full grid
+  published. Holdout MAE improvement **−0.003 [−0.166, +0.179]** — the interval spans zero for every λ,
+  and the page says that is a finding about the sample, not about injuries.
+* `origination/data/requirements.json` — **62** requirements: 33 implemented, 21 partial, 8 blocked,
+  **0 validated**. Every row names its blocking gate and a measurable clearance number.
+* `origination/data/questions.json` (20) and `suggestions.json` (9) — every question names what it blocks
+  and how to close it; every suggestion names the requirements it unblocks, its cost, its risk and the
+  decision it needs.
+
+**Verification performed (all re-run on the committed tree).**
+
+* `python3 tests/test_origination.py` — 35 tests pass, including a sign-convention regression (during
+  development a losing rule was published as a "skill signal" because the bootstrap difference had the
+  wrong sign; the test now pins the direction), the push rule, the sample-size closed form, the price
+  policy, settlement balance, and the demotion agreement between gate and leaderboard.
+* `python3 origination/scripts/verify.py` — 13 pages, 448 table rows, **0** without a source link, 326
+  carrying an official nfl.com link, 0 broken local links, 0 conflict markers, no placeholder tokens, and
+  a rebuild that produces byte-identical output.
+* `python3 scripts/validate_site.py` (14 root pages), `python3 tests/check_site.py`,
+  `python3 decision-lab/scripts/audit.py` (126 pages, 6,624 rows, 1 finding, lab gate PASS),
+  `python3 tests/test_decision_lab.py` (37), `python3 engine/test_engine.py` (ALL PASSED),
+  `python3 ops-center/scripts/verify.py` (9 pages, 0 failures, 8 pre-existing source-class warnings).
+  No existing artifact or published NFL row was edited.
+
+**Irregularities flagged for review (published on `origination/flagged.html`, none blocking):** one price
+observation · two clubs with no parseable depth chart · no inactive lists · the ablation cannot resolve an
+effect · AZ/ARI alias · kickoff time zone absent · two strategies already demoted · no reward funding ·
+a club with no report section is not injury-free · one correlation mixes a community price with an
+official score · unjoined report rows · the site's own model trails the market.
+
+**Scope note for the next session.** The three shared files this session touched are listed in the table
+above: root `index.html` (an additive nav block and one table row), `README.md` (one table row) and
+`.github/workflows/pages.yml` (three additive validation steps). No other workspace was modified and no
+existing numeric claim was changed.
+
+### Addendum — second price capture, and what it proved (`arena/99122105-nfl3`, 2026-11-15)
+
+While rebasing onto main's `data-refresh` commit (`dadba84`), the origination verifier failed on its own
+determinism check. The cause was not a bug in the build: main's refresh had replaced the community
+`schedules` release (`release_asset_updated_utc` 12:36:23Z → 13:06:44Z, sha256 `85e2dcb8…` → `57c2f1b0…`,
+one byte smaller), and **five Week 10 events had actually moved** between the two reads.
+
+Treatment: the store now appends every distinct capture instead of superseding, both snapshot files are
+retained under `origination/data/prices/snapshots/`, and the ledger measures opening-versus-latest per
+cell. Result on this build: **2 snapshots, 78 pre-kickoff market cells, 7 of them moved.**
+
+What moved, exactly: a half-point of total juice on `NE @ DET` (−110/−110 → −115/−105) and on `BUF @ NYJ`
+(−118/−102 → −115/−105); a spread-price flip on `CAR @ NO` (−110/−110 → −105/−115) with both moneylines
+moving a couple of cents; the `KC @ ATL` moneyline (145→150 / −175→−180); and the `SEA @ LV` moneyline
+(230→235 / −285→−290). **No handicap and no total line moved.** That is the honest characterisation: this
+is juice movement on one board, not line movement, and the page says so.
+
+Consequence for the gates, changed deliberately rather than conveniently: G05 used to pass merely because
+two snapshot files existed. That would have been an overclaim. It now passes only when at least one
+pre-kickoff cell shows a genuine opening-to-latest interval, and its evidence line reports
+`78 cells / 2 snapshots / 7 moved`. Two new unit tests pin both the retention rule and the gate's
+condition; a third asserts that movement may never be claimed from a single observation. Gate state is
+now 7 pass / 1 fail (G10, self-inflicted demotions) / 2 blocked (G07 joint evidence, G08 operator rules).
+
+No strategy's grade changed, because no graded row used a moved cell as both its opening and close in a way
+that alters a result, and no CLV claim was added. Re-verified after the change: `tests/test_origination.py`
+38 tests, `origination/scripts/verify.py` (13 pages, 456 rows, 0 missing a source, deterministic),
+`scripts/validate_site.py`, `tests/check_site.py`.

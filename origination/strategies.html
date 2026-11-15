@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strategy registry | NFL3 origination workspace</title>
+<link rel="stylesheet" href="assets/origination.css"></head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="index.html"><b>N</b> NFL3 <span>/ origination</span></a>
+<nav aria-label="Origination navigation" data-current="strategies.html">
+<a href='index.html'>Overview</a><a href='requirements.html'>Requirements</a><a href='decisions.html'>Decisions &amp; questions</a><a href='strategies.html'>Strategy registry</a><a href='leaderboard.html'>Leaderboard</a><a href='lines.html'>Originated lines</a><a href='prices.html'>Price store</a><a href='availability.html'>Availability &amp; depth</a><a href='correlations.html'>Correlations</a><a href='luck.html'>Luck removal</a><a href='suggestions.html'>Suggestions</a><a href='flagged.html'>Flagged for review</a><a href='sources.html'>Sources</a>
+</nav></div></header>
+<main class="wrap">
+<div class="hrow"><div><p class="eyebrow">Frozen rules and their kill conditions</p><h1>Strategy registry</h1></div>
+<span class="badge warn">Research · not betting advice</span></div>
+
+<div class="notice"><b>Read this first.</b> This workspace originates its own numbers and grades them
+against a reconciled official results feed. It holds <b>one</b> community price observation, so no
+opening-line edge, closing-line value or validated strategy exists yet — and the leaderboard says so on
+every row. Prices are labelled <b>COMMUNITY</b>; standings and injury reports are labelled
+<b>OFFICIAL</b>; anything that could not be confirmed is blank and sits on
+<a href="flagged.html">Flagged for review</a>. Nothing here is betting advice.</div>
+
+<div class="section-head"><div><div class="section-label">PRE-REGISTRATION</div>
+<h2>Every strategy is frozen before it sees a result</h2></div>
+<p>10 rules registered at version <code>2026-11-15.v1</code>. The hash is
+a digest of the rule text, so an edit produces a different registration rather than a quiet change.</p></div>
+<div class="table-wrap"><table><caption>Two-sided 'what would change our mind' on every
+row: the condition that would promote it and the condition that would kill it. A blocked row is not
+scored anywhere.</caption>
+<thead><tr><th>ID</th><th>Strategy</th><th>Family</th><th>Frozen rule</th><th>Registration</th>
+<th>Promote if</th><th>Kill if</th><th>Status</th><th>Source</th></tr></thead><tbody>
+<tr><td><b>S01</b></td><td>Model spread vs market spread (no threshold)</td>
+<td>singles</td><td>Bet the side when the originated margin differs from the stored market spread by at least Δ points, Δ = 0. Tie games push on whole numbers only.</td>
+<td><code>487633a291da88d0 · 2026-11-15.v1</code></td><td>Paired BSS interval lower bound above 0 on pre-kickoff rows with n ≥ 200.</td>
+<td>Interval straddles 0 after 400 graded legs, or the sign flips between the two independent estimators (ridge and Elo).</td><td><span class='pill danger'>demoted</span></td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>rules on file ↗</a></td></tr>
+<tr><td><b>S02</b></td><td>Model spread vs market spread (Δ ≥ 1.5)</td>
+<td>singles</td><td>Same as S01 but only when |model − market| ≥ 1.5 points.</td>
+<td><code>e11c73800d74dc54 · 2026-11-15.v1</code></td><td>Paired BSS interval lower bound above 0 with n ≥ 200 at Δ=1.5.</td>
+<td>BSS at Δ=1.5 is not better than Δ=0 after the multiplicity adjustment.</td><td><span class='pill warn'>scored</span></td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>rules on file ↗</a></td></tr>
+<tr><td><b>S03</b></td><td>Model total vs market total</td>
+<td>singles</td><td>Bet over when the originated total exceeds the stored total by ≥ 1.0 point, under by the same margin.</td>
+<td><code>f4818ac3769a9b82 · 2026-11-15.v1</code></td><td>Paired BSS interval lower bound above 0 with n ≥ 200.</td>
+<td>Total MAE is worse than the market&#x27;s MAE on the same rows.</td><td><span class='pill danger'>demoted</span></td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>rules on file ↗</a></td></tr>
+<tr><td><b>S04</b></td><td>Model win probability vs de-vigged moneyline</td>
+<td>singles</td><td>Bet the side whose model probability exceeds the de-vigged market probability by ≥ 3 percentage points.</td>
+<td><code>3eafe17a92172241 · 2026-11-15.v1</code></td><td>Paired BSS interval lower bound above 0 with n ≥ 200.</td>
+<td>Model probabilities are less calibrated than the de-vigged market on the same rows.</td><td><span class='pill warn'>scored</span></td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>rules on file ↗</a></td></tr>
+<tr><td><b>S05</b></td><td>Control: always take the home side</td>
+<td>controls</td><td>Bet home on every pre-kickoff row, ignoring the model.</td>
+<td><code>0d65bb0adb6513af · 2026-11-15.v1</code></td><td>Never promoted. It exists to be beaten.</td>
+<td>n/a — control arm.</td><td><span class='pill warn'>scored</span></td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>rules on file ↗</a></td></tr>
+<tr><td><b>S06</b></td><td>Control: always take the favourite</td>
+<td>controls</td><td>Bet the side the market prices as favourite, ignoring the model.</td>
+<td><code>07e26ffe7917f6ce · 2026-11-15.v1</code></td><td>Never promoted.</td>
+<td>n/a — control arm.</td><td><span class='pill warn'>scored</span></td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>rules on file ↗</a></td></tr>
+<tr><td><b>S07</b></td><td>Control: always take the underdog</td>
+<td>controls</td><td>Bet the side the market prices as underdog.</td>
+<td><code>df790f0f35a19e62 · 2026-11-15.v1</code></td><td>Never promoted.</td>
+<td>n/a — control arm.</td><td><span class='pill warn'>scored</span></td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>rules on file ↗</a></td></tr>
+<tr><td><b>S08</b></td><td>Control: always take the over</td>
+<td>controls</td><td>Bet over on every pre-kickoff row, ignoring the model.</td>
+<td><code>0656df4ae3e6955a · 2026-11-15.v1</code></td><td>Never promoted.</td>
+<td>n/a — control arm.</td><td><span class='pill warn'>scored</span></td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>rules on file ↗</a></td></tr>
+<tr><td><b>S09</b></td><td>Two-leg same-week parlay (joint-evidence gate)</td>
+<td>parlays</td><td>Combine two legs only when a directly validated joint probability exists. Marginal probabilities may not be multiplied: dependence inside a game and across a slate makes the product wrong in both directions.</td>
+<td><code>c025e35d3f03800a · 2026-11-15.v1</code></td><td>A joint probability validated on held-out data, plus the operator&#x27;s void and push rules, plus a settled sample with push handling.</td>
+<td>No joint estimate exists → the strategy stays BLOCKED, not &#x27;promising&#x27;.</td><td><span class='pill warn'>blocked</span><br><small>G07 joint-evidence gate: no validated joint probability is available.</small></td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>rules on file ↗</a></td></tr>
+<tr><td><b>S10</b></td><td>Player-prop combination (joint-evidence gate)</td>
+<td>player-props</td><td>Rank a prop combination only when a directly validated joint probability and the operator&#x27;s void/push rules are both available.</td>
+<td><code>aa0d536e613b58c2 · 2026-11-15.v1</code></td><td>A validated joint model with held-out calibration and settled grading.</td>
+<td>No prop outcome feed exists → stays BLOCKED.</td><td><span class='pill warn'>blocked</span><br><small>G07 + G08: no validated joint probability and no prop settlement feed.</small></td>
+<td><a class='source' href='https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL' target='_blank' rel='noopener noreferrer'>rules on file ↗</a></td></tr>
+</tbody></table></div>
+<div class="notice"><b>Demotion is a feature, not a failure.</b> 2 of the
+scored rules have a Brier-skill interval entirely below zero and are labelled demoted. They keep their
+numbers so the demotion can be checked. <a href="leaderboard.html">See the leaderboard →</a></div>
+</main>
+<footer class="wrap foot"><span><strong>NFL3 origination workspace</strong> · every row links to its source ·
+a value that could not be confirmed stays blank.</span>
+<span>Generated 2026-11-15</span></footer>
+</body></html>

@@ -1,0 +1,225 @@
+{
+ "built_at": "2026-11-15",
+ "rows": [
+  {
+   "id": "Q01",
+   "area": "Price data",
+   "question": "Which price source may be retained, at what latency, and with what right to republish a derived line?",
+   "known": "The NFL's own betting FAQ states its odds are a partner widget; the repository holds one community observation with no bookmaker identity.",
+   "unknown": "No licensed archive, no terms of reuse, no open-versus-close flag on the stored numbers.",
+   "discovery": "Obtain a written data agreement covering history, latency, retention and derived output, or explicitly accept a community source and label every price as such forever.",
+   "blocks": "R01, R18, R50, R51, G05",
+   "source": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL",
+   "source_label": "NFL betting FAQ (OFFICIAL)"
+  },
+  {
+   "id": "Q02",
+   "area": "Price data",
+   "question": "If the only source is community, is a community price good enough to define an opening line?",
+   "known": "The stored series is digest-verified and has one observation. 411 of 816 market cells are post-hoc or empty.",
+   "unknown": "Whether the release's price is an open, a close or a snapshot of one book.",
+   "discovery": "Capture the same markets from a second, independent source and compare: if the two disagree by more than a point, neither can define an opening.",
+   "blocks": "R01, R19, G05",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+   "source_label": "nflverse schedules (COMMUNITY)"
+  },
+  {
+   "id": "Q03",
+   "area": "Availability",
+   "question": "How do we know a listed player actually missed the game?",
+   "known": "6 of 254 report rows carry a game designation; no inactive list is held.",
+   "unknown": "Which listed players were inactive, and which played a reduced role.",
+   "discovery": "Capture official inactive lists for each game and join them to the report rows; the play rate per designation is then measurable.",
+   "blocks": "R25, R38, R45, R12",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL)"
+  },
+  {
+   "id": "Q04",
+   "area": "Availability",
+   "question": "Is 'no injury section' the same as 'no injuries'?",
+   "known": "4 clubs had no section on the captured report, and 24 of 32 clubs had rows at all.",
+   "unknown": "Whether an absent section reflects a healthy roster or a reporting gap.",
+   "discovery": "Compare a club's absent-section week with its next published report and with its inactive list; a reappearing long-term injury would prove a gap.",
+   "blocks": "R12, R42",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL)"
+  },
+  {
+   "id": "Q05",
+   "area": "Depth",
+   "question": "What does a published rank actually mean when one slot names three players?",
+   "known": "149 rank-1 slots name two or more players.",
+   "unknown": "Which of those players starts, and whether the order within the group is meaningful.",
+   "discovery": "Join playing time to each shared slot: if the measured shares are indistinguishable, the slot is a committee and no single starter exists.",
+   "blocks": "R06, R11, R27, R35, R39",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL); club charts: decision-lab/data/official_snapshot.json"
+  },
+  {
+   "id": "Q06",
+   "area": "Depth",
+   "question": "Can depth be derived from playing time for a player who has not yet played?",
+   "known": "Snap counts cover the season to date; a rookie with no snaps has no measurement.",
+   "unknown": "The order behind a player with zero recorded snaps.",
+   "discovery": "Keep the published order for those players and label the measured order as unavailable for them; do not fall back to jersey number.",
+   "blocks": "R11, R47",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/snap_counts",
+   "source_label": "nflverse snap counts (COMMUNITY)"
+  },
+  {
+   "id": "Q07",
+   "area": "Depth",
+   "question": "Two clubs publish no parseable depth chart. What is the authorised structured source?",
+   "known": "The Texans publish the chart as an image and the Packers prepend jersey numbers; the failure is recorded per club.",
+   "unknown": "A structured, authorised source for those two clubs.",
+   "discovery": "Ask each club for a structured export, or accept the gap and publish it as a gap rather than transcribing an image by eye.",
+   "blocks": "R26, R37, R40",
+   "source": "https://www.nfl.com/teams/",
+   "source_label": "NFL club directory (OFFICIAL); capture: decision-lab/data/official_snapshot.json"
+  },
+  {
+   "id": "Q08",
+   "area": "Modelling",
+   "question": "Is the injury effect even measurable at this sample size?",
+   "known": "The holdout ablation interval spans zero for every \u03bb in the published grid.",
+   "unknown": "The size of the true effect, and whether it is larger for specific positions.",
+   "discovery": "Accumulate pre-kickoff price and availability captures across a season, then re-run the ablation with position-specific terms and a pre-registered \u03bb.",
+   "blocks": "R24, R61",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL)"
+  },
+  {
+   "id": "Q09",
+   "area": "Modelling",
+   "question": "Which estimator should represent the side?",
+   "known": "Two estimators exist: a ridge fit on seasonal scoring and a leak-free Elo. Both trail the market on the same 137 games, and their errors correlate at about 0.95.",
+   "unknown": "Whether a third family, or a combination, would close the gap.",
+   "discovery": "Publish both until a walk-forward comparison separates them with an interval, which requires more pre-kickoff games.",
+   "blocks": "R03, R53, R60",
+   "source": "https://www.nfl.com/standings/",
+   "source_label": "NFL standings (OFFICIAL)"
+  },
+  {
+   "id": "Q10",
+   "area": "Modelling",
+   "question": "What converts a measured snap share into points of margin?",
+   "known": "The ablation publishes a pre-registered \u03bb grid so no single conversion is asserted.",
+   "unknown": "The true conversion, and whether it varies by position.",
+   "discovery": "Fit \u03bb out of sample on a corpus large enough to estimate it, and pre-register the fit before looking at the holdout.",
+   "blocks": "R24, R35",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/snap_counts",
+   "source_label": "nflverse snap counts (COMMUNITY)"
+  },
+  {
+   "id": "Q11",
+   "area": "Leaderboard",
+   "question": "What sample is enough to call a strategy validated?",
+   "known": "Floors are pre-registered at n\u226550 to publish and n\u2265200 to promote; the largest scored arm has 137.",
+   "unknown": "Whether those floors are strict enough given the dependence between legs in the same week.",
+   "discovery": "Simulate the family-wise error rate under the current floors and adjust them before the next evaluation window opens.",
+   "blocks": "R32, R50, G06, G09",
+   "source": "https://www.nfl.com/standings/",
+   "source_label": "NFL standings (OFFICIAL)"
+  },
+  {
+   "id": "Q12",
+   "area": "Leaderboard",
+   "question": "Where do the rewards come from, and who funds them?",
+   "known": "No reward pool, rule set or funding source exists in the repository.",
+   "unknown": "The existence, size and legality of any reward.",
+   "discovery": "Decide the jurisdiction and the funding source before any reward is described as available.",
+   "blocks": "R05, R32, R56",
+   "source": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL",
+   "source_label": "NFL betting FAQ (OFFICIAL)"
+  },
+  {
+   "id": "Q13",
+   "area": "Leaderboard",
+   "question": "Are control arms scored on the same rows as the model arms?",
+   "known": "Yes by construction, and a control's Brier skill is exactly zero, which is what proves the scoring path is neutral.",
+   "unknown": "Whether a control should also carry an interval on its own win rate for display.",
+   "discovery": "Add a Wilson interval to every control arm so a reader can see that a 51% control is ordinary.",
+   "blocks": "R48",
+   "source": "https://www.nfl.com/standings/",
+   "source_label": "NFL standings (OFFICIAL)"
+  },
+  {
+   "id": "Q14",
+   "area": "Combos",
+   "question": "What would a validated joint probability require?",
+   "known": "Nothing exists yet: no prop outcome feed and no operator settlement rules.",
+   "unknown": "The conditional structure between legs inside a game.",
+   "discovery": "Capture a play-level prop outcome series and a same-game price pair; only then can a joint model be fitted and validated on a holdout.",
+   "blocks": "R30, G07, G08",
+   "source": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL",
+   "source_label": "NFL betting FAQ (OFFICIAL)"
+  },
+  {
+   "id": "Q15",
+   "area": "Legal",
+   "question": "What may be republished from each source, and under what terms?",
+   "known": "The site links to official pages and stores a private capture; reuse terms are not established.",
+   "unknown": "Whether derived output (a fair line) counts as republished source data.",
+   "discovery": "Get written terms per source class, or restrict the site to derived analysis plus links.",
+   "blocks": "R34, DATA-USE-01",
+   "source": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL",
+   "source_label": "NFL betting FAQ (OFFICIAL)"
+  },
+  {
+   "id": "Q16",
+   "area": "Automation",
+   "question": "What runs the capture schedule, and what happens when a capture is missed?",
+   "known": "Captures are scripted and hashed; no schedule currently hits the official page on Wed/Thu/Fri.",
+   "unknown": "Whether a missed capture can be detected and recorded as a gap rather than back-filled.",
+   "discovery": "Enable a scheduled capture job, write a manifest of expected captures, and fail the build when a scheduled capture is absent.",
+   "blocks": "R12, R21, R33, R41, R46, R52, R54",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL)"
+  },
+  {
+   "id": "Q17",
+   "area": "Automation",
+   "question": "How should a source change be distinguished from a data error?",
+   "known": "The build fails closed on a reconciliation break and publishes drift instead of reconciling it.",
+   "unknown": "The threshold at which a row-count change is a source format change rather than news.",
+   "discovery": "Pin an expected row count and field set per source, and alert on a miss before the page is published.",
+   "blocks": "R33, R54",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL)"
+  },
+  {
+   "id": "Q18",
+   "area": "Settlement",
+   "question": "Which operator's void and push rules govern a graded bet?",
+   "known": "Grading uses a mechanical push rule stated in policy P06; no operator terms are held.",
+   "unknown": "Whether a real operator voids a pushed leg or refunds the stake inside a same-game parlay.",
+   "discovery": "Obtain the rules for whichever operator would be used, and store them with a date.",
+   "blocks": "R30, G08",
+   "source": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL",
+   "source_label": "NFL betting FAQ (OFFICIAL)"
+  },
+  {
+   "id": "Q19",
+   "area": "Ownership",
+   "question": "Which of the 62 requirements should be funded first?",
+   "known": "The suggestions page ranks 9 proposals by the requirements they unblock.",
+   "unknown": "The owner's appetite for a licensed price feed, which would unblock the most at once.",
+   "discovery": "Choose a path on the suggestions page, then re-run the build: blocked gates become a plan rather than a list.",
+   "blocks": "All blocked requirements",
+   "source": "https://www.nfl.com/standings/",
+   "source_label": "NFL standings (OFFICIAL)"
+  },
+  {
+   "id": "Q20",
+   "area": "Ownership",
+   "question": "How does a demoted strategy earn its way back?",
+   "known": "Demotion is automatic and published, and the score is retained.",
+   "unknown": "The re-entry rule, and whether a demoted rule must be re-registered with a new hash.",
+   "discovery": "Require re-registration (a new hash) with the demotion recorded in its text, so a comeback cannot silently reuse a failed rule.",
+   "blocks": "R08, R58, G10",
+   "source": "https://www.nfl.com/standings/",
+   "source_label": "NFL standings (OFFICIAL); gate artifact: origination/data/gates.json"
+  }
+ ]
+}

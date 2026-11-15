@@ -1,0 +1,1497 @@
+{
+ "schema_version": 1,
+ "built_at": "2026-11-15",
+ "settlement_authority": "official final score, reconciled (see policy P07)",
+ "official_standings": {
+  "url": "https://www.nfl.com/standings/",
+  "observed_at": "2026-11-15T13:05:00Z",
+  "clubs": 32
+ },
+ "community_games": {
+  "url": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+  "sha256": "sha256:57c2f1b063689cbb639144148c9d0bea2c791d2b1a7cdbc64643f68eaf9d0e27"
+ },
+ "counts": {
+  "games_scheduled": 272,
+  "games_played": 137,
+  "games_unplayed": 135,
+  "ties": 1,
+  "team_fields_checked": 160,
+  "team_fields_matching": 160,
+  "clubs_checked": 32,
+  "weeks_covered": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ]
+ },
+ "league_totals": {
+  "feed": {
+   "pf": 6291,
+   "pa": 6291,
+   "w": 136,
+   "l": 136,
+   "t": 2
+  },
+  "official": {
+   "pf": 6291,
+   "pa": 6291,
+   "w": 136,
+   "l": 136,
+   "t": 2
+  },
+  "match": true
+ },
+ "reconciliation": [
+  {
+   "code": "ATL",
+   "club": "Atlanta Falcons",
+   "official_code": "ATL",
+   "field": "wins",
+   "official": 3,
+   "feed": 3,
+   "match": true
+  },
+  {
+   "code": "ATL",
+   "club": "Atlanta Falcons",
+   "official_code": "ATL",
+   "field": "losses",
+   "official": 6,
+   "feed": 6,
+   "match": true
+  },
+  {
+   "code": "ATL",
+   "club": "Atlanta Falcons",
+   "official_code": "ATL",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "ATL",
+   "club": "Atlanta Falcons",
+   "official_code": "ATL",
+   "field": "points for",
+   "official": 188,
+   "feed": 188,
+   "match": true
+  },
+  {
+   "code": "ATL",
+   "club": "Atlanta Falcons",
+   "official_code": "ATL",
+   "field": "points against",
+   "official": 223,
+   "feed": 223,
+   "match": true
+  },
+  {
+   "code": "AZ",
+   "club": "Arizona Cardinals",
+   "official_code": "AZ",
+   "field": "wins",
+   "official": 3,
+   "feed": 3,
+   "match": true
+  },
+  {
+   "code": "AZ",
+   "club": "Arizona Cardinals",
+   "official_code": "AZ",
+   "field": "losses",
+   "official": 6,
+   "feed": 6,
+   "match": true
+  },
+  {
+   "code": "AZ",
+   "club": "Arizona Cardinals",
+   "official_code": "AZ",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "AZ",
+   "club": "Arizona Cardinals",
+   "official_code": "AZ",
+   "field": "points for",
+   "official": 178,
+   "feed": 178,
+   "match": true
+  },
+  {
+   "code": "AZ",
+   "club": "Arizona Cardinals",
+   "official_code": "AZ",
+   "field": "points against",
+   "official": 255,
+   "feed": 255,
+   "match": true
+  },
+  {
+   "code": "BAL",
+   "club": "Baltimore Ravens",
+   "official_code": "BAL",
+   "field": "wins",
+   "official": 4,
+   "feed": 4,
+   "match": true
+  },
+  {
+   "code": "BAL",
+   "club": "Baltimore Ravens",
+   "official_code": "BAL",
+   "field": "losses",
+   "official": 5,
+   "feed": 5,
+   "match": true
+  },
+  {
+   "code": "BAL",
+   "club": "Baltimore Ravens",
+   "official_code": "BAL",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "BAL",
+   "club": "Baltimore Ravens",
+   "official_code": "BAL",
+   "field": "points for",
+   "official": 189,
+   "feed": 189,
+   "match": true
+  },
+  {
+   "code": "BAL",
+   "club": "Baltimore Ravens",
+   "official_code": "BAL",
+   "field": "points against",
+   "official": 236,
+   "feed": 236,
+   "match": true
+  },
+  {
+   "code": "BUF",
+   "club": "Buffalo Bills",
+   "official_code": "BUF",
+   "field": "wins",
+   "official": 7,
+   "feed": 7,
+   "match": true
+  },
+  {
+   "code": "BUF",
+   "club": "Buffalo Bills",
+   "official_code": "BUF",
+   "field": "losses",
+   "official": 1,
+   "feed": 1,
+   "match": true
+  },
+  {
+   "code": "BUF",
+   "club": "Buffalo Bills",
+   "official_code": "BUF",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "BUF",
+   "club": "Buffalo Bills",
+   "official_code": "BUF",
+   "field": "points for",
+   "official": 256,
+   "feed": 256,
+   "match": true
+  },
+  {
+   "code": "BUF",
+   "club": "Buffalo Bills",
+   "official_code": "BUF",
+   "field": "points against",
+   "official": 187,
+   "feed": 187,
+   "match": true
+  },
+  {
+   "code": "CAR",
+   "club": "Carolina Panthers",
+   "official_code": "CAR",
+   "field": "wins",
+   "official": 3,
+   "feed": 3,
+   "match": true
+  },
+  {
+   "code": "CAR",
+   "club": "Carolina Panthers",
+   "official_code": "CAR",
+   "field": "losses",
+   "official": 5,
+   "feed": 5,
+   "match": true
+  },
+  {
+   "code": "CAR",
+   "club": "Carolina Panthers",
+   "official_code": "CAR",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "CAR",
+   "club": "Carolina Panthers",
+   "official_code": "CAR",
+   "field": "points for",
+   "official": 199,
+   "feed": 199,
+   "match": true
+  },
+  {
+   "code": "CAR",
+   "club": "Carolina Panthers",
+   "official_code": "CAR",
+   "field": "points against",
+   "official": 219,
+   "feed": 219,
+   "match": true
+  },
+  {
+   "code": "CHI",
+   "club": "Chicago Bears",
+   "official_code": "CHI",
+   "field": "wins",
+   "official": 7,
+   "feed": 7,
+   "match": true
+  },
+  {
+   "code": "CHI",
+   "club": "Chicago Bears",
+   "official_code": "CHI",
+   "field": "losses",
+   "official": 2,
+   "feed": 2,
+   "match": true
+  },
+  {
+   "code": "CHI",
+   "club": "Chicago Bears",
+   "official_code": "CHI",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "CHI",
+   "club": "Chicago Bears",
+   "official_code": "CHI",
+   "field": "points for",
+   "official": 241,
+   "feed": 241,
+   "match": true
+  },
+  {
+   "code": "CHI",
+   "club": "Chicago Bears",
+   "official_code": "CHI",
+   "field": "points against",
+   "official": 184,
+   "feed": 184,
+   "match": true
+  },
+  {
+   "code": "CIN",
+   "club": "Cincinnati Bengals",
+   "official_code": "CIN",
+   "field": "wins",
+   "official": 6,
+   "feed": 6,
+   "match": true
+  },
+  {
+   "code": "CIN",
+   "club": "Cincinnati Bengals",
+   "official_code": "CIN",
+   "field": "losses",
+   "official": 2,
+   "feed": 2,
+   "match": true
+  },
+  {
+   "code": "CIN",
+   "club": "Cincinnati Bengals",
+   "official_code": "CIN",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "CIN",
+   "club": "Cincinnati Bengals",
+   "official_code": "CIN",
+   "field": "points for",
+   "official": 240,
+   "feed": 240,
+   "match": true
+  },
+  {
+   "code": "CIN",
+   "club": "Cincinnati Bengals",
+   "official_code": "CIN",
+   "field": "points against",
+   "official": 175,
+   "feed": 175,
+   "match": true
+  },
+  {
+   "code": "CLE",
+   "club": "Cleveland Browns",
+   "official_code": "CLE",
+   "field": "wins",
+   "official": 5,
+   "feed": 5,
+   "match": true
+  },
+  {
+   "code": "CLE",
+   "club": "Cleveland Browns",
+   "official_code": "CLE",
+   "field": "losses",
+   "official": 4,
+   "feed": 4,
+   "match": true
+  },
+  {
+   "code": "CLE",
+   "club": "Cleveland Browns",
+   "official_code": "CLE",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "CLE",
+   "club": "Cleveland Browns",
+   "official_code": "CLE",
+   "field": "points for",
+   "official": 161,
+   "feed": 161,
+   "match": true
+  },
+  {
+   "code": "CLE",
+   "club": "Cleveland Browns",
+   "official_code": "CLE",
+   "field": "points against",
+   "official": 196,
+   "feed": 196,
+   "match": true
+  },
+  {
+   "code": "DAL",
+   "club": "Dallas Cowboys",
+   "official_code": "DAL",
+   "field": "wins",
+   "official": 4,
+   "feed": 4,
+   "match": true
+  },
+  {
+   "code": "DAL",
+   "club": "Dallas Cowboys",
+   "official_code": "DAL",
+   "field": "losses",
+   "official": 5,
+   "feed": 5,
+   "match": true
+  },
+  {
+   "code": "DAL",
+   "club": "Dallas Cowboys",
+   "official_code": "DAL",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "DAL",
+   "club": "Dallas Cowboys",
+   "official_code": "DAL",
+   "field": "points for",
+   "official": 246,
+   "feed": 246,
+   "match": true
+  },
+  {
+   "code": "DAL",
+   "club": "Dallas Cowboys",
+   "official_code": "DAL",
+   "field": "points against",
+   "official": 236,
+   "feed": 236,
+   "match": true
+  },
+  {
+   "code": "DEN",
+   "club": "Denver Broncos",
+   "official_code": "DEN",
+   "field": "wins",
+   "official": 7,
+   "feed": 7,
+   "match": true
+  },
+  {
+   "code": "DEN",
+   "club": "Denver Broncos",
+   "official_code": "DEN",
+   "field": "losses",
+   "official": 2,
+   "feed": 2,
+   "match": true
+  },
+  {
+   "code": "DEN",
+   "club": "Denver Broncos",
+   "official_code": "DEN",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "DEN",
+   "club": "Denver Broncos",
+   "official_code": "DEN",
+   "field": "points for",
+   "official": 198,
+   "feed": 198,
+   "match": true
+  },
+  {
+   "code": "DEN",
+   "club": "Denver Broncos",
+   "official_code": "DEN",
+   "field": "points against",
+   "official": 186,
+   "feed": 186,
+   "match": true
+  },
+  {
+   "code": "DET",
+   "club": "Detroit Lions",
+   "official_code": "DET",
+   "field": "wins",
+   "official": 6,
+   "feed": 6,
+   "match": true
+  },
+  {
+   "code": "DET",
+   "club": "Detroit Lions",
+   "official_code": "DET",
+   "field": "losses",
+   "official": 2,
+   "feed": 2,
+   "match": true
+  },
+  {
+   "code": "DET",
+   "club": "Detroit Lions",
+   "official_code": "DET",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "DET",
+   "club": "Detroit Lions",
+   "official_code": "DET",
+   "field": "points for",
+   "official": 222,
+   "feed": 222,
+   "match": true
+  },
+  {
+   "code": "DET",
+   "club": "Detroit Lions",
+   "official_code": "DET",
+   "field": "points against",
+   "official": 189,
+   "feed": 189,
+   "match": true
+  },
+  {
+   "code": "GB",
+   "club": "Green Bay Packers",
+   "official_code": "GB",
+   "field": "wins",
+   "official": 6,
+   "feed": 6,
+   "match": true
+  },
+  {
+   "code": "GB",
+   "club": "Green Bay Packers",
+   "official_code": "GB",
+   "field": "losses",
+   "official": 3,
+   "feed": 3,
+   "match": true
+  },
+  {
+   "code": "GB",
+   "club": "Green Bay Packers",
+   "official_code": "GB",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "GB",
+   "club": "Green Bay Packers",
+   "official_code": "GB",
+   "field": "points for",
+   "official": 216,
+   "feed": 216,
+   "match": true
+  },
+  {
+   "code": "GB",
+   "club": "Green Bay Packers",
+   "official_code": "GB",
+   "field": "points against",
+   "official": 191,
+   "feed": 191,
+   "match": true
+  },
+  {
+   "code": "HOU",
+   "club": "Houston Texans",
+   "official_code": "HOU",
+   "field": "wins",
+   "official": 3,
+   "feed": 3,
+   "match": true
+  },
+  {
+   "code": "HOU",
+   "club": "Houston Texans",
+   "official_code": "HOU",
+   "field": "losses",
+   "official": 5,
+   "feed": 5,
+   "match": true
+  },
+  {
+   "code": "HOU",
+   "club": "Houston Texans",
+   "official_code": "HOU",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "HOU",
+   "club": "Houston Texans",
+   "official_code": "HOU",
+   "field": "points for",
+   "official": 209,
+   "feed": 209,
+   "match": true
+  },
+  {
+   "code": "HOU",
+   "club": "Houston Texans",
+   "official_code": "HOU",
+   "field": "points against",
+   "official": 192,
+   "feed": 192,
+   "match": true
+  },
+  {
+   "code": "IND",
+   "club": "Indianapolis Colts",
+   "official_code": "IND",
+   "field": "wins",
+   "official": 2,
+   "feed": 2,
+   "match": true
+  },
+  {
+   "code": "IND",
+   "club": "Indianapolis Colts",
+   "official_code": "IND",
+   "field": "losses",
+   "official": 7,
+   "feed": 7,
+   "match": true
+  },
+  {
+   "code": "IND",
+   "club": "Indianapolis Colts",
+   "official_code": "IND",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "IND",
+   "club": "Indianapolis Colts",
+   "official_code": "IND",
+   "field": "points for",
+   "official": 184,
+   "feed": 184,
+   "match": true
+  },
+  {
+   "code": "IND",
+   "club": "Indianapolis Colts",
+   "official_code": "IND",
+   "field": "points against",
+   "official": 249,
+   "feed": 249,
+   "match": true
+  },
+  {
+   "code": "JAX",
+   "club": "Jacksonville Jaguars",
+   "official_code": "JAX",
+   "field": "wins",
+   "official": 6,
+   "feed": 6,
+   "match": true
+  },
+  {
+   "code": "JAX",
+   "club": "Jacksonville Jaguars",
+   "official_code": "JAX",
+   "field": "losses",
+   "official": 2,
+   "feed": 2,
+   "match": true
+  },
+  {
+   "code": "JAX",
+   "club": "Jacksonville Jaguars",
+   "official_code": "JAX",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "JAX",
+   "club": "Jacksonville Jaguars",
+   "official_code": "JAX",
+   "field": "points for",
+   "official": 229,
+   "feed": 229,
+   "match": true
+  },
+  {
+   "code": "JAX",
+   "club": "Jacksonville Jaguars",
+   "official_code": "JAX",
+   "field": "points against",
+   "official": 121,
+   "feed": 121,
+   "match": true
+  },
+  {
+   "code": "KC",
+   "club": "Kansas City Chiefs",
+   "official_code": "KC",
+   "field": "wins",
+   "official": 6,
+   "feed": 6,
+   "match": true
+  },
+  {
+   "code": "KC",
+   "club": "Kansas City Chiefs",
+   "official_code": "KC",
+   "field": "losses",
+   "official": 2,
+   "feed": 2,
+   "match": true
+  },
+  {
+   "code": "KC",
+   "club": "Kansas City Chiefs",
+   "official_code": "KC",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "KC",
+   "club": "Kansas City Chiefs",
+   "official_code": "KC",
+   "field": "points for",
+   "official": 202,
+   "feed": 202,
+   "match": true
+  },
+  {
+   "code": "KC",
+   "club": "Kansas City Chiefs",
+   "official_code": "KC",
+   "field": "points against",
+   "official": 143,
+   "feed": 143,
+   "match": true
+  },
+  {
+   "code": "LA",
+   "club": "Los Angeles Rams",
+   "official_code": "LA",
+   "field": "wins",
+   "official": 5,
+   "feed": 5,
+   "match": true
+  },
+  {
+   "code": "LA",
+   "club": "Los Angeles Rams",
+   "official_code": "LA",
+   "field": "losses",
+   "official": 4,
+   "feed": 4,
+   "match": true
+  },
+  {
+   "code": "LA",
+   "club": "Los Angeles Rams",
+   "official_code": "LA",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "LA",
+   "club": "Los Angeles Rams",
+   "official_code": "LA",
+   "field": "points for",
+   "official": 214,
+   "feed": 214,
+   "match": true
+  },
+  {
+   "code": "LA",
+   "club": "Los Angeles Rams",
+   "official_code": "LA",
+   "field": "points against",
+   "official": 181,
+   "feed": 181,
+   "match": true
+  },
+  {
+   "code": "LAC",
+   "club": "Los Angeles Chargers",
+   "official_code": "LAC",
+   "field": "wins",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "LAC",
+   "club": "Los Angeles Chargers",
+   "official_code": "LAC",
+   "field": "losses",
+   "official": 8,
+   "feed": 8,
+   "match": true
+  },
+  {
+   "code": "LAC",
+   "club": "Los Angeles Chargers",
+   "official_code": "LAC",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "LAC",
+   "club": "Los Angeles Chargers",
+   "official_code": "LAC",
+   "field": "points for",
+   "official": 121,
+   "feed": 121,
+   "match": true
+  },
+  {
+   "code": "LAC",
+   "club": "Los Angeles Chargers",
+   "official_code": "LAC",
+   "field": "points against",
+   "official": 219,
+   "feed": 219,
+   "match": true
+  },
+  {
+   "code": "LV",
+   "club": "Las Vegas Raiders",
+   "official_code": "LV",
+   "field": "wins",
+   "official": 4,
+   "feed": 4,
+   "match": true
+  },
+  {
+   "code": "LV",
+   "club": "Las Vegas Raiders",
+   "official_code": "LV",
+   "field": "losses",
+   "official": 5,
+   "feed": 5,
+   "match": true
+  },
+  {
+   "code": "LV",
+   "club": "Las Vegas Raiders",
+   "official_code": "LV",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "LV",
+   "club": "Las Vegas Raiders",
+   "official_code": "LV",
+   "field": "points for",
+   "official": 238,
+   "feed": 238,
+   "match": true
+  },
+  {
+   "code": "LV",
+   "club": "Las Vegas Raiders",
+   "official_code": "LV",
+   "field": "points against",
+   "official": 268,
+   "feed": 268,
+   "match": true
+  },
+  {
+   "code": "MIA",
+   "club": "Miami Dolphins",
+   "official_code": "MIA",
+   "field": "wins",
+   "official": 1,
+   "feed": 1,
+   "match": true
+  },
+  {
+   "code": "MIA",
+   "club": "Miami Dolphins",
+   "official_code": "MIA",
+   "field": "losses",
+   "official": 7,
+   "feed": 7,
+   "match": true
+  },
+  {
+   "code": "MIA",
+   "club": "Miami Dolphins",
+   "official_code": "MIA",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "MIA",
+   "club": "Miami Dolphins",
+   "official_code": "MIA",
+   "field": "points for",
+   "official": 126,
+   "feed": 126,
+   "match": true
+  },
+  {
+   "code": "MIA",
+   "club": "Miami Dolphins",
+   "official_code": "MIA",
+   "field": "points against",
+   "official": 200,
+   "feed": 200,
+   "match": true
+  },
+  {
+   "code": "MIN",
+   "club": "Minnesota Vikings",
+   "official_code": "MIN",
+   "field": "wins",
+   "official": 6,
+   "feed": 6,
+   "match": true
+  },
+  {
+   "code": "MIN",
+   "club": "Minnesota Vikings",
+   "official_code": "MIN",
+   "field": "losses",
+   "official": 2,
+   "feed": 2,
+   "match": true
+  },
+  {
+   "code": "MIN",
+   "club": "Minnesota Vikings",
+   "official_code": "MIN",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "MIN",
+   "club": "Minnesota Vikings",
+   "official_code": "MIN",
+   "field": "points for",
+   "official": 146,
+   "feed": 146,
+   "match": true
+  },
+  {
+   "code": "MIN",
+   "club": "Minnesota Vikings",
+   "official_code": "MIN",
+   "field": "points against",
+   "official": 116,
+   "feed": 116,
+   "match": true
+  },
+  {
+   "code": "NE",
+   "club": "New England Patriots",
+   "official_code": "NE",
+   "field": "wins",
+   "official": 5,
+   "feed": 5,
+   "match": true
+  },
+  {
+   "code": "NE",
+   "club": "New England Patriots",
+   "official_code": "NE",
+   "field": "losses",
+   "official": 4,
+   "feed": 4,
+   "match": true
+  },
+  {
+   "code": "NE",
+   "club": "New England Patriots",
+   "official_code": "NE",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "NE",
+   "club": "New England Patriots",
+   "official_code": "NE",
+   "field": "points for",
+   "official": 211,
+   "feed": 211,
+   "match": true
+  },
+  {
+   "code": "NE",
+   "club": "New England Patriots",
+   "official_code": "NE",
+   "field": "points against",
+   "official": 207,
+   "feed": 207,
+   "match": true
+  },
+  {
+   "code": "NO",
+   "club": "New Orleans Saints",
+   "official_code": "NO",
+   "field": "wins",
+   "official": 3,
+   "feed": 3,
+   "match": true
+  },
+  {
+   "code": "NO",
+   "club": "New Orleans Saints",
+   "official_code": "NO",
+   "field": "losses",
+   "official": 5,
+   "feed": 5,
+   "match": true
+  },
+  {
+   "code": "NO",
+   "club": "New Orleans Saints",
+   "official_code": "NO",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "NO",
+   "club": "New Orleans Saints",
+   "official_code": "NO",
+   "field": "points for",
+   "official": 185,
+   "feed": 185,
+   "match": true
+  },
+  {
+   "code": "NO",
+   "club": "New Orleans Saints",
+   "official_code": "NO",
+   "field": "points against",
+   "official": 216,
+   "feed": 216,
+   "match": true
+  },
+  {
+   "code": "NYG",
+   "club": "New York Giants",
+   "official_code": "NYG",
+   "field": "wins",
+   "official": 5,
+   "feed": 5,
+   "match": true
+  },
+  {
+   "code": "NYG",
+   "club": "New York Giants",
+   "official_code": "NYG",
+   "field": "losses",
+   "official": 3,
+   "feed": 3,
+   "match": true
+  },
+  {
+   "code": "NYG",
+   "club": "New York Giants",
+   "official_code": "NYG",
+   "field": "ties",
+   "official": 1,
+   "feed": 1,
+   "match": true
+  },
+  {
+   "code": "NYG",
+   "club": "New York Giants",
+   "official_code": "NYG",
+   "field": "points for",
+   "official": 203,
+   "feed": 203,
+   "match": true
+  },
+  {
+   "code": "NYG",
+   "club": "New York Giants",
+   "official_code": "NYG",
+   "field": "points against",
+   "official": 196,
+   "feed": 196,
+   "match": true
+  },
+  {
+   "code": "NYJ",
+   "club": "New York Jets",
+   "official_code": "NYJ",
+   "field": "wins",
+   "official": 2,
+   "feed": 2,
+   "match": true
+  },
+  {
+   "code": "NYJ",
+   "club": "New York Jets",
+   "official_code": "NYJ",
+   "field": "losses",
+   "official": 7,
+   "feed": 7,
+   "match": true
+  },
+  {
+   "code": "NYJ",
+   "club": "New York Jets",
+   "official_code": "NYJ",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "NYJ",
+   "club": "New York Jets",
+   "official_code": "NYJ",
+   "field": "points for",
+   "official": 182,
+   "feed": 182,
+   "match": true
+  },
+  {
+   "code": "NYJ",
+   "club": "New York Jets",
+   "official_code": "NYJ",
+   "field": "points against",
+   "official": 223,
+   "feed": 223,
+   "match": true
+  },
+  {
+   "code": "PHI",
+   "club": "Philadelphia Eagles",
+   "official_code": "PHI",
+   "field": "wins",
+   "official": 2,
+   "feed": 2,
+   "match": true
+  },
+  {
+   "code": "PHI",
+   "club": "Philadelphia Eagles",
+   "official_code": "PHI",
+   "field": "losses",
+   "official": 7,
+   "feed": 7,
+   "match": true
+  },
+  {
+   "code": "PHI",
+   "club": "Philadelphia Eagles",
+   "official_code": "PHI",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "PHI",
+   "club": "Philadelphia Eagles",
+   "official_code": "PHI",
+   "field": "points for",
+   "official": 148,
+   "feed": 148,
+   "match": true
+  },
+  {
+   "code": "PHI",
+   "club": "Philadelphia Eagles",
+   "official_code": "PHI",
+   "field": "points against",
+   "official": 221,
+   "feed": 221,
+   "match": true
+  },
+  {
+   "code": "PIT",
+   "club": "Pittsburgh Steelers",
+   "official_code": "PIT",
+   "field": "wins",
+   "official": 6,
+   "feed": 6,
+   "match": true
+  },
+  {
+   "code": "PIT",
+   "club": "Pittsburgh Steelers",
+   "official_code": "PIT",
+   "field": "losses",
+   "official": 2,
+   "feed": 2,
+   "match": true
+  },
+  {
+   "code": "PIT",
+   "club": "Pittsburgh Steelers",
+   "official_code": "PIT",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "PIT",
+   "club": "Pittsburgh Steelers",
+   "official_code": "PIT",
+   "field": "points for",
+   "official": 180,
+   "feed": 180,
+   "match": true
+  },
+  {
+   "code": "PIT",
+   "club": "Pittsburgh Steelers",
+   "official_code": "PIT",
+   "field": "points against",
+   "official": 144,
+   "feed": 144,
+   "match": true
+  },
+  {
+   "code": "SEA",
+   "club": "Seattle Seahawks",
+   "official_code": "SEA",
+   "field": "wins",
+   "official": 5,
+   "feed": 5,
+   "match": true
+  },
+  {
+   "code": "SEA",
+   "club": "Seattle Seahawks",
+   "official_code": "SEA",
+   "field": "losses",
+   "official": 4,
+   "feed": 4,
+   "match": true
+  },
+  {
+   "code": "SEA",
+   "club": "Seattle Seahawks",
+   "official_code": "SEA",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "SEA",
+   "club": "Seattle Seahawks",
+   "official_code": "SEA",
+   "field": "points for",
+   "official": 202,
+   "feed": 202,
+   "match": true
+  },
+  {
+   "code": "SEA",
+   "club": "Seattle Seahawks",
+   "official_code": "SEA",
+   "field": "points against",
+   "official": 162,
+   "feed": 162,
+   "match": true
+  },
+  {
+   "code": "SF",
+   "club": "San Francisco 49ers",
+   "official_code": "SF",
+   "field": "wins",
+   "official": 7,
+   "feed": 7,
+   "match": true
+  },
+  {
+   "code": "SF",
+   "club": "San Francisco 49ers",
+   "official_code": "SF",
+   "field": "losses",
+   "official": 1,
+   "feed": 1,
+   "match": true
+  },
+  {
+   "code": "SF",
+   "club": "San Francisco 49ers",
+   "official_code": "SF",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "SF",
+   "club": "San Francisco 49ers",
+   "official_code": "SF",
+   "field": "points for",
+   "official": 235,
+   "feed": 235,
+   "match": true
+  },
+  {
+   "code": "SF",
+   "club": "San Francisco 49ers",
+   "official_code": "SF",
+   "field": "points against",
+   "official": 156,
+   "feed": 156,
+   "match": true
+  },
+  {
+   "code": "TB",
+   "club": "Tampa Bay Buccaneers",
+   "official_code": "TB",
+   "field": "wins",
+   "official": 3,
+   "feed": 3,
+   "match": true
+  },
+  {
+   "code": "TB",
+   "club": "Tampa Bay Buccaneers",
+   "official_code": "TB",
+   "field": "losses",
+   "official": 6,
+   "feed": 6,
+   "match": true
+  },
+  {
+   "code": "TB",
+   "club": "Tampa Bay Buccaneers",
+   "official_code": "TB",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "TB",
+   "club": "Tampa Bay Buccaneers",
+   "official_code": "TB",
+   "field": "points for",
+   "official": 202,
+   "feed": 202,
+   "match": true
+  },
+  {
+   "code": "TB",
+   "club": "Tampa Bay Buccaneers",
+   "official_code": "TB",
+   "field": "points against",
+   "official": 178,
+   "feed": 178,
+   "match": true
+  },
+  {
+   "code": "TEN",
+   "club": "Tennessee Titans",
+   "official_code": "TEN",
+   "field": "wins",
+   "official": 1,
+   "feed": 1,
+   "match": true
+  },
+  {
+   "code": "TEN",
+   "club": "Tennessee Titans",
+   "official_code": "TEN",
+   "field": "losses",
+   "official": 7,
+   "feed": 7,
+   "match": true
+  },
+  {
+   "code": "TEN",
+   "club": "Tennessee Titans",
+   "official_code": "TEN",
+   "field": "ties",
+   "official": 0,
+   "feed": 0,
+   "match": true
+  },
+  {
+   "code": "TEN",
+   "club": "Tennessee Titans",
+   "official_code": "TEN",
+   "field": "points for",
+   "official": 144,
+   "feed": 144,
+   "match": true
+  },
+  {
+   "code": "TEN",
+   "club": "Tennessee Titans",
+   "official_code": "TEN",
+   "field": "points against",
+   "official": 199,
+   "feed": 199,
+   "match": true
+  },
+  {
+   "code": "WAS",
+   "club": "Washington Commanders",
+   "official_code": "WAS",
+   "field": "wins",
+   "official": 3,
+   "feed": 3,
+   "match": true
+  },
+  {
+   "code": "WAS",
+   "club": "Washington Commanders",
+   "official_code": "WAS",
+   "field": "losses",
+   "official": 5,
+   "feed": 5,
+   "match": true
+  },
+  {
+   "code": "WAS",
+   "club": "Washington Commanders",
+   "official_code": "WAS",
+   "field": "ties",
+   "official": 1,
+   "feed": 1,
+   "match": true
+  },
+  {
+   "code": "WAS",
+   "club": "Washington Commanders",
+   "official_code": "WAS",
+   "field": "points for",
+   "official": 196,
+   "feed": 196,
+   "match": true
+  },
+  {
+   "code": "WAS",
+   "club": "Washington Commanders",
+   "official_code": "WAS",
+   "field": "points against",
+   "official": 223,
+   "feed": 223,
+   "match": true
+  }
+ ],
+ "failures": [],
+ "passed": true,
+ "statement": "Every one of the 160 club x field checks reproduces nfl.com's official 2026 standings. That is what makes this feed usable as a settlement source."
+}
