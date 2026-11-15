@@ -1713,6 +1713,6 @@ RR-01 published page ≠ committed data; RR-02 Lions designations stale in git; 
 
 | Task | Status | Owner | File scope |
 |---|---|---|---|
-| Take over verification artifact/page consistency, run full repository acceptance checks, and publish a verified integration update | in progress | `arena/2b0f3e11-nfl3` | `COORDINATION.md`, `decision-lab/data/verification.json`, `decision-lab/integrity.html`, `tests/test_decision_lab.py` if a regression test is needed |
+| Take over verification artifact/page consistency, run full repository acceptance checks, and publish a verified integration update | in progress | `arena/2b0f3e11-nfl3` | `COORDINATION.md`, `decision-lab/data/verification.json`, `decision-lab/integrity.html`, `decision-lab/scripts/pages_extra.py`, `tests/test_decision_lab.py` |
 
 The current Arena branch is fixed as `arena/2b0f3e11-nfl3`; no other branch or worktree will be created. Takeover basis: the mismatch between `decision-lab/data/verification.json` and the committed `decision-lab/integrity.html` was explicitly left for `arena/af49b4f9-nfl3` in the 2026-11-13 final-integration log. That note is over 60 minutes old (more than 48 hours at claim time), so this session is taking over the stale item under the task-board handoff rule. The immediate objective is to make the published integrity page faithfully reflect the committed verification artifact and its limitations; no NFL values will be promoted to verified without a current official-source check.
