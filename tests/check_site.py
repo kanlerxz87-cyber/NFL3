@@ -1,5 +1,7 @@
 from html.parser import HTMLParser
 from pathlib import Path
+import subprocess
+import sys
 from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -27,5 +29,17 @@ for path in ROOT.rglob('*.html'):
             errors.append(f'{path.relative_to(ROOT)}:{line_number}: unresolved merge-conflict marker')
     if path.parent == ROOT:
         p = Check(path); p.feed(content); errors += [f'{path.name}: {e}' for e in p.errors]
+metrics = subprocess.run(
+    [sys.executable, str(ROOT / 'scripts' / 'sync_landing_metrics.py'), '--check'],
+    cwd=ROOT, capture_output=True, text=True,
+)
+if metrics.returncode:
+    errors.append('landing metrics are stale: ' + (metrics.stdout or metrics.stderr).strip())
+ops = subprocess.run(
+    [sys.executable, str(ROOT / 'ops-center' / 'scripts' / 'verify.py')],
+    cwd=ROOT, capture_output=True, text=True,
+)
+if ops.returncode:
+    errors.append('ops-centre verification failed: ' + (ops.stdout or ops.stderr).strip())
 if errors: raise SystemExit('\n'.join(errors))
-print('Site checks passed: local links and source links in table rows.')
+print('Site checks passed: local links, row citations, decision-readiness and ops-centre metrics.')

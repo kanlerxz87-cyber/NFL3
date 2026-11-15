@@ -108,65 +108,138 @@ def build_integrity() -> str:
         return shell("Verification & integrity", "integrity.html",
                      '<div class="eyebrow">Verification</div><h1>No automated verification run recorded</h1>'
                      '<p class="lede">Run <code>python3 decision-lab/scripts/verify_live.py</code> (live) or with <code>--offline</code>.</p>')
-    totals = doc["row_totals"]
+
+    mode = doc.get("mode", "unknown")
+    if mode == "live":
+        lede = ('This is a recorded point-in-time HTTPS re-fetch and comparison. Only a family marked '
+                '<strong>match</strong> had comparable values with no observed difference. Drift, row-set differences '
+                'and unreachable sources are reported below and are not passes. The independent hand-checked '
+                'transcription lives on the <a href="verification.html">Verification log</a>.')
+        method = "live HTTPS re-fetch and field-by-field comparison"
+        mode_note = "point-in-time live re-fetch; unreachable sources are not passes"
+    elif mode == "offline-structural":
+        lede = ('This committed record checks structure, joins and coverage against the stored snapshot only. '
+                '<strong>No live official source content was fetched</strong>, so it does not establish that any '
+                'published value matches a current NFL or club page. The independent hand-checked transcription '
+                'lives on the <a href="verification.html">Verification log</a>.')
+        method = "offline structural checks; no source re-fetch"
+        mode_note = "stored-snapshot structure only; not current source verification"
+    else:
+        lede = ('This record has an unrecognized verification mode. Do not treat any value as confirmed until the '
+                'mode and method are reviewed. The independent hand-checked transcription lives on the '
+                '<a href="verification.html">Verification log</a>.')
+        method = "unrecognized mode; review required"
+        mode_note = "unrecognized; review before use"
+
     metrics = "".join([
-        metric("Run mode", doc.get("mode", "live"), "live re-fetches; offline is structure only"),
+        metric("Run mode", mode, mode_note),
         metric("Status", doc.get("status", ""), "verified / drift / row-set-differs / partial / structural-only"),
         metric("Checks run", str(doc["checks_run"]), f'{doc["checks_compared"]} comparable'),
-        metric("Rows compared", str(totals["rows_checked"]), f'{totals["mismatched"]} field mismatch(es)'),
+        metric("Recorded row/field details", str(doc.get("mismatch_count", 0)), "specific differences retained"),
         metric("Sources unreachable", str(doc["checks_unreachable"]), "never counted as a pass"),
     ])
     content = (
         '<div class="eyebrow">Line-by-line integrity</div><h1>Verification &amp; integrity</h1>'
-        '<p class="lede">Every published value is re-derived from the official source and compared field by field. A source '
-        'that cannot be reached is reported as unreachable and is never counted as a pass. This page is the automated live '
-        'check; the independent hand-checked transcription lives on the <a href="verification.html">Verification log</a>.</p>'
-        f'<div class="notice"><strong>Run at</strong> {e(doc["run_at"])} · <strong>snapshot captured</strong> '
-        f'{e(doc["snapshot_observed_at"])} · <strong>method</strong> {e(doc.get("mode", "live"))} re-parse with the same parser '
-        'that produced the snapshot, then a field-by-field comparison.</div>'
+        f'<p class="lede">{lede}</p>'
+        f'<div class="notice"><strong>Run recorded</strong> {e(doc.get("run_at", ""))} · '
+        f'<strong>snapshot captured</strong> {e(doc.get("snapshot_observed_at", ""))} · '
+        f'<strong>method</strong> {e(method)}.</div>'
         f'<div class="metrics">{metrics}</div>'
     )
-    if doc.get("mode") == "offline-structural":
-        content += ('<div class="notice warn"><strong>This page is showing an offline structural run.</strong> The deployment '
-                    'workflow performs the live field-by-field re-fetch and uploads it as the <code>live-verification</code> '
-                    'artifact, but it does not write to the repository, so the committed page keeps the last run that could be '
-                    'reproduced from the committed tree. The live result for a given deployment is available in that run\'s artifact.</div>')
+    if mode == "live" and (doc.get("checks_unreachable", 0) or doc.get("checks_drift", 0) or doc.get("checks_row_set_differs", 0)):
+        content += (
+            '<div class="notice warn"><strong>Incomplete or discrepant live run.</strong> '
+            f'{e(str(doc.get("checks_unreachable", 0)))} source fetch(es) were unreachable; '
+            f'{e(str(doc.get("checks_drift", 0)))} compared family/families reported drift; '
+            f'{e(str(doc.get("checks_row_set_differs", 0)))} reported row-set differences. '
+            'Read the family rows below; an unreachable source is not a match, and a family-level match does not '
+            'validate unrelated fields.</div>'
+        )
+    elif mode == "offline-structural":
+        content += ('<div class="notice warn"><strong>Offline structural run only.</strong> This checks the stored snapshot '
+                    'and does not verify current official-source content. A live re-fetch is attempted by the scheduled '
+                    'publication workflow and uploaded as a per-run <code>live-verification</code> artifact; it is not '
+                    'written back to this repository.</div>')
+
+    totals = doc.get("row_totals", {})
+    aggregate_mismatches = int(totals.get("mismatched", 0) or 0)
+    retained_details = int(doc.get("mismatch_count", len(doc.get("mismatches", []))) or 0)
+    if aggregate_mismatches and not retained_details:
+        mismatch_families = [family for family in doc.get("families", [])
+                             if int(family.get("mismatched", 0) or 0) > 0]
+        family_notes = "; ".join(
+            f'{family.get("id", "")} {family.get("name", "")}: '
+            f'{family.get("mismatched", 0)} of {family.get("rows_checked", 0)} '
+            f'({family.get("coverage", "coverage not stated")}; {family.get("note", "")})'
+            for family in mismatch_families
+        )
+        detail_limit = (
+            "This offline run made no live field-by-field comparison."
+            if mode == "offline-structural" else
+            "Review the listed family methods and notes; this report retains no itemized row/field differences."
+        )
+        content += (
+            '<div class="notice warn"><strong>Aggregate row mismatches are not retained row/field details.</strong> '
+            f'The family totals sum to {e(str(aggregate_mismatches))} mismatched units; '
+            f'<code>mismatch_count</code> reports {e(str(retained_details))} itemized records in '
+            '<code>mismatches</code>. The aggregate count is computed from family-level coverage counts, while '
+            'the detail list is for retained row/field differences; the two fields do not count the same thing. '
+            f'Family-level mismatch source: {e(family_notes or "not specified in this artifact")}. '
+            'Thus, zero retained detail records do not cancel the aggregate mismatch count. '
+            f'{e(detail_limit)}</div>'
+        )
     fam = [[td(e(f["id"])), td(e(f["name"])),
             td(pill(f["status"], "ok" if f["status"] == "match" else ("danger" if f["status"] in {"drift", "unreachable"} else "warn"))),
             td(e(f["method"])), td(f'{f["matched"]}/{f["rows_checked"]}' if f["rows_checked"] else "—"),
             td(str(f["mismatched"])), td(e(f["note"])),
             td(raw_source(f["source_url"], "Official source") if f["source_url"] else "—")]
            for f in doc["families"]]
-    content += table("Verification families. Each family is an independent claim about the data; catch-all rows exist so the families are visible even when a live fetch fails.",
+    content += table("Verification families. A family only supports the fields named in its method; status does not establish rights or future accuracy.",
                      ["ID", "Check", "Status", "Method", "Match", "Mismatch", "Note", "Source"], fam)
     if doc.get("skipped_offline"):
-        content += (f'<div class="notice warn"><strong>Skipped in this run ({e(doc.get("mode"))}):</strong> '
-                    f'{e("; ".join(doc["skipped_offline"]))}. The scheduled publication workflow runs the live re-fetch.</div>')
-    if doc["mismatches"]:
-        rows = [[td(e(m.get("scope", ""))), td(e(m["key"])), td(e(m["field"])), td(e(str(m.get("published", "")))),
-                 td(e(str(m.get("live", "")))), td(raw_source(m["source_url"], "Source") if m.get("source_url") else "—")]
-                for m in doc["mismatches"][:200]]
-        content += f'<h2>Mismatches and drift ({doc["mismatch_count"]})</h2>'
-        content += table("Every mismatch, published versus live. Reported, never auto-corrected.",
-                         ["Scope", "Row", "Field", "Published", "Live", "Source"], rows)
-    if doc["unreachable"]:
+        content += (f'<div class="notice warn"><strong>Skipped in this run ({e(mode)}):</strong> '
+                    f'{e("; ".join(doc["skipped_offline"]))}. These checks were not performed.</div>')
+    mismatches = doc.get("mismatches", [])
+    if mismatches:
+        rows = []
+        for mismatch in mismatches:
+            source_url = mismatch.get("source_url", "")
+            if not source_url and mismatch.get("scope") in {"injury", "no-injury"}:
+                source_url = B.SOURCES["S01"]["url"]
+            source_cell = raw_source(source_url, "Official source") if source_url else ""
+            rows.append([
+                td(e(mismatch.get("scope", ""))), td(e(mismatch.get("key", ""))),
+                td(e(mismatch.get("field", ""))), td(e(str(mismatch.get("published", "")))),
+                td(e(str(mismatch.get("live", "")))), td(source_cell, blank=not bool(source_url)),
+            ])
+        shown = len(rows)
+        total = doc.get("mismatch_count", shown)
+        content += f'<h2>Mismatches and drift ({e(str(total))})</h2>'
+        caption = "Every recorded mismatch, published versus re-fetched; reported, never auto-corrected."
+        if shown < total:
+            content += (f'<div class="notice warn">This artifact contains {shown} of {total} mismatch details. '
+                        'The remaining detail rows were not retained in the report.</div>')
+            caption = f"Retained mismatch details ({shown} of {total}); published versus re-fetched."
+        content += table(caption, ["Scope", "Row", "Field", "Published", "Observed", "Official source"], rows)
+    unreachable = doc.get("unreachable", [])
+    if unreachable:
         rows = [[td(e(u["family"])), td(e(u["url"])), td(e(u["error"])), td(raw_source(u["url"], "Retry source"))]
-                for u in doc["unreachable"][:80]]
-        content += (f'<h2>Unreachable sources ({len(doc["unreachable"])})</h2>'
+                for u in unreachable]
+        content += (f'<h2>Unreachable sources ({len(unreachable)})</h2>'
                     '<p>An unreachable source proves nothing about the data. These checks are recorded as not comparable.</p>')
         content += table("Sources that could not be fetched during this run.", ["Family", "URL", "Error", "Source"], rows)
     content += table("What each status means, and why a row difference is not a value error.",
                      ["Status", "Meaning", "Action", "Source"], [
-        [td("match"), td("Every compared field equals the official source, and the row set is unchanged."), td("Verified for this moment only."), td(B.source_link("S01"))],
-        [td("row-set-differs"), td("No published value changed, but the live page lists a different set of rows (for example it moved on to the next week)."), td("Re-capture and re-version; do not describe this as a data error."), td(B.source_link("S01"))],
-        [td("drift"), td("A value that exists in both published and live data differs."), td("Treat as a real discrepancy; the official source wins."), td(B.source_link("S01"))],
-        [td("unreachable"), td("The source could not be fetched, so nothing was compared."), td("Do not treat the published value as verified."), td(B.source_link("S01"))],
-        [td("structural-only"), td("Offline run: joins and coverage were checked, live fields were not."), td("Wait for the scheduled live run."), td(B.source_link("S16"))],
+        [td("match"), td("Every field named by this family matched at this recorded point in time."), td("No inference beyond the listed fields; re-check before relying on it."), td(B.source_link("S01"))],
+        [td("row-set-differs"), td("No compared field changed, but the live page lists a different set of rows."), td("Re-capture and re-version; do not describe this as a value error."), td(B.source_link("S01"))],
+        [td("drift"), td("A value that exists in both records differs."), td("Treat as a discrepancy for review; do not auto-correct."), td(B.source_link("S01"))],
+        [td("unreachable"), td("The source could not be fetched, so nothing was compared."), td("Do not treat the stored value as verified."), td(B.source_link("S01"))],
+        [td("structural-only"), td("Offline run: joins and coverage were checked, live fields were not."), td("Wait for an accessible live comparison."), td(B.source_link("S16"))],
     ])
     content += table("Honest limits of this verification.", ["Limit", "Consequence", "Source"], [
         [td("It proves agreement at one moment."), td("A page edited after capture is drift, not a data error; a page edited before capture is invisible."), td(B.source_link("S01"))],
         [td("A hash proves bytes, not truth."), td("Capture integrity never establishes factual accuracy, authorship or reuse rights."), td(B.source_link("S12"))],
-        [td("Parsers can agree with themselves."), td("The live check re-uses the same parser, so a bug shared by both runs is invisible; structural families plus manual page reads are the cross-check."), td(B.source_link("S16"))],
+        [td("Parsers can agree with themselves."), td("The live check re-uses the same parser, so a bug shared by both runs is invisible; independent transcription is the cross-check."), td(B.source_link("S16"))],
         [td("Depth rank is not usage."), td("Verification confirms a club published a name in a column. It says nothing about snaps."), td(B.source_link("S29"))],
     ])
     return shell("Verification & integrity", "integrity.html", content)

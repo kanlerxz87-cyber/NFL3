@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
-"""Derive the landing page's headline numbers from the published data.
+"""Derive the decision-readiness landing page's headline metrics.
 
-The landing page quotes counts (injury rows, depth rows, replacement chains,
-open questions, proposals, validated strategies, review flags). Those counts are
-also written into the published tables, so a hand-typed number on the landing
-page can drift away from the tables it claims to summarise. This script derives
-each number from the same file the tables are built from and rewrites the
-landing page in place.
+The shared root landing page now summarizes requirements, their states,
+validated strategies, open questions and proposals. Availability counts belong
+on the separate ops-centre page. This script derives each root metric from the
+same committed registers used by those pages and rewrites index.html in place.
 
     python3 scripts/sync_landing_metrics.py           # rewrite index.html
     python3 scripts/sync_landing_metrics.py --check   # fail if it would change
@@ -25,34 +23,38 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "index.html"
 DERIVED = ROOT / "ops-center" / "data" / "derived.json"
-SNAPSHOT = ROOT / "decision-lab" / "data" / "official_snapshot.json"
+CATALOG = ROOT / "decision-lab" / "data" / "catalog.json"
 
-LABEL_INJURY_ROWS = "INJURY ROWS (OFFICIAL, CURRENT)"
-LABEL_DEPTH_ROWS = "CLUB DEPTH ROWS"
-LABEL_CHAINS = "REPLACEMENT CHAINS"
+LABEL_REQUIREMENTS = "REQUIREMENTS TRACKED"
+LABEL_IMPLEMENTED = "IMPLEMENTED"
+LABEL_PARTIAL = "PARTIAL"
+LABEL_BLOCKED = "BLOCKED"
 LABEL_QUESTIONS = "OPEN QUESTIONS"
 LABEL_PROPOSALS = "PROPOSALS AWAITING DECISION"
 LABEL_VALIDATED = "VALIDATED STRATEGIES"
-LABEL_FLAGS = "REVIEW FLAGS"
 
 
 def derive() -> dict[str, str]:
     derived = json.loads(DERIVED.read_text(encoding="utf-8"))
-    snapshot = json.loads(SNAPSHOT.read_text(encoding="utf-8"))
-
-    chains = derived.get("chains", [])
-    published_chains = sum(1 for c in chains if c.get("chain_status") == "chain-identified")
+    catalog = json.loads(CATALOG.read_text(encoding="utf-8"))
+    requirements = catalog.get("requirements", [])
+    states = {state: sum(1 for row in requirements if row.get("state") == state)
+              for state in ("implemented", "partial", "blocked")}
+    if sum(states.values()) != len(requirements):
+        raise SystemExit("landing metrics: requirement has a missing or unrecognized state")
     strategies = derived.get("strategies", [])
-    validated = sum(1 for s in strategies if s.get("validated") is True)
+    validated = sum(1 for strategy in strategies if strategy.get("validated") is True)
 
+    if not requirements or not derived.get("questions") or not derived.get("suggestions"):
+        raise SystemExit("landing metrics: required source register is empty")
     return {
-        LABEL_INJURY_ROWS: f"{int(derived['injury_rows_current']):,}",
-        LABEL_DEPTH_ROWS: f"{int(snapshot['coverage']['depth_rows']):,}",
-        LABEL_CHAINS: f"{published_chains:,}",
-        LABEL_QUESTIONS: f"{len(derived.get('questions', [])):,}",
-        LABEL_PROPOSALS: f"{len(derived.get('suggestions', [])):,}",
+        LABEL_REQUIREMENTS: f"{len(requirements):,}",
+        LABEL_IMPLEMENTED: f"{states['implemented']:,}",
+        LABEL_PARTIAL: f"{states['partial']:,}",
+        LABEL_BLOCKED: f"{states['blocked']:,}",
         LABEL_VALIDATED: f"{validated:,}",
-        LABEL_FLAGS: f"{len(derived.get('flags', [])):,}",
+        LABEL_QUESTIONS: f"{len(derived['questions']):,}",
+        LABEL_PROPOSALS: f"{len(derived['suggestions']):,}",
     }
 
 
@@ -60,19 +62,13 @@ def rewrite(text: str, metrics: dict[str, str]) -> str:
     start = text.index('<div class="metrics">')
     end = text.index("</div></div>", start) + len("</div></div>")
     block = text[start:end]
-    present = {label: value for label, value in metrics.items()
-               if re.search(r'<span>' + re.escape(label) + r'</span><strong>', block)}
-    absent = [label for label in metrics if label not in present]
-    if not present:
-        raise SystemExit("landing page: none of the expected metric labels were found")
-    for label, value in present.items():
+    for label, value in metrics.items():
         pattern = re.compile(
             r'(<span>' + re.escape(label) + r'</span><strong>)([^<]*)(</strong>)'
         )
+        if not pattern.search(block):
+            raise SystemExit(f"landing page: required decision-readiness metric label not found: {label}")
         block = pattern.sub(lambda m: m.group(1) + value + m.group(3), block, count=1)
-    if absent:
-        # Labels not on the landing page (removed by the readiness register, PR #67) are reported, not guessed.
-        print("not on landing page, not synced: " + ", ".join(absent))
     return text[:start] + block + text[end:]
 
 

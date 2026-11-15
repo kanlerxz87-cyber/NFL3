@@ -8,11 +8,14 @@ import sys
 import unittest
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "decision-lab" / "scripts"))
 import availability as av
+import build as decision_lab_build
 import capture_official as capture
+import pages_extra as decision_lab_pages
 import validation as v
 import verify_live as vl
 
@@ -366,6 +369,48 @@ class CatalogTests(unittest.TestCase):
             self.assertIn("source_url", fam)
             if fam["rows_checked"]:
                 self.assertLessEqual(fam["matched"], fam["rows_checked"])
+
+    def test_committed_integrity_page_matches_verification_artifact(self):
+        page = (ROOT / "decision-lab/integrity.html").read_text()
+        report = json.loads((ROOT / "decision-lab/data/verification.json").read_text())
+        self.assertEqual(page, decision_lab_pages.build_integrity())
+        self.assertNotIn(f'{report["row_totals"]["mismatched"]} mismatch count', page)
+
+    def test_offline_aggregate_mismatches_explain_empty_detail_list(self):
+        report = json.loads((ROOT / "decision-lab/data/verification.json").read_text())
+        self.assertEqual(report["mode"], "offline-structural")
+        self.assertEqual(report["row_totals"]["mismatched"], 2)
+        self.assertEqual(report["mismatch_count"], 0)
+        self.assertEqual(report["mismatches"], [])
+
+        page = decision_lab_pages.build_integrity()
+        self.assertIn("Aggregate row mismatches are not retained row/field details", page)
+        self.assertIn("2 mismatched units", page)
+        self.assertIn("reports 0 itemized records", page)
+        self.assertIn("F8 Club depth coverage: 2 of 32", page)
+        self.assertIn("Houston Texans not parsed", page)
+        self.assertIn("Green Bay Packers not parsed", page)
+        self.assertIn("This offline run made no live field-by-field comparison", page)
+
+    def test_live_integrity_report_qualifies_drift_and_links_injury_source(self):
+        report = {
+            "mode": "live", "status": "drift", "run_at": "2026-11-15T00:00:00+00:00",
+            "snapshot_observed_at": "2026-11-14T00:00:00+00:00", "checks_run": 1,
+            "checks_compared": 1, "checks_drift": 1, "checks_row_set_differs": 0,
+            "checks_unreachable": 0, "row_totals": {"rows_checked": 1, "matched": 0, "mismatched": 1},
+            "families": [{"id": "F1", "name": "Injury report rows", "method": "field-by-field",
+                          "source_url": "https://www.nfl.com/injuries/", "status": "drift",
+                          "matched": 0, "mismatched": 1, "rows_checked": 1, "note": "one field changed"}],
+            "skipped_offline": [], "mismatches": [{"scope": "injury", "key": "Team / Player",
+                "field": "game_status", "published": "", "live": "Out", "category": "field-change"}],
+            "mismatch_count": 1, "unreachable": [],
+        }
+        with patch.object(decision_lab_build, "VERIFICATION", report):
+            page = decision_lab_pages.build_integrity()
+        self.assertIn("Only a family marked", page)
+        self.assertIn("reported drift", page)
+        self.assertIn(f'href="{decision_lab_build.SOURCES["S01"]["url"]}"', page)
+        self.assertNotIn("Every published value is re-derived", page)
 
 
 if __name__ == "__main__":

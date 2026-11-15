@@ -145,38 +145,83 @@ def check_determinism(errors: list[str]) -> None:
             errors.append(f"{p}: build is not deterministic")
 
 
-def check_root_counts(warnings: list[str]) -> None:
-    """The landing page quotes headline counts. If the data moves, they go stale.
+def metric_value(text: str, label: str) -> int | None:
+    """Read a labelled metric, not a coincidental copy of its number elsewhere."""
+    match = re.search(r"<span>\s*" + re.escape(label) + r"\s*</span>\s*<strong>([^<]*)</strong>", text)
+    if not match:
+        return None
+    digits = re.sub(r"\D", "", match.group(1))
+    return int(digits) if digits else None
 
-    Reported as a warning rather than a failure because index.html is a shared
-    file, but it is the difference between a number that is right and a number
-    that merely looks right.
+
+def check_landing_counts(errors: list[str]) -> None:
+    """Check each dashboard's own headline metrics against its source registers.
+
+    The shared root page is a decision-readiness dashboard; availability counts
+    belong to ops-center/index.html. Comparing every metric to the root page
+    produced false stale-count warnings after the root page was reorganized.
     """
-    index = ROOT / "index.html"
-    derived = OPS / "data" / "derived.json"
-    if not index.exists() or not derived.exists():
+    root_page = ROOT / "index.html"
+    ops_page = OPS / "index.html"
+    flags_page = OPS / "flagged.html"
+    derived_path = OPS / "data" / "derived.json"
+    catalog_path = ROOT / "decision-lab" / "data" / "catalog.json"
+    required = (root_page, ops_page, flags_page, derived_path, catalog_path)
+    missing = [path.relative_to(ROOT).as_posix() for path in required if not path.exists()]
+    if missing:
+        errors.append("landing metric check skipped; required files are missing: " + ", ".join(missing))
         return
-    text = index.read_text(encoding="utf-8")
-    data = json.loads(derived.read_text(encoding="utf-8"))
 
-    expected = {
-        "injury_rows_current": data.get("injury_rows_current"),
-        "questions": len(data.get("questions", [])),
-        "suggestions": len(data.get("suggestions", [])),
-        "flags": len(data.get("flags", [])),
+    root_text = root_page.read_text(encoding="utf-8")
+    ops_text = ops_page.read_text(encoding="utf-8")
+    flags_text = flags_page.read_text(encoding="utf-8")
+    data = json.loads(derived_path.read_text(encoding="utf-8"))
+    catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+    requirements = catalog.get("requirements", [])
+    if not requirements:
+        errors.append("decision-lab/data/catalog.json: requirement register is empty")
+    state_counts = {state: sum(1 for row in requirements if row.get("state") == state)
+                    for state in ("implemented", "partial", "blocked")}
+    if sum(state_counts.values()) != len(requirements):
+        errors.append("decision-lab/data/catalog.json: a requirement is missing or has an unrecognized state")
+
+    root_expected = {
+        "REQUIREMENTS TRACKED": len(requirements),
+        "IMPLEMENTED": state_counts["implemented"],
+        "PARTIAL": state_counts["partial"],
+        "BLOCKED": state_counts["blocked"],
+        "VALIDATED STRATEGIES": sum(1 for strategy in data.get("strategies", [])
+                                     if strategy.get("validated") is True),
+        "OPEN QUESTIONS": len(data.get("questions", [])),
+        "PROPOSALS AWAITING DECISION": len(data.get("suggestions", [])),
     }
-    found = {}
-    for key in expected:
-        m = re.search(r">" + str(expected[key]).replace(",", "") + r"<", text)
-        if m:
-            found[key] = expected[key]
-    chains = sum(1 for c in data.get("chains", [])
-                 if c.get("chain_status") == "chain-identified")
-    if not re.search(r">" + str(chains) + r"<", text):
-        warnings.append(f"index.html: replacement-chain count does not match the data ({chains})")
-    for key, value in expected.items():
-        if key not in found:
-            warnings.append(f"index.html: {key} count ({value}) not found on the landing page")
+    for label, expected in root_expected.items():
+        observed = metric_value(root_text, label)
+        if observed != expected:
+            errors.append(f"index.html: {label} metric expected {expected}, found {observed}")
+
+    chains = sum(1 for chain in data.get("chains", [])
+                 if chain.get("chain_status") == "chain-identified")
+    try:
+        depth_rows = len(builder.model.load_snapshot().get("depth_rows", []))
+    except (OSError, ValueError, KeyError) as exc:
+        errors.append(f"ops-center/data/official_snapshot.json: depth-row count unavailable ({exc})")
+        depth_rows = None
+    ops_expected = {
+        "Injury rows (current official view)": data.get("injury_rows_current"),
+        "Replacement chains published": chains,
+    }
+    if depth_rows is not None:
+        ops_expected["Club depth rows"] = depth_rows
+    for label, expected in ops_expected.items():
+        observed = metric_value(ops_text, label)
+        if observed != expected:
+            errors.append(f"ops-center/index.html: {label} metric expected {expected}, found {observed}")
+
+    flag_rows = sum(1 for row in ROW.findall(flags_text) if "<th" not in row)
+    expected_flags = len(data.get("flags", []))
+    if flag_rows != expected_flags:
+        errors.append(f"ops-center/flagged.html: {flag_rows} flag rows do not match {expected_flags} records in derived.json")
 
 
 def main() -> int:
@@ -184,7 +229,7 @@ def main() -> int:
     warnings: list[str] = []
     check_pages(errors, warnings)
     check_determinism(errors)
-    check_root_counts(warnings)
+    check_landing_counts(errors)
 
     for w in warnings:
         print(f"WARN  {w}")
