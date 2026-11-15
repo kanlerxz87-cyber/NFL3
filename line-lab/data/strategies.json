@@ -57,8 +57,8 @@
     },
     {
       "id": "ST-04", "name": "Divisional compression", "type": "single bet", "market": "spread / total",
-      "thesis": "Familiarity compresses margins. The measured correlation between division form and overall form is only +0.33 (p=0.066, n=32), i.e. division results carry real but modest extra information.",
-      "rule": "In divisional games, shade the underdog and the under. Reject if the market total already sits below the model total by the declared threshold.",
+      "thesis": "Hypothesis only: divisional-game context may improve a team-strength baseline for spread or total forecasts. No official-only effect estimate is established; evaluate a pre-registered adjustment on chronological holdouts.",
+      "rule": "For research only, compare a pre-registered divisional adjustment with the unchanged baseline on chronological holdouts; do not assert a betting direction before prospective validation.",
       "signals": ["division records", "model totals"],
       "required_data": ["odds archive", "divisional game logs"],
       "gates": {"G0": "blocked", "G1": "unrun", "G2": "unrun", "G3": "unrun", "G4": "unrun", "G5": "unrun", "G6": "unrun", "G7": "unrun", "G8": "unrun", "G11": "unrun", "G12": "unrun"},
