@@ -1,0 +1,18 @@
+{
+  "url": "https://www.nfl.com/injuries/",
+  "label": "Official NFL injury report, 2026 Week 10 - fourth observation",
+  "observed_at": "2026-11-15T14:05:00Z",
+  "observed_at_note": "Approximate wall-clock time (UTC) at which the page was read in eight sequential chunks with the page-fetch tool. The last chunk finished at approximately this time.",
+  "method": "Page fetched and rendered to markdown by the session's page-fetch tool. The injury-report portion (all 28 club tables, from the top of the page through the Ravens table) is stored verbatim in the three part files, which concatenate byte-for-byte into nfl-injuries-2026-11-15.md (sha256 ecd2573e7b84747d6705ffa0a61cb0e1971a5be4533c05b3843705f4a6e01d6b). The trailing site news module and navigation chrome are not part of the injury report and are not retained, matching the exclusion documented by the 2026-11-13 capture manifest.",
+  "publisher": "NFL.com (official NFL publisher)",
+  "scope": "The official injury tables for every Week 10 matchup: 347 player rows across all 28 clubs in the 14-game Week 10 slate.",
+  "authority": "official HTTPS publisher",
+  "parsed_to": "results-verification/data/injury_observation_2026-11-15.json (347 rows, parsed by results-verification/scripts/parse_injury_page.py)",
+  "compared_against": [
+    "results-verification/data/injury_baseline_2026-11-13.json (third observation, 2026-11-13T12:40Z, 296 rows, parsed from the verbatim capture in integration/data/captures/2026-11-13-nfl-injuries/)",
+    "decision-lab/data/official_snapshot.json (first read, 2026-11-12T06:32:36Z, 254 rows)",
+    "ops-center/data/live_recheck.json (second observation, 2026-11-12T22:25Z, 279 rows)"
+  ],
+  "delta_published_at": "results-verification/data/injury_delta.json",
+  "mutation_evidence": "The page is mutable: rows grew from 296 (2026-11-13T12:40Z) to 347 (2026-11-15T14:05Z) with 217 rows changed, 139 game-status changes, 140 practice-status changes and 51 rows added. This is the point of storing dated observations: the level is not durable, only the delta is."
+}

@@ -1742,18 +1742,6 @@ Final acceptance after PR #69 exposed three ops-centre warnings because its veri
 
 The stale independent source-audit JSON/page were regenerated; `verification/audit_sources.py --check` and its 10 regression tests pass. Current report: 254 snapshot injury rows, 1,745 depth rows, 30/32 clubs parsed, 112 pages / 6,113 rows in its fixed-host scan, 626 rows without a link to its approved primary-host registry, and 6 findings. Its SRC-04 count-difference finding remains visible: the canonical decision-lab audit records 113 pages / 6,175 rows, while the independent scanner counts 112 / 6,113 under its own scan; this was not suppressed or declared resolved. The main-branch readiness builder refused the shallow clone as intended; after `git fetch --unshallow origin`, `readiness/build_readiness.py` regenerated 64 rows / 10 flags byte-for-byte consistent with main, and `tests/test_readiness.py` passed. Root/site checks pass, and no NFL row values were edited or promoted to verified.
 
-## Claim — `arena/16183225-nfl3` (current Arena session), 2026-11-15 UTC
-
-| Task | Status | Owner | File scope |
-|---|---|---|---|
-| Verified results feed: official verification of all 136 Week 1–9 finals against NFL.com score pages; pre-registered backtest-corpus freeze (R1/R2); fourth dated injury-hub observation with published per-player delta (A3/A4) | in progress | `arena/16183225-nfl3` | new `integration/data/captures/2026-11-15-nfl-scores/`; new `results-verification/**`; `readiness/build_readiness.py` (R1/R2/A3/A4 rows only), regenerated `readiness/data/readiness.csv` + `readiness.html`; `tests/test_readiness.py` (counts only); `index.html` (one nav row); `README.md` (one table row); this board |
-
-**Scope discipline.** This session runs on Arena's fixed branch `arena/16183225-nfl3` (even with `main` at `5368709`). It will not create or switch branches. Shared landing-matrix cells (R01–R26), `decision-lab/data/catalog.json`, all data rows and other workspaces are untouched. Landing-metric counts are synced by `scripts/sync_landing_metrics.py` from `decision-lab/data/catalog.json`, which this session does not edit; the landing matrix therefore keeps its dated 2026-11-12 catalog labels while the detailed 64-row register is rebuilt from the new artifacts.
-
-**Pages deploy incident (fixing first).** On 2026-11-15 the legacy dynamic `pages build and deployment` run [43715223346](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43715223346) failed at its deploy step, leaving the Pages API status `errored`, while the authoritative `Validate and deploy GitHub Pages` run [43715173974](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43715173974) succeeded on the same push. The failed dynamic run cannot be rerun via API ("workflow file may be broken"); the next push to `main` triggers a fresh legacy build, which this session will verify. The sandbox token cannot change the Pages `build_type` (PUT `/pages` → 403), so the dual legacy/workflow deployment mechanism remains; the custom workflow is the deployment of record.
-
-**Method note.** The sandbox's direct egress cannot reach nfl.com, but the page-fetch tool renders official pages to text; every value this session publishes is transcribed from an official NFL.com score page or the official injury hub, with the source URL on the table row. Nothing is inferred; unmatched or unfetchable values stay blank and are flagged.
-
 ## Claim — arena/ee7e0f6c-nfl3 (session ee7e0f6c), 2026-11-15 ~12:56 UTC
 
 | Task | Status | Owner | File scope |
@@ -1973,3 +1961,88 @@ No strategy's grade changed, because no graded row used a moved cell as both its
 that alters a result, and no CLV claim was added. Re-verified after the change: `tests/test_origination.py`
 38 tests, `origination/scripts/verify.py` (13 pages, 456 rows, 0 missing a source, deterministic),
 `scripts/validate_site.py`, `tests/check_site.py`.
+
+## Claim — `arena/16183225-nfl3` (current Arena session), 2026-11-15 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Verified results feed: official verification of all 136 Week 1–9 finals against NFL.com score pages; pre-registered backtest-corpus freeze (R1/R2); fourth dated injury-hub observation with published per-player delta (A3/A4) | in progress | `arena/16183225-nfl3` | new `integration/data/captures/2026-11-15-nfl-scores/`; new `results-verification/**`; `readiness/build_readiness.py` (R1/R2/A3/A4 rows only), regenerated `readiness/data/readiness.csv` + `readiness.html`; `tests/test_readiness.py` (counts only); `index.html` (one nav row); `README.md` (one table row); this board |
+
+**Scope discipline.** This session runs on Arena's fixed branch `arena/16183225-nfl3` (even with `main` at `5368709`). It will not create or switch branches. Shared landing-matrix cells (R01–R26), `decision-lab/data/catalog.json`, all data rows and other workspaces are untouched. Landing-metric counts are synced by `scripts/sync_landing_metrics.py` from `decision-lab/data/catalog.json`, which this session does not edit; the landing matrix therefore keeps its dated 2026-11-12 catalog labels while the detailed 64-row register is rebuilt from the new artifacts.
+
+**Pages deploy incident (fixing first).** On 2026-11-15 the legacy dynamic `pages build and deployment` run [43715223346](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43715223346) failed at its deploy step, leaving the Pages API status `errored`, while the authoritative `Validate and deploy GitHub Pages` run [43715173974](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43715173974) succeeded on the same push. The failed dynamic run cannot be rerun via API ("workflow file may be broken"); the next push to `main` triggers a fresh legacy build, which this session will verify. The sandbox token cannot change the Pages `build_type` (PUT `/pages` → 403), so the dual legacy/workflow deployment mechanism remains; the custom workflow is the deployment of record.
+
+**Method note.** The sandbox's direct egress cannot reach nfl.com, but the page-fetch tool renders official pages to text; every value this session publishes is transcribed from an official NFL.com score page or the official injury hub, with the source URL on the table row. Nothing is inferred; unmatched or unfetchable values stay blank and are flagged.
+
+
+## 2026-11-15 — results-verification session (branch arena/16183225-nfl3) — RESULT
+
+Scope claimed earlier this session (verified results feed R1/R2 + injury-hub 4th observation A3/A4) is **complete**.
+
+**R1 — verified results feed (Done).** All 136 finals of Weeks 1–9 were read from the official score pages
+`https://www.nfl.com/scores/2026/week-1` … `week-9` on 2026-11-15 UTC (observed 12:59:59Z–13:46:00Z) and agree with
+`data/raw/games.csv` on score and date: 136/136 scores, 136/136 dates, 0 mismatches, 0 unmatched, 0 community rows
+never matched. Per-game evidence: `results-verification/data/verification_report.json`; weekly archives
+`results-verification/data/official_scores_2026/week_01..09.json`; fail-closed checker
+`results-verification/scripts/crosscheck.py` (exit 0). Re-run after the parallel data refresh of `games.csv` on the
+rebased tree: still 136/136.
+
+**R2 — corpus freeze (registration commit `99f2046` in this branch's push; effective freeze commit recorded as
+`87f83f5ee231`, rebased to `99f2046`).** `results-verification/data/backtest_corpus_w1_w9.csv` (136 rows + provenance
+columns) sha256 `a1633c2011bc8fb4c6508ada2ed1cd32ddede8993300b5e03ef157f762ee73b1`; official-scores bundle sha256
+`59ae6520a71e9021dd97945ab7f5ab4182de4824186222833b4c002ddc05fc18`; report sha256
+`95f2397ea2c6f2ce417e8946a68d904827c74e91cea604719a22fa9edc2b2ec2`. Rules in `results-verification/CORPUS_FREEZE.md`.
+No evaluation has run against it (0 validated strategies) — it was frozen before any evaluation. Distinct from the
+parallel `official-verify` schedule-page corpus (sha256 `44f9ea2b…`, registered PREREG-2026-OV1): different official
+surface (final scores on score pages vs schedule/venue facts), kept as separate frozen artifacts.
+
+**A3/A4 — fourth dated observation + per-player delta published.** Read of `https://www.nfl.com/injuries/` at
+2026-11-15T14:05Z (page-fetch tool, 8 chunks; injury-report portion stored verbatim in
+`results-verification/data/captures/2026-11-15-nfl-injuries/` part-00..02.md → `nfl-injuries-2026-11-15.md`, sha256
+`ecd2573e7b84747d6705ffa0a61cb0e1971a5be4533c05b3843705f4a6e01d6b`; manifest in the same directory). Parsed 347 rows /
+28 clubs / week 10 (`results-verification/scripts/parse_injury_page.py`); baseline = third observation
+(2026-11-13T12:40Z, 296 rows) parsed from `integration/data/captures/2026-11-13-nfl-injuries/` — the 296 baseline count
+reproduces that capture's published row count exactly. Delta (`results-verification/scripts/compute_delta.py` →
+`results-verification/data/injury_delta.json`, rendered at `results-verification/delta.html`): 217 rows changed of 296
+on both reads, 139 game-status changes, 140 practice-status changes, 51 rows added, 0 removed, 0 club reassignments.
+Delta only, never the level, per the standing requirement.
+
+**Cross-checks against parallel work merged today (PRs #78, #79/#81).** The `injury-capture` scheduled archive's
+2026-11-15T12:59:08Z read independently recorded the same 347 rows / 28 team sections / week 10 ~1h before my read —
+independent corroboration of the observation. Its pipeline flags `Jaguars / BJ Green II: game status Out but practice
+Full Participation`; the same conflict is visible verbatim in my capture and is carried, not smoothed. The
+`decision-lab` live verification now shows `Lions / Kerby Joseph game_status: captured='' now='Out'`, consistent with
+my delta (Lions blanks → Out).
+
+**Irregularities / flags (also on the sub-site's Flagged-for-review sections).**
+1. Official pages render Arizona as `AZ` vs `ARI` in the community file; documented `TEAM_ALIASES = {"AZ": "ARI"}` join
+   normalization in `crosscheck.py`. Official JSON files keep verbatim `AZ`.
+2. Official Week 1 score page headers the opener (NE@SEA, 2026-09-09) as "Sunday Night Football, September 9th", but
+   2026-09-09 is a **Wednesday** (calendar, community file weekday, and official-verify's schedule-page transcription
+   all agree). Likely broadcast-package branding on the scores page; flagged, not resolved by inference.
+3. BJ Green II (JAX): official `Out` game status with `Full Participation in Practice` — official-report internal
+   conflict, transcribed verbatim and flagged.
+4. Observation timestamps are approximate wall-clock ends of page reads (page-fetch tool), not server timestamps.
+5. Not captured anywhere yet: official inactive lists and snap counts — replacement of a starter still cannot be
+   confirmed from the report alone (A6/A7 remain Blocked).
+
+**Captures locations (one decision, noted for all sessions):** scheduled automated captures → `captures/nfl-injuries/`
+(owned by the injury-capture workflow); manual tool-rendered reads → `results-verification/data/captures/<date-slug>/`
+(this session's read 4); historical reads 1–3 stay frozen in `integration/data/captures/` with their manifests. Do not
+copy captures between locations; cross-reference instead.
+
+**Site/integration.** New sub-site `results-verification/` (`index.html` 136-row verified feed + `delta.html` 330-row
+delta) with fail-closed builder `scripts/build.py` and strict gate `scripts/verify.py` (every data row carries an
+official source link; corpus hash recomputed each build; placeholders and broken internal links fail the build).
+`readiness/build_readiness.py` rows updated: R1→**Done** (136/136), R2→Partial (frozen; ROI still blocked on P1/P7),
+A3→Partial (deltas published; reads unscheduled), A4→Partial (4 dated reads; deltas published); R6 current count now
+"4 observations" computed from manifests. `readiness.html` + `readiness.csv` regenerated (64 rows; Done 3 / Partial 18 /
+Blocked 14 / Not started 28 / Decision recorded 1). `tests/test_readiness.py` extended with regression pins for these
+rows (landing matrix cells untouched — still the dated 2026-11-12 catalog snapshot). Landing site-guide row + README
+row added; nav script untouched beyond prior sessions' entries. Full validator set green on the merged tree:
+`validate_site.py`, `tests/check_site.py`, all 7 test scripts, decision-lab/ops-center/verification-lab/official-verify
+gates.
+
+**No claim added:** no ROI, CLV, vig, market residual, price snapshot, validated strategy, inactive list or snap count.
+PR: opened and merged immediately after this entry; link recorded by the follow-up board entry per protocol.
+
