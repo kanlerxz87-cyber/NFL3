@@ -1,8 +1,8 @@
 {
-  "html_pages": 145,
-  "table_rows": 8334,
-  "rows_missing_official_source": 746,
-  "rows_community_only": 242,
+  "html_pages": 147,
+  "table_rows": 8566,
+  "rows_missing_official_source": 754,
+  "rows_community_only": 243,
   "rows_with_internal_audit_source": 7,
   "conflict_files": [],
   "authority_claim_files": [],
@@ -12,7 +12,7 @@
       "id": "AUD-03",
       "severity": "High",
       "title": "Table rows without an official-source link",
-      "detail": "746 row(s) across the repository lack an official HTTPS source; 242 cite only community sources.",
+      "detail": "754 row(s) across the repository lack an official HTTPS source; 243 cite only community sources.",
       "files": [
         "dashboard/flagged.html",
         "dashboard/questions.html",
@@ -39,6 +39,14 @@
     }
   ],
   "pages": [
+    {
+      "path": "corpus.html",
+      "rows": 149,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
     {
       "path": "dashboard/flagged.html",
       "rows": 27,
@@ -449,7 +457,7 @@
     },
     {
       "path": "index.html",
-      "rows": 60,
+      "rows": 62,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -745,8 +753,8 @@
     },
     {
       "path": "ops-center/leaderboard.html",
-      "rows": 99,
-      "rows_missing_official_source": 36,
+      "rows": 140,
+      "rows_missing_official_source": 43,
       "rows_community_only": 4,
       "rows_with_internal_audit_source": 0,
       "local_errors": []
@@ -880,8 +888,16 @@
       "local_errors": []
     },
     {
+      "path": "pricing.html",
+      "rows": 34,
+      "rows_missing_official_source": 1,
+      "rows_community_only": 1,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
       "path": "readiness.html",
-      "rows": 74,
+      "rows": 75,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -1089,7 +1105,7 @@
     },
     {
       "path": "shadow-board/method.html",
-      "rows": 19,
+      "rows": 24,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,

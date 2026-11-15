@@ -14519,7 +14519,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-01"
+   "id": "ST-01",
+   "mind_confirms": "In a pre-registered walk-forward on the official game log, the total forecast using neutral pace and points-per-possession beats the raw-points baseline on Brier score, with the game-cluster lower bound above zero.",
+   "mind_kills": "The lower bound touches zero, or the gain vanishes on the holdout block; pace and possession then add nothing beyond raw scoring and the strategy is retired.",
+   "registration": ""
   },
   {
    "name": "Availability-adjusted line versus market",
@@ -14539,7 +14542,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-02"
+   "id": "ST-02",
+   "mind_confirms": "With licensed prices in the store, the availability-adjusted fair line earns positive closing-line value at the pre-registered threshold on a prospective sample, after de-vigging.",
+   "mind_kills": "The prospective CLV lower bound is at or below zero, or the adjustment moves the line away from the closing line on balance.",
+   "registration": ""
   },
   {
    "name": "Backup QB start \u2013 total under",
@@ -14558,7 +14564,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-03"
+   "id": "ST-03",
+   "mind_confirms": "On official game books naming a backup starter at quarterback, the pre-registered total-under rule shows positive Brier skill versus the no-information baseline over a multi-season official sample.",
+   "mind_kills": "The skill interval includes zero, or unders and overs split evenly in the backup-quarterback subsample.",
+   "registration": ""
   },
   {
    "name": "Control: favorites only",
@@ -14575,7 +14584,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-04"
+   "id": "ST-04",
+   "mind_confirms": "As a control it succeeds by being beaten: a candidate must out-earn this baseline on the same games to be considered skilful at all.",
+   "mind_kills": "A leaderboard run that omits this control beside every strategy is invalid and its results are discarded.",
+   "registration": ""
   },
   {
    "name": "Control: random side each game",
@@ -14592,7 +14604,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-05"
+   "id": "ST-05",
+   "mind_confirms": "As a control it succeeds by being beaten: a seeded random side is the luck benchmark every candidate must outscore on Brier skill.",
+   "mind_kills": "A leaderboard run that omits this control beside every strategy is invalid and its results are discarded.",
+   "registration": ""
   },
   {
    "name": "Cross-game parlay value",
@@ -14611,7 +14626,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-06"
+   "id": "ST-06",
+   "mind_confirms": "A directly validated joint probability for the leg set, from official settlement data with published n, differs from the operator price after the void/push rules are applied.",
+   "mind_kills": "No validated joint probability exists, or the operator price sits inside the joint price interval; no combo is ever ranked.",
+   "registration": ""
   },
   {
    "name": "Defensive depth deficiency (secondary/line)",
@@ -14630,7 +14648,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-07"
+   "id": "ST-07",
+   "mind_confirms": "A pre-registered ablation comparing identical models with and without verified defensive-absence features shows opponent scoring forecasts improving on official chronological holdouts, interval above zero.",
+   "mind_kills": "The ablation difference interval includes zero, or the effect appears only in seasons used for fitting.",
+   "registration": ""
   },
   {
    "name": "Divisional compression",
@@ -14649,7 +14670,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-08"
+   "id": "ST-08",
+   "mind_confirms": "Adding a divisional-game indicator improves spread or total forecasts over the team-strength baseline in a pre-registered chronological comparison, lower bound above zero.",
+   "mind_kills": "No out-of-sample improvement, and the indicator is retired.",
+   "registration": ""
   },
   {
    "name": "Injury-news timing reaction",
@@ -14668,7 +14692,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-09"
+   "id": "ST-09",
+   "mind_confirms": "Forecasts updated only after official status changes beat stale baselines on proper scores in a pre-registered replay with clock-time stamps.",
+   "mind_kills": "The replay shows no improvement, or the update cannot be recorded before the market moves.",
+   "registration": ""
   },
   {
    "name": "Injury-status change fade",
@@ -14687,7 +14714,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-10"
+   "id": "ST-10",
+   "mind_confirms": "When a starter moves to Out on the official Friday designation, the pre-registered fade rule earns positive closing-line value against licensed closing prices, lower bound above zero.",
+   "mind_kills": "The CLV lower bound is at or below zero, or the closing line already fully reprices the change.",
+   "registration": ""
   },
   {
    "name": "Line movement after injury news (CLV)",
@@ -14706,7 +14736,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-11"
+   "id": "ST-11",
+   "mind_confirms": "With licensed price snapshots at official news timestamps, post-news quotes differ from closing quotes in the pre-registered direction at the declared threshold.",
+   "mind_kills": "No systematic difference remains after de-vigging, or the direction reverses out of sample.",
+   "registration": ""
   },
   {
    "name": "Net injury differential \u2013 spread",
@@ -14725,7 +14758,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-12"
+   "id": "ST-12",
+   "mind_confirms": "A pre-registered net-availability count from official reports and game books explains spread-forecast residuals beyond the team-strength baseline, interval above zero.",
+   "mind_kills": "The interval includes zero once opponent quality and market information are controlled for.",
+   "registration": ""
   },
   {
    "name": "Offensive line replacement \u2013 rushing under",
@@ -14744,7 +14780,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-13"
+   "id": "ST-13",
+   "mind_confirms": "Official game books naming backup offensive linemen are followed by lower rushing output than the pre-registered prop baseline implies, on samples settled from official stats.",
+   "mind_kills": "No under bias in the subsample, or its interval includes zero.",
+   "registration": ""
   },
   {
    "name": "Offensive-line replacement stress",
@@ -14763,7 +14802,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-14"
+   "id": "ST-14",
+   "mind_confirms": "The pre-registered ablation shows team-scoring forecasts improve when verified offensive-line availability features are included, on chronological holdouts, interval above zero.",
+   "mind_kills": "The ablation difference interval includes zero.",
+   "registration": ""
   },
   {
    "name": "Opponent-adjusted team strength",
@@ -14782,7 +14824,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-15"
+   "id": "ST-15",
+   "mind_confirms": "Rolling opponent-adjusted efficiency beats the simple baseline on Brier skill over pre-registered holdout games, lower bound above zero.",
+   "mind_kills": "No out-of-sample skill gain over the simple baseline.",
+   "registration": ""
   },
   {
    "name": "Practice-trend signal (DNP\u2192LP\u2192FP)",
@@ -14801,7 +14846,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-16"
+   "id": "ST-16",
+   "mind_confirms": "Multi-season official designations joined to official inactives show the DNP-to-LP-to-FP progression raising play probability over LP-to-DNP, with an interval excluding no difference, computed before any model uses the label.",
+   "mind_kills": "The interval includes no difference, or the direction reverses out of sample.",
+   "registration": ""
   },
   {
    "name": "Pythagorean luck regression",
@@ -14820,7 +14868,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-17"
+   "id": "ST-17",
+   "mind_confirms": "Clubs whose win total exceeds the Pythagorean expectation regress toward it in later official results, in the pre-registered direction, interval above zero.",
+   "mind_kills": "No regression beyond chance, or the gap is already inside the closing line.",
+   "registration": ""
   },
   {
    "name": "Quarterback availability shock",
@@ -14839,7 +14890,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-18"
+   "id": "ST-18",
+   "mind_confirms": "The pre-registered ablation comparing identical models with and without verified quarterback-availability features shows improved team-scoring forecasts on official holdouts, interval above zero.",
+   "mind_kills": "The ablation difference interval includes zero.",
+   "registration": ""
   },
   {
    "name": "Quarterback-out offence fade",
@@ -14859,7 +14913,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-19"
+   "id": "ST-19",
+   "mind_confirms": "Fading the side missing a verified starting quarterback earns positive prospective closing-line value at the pre-registered threshold against licensed closing prices.",
+   "mind_kills": "The CLV lower bound is at or below zero.",
+   "registration": ""
   },
   {
    "name": "Rating-mismatch spread",
@@ -14879,7 +14936,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-20"
+   "id": "ST-20",
+   "mind_confirms": "Entries taken only when the model margin disagrees with the licensed closing line by more than the pre-registered threshold earn positive Brier skill and CLV prospectively.",
+   "mind_kills": "Either lower bound is at or below zero.",
+   "registration": ""
   },
   {
    "name": "Receiver opportunity prop",
@@ -14898,7 +14958,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-21"
+   "id": "ST-21",
+   "mind_confirms": "Official participation and target data show reception and yardage forecasts improve when verified personnel-shift features are included, on pre-registered prop samples settled from official stats.",
+   "mind_kills": "No improvement over the prop baseline, or settlement cannot be sourced officially.",
+   "registration": ""
   },
   {
    "name": "Receiver target-share prop",
@@ -14917,7 +14980,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-22"
+   "id": "ST-22",
+   "mind_confirms": "Pre-registered volume props settled from official stats show positive skill versus the market-implied baseline once licensed prices exist.",
+   "mind_kills": "No skill edge, or the share signal is stale by kickoff.",
+   "registration": ""
   },
   {
    "name": "Rest and schedule asymmetry",
@@ -14936,7 +15002,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-23"
+   "id": "ST-23",
+   "mind_confirms": "Published schedule facts (byes, Thursday turnarounds, international travel) improve forecasts over the baseline in a pre-registered comparison, interval above zero, before any price comparison.",
+   "mind_kills": "No gain from the schedule features, or the gain is smaller than the vig.",
+   "registration": ""
   },
   {
    "name": "Running-back workload prop",
@@ -14953,7 +15022,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-24"
+   "id": "ST-24",
+   "mind_confirms": "Verified rising snap and carry share from official participation data predicts rushing props better than the pre-registered baseline, interval above zero.",
+   "mind_kills": "No predictive gain, or the workload is already priced at kickoff.",
+   "registration": ""
   },
   {
    "name": "Rushing workload prop combo",
@@ -14972,7 +15044,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-25"
+   "id": "ST-25",
+   "mind_confirms": "A directly validated joint probability for the workload legs exists from official settlement data with published n, and the operator void/push rules are documented.",
+   "mind_kills": "Either is missing, and the combo stays unranked.",
+   "registration": ""
   },
   {
    "name": "Same-game parlay: QB passing yards over + WR1 receptions over",
@@ -14991,7 +15066,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-26"
+   "id": "ST-26",
+   "mind_confirms": "A validated joint probability from official settlement data with published n exceeds the independence product, and the operator price does not reflect the gap.",
+   "mind_kills": "The joint probability is not validated, or the price already reflects it.",
+   "registration": ""
   },
   {
    "name": "Same-game script combination",
@@ -15010,7 +15088,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-27"
+   "id": "ST-27",
+   "mind_confirms": "Conditional joint modelling of game-script legs beats marginal multiplication on held-out official settlements, interval above zero.",
+   "mind_kills": "No advantage over marginals, or the joint sample is below the pre-registered n.",
+   "registration": ""
   },
   {
    "name": "Secondary attrition versus the pass",
@@ -15030,7 +15111,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-28"
+   "id": "ST-28",
+   "mind_confirms": "Official game books naming backup defensive backs show opponent passing efficiency rising, in a pre-registered ablation on official data, interval above zero.",
+   "mind_kills": "The ablation difference interval includes zero.",
+   "registration": ""
   },
   {
    "name": "Secondary replacement exposure",
@@ -15049,7 +15133,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-29"
+   "id": "ST-29",
+   "mind_confirms": "Coverage-role-weighted availability features improve passing forecasts on official holdouts versus the same model without them, interval above zero.",
+   "mind_kills": "No improvement, or the coverage role cannot be established from official sources.",
+   "registration": ""
   },
   {
    "name": "Team total under + game total under (parlay)",
@@ -15068,7 +15155,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-30"
+   "id": "ST-30",
+   "mind_confirms": "A validated joint probability from official settlements with published n prices the pair differently from the operator price after void/push rules.",
+   "mind_kills": "No validated joint probability, and the pair is never ranked.",
+   "registration": ""
   },
   {
    "name": "Three-leg same-game script parlay",
@@ -15085,7 +15175,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-31"
+   "id": "ST-31",
+   "mind_confirms": "A directly validated three-leg joint probability from official settlement data, with published n, shows the operator price materially above the joint price.",
+   "mind_kills": "The joint probability is not validated, or the price gap sits inside its interval.",
+   "registration": ""
   },
   {
    "name": "Two-leg cross-game parlay",
@@ -15102,7 +15195,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-32"
+   "id": "ST-32",
+   "mind_confirms": "Cross-game legs are near-independent in official settlement data with published n, so the de-vigged product rule prices the combo within its interval; edge exists only if the operator price differs.",
+   "mind_kills": "The legs are not independent in the data, or the operator price matches the joint price.",
+   "registration": ""
   },
   {
    "name": "Two-leg same-game parlay (team total + spread)",
@@ -15119,7 +15215,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-33"
+   "id": "ST-33",
+   "mind_confirms": "A validated same-game joint probability with published n shows the independent-leg price is materially wrong in the pre-registered direction.",
+   "mind_kills": "No validated joint probability, or the mispricing is inside the interval.",
+   "registration": ""
   },
   {
    "name": "Uncorrelated 2-leg parlay of two single games (control)",
@@ -15136,7 +15235,10 @@
    "clv": "",
    "rank": "",
    "reward": "",
-   "id": "ST-34"
+   "id": "ST-34",
+   "mind_confirms": "As a control it succeeds when the correlation-adjusted method beats the unadjusted product rule on held-out official settlements.",
+   "mind_kills": "A run that omits this control for combo divisions is invalid and its results are discarded.",
+   "registration": ""
   }
  ],
  "gates": [

@@ -670,7 +670,38 @@ def build_strategies() -> list[dict]:
     rows.sort(key=lambda r: r["name"])
     for i, r in enumerate(rows, 1):
         r["id"] = f"ST-{i:02d}"
+    attach_falsification(rows)
     return rows
+
+
+def attach_falsification(rows: list[dict]) -> None:
+    """Attach the pre-registered two-sided criteria and the registration hash.
+
+    The text is copied from the committed register ops-center/data/mindchange.json
+    (proposed decision rules, not data claims). Fail-closed: every merged strategy
+    must carry both sides, and the register may not name a strategy that no longer
+    exists. Either condition stops the build instead of publishing a strategy
+    without falsification criteria.
+    """
+    data = json.loads((OPS / "data" / "mindchange.json").read_text(encoding="utf-8"))
+    entries = data.get("entries", {})
+    manifest = ROOT / "corpus" / "manifest.json"
+    reg = ""
+    if manifest.exists():
+        reg = json.loads(manifest.read_text(encoding="utf-8")).get("corpus_registration", "")
+    names = {r["name"] for r in rows}
+    missing = names - set(entries)
+    extra = set(entries) - names
+    if missing or extra:
+        raise SystemExit("mindchange register out of sync with the merged strategies: "
+                         f"missing={sorted(missing)} extra={sorted(extra)}")
+    for r in rows:
+        entry = entries[r["name"]]
+        if not entry.get("confirms") or not entry.get("kills"):
+            raise SystemExit(f"mindchange entry for {r['name']!r} is missing one side")
+        r["mind_confirms"] = entry["confirms"]
+        r["mind_kills"] = entry["kills"]
+        r["registration"] = reg
 
 
 def build_community_evidence() -> dict:
