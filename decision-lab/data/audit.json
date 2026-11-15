@@ -1,8 +1,8 @@
 {
-  "html_pages": 147,
-  "table_rows": 8566,
-  "rows_missing_official_source": 754,
-  "rows_community_only": 243,
+  "html_pages": 164,
+  "table_rows": 9651,
+  "rows_missing_official_source": 789,
+  "rows_community_only": 250,
   "rows_with_internal_audit_source": 7,
   "conflict_files": [],
   "authority_claim_files": [],
@@ -12,7 +12,7 @@
       "id": "AUD-03",
       "severity": "High",
       "title": "Table rows without an official-source link",
-      "detail": "754 row(s) across the repository lack an official HTTPS source; 243 cite only community sources.",
+      "detail": "789 row(s) across the repository lack an official HTTPS source; 250 cite only community sources.",
       "files": [
         "dashboard/flagged.html",
         "dashboard/questions.html",
@@ -39,6 +39,62 @@
     }
   ],
   "pages": [
+    {
+      "path": "availability-ledger/availability.html",
+      "rows": 50,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "availability-ledger/depth-flags.html",
+      "rows": 34,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "availability-ledger/diff.html",
+      "rows": 22,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "availability-ledger/flagged.html",
+      "rows": 5,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "availability-ledger/index.html",
+      "rows": 3,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "availability-ledger/ledger.html",
+      "rows": 62,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "availability-ledger/sources.html",
+      "rows": 5,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
     {
       "path": "corpus.html",
       "rows": 149,
@@ -457,7 +513,7 @@
     },
     {
       "path": "index.html",
-      "rows": 62,
+      "rows": 81,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -905,7 +961,7 @@
     },
     {
       "path": "repo-review.html",
-      "rows": 33,
+      "rows": 34,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -1097,7 +1153,7 @@
     },
     {
       "path": "shadow-board/index.html",
-      "rows": 20,
+      "rows": 22,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -1105,7 +1161,7 @@
     },
     {
       "path": "shadow-board/method.html",
-      "rows": 24,
+      "rows": 26,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -1121,7 +1177,7 @@
     },
     {
       "path": "shadow-board/sources.html",
-      "rows": 45,
+      "rows": 46,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -1131,6 +1187,86 @@
       "path": "signals.html",
       "rows": 8,
       "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "skill-lab/controls.html",
+      "rows": 12,
+      "rows_missing_official_source": 12,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "skill-lab/dependence.html",
+      "rows": 8,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "skill-lab/flagged.html",
+      "rows": 7,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "skill-lab/graded.html",
+      "rows": 802,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "skill-lab/index.html",
+      "rows": 0,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "skill-lab/leaderboard.html",
+      "rows": 23,
+      "rows_missing_official_source": 6,
+      "rows_community_only": 6,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "skill-lab/methodology.html",
+      "rows": 10,
+      "rows_missing_official_source": 10,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "skill-lab/mind-change.html",
+      "rows": 6,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "skill-lab/sources.html",
+      "rows": 5,
+      "rows_missing_official_source": 1,
+      "rows_community_only": 1,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "skill-lab/staking.html",
+      "rows": 6,
+      "rows_missing_official_source": 6,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
       "local_errors": []

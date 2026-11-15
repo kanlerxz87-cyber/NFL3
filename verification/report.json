@@ -24,15 +24,15 @@
     ]
   },
   "table_citations": {
-    "html_pages": 146,
-    "table_rows": 8504,
-    "rows_missing_approved_primary_link": 810,
-    "rows_missing_nfl_or_club_link": 1113,
-    "rows_community_only": 309,
+    "html_pages": 163,
+    "table_rows": 9589,
+    "rows_missing_approved_primary_link": 864,
+    "rows_missing_nfl_or_club_link": 1167,
+    "rows_community_only": 329,
     "host_link_counts_in_tables": {
       "apnews.com": 1,
       "docs.github.com": 57,
-      "github.com": 647,
+      "github.com": 674,
       "itl.nist.gov": 3,
       "kanlerxz87-cyber.github.io": 1,
       "kansspelautoriteit.nl": 9,
@@ -41,7 +41,7 @@
       "nextgenstats.nfl.com": 36,
       "nfl.com": 1,
       "nflreadr.nflverse.com": 1,
-      "operations.nfl.com": 82,
+      "operations.nfl.com": 85,
       "scikit-learn.org": 83,
       "sports.yahoo.com": 8,
       "sports24.us": 4,
@@ -49,24 +49,24 @@
       "static.www.nfl.com": 1,
       "statrankings.com": 4,
       "sticktothemodel.com": 2,
-      "support.nfl.com": 142,
+      "support.nfl.com": 147,
       "touchdownwire.usatoday.com": 2,
       "tsapps.nist.gov": 15,
-      "www.49ers.com": 88,
+      "www.49ers.com": 90,
       "www.atlantafalcons.com": 71,
       "www.azcardinals.com": 95,
-      "www.baltimoreravens.com": 73,
+      "www.baltimoreravens.com": 76,
       "www.bengals.com": 66,
       "www.buccaneers.com": 61,
       "www.buffalobills.com": 87,
       "www.chargers.com": 62,
       "www.chicagobears.com": 60,
       "www.chiefs.com": 87,
-      "www.clevelandbrowns.com": 87,
-      "www.colts.com": 118,
-      "www.commanders.com": 116,
-      "www.dallascowboys.com": 103,
-      "www.denverbroncos.com": 65,
+      "www.clevelandbrowns.com": 88,
+      "www.colts.com": 120,
+      "www.commanders.com": 122,
+      "www.dallascowboys.com": 105,
+      "www.denverbroncos.com": 67,
       "www.detroitlions.com": 88,
       "www.fsroundup.com": 2,
       "www.gaming.nv.gov": 12,
@@ -75,22 +75,29 @@
       "www.itl.nist.gov": 118,
       "www.jaguars.com": 87,
       "www.miamidolphins.com": 82,
-      "www.neworleanssaints.com": 86,
+      "www.neworleanssaints.com": 87,
       "www.newyorkjets.com": 72,
-      "www.nfl.com": 5032,
+      "www.nfl.com": 6052,
       "www.packers.com": 16,
       "www.panthers.com": 86,
-      "www.patriots.com": 119,
+      "www.patriots.com": 120,
       "www.philadelphiaeagles.com": 57,
       "www.raiders.com": 67,
       "www.seahawks.com": 94,
       "www.steelers.com": 83,
-      "www.tennesseetitans.com": 102,
-      "www.therams.com": 87,
-      "www.vikings.com": 84,
+      "www.tennesseetitans.com": 107,
+      "www.therams.com": 93,
+      "www.vikings.com": 88,
       "www.weather.gov": 8
     },
     "rows_by_page": {
+      "availability-ledger/availability.html": 50,
+      "availability-ledger/depth-flags.html": 34,
+      "availability-ledger/diff.html": 22,
+      "availability-ledger/flagged.html": 5,
+      "availability-ledger/index.html": 3,
+      "availability-ledger/ledger.html": 62,
+      "availability-ledger/sources.html": 5,
       "corpus.html": 149,
       "dashboard/flagged.html": 27,
       "dashboard/games.html": 14,
@@ -143,7 +150,7 @@
       "decision-lab/verification.html": 301,
       "decisions.html": 11,
       "flagged.html": 10,
-      "index.html": 62,
+      "index.html": 81,
       "injury-capture/index.html": 648,
       "injury-verification/index.html": 295,
       "line-lab/index.html": 15,
@@ -199,7 +206,7 @@
       "origination/suggestions.html": 9,
       "pricing.html": 34,
       "readiness.html": 75,
-      "repo-review.html": 33,
+      "repo-review.html": 34,
       "requirements.html": 17,
       "research-desk/availability.html": 91,
       "research-desk/correlation.html": 11,
@@ -223,11 +230,21 @@
       "review.html": 26,
       "shadow-board/backtest.html": 50,
       "shadow-board/forecasts.html": 30,
-      "shadow-board/index.html": 20,
-      "shadow-board/method.html": 24,
+      "shadow-board/index.html": 22,
+      "shadow-board/method.html": 26,
       "shadow-board/registers.html": 12,
-      "shadow-board/sources.html": 45,
+      "shadow-board/sources.html": 46,
       "signals.html": 8,
+      "skill-lab/controls.html": 12,
+      "skill-lab/dependence.html": 8,
+      "skill-lab/flagged.html": 7,
+      "skill-lab/graded.html": 802,
+      "skill-lab/index.html": 0,
+      "skill-lab/leaderboard.html": 23,
+      "skill-lab/methodology.html": 10,
+      "skill-lab/mind-change.html": 6,
+      "skill-lab/sources.html": 5,
+      "skill-lab/staking.html": 6,
       "sources.html": 6,
       "strategies.html": 15,
       "suggestions.html": 4,
@@ -239,6 +256,11 @@
       "verification-lab/register.html": 34
     },
     "pages_with_missing_primary_links": [
+      {
+        "path": "availability-ledger/sources.html",
+        "rows_missing_approved_primary_link": 1,
+        "rows": 5
+      },
       {
         "path": "corpus.html",
         "rows_missing_approved_primary_link": 13,
@@ -462,7 +484,7 @@
       {
         "path": "repo-review.html",
         "rows_missing_approved_primary_link": 7,
-        "rows": 33
+        "rows": 34
       },
       {
         "path": "research-desk/correlation.html",
@@ -538,20 +560,55 @@
         "path": "review.html",
         "rows_missing_approved_primary_link": 1,
         "rows": 26
+      },
+      {
+        "path": "skill-lab/controls.html",
+        "rows_missing_approved_primary_link": 12,
+        "rows": 12
+      },
+      {
+        "path": "skill-lab/flagged.html",
+        "rows_missing_approved_primary_link": 3,
+        "rows": 7
+      },
+      {
+        "path": "skill-lab/leaderboard.html",
+        "rows_missing_approved_primary_link": 15,
+        "rows": 23
+      },
+      {
+        "path": "skill-lab/methodology.html",
+        "rows_missing_approved_primary_link": 10,
+        "rows": 10
+      },
+      {
+        "path": "skill-lab/mind-change.html",
+        "rows_missing_approved_primary_link": 6,
+        "rows": 6
+      },
+      {
+        "path": "skill-lab/sources.html",
+        "rows_missing_approved_primary_link": 1,
+        "rows": 5
+      },
+      {
+        "path": "skill-lab/staking.html",
+        "rows_missing_approved_primary_link": 6,
+        "rows": 6
       }
     ]
   },
   "audit_count_comparison": {
-    "saved_html_pages": 147,
-    "independent_html_pages": 146,
-    "saved_table_rows": 8566,
-    "independent_table_rows": 8504,
-    "saved_index_rows": 62,
-    "independent_index_rows": 62,
-    "saved_rows_missing_official_source": 754,
-    "independent_rows_missing_approved_primary_link": 810,
-    "saved_rows_community_only": 243,
-    "independent_rows_community_only": 309,
+    "saved_html_pages": 164,
+    "independent_html_pages": 163,
+    "saved_table_rows": 9651,
+    "independent_table_rows": 9589,
+    "saved_index_rows": 81,
+    "independent_index_rows": 81,
+    "saved_rows_missing_official_source": 789,
+    "independent_rows_missing_approved_primary_link": 864,
+    "saved_rows_community_only": 250,
+    "independent_rows_community_only": 329,
     "note": "Citation totals are not directly comparable: this audit rejects every github.com host as NFL-authority evidence and recognizes the supplemental tsapps.nist.gov source; the saved audit uses different host/path rules. A table-row total mismatch is reported separately as a stale-output flag."
   },
   "existing_gate_reproduction": {
@@ -979,7 +1036,7 @@
       "severity": "High",
       "status": "Reproduced stale generated audit output",
       "title": "Saved repository audit totals do not match the current HTML",
-      "detail": "Saved `audit.json` records 8566 rows across 147 pages (62 in index.html); a fresh offline scan finds 8504 rows across 146 pages (62 in index.html). Regenerate the canonical audit/build so its saved counts match the checked-in HTML; this is a report freshness issue, not a game-data mismatch.",
+      "detail": "Saved `audit.json` records 9651 rows across 164 pages (81 in index.html); a fresh offline scan finds 9589 rows across 163 pages (81 in index.html). Regenerate the canonical audit/build so its saved counts match the checked-in HTML; this is a report freshness issue, not a game-data mismatch.",
       "code": [
         "decision-lab/data/audit.json",
         "index.html"
@@ -991,7 +1048,7 @@
       "severity": "High",
       "status": "Open requirement / review finding",
       "title": "Repository table rows lack a link to an approved primary-source host",
-      "detail": "The independent fixed-host scanner counted 810 such rows among 8504 `<tbody>` rows on 146 HTML pages. This is a host-level count only; it does not judge whether a link's content supports its row. See `pages_with_missing_primary_links` in `report.json` for a per-page breakdown.",
+      "detail": "The independent fixed-host scanner counted 864 such rows among 9589 `<tbody>` rows on 163 HTML pages. This is a host-level count only; it does not judge whether a link's content supports its row. See `pages_with_missing_primary_links` in `report.json` for a per-page breakdown.",
       "code": [
         "verification/audit_sources.py",
         "decision-lab/data/audit.json"

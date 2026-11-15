@@ -171,9 +171,17 @@ win-loss records printed beside it are end-of-season values, so it is not point-
 calibrate "Questionable" against inactives; and those pages' titles state a different week from their own body
 headers, which would mislabel every capture by a week for a parser keyed on the title.
 
-**Decisions this workspace still needs (nothing here acts on them):** the price-data policy, which is the single
-gate in front of opening/closing snapshots, residuals, vig-free consensus, CLV, ROI and the top reward tier;
-whether the verified game log is extended and hashed weekly, which is what makes rest-day, form and availability
-features possible at all; which official field is authoritative for venue; and what a tier pays. Each is written as
-a row with its unblocking effect on [`shadow-board/registers.html`](shadow-board/registers.html), next to six
-suggestions with cost and blocker stated, so a path can be chosen before anything else is implemented.
+**Decisions this workspace still needs (nothing here acts on them).** Two of the six moved while this pass was in
+flight, and the pages were corrected rather than left asserting the older state. The **price-data policy** is now
+written and adopted in [`pricing/PRICE_DATA_POLICY.md`](pricing/PRICE_DATA_POLICY.md) as a fail-closed rule — a named
+source, a named licence with permitted use, and both the price's as-of time and the capture clock time, or the row is
+not stored and no price-dependent number is published — and its own register currently grants nothing (no permitted
+source, no stored price rows, no residual rows), so the market and residual columns here are blank **by rule** rather
+than by omission. The verified game log is now **frozen by SHA-256** in [`corpus/manifest.json`](corpus/manifest.json)
+with a registered chronological train/validation/holdout split, and `shadow-board/scripts/build.py` pins each
+forecast to the log's hash, with the gate failing if the live file and the frozen copy diverge. What is still open:
+whether the log is extended and hashed weekly, which is what makes rest-day, form and availability features possible
+at all; which official field is authoritative for venue; and what a tier pays. Each remaining item is a row with its
+unblocking effect on [`shadow-board/registers.html`](shadow-board/registers.html), beside six suggestions with cost
+and blocker stated. The §1 sentence of the pre-registration that said the price policy was "undecided" is kept as
+written and annotated as amendment A1 in §9, because a frozen registration must be annotated, not re-worded.

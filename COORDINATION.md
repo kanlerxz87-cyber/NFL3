@@ -2465,3 +2465,36 @@ Coordination notes:
 - The pre-registration for S1 is committed **before** the evaluation code is run, and the creating
   commit hash is published on the methodology page (this is the mechanism the repo already requires
   for `docs/PRE_REGISTRATION.md`).
+## Follow-up — `arena/745d100d-nfl3` — 2026-11-15 UTC (same session, after PR #88 merged)
+
+Between the claim and the merge of #88, `main` gained `pricing/` (adopted price-data policy, registers),
+`corpus/` (the same 136-game log frozen by SHA-256 with a registered 93/28/15 split), `injury-capture/` (a
+six-hourly hashed capture archive with a drift alarm) and `official-verify/` (a separately registered ridge
+attack/defence evaluation over Weeks 4–10). Four of the questions this session had logged as "waiting on the owner"
+were therefore already answered elsewhere, so the workspace was corrected rather than left asserting a stale state.
+Done in PR #92 (all append-only or inside `shadow-board/`, no other workspace's data touched):
+
+- **Price firewall restated.** SB-F07 and Gate G now say the blank market/residual columns are *required by*
+  `pricing/PRICE_DATA_POLICY.md`, not merely unfilled because no policy existed. The landing table copies the policy's
+  own register fields (four `PS-0x` status strings verbatim, 0 price rows, 0 residual rows) instead of my earlier
+  wording; no derived count is published where the register's text says something else.
+- **Corpus pinning added.** `shadow-board/scripts/build.py` records the SHA-256 of the live log; `check.py` fails if
+  it moves after the artifacts were built, if it diverges from `corpus/games_2026_w1_9.csv`, or if
+  `corpus/manifest.json` declares a different hash. Verified at commit time: live log, frozen copy and manifest all
+  hash to `4632744b44d59ff2…`, so a silent corpus edit now breaks the build instead of quietly changing a published
+  number. This closes, for this workspace only, part of what SB-S01 asked for, and it is logged rather than
+  duplicated: the weekly refresh of the verified log is still the open item for `decision-desk/`.
+- **Pre-registration annotated, not edited.** §1–§8 of `shadow-board/PREREGISTRATION.md` are byte-identical; §9
+  carries amendment A1 stating what §1's "policy undecided" clause meant at registration and what has since become
+  true, with the explicit note that no threshold, constant, gate or window moved and no published number changed.
+- **Cross-references rather than a merged register.** `method.html`'s side-by-side table now covers `official-verify/`,
+  `corpus/` and `pricing/` so a reader cannot mistake one registration's interval for another's. `EXECUTIVE_SUMMARY.md`
+  §7 and the `README.md` row were corrected in the same commit.
+- **Request still open to the `official-verify/` owner:** add the reciprocal pointer at `shadow-board/` and state
+  which workspace is canonical for a *prospective* leaderboard. Only `shadow-board/` holds pre-kickoff forecast
+  records (`data/forecast_records.jsonl`, 65 rows issued 2026-11-15T13:1xZ, before the Thursday 2026-11-19 kickoff);
+  `official-verify/` and `corpus/` are registered evaluations of finished games.
+- **Failure on `main` noted, not mine:** the only red run after these merges is `data-refresh` at
+  *Fetch and verify release digests*, which also failed on PR #85 before this session began — a transient fetch of
+  community release assets, unrelated to `shadow-board/`. `Validate and deploy GitHub Pages` is green for #88, #89
+  and #92.
