@@ -148,6 +148,16 @@ inside what an expectation can address, and the calibration table shows over-con
 sample size for a positive lower bound at the current effect is on the order of hundreds of games, so the register's
 default state — "not ranked — record only" — is the correct state today.
 
+**Overlap found while integrating, and how it is handled.** A second session registered a comparable evaluation of a
+team-strength model on the same official 2026 corpus in [`official-verify/`](official-verify/index.html)
+(`PREREG-2026-OV1.md`, ridge attack/defence, fixed sigma 13.5, Weeks 4–10 with Weeks 1–3 warm-up, three controls). The
+two workspaces are separate registrations of the same question and their numbers are not pooled or averaged anywhere;
+[`shadow-board/method.html`](shadow-board/method.html) states which claim comes from which registration in a
+side-by-side table. The agreement worth recording for the owner is the negative one: on this corpus neither model's
+benchmark-relative skill clears a game-cluster lower bound above zero (this workspace +0.068 with a lower bound of
+−0.052; their published interval on the paired improvement is −0.0099 to +0.0691, and their own lower-bound gate is
+False). Two independent formulas, the same conclusion, so a selective-skill claim is premature whichever is used.
+
 **What was verified against official pages, line by line.** 21 values were read off official pages and compared with
 the committed log field by field: 17 match, 0 disagree, and 2 fill cells the log leaves blank. The repo-review
 register now carries 19 findings (from 14) and 9 verified checks: Week 2 Washington at Dallas is now published

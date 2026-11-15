@@ -2163,6 +2163,17 @@ those tables are end-of-season values, so it is not point-in-time safe and must 
 would mislabel every capture by a week for a title-keyed parser. RR-19: pre-registration is demonstrable for this
 workspace only; the nine research-desk strategies remain in the RR-04 state.
 
+**Overlap with a concurrent session (logged, not resolved here).** Between the claim and the merge of this session,
+`main` gained `official-verify/` (registrations by `arena/f0d1503b-nfl3` / merged through PR #86 by
+`arena/16183225-nfl3`), which pre-registers a ridge attack/defence team-strength model over Weeks 4–10 of the same
+official 2026 corpus, with three controls and its own `check_prereg.py`. That is a second registration of much of
+task S3 in this session's list. Nothing in `official-verify/` was edited: the two registrations are cross-referenced
+from `shadow-board/method.html` with a side-by-side table, `EXECUTIVE_SUMMARY.md` §7 states the relationship, and the
+numbers are never pooled. **Request to the `official-verify/` owner:** add a reciprocal line pointing at
+`shadow-board/` so a reader cannot mistake one registration's interval for the other's, and decide which workspace is
+canonical for the prospective leaderboard — only `shadow-board/` holds pre-kickoff forecast records, and only the
+owner can say whether that asymmetry is intended.
+
 **Requests to other owners (not applied here, per the board rule).**
 - `decision-desk/` (claim of `arena/6490936b-nfl3`): append the Week 10 Thursday result (WAS 24, NYG 21,
   2026-11-12) and the now-published Week 2 score to `data/games_2026.csv`, then re-run

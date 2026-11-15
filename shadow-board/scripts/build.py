@@ -822,10 +822,41 @@ def render(res: dict, fixtures, readings, ledger, graded, graded_ml) -> dict[str
          "normality of the underlying pairs is not checked at the n printed above",
          link("https://itl.nist.gov/", "NIST reference")],
     ])
+    other = table(["Item", "This workspace", "official-verify/ (registered separately, on main)", "Source"], [
+        ["Model", "Shrunken net-points-per-game, margin sd fitted from the corpus and clipped to 10.0-17.0",
+         "Ridge attack/defence on the sum-to-zero constraint, sigma fixed at 13.5 in advance",
+         link("https://www.nfl.com/schedules/2026/by-week/week-1", "official Week 1 schedule page")
+         + " &#183; <a href='../official-verify/prereg/PREREG-2026-OV1.md'>their registration</a>"],
+        ["Backtest window", f"2026 Weeks 2-{max(res['corpus']['weeks'])}, every game with a prior",
+         "2026 Weeks 4-10 evaluation, Weeks 1-3 warm-up",
+         link("https://www.nfl.com/schedules/2026/by-week/week-4", "official Week 4 schedule page")
+         + " &#183; <a href='../official-verify/index.html'>official-verify overview</a>"],
+        ["Controls", "Home-win-rate benchmark and a coin flip",
+         "Coin flip, home base rate and a favourites-only control",
+         link("https://www.nfl.com/standings/", "official standings")
+         + " &#183; <a href='../official-verify/data/evaluation.json'>their evaluation artifact</a>"],
+        ["Prospective board", "Yes - Week 11 onward, and only that window is ranked", "No prospective leaderboard",
+         link(OFFICIAL_SCHEDULE, "official Week 11 schedule page")
+         + " &#183; <a href='../official-verify/leaderboard.html'>their leaderboard page</a>"],
+        ["Result on the shared weeks", "Skill +0.068, cluster lower bound -0.052 (see the backtest page)",
+         "Skill +0.119 against the home base-rate control on 89 scored games, intervals as they publish them",
+         link("https://www.nfl.com/schedules/2026/by-week/week-9", "official Week 9 schedule page")
+         + " &#183; <a href='../official-verify/data/evaluation.json'>their evaluation artifact</a>"],
+    ])
     pages["method.html"] = page("method.html", "Method, gates and the strategy register",
                                 "What is frozen, what is measured, and what would change each entry's mind. The "
                                 "gates are fail-closed: the default state of a strategy is not ranked.",
                                 para + "<h2>Declared strategies</h2>" + strat +
+                                "<h2>The same question is registered twice in this repository</h2>"
+                                + "<p class='para'>A second session registered a comparable evaluation on the same "
+                                  "official corpus while this one was being built. The two are not corrections of each "
+                                  "other and neither is a replication of the other: they differ in model form, window "
+                                  "and sigma treatment, so their numbers must not be pooled or averaged. This table "
+                                  "exists so a reader can see which claim comes from which registration. The one thing "
+                                  "the two registrations do agree on is the verdict that matters: neither model's "
+                                  "skill clears a game-cluster lower bound above zero on the 2026 corpus, so a claim "
+                                  "of selective skill from either workspace would be premature regardless of which "
+                                  "formula is used.</p>" + other +
                                 "<h2>Leaderboard divisions</h2>" + divisions +
                                 "<h2>Scoring rules and their failure modes</h2>" + stats_tbl +
                                 "<h2>Rejected shortcuts (recorded so they are not re-proposed silently)</h2>" +
