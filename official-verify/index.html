@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Official verification and line origination · NFL3 Official Verification</title>
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+.blank{color:#a93939;font-weight:700;font-size:11px;white-space:nowrap}
+.state{display:inline-block;border-radius:99px;padding:2px 8px;font-size:11px;font-weight:700;white-space:nowrap}
+.state.done{color:#16734e;background:#e9f7ef;border:1px solid #c7ebd5}
+.state.partial{color:#8a5a0a;background:#fff4dc;border:1px solid #f4dfae}
+.state.blocked{color:#a93939;background:#fff0ef;border:1px solid #f3cecb}
+.state.open{color:#a93939;background:#fff0ef;border:1px solid #f3cecb}
+.state.resolved{color:#16734e;background:#e9f7ef;border:1px solid #c7ebd5}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}
+.sub{display:block;color:#66748b;font-size:12px;margin-top:3px}
+.neg{color:#a93939}
+</style>
+</head>
+<body>
+<header><div class="top">
+<a class="brand" href="../index.html"><b>N</b>NFL Decision Lab</a>
+<nav class="nav" aria-label="Main navigation"><a href="index.html" class="active" aria-current="page">Overview</a><a href="requirements.html">Requirements</a><a href="origination.html">Originated lines</a><a href="leaderboard.html">Leaderboard & luck</a><a href="results.html">Verified results</a><a href="availability.html">Availability</a><a href="questions.html">Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="flagged.html">Flagged for review</a></nav>
+</div></header>
+<div class="wrap">
+<div class="eyebrow">Official-source verification · captured 2026-11-15 UTC</div>
+<h1>Official verification and line origination</h1>
+<p class="intro">Every number on this site was read from an official NFL page on 2026-11-15 and is linked on its row. Where an official source does not exist, the cell is blank and the reason is published.</p>
+<div class="pillrow">
+<span class="badge good">137 games verified</span>
+<span class="badge blue">pre-registered before results</span>
+<span class="badge warn">1 strategy, unvalidated</span>
+<span class="badge danger">12 flagged items</span>
+<span class="badge">0 invented values</span>
+</div>
+<div class="grid">
+<div class="card stat"><div class="num">137</div><p>official games verified</p></div>
+<div class="card stat"><div class="num">192/192</div><p>club-field standings matches</p></div>
+<div class="card stat"><div class="num">89</div><p>out-of-sample games scored</p></div>
+<div class="card stat"><div class="num">21</div><p>requirements done</p></div>
+<div class="card stat"><div class="num">10</div><p>requirements partial</p></div>
+<div class="card stat"><div class="num">36</div><p>requirements blocked</p></div>
+<div class="card stat"><div class="num">35</div><p>open questions</p></div>
+<div class="card stat"><div class="num">12</div><p>flagged for review</p></div>
+</div><div class="callout danger">
+<strong>The headline result is a failure, and it is published as one.</strong>
+The pre-registered model scores a Brier skill of +0.119 against the
+home base rate on 89 out-of-sample games, but the 95% cluster-bootstrap interval on the
+paired per-game improvement is <span class="mono">-0.0099 to +0.0691</span>. The lower bound is below
+zero, so the model <strong>does not clear its gate</strong>. No strategy here is validated, earns reward eligibility, or
+is claimed to be profitable. The leaderboard shows the one entry with its interval.
+</div><div class="grid">
+<div class="card half"><h2>Start with these three pages</h2>
+<ul class="list">
+<li><a href="origination.html">Originated lines</a> — every Week 11 fixture, our number, and why the
+residual is blank.</li>
+<li><a href="leaderboard.html">Leaderboard &amp; luck</a> — the one strategy, its control rows, and the
+luck panel.</li>
+<li><a href="flagged.html">Flagged for review</a> — twelve items, including four that call out problems
+in other parts of this repository.</li>
+</ul></div>
+<div class="card half"><h2>How to check a number yourself</h2>
+<p>Every table row has an official link. The corpus check is one command and it compares our game log
+against official standings arithmetic field by field:</p>
+<p class="mono">python3 official-verify/scripts/verify_corpus.py</p>
+<p>To re-derive every score on the site:</p>
+<p class="mono">python3 official-verify/scripts/evaluate.py<br>python3 official-verify/scripts/analysis.py<br>python3 official-verify/scripts/originate.py</p>
+</div></div><div class="section"><h2>Status of the five things you asked for</h2>
+<p>Read this table first. It is the shortest honest summary on the site.</p></div><div class="tablewrap"><table><thead><tr><th>Area</th><th>What was actually done</th><th>State</th><th>Official source</th></tr></thead><tbody>
+<tr><td>Verified 2026 corpus</td><td>137 games, Weeks 1–10, every result read from an official weekly schedule page and reconciled to the official standings table. 0 of 192 club-field comparisons disagree.</td><td><span class="state done">verified</span></td><td><a class="source" href="https://www.nfl.com/standings/" title="Official source OV-S10">OV-S10 ↗</a></td></tr>
+<tr><td>Pre-registered evaluation</td><td>89 out-of-sample games, one model, three controls. Brier skill +0.119 against base rate, interval -0.0099 to +0.0691.</td><td><span class="state blocked">gate fails</span></td><td><a class="source" href="https://www.nfl.com/standings/" title="Official source PREREG-2026-OV1">PREREG-2026-OV1 ↗</a></td></tr>
+<tr><td>Luck removal</td><td>31% of the spread in club win totals is consistent with a coin flip, with n=32 clubs.</td><td><span class="state partial">published with caveat</span></td><td><a class="source" href="https://www.nfl.com/standings/" title="Official source OV-S10">OV-S10 ↗</a></td></tr>
+<tr><td>Originated lines</td><td>13 Week 11 fixtures priced side → total → moneyline. Market column and residual blank: no price source.</td><td><span class="state partial">partial</span></td><td><a class="source" href="https://www.nfl.com/schedules/2026/by-week/week-11" title="Official source OV-S17">OV-S17 ↗</a></td></tr>
+<tr><td>Depth, snap counts, inactives</td><td>Both tested official routes return the league 404 page. Nothing inferred, nothing approximated.</td><td><span class="state blocked">blocked</span></td><td><a class="source" href="https://www.nfl.com/teams/detroit-lions/depth-chart" title="Official source OV-S14">OV-S14 ↗</a></td></tr>
+</tbody></table></div><div class="card"><h2>What this workspace is for</h2>
+<p>You asked for an NFL line-origination and strategy system with no manual input, every number
+traceable to an official source, and no invented values. This is that, built the way the evidence
+allowed:</p>
+<ul class="list">
+<li><strong>A verified results corpus.</strong> Every 2026 game through Week 10 was re-read from the
+official weekly schedule pages, then cross-checked against official standings arithmetic. The check
+caught a real transcription error, which was corrected at the source.</li>
+<li><strong>A pre-registration that predates its results.</strong> The rule text, the corpus hashes, the
+model form, the window, the controls and the gates were committed before any score existed. A gate
+fails the build if that is ever untrue.</li>
+<li><strong>Originated lines in the order you asked for.</strong> Side, then total, then moneyline, with
+our number, the market number and the residual as separate columns. The market column is blank,
+because no price source exists here, and it says so.</li>
+<li><strong>A realism layer.</strong> Luck removed from the win table, calibration published including the
+bins too small to read, and controls on every board.</li>
+<li><strong>An honest refusal list.</strong> Depth, snap counts, inactive lists and dated injury series
+were tested and could not be obtained. Rather than approximate them, the requirements that need them
+are marked blocked, with the exact number that would clear them.</li>
+</ul></div>
+</div>
+<footer><div class="foot">
+<span><strong>NFL3 · Official verification workspace.</strong> A research workspace, not a sportsbook or an approved wagering system. Not betting advice.</span>
+<span>Every table row links to the official page it came from. Unconfirmed values are blank and flagged.</span>
+</div></footer>
+</body>
+</html>

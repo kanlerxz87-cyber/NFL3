@@ -1,0 +1,68 @@
+id,requirement,state,evidence,blocking_gate,number_that_would_clear_it,source_id
+R01,Price-snapshot store: opening and closing numbers per market we originate,blocked,No price series is held; every market column is blank with a flag.,G-PRICE (no licensed source),"2 licensed vendors evaluated in writing, 1 reuse grant, closing definition fixed",OV-B01
+R02,Verified results feed so backtests and ROI can be computed,partial,"137 official results verified against 192 official standings fields (0 mismatches); ROI needs prices, which are absent.",G-PRICE for the ROI half; results half passes,official corpus extended to 2 seasons,OV-S10
+R03,"Originate the side first, then the total, then the moneyline",done,Implemented in that order in originate.py; the order is published per row.,none,n/a (order is a property of the code and is tested),OV-S17
+R04,"Publish fair line, market line and difference as separate columns",partial,Three columns exist; the market and residual columns are blank because no price exists.,G-PRICE,1 licensed price source,OV-B01
+R05,Separate signal from staking on the leaderboard,done,Every board entry carries a skill score and its interval; no staking column exists to mask it.,G-CLUSTER for admission,n/a (separation is structural),PREREG-2026-OV1
+R06,"Track the depth of the replacement, not just the fact",blocked,No official depth ordering was obtained; the league route 404s.,G-DEPTH (no official ordering),1 official ordering source covering 32 clubs,OV-S14
+R07,"Correlations from officially sourced numbers, with n",done,"Four correlations, each with n=32, a Fisher interval and a caveat.",none,n/a (n is published on the row),OV-S10
+R08,Demotion gate that returns a live strategy to paper,blocked,"No strategy is live, so the gate has never been exercised; the rule is not yet registered.",G-DEMOTE (rule not registered),demotion rule registered in a committed file,PREREG-2026-OV1
+R09,Pre-register every strategy; backtest numbers never on the leaderboard,done,PREREG-2026-OV1 is committed before its results; the gate fails if it does not precede HEAD.,G-PREREG passes,n/a (mechanism is enforced by check_prereg.py),PREREG-2026-OV1
+R10,Availability graph as a first-class dataset,blocked,Only current-state injury captures exist; no dated series.,G-PIT (no point-in-time series),daily captures Wed-Sun with hashes for 4 weeks,OV-S11
+R11,"Model depth from playing time, not jersey order",blocked,The tested official snap-count route 404s; no snap share is held.,G-SNAP (no official snap table),"1 official snap-share source, or a Game Book reuse grant",OV-S15
+R12,"Injury signal as a surprise, never a level",blocked,"A surprise needs the prior-expected state, which needs the dated series.",G-PIT,dated series (see R10),OV-S11
+R13,32-team roster/IR sweep before a team model is trusted,blocked,The report lists only clubs with designations; a reserve-list join is required.,G-ROSTER,1 official roster/status source joined to the report,OV-S11
+R14,Fixture-context features from published schedule facts only,done,"Week, weekday, date, kickoff time, venue and neutral flag are captured per fixture with a source.",none,n/a (published facts only),OV-S17
+R15,Store every model output as a probability plus its inputs,done,"Each originated row carries p(home), the fitted parameters and mu/hfa used.",none,n/a (inputs are on the row),OV-S17
+R16,Removal-of-luck panel on the dashboard,done,Luck share of club-win dispersion computed and published with n=32 clubs and a caveat.,none,n/a (published with its interval caveat),OV-S10
+R17,Two-sided 'what would change our mind' field on every strategy,done,Every suggestion and the registration carry an explicit refutation line.,none,n/a,PREREG-2026-OV1
+R18,Price a line ourselves and publish the residual against the market on a schedule,partial,We price every Week 11 fixture on a fixed board; the residual is blank because the market column is blank.,G-PRICE,1 licensed price source with a closing definition,OV-B01
+R19,Turn the game log into a pre-registered backtest corpus,done,"137 games, hashed in the registration, scored walk-forward under the frozen rules.",G-CLUSTER for promotion,n/a (corpus is registered and hashed),PREREG-2026-OV1
+R20,Decide the price-data policy before any backtest is published,done,"Published policy: no market price until a licensed source exists; blanks are flagged, never filled.",none,n/a,OV-B01
+R21,Store every injury-hub read with a clock time and publish the delta,partial,"Captures carry timestamps and hashes; only one or two observations exist, so no delta series is available.",G-PIT,4 consecutive weeks of dated captures,OV-S11
+R22,Decision-readiness table on the landing page,done,This page plus its requirement table; one row per requirement with the blocking gate and the clearing number.,none,n/a,OV-S17
+R23,Transcribe the venue of every fixture from the official game centre,partial,Week 11 venues are transcribed from the official schedule; Game Center confirms stadium names for sampled games.,G-VENUE (per-fixture Game Center confirmation incomplete),13 of 13 Week 11 fixtures confirmed on Game Center,OV-S17
+R24,Publish the dated schedule announcement beside the live schedule,blocked,No dated announcement page has been captured.,G-ANNOUNCE,1 official dated announcement URL and its capture,OV-B04
+R25,Use Game Books for actual starters; do not infer depth rank or snaps,blocked,"Game Books are linked from Game Center; reuse terms are unresolved, so nothing is stored.",G-BOOK (terms unresolved),written terms resolved for storage,OV-S12
+R26,Ingest game-level results to make ratings opponent-aware,done,"The registered model fits attack and defence jointly, so ratings are opponent-adjusted by construction.",G-CLUSTER to be trusted,n/a (structure is opponent-aware),PREREG-2026-OV1
+R27,Injury and personnel ablations instead of fixed penalties,blocked,An ablation needs the availability features first.,G-PIT + G-ABLATE,"dated series, then one ablation with an interval",OV-B04
+R28,Immutable multi-day availability snapshots with hashes,blocked,No scheduled capture infrastructure exists in this workspace; only ad hoc captures.,G-PIT,scheduled job writing hashed captures daily,OV-S11
+R29,Capture official inactive lists and snap counts,blocked,Neither is held; the official snap route 404s.,G-SNAP,1 official source for either,OV-S15
+R30,"Model depth slots as groups, not a single starter",blocked,Requires an official ordering source; none obtained.,G-DEPTH,1 official ordering source,OV-S14
+R31,Treat roster turnover as a first-class data event,blocked,No dated roster event log is held.,G-ROSTER,1 dated official transactions log,OV-S11
+R32,"Singles-only shadow baseline, pre-registered and frozen",done,"Registered, frozen and scored; it is the only scored strategy, and it fails its own promotion gate.",G-CLUSTER (fails),lower bound above 0 on 2 seasons,PREREG-2026-OV1
+R33,Parlays and prop combos behind a joint-evidence gate,blocked,"No joint probability, no operator void/push rules.",G-JOINT,validated joint probability + operator rules,OV-B01
+R34,Proper-score leaderboard divisions,partial,One division exists (singles) and it is proper-scored; other divisions are empty by rule.,G-CLUSTER,at least one eligible entry per division,PREREG-2026-OV1
+R35,"Rank with proper scores and uncertainty, not win rate",done,Brier skill with a cluster-bootstrap interval; no win-rate ranking exists on this board.,none,n/a (structure),PREREG-2026-OV1
+R36,Durable snapshot storage and freshness alerts,blocked,"Captures are committed with hashes, but no freshness monitor or alert exists.",G-FRESH,scheduled monitor with an alert on stale or changed source,OV-S11
+R37,Split public analysis layer from a private raw layer,partial,This workspace publishes derived tables and links to the official page; the repository as a whole still exposes a large raw folder.,G-TERMS,per-source reuse terms read and recorded,OV-S11
+R38,"Per-team view: out, replacement named, net injury count",blocked,The count is computable; the replacement column needs depth ordering.,G-DEPTH,1 official ordering source,OV-S14
+R39,"Announced-starter evidence field, not an inferred replacement",blocked,No official dated starter-change source is held.,G-STARTER,1 official dated starter announcement source,OV-B04
+R40,Official depth-chart register with date and source per row,blocked,No depth rows are asserted anywhere in this workspace.,G-DEPTH,1 official ordering source,OV-S14
+R41,Calibrate 'Questionable' empirically,blocked,Needs inactive lists joined to designations over several seasons.,G-DESIG,join with n per designation,OV-B04
+R42,Interactive offense/defense deficiency matrix by string,blocked,Requires depth ordering and playing time; neither exists.,G-DEPTH + G-SNAP,both sources obtained,OV-S14
+R43,Flag stale depth rows against the transactions log,blocked,No depth rows and no transactions log are held.,G-ROSTER,1 dated transactions log,OV-S11
+R44,"Point-in-time snapshot ledger for injuries, depth and inactives",blocked,Ad hoc captures only.,G-PIT,scheduled ledger with hashes,OV-S11
+R45,Populate missing game-status designations (three Lions players),partial,The official page now publishes all three as Out; the repository's stored copy was not edited here because it belongs to another workspace.,G-STORE (foreign file),re-capture and diff in the owning workspace,OV-S11
+R46,Re-capture and republish the Week 10 injury tables,blocked,The stale counts live in another workspace's snapshot.,G-STORE (foreign file),owner re-captures and publishes the diff,OV-S11
+R47,"Reject deriving depth order from jersey number, experience or salary",done,No such inference exists anywhere in this workspace; the depth feature is refused outright.,none,n/a,OV-S14
+R48,Represent shared and empty depth slots faithfully,blocked,"Requires depth data, which is absent.",G-DEPTH,1 official ordering source,OV-S14
+R49,Resolve the depth-order source before building the backup feature,done,Both routes were tested and both failed; the feature is not built and the failure is published.,none,n/a (resolution is the documented failure),OV-S15
+R50,Score injury-designation reliability before using it,blocked,Needs several seasons of designations joined to inactive lists.,G-DESIG,measured play rate per designation with intervals,OV-B04
+R51,Treat the injury report as a timestamped series,blocked,Current-state page only; no dated series stored.,G-PIT,daily captures from Wednesday,OV-S11
+R52,Snap counts as starter proxy when depth is unavailable,blocked,The official snap route 404s.,G-SNAP,1 official snap table,OV-S15
+R53,Control baselines on every leaderboard run,done,"Coin flip, home base rate and favourites are scored beside the model on every run.",none,n/a,PREREG-2026-OV1
+R54,Stadium roof/surface and hourly wind overlay,blocked,No roof designation or weather feed is held.,G-WX,1 official roof designation source + 1 forecast source,OV-B04
+R55,Two-stage leaderboard: proper-score qualification then prospective CLV/ROI,blocked,Stage two needs prices and a prospective sample.,G-PRICE + G-CLUSTER,"prices, then 4 weeks prospective",OV-B01
+R56,Vig-free consensus vs originated fair-line decomposition,blocked,Needs a multi-book price set.,G-PRICE,3 licensed books,OV-B01
+R57,Publish a weekly 'what changed' diff,partial,Standings and results can be diffed between refreshes; the diff is not yet rendered as a column.,G-FRESH,a stored prior snapshot per refresh,OV-S10
+R58,Publish every model total twice until one wins,blocked,Only one estimator is registered; a second would need its own registration.,G-DUAL,a second estimator registered and scored,PREREG-2026-OV1
+R59,Drift alarm on every scraper,partial,"This workspace fails closed on corpus, pre-registration and source checks; no schema drift alarm exists.",G-DRIFT,pinned row counts and required fields per source,OV-S10
+R60,Capture the reserve list so 'not listed' never means 'available',blocked,No reserve-list source is joined.,G-ROSTER,1 official roster/status source,OV-S11
+R61,Reject ranking strategies by season-long ROI,done,Not implemented; ranking is by benchmark-relative proper score only.,none,n/a,PREREG-2026-OV1
+R62,Archive weekly injury reports for past seasons,blocked,No archive exists.,G-PIT,an archived series per season,OV-B04
+R63,Pre-register each strategy with frozen text,done,PREREG-2026-OV1 does exactly this; the gate checks the commit precedes HEAD.,G-PREREG passes,n/a,PREREG-2026-OV1
+R64,2026 kickoff and declared onside-kick regime priors filter,blocked,No official rule text for the 2026 regime has been captured in this workspace.,G-RULES,1 official 2026 rulebook section captured,OV-B04
+R65,Freeze a rule before it sees data,done,Registration committed before results; hash and commit both checked.,G-PREREG passes,n/a,PREREG-2026-OV1
+R66,"Split data into train, validation and final holdout seasons",blocked,"One season only, so a three-way season split is impossible.",G-SPLIT,3 seasons of official results,OV-S10
+R67,Suggestions section with a review surface,done,"This page; every suggestion carries effort, risk, dependency and a refutation line.",none,n/a,PREREG-2026-OV1

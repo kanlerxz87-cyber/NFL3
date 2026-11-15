@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Availability, depth and the limits of the official sources · NFL3 Official Verification</title>
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+.blank{color:#a93939;font-weight:700;font-size:11px;white-space:nowrap}
+.state{display:inline-block;border-radius:99px;padding:2px 8px;font-size:11px;font-weight:700;white-space:nowrap}
+.state.done{color:#16734e;background:#e9f7ef;border:1px solid #c7ebd5}
+.state.partial{color:#8a5a0a;background:#fff4dc;border:1px solid #f4dfae}
+.state.blocked{color:#a93939;background:#fff0ef;border:1px solid #f3cecb}
+.state.open{color:#a93939;background:#fff0ef;border:1px solid #f3cecb}
+.state.resolved{color:#16734e;background:#e9f7ef;border:1px solid #c7ebd5}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}
+.sub{display:block;color:#66748b;font-size:12px;margin-top:3px}
+.neg{color:#a93939}
+</style>
+</head>
+<body>
+<header><div class="top">
+<a class="brand" href="../index.html"><b>N</b>NFL Decision Lab</a>
+<nav class="nav" aria-label="Main navigation"><a href="index.html">Overview</a><a href="requirements.html">Requirements</a><a href="origination.html">Originated lines</a><a href="leaderboard.html">Leaderboard & luck</a><a href="results.html">Verified results</a><a href="availability.html" class="active" aria-current="page">Availability</a><a href="questions.html">Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="flagged.html">Flagged for review</a></nav>
+</div></header>
+<div class="wrap">
+<div class="eyebrow">Official-source verification · captured 2026-11-15 UTC</div>
+<h1>Availability, depth and the limits of the official sources</h1>
+<p class="intro">Which starters are out is answerable from the official report. Who replaces them, and with what workload, is not answerable from any source obtained here — so it is blank, not estimated.</p>
+
+<div class="callout danger"><strong>Nothing in this table is inferred, which is why it is short.</strong>
+The league's depth-chart route and its snap-count route both returned the league's own 404 page on the
+capture date. Rather than reconstruct a depth order from roster status, jersey numbers, salary or
+experience — all of which the brief explicitly rejects — the columns that would need those inputs are left
+blank and the requirements that depend on them are marked blocked.</div>
+
+<h2 style="margin-top:26px">What the official injury report does and does not support</h2>
+<p>Three players your brief names as blank in the repository's stored copy are, on the capture date,
+published with a full status by the official report. The rows are transcribed below exactly as the
+official page renders them, with blank cells kept blank.</p><div class="tablewrap"><table><thead><tr><th>Player</th><th>Club</th><th>Pos</th><th>Injury</th><th>Practice status</th><th>Game status</th><th>Official source</th></tr></thead><tbody>
+<tr><td><a href="https://www.nfl.com/players/kerby-joseph/">Kerby Joseph</a></td><td>Lions</td><td>S</td><td>Knee</td><td>Did Not Participate In Practice</td><td><strong>Out</strong></td><td><a class="source" href="https://www.nfl.com/injuries/" title="Official source OV-S11">OV-S11 ↗</a></td></tr>
+<tr><td><a href="https://www.nfl.com/players/cade-mays/">Cade Mays</a></td><td>Lions</td><td>C</td><td>Ankle</td><td>Did Not Participate In Practice</td><td><strong>Out</strong></td><td><a class="source" href="https://www.nfl.com/injuries/" title="Official source OV-S11">OV-S11 ↗</a></td></tr>
+<tr><td><a href="https://www.nfl.com/players/d-j-reed/">D.J. Reed</a></td><td>Lions</td><td>CB</td><td>Hip</td><td>Did Not Participate In Practice</td><td><strong>Out</strong></td><td><a class="source" href="https://www.nfl.com/injuries/" title="Official source OV-S11">OV-S11 ↗</a></td></tr>
+<tr><td><a href="https://www.nfl.com/players/john-bates/">John Bates</a></td><td>Commanders</td><td>TE</td><td></td><td>Full Participation in Practice</td><td><span class="blank" title="Not confirmed from an official source; left blank on purpose">— unverified</span></td><td><a class="source" href="https://www.nfl.com/injuries/" title="Official source OV-S11">OV-S11 ↗</a></td></tr>
+<tr><td><a href="https://www.nfl.com/players/treylon-burks/">Treylon Burks</a></td><td>Commanders</td><td>WR</td><td></td><td>Did Not Participate In Practice</td><td><span class="blank" title="Not confirmed from an official source; left blank on purpose">— unverified</span></td><td><a class="source" href="https://www.nfl.com/injuries/" title="Official source OV-S11">OV-S11 ↗</a></td></tr>
+<tr><td><a href="https://www.nfl.com/players/a-j-brown/">A.J. Brown</a></td><td>Patriots</td><td>WR</td><td>Ankle, Knee</td><td>Limited Participation in Practice</td><td>Questionable</td><td><a class="source" href="https://www.nfl.com/injuries/" title="Official source OV-S11">OV-S11 ↗</a></td></tr>
+</tbody></table></div><div class="callout warn"><strong>Read the blank game-status cells carefully.</strong> A blank
+is what the official page publishes, not a gap this site filled. It is most likely to mean no designation
+was required or the designation was not final at capture time — and because which of those it is cannot be
+established from one capture, no value is substituted and no availability feature uses it.</div>
+
+<h2 style="margin-top:26px">Why no replacement or depth column exists</h2>
+<div class="tablewrap"><table><thead><tr><th>What you asked for</th><th>What was tested</th><th>Result</th><th>What would clear it</th><th>Official source</th></tr></thead><tbody>
+<tr><td>Official depth order per club</td><td>The league depth-chart route for one club (<span class="mono">/teams/detroit-lions/depth-chart</span>)</td><td><span class="state blocked">404 from the league itself</span></td><td>A tested route for all 32 clubs, verified club by club</td><td><a class="source" href="https://www.nfl.com/teams/detroit-lions/depth-chart" title="Official source OV-S14">OV-S14 ↗</a></td></tr>
+<tr><td>Snap counts as the playing-time source</td><td>The league snap-count route (<span class="mono">/stats/player-stats/category/snap-counts/2026/reg/</span>)</td><td><span class="state blocked">404 from the league itself</span></td><td>One official tabular snap source</td><td><a class="source" href="https://www.nfl.com/stats/player-stats/category/snap-counts/2026/reg/" title="Official source OV-S15">OV-S15 ↗</a></td></tr>
+<tr><td>Actual starters and game-day status</td><td>Official Game Book PDFs linked from every Game Center page</td><td><span class="state partial">exists, terms unresolved</span></td><td>Written permission to store Game Book content</td><td><a class="source" href="https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2" title="Official source OV-S12">OV-S12 ↗</a></td></tr>
+<tr><td>Dated availability series for a point-in-time backtest</td><td>The injury report across repeated observations</td><td><span class="state blocked">current-state page only</span></td><td>Scheduled captures from Wednesday to kickoff, each hashed and timestamped</td><td><a class="source" href="https://www.nfl.com/injuries/" title="Official source OV-S11">OV-S11 ↗</a></td></tr>
+<tr><td>Inactive lists</td><td>Not obtainable from the pages fetched in this session</td><td><span class="state blocked">not obtained</span></td><td>One official inactive-list source, per season</td><td><a class="source" href="https://www.nfl.com/injuries/" title="Official source OV-S11">OV-S11 ↗</a></td></tr>
+</tbody></table></div>
+</div>
+<footer><div class="foot">
+<span><strong>NFL3 · Official verification workspace.</strong> A research workspace, not a sportsbook or an approved wagering system. Not betting advice.</span>
+<span>Every table row links to the official page it came from. Unconfirmed values are blank and flagged.</span>
+</div></footer>
+</body>
+</html>

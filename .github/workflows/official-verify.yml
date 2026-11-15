@@ -1,0 +1,79 @@
+name: Official verification workspace
+
+# Guards the official-verify workspace: the corpus must reconcile to official
+# standings arithmetic, the pre-registration must still precede its results, the
+# site must build deterministically with an official source on every row, and the
+# reported numbers must be internally coherent.
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'official-verify/**'
+      - 'tests/test_official_verify.py'
+      - '.github/workflows/official-verify.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'official-verify/**'
+      - 'tests/test_official_verify.py'
+      - '.github/workflows/official-verify.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: official-verify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # the pre-registration gate walks history
+
+      - name: Pre-registration gate (must precede HEAD and match the corpus hash)
+        run: python3 official-verify/scripts/check_prereg.py
+
+      - name: Corpus must reconcile to official standings arithmetic
+        run: python3 official-verify/scripts/verify_corpus.py
+
+      - name: Re-derive every published number
+        run: |
+          python3 official-verify/scripts/evaluate.py
+          python3 official-verify/scripts/analysis.py
+          python3 official-verify/scripts/originate.py
+
+      - name: Regenerated artifacts must match the committed ones
+        run: |
+          if ! git diff --exit-code -- official-verify/data; then
+            echo "::error::Committed data files are stale. Re-run the scripts and commit the result."
+            exit 1
+          fi
+
+      - name: Regenerate the registers and fail on drift
+        run: |
+          python3 official-verify/scripts/registers.py
+          if ! git diff --exit-code -- official-verify/data/questions.csv official-verify/data/suggestions.csv official-verify/data/requirements.csv; then
+            echo "::error::Registers are stale. Run official-verify/scripts/registers.py and commit."
+            exit 1
+          fi
+
+      - name: Build the pages (fails closed on an unsourced row)
+        run: python3 official-verify/scripts/build_site.py
+
+      - name: Site gate (official host on every table row, no broken links, deterministic)
+        run: python3 official-verify/scripts/check_site.py
+
+      - name: Regression tests
+        run: python3 tests/test_official_verify.py
+
+      - name: Root site validators still pass
+        run: |
+          python3 scripts/validate_site.py
+          python3 tests/check_site.py

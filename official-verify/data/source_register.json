@@ -148,6 +148,24 @@
       "used_for": "One Week 10 result, needed to reconcile standings arithmetic",
       "verified_by": "read line by line",
       "evidence": "Final 24-21; WEEK 10 / Nov 12; quarter table 0/10/7/7 for WAS and 0/7/7/7 for NYG; Game Info Location EAST RUTHERFORD, NJ, Stadium METLIFE STADIUM. The committed repository schedule stops at Week 9 and does not contain this game."
+    },
+    {
+      "id": "OV-S17",
+      "url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+      "title": "NFL Week 11 Schedule 2026: Games, Times, Matchups & Tickets",
+      "observed_at_utc": "2026-11-15",
+      "used_for": "The 13 unplayed Week 11 fixtures originated on this site: teams, weekday, date, kickoff time, venue and neutral-site status",
+      "verified_by": "read line by line; all 13 fixtures transcribed",
+      "evidence": "Each fixture prints a match-up line with weekday, date, kickoff time and broadcaster, a team row with the official record, and a Ticketmaster destination naming the stadium (for example 'destinationAddress.location=GEHA+Field+at+Arrowhead+Stadium'). The international block names 'Mexico City' for Vikings at 49ers, which is the only neutral-site fixture of the week. Bye list: ATL, CLE, GB, LA, NE, SEA."
+    },
+    {
+      "id": "OV-S18",
+      "url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+      "title": "NFL Week 10 Schedule 2026: Games, Times, Matchups & Tickets",
+      "observed_at_utc": "2026-11-15",
+      "used_for": "Negative evidence: Week 10 fixtures were in progress on the capture date, so no Week 10 line was originated",
+      "verified_by": "read line by line",
+      "evidence": "One Week 10 game is already final (Commanders 24, Giants 21, Thursday 12 November); the remainder are listed as scheduled fixtures on the same day, 15 November, with kickoff times. The Munich block names the international game Patriots at Lions."
     }
   ],
   "blocked": [

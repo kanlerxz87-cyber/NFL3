@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "generated_by": "session arena/f0d1503b-nfl3",
+  "access_date": "2026-11-15",
+  "note": "Every flag below is published, not suppressed. Flags do not block publication; they tell a reviewer what to look at first. Anything that could not be confirmed from an official source is blank in the tables and listed here.",
+  "flags": [
+    {
+      "id": "OV-F01",
+      "severity": "high",
+      "status": "resolved",
+      "statement": "The repository's committed game log stopped at Week 9, and its standings arithmetic missed one game for each of two clubs.",
+      "evidence": "Recomputing the committed 136-game log could not reproduce the official records: NYG and WAS each had 8 games in the corpus against 9 in the official standings. The missing fixture is Commanders at Giants, Week 10, Thursday 12 November, final 24-21.",
+      "what_we_did": "Fetched the official Game Center for that fixture, transcribed it, and appended it. All 192 club-field comparisons against the official standings now agree exactly.",
+      "source_id": "OV-S16",
+      "source_url": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
+      "action_for_reviewer": "Confirm the appended Week 10 result against the official page, then decide whether the other workspaces in this repository should adopt the 137-game corpus."
+    },
+    {
+      "id": "OV-F02",
+      "severity": "high",
+      "status": "open",
+      "statement": "A game the repository publishes as a blank 'hidden score' is fully published by the official source.",
+      "evidence": "Commanders at Cowboys, Week 2: the official weekly schedule page reads 'Commanders 20, Cowboys 37, FINAL, Sunday, September 20th', and the official Game Center prints 20 and 37 with a full quarter breakdown (0/10/3/7 against 10/7/10/10). The repository stored both scores blank and described the page as rendering a hidden score.",
+      "what_we_did": "Published the official value in this workspace's corpus with this source. The older workspace's copy was not edited by this session.",
+      "source_id": "OV-S12",
+      "source_url": "https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2",
+      "action_for_reviewer": "Decide whether the blank was correct at capture time or a parse failure. If it was a parse failure, the owning workspace needs the fix; the distinction is not inferable from the committed files alone."
+    },
+    {
+      "id": "OV-F03",
+      "severity": "medium",
+      "status": "open",
+      "statement": "The league site publishes no depth-chart route at the path this repository tested; it returns the league's own 404 page.",
+      "evidence": "https://www.nfl.com/teams/detroit-lions/depth-chart returned the NFL 404 template ('404 - Flag on the Play.').",
+      "what_we_did": "Refused to construct any depth ordering. No depth rank, starter label or replacement order is asserted anywhere in this workspace. Requirement rows that depend on depth are marked blocked with this flag as the reason.",
+      "source_id": "OV-S14",
+      "source_url": "https://www.nfl.com/teams/detroit-lions/depth-chart",
+      "action_for_reviewer": "Test the other 31 club routes before concluding that no official ordering exists. A single 404 proves one path is wrong, not that all are."
+    },
+    {
+      "id": "OV-F04",
+      "severity": "medium",
+      "status": "open",
+      "statement": "The tested official snap-count route returns 404, so snap share is neither published nor used.",
+      "evidence": "https://www.nfl.com/stats/player-stats/category/snap-counts/2026/reg/ returned the league 404 template.",
+      "what_we_did": "Pinned the negative result as evidence. No snap-share value appears in this workspace, and no 'starter' claim is made from playing time.",
+      "source_id": "OV-S15",
+      "source_url": "https://www.nfl.com/stats/player-stats/category/snap-counts/2026/reg/",
+      "action_for_reviewer": "Confirm whether any official tabular snap source exists at another route. If it does, the starter/backup work unblocks immediately."
+    },
+    {
+      "id": "OV-F05",
+      "severity": "high",
+      "status": "open",
+      "statement": "No market price exists in this repository, so every market column and every residual is blank.",
+      "evidence": "The official pages fetched publish results, schedules, standings and injuries. They do not publish historical prices. No licensed price archive is held.",
+      "what_we_did": "Decided and published the price policy before any backtest: the market column stays blank and flagged, and the residual is blank rather than zero. No ROI, closing-line value, vig or 'market disagreement' number is published anywhere.",
+      "source_id": "OV-B01",
+      "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+      "action_for_reviewer": "Obtain a licensed or official price series with a closing-time definition. Until then, treat any ROI figure that appears elsewhere in this repository with suspicion."
+    },
+    {
+      "id": "OV-F06",
+      "severity": "high",
+      "status": "open",
+      "statement": "The pre-registered model does not clear its own promotion gate: the 95% interval on its out-of-sample skill includes zero.",
+      "evidence": "On 89 out-of-sample games (Weeks 4-10) the Brier score is 0.2245 against 0.2547 for the home base rate, a point skill of +0.1187; the cluster bootstrap interval on the paired per-game improvement is -0.0099 to +0.0691. The lower bound is below zero.",
+      "what_we_did": "Published the failure rather than the point estimate. The leaderboard shows one entry, marked unvalidated, with its interval. No reward eligibility is claimed.",
+      "source_id": "PREREG-2026-OV1",
+      "source_url": "https://www.nfl.com/standings/",
+      "action_for_reviewer": "This is the central honest result. If a second season is added and the lower bound still sits below zero, the model should be retired rather than tuned."
+    },
+    {
+      "id": "OV-F07",
+      "severity": "medium",
+      "status": "open",
+      "statement": "The fitted home-field advantage is negative, which is unusual and may be a small-sample artefact.",
+      "evidence": "Fitting the registered model on all 137 official games gives a home-field term of about -0.49 points, i.e. the home team is projected slightly worse than neutral on average.",
+      "what_we_did": "Left the number exactly as fitted and published it as an input on every originated row. It is not 'corrected' to a conventional prior, because that would be fitting to an assumption rather than to the data.",
+      "source_id": "PREREG-2026-OV1",
+      "source_url": "https://www.nfl.com/standings/",
+      "action_for_reviewer": "Decide whether a negative home-field term is acceptable evidence of a regime change or a reason to add a multi-season prior. Deciding is a governance call, not a modelling one."
+    },
+    {
+      "id": "OV-F08",
+      "severity": "low",
+      "status": "open",
+      "statement": "The official Week 1 page prints a Wednesday game under a Sunday Night Football heading.",
+      "evidence": "The heading reads 'Sunday Night Football, September 9th' while the fixture line reads 'Patriots 10, Seahawks 13, FINAL, Wednesday, September 9th'. 9 September 2026 is a Wednesday.",
+      "what_we_did": "Stored the weekday from the fixture line and published the conflict. No rest-day or short-week feature is derived from it.",
+      "source_id": "OV-S01",
+      "source_url": "https://www.nfl.com/schedules/2026/by-week/week-1",
+      "action_for_reviewer": "Confirm on the Game Center page which rendering is correct before any scheduling-fact feature uses the weekday."
+    },
+    {
+      "id": "OV-F09",
+      "severity": "medium",
+      "status": "open",
+      "statement": "The repository's legacy GitHub Pages build job failed on the current default branch, while the site itself is live.",
+      "evidence": "Actions run 43715223346 ('pages build and deployment', deploy job) concluded failure at 2026-11-15T12:43Z. The Pages API reports the site status as 'errored' while the published site continued to serve the previous build. The custom 'Validate and deploy GitHub Pages' workflow succeeded on the same commit.",
+      "what_we_did": "Recorded it. This workspace does not rely on the failing legacy job: its own gate is the workflow added with this change, and its pages are static files committed to the repository.",
+      "source_id": "OV-F09",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43715223346",
+      "action_for_reviewer": "Decide whether the legacy Pages builder should be disabled, since the custom artifact deploy already publishes the site. Two publishers on one environment is a race."
+    },
+    {
+      "id": "OV-F10",
+      "severity": "medium",
+      "status": "open",
+      "statement": "Published counts for the same facts disagree across workspaces in this repository.",
+      "evidence": "Week 10 injury rows are published as 254 in one snapshot and 279 in another; replacement chains as 117, 195 and 280; strategies as 12 and 34. This session did not reconcile them because those files belong to other sessions.",
+      "what_we_did": "Did not restate or overwrite the foreign counts. This workspace publishes its own numbers with their own sources and marks the conflict here.",
+      "source_id": "OV-F10",
+      "source_url": "https://www.nfl.com/injuries/",
+      "action_for_reviewer": "One owner should reconcile the counts against a single dated capture and retire the stale table, rather than publishing both."
+    },
+    {
+      "id": "OV-F11",
+      "severity": "medium",
+      "status": "open",
+      "statement": "Reuse terms for official NFL pages and Game Book PDFs have not been read, so this workspace links to sources rather than mirroring them.",
+      "evidence": "No terms text was obtained. Game Book PDFs are linked from Game Center pages and are not stored in this workspace.",
+      "what_we_did": "Published derived tables and per-row official links instead of copying source pages. The corpus stores only scores, dates and club abbreviations, each with its source URL.",
+      "source_id": "OV-S12",
+      "source_url": "https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2",
+      "action_for_reviewer": "Read the terms per source. If redistribution is restricted, the corpus should move behind an access control before the site gains an audience."
+    },
+    {
+      "id": "OV-F12",
+      "severity": "low",
+      "status": "open",
+      "statement": "Week 10 fixtures were deliberately excluded from the origination board.",
+      "evidence": "The capture date is 2026-11-15, the same day Week 10 games were being played. Originated numbers for those games would be forecasts made after the fact.",
+      "what_we_did": "Originated only Week 11 fixtures, all of which had not kicked off at capture time.",
+      "source_id": "OV-S18",
+      "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+      "action_for_reviewer": "Confirm the kickoff clock against the capture timestamp. Any board entry whose fixture started before its number was produced is a look-ahead and must be discarded."
+    }
+  ]
+}
