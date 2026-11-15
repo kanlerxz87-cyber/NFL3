@@ -25,7 +25,7 @@
   },
   "table_citations": {
     "html_pages": 146,
-    "table_rows": 8504,
+    "table_rows": 8510,
     "rows_missing_approved_primary_link": 810,
     "rows_missing_nfl_or_club_link": 1113,
     "rows_community_only": 309,
@@ -49,7 +49,7 @@
       "static.www.nfl.com": 1,
       "statrankings.com": 4,
       "sticktothemodel.com": 2,
-      "support.nfl.com": 142,
+      "support.nfl.com": 144,
       "touchdownwire.usatoday.com": 2,
       "tsapps.nist.gov": 15,
       "www.49ers.com": 88,
@@ -77,7 +77,7 @@
       "www.miamidolphins.com": 82,
       "www.neworleanssaints.com": 86,
       "www.newyorkjets.com": 72,
-      "www.nfl.com": 5032,
+      "www.nfl.com": 5036,
       "www.packers.com": 16,
       "www.panthers.com": 86,
       "www.patriots.com": 119,
@@ -199,7 +199,7 @@
       "origination/suggestions.html": 9,
       "pricing.html": 34,
       "readiness.html": 75,
-      "repo-review.html": 33,
+      "repo-review.html": 34,
       "requirements.html": 17,
       "research-desk/availability.html": 91,
       "research-desk/correlation.html": 11,
@@ -223,10 +223,10 @@
       "review.html": 26,
       "shadow-board/backtest.html": 50,
       "shadow-board/forecasts.html": 30,
-      "shadow-board/index.html": 20,
-      "shadow-board/method.html": 24,
+      "shadow-board/index.html": 22,
+      "shadow-board/method.html": 26,
       "shadow-board/registers.html": 12,
-      "shadow-board/sources.html": 45,
+      "shadow-board/sources.html": 46,
       "signals.html": 8,
       "sources.html": 6,
       "strategies.html": 15,
@@ -462,7 +462,7 @@
       {
         "path": "repo-review.html",
         "rows_missing_approved_primary_link": 7,
-        "rows": 33
+        "rows": 34
       },
       {
         "path": "research-desk/correlation.html",
@@ -544,8 +544,8 @@
   "audit_count_comparison": {
     "saved_html_pages": 147,
     "independent_html_pages": 146,
-    "saved_table_rows": 8566,
-    "independent_table_rows": 8504,
+    "saved_table_rows": 8572,
+    "independent_table_rows": 8510,
     "saved_index_rows": 62,
     "independent_index_rows": 62,
     "saved_rows_missing_official_source": 754,
@@ -979,7 +979,7 @@
       "severity": "High",
       "status": "Reproduced stale generated audit output",
       "title": "Saved repository audit totals do not match the current HTML",
-      "detail": "Saved `audit.json` records 8566 rows across 147 pages (62 in index.html); a fresh offline scan finds 8504 rows across 146 pages (62 in index.html). Regenerate the canonical audit/build so its saved counts match the checked-in HTML; this is a report freshness issue, not a game-data mismatch.",
+      "detail": "Saved `audit.json` records 8572 rows across 147 pages (62 in index.html); a fresh offline scan finds 8510 rows across 146 pages (62 in index.html). Regenerate the canonical audit/build so its saved counts match the checked-in HTML; this is a report freshness issue, not a game-data mismatch.",
       "code": [
         "decision-lab/data/audit.json",
         "index.html"
@@ -991,7 +991,7 @@
       "severity": "High",
       "status": "Open requirement / review finding",
       "title": "Repository table rows lack a link to an approved primary-source host",
-      "detail": "The independent fixed-host scanner counted 810 such rows among 8504 `<tbody>` rows on 146 HTML pages. This is a host-level count only; it does not judge whether a link's content supports its row. See `pages_with_missing_primary_links` in `report.json` for a per-page breakdown.",
+      "detail": "The independent fixed-host scanner counted 810 such rows among 8510 `<tbody>` rows on 146 HTML pages. This is a host-level count only; it does not judge whether a link's content supports its row. See `pages_with_missing_primary_links` in `report.json` for a per-page breakdown.",
       "code": [
         "verification/audit_sources.py",
         "decision-lab/data/audit.json"

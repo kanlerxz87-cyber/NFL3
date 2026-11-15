@@ -11,6 +11,7 @@ the parsers depend on have not drifted.
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
 import re
 import subprocess
@@ -201,6 +202,40 @@ def check_fixtures() -> None:
     notes.append(f"fixtures: 13 rows, {verified} venues transcribed from the game centre, {13 - verified} left blank")
 
 
+def check_corpus_pin() -> None:
+    """Published forecasts are issued against specific bytes; if the log moves, say so instead of re-deriving."""
+    desk = ROOT / "decision-desk" / "data" / "games_2026.csv"
+    frozen = ROOT / "corpus" / "games_2026_w1_9.csv"
+    summary = json.loads((build.DATA / "summary.json").read_text())
+    pinned = summary.get("corpus_digest", {})
+    if not desk.is_file():
+        fail("corpus pin: the committed game log is missing")
+        return
+    live = hashlib.sha256(desk.read_bytes()).hexdigest()
+    if pinned.get("decision_desk_sha256") and pinned["decision_desk_sha256"] != live:
+        fail("corpus pin: the game log changed after the artifacts were built "
+             f"({pinned['decision_desk_sha256'][:12]}... recorded, {live[:12]}... on disk); re-run build.py and "
+             "re-issue the affected forecasts rather than letting the pages drift")
+    if frozen.is_file():
+        fhash = hashlib.sha256(frozen.read_bytes()).hexdigest()
+        if fhash != live:
+            fail(f"corpus pin: the live log ({live[:12]}...) no longer matches the frozen corpus "
+                 f"({fhash[:12]}...). Forecasts already issued reference the frozen bytes; the mismatch must be "
+                 "resolved by re-issuing, not by editing the published records")
+        else:
+            notes.append(f"corpus pin: live log and frozen corpus are the same bytes ({live[:12]}...)")
+    else:
+        notes.append("corpus pin: no frozen corpus copy in the tree; only the live log hash is checked")
+    manifest = ROOT / "corpus" / "manifest.json"
+    if manifest.is_file():
+        doc = json.loads(manifest.read_text())
+        declared = doc.get("frozen_sha256", "")
+        if declared and declared != live:
+            fail(f"corpus pin: corpus/manifest.json declares {declared[:12]}... but the log is {live[:12]}...")
+        else:
+            notes.append(f"corpus pin: manifest-declared hash agrees for {doc.get('corpus_id', 'the frozen corpus')}")
+
+
 def check_price_firewall() -> None:
     path = build.DATA / "fair_lines_2026_w11.csv"
     if not path.is_file():
@@ -314,6 +349,7 @@ def main() -> int:
         check_pages()
         check_prereg()
         check_fixtures()
+        check_corpus_pin()
         check_price_firewall()
         check_ledger_and_repro()
         check_firewall_between_pages()

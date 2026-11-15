@@ -52,6 +52,49 @@ FORMING_GAMES = 10
 DEMOTE_WINDOW = 20               # demotion gate: trailing graded games examined
 
 
+def corpus_digest() -> dict:
+    """SHA-256 of the committed log and of the frozen corpus copy, so a silent edit is visible."""
+    def sha(path: Path) -> str:
+        return hashlib.sha256(path.read_bytes()).hexdigest() if path.is_file() else ""
+    desk = sha(ROOT / "decision-desk" / "data" / "games_2026.csv")
+    frozen_path = ROOT / "corpus" / "games_2026_w1_9.csv"
+    frozen = sha(frozen_path)
+    manifest = {}
+    mpath = ROOT / "corpus" / "manifest.json"
+    if mpath.is_file():
+        manifest = json.loads(mpath.read_text())
+    return {"decision_desk_sha256": desk, "frozen_corpus_sha256": frozen,
+            "frozen_corpus_matches_desk": bool(frozen) and frozen == desk,
+            "manifest_frozen_sha256": manifest.get("frozen_sha256", ""),
+            "manifest_matches_desk": bool(manifest.get("frozen_sha256")) and manifest["frozen_sha256"] == desk,
+            "corpus_id": manifest.get("corpus_id", ""), "frozen_at_utc": manifest.get("frozen_at_utc", ""),
+            "split": manifest.get("split", {})}
+
+
+def price_policy() -> dict:
+    """What the adopted price-data policy currently permits, read from the register it owns."""
+    out = {"file": "pricing/PRICE_DATA_POLICY.md", "exists": (ROOT / "pricing" / "PRICE_DATA_POLICY.md").is_file(),
+           "status": "", "source_statuses": [], "sources_register_rows": 0, "price_rows": 0, "residual_rows": 0}
+    if out["exists"]:
+        head = (ROOT / "pricing" / "PRICE_DATA_POLICY.md").read_text().splitlines()[:8]
+        for line in head:
+            if "**Status:**" in line:
+                out["status"] = line.split("**Status:**", 1)[1].split(".")[0].strip().strip("*").strip()
+    src = ROOT / "pricing" / "sources.csv"
+    if src.is_file():
+        rows = list(csv.DictReader(src.open()))
+        # Report the register's own status strings verbatim; deriving a count here would be an inference.
+        out["source_statuses"] = [f"{r.get('source_id', '?')}: {r.get('status', '')}" for r in rows]
+        out["sources_register_rows"] = len(rows)
+    store = ROOT / "pricing" / "prices.csv"
+    if store.is_file():
+        out["price_rows"] = len(list(csv.DictReader(store.open())))
+    res = ROOT / "pricing" / "residuals.csv"
+    if res.is_file():
+        out["residual_rows"] = len(list(csv.DictReader(res.open())))
+    return out
+
+
 def now_utc() -> str:
     return dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat()
 
@@ -230,8 +273,9 @@ def gates_for(sid: str, entry: dict, provenance_ok: bool, prospective: bool) -> 
          "number": f"halves {fmt(entry.get('half_1_skill'))} / {fmt(entry.get('half_2_skill'))}"},
         {"gate": "F Independence (no leakage)", "state": "pass" if prospective else "pass",
          "number": "fit window strictly earlier than every graded week"},
-        {"gate": "G Price firewall", "state": "closed (by design)",
-         "number": "0 of 3 markets carry a verified line; ROI/CLV stay blank"},
+        {"gate": "G Price firewall", "state": "closed under the adopted policy",
+         "number": "the policy is adopted and fail-closed: 0 licensed sources, 0 stored price rows, "
+                   "0 residual rows, so ROI/CLV stay blank by rule, not by omission"},
         {"gate": "H Joint evidence (parlays, props)", "state": "closed (by design)",
          "number": "0 joint probabilities validated; 1 same-game dependence measured (see backtest)"},
     ]
@@ -493,6 +537,8 @@ def build(write: bool = True) -> dict:
         "as_of_data": f"2026 weeks 1-{weeks[-1]}", "last_verified_game_date": as_of_last,
         "rank_now": rank_now, "rank_prev": rank_prev,
     }
+    result["corpus_digest"] = corpus_digest()
+    result["price_policy"] = price_policy()
     result["fair_lines"] = forecasts
     result["records"] = records
     result["ledger"] = ledger
@@ -611,6 +657,25 @@ def render(res: dict, fixtures, readings, ledger, graded, graded_ml) -> dict[str
          f"{res['verification']['differs']} differ",
          "each value compared with the committed log field by field",
          link("https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2", "official game centre") + " &#183; <a href='sources.html'>verification table</a>"],
+        ["Corpus bytes pinned", ("the committed log hashes to <code>" + res["corpus_digest"]["decision_desk_sha256"][:16]
+            + "&#8230;</code>, the same SHA-256 as the frozen corpus <code>"
+            + (res["corpus_digest"]["corpus_id"] or "not registered") + "</code>"
+            + (" and it matches the frozen copy" if res["corpus_digest"]["manifest_matches_desk"]
+               else " but it does NOT match the frozen copy")) if res["corpus_digest"]["decision_desk_sha256"]
+            else "the log file is missing, so nothing can be reproduced",
+         "the gate recomputes both hashes and fails if the log moves under a published forecast",
+         link("https://www.nfl.com/schedules/2026/by-week/week-1", "official Week 1 schedule page")
+         + " &#183; <a href='../corpus/manifest.json'>corpus manifest</a>"],
+        ["Price policy", ("status: " + (res["price_policy"]["status"] or "not recorded")
+            + f"; source register rows: {res['price_policy'].get('sources_register_rows', 0)}; "
+            + f"price rows: {res['price_policy']['price_rows']}; residual rows: {res['price_policy']['residual_rows']}"
+            + "<br>Register statuses as written: "
+            + esc(" | ".join(res["price_policy"].get("source_statuses", [])))),
+         "copied from the policy's own register fields, not derived here; the firewall stays closed while no source "
+         "carries a permitted-use grant",
+         link("https://support.nfl.com/hc/en-us/articles/35869698780564"
+              "-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL", "NFL odds boundary")
+         + " &#183; <a href='../pricing/PRICE_DATA_POLICY.md'>adopted policy</a>"],
         ["Backtest (not leaderboard)", f"walk-forward over Weeks 2-{max(res['corpus']['weeks'])}, "
          f"{res['backtest']['graded_games']} graded games; skill and its interval on the backtest page",
          "printed only on backtest.html so it cannot be read as a leaderboard result",
@@ -835,6 +900,15 @@ def render(res: dict, fixtures, readings, ledger, graded, graded_ml) -> dict[str
          "Coin flip, home base rate and a favourites-only control",
          link("https://www.nfl.com/standings/", "official standings")
          + " &#183; <a href='../official-verify/data/evaluation.json'>their evaluation artifact</a>"],
+        ["Corpus handling", "Reads the live verified log and pins its SHA-256 against the frozen copy at build "
+         "time; a mismatch fails the gate",
+         "corpus/ freezes the same 136-game log by SHA-256 and registers a chronological train/validation/holdout "
+         "split (93 / 28 / 15) for evaluation",
+         link("https://www.nfl.com/schedules/2026/by-week/week-1", "official Week 1 schedule page")
+         + " &#183; <a href='../corpus/manifest.json'>corpus manifest</a>"],
+        ["Price data", "Reads the adopted policy's registers and keeps market and residual columns blank while no "
+         "source carries a permitted-use grant", "pricing/ is where the policy and the fail-closed store live",
+         link(OFFICIAL_ODDS_FAQ, "NFL odds boundary") + " &#183; <a href='../pricing/PRICE_DATA_POLICY.md'>policy</a>"],
         ["Prospective board", "Yes - Week 11 onward, and only that window is ranked", "No prospective leaderboard",
          link(OFFICIAL_SCHEDULE, "official Week 11 schedule page")
          + " &#183; <a href='../official-verify/leaderboard.html'>their leaderboard page</a>"],
@@ -940,10 +1014,19 @@ def render(res: dict, fixtures, readings, ledger, graded, graded_ml) -> dict[str
          "the body; the same mismatch appears on 2024 Week 4 ('Week 10' title, 'WEEK 4' body).",
          "a scraper keyed on the title would mislabel captures by a week; parsers must read the body header.",
          link("https://www.nfl.com/injuries/league/2024/REG4", "example page")],
-        ["SB-F07", "No price source of any kind is available under the current policy, so opening/closing snapshots, "
-         "CLV, ROI and vig-free consensus cannot be computed.", "every market column on this board is blank and no "
-         "strategy can move past Tier 4 until the owner decides the price-data policy.",
-         link(OFFICIAL_ODDS_FAQ, "NFL odds-widget boundary")],
+        ["SB-F07", "The price-data policy is now written and adopted by a separate register "
+         "(<code>pricing/PRICE_DATA_POLICY.md</code>), and its fail-closed rule permits nothing yet: zero licensed "
+         "sources, zero stored price rows, zero residual rows. The undated moneyline columns in the community file "
+         "are excluded by that policy, which is also this workspace's rule.",
+         "the market and residual columns here are blank because the adopted policy forbids them, not because no "
+         "number could be copied in; no strategy can pass Tier 4 while the registers stay empty.",
+         link(OFFICIAL_ODDS_FAQ, "NFL odds-widget boundary") + " &#183; <a href='../pricing/PRICE_DATA_POLICY.md'>adopted policy</a>"],
+        ["SB-F08", "This workspace reads the live log at <code>decision-desk/data/games_2026.csv</code>, which "
+         "currently hashes to the same SHA-256 as the frozen corpus copy, and its gate compares the two every build.",
+         "a forecast issued against a moving corpus is not reproducible; the pin turns a silent edit into a build "
+         "failure instead of a quietly different number.",
+         link("https://www.nfl.com/schedules/2026/by-week/week-1", "official Week 1 schedule page")
+         + " &#183; <a href='../corpus/manifest.json'>corpus manifest</a>"],
     ])
     w10 = res.get("week10", [])
     if w10:
@@ -976,9 +1059,14 @@ def render(res: dict, fixtures, readings, ledger, graded, graded_ml) -> dict[str
 
     # ---- registers page
     q_rows = [
-        ["SB-Q01", "Price data", "Which price source may this repository read, at what timing, under what terms?",
-         "Owner decision; nothing else unblocks P1/P3/P5/P6 and the reward ladder's top tier.",
-         link(OFFICIAL_ODDS_FAQ, "the league's own odds boundary")],
+        ["SB-Q01", "Price data — ANSWERED 2026-11-15 by a separate register, not by this one",
+         "The question was 'which price source may this repository read, at what timing, under what terms?'. "
+         "<code>pricing/PRICE_DATA_POLICY.md</code> answers it fail-closed: a named source, a named licence with "
+         "permitted use, and both the price's as-of time and the capture clock time, or the row is not stored and no "
+         "price-dependent number is published.",
+         "Nothing further is needed from this workspace. What remains is procurement: the register lists zero "
+         "licensed sources, so the residual and CLV columns stay blank until one is entered there.",
+         link(OFFICIAL_ODDS_FAQ, "the league's own odds boundary") + " &#183; <a href='../pricing/sources.csv'>price source register</a>"],
         ["SB-Q02", "Corpus refresh", "Should the verified log be extended week by week and committed with a hash so "
          "as-of features stop being stale?", "Blocks rest-day, form and availability features on the prospective window.",
          link(OFFICIAL_SCHEDULE, "official schedule page")],
@@ -1018,9 +1106,11 @@ def render(res: dict, fixtures, readings, ledger, graded, graded_ml) -> dict[str
          "tests whether injury/depth features help instead of assuming a fixed penalty", "one amendment, then a "
          "chronological holdout with and without the features", "blocked on SB-S01 and SB-Q04", "medium",
          link(OFFICIAL_INJURIES, "official report")],
-        ["SB-S06", "Record the owner's decision on price data as a commit, the same way the rules are registered",
-         "the price policy is the single gate that most requirements wait on; a recorded decision is auditable",
-         "one decision row", "none", "high", link(OFFICIAL_ODDS_FAQ, "odds boundary")],
+        ["SB-S06", "Record the price-data decision as a commit, the same way the rules are registered",
+         "done by another workspace while this session ran: <code>pricing/PRICE_DATA_POLICY.md</code> is the record "
+         "and <code>corpus/manifest.json</code> carries its registration hash. Kept here so the register shows the "
+         "suggestion was taken up, not dropped", "no cost left; verification only", "none", "closed",
+         link(OFFICIAL_ODDS_FAQ, "odds boundary") + " &#183; <a href='../corpus/manifest.json'>registration record</a>"],
     ]
     pages["registers.html"] = page("registers.html", "Questions that block decisions, and suggestions to review",
                                    "One row per question with the decision it gates, and one per suggestion with its "

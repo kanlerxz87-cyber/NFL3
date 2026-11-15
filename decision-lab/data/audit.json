@@ -1,6 +1,6 @@
 {
   "html_pages": 147,
-  "table_rows": 8566,
+  "table_rows": 8572,
   "rows_missing_official_source": 754,
   "rows_community_only": 243,
   "rows_with_internal_audit_source": 7,
@@ -905,7 +905,7 @@
     },
     {
       "path": "repo-review.html",
-      "rows": 33,
+      "rows": 34,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -1097,7 +1097,7 @@
     },
     {
       "path": "shadow-board/index.html",
-      "rows": 20,
+      "rows": 22,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -1105,7 +1105,7 @@
     },
     {
       "path": "shadow-board/method.html",
-      "rows": 24,
+      "rows": 26,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -1121,7 +1121,7 @@
     },
     {
       "path": "shadow-board/sources.html",
-      "rows": 45,
+      "rows": 46,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,

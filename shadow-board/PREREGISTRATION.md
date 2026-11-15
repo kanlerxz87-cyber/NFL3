@@ -125,4 +125,14 @@ as such on the leaderboard; that is the point of running them.
 
 ## 9. Amendments
 
-None.
+**A1 — 2026-11-15, clarification only: no threshold, formula, constant, gate or window in §1–§8 was changed.**
+§1 says market prices are not read "because the price-data policy (requirement P7) is undecided". While this
+workspace was being built, that policy was written and adopted in a separate register, `pricing/PRICE_DATA_POLICY.md`
+(status: adopted; fail-closed rule; source register with no permitted-use grant, no stored price rows, no residual
+rows). The prohibition in §1 is unchanged in force and is now additionally required by that policy rather than by the
+absence of one, and the same 136-game log is now also frozen by SHA-256 in `corpus/manifest.json`, which
+`shadow-board/scripts/check.py` pins against the live file at every build. The reason this entry exists is that a
+frozen pre-registration must not be silently re-worded when the world around it changes: the sentence above records
+what §1 meant at registration time, and §9 records what has since become true of it. No number on any page of this
+workspace moved as a result of this amendment, and the prospective clock is unaffected because nothing had been
+graded when it was written.
