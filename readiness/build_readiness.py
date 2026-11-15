@@ -118,8 +118,14 @@ def compute() -> dict:
     ver = load_json("integration/data/verification.json")
     v["published_rows_279"] = ver.get("published_rows")
 
-    v["prereg_commit"] = git("log", "-1", "--format=%h", "--", "docs/PRE_REGISTRATION.md")
-    v["prereg_date"] = git("log", "-1", "--format=%cs", "--", "docs/PRE_REGISTRATION.md")
+    # The registration is the commit that CREATED the file. A shallow clone hides it, and the last
+    # commit that touched the file is not the registration, so refuse to guess on a shallow clone.
+    if git("rev-parse", "--is-shallow-repository") == "true":
+        sys.exit("readiness: shallow clone; run `git fetch --unshallow` so the pre-registration commit can be found")
+    created = git("log", "--diff-filter=A", "--format=%h %cs", "--", "docs/PRE_REGISTRATION.md").splitlines()
+    if len(created) != 1:
+        sys.exit(f"readiness: expected one commit creating docs/PRE_REGISTRATION.md, found {len(created)}")
+    v["prereg_commit"], v["prereg_date"] = created[0].split(" ", 1)
     wf = "".join(p.read_text(encoding="utf-8") for p in (ROOT / ".github/workflows").glob("*.yml"))
     v["alert_hits"] = len(re.findall(r"alert|notify|slack|smtp|webhook", wf, re.I))
     v["strategy_change_field"] = 0  # no strategy register has a "what would change our mind" column
@@ -416,6 +422,9 @@ FLAGS = [
     ("F7", "Community data is stored in the public repository under a 'verified' flag.",
      "data/raw/manifest.json marks the nflverse depth file verified: true. The check is a SHA-256 digest of a community release, not an NFL authority check. {raw_files} raw files are public.",
      "data/raw/manifest.json", NFLVERSE_DEPTH),
+    ("F10", "A pre-registration hash was published wrong, then corrected.",
+     "The first published register cited 3db9a64 as the registration commit. That was an artifact of a shallow clone: 3db9a64 last touched the file but did not create it. The creating commit is c25ae53 (2026-11-12), verified with full history. The build now refuses to run on a shallow clone.",
+     "docs/PRE_REGISTRATION.md", NFL_RULEBOOK),
     ("F9", "Two readiness registers are now published on the site.",
      "The landing page holds an 18-row summary (R01–R18) merged from session arena/1a306c91-nfl3 (PR #69). This page holds 64 rows with different IDs, and some statuses differ. Neither has been reconciled to the other. This session could not reach nfl.com to re-check that session's official-source statements.",
      "index.html", NFL_INJ),
