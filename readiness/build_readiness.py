@@ -222,7 +222,7 @@ def rows(v: dict) -> list[dict]:
     add("R2", G, "Turn the 136-game log into the pre-registered backtest corpus", "Partial",
         "Corpus frozen before any evaluation (freeze commit below), but no price data (P1/P7) exists, so ROI and CLV still cannot be computed; adding a season or correcting a score requires a new freeze commit.",
         "Corpus file with a commit hash dated before any evaluation.",
-        f"Corpus frozen: {v['final_w1_9']} verified games, sha256 a1633c2011bc8fb4c6508ada2ed1cd32ddede8993300b5e03ef157f762ee73b1, freeze commit 87f83f5ee231 (2026-11-15); 0 evaluations run.",
+        f"Corpus frozen: {v['final_w1_9']} verified games, sha256 a1633c2011bc8fb4c6508ada2ed1cd32ddede8993300b5e03ef157f762ee73b1, freeze commit 76f4c7d775b8 (2026-11-15); 0 evaluations run.",
         "results-verification/CORPUS_FREEZE.md", "Corpus freeze registration (rules, hashes, provenance)", NFL_SCORES, "NFL score pages, 2026 weeks 1-9 (official)")
     add("R3", G, "Ingest game-level results so ratings are opponent-aware", "Partial",
         "The decision desk built opponent-adjusted ratings from community game data; not verified against official scores (R1).",
