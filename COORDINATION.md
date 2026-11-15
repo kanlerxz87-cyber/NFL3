@@ -2372,7 +2372,7 @@ internal-consistency gates; official pages were read once by hand at the times a
 
 **1. A pre-registered, proper-score skill lab (`skill-lab/`).** Three protocol files, a scoring library, a walk-forward evaluation harness, a page renderer, a fail-closed verifier, a machine-readable artifact and 10 published pages.
 
-- `docs/SKILL_LAB_PRE_REGISTRATION.md` (SL-PRE-01) froze the corpus, model, metrics, benchmark, controls, uncertainty, multiplicity, gates, divisions and the signal/staking separation **before any result was computed** — committed as `0d94a177dc399e1c5ea5c4c0e03968e6adba4fb1`. (The original registration commit `d80b8453` was rewritten by the rebase onto the current `main`; the protocol file is byte-identical, its SHA-256 is `4338c168e2fbd1bc56fc1f1747099e919fd962e920c2086735ca7c883cc0f59d` at both commits, and the published hash is the one that is reachable from the published branch.)
+- `docs/SKILL_LAB_PRE_REGISTRATION.md` (SL-PRE-01) froze the corpus, model, metrics, benchmark, controls, uncertainty, multiplicity, gates, divisions and the signal/staking separation **before any result was computed** — committed as `ae5d5797da46e3712aa351802c4cf624c17799db`. (The registration commit was rewritten twice by rebases onto concurrent `main`; the protocol file is byte-identical throughout, its SHA-256 is `4338c168e2fbd1bc56fc1f1747099e919fd962e920c2086735ca7c883cc0f59d` at every commit, and the published hash is the one that is reachable from the published branch. `skill-lab/scripts/verify.py` and `tests/test_skill_lab.py` both assert the reachability, the digest and the topological ordering against the commit that added the results artifact.)
 - `docs/SKILL_LAB_PRE_REGISTRATION_AMENDMENT.md` (SL-PRE-01a) corrected the random-control wording and added the deterministic neutral control, again before any score existed.
 - `docs/SKILL_LAB_PRE_REGISTRATION_AMENDMENT_02.md` (SL-PRE-01b) freezes the **two-sided "what would change our mind" field** and the next evaluation window (2026 weeks 10 onward). It is written **forward** — it does not reinterpret the completed run.
 - `skill-lab/scripts/scorelib.py`: dependency-free normal CDF/quantile, American-price conversion, proportional and Shin de-vigging, Brier, log loss, skill, calibration ECE, game-cluster bootstrap, percentile and Benjamini–Hochberg.
@@ -2439,3 +2439,29 @@ Detailed register (64 rows): **Not started 16 · Partial 30 · Blocked 13 · Don
 ### Publication record
 
 Recorded after the pull request is opened and merged; see the entries appended below this one.
+
+## Current claim — `arena/e9629801-nfl3` — 2026-11-15 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| S1 Skill leaderboard: proper scores, game-cluster uncertainty, multiplicity control, control baselines, signal/staking split | done | `arena/e9629801-nfl3` | `skill-lab/**` |
+| S2 Official availability ledger: reserve list, transactions and live injury-report captures with hashes; deltas vs the committed snapshot; stale-depth flags | done | `arena/e9629801-nfl3` | `availability-ledger/**` |
+| S3 Pre-registration of the evaluation protocol before any result is computed | done | `arena/e9629801-nfl3` | `docs/SKILL_LAB_PRE_REGISTRATION.md` |
+| S4 Final integration: rebuild, validate, PR to `main`, merge, Pages deploy verification | done | `arena/e9629801-nfl3` | `COORDINATION.md`, `README.md` (nav row), `index.html` (nav row only), `readiness/data/readiness.csv` + `decision-lab/data/catalog.json` (status rows for S1-S3 only) |
+
+Branch: `arena/e9629801-nfl3` (fixed by Arena; session-named branches such as `session-e9629801/<task>` cannot be created here, so every task above is on this branch). Base: `main` at `5368709`.
+
+Coordination notes:
+
+- No other session branch exists on `origin` (`git branch -r` shows only `origin/main`). The most recent
+  board entries (`arena/2b0f3e11-nfl3`) are recorded as *in progress* but their work is already merged
+  into `main`; their file scopes (`decision-lab/integrity.html`, `decision-lab/scripts/pages_extra.py`,
+  `decision-lab/audit.html`, `decision-lab/data/audit.json`, `tests/test_decision_lab.py`,
+  `scripts/sync_landing_metrics.py`, `ops-center/scripts/verify.py`, `tests/check_site.py`,
+  `verification/index.html`, `verification/report.json`) are **not** edited by this session. This
+  session takes over only the root navigation rows and the readiness/catalog status rows needed to
+  publish S1-S3, and logs that handoff here.
+- `skill-lab/` and `availability-ledger/` are new directories; no existing claim covers them.
+- The pre-registration for S1 is committed **before** the evaluation code is run, and the creating
+  commit hash is published on the methodology page (this is the mechanism the repo already requires
+  for `docs/PRE_REGISTRATION.md`).
