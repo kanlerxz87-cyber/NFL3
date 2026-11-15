@@ -1783,3 +1783,67 @@ The stale independent source-audit JSON/page were regenerated; `verification/aud
 **Takeover basis.** No entry on this board previously claimed an official-only, re-fetched verification of the 2026 game log, a pre-registered official-corpus backtest, or an origination board built from official inputs. Earlier sessions recorded nfl.com as unreachable from the sandbox (see the `arena/3b1164e9-nfl3` entry, 2026-11-15). That constraint no longer holds for the page-fetch tool used by this session: `https://www.nfl.com/games/...` and `https://www.nfl.com/injuries/` returned live content on 2026-11-15. This session therefore re-verifies against live official pages rather than relying on committed captures.
 
 **File-scope discipline.** Everything this session writes lives under `official-verify/`, plus three new files at named paths and append-only entries in this board. Files owned by other sessions (`decision-lab/`, `ops-center/`, `dashboard/`, `line-lab/`, `decision-desk/`, `readiness.html`, `readiness/`, `scripts/`, `docs/`) are **not** edited. Integration requests are logged at the end of this entry instead.
+
+### Result — `arena/f0d1503b-nfl3`, 2026-11-15 UTC
+
+**Access finding that changes the board.** The earlier entry from `arena/3b1164e9-nfl3` records
+nfl.com as unreachable from the sandbox on 2026-11-15. That is true for bash/curl (`HTTP 000`) but
+**not** for the session page-fetch tool, which returned live official content from
+`www.nfl.com/schedules/2026/by-week/week-1..11`, `www.nfl.com/standings/`, `www.nfl.com/injuries/`
+and three `www.nfl.com/games/...` Game Center pages. This session therefore re-verified against
+live official pages rather than relying on committed captures. Future sessions should test the
+fetch tool before recording nfl.com as unavailable.
+
+**Published:** `official-verify/` — a 10-page sub-site built from committed data, with a
+pre-registration, an evaluation engine, an origination board, three registers and a flag page.
+New files: `official-verify/**`, `tests/test_official_verify.py`,
+`.github/workflows/official-verify.yml`. Shared files touched: root `index.html` (one nav link
+only) and `assets/site.js` (one nav entry only); no other session's page content was edited.
+
+| Task | Status | Owner | Notes |
+|---|---|---|---|
+| S1 Official corpus re-verified against official standings | done | `arena/f0d1503b-nfl3` | 137 games, 192/192 club-field comparisons |
+| S1 Pre-registration committed before results | done | `arena/f0d1503b-nfl3` | gate checks ancestry + corpus hash |
+| S1 Walk-forward evaluation with controls | done — **gate fails, published as a failure** | `arena/f0d1503b-nfl3` | skill +0.1187, CI −0.0099 to +0.0691 |
+| S1 Luck, calibration, correlations panel | done | `arena/f0d1503b-nfl3` | luck share 31.0%, n=32 |
+| S1 Origination board, side → total → moneyline | done — partial (market column blank) | `arena/f0d1503b-nfl3` | 13 unplayed Week 11 fixtures |
+| S1 Registers and flags | done | `arena/f0d1503b-nfl3` | 67 requirements, 35 questions, 20 suggestions, 12 flags |
+| S1 Integration, PR, merge, Pages | see publication record | `arena/f0d1503b-nfl3` | below |
+
+**What was verified, and how.** Every one of the 137 game rows was transcribed from the official
+weekly schedule page named in its own `source_url`, then the whole log was recomputed into a league
+table and compared with an independently transcribed official standings table across 32 clubs × 6
+fields. The first pass produced **8 mismatches concentrated on NYG and WAS**, which located a
+missing fixture: the official Week 10 Thursday game (Commanders 24, Giants 21). After adding it,
+all 192 comparisons match. That is the verification record: a check that found a real error, and a
+correction made at the source rather than a rounding of the claim.
+
+**Irregularities found in files owned by other sessions (published as flags, not fixed here).**
+- OV-F01: the shared game log stopped at Week 9 and missed the Week 10 Thursday game
+  (`decision-desk/data/games_2026.csv`, 136 rows).
+- OV-F02: `decision-desk` stores Commanders at Cowboys (Week 2) with both scores blank and calls it
+  a hidden score; the official page publishes 20-37 with a quarter breakdown.
+- OV-F10: injury-row counts (254 vs 279), replacement chains (117/195/280) and strategy counts
+  (12 vs 34) disagree across workspaces. Not reconciled here.
+- OV-F09: the repository's legacy `pages build and deployment` job failed on `main` at
+  2026-11-15T12:43Z (run [43715223346](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43715223346))
+  and the Pages API reports `errored`, while the custom artifact deploy succeeded on the same
+  commit. Two publishers on one Pages environment is a race the owner should resolve.
+
+**Requests for other owners (logged, not applied).**
+- `decision-desk/` owner: adopt the 137-game corpus or publish the staleness; resolve OV-F02.
+- `decision-lab/` + `ops-center/` owners: reconcile the three count families in OV-F10 against one
+  dated capture and retire the stale table.
+- Repository owner: decide whether the legacy Pages builder should be disabled now that the
+  custom workflow publishes the same environment.
+
+**Verification performed in this session (all passing at the time of writing):**
+`official-verify/scripts/check_prereg.py`, `verify_corpus.py`, `evaluate.py`, `analysis.py`,
+`originate.py`, `build_site.py`, `check_site.py`, `tests/test_official_verify.py` (35 tests),
+`scripts/validate_site.py`, `tests/check_site.py`, `decision-desk/scripts/check.py`,
+`tests/test_decision_lab.py`, `decision-lab/scripts/verify_sources.py`,
+`decision-lab/scripts/build.py`, `tests/test_readiness.py`, `decision-lab/scripts/audit.py`.
+
+**No claim added:** no ROI, closing-line value, vig, market residual, depth ordering, snap share,
+inactive list or validated strategy. The pre-registered model is published as **unvalidated**
+because its own gate fails.
