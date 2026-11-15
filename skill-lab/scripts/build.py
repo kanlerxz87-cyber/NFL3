@@ -335,7 +335,11 @@ def favourite_stake(p: dict, market: str) -> dict | None:
 # --------------------------------------------------------------------------- statistics
 def bootstrap_skill(obs: list[tuple[str, float, float]], n_boot: int = N_BOOT,
                     seed: int = BOOT_SEED, alpha: float = 0.05) -> dict:
-    """Cluster bootstrap of the Brier skill, resampling games (not forecasts)."""
+    """Cluster bootstrap of the Brier skill, resampling games (not forecasts).
+
+    Per-game aggregates are pre-computed so each resample is O(games) arithmetic rather than a
+    list rebuild; the statistic is identical to recomputing the means on the resampled games.
+    """
     games: dict[str, list[tuple[float, float]]] = collections.defaultdict(list)
     for gid, bm, br in obs:
         games[gid].append((bm, br))
@@ -343,19 +347,27 @@ def bootstrap_skill(obs: list[tuple[str, float, float]], n_boot: int = N_BOOT,
     if not keys:
         return {"point": float("nan"), "ci95": [None, None], "lower95": None,
                 "p_one_sided": None, "n_boot": 0, "n_games": 0}
+    agg = [(sum(t[0] for t in games[k]), sum(t[1] for t in games[k]), len(games[k])) for k in keys]
+    model_by_game = [a[0] for a in agg]
+    ref_by_game = [a[1] for a in agg]
+    n_by_game = [a[2] for a in agg]
+    get_model = model_by_game.__getitem__
+    get_ref = ref_by_game.__getitem__
+    get_n = n_by_game.__getitem__
 
-    def stat(sample: list[str]) -> float:
-        mm = [bm for k in sample for bm, _ in games[k]]
-        mr = [br for k in sample for br, _ in games[k]]
-        if not mm or not mr:
+    def stat(idx: list[int]) -> float:
+        sn = sum(map(get_n, idx))
+        sr = sum(map(get_ref, idx))
+        if sn <= 0 or sr <= 0:
             return float("nan")
-        return 1.0 - (sum(mm) / len(mm)) / (sum(mr) / len(mr))
+        return 1.0 - (sum(map(get_model, idx)) / sn) / (sr / sn)
 
-    point = stat(keys)
+    point = stat(list(range(len(keys))))
     rnd = random.Random(seed)
+    n_keys = len(keys)
     draws = []
     for _ in range(n_boot):
-        draws.append(stat([keys[rnd.randrange(len(keys))] for _ in keys]))
+        draws.append(stat(rnd.choices(range(n_keys), k=n_keys)))
     draws.sort()
     lo = draws[int(math.floor((alpha / 2) * (len(draws) - 1)))]
     hi = draws[int(math.ceil((1 - alpha / 2) * (len(draws) - 1)))]
@@ -373,16 +385,22 @@ def bootstrap_mean(obs: list[tuple[str, float]], n_boot: int = N_BOOT,
     if not keys:
         return {"point": float("nan"), "ci95": [None, None], "lower95": None,
                 "p_one_sided": None, "n_boot": 0, "n_games": 0}
+    agg = [(sum(games[k]), len(games[k])) for k in keys]
+    sum_by_game = [a[0] for a in agg]
+    n_by_game = [a[1] for a in agg]
+    get_sum = sum_by_game.__getitem__
+    get_n = n_by_game.__getitem__
 
-    def stat(sample: list[str]) -> float:
-        vals = [v for k in sample for v in games[k]]
-        return sum(vals) / len(vals) if vals else float("nan")
+    def stat(idx: list[int]) -> float:
+        n = sum(map(get_n, idx))
+        return (sum(map(get_sum, idx)) / n) if n else float("nan")
 
-    point = stat(keys)
+    point = stat(list(range(len(keys))))
     rnd = random.Random(seed)
+    n_keys = len(keys)
     draws = []
     for _ in range(n_boot):
-        draws.append(stat([keys[rnd.randrange(len(keys))] for _ in keys]))
+        draws.append(stat(rnd.choices(range(n_keys), k=n_keys)))
     draws.sort()
     lo = draws[int(math.floor((alpha / 2) * (len(draws) - 1)))]
     hi = draws[int(math.ceil((1 - alpha / 2) * (len(draws) - 1)))]
@@ -396,21 +414,39 @@ def random_control(graded: list[dict], seeds: int = RANDOM_SEEDS, base_seed: int
     if not graded:
         return {}
     bs_market = sl.mean([g["brier_market"] for g in graded])
+    # Pre-compute the per-row outcomes of a hard pick so the seed loop is pure arithmetic.
+    table = []
+    for g in graded:
+        y = g["outcome"]
+        se, so = g["stake_event"], g["stake_other"]
+        table.append((
+            sl.brier(1.0, y), sl.brier(0.0, y),
+            sl.log_loss(1.0, y), sl.log_loss(0.0, y),
+            se["profit"] if se else None, so["profit"] if so else None,
+        ))
     skills, returns, briers = [], [], []
     for s in range(seeds):
         rnd = random.Random(base_seed + s)
-        bs, ll, ret = [], [], []
-        for g in graded:
-            take_event = rnd.random() < 0.5
-            p = 1.0 if take_event else 0.0
-            bs.append(sl.brier(p, g["outcome"]))
-            ll.append(sl.log_loss(p, g["outcome"]))
-            stake = stake_for(g["_pred"], g["market"], take_event)
-            if stake:
-                ret.append(stake["profit"])
-        skills.append(sl.skill(sl.mean(bs), bs_market))
-        briers.append(sl.mean(bs))
-        returns.append(sl.mean(ret) if ret else float("nan"))
+        bs_sum = ll_sum = 0.0
+        ret_sum = 0.0
+        ret_n = 0
+        for b_ev, b_ot, l_ev, l_ot, p_ev, p_ot in table:
+            if rnd.random() < 0.5:
+                bs_sum += b_ev
+                ll_sum += l_ev
+                if p_ev is not None:
+                    ret_sum += p_ev
+                    ret_n += 1
+            else:
+                bs_sum += b_ot
+                ll_sum += l_ot
+                if p_ot is not None:
+                    ret_sum += p_ot
+                    ret_n += 1
+        brier_mean = bs_sum / len(table)
+        skills.append(sl.skill(brier_mean, bs_market))
+        briers.append(brier_mean)
+        returns.append(ret_sum / ret_n if ret_n else float("nan"))
     return {"seeds": seeds, "brier_mean": sl.mean(briers),
             "skill_p50": sl.percentile(skills, 0.5), "skill_p95": sl.percentile(skills, 0.95),
             "skill_max": max(skills), "return_p50": sl.percentile(returns, 0.5),
@@ -419,7 +455,7 @@ def random_control(graded: list[dict], seeds: int = RANDOM_SEEDS, base_seed: int
 
 
 # --------------------------------------------------------------------------- run assembly
-def build_run(preds: list[dict], label: str, season_filter=None) -> dict:
+def build_run(preds: list[dict], label: str, season_filter=None, keep_graded: bool = False) -> dict:
     """Grade, score and test every registered strategy row for one run."""
     graded_by_strategy: dict[str, list[dict]] = {sid: [] for sid, *_ in STRATEGIES}
     exclusions: collections.Counter = collections.Counter()
@@ -451,6 +487,9 @@ def build_run(preds: list[dict], label: str, season_filter=None) -> dict:
                 if (model_line is not None and g["market_line"] is not None) else None,
                 "brier_model": sl.brier(mp, y), "brier_market": sl.brier(g["benchmark_prob"], y),
                 "logloss_model": sl.log_loss(mp, y), "logloss_market": sl.log_loss(g["benchmark_prob"], y),
+                "stake_event": stake_for(p, market, True),
+                "stake_other": stake_for(p, market, False),
+                "stake_favourite": favourite_stake(p, market),
                 "_pred": p,
             })
             graded_by_strategy[sid].append(g)
@@ -487,27 +526,25 @@ def build_run(preds: list[dict], label: str, season_filter=None) -> dict:
         # staking view (retrospective, community prices)
         stakes, ret = [], []
         for g in graded:
-            take_event = g["model_prob"] > 0.5
-            stake = stake_for(g["_pred"], market, take_event)
+            stake = g["stake_event"] if g["model_prob"] > 0.5 else g["stake_other"]
             if stake:
                 stakes.append(stake)
                 ret.append(stake["profit"])
-        fav = [favourite_stake(g["_pred"], market) for g in graded]
+        fav = [g["stake_favourite"] for g in graded]
         fav = [f for f in fav if f]
         model_return = sl.mean(ret) if ret else float("nan")
         fav_return = sl.mean([f["profit"] for f in fav]) if fav else float("nan")
         fav_hit = sl.mean([1.0 if f["won"] else 0.0 for f in fav]) if fav else float("nan")
         # stressed price: 10% worse payout, same picks
-        stressed = []
-        for g in graded:
-            take_event = g["model_prob"] > 0.5
-            stake = stake_for(g["_pred"], market, take_event)
-            if stake and stake["decimal"]:
-                stressed.append(0.9 * (stake["decimal"] - 1.0) if stake["won"] else -1.0)
+        stressed = [0.9 * (s["decimal"] - 1.0) if s["won"] else -1.0 for s in stakes if s["decimal"]]
         stressed_return = sl.mean(stressed) if stressed else float("nan")
-        return_boot = bootstrap_mean([(g["game_id"], stake_for(g["_pred"], market, g["model_prob"] > 0.5)["profit"])
+        fav_stressed = [0.9 * (f["decimal"] - 1.0) if f["won"] else -1.0 for f in fav if f["decimal"]]
+        fav_stressed_return = sl.mean(fav_stressed) if fav_stressed else float("nan")
+        return_boot = bootstrap_mean([(g["game_id"], (g["stake_event"] if g["model_prob"] > 0.5
+                                                      else g["stake_other"])["profit"])
                                       for g in graded
-                                      if stake_for(g["_pred"], market, g["model_prob"] > 0.5) is not None])
+                                      if (g["stake_event"] if g["model_prob"] > 0.5
+                                          else g["stake_other"]) is not None])
 
         rows.append({
             "strategy": sid, "name": name, "market": market, "variant": variant,
@@ -524,7 +561,7 @@ def build_run(preds: list[dict], label: str, season_filter=None) -> dict:
                         "return_ci95": return_boot.get("ci95"),
                         "favourites_only_return": fav_return, "favourites_only_hit_rate": fav_hit,
                         "return_at_minus_10pct_price": stressed_return,
-                        "favourites_only_return_at_minus_10pct_price": None},
+                        "favourites_only_return_at_minus_10pct_price": fav_stressed_return},
         })
 
     # multiplicity across the family
@@ -561,13 +598,25 @@ def build_run(preds: list[dict], label: str, season_filter=None) -> dict:
     for r in rows:
         r["family_trials"] = trials
 
+    all_graded = sum(graded_by_strategy.values(), [])
+    public = []
+    if keep_graded:
+        for g in all_graded:
+            public.append({k: v for k, v in g.items()
+                           if k not in ("_pred", "stake_event", "stake_other", "stake_favourite",
+                                        "prices", "model_line", "market_line")} |
+                          {"model_line": g["model_line"], "market_line": g["market_line"],
+                           "line_gap": g["line_gap"],
+                           "event": g["event"],
+                           "event_prob_raw": g["prices"]["event_prob_raw"],
+                           "other_prob_raw": g["prices"]["other_prob_raw"]})
     return {
         "label": label,
         "rows": rows,
-        "graded": [g for g in sum(graded_by_strategy.values(), []) if True],
+        "graded": public,
         "exclusions": dict(exclusions),
         "excluded_examples": excluded_examples,
-        "n_games_in_corpus": len({g["game_id"] for g in sum(graded_by_strategy.values(), [])}),
+        "n_games_in_corpus": len({g["game_id"] for g in all_graded}),
     }
 
 
@@ -601,11 +650,17 @@ def dependence_analysis(preds: list[dict], season_filter=None) -> dict:
     prod_all = p_cover * p_over * p_win
 
     def phi(a: list[float], b: list[float]) -> float:
+        """Phi coefficient (Matthews' correlation for binary variables).
+
+        phi = (n11 - n1*n2/n) / sqrt(n1(n-n1) * n2(n-n2)) / n, written here in the
+        equivalent multiplied-through form: (n*n11 - n1*n2) / sqrt(n1(n-n1)*n2(n-n2)).
+        """
         n_ = len(a)
-        p1, p2 = sl.mean(a), sl.mean(b)
-        p12 = sl.mean([x * y for x, y in zip(a, b)])
-        num = n_ * p12 - sum(a) * sum(b)
-        den = math.sqrt((sum(a) * (n_ - sum(a))) * (sum(b) * (n_ - sum(b))))
+        n11 = sum(x * y for x, y in zip(a, b))
+        n1 = sum(a)
+        n2 = sum(b)
+        num = n_ * n11 - n1 * n2
+        den = math.sqrt((n1 * (n_ - n1)) * (n2 * (n_ - n2)))
         return num / den if den else float("nan")
 
     cover_v = [g["cover"] for g in games]
@@ -631,7 +686,8 @@ def main() -> int:
     preds, audit = walk_forward(games)
     primary = [p for p in preds if p["season"] == PRIMARY_SEASON and p["week"] <= PRIMARY_MAX_WEEK]
     supporting = [p for p in preds if not (p["season"] == PRIMARY_SEASON and p["week"] <= PRIMARY_MAX_WEEK)]
-    run_primary = build_run(primary, f"{PRIMARY_SEASON} regular season, weeks 1-{PRIMARY_MAX_WEEK}")
+    run_primary = build_run(primary, f"{PRIMARY_SEASON} regular season, weeks 1-{PRIMARY_MAX_WEEK}",
+                           keep_graded=True)
     run_supporting = build_run(supporting, "Supporting panel: every earlier regular season (walk-forward)")
     dependence = dependence_analysis(primary)
 
