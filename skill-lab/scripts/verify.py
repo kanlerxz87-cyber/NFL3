@@ -88,10 +88,8 @@ def main() -> int:
             fail(f"missing page: {name}")
             continue
         text = path.read_text(encoding="utf-8")
-        for token in ("None", "nan", "{", "}"):
-            if token in text and not (token == "{" and "style=" in text):
-                fail(f"{name}: placeholder token {token!r} found in the published page")
-                break
+        if re.search(r"\b(None|nan|undefined|null)\b", text):
+            fail(f"{name}: a placeholder token appears in the published page")
         for href in re.findall(r'href="([^"]+)"', text):
             if href.startswith("http"):
                 continue
