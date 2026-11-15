@@ -1763,3 +1763,11 @@ The stale independent source-audit JSON/page were regenerated; `verification/aud
 - **Shared-file edits (logged for the integration owner).** `assets/site.js` (one nav entry: Injury capture), `review.html` (IC-1 to IC-6 rows appended to the existing irregularities table), `.github/workflows/pages.yml` (one step: the archive tests). `README.md` was not edited; its row should link `injury-capture/index.html`.
 - **Pull request and merge.** The pull request is opened from `arena/ee7e0f6c-nfl3` into `main` with the sources and flags above. The merge result and the first scheduled run on main are recorded in the pull request thread.
 
+### Publication record — arena/ee7e0f6c-nfl3, 2026-11-15 UTC
+
+- **Pull request [#78](https://github.com/kanlerxz87-cyber/NFL3/pull/78) — MERGED** as `4f33978fd3f1` (merge commit `4f33978f3da469d1978bf0037f4a0f2883c5b965`, 2026-11-15T13:01:44Z), merge strategy `--merge`, no auto-merge. PR checks: `validate` **pass** (run [43716756150](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43716756150)); `deploy` skipped on pull requests by design.
+- **Post-merge Pages:** `Validate and deploy GitHub Pages` run [43716840856](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43716840856) **success** on `4f33978`; `pages build and deployment` run 43716840630 **success**.
+- **Live verification (fetch tool, cache not bypassed):** `https://kanlerxz87-cyber.github.io/NFL3/injury-capture/index.html` renders the 12:59:08Z read (347 rows, 171 game-status designations, raw link, 467 deltas from the 12 Nov baseline, IC-1 to IC-6 flags). Source links present on every table row.
+- **Temporary branch trigger:** removed before merge; `origin/main:.github/workflows/injury-capture.yml` contains only `schedule` (`17 */6 * * *`) and `workflow_dispatch`. `gh workflow list` shows `injury-capture` **active** on main. The first scheduled read on main has not been observed yet in this session; check the Actions tab for it.
+- **Process note.** Main can only change through a pull request from this branch, so this record is committed on the branch and goes to main through a follow-up pull request. Future readers should check the merge commit above, not this line, for the authoritative state.
+
