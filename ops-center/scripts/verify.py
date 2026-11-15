@@ -130,7 +130,7 @@ def check_pages(errors: list[str], warnings: list[str]) -> None:
                     window = low[max(0, m.start() - 60):m.start()]
                     if re.search(r"\b(no|not|never|without|zero|0|nor)\b", window):
                         continue
-                    warnings.append(f"{name}: {why} — '{low.strip()[:80]}'")
+                    errors.append(f"{name}: {why} — '{low.strip()[:80]}'")
 
     print(f"rows: {total_rows}, rows carrying an official source link: {sourced_rows}")
 

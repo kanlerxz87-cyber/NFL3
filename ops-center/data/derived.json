@@ -14635,9 +14635,9 @@
   {
    "name": "Divisional compression",
    "kind": "single bet",
-   "thesis": "Familiarity compresses margins. The measured correlation between division form and overall form is only +0.33 (p=0.066, n=32), i.e. division results carry real but modest extra information.",
+   "thesis": "Hypothesis only: divisional-game context may improve a team-strength baseline for spread or total forecasts. No official-only effect estimate is established; evaluate a pre-registered adjustment on chronological holdouts.",
    "status": "BLOCKED at G0.",
-   "note": "In divisional games, shade the underdog and the under. Reject if the market total already sits below the model total by the declared threshold.",
+   "note": "For research only, compare a pre-registered divisional adjustment with the unchanged baseline on chronological holdouts; do not assert a betting direction before prospective validation.",
    "provenance": [
     "line-lab/ST-04"
    ],
@@ -14825,7 +14825,7 @@
   {
    "name": "Quarterback availability shock",
    "kind": "Singles",
-   "thesis": "Confirmed QB absence/replacement changes team scoring enough to create incremental forecast value.",
+   "thesis": "Testable hypothesis only: after an officially documented starting-QB change, verified availability features may improve team-scoring forecasts versus the same baseline without those features. The effect is unknown until an out-of-sample ablation.",
    "status": "Not run",
    "note": "Ablate availability feature; cluster uncertainty by game; require held-out improvement.",
    "provenance": [
@@ -14958,7 +14958,7 @@
   {
    "name": "Rushing workload prop combo",
    "kind": "Prop combinations",
-   "thesis": "Confirmed replacement workload and game script may jointly affect rushing attempts/yards.",
+   "thesis": "Testable hypothesis only: verified starter/replacement evidence and game context may jointly improve rushing-outcome forecasts. No effect is established; testing requires workload observations, joint prices and settlement terms.",
    "status": "Not run",
    "note": "Joint outcome model with game-cluster bootstrap and independence comparison.",
    "provenance": [
