@@ -8,7 +8,12 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-OFFICIAL_HOSTS = {"nfl.com", "www.nfl.com", "operations.nfl.com"}
+OFFICIAL_HOSTS = {
+    "nfl.com", "www.nfl.com", "operations.nfl.com", "support.nfl.com",
+    "nextgenstats.nfl.com", "www.commanders.com", "www.steelers.com",
+    "www.houstontexans.com", "static.www.nfl.com", "docs.github.com", "itl.nist.gov",
+    "www.itl.nist.gov", "scikit-learn.org",
+}
 errors: list[str] = []
 TEXT_SUFFIXES = {".html", ".md", ".py", ".js", ".css", ".json", ".yml", ".yaml", ".txt", ".tsv", ".csv", ".mjs"}
 
@@ -65,6 +70,15 @@ class SiteParser(HTMLParser):
 
 
 def main() -> int:
+    readiness = subprocess.run(
+        [sys.executable, str(ROOT / "decision-readiness/scripts/check.py")],
+        cwd=ROOT, capture_output=True, text=True,
+    )
+    if readiness.stdout.strip():
+        print(readiness.stdout.strip())
+    if readiness.returncode:
+        errors.append("decision-readiness: " + (readiness.stderr or readiness.stdout).strip())
+
     # Validate the root pages and every sub-site, each with its own link/citation checks.
     # The root glob alone would silently stop validating the workspaces under dashboard/, line-lab/,
     # decision-hub/, research-workspace/ and research-desk/ as soon as one was moved into a folder.
