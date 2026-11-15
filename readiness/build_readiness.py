@@ -39,6 +39,7 @@ CLUB_TEXANS = "https://www.houstontexans.com/team/depth-chart"
 CLUB_COMMANDERS = "https://www.commanders.com/team/depth-chart"
 NFLVERSE_DEPTH = "https://github.com/nflverse/nflverse-data/releases/tag/depth_charts"
 NWS_API = "https://www.weather.gov/documentation/services-web-api"
+REPO_BLOB = "https://github.com/kanlerxz87-cyber/NFL3/blob/main/"
 
 
 def load_json(rel: str):
@@ -451,7 +452,9 @@ def page(R: list[dict], v: dict) -> str:
         return f'<a{cls} href="{html.escape(url)}" target="_blank" rel="noopener noreferrer">{html.escape(label)} ↗</a>'
 
     def local(path: str, label: str) -> str:
-        return f'<a href="{html.escape(path)}">{html.escape(label)}</a>'
+        # Repository files are linked to their GitHub blob on main, not to Pages paths: hidden
+        # folders such as .github are not served by Pages (a live check returned a 404 page).
+        return f'<a href="{html.escape(REPO_BLOB + path)}" target="_blank" rel="noopener noreferrer">{html.escape(label)}</a>'
 
     body = []
     body.append('<div class="content">')
