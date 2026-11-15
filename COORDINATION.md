@@ -1932,3 +1932,32 @@ official score · unjoined report rows · the site's own model trails the market
 above: root `index.html` (an additive nav block and one table row), `README.md` (one table row) and
 `.github/workflows/pages.yml` (three additive validation steps). No other workspace was modified and no
 existing numeric claim was changed.
+
+### Addendum — second price capture, and what it proved (`arena/99122105-nfl3`, 2026-11-15)
+
+While rebasing onto main's `data-refresh` commit (`dadba84`), the origination verifier failed on its own
+determinism check. The cause was not a bug in the build: main's refresh had replaced the community
+`schedules` release (`release_asset_updated_utc` 12:36:23Z → 13:06:44Z, sha256 `85e2dcb8…` → `57c2f1b0…`,
+one byte smaller), and **five Week 10 events had actually moved** between the two reads.
+
+Treatment: the store now appends every distinct capture instead of superseding, both snapshot files are
+retained under `origination/data/prices/snapshots/`, and the ledger measures opening-versus-latest per
+cell. Result on this build: **2 snapshots, 78 pre-kickoff market cells, 7 of them moved.**
+
+What moved, exactly: a half-point of total juice on `NE @ DET` (−110/−110 → −115/−105) and on `BUF @ NYJ`
+(−118/−102 → −115/−105); a spread-price flip on `CAR @ NO` (−110/−110 → −105/−115) with both moneylines
+moving a couple of cents; the `KC @ ATL` moneyline (145→150 / −175→−180); and the `SEA @ LV` moneyline
+(230→235 / −285→−290). **No handicap and no total line moved.** That is the honest characterisation: this
+is juice movement on one board, not line movement, and the page says so.
+
+Consequence for the gates, changed deliberately rather than conveniently: G05 used to pass merely because
+two snapshot files existed. That would have been an overclaim. It now passes only when at least one
+pre-kickoff cell shows a genuine opening-to-latest interval, and its evidence line reports
+`78 cells / 2 snapshots / 7 moved`. Two new unit tests pin both the retention rule and the gate's
+condition; a third asserts that movement may never be claimed from a single observation. Gate state is
+now 7 pass / 1 fail (G10, self-inflicted demotions) / 2 blocked (G07 joint evidence, G08 operator rules).
+
+No strategy's grade changed, because no graded row used a moved cell as both its opening and close in a way
+that alters a result, and no CLV claim was added. Re-verified after the change: `tests/test_origination.py`
+38 tests, `origination/scripts/verify.py` (13 pages, 456 rows, 0 missing a source, deterministic),
+`scripts/validate_site.py`, `tests/check_site.py`.
