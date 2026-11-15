@@ -1499,7 +1499,6 @@ main's committed state and ships no `decision-lab/` changes; the regenerated pai
 
 - **Follow-up record PR [#64](https://github.com/kanlerxz87-cyber/NFL3/pull/64) — MERGED** as `f3fbabc3ba97ea55f1d72712139d2bd2e6963153`. Its checks: `validate` **pass** (run 43433302746), `deploy` skipped by design. Post-merge: `Validate and deploy GitHub Pages` run [43433439265](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43433439265) **success**; `data-refresh` run 43433439114 **success**; the managed legacy `pages build and deployment` run [43433532113](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43433532113) **failed** and cannot be rerun (`its workflow file may be broken`) — the known dual-publisher race already published as decision-lab flag **F24**, not a build defect: the canonical publisher succeeded, the GitHub Pages API reports `built`, and the live landing page and `/NFL3/verification/index.html` were fetched cache-busted after this merge and render correctly (site guide, archive row, no conflict markers, single doctype).
 
-<<<<<<< HEAD
 ## Current-session claim — arena/a3dbd91d-nfl3 (2026-11-15 UTC)
 
 | Task | Status | Owner | File scope |
@@ -1519,7 +1518,6 @@ Initial verification: `python3 ops-center/scripts/verify.py` passed with 0 failu
 - Official pages opened for context/source review: [NFL injury report](https://www.nfl.com/injuries/) (the live report page exposes injury, practice and game-status columns), [NFL standings](https://www.nfl.com/standings/) (official standings tables), and the [Colts Week 10 unofficial depth-chart release](https://www.colts.com/news/colts-release-unofficial-depth-chart-for-week-10) (explicitly titled “Unofficial Depth Chart”; it also documents two receiver trades). These sources do not establish any strategy effect, replacement workload, or market price; none is claimed.
 - Verification passed: root `scripts/validate_site.py` and `tests/check_site.py`; 34 decision-lab tests; verification-lab tests; 10 source-authority tests; `verification/audit_sources.py`; decision-hub (8 pages); research desk (11 pages / 159 sourced rows); decision desk (14 pages); ops-centre strict check (9 pages, 0 failures); injury-verification; engine tests; research workspace; line-lab (14 checks); offline decision-lab structural verifier; and `git diff --check`. Ops-centre now reports 8 deliberate community/secondary source warnings, down from 10 because the two unsupported wording warnings were removed; it has 0 failures.
 - Remaining irregularities are not suppressed: the independent repository audit still records AUD-03 (616 table rows without an official-source link, 112 community-only in the just-built artifact); other audit and source warnings remain on the published Flagged for Review pages. This narrow correction does not create odds history, a live ingestion service, official snap counts, a verified replacement workload, an official-only correlation sample, a validated strategy, or a funded reward pool.
-=======
 ## Claim — arena/ecdea533-nfl3 (session ecdea533), 2026-11-15 UTC
 
 Branch: `arena/ecdea533-nfl3` (fixed by Arena; session-named branches such as `session-ecdea533/<task>` cannot be created here, so every task below is on this branch). Base: `main` at `3db9a64`. Status of the branch: active.
@@ -1535,4 +1533,3 @@ Other sessions: no concurrent claim is open on the board for the files below (la
 | R5 Integration: validators, PR to `main`, merge without waiting for approval, GitHub Pages deploy check, publication record | in progress | arena/ecdea533-nfl3 | this board |
 
 Not edited by this session: `decision-lab/`, `ops-center/`, `decision-desk/`, `dashboard/`, `line-lab/`, `decision-hub/`, `research-desk/`, `research-workspace/`, `verification*/`, `injury-verification/`, `engine/`, `pipeline/`, `data/`, `tests/`, `.github/workflows/`. Requests for those owners are logged below rather than applied.
->>>>>>> be264f2 (chore(board): claim readiness, repo review and integration tasks (arena/ecdea533-nfl3))
