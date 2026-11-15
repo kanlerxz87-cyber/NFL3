@@ -1771,3 +1771,15 @@ The stale independent source-audit JSON/page were regenerated; `verification/aud
 - **Temporary branch trigger:** removed before merge; `origin/main:.github/workflows/injury-capture.yml` contains only `schedule` (`17 */6 * * *`) and `workflow_dispatch`. `gh workflow list` shows `injury-capture` **active** on main. The first scheduled read on main has not been observed yet in this session; check the Actions tab for it.
 - **Process note.** Main can only change through a pull request from this branch, so this record is committed on the branch and goes to main through a follow-up pull request. Future readers should check the merge commit above, not this line, for the authoritative state.
 
+
+## Claim — `arena/f0d1503b-nfl3` (session f0d1503b), 2026-11-15 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| S1 Official-only verification & origination workspace: live re-fetch of official NFL game centres/schedules/injury report/depth pages from this sandbox; a per-row official-source register; a pre-registered official-corpus backtest; an official-input line-origination board (fair line / market line / residual as separate columns); a luck-removal leaderboard panel with control baselines; a questions-and-missing-information register; a suggestions review board; and a Flagged-for-Review register. | in progress | `arena/f0d1503b-nfl3` | `official-verify/**` (new), `tests/test_official_verify.py` (new), `.github/workflows/official-verify.yml` (new), `COORDINATION.md` only from shared files. Root `index.html` navigation link requested below, not taken. |
+
+**Branch.** The Arena-fixed branch is `arena/f0d1503b-nfl3`; per the platform rule no other branch or worktree can be created, so the brief's `session-<id>/<task>` naming is recorded as not usable (same constraint recorded by earlier sessions).
+
+**Takeover basis.** No entry on this board previously claimed an official-only, re-fetched verification of the 2026 game log, a pre-registered official-corpus backtest, or an origination board built from official inputs. Earlier sessions recorded nfl.com as unreachable from the sandbox (see the `arena/3b1164e9-nfl3` entry, 2026-11-15). That constraint no longer holds for the page-fetch tool used by this session: `https://www.nfl.com/games/...` and `https://www.nfl.com/injuries/` returned live content on 2026-11-15. This session therefore re-verifies against live official pages rather than relying on committed captures.
+
+**File-scope discipline.** Everything this session writes lives under `official-verify/`, plus three new files at named paths and append-only entries in this board. Files owned by other sessions (`decision-lab/`, `ops-center/`, `dashboard/`, `line-lab/`, `decision-desk/`, `readiness.html`, `readiness/`, `scripts/`, `docs/`) are **not** edited. Integration requests are logged at the end of this entry instead.
