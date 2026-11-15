@@ -2438,7 +2438,12 @@ Detailed register (64 rows): **Not started 16 · Partial 30 · Blocked 13 · Don
 
 ### Publication record
 
-Recorded after the pull request is opened and merged; see the entries appended below this one.
+- **Pull request [#87](https://github.com/kanlerxz87-cyber/NFL3/pull/87)** — **MERGED** as `8dfa4452ad72dd4071a72a91de49b6f1bb1a4381` (merge commit `8dfa445`, 2026-11-15T14:00:36Z), merge strategy `--merge`, no auto-merge.
+- **PR checks:** `validate` **pass** (run [43721855093](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43721855093)); `deploy` skipped on pull requests by design.
+- **Post-merge Pages:** `Validate and deploy GitHub Pages` run [43721982921](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43721982921) **success** on `8dfa445` — `validate` **success**, `deploy` **success**.
+- **Live verification (fetch tool):** `https://kanlerxz87-cyber.github.io/NFL3/skill-lab/index.html` renders the six rows, the 136-game corpus and the "0 eligible for ranking" headline; `.../skill-lab/mind-change.html` renders the two-sided field for all six rows; `.../availability-ledger/depth-flags.html` renders the 9 stale rows, the 1 unresolved row, the 9 traded-in players and the 12 traded-out control cases, each with its official source link; the root landing page lists both workspaces in the site guide and in the preserved-workspaces table.
+- **Conflicts during the merge.** `main` moved three times while this work was in flight, so the branch was rebased each time. The `COORDINATION.md`, `index.html` and `readiness.html` conflicts were resolved by keeping **both** sides. That resolution duplicated the root site-guide table once; it was detected by reading the deployed page and removed in the follow-up commit `fix(site): remove the duplicated site-guide table on the landing page`.
+- **A repository-wide defect was fixed in passing.** `COORDINATION.md` carried a stray `<<<<<<< HEAD` marker at line 1745 from an earlier session's conflict resolution, which made `scripts/validate_site.py` fail for the whole repository. It was removed and nothing else in that file was changed.
 
 ## Current claim — `arena/e9629801-nfl3` — 2026-11-15 UTC
 
