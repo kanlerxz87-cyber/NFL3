@@ -332,10 +332,10 @@ def build_origination():
             f'<strong>{esc(r["fixture"])}</strong><span class="sub">Week {esc(r["week"])} · {esc(r["kickoff_et"])}</span>',
             esc(r["venue"]) if r["venue"] else BLANK,
             f'<span class="num" style="background:#f4f7fb;border-radius:6px;padding:2px 6px">{side_txt}</span>'
-            f'<span class="sub">negative = home favoured</span>',
+            f'<span class="sub">— negative means the home side is favoured</span>',
             f'<span class="num">{r["fair_total"]:.1f}</span>',
             f'<span class="num">{r["fair_p_home_win"]:.3f}</span>'
-            f'<span class="sub">{r["fair_home_decimal"]:.2f} / {r["fair_away_decimal"]:.2f}</span>',
+            f'<span class="sub">— fair decimals: home {r["fair_home_decimal"]:.2f} / away {r["fair_away_decimal"]:.2f}</span>',
             BLANK,
             BLANK,
             src_link(r["source_id"], r["source_url"]),
