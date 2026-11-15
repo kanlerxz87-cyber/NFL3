@@ -33,6 +33,7 @@ import scoring        # noqa: E402
 DATA = BOARD / "data"
 FIXTURES = DATA / "fixtures_2026_w11.csv"
 READINGS = DATA / "official_spot_readings.csv"
+WEEK10 = DATA / "week10_status.csv"
 PREREG = BOARD / "PREREGISTRATION.md"
 OFFICIAL_SCHEDULE = "https://www.nfl.com/schedules/2026/by-week/week-11"
 OFFICIAL_SCORES = "https://www.nfl.com/scores/2026/week-11"
@@ -78,6 +79,14 @@ def read_fixtures() -> list[dict]:
 
 def read_readings() -> list[dict]:
     with READINGS.open(newline="", encoding="utf-8") as handle:
+        return list(csv.DictReader(handle))
+
+
+def read_week10() -> list[dict]:
+    """The official Week 10 state at the read window: what the corpus is allowed to be missing, exactly."""
+    if not WEEK10.is_file():
+        return []
+    with WEEK10.open(newline="", encoding="utf-8") as handle:
         return list(csv.DictReader(handle))
 
 
@@ -478,6 +487,7 @@ def build(write: bool = True) -> dict:
         "backtest": backtest, "correlations": corr_rows, "luck": luck,
         "graded_for_win_grading": len(graded_ml),
         "fixtures": len(forecasts), "forecast_records": len(records),
+        "week10": read_week10(),
         "prospective_graded": 0, "issued_before_first_kickoff": bool(issued_before_first),
         "first_kickoff_iso": kickoff_iso,
         "as_of_data": f"2026 weeks 1-{weeks[-1]}", "last_verified_game_date": as_of_last,
@@ -878,7 +888,7 @@ def render(res: dict, fixtures, readings, ledger, graded, graded_ml) -> dict[str
                  [[f"<td>{esc(a)}</td>", b, f"<td>{esc(c)}</td>", f"<td>{esc(d)}</td>"] for a, b, c, d in src_rows])
     flags = table(["Flag", "Observation", "Why it matters", "Source"], [
         ["SB-F01", "The committed 2026 log has one game with no score (Week 2, Washington at Dallas); the official "
-         "game centre published 20-37 when read on 2026-11-15.", "the corpus is 135 of 136 games; the blank is "
+         "game centre published 20-37 when read on 2026-11-15, and the quarter scores sum to it.", "the corpus is "
          "excluded from fitting and grading rather than filled here, because the log file belongs to another owner.",
          link("https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2", "game centre")],
         ["SB-F02", "The log covers Weeks 1-9, so a Week 11 forecast is 12-14 days stale and every club's Week 10 "
@@ -904,10 +914,33 @@ def render(res: dict, fixtures, readings, ledger, graded, graded_ml) -> dict[str
          "strategy can move past Tier 4 until the owner decides the price-data policy.",
          link(OFFICIAL_ODDS_FAQ, "NFL odds-widget boundary")],
     ])
+    w10 = res.get("week10", [])
+    if w10:
+        boundary = table(["Wk", "Slot", "Date / kickoff (ET)", "Fixture", "Pregame records", "Status at read time",
+                          "Score read", "Source"],
+                         [[f"<td>{esc(r['week'])}</td>", f"<td>{esc(r['slot'])}</td>",
+                           f"<td>{esc(r['date_et'])} {esc(r['kickoff_et'])}</td>",
+                           f"<td>{esc(r['away'])} at {esc(r['home'])}</td>",
+                           f"<td class='mono'>{esc(r['away_record_pregame'])} / {esc(r['home_record_pregame'])}</td>",
+                           f"<td>{esc(r['official_status_at_read'])}</td>",
+                           (f"<td class='mono'>{esc(r['away_score'])}-{esc(r['home_score'])}</td>"
+                            if r["away_score"] else
+                            "<td class='blankcell' title='no score on the page at the read window'></td>"),
+                           f"<td>{link(r['game_centre_url'], 'game centre')} &#183; "
+                           f"{link(r['schedule_page_url'], 'Week 10 schedule')}</td>"]
+                          for r in w10],
+                         "The corpus boundary, stated exactly. The verified log ends with the Week 9 Monday game "
+                         "(2026-11-09). Of Week 10, the Thursday game is final and is the one completed result the log "
+                         "is missing; the Sunday games had not been played inside the read window, so they are not "
+                         "missing data. No count of Week 10 fixtures is claimed here because the page read stopped "
+                         "part-way through the slate.")
+    else:
+        boundary = ""
     pages["sources.html"] = page("sources.html", "Verification, sources and flags",
                                  "The reads that check this workspace, what each source is allowed to establish, and "
                                  "the irregularities that are published instead of quietly corrected.",
                                  "<h2>Line-by-line checks</h2>" + ver +
+                                 "<h2>What the corpus is missing, exactly</h2>" + boundary +
                                  "<h2>Source register</h2>" + srcs + "<h2>Flagged for review</h2>" + flags)
 
     # ---- registers page
