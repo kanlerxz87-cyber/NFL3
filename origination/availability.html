@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Availability &amp; depth | NFL3 origination workspace</title>
+<link rel="stylesheet" href="assets/origination.css"></head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="index.html"><b>N</b> NFL3 <span>/ origination</span></a>
+<nav aria-label="Origination navigation" data-current="availability.html">
+<a href='index.html'>Overview</a><a href='requirements.html'>Requirements</a><a href='decisions.html'>Decisions &amp; questions</a><a href='strategies.html'>Strategy registry</a><a href='leaderboard.html'>Leaderboard</a><a href='lines.html'>Originated lines</a><a href='prices.html'>Price store</a><a href='availability.html'>Availability &amp; depth</a><a href='correlations.html'>Correlations</a><a href='luck.html'>Luck removal</a><a href='suggestions.html'>Suggestions</a><a href='flagged.html'>Flagged for review</a><a href='sources.html'>Sources</a>
+</nav></div></header>
+<main class="wrap">
+<div class="hrow"><div><p class="eyebrow">Who was expected, who actually played</p><h1>Availability &amp; depth</h1></div>
+<span class="badge warn">Research · not betting advice</span></div>
+
+<div class="notice"><b>Read this first.</b> This workspace originates its own numbers and grades them
+against a reconciled official results feed. It holds <b>one</b> community price observation, so no
+opening-line edge, closing-line value or validated strategy exists yet — and the leaderboard says so on
+every row. Prices are labelled <b>COMMUNITY</b>; standings and injury reports are labelled
+<b>OFFICIAL</b>; anything that could not be confirmed is blank and sits on
+<a href="flagged.html">Flagged for review</a>. Nothing here is betting advice.</div>
+
+<div class="section-head"><div><div class="section-label">AVAILABILITY GRAPH</div>
+<h2>Expected starters, actual participants, and the depth between them</h2></div>
+<p>Nodes: 32 clubs, 1,386 published slots,
+1,745 named players, 254
+report rows, 400 reserve rows,
+12,785 playing-time rows.</p></div>
+<div class="metrics">
+<div><span>CLUBS WITH A PARSED DEPTH PAGE</span><strong>30/32</strong>
+<small>two clubs publish no parseable chart</small></div>
+<div><span>SLOTS NAMING ≥2 RANK-1 PLAYERS</span><strong>149</strong>
+<small>kept as groups</small></div>
+<div><span>GAME DESIGNATIONS PUBLISHED</span><strong>6/254</strong>
+<small>of official report rows</small></div>
+<div><span>CLUBS WITH NO REPORT SECTION</span><strong>4</strong>
+<small>not the same as injury-free</small></div>
+</div>
+<div class='notice'><b>Rules this graph enforces.</b><ul>
+<li>A slot is a group. 149 club/unit/position slots publish more than one rank-1 player; the graph keeps them together instead of inventing a single starter.</li>
+<li>A player on a reserve list is absent from the weekly report by construction. &#x27;Not listed&#x27; never means &#x27;available&#x27;.</li>
+<li>Depth is measured from playing time (snap share), never from jersey number, experience or salary.</li>
+<li>No .confirmed replacement. is published unless an official source names one. The backup shown is the club&#x27;s own next published name, which is evidence of order, not of assignment.</li>
+</ul></div>
+<div class="section-head"><div><div class="section-label">DEPTH FROM PLAYING TIME</div>
+<h2>Measured order versus published order</h2></div>
+<p>For every club/unit/position where playing time exists, the player with the largest measured snap share
+is compared with the club's published rank 1. Neither is declared correct; the disagreement is the datum.</p></div>
+<div class="table-wrap"><table><caption>Disagreements first. A rank-1 group holding several players can
+show a measured leader who is not the first name on the page.</caption>
+<thead><tr><th>Club</th><th>Unit</th><th>Pos</th><th>Measured leader</th><th>Share</th>
+<th>Published rank</th><th>Agrees?</th><th>Source</th></tr></thead><tbody>
+<tr><td>NYG</td><td>Defense</td>
+<td>FS</td><td>Ar&#x27;Darius Washington</td>
+<td>78.0%</td><td>2</td>
+<td><span class='pill warn'>partial</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>NYG</td><td>Defense</td>
+<td>NB</td><td>Nic Jones</td>
+<td>0.0%</td><td>2</td>
+<td><span class='pill warn'>partial</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>NYG</td><td>Defense</td>
+<td>SS</td><td>Jason Pinnock</td>
+<td>22.0%</td><td>2</td>
+<td><span class='pill warn'>partial</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>NYG</td><td>Offense</td>
+<td>RG</td><td>Aaron Stinnie</td>
+<td>2.0%</td><td>2</td>
+<td><span class='pill warn'>partial</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>NYG</td><td>Offense</td>
+<td>WR</td><td>Malachi Fields</td>
+<td>89.0%</td><td>2</td>
+<td><span class='pill warn'>partial</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>NYG</td><td>Special Teams</td>
+<td>PR</td><td>Charlie Jones</td>
+<td>0.0%</td><td>2</td>
+<td><span class='pill warn'>partial</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>WAS</td><td>Defense</td>
+<td>DL</td><td>Charles Omenihu</td>
+<td>58.0%</td><td>2</td>
+<td><span class='pill warn'>partial</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>WAS</td><td>Offense</td>
+<td>RB</td><td>Rachaad White</td>
+<td>52.0%</td><td>2</td>
+<td><span class='pill warn'>partial</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>WAS</td><td>Offense</td>
+<td>RT</td><td>Andrew Wylie</td>
+<td>0.0%</td><td>2</td>
+<td><span class='pill warn'>partial</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>WAS</td><td>Offense</td>
+<td>WR</td><td>Antonio Williams</td>
+<td>86.0%</td><td>2</td>
+<td><span class='pill warn'>partial</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>WAS</td><td>Special Teams</td>
+<td>PR</td><td>Luke McCaffrey</td>
+<td>0.0%</td><td>2</td>
+<td><span class='pill warn'>partial</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>NYG</td><td>Defense</td>
+<td>CB</td><td>Deonte Banks</td>
+<td>100.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>NYG</td><td>Defense</td>
+<td>DE</td><td>Darius Alexander</td>
+<td>39.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>NYG</td><td>Defense</td>
+<td>DT</td><td>Shelby Harris</td>
+<td>65.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>NYG</td><td>Defense</td>
+<td>MLB</td><td>Micah McFadden</td>
+<td>100.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>NYG</td><td>Defense</td>
+<td>RUSH</td><td>Kayvon Thibodeaux</td>
+<td>75.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>NYG</td><td>Defense</td>
+<td>SAM</td><td>Abdul Carter</td>
+<td>90.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>NYG</td><td>Defense</td>
+<td>WLB</td><td>Arvell Reese</td>
+<td>100.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>NYG</td><td>Offense</td>
+<td>C</td><td>Bryan Hudson</td>
+<td>100.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>NYG</td><td>Offense</td>
+<td>FB</td><td>Patrick Ricard</td>
+<td>20.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>NYG</td><td>Offense</td>
+<td>LG</td><td>Jon Runyan Jr.</td>
+<td>100.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>NYG</td><td>Offense</td>
+<td>LT</td><td>Andrew Thomas</td>
+<td>100.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>NYG</td><td>Offense</td>
+<td>QB</td><td>J.J. McCarthy</td>
+<td>95.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>NYG</td><td>Offense</td>
+<td>RB</td><td>Cam Skattebo</td>
+<td>89.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>NYG</td><td>Offense</td>
+<td>RT</td><td>Jermaine Eluemunor</td>
+<td>98.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>NYG</td><td>Offense</td>
+<td>TE</td><td>Isaiah Likely</td>
+<td>88.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>NYG</td><td>Special Teams</td>
+<td>H</td><td>Jordan Stout</td>
+<td>0.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>NYG</td><td>Special Teams</td>
+<td>K</td><td>Dominic Zvada</td>
+<td>0.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>NYG</td><td>Special Teams</td>
+<td>KOR</td><td>Deonte Banks</td>
+<td>100.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>NYG</td><td>Special Teams</td>
+<td>LS</td><td>Ben Mann</td>
+<td>0.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>NYG</td><td>Special Teams</td>
+<td>P</td><td>Jordan Stout</td>
+<td>0.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>WAS</td><td>Defense</td>
+<td>CB</td><td>Amik Robertson</td>
+<td>98.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>WAS</td><td>Defense</td>
+<td>FS</td><td>Jeremy Reaves</td>
+<td>83.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>WAS</td><td>Defense</td>
+<td>LB</td><td>Sonny Styles</td>
+<td>100.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>WAS</td><td>Defense</td>
+<td>OLB</td><td>Odafe Oweh</td>
+<td>74.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>WAS</td><td>Defense</td>
+<td>SS</td><td>Nick Cross</td>
+<td>100.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>WAS</td><td>Offense</td>
+<td>C</td><td>Nick Allegretti</td>
+<td>100.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>WAS</td><td>Offense</td>
+<td>LG</td><td>Chris Paul</td>
+<td>100.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>WAS</td><td>Offense</td>
+<td>LT</td><td>Brandon Coleman</td>
+<td>100.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>WAS</td><td>Offense</td>
+<td>QB</td><td>Jayden Daniels</td>
+<td>100.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>WAS</td><td>Offense</td>
+<td>TE</td><td>Chig Okonkwo</td>
+<td>59.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>WAS</td><td>Special Teams</td>
+<td>H</td><td>Tress Way</td>
+<td>0.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>WAS</td><td>Special Teams</td>
+<td>K</td><td>Drew Stevens</td>
+<td>0.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>WAS</td><td>Special Teams</td>
+<td>KR</td><td>Luke McCaffrey</td>
+<td>0.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>WAS</td><td>Special Teams</td>
+<td>LS</td><td>Tyler Ott</td>
+<td>0.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+<tr><td>WAS</td><td>Special Teams</td>
+<td>P</td><td>Tress Way</td>
+<td>0.0%</td><td>1</td>
+<td><span class='pill ok'>pass</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>playing time ↗</a></td></tr>
+</tbody></table><p class='small'>First 60 of 46 groups shown.</p></div>
+<div class="section-head"><div><div class="section-label">WEEK 10 DEFICIENCIES</div>
+<h2>Where a rank-1 slot is officially unavailable</h2></div>
+<p>Only official designations (Out / Doubtful) create a deficiency. The backup shown is the club's own
+next published name — evidence of order, never a claim of assignment.</p></div>
+<div class="table-wrap"><table><caption>Empty where the club publishes no chart or the report names no
+unavailable rank-1 player. A blank means the source does not say, not that the slot is healthy.</caption>
+<thead><tr><th>Fixture</th><th>Club</th><th>Pos</th><th>Unavailable</th><th>Designation</th>
+<th>Next published name</th><th>His status</th><th>Source</th></tr></thead><tbody>
+<tr><td>New England Patriots @ Detroit Lions</td>
+<td>New England Patriots</td><td>LG</td>
+<td>Ben Brown</td><td><span class='pill warn'>Out</span></td>
+<td><span class='blank'>not published</span></td>
+<td>blank</td>
+<td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>NFL report ↗</a><br><a class='source' href='https://www.patriots.com/team/depth-chart' target='_blank' rel='noopener noreferrer'>club chart ↗</a></td></tr>
+</tbody></table></div>
+<div class="section-head"><div><div class="section-label">ABLATION</div>
+<h2>Injury and personnel: tested, not penalised</h2></div>
+<p>Same model, with and without the personnel term, on a chronological holdout. λ is a pre-registered
+conversion and the whole grid is published so no reader has to trust a single number.</p></div>
+<div class="table-wrap"><table><caption>MAE improvement is (without personnel) − (with personnel), so a
+positive number means the personnel term helped. The interval is a paired game-cluster bootstrap.</caption>
+<thead><tr><th>λ (points per lost snap share)</th><th>n</th><th>MAE without</th><th>MAE with</th>
+<th>Improvement</th><th>95% interval</th><th>Source</th></tr></thead><tbody>
+<tr><td>0.0</td><td>44</td><td>11.698</td>
+<td>11.698</td><td>0.000</td>
+<td>[0.000, 0.000]</td>
+<td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>report ↗</a> · <a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>snaps ↗</a></td></tr>
+<tr><td>0.5</td><td>44</td><td>11.698</td>
+<td>11.697</td><td>-0.002</td>
+<td>[-0.083, 0.089]</td>
+<td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>report ↗</a> · <a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>snaps ↗</a></td></tr>
+<tr><td>1.0</td><td>44</td><td>11.698</td>
+<td>11.695</td><td>-0.003</td>
+<td>[-0.166, 0.179]</td>
+<td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>report ↗</a> · <a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>snaps ↗</a></td></tr>
+<tr><td>1.5</td><td>44</td><td>11.698</td>
+<td>11.693</td><td>-0.005</td>
+<td>[-0.249, 0.268]</td>
+<td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>report ↗</a> · <a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>snaps ↗</a></td></tr>
+<tr><td>2.0</td><td>44</td><td>11.698</td>
+<td>11.707</td><td>0.009</td>
+<td>[-0.332, 0.334]</td>
+<td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>report ↗</a> · <a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>snaps ↗</a></td></tr>
+<tr><td>3.0</td><td>44</td><td>11.698</td>
+<td>11.770</td><td>0.072</td>
+<td>[-0.517, 0.436]</td>
+<td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>report ↗</a> · <a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>snaps ↗</a></td></tr>
+<tr><td>5.0</td><td>44</td><td>11.698</td>
+<td>11.934</td><td>0.236</td>
+<td>[-0.980, 0.539]</td>
+<td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>report ↗</a> · <a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>snaps ↗</a></td></tr>
+</tbody></table></div>
+<div class='notice'><b>Verdict.</b> <ul>
+<li>One official injury snapshot (2026-11-12). A player hurt after that observation is not in this ablation, so the personnel term under-counts late-week changes.</li>
+<li>Snap share measures a role, not the value of a player. Replacing a high-share left tackle with another high-share player would show no effect by construction.</li>
+<li>137 played games cannot resolve a 1-2 point effect on a 13.5 point margin sd. The interval is the result, not the point estimate.</li>
+<li>λ is not fitted. The full grid is published so a reader can see that no λ rescues the signal in this sample.</li>
+</ul></div>
+</main>
+<footer class="wrap foot"><span><strong>NFL3 origination workspace</strong> · every row links to its source ·
+a value that could not be confirmed stays blank.</span>
+<span>Generated 2026-11-15</span></footer>
+</body></html>

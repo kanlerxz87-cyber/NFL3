@@ -100,7 +100,7 @@ def build() -> dict:
     played_rows = [r for r in rows if r["played"]]
     report = {
         "schema_version": 1,
-        "built_at": dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat(),
+        "built_at": C.GENERATED_AT,
         "settlement_authority": "official final score, reconciled (see policy P07)",
         "official_standings": {
             "url": C.S["standings"], "observed_at": inputs.standings()[0]["observed_at"],

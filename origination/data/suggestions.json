@@ -1,0 +1,137 @@
+{
+ "built_at": "2026-11-15",
+ "rows": [
+  {
+   "title": "Buy or licence one historical price archive",
+   "detail": "One licensed archive with a stated open/close timestamp would convert most of this site's blanks into numbers. Nothing else on this list unlocks as much.",
+   "unblocks": [
+    "R01",
+    "R18",
+    "R29",
+    "R50",
+    "R51",
+    "G05"
+   ],
+   "cost": "High (licence cost + legal review)",
+   "risk": "A cheap archive with no timestamp flag would be worse than none: it cannot be labelled open vs close, so every CLV claim stays invalid.",
+   "decision": "Approve a budget and a vendor shortlist.",
+   "source": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL",
+   "source_label": "NFL betting FAQ (OFFICIAL)"
+  },
+  {
+   "title": "Run the capture schedule that already exists",
+   "detail": "The capture script is written. Pointing a scheduled job at the official report on Wed/Thu/Fri and at kickoff-minus-60 costs almost nothing and creates the series every availability feature needs.",
+   "unblocks": [
+    "R12",
+    "R21",
+    "R41",
+    "R42",
+    "R46",
+    "R52",
+    "G05"
+   ],
+   "cost": "Low (a scheduled job + a monitor)",
+   "risk": "A capture that overwrites rather than appends destroys the series. The store must stay immutable per observation.",
+   "decision": "Approve enabling the scheduled job.",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL)"
+  },
+  {
+   "title": "Capture official inactive lists per game",
+   "detail": "The single biggest evidence gap in the availability work. Without inactive lists a listed player cannot be confirmed absent, so a replacement is suspected and never established.",
+   "unblocks": [
+    "R25",
+    "R38",
+    "R45",
+    "R06",
+    "R35"
+   ],
+   "cost": "Medium (a source + a parser + a daily schedule)",
+   "risk": "An inactive list captured after the game is not point-in-time and cannot be used for a backtest.",
+   "decision": "Approve the source and the capture window.",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL)"
+  },
+  {
+   "title": "Add a second price observation within 24 hours",
+   "detail": "Even a second capture from the same community release would turn one snapshot into an interval and let the ledger distinguish an open from a close for the unplayed Week 10 games.",
+   "unblocks": [
+    "R01",
+    "R18",
+    "G05"
+   ],
+   "cost": "Very low (one more snapshot file)",
+   "risk": "Two captures of the same number prove nothing about movement. The value is purely in establishing the pipeline.",
+   "decision": "Approve running the capture twice a day.",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+   "source_label": "nflverse schedules (COMMUNITY)"
+  },
+  {
+   "title": "Pin row counts and field sets per source, and alert on a miss",
+   "detail": "The build already fails closed on a reconciliation break. Extending that to per-source row counts turns a silent blank into a loud failure.",
+   "unblocks": [
+    "R33",
+    "R54"
+   ],
+   "cost": "Low",
+   "risk": "A brittle pin can fail on legitimate news (a club adding a player). Set the bound as a band, not an exact count.",
+   "decision": "Approve the alert thresholds.",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL)"
+  },
+  {
+   "title": "Publish a per-team deficiency page with both sides of the ball",
+   "detail": "The current deficiency view is offense-side, because that is what the report designates. A defensive view needs the opposing club's chart, which exists for 30 clubs.",
+   "unblocks": [
+    "R39",
+    "R35"
+   ],
+   "cost": "Medium (a join across two club charts)",
+   "risk": "Joining two different clubs' charts invites a positional mismatch that looks like a deficiency but is only a naming difference.",
+   "decision": "Approve the cross-club join with a published position map.",
+   "source": "https://www.nfl.com/injuries/",
+   "source_label": "NFL injury report (OFFICIAL); club charts captured in decision-lab/data/official_snapshot.json"
+  },
+  {
+   "title": "Fund the sample, not the model",
+   "detail": "Every scored rule is within noise. More modelling effort on 137 games will produce a better-looking number, not a better number. The cheapest path to a decision is more graded legs at fixed, pre-registered rules.",
+   "unblocks": [
+    "R32",
+    "R50",
+    "R60"
+   ],
+   "cost": "Low in money, high in patience",
+   "risk": "Re-using this corpus with new rules inflates the multiplicity problem; new legs must be genuinely out of sample.",
+   "decision": "Approve a fixed evaluation window and no rule changes inside it.",
+   "source": "https://www.nfl.com/standings/",
+   "source_label": "NFL standings (OFFICIAL)"
+  },
+  {
+   "title": "Make the demotion rule binding on the owner, not just the build",
+   "detail": "Two rules have already failed their kill condition. A leaderboard that demotes but never acts is a dashboard, not a governance system.",
+   "unblocks": [
+    "R08",
+    "R17",
+    "G10"
+   ],
+   "cost": "Low",
+   "risk": "Demoting aggressively can bury a rule that needed one more week. The kill condition is therefore pre-registered, not discretionary.",
+   "decision": "Approve that a demoted rule needs a new hash to return.",
+   "source": "https://www.nfl.com/standings/",
+   "source_label": "NFL standings (OFFICIAL); gate artifact: origination/data/gates.json"
+  },
+  {
+   "title": "State the reuse position before adding more captures",
+   "detail": "The repository stores private captures and publishes derived analysis. That is a defensible position only if it is written down per source class.",
+   "unblocks": [
+    "R34",
+    "DATA-USE-01"
+   ],
+   "cost": "Low (a decision, not code)",
+   "risk": "Publishing a raw row from a source whose terms forbid it would compromise every page that cites it.",
+   "decision": "Approve the public/private split in writing.",
+   "source": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL",
+   "source_label": "NFL betting FAQ (OFFICIAL)"
+  }
+ ]
+}

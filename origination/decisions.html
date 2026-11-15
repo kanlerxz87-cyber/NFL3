@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decisions &amp; questions | NFL3 origination workspace</title>
+<link rel="stylesheet" href="assets/origination.css"></head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="index.html"><b>N</b> NFL3 <span>/ origination</span></a>
+<nav aria-label="Origination navigation" data-current="decisions.html">
+<a href='index.html'>Overview</a><a href='requirements.html'>Requirements</a><a href='decisions.html'>Decisions &amp; questions</a><a href='strategies.html'>Strategy registry</a><a href='leaderboard.html'>Leaderboard</a><a href='lines.html'>Originated lines</a><a href='prices.html'>Price store</a><a href='availability.html'>Availability &amp; depth</a><a href='correlations.html'>Correlations</a><a href='luck.html'>Luck removal</a><a href='suggestions.html'>Suggestions</a><a href='flagged.html'>Flagged for review</a><a href='sources.html'>Sources</a>
+</nav></div></header>
+<main class="wrap">
+<div class="hrow"><div><p class="eyebrow">What must be resolved first</p><h1>Decisions &amp; questions</h1></div>
+<span class="badge warn">Research · not betting advice</span></div>
+
+<div class="notice"><b>Read this first.</b> This workspace originates its own numbers and grades them
+against a reconciled official results feed. It holds <b>one</b> community price observation, so no
+opening-line edge, closing-line value or validated strategy exists yet — and the leaderboard says so on
+every row. Prices are labelled <b>COMMUNITY</b>; standings and injury reports are labelled
+<b>OFFICIAL</b>; anything that could not be confirmed is blank and sits on
+<a href="flagged.html">Flagged for review</a>. Nothing here is betting advice.</div>
+
+<div class="section-head"><div><div class="section-label">THE QUESTIONS</div>
+<h2>20 questions that must be answered before a decision is reasonable</h2></div>
+<p>Each question names what we know, what we do not know, how to find it out, and who or what it blocks.
+An answer is only written when a source supplied it.</p></div>
+<div class="table-wrap"><table><caption>Questions grouped by the decision they block.
+Discovery action is the cheapest way to close the gap, not a commitment.</caption>
+<thead><tr><th>ID</th><th>Area</th><th>Question</th><th>What we know</th><th>What we do not know</th>
+<th>Discovery action</th><th>Blocks</th><th>Source</th></tr></thead><tbody>
+<tr><td><b>Q01</b></td><td>Price data</td><td>Which price source may be retained, at what latency, and with what right to republish a derived line?</td>
+<td>The NFL&#x27;s own betting FAQ states its odds are a partner widget; the repository holds one community observation with no bookmaker identity.</td><td>No licensed archive, no terms of reuse, no open-versus-close flag on the stored numbers.</td><td>Obtain a written data agreement covering history, latency, retention and derived output, or explicitly accept a community source and label every price as such forever.</td>
+<td>R01, R18, R50, R51, G05</td><td><a class='source' href='https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL' target='_blank' rel='noopener noreferrer'>NFL betting FAQ (OFFICIAL) ↗</a></td></tr>
+<tr><td><b>Q02</b></td><td>Price data</td><td>If the only source is community, is a community price good enough to define an opening line?</td>
+<td>The stored series is digest-verified and has one observation. 411 of 816 market cells are post-hoc or empty.</td><td>Whether the release&#x27;s price is an open, a close or a snapshot of one book.</td><td>Capture the same markets from a second, independent source and compare: if the two disagree by more than a point, neither can define an opening.</td>
+<td>R01, R19, G05</td><td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>nflverse schedules (COMMUNITY) ↗</a></td></tr>
+<tr><td><b>Q03</b></td><td>Availability</td><td>How do we know a listed player actually missed the game?</td>
+<td>6 of 254 report rows carry a game designation; no inactive list is held.</td><td>Which listed players were inactive, and which played a reduced role.</td><td>Capture official inactive lists for each game and join them to the report rows; the play rate per designation is then measurable.</td>
+<td>R25, R38, R45, R12</td><td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>NFL injury report (OFFICIAL) ↗</a></td></tr>
+<tr><td><b>Q04</b></td><td>Availability</td><td>Is &#x27;no injury section&#x27; the same as &#x27;no injuries&#x27;?</td>
+<td>4 clubs had no section on the captured report, and 24 of 32 clubs had rows at all.</td><td>Whether an absent section reflects a healthy roster or a reporting gap.</td><td>Compare a club&#x27;s absent-section week with its next published report and with its inactive list; a reappearing long-term injury would prove a gap.</td>
+<td>R12, R42</td><td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>NFL injury report (OFFICIAL) ↗</a></td></tr>
+<tr><td><b>Q05</b></td><td>Depth</td><td>What does a published rank actually mean when one slot names three players?</td>
+<td>149 rank-1 slots name two or more players.</td><td>Which of those players starts, and whether the order within the group is meaningful.</td><td>Join playing time to each shared slot: if the measured shares are indistinguishable, the slot is a committee and no single starter exists.</td>
+<td>R06, R11, R27, R35, R39</td><td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>NFL injury report (OFFICIAL); club charts: decision-lab/data/official_snapshot.json ↗</a></td></tr>
+<tr><td><b>Q06</b></td><td>Depth</td><td>Can depth be derived from playing time for a player who has not yet played?</td>
+<td>Snap counts cover the season to date; a rookie with no snaps has no measurement.</td><td>The order behind a player with zero recorded snaps.</td><td>Keep the published order for those players and label the measured order as unavailable for them; do not fall back to jersey number.</td>
+<td>R11, R47</td><td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>nflverse snap counts (COMMUNITY) ↗</a></td></tr>
+<tr><td><b>Q07</b></td><td>Depth</td><td>Two clubs publish no parseable depth chart. What is the authorised structured source?</td>
+<td>The Texans publish the chart as an image and the Packers prepend jersey numbers; the failure is recorded per club.</td><td>A structured, authorised source for those two clubs.</td><td>Ask each club for a structured export, or accept the gap and publish it as a gap rather than transcribing an image by eye.</td>
+<td>R26, R37, R40</td><td><a class='source' href='https://www.nfl.com/teams/' target='_blank' rel='noopener noreferrer'>NFL club directory (OFFICIAL); capture: decision-lab/data/official_snapshot.json ↗</a></td></tr>
+<tr><td><b>Q08</b></td><td>Modelling</td><td>Is the injury effect even measurable at this sample size?</td>
+<td>The holdout ablation interval spans zero for every λ in the published grid.</td><td>The size of the true effect, and whether it is larger for specific positions.</td><td>Accumulate pre-kickoff price and availability captures across a season, then re-run the ablation with position-specific terms and a pre-registered λ.</td>
+<td>R24, R61</td><td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>NFL injury report (OFFICIAL) ↗</a></td></tr>
+<tr><td><b>Q09</b></td><td>Modelling</td><td>Which estimator should represent the side?</td>
+<td>Two estimators exist: a ridge fit on seasonal scoring and a leak-free Elo. Both trail the market on the same 137 games, and their errors correlate at about 0.95.</td><td>Whether a third family, or a combination, would close the gap.</td><td>Publish both until a walk-forward comparison separates them with an interval, which requires more pre-kickoff games.</td>
+<td>R03, R53, R60</td><td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>NFL standings (OFFICIAL) ↗</a></td></tr>
+<tr><td><b>Q10</b></td><td>Modelling</td><td>What converts a measured snap share into points of margin?</td>
+<td>The ablation publishes a pre-registered λ grid so no single conversion is asserted.</td><td>The true conversion, and whether it varies by position.</td><td>Fit λ out of sample on a corpus large enough to estimate it, and pre-register the fit before looking at the holdout.</td>
+<td>R24, R35</td><td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/snap_counts' target='_blank' rel='noopener noreferrer'>nflverse snap counts (COMMUNITY) ↗</a></td></tr>
+<tr><td><b>Q11</b></td><td>Leaderboard</td><td>What sample is enough to call a strategy validated?</td>
+<td>Floors are pre-registered at n≥50 to publish and n≥200 to promote; the largest scored arm has 137.</td><td>Whether those floors are strict enough given the dependence between legs in the same week.</td><td>Simulate the family-wise error rate under the current floors and adjust them before the next evaluation window opens.</td>
+<td>R32, R50, G06, G09</td><td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>NFL standings (OFFICIAL) ↗</a></td></tr>
+<tr><td><b>Q12</b></td><td>Leaderboard</td><td>Where do the rewards come from, and who funds them?</td>
+<td>No reward pool, rule set or funding source exists in the repository.</td><td>The existence, size and legality of any reward.</td><td>Decide the jurisdiction and the funding source before any reward is described as available.</td>
+<td>R05, R32, R56</td><td><a class='source' href='https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL' target='_blank' rel='noopener noreferrer'>NFL betting FAQ (OFFICIAL) ↗</a></td></tr>
+<tr><td><b>Q13</b></td><td>Leaderboard</td><td>Are control arms scored on the same rows as the model arms?</td>
+<td>Yes by construction, and a control&#x27;s Brier skill is exactly zero, which is what proves the scoring path is neutral.</td><td>Whether a control should also carry an interval on its own win rate for display.</td><td>Add a Wilson interval to every control arm so a reader can see that a 51% control is ordinary.</td>
+<td>R48</td><td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>NFL standings (OFFICIAL) ↗</a></td></tr>
+<tr><td><b>Q14</b></td><td>Combos</td><td>What would a validated joint probability require?</td>
+<td>Nothing exists yet: no prop outcome feed and no operator settlement rules.</td><td>The conditional structure between legs inside a game.</td><td>Capture a play-level prop outcome series and a same-game price pair; only then can a joint model be fitted and validated on a holdout.</td>
+<td>R30, G07, G08</td><td><a class='source' href='https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL' target='_blank' rel='noopener noreferrer'>NFL betting FAQ (OFFICIAL) ↗</a></td></tr>
+<tr><td><b>Q15</b></td><td>Legal</td><td>What may be republished from each source, and under what terms?</td>
+<td>The site links to official pages and stores a private capture; reuse terms are not established.</td><td>Whether derived output (a fair line) counts as republished source data.</td><td>Get written terms per source class, or restrict the site to derived analysis plus links.</td>
+<td>R34, DATA-USE-01</td><td><a class='source' href='https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL' target='_blank' rel='noopener noreferrer'>NFL betting FAQ (OFFICIAL) ↗</a></td></tr>
+<tr><td><b>Q16</b></td><td>Automation</td><td>What runs the capture schedule, and what happens when a capture is missed?</td>
+<td>Captures are scripted and hashed; no schedule currently hits the official page on Wed/Thu/Fri.</td><td>Whether a missed capture can be detected and recorded as a gap rather than back-filled.</td><td>Enable a scheduled capture job, write a manifest of expected captures, and fail the build when a scheduled capture is absent.</td>
+<td>R12, R21, R33, R41, R46, R52, R54</td><td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>NFL injury report (OFFICIAL) ↗</a></td></tr>
+<tr><td><b>Q17</b></td><td>Automation</td><td>How should a source change be distinguished from a data error?</td>
+<td>The build fails closed on a reconciliation break and publishes drift instead of reconciling it.</td><td>The threshold at which a row-count change is a source format change rather than news.</td><td>Pin an expected row count and field set per source, and alert on a miss before the page is published.</td>
+<td>R33, R54</td><td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>NFL injury report (OFFICIAL) ↗</a></td></tr>
+<tr><td><b>Q18</b></td><td>Settlement</td><td>Which operator&#x27;s void and push rules govern a graded bet?</td>
+<td>Grading uses a mechanical push rule stated in policy P06; no operator terms are held.</td><td>Whether a real operator voids a pushed leg or refunds the stake inside a same-game parlay.</td><td>Obtain the rules for whichever operator would be used, and store them with a date.</td>
+<td>R30, G08</td><td><a class='source' href='https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL' target='_blank' rel='noopener noreferrer'>NFL betting FAQ (OFFICIAL) ↗</a></td></tr>
+<tr><td><b>Q19</b></td><td>Ownership</td><td>Which of the 62 requirements should be funded first?</td>
+<td>The suggestions page ranks 9 proposals by the requirements they unblock.</td><td>The owner&#x27;s appetite for a licensed price feed, which would unblock the most at once.</td><td>Choose a path on the suggestions page, then re-run the build: blocked gates become a plan rather than a list.</td>
+<td>All blocked requirements</td><td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>NFL standings (OFFICIAL) ↗</a></td></tr>
+<tr><td><b>Q20</b></td><td>Ownership</td><td>How does a demoted strategy earn its way back?</td>
+<td>Demotion is automatic and published, and the score is retained.</td><td>The re-entry rule, and whether a demoted rule must be re-registered with a new hash.</td><td>Require re-registration (a new hash) with the demotion recorded in its text, so a comeback cannot silently reuse a failed rule.</td>
+<td>R08, R58, G10</td><td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>NFL standings (OFFICIAL); gate artifact: origination/data/gates.json ↗</a></td></tr>
+</tbody></table></div>
+<div class="notice"><b>Why these questions and not others.</b> Every question below blocks
+a number that is currently blank on this site. A question that blocks nothing is not on this page —
+it is on the suggestions page, where it can be argued about without holding up a decision.</div>
+</main>
+<footer class="wrap foot"><span><strong>NFL3 origination workspace</strong> · every row links to its source ·
+a value that could not be confirmed stays blank.</span>
+<span>Generated 2026-11-15</span></footer>
+</body></html>

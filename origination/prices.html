@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Price store | NFL3 origination workspace</title>
+<link rel="stylesheet" href="assets/origination.css"></head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="index.html"><b>N</b> NFL3 <span>/ origination</span></a>
+<nav aria-label="Origination navigation" data-current="prices.html">
+<a href='index.html'>Overview</a><a href='requirements.html'>Requirements</a><a href='decisions.html'>Decisions &amp; questions</a><a href='strategies.html'>Strategy registry</a><a href='leaderboard.html'>Leaderboard</a><a href='lines.html'>Originated lines</a><a href='prices.html'>Price store</a><a href='availability.html'>Availability &amp; depth</a><a href='correlations.html'>Correlations</a><a href='luck.html'>Luck removal</a><a href='suggestions.html'>Suggestions</a><a href='flagged.html'>Flagged for review</a><a href='sources.html'>Sources</a>
+</nav></div></header>
+<main class="wrap">
+<div class="hrow"><div><p class="eyebrow">Opening, closing and the policy that governs them</p><h1>Price store</h1></div>
+<span class="badge warn">Research · not betting advice</span></div>
+
+<div class="notice"><b>Read this first.</b> This workspace originates its own numbers and grades them
+against a reconciled official results feed. It holds <b>one</b> community price observation, so no
+opening-line edge, closing-line value or validated strategy exists yet — and the leaderboard says so on
+every row. Prices are labelled <b>COMMUNITY</b>; standings and injury reports are labelled
+<b>OFFICIAL</b>; anything that could not be confirmed is blank and sits on
+<a href="flagged.html">Flagged for review</a>. Nothing here is betting advice.</div>
+
+<div class="section-head"><div><div class="section-label">PRICE STORE</div>
+<h2>Opening and closing numbers for every market we originate — recorded, not estimated</h2></div>
+<p>One immutable snapshot per observation, each with its own hash and the upstream release digest.
+A market with no pre-kickoff observation keeps a blank opening and closing.</p></div>
+<div class="metrics">
+<div><span>SNAPSHOTS</span><strong>1</strong><small>immutable, hashed</small></div>
+<div><span>EVENT × MARKET CELLS</span><strong>816</strong><small>272 events × 3 markets</small></div>
+<div><span>WITH PRE-KICKOFF OPENING</span><strong>78</strong><small>the only usable cell set</small></div>
+<div><span>POST-HOC ONLY</span><strong>411</strong><small>shown, never graded as a close</small></div>
+<div><span>NO OBSERVATION</span><strong>327</strong><small>blank, by rule</small></div>
+</div>
+<div class="notice"><b>The honest state of the store.</b> Week 10's unplayed games are
+the first genuine pre-kickoff numbers this repository owns. For them the opening and the closing are
+<b>the same number</b> because only one capture exists — the ledger says so on every such cell. This is
+the day-one baseline, and it is the reason no closing-line-value claim appears anywhere on this site.</div>
+<div class="table-wrap"><table><caption>Snapshot register. A new observation is a new
+file; nothing is overwritten in place.</caption>
+<thead><tr><th>Snapshot</th><th>Observed at</th><th>SHA-256</th><th>Source class</th><th>Source</th></tr></thead><tbody>
+<tr><td><code>origination/data/prices/snapshots/2026-11-15T123623Z.json</code></td><td>2026-11-15T12:36:23Z</td>
+<td><code>bad237f573518848e61434e3cd0cb210…</code></td><td><span class='pill warn'>community</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>nflverse release ↗</a></td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table><caption>Per-event ledger, Week 10 and the played
+Week 10 game. Opening/closing are blank wherever no pre-kickoff observation exists.</caption>
+<thead><tr><th>Event</th><th>Kickoff (approx UTC)</th><th>Market</th><th>Opening</th><th>Closing</th>
+<th>Observations pre / post</th><th>Source</th></tr></thead><tbody>
+<tr><td>BUF @ NYJ</td>
+<td>2026-11-15T17:00</td><td>spread</td>
+<td>home_line -8.5 / home_price -115 / away_price -105</td><td>home_line -8.5 / home_price -115 / away_price -105</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>BUF @ NYJ</td>
+<td>2026-11-15T17:00</td><td>total</td>
+<td>line 50.5 / over_price -118 / under_price -102</td><td>line 50.5 / over_price -118 / under_price -102</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>BUF @ NYJ</td>
+<td>2026-11-15T17:00</td><td>moneyline</td>
+<td>home 360 / away -470</td><td>home 360 / away -470</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>CAR @ NO</td>
+<td>2026-11-15T17:00</td><td>spread</td>
+<td>home_line 1.5 / home_price -110 / away_price -110</td><td>home_line 1.5 / home_price -110 / away_price -110</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>CAR @ NO</td>
+<td>2026-11-15T17:00</td><td>total</td>
+<td>line 48.5 / over_price -115 / under_price -105</td><td>line 48.5 / over_price -115 / under_price -105</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>CAR @ NO</td>
+<td>2026-11-15T17:00</td><td>moneyline</td>
+<td>home -122 / away 102</td><td>home -122 / away 102</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>HOU @ CLE</td>
+<td>2026-11-15T17:00</td><td>spread</td>
+<td>home_line -4.5 / home_price -108 / away_price -112</td><td>home_line -4.5 / home_price -108 / away_price -112</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>HOU @ CLE</td>
+<td>2026-11-15T17:00</td><td>total</td>
+<td>line 40.5 / over_price -112 / under_price -108</td><td>line 40.5 / over_price -112 / under_price -108</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>HOU @ CLE</td>
+<td>2026-11-15T17:00</td><td>moneyline</td>
+<td>home 185 / away -225</td><td>home 185 / away -225</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>JAX @ TEN</td>
+<td>2026-11-15T17:00</td><td>spread</td>
+<td>home_line -10.5 / home_price -105 / away_price -115</td><td>home_line -10.5 / home_price -105 / away_price -115</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>JAX @ TEN</td>
+<td>2026-11-15T17:00</td><td>total</td>
+<td>line 46.5 / over_price -110 / under_price -110</td><td>line 46.5 / over_price -110 / under_price -110</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>JAX @ TEN</td>
+<td>2026-11-15T17:00</td><td>moneyline</td>
+<td>home 525 / away -750</td><td>home 525 / away -750</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>KC @ ATL</td>
+<td>2026-11-15T17:00</td><td>spread</td>
+<td>home_line -3.0 / home_price -102 / away_price -118</td><td>home_line -3.0 / home_price -102 / away_price -118</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>KC @ ATL</td>
+<td>2026-11-15T17:00</td><td>total</td>
+<td>line 47.5 / over_price -105 / under_price -115</td><td>line 47.5 / over_price -105 / under_price -115</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>KC @ ATL</td>
+<td>2026-11-15T17:00</td><td>moneyline</td>
+<td>home 145 / away -175</td><td>home 145 / away -175</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>LAC @ BAL</td>
+<td>2026-11-17T00:15</td><td>spread</td>
+<td>home_line 4.5 / home_price -108 / away_price -112</td><td>home_line 4.5 / home_price -108 / away_price -112</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>LAC @ BAL</td>
+<td>2026-11-17T00:15</td><td>total</td>
+<td>line 38.5 / over_price -110 / under_price -110</td><td>line 38.5 / over_price -110 / under_price -110</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>LAC @ BAL</td>
+<td>2026-11-17T00:15</td><td>moneyline</td>
+<td>home -225 / away 185</td><td>home -225 / away 185</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>LA @ ARI</td>
+<td>2026-11-15T20:05</td><td>spread</td>
+<td>home_line -9.5 / home_price -108 / away_price -112</td><td>home_line -9.5 / home_price -108 / away_price -112</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>LA @ ARI</td>
+<td>2026-11-15T20:05</td><td>total</td>
+<td>line 38.5 / over_price -108 / under_price -112</td><td>line 38.5 / over_price -108 / under_price -112</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>LA @ ARI</td>
+<td>2026-11-15T20:05</td><td>moneyline</td>
+<td>home 370 / away -485</td><td>home 370 / away -485</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>MIA @ IND</td>
+<td>2026-11-15T17:00</td><td>spread</td>
+<td>home_line 4.5 / home_price -110 / away_price -110</td><td>home_line 4.5 / home_price -110 / away_price -110</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>MIA @ IND</td>
+<td>2026-11-15T17:00</td><td>total</td>
+<td>line 37.5 / over_price -110 / under_price -110</td><td>line 37.5 / over_price -110 / under_price -110</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>MIA @ IND</td>
+<td>2026-11-15T17:00</td><td>moneyline</td>
+<td>home -225 / away 185</td><td>home -225 / away 185</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>MIN @ GB</td>
+<td>2026-11-15T17:00</td><td>spread</td>
+<td>home_line 2.5 / home_price -120 / away_price 100</td><td>home_line 2.5 / home_price -120 / away_price 100</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>MIN @ GB</td>
+<td>2026-11-15T17:00</td><td>total</td>
+<td>line 42.5 / over_price -105 / under_price -115</td><td>line 42.5 / over_price -105 / under_price -115</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>MIN @ GB</td>
+<td>2026-11-15T17:00</td><td>moneyline</td>
+<td>home -148 / away 124</td><td>home -148 / away 124</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>NE @ DET</td>
+<td>2026-11-15T13:30</td><td>spread</td>
+<td>home_line 2.5 / home_price -118 / away_price -102</td><td>home_line 2.5 / home_price -118 / away_price -102</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>NE @ DET</td>
+<td>2026-11-15T13:30</td><td>total</td>
+<td>line 50.5 / over_price -110 / under_price -110</td><td>line 50.5 / over_price -110 / under_price -110</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>NE @ DET</td>
+<td>2026-11-15T13:30</td><td>moneyline</td>
+<td>home -142 / away 120</td><td>home -142 / away 120</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>PIT @ CIN</td>
+<td>2026-11-16T00:20</td><td>spread</td>
+<td>home_line 3.5 / home_price -108 / away_price -112</td><td>home_line 3.5 / home_price -108 / away_price -112</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>PIT @ CIN</td>
+<td>2026-11-16T00:20</td><td>total</td>
+<td>line 49.5 / over_price -105 / under_price -115</td><td>line 49.5 / over_price -105 / under_price -115</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>PIT @ CIN</td>
+<td>2026-11-16T00:20</td><td>moneyline</td>
+<td>home -185 / away 154</td><td>home -185 / away 154</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>SEA @ LV</td>
+<td>2026-11-15T20:05</td><td>spread</td>
+<td>home_line -6.5 / home_price -110 / away_price -110</td><td>home_line -6.5 / home_price -110 / away_price -110</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>SEA @ LV</td>
+<td>2026-11-15T20:05</td><td>total</td>
+<td>line 40.5 / over_price -108 / under_price -112</td><td>line 40.5 / over_price -108 / under_price -112</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>SEA @ LV</td>
+<td>2026-11-15T20:05</td><td>moneyline</td>
+<td>home 230 / away -285</td><td>home 230 / away -285</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>SF @ DAL</td>
+<td>2026-11-15T20:25</td><td>spread</td>
+<td>home_line -4.5 / home_price -112 / away_price -108</td><td>home_line -4.5 / home_price -112 / away_price -108</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>SF @ DAL</td>
+<td>2026-11-15T20:25</td><td>total</td>
+<td>line 55.5 / over_price -118 / under_price -102</td><td>line 55.5 / over_price -118 / under_price -102</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>SF @ DAL</td>
+<td>2026-11-15T20:25</td><td>moneyline</td>
+<td>home 180 / away -218</td><td>home 180 / away -218</td>
+<td>1 / 0</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>WAS @ NYG</td>
+<td>2026-11-13T00:15</td><td>spread</td>
+<td><span class='blank'>unverified</span></td><td><span class='blank'>unverified</span></td>
+<td>0 / 1</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>WAS @ NYG</td>
+<td>2026-11-13T00:15</td><td>total</td>
+<td><span class='blank'>unverified</span></td><td><span class='blank'>unverified</span></td>
+<td>0 / 1</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>WAS @ NYG</td>
+<td>2026-11-13T00:15</td><td>moneyline</td>
+<td><span class='blank'>unverified</span></td><td><span class='blank'>unverified</span></td>
+<td>0 / 1</td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+</tbody></table></div>
+<div class="section-head"><div><div class="section-label">POLICY</div>
+<h2>Decided before any backtest was published</h2></div>
+<p>Policy hash <code>d3df9119b1248e8b7adfe7a73175424b…</code> is written into the ledger,
+so a later edit is visible as a changed hash rather than a silent change.</p>
+<pre class="policy"># Price-data policy — pre-registered before any backtest was published
+
+Registered: 2026-11-15 (UTC). Content hash is written into `data/prices/ledger.json`, so any later edit
+shows up as a changed hash in the diff of this commit. This file is a decision, not a finding.
+
+## The source boundary (why we hold what we hold)
+
+* The NFL publishes no odds feed this project may use, and the NFL&#x27;s own betting FAQ states that odds
+  shown on NFL properties are a widget supplied by a partner. Those numbers are not a licensed archive.
+  Legitimate historical price archives are licensed commercial products. This project holds none.
+* The only price series in this repository is the community `schedules` release (nflverse-data). Its
+  digest is verified against the published SHA-256 in `data/raw/manifest.json`. That proves byte
+  integrity, **not** official authority, and it does not prove the number is an open or a close.
+* Therefore every price on this site is labelled **COMMUNITY**. No price is ever labelled official.
+
+## P01 — Opening and closing are different objects
+
+Opening = the earliest pre-kickoff observation this repository holds for that event x market.
+Closing = the latest pre-kickoff observation held before that event&#x27;s kickoff.
+Neither is ever inferred. If we hold no pre-kickoff observation, both stay blank.
+
+## P02 — An after-the-fact number is not an opening, a close, or CLV evidence
+
+An observation recorded after an event&#x27;s kickoff is stored as `post_hoc`. It may be used as a reference
+only. It may never enter an opening-line study, a closing-line-value study or any &quot;we beat the close&quot;
+claim. The ledger counts those cells explicitly (`counts.post_hoc_only`).
+
+## P03 — Day-one status, stated plainly
+
+At the first observation (2026-11-15, Weeks 1-9 already played) this repository holds **one** price
+observation. Consequences, published rather than hidden:
+
+* the 136-game corpus (Weeks 1-10 including the played Week 10 game) keeps its numbers in `post_hoc`,
+  so no backtest may claim an opening-line or CLV edge on it;
+* the Week 10 games that had not kicked off at the observation time are the first genuine pre-kickoff
+  numbers this repository owns; for them opening = closing until a second capture exists, and the
+  ledger says so cell by cell.
+
+## P04 — The capture schedule (the automation that must run)
+
+A scheduled job captures the price source at least: daily during the week, and at T-60 minutes before
+each kickoff. Each capture is a new immutable snapshot file. A missed capture is recorded as a gap, not
+back-filled. No backtest may be published for a market whose capture coverage is below the pre-registered
+gate (see `strategies.html`, gate G05).
+
+## P05 — Vig removal
+
+Two-way markets are de-vigged multiplicatively: `p_fair = p_raw / (p_raw + p_other)`. This is stated so
+the residual and correlation work is reproducible. It is an assumption, not a measurement, and it is
+applied identically to every price so it cannot favour a strategy.
+
+## P06 — Push and void
+
+Spread and total lines published on the half-point are push-free. Whole-number lines can push. Where a
+result lands exactly on the number, the leg is graded as a push and excluded from win/loss scoring; it
+still counts toward `n`. Moneyline has no push. This rule is applied mechanically by the grader and is
+unit-tested.
+
+## P07 — Settlement source
+
+A bet settles against the official final score. In this workspace the official final score is the
+reconciled result feed (`results.html`), which reproduces nfl.com&#x27;s standing totals exactly for all 32
+clubs. The community game log is a cross-check, never the settlement authority.
+
+## P08 — One book, no line shopping, no best-of-multi-book
+
+The price series carries no bookmaker identity, so a backtest may not assume a better number existed.
+The grader uses exactly the stored number. If a licensed multi-book feed is later purchased, this policy
+is superseded by a new dated policy file, not edited in place.
+
+## P09 — Time zones
+
+Kickoff times come from the schedule release in US Eastern and are converted at a fixed UTC-4 offset.
+The boundary error (up to 60 minutes in EST weeks) is published, not corrected silently. It can only
+mislabel an observation as pre-kickoff when that observation is within an hour of kickoff.
+
+## P10 — What may never appear on the leaderboard
+
+A backtest number produced under a superseded policy, or from a market without opening/closing
+coverage, or from a source other than the settlement authority in P07. Those rows stay blank and are
+published on Flagged for Review.
+</pre></div>
+</main>
+<footer class="wrap foot"><span><strong>NFL3 origination workspace</strong> · every row links to its source ·
+a value that could not be confirmed stays blank.</span>
+<span>Generated 2026-11-15</span></footer>
+</body></html>

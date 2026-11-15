@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overview | NFL3 origination workspace</title>
+<link rel="stylesheet" href="assets/origination.css"></head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="index.html"><b>N</b> NFL3 <span>/ origination</span></a>
+<nav aria-label="Origination navigation" data-current="index.html">
+<a href='index.html'>Overview</a><a href='requirements.html'>Requirements</a><a href='decisions.html'>Decisions &amp; questions</a><a href='strategies.html'>Strategy registry</a><a href='leaderboard.html'>Leaderboard</a><a href='lines.html'>Originated lines</a><a href='prices.html'>Price store</a><a href='availability.html'>Availability &amp; depth</a><a href='correlations.html'>Correlations</a><a href='luck.html'>Luck removal</a><a href='suggestions.html'>Suggestions</a><a href='flagged.html'>Flagged for review</a><a href='sources.html'>Sources</a>
+</nav></div></header>
+<main class="wrap">
+<div class="hrow"><div><p class="eyebrow">The origination workspace</p><h1>Overview</h1></div>
+<span class="badge warn">Research · not betting advice</span></div>
+
+<div class="notice"><b>Read this first.</b> This workspace originates its own numbers and grades them
+against a reconciled official results feed. It holds <b>one</b> community price observation, so no
+opening-line edge, closing-line value or validated strategy exists yet — and the leaderboard says so on
+every row. Prices are labelled <b>COMMUNITY</b>; standings and injury reports are labelled
+<b>OFFICIAL</b>; anything that could not be confirmed is blank and sits on
+<a href="flagged.html">Flagged for review</a>. Nothing here is betting advice.</div>
+
+
+<div class="metrics">
+  <div><span>PLAYED GAMES IN CORPUS</span><strong>137</strong>
+    <small>10 weeks · reconciled</small></div>
+  <div><span>OFFICIAL RECONCILIATION</span><strong>160/160</strong>
+    <small>club × field checks match</small></div>
+  <div><span>PRICE SNAPSHOTS</span><strong>1</strong>
+    <small>78 pre-kickoff market cells</small></div>
+  <div><span>STRATEGIES SCORED</span><strong>8</strong>
+    <small>2 demoted by their own kill rule</small></div>
+  <div><span>VALIDATED</span><strong>0</strong>
+    <small>gates blocked: G05, G07, G08, G10</small></div>
+  <div><span>CORRELATIONS WITH n</span><strong>2</strong>
+    <small>4 withheld with a reason</small></div>
+</div>
+
+<div class="section-head"><div><div class="section-label">00 / THE SHORT VERSION</div>
+<h2>What this workspace can and cannot say today</h2></div></div>
+<div class="two">
+<div class="card good"><h3>What is established</h3><ul>
+<li>The results feed reproduces nfl.com's official standings for <b>all 32 clubs</b> on every field —
+wins, losses, ties, points for, points against — over 137 played games.</li>
+<li>The official depth pages describe <b>1,386 slots across 30 clubs</b>, and <b>149 rank-1 slots name
+more than one player</b>. A single "starter" per slot would be a fabrication.</li>
+<li>The injury report is captured with a hash and a clock time; every published availability row links
+to it.</li>
+<li>Every strategy is pre-registered with a content hash and scored with a proper score, an interval and
+a control arm.</li>
+</ul></div>
+<div class="card bad"><h3>What is not</h3><ul>
+<li><b>No price history.</b> One community observation exists. Weeks 1-9 kicked off before it, so their
+numbers are post-hoc and cannot support a closing-line claim.</li>
+<li><b>No validated strategy.</b> Every scored rule has a Brier-skill interval that includes zero or sits
+below it. Two have already failed their own kill rule.</li>
+<li><b>No measured injury effect.</b> The personnel ablation's holdout interval is
+-0.166 to 0.179 points of MAE — it cannot distinguish an effect from noise.</li>
+<li><b>No replacement certainty.</b> No official source names a replacement, so that column stays blank.</li>
+</ul></div></div>
+
+<div class="section-head"><div><div class="section-label">01 / ORIGINATION ORDER</div>
+<h2>Side first, then total, then moneyline</h2></div>
+<p>Each market is originated separately, in that order, and each is graded on its own before the next is
+trusted. The moneyline is a transform of the same margin model, so it is last by construction.</p></div>
+<div class="table-wrap"><table><caption>Walk-forward origination (fit on prior seasons only). Market
+comparison is shown wherever a stored price exists; the price class column says whether that number was
+observed before kickoff.</caption>
+<thead><tr><th>Market</th><th>Originated number</th><th>Market number</th><th>Difference</th>
+<th>Error vs result (MAE)</th><th>Market error (MAE)</th><th>Price class</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td><b>1 · Side</b><br><small>home margin</small></td>
+<td>residual sd 13.24 pts</td><td>stored spread</td>
+<td>0.20 pts mean</td>
+<td>10.48 pts</td><td>9.45 pts</td><td><span class='pill warn'>post_hoc</span> <span class='pill ok'>pre-kickoff</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>nflverse schedules ↗</a><br><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>NFL standings ↗</a></td></tr>
+<tr><td><b>2 · Total</b><br><small>combined points</small></td>
+<td>residual sd 14.05 pts</td><td>stored total</td>
+<td>0.60 pts mean</td>
+<td>11.36 pts</td><td>10.55 pts</td><td><span class='pill warn'>post_hoc</span> <span class='pill ok'>pre-kickoff</span></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>nflverse schedules ↗</a><br><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>NFL standings ↗</a></td></tr>
+<tr><td><b>3 · Moneyline</b><br><small>home win probability</small></td>
+<td>derived from the side model's residual sd</td><td>de-vigged stored moneyline</td>
+<td>2.18 pt side bias carried in</td>
+<td colspan="2">graded as a probability (Brier), not a point error</td>
+<td><span class='pill warn'>community</span></td><td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>nflverse schedules ↗</a></td></tr>
+</tbody></table></div>
+<div class="notice"><b>The model is worse than the market, and that is published.</b> On 137 games the
+side model's mean absolute error is 10.48 points against the market's 9.45; the total model is
+11.36 against 10.55. A model that trails the number it is trying to beat is useful: it is a
+working benchmark, and every strategy above it inherits the same handicap.</div>
+
+<div class="section-head"><div><div class="section-label">02 / LUCK</div>
+<h2>Removing luck from the equation</h2></div>
+<p>A win rate cannot separate skill from variance at this sample size. The panel below shows how much
+sample a real edge needs, and what each scored strategy's interval actually covers.</p></div>
+<div class="two">
+<div class="card"><h3>Sample size needed (80% power, one-sided α=0.05)</h3>
+<table><thead><tr><th>Edge over a coin</th><th>n needed</th><th>n held</th><th>Still needed</th></tr></thead><tbody>
+<tr><td>2%</td><td>3,863</td>
+<td>137</td><td>3,726</td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>results ↗</a></td></tr>
+<tr><td>5%</td><td>617</td>
+<td>137</td><td>480</td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>results ↗</a></td></tr>
+<tr><td>10%</td><td>153</td>
+<td>137</td><td>16</td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>results ↗</a></td></tr>
+</tbody></table><p class="small">A 10% edge would need about 153 graded legs; a 2% edge
+would need almost 4,000. This is why a 12-8 run is not evidence.</p></div>
+<div class="card"><h3>What the leaderboard can distinguish</h3><ul>
+<li><b>S01</b> n=131, win rate 50.4% [41.9%, 58.8%] — worse than benchmark: interval below zero</li>
+<li><b>S02</b> n=105, win rate 50.5% [41.1%, 59.9%] — no distinguishable signal: interval includes zero</li>
+<li><b>S03</b> n=113, win rate 45.1% [36.3%, 54.3%] — worse than benchmark: interval below zero</li>
+<li><b>S04</b> n=113, win rate 37.2% [28.8%, 46.4%] — no distinguishable signal: interval includes zero</li>
+<li><b>S05</b> n=131, win rate 42.7% [34.6%, 51.3%] — no distinguishable signal: interval includes zero</li>
+</ul><p><a class="text-link" href="luck.html">Open the full removal-of-luck panel →</a></p></div>
+</div>
+
+<div class="section-head"><div><div class="section-label">03 / AVAILABILITY</div>
+<h2>Who was expected to start, and who actually played</h2></div>
+<p>Depth is measured from playing time, never from jersey order. A slot is a group, not a person.</p></div>
+<div class="metrics">
+  <div><span>DEPTH SLOTS</span><strong>1,386</strong><small>across 30 of 32 clubs</small></div>
+  <div><span>RANK-1 SLOTS WITH ≥2 PLAYERS</span><strong>149</strong><small>a single starter would be invented</small></div>
+  <div><span>REPORT ROWS WITH A GAME STATUS</span><strong>6</strong><small>of 254 official rows</small></div>
+  <div><span>RESERVE-LIST PLAYERS</span><strong>400</strong><small>absent from the report by construction</small></div>
+</div>
+<div class="notice"><b>Snap-share leader vs published rank 1:</b> they agree in
+35 of
+46 position groups where both exist. Where they disagree, the
+published order and the measured order are both shown; neither is declared right.
+<a href="availability.html">Open the availability graph →</a></div>
+
+<div class="section-head"><div><div class="section-label">04 / WHAT WOULD CHANGE OUR MIND</div>
+<h2>The gates that are blocking, and the number that would clear them</h2></div></div>
+<div class="table-wrap"><table><caption>Gate status computed on this build. A blocked gate is not a
+promise that the work is coming; it is a statement of what is missing.</caption>
+<thead><tr><th>Gate</th><th>Question</th><th>Status</th><th>The number that decided it</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td><b>G01</b></td><td>Is every input to a scored strategy traceable to a named source and digest?</td><td><span class='pill ok'>pass</span></td>
+<td>272 events, 1 snapshot(s), 160 club checks<br><small>Scored rows may be published with a source class on each row.</small></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>source ↗</a></td></tr>
+<tr><td><b>G02</b></td><td>Was the rule frozen before the evaluation rows were scored?</td><td><span class='pill ok'>pass</span></td>
+<td>10 registered rules, all hashed<br><small>A rule change produces a new hash; the leaderboard shows the hash it scored.</small></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>source ↗</a></td></tr>
+<tr><td><b>G03</b></td><td>Are there silent blanks, duplicate events or imputed values inside a score?</td><td><span class='pill ok'>pass</span></td>
+<td>160/160 checks match<br><small>A failure here blocks every score on the page.</small></td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>source ↗</a></td></tr>
+<tr><td><b>G04</b></td><td>Does the results feed reproduce the official standings?</td><td><span class='pill ok'>pass</span></td>
+<td>PF 6291 = official 6291<br><small>Settlement authority for every graded leg.</small></td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>source ↗</a></td></tr>
+<tr><td><b>G05</b></td><td>Does a market have both a pre-kickoff opening and a pre-kickoff close?</td><td><span class='pill warn'>blocked</span></td>
+<td>78 pre-kickoff market cells of 816; 1 snapshot(s)<br><small>Blocks every closing-line-value claim. Grades on the stored number only.</small></td>
+<td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>source ↗</a></td></tr>
+<tr><td><b>G06</b></td><td>Is there enough settled sample to publish a score at all?</td><td><span class='pill ok'>pass</span></td>
+<td>137 graded legs on the largest strategy; 137 &lt; 200 for promotion<br><small>Scores are published with intervals. No strategy may be called validated at this n.</small></td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>source ↗</a></td></tr>
+<tr><td><b>G07</b></td><td>Is a directly validated joint probability available for combos?</td><td><span class='pill warn'>blocked</span></td>
+<td>0 joint probabilities validated<br><small>Parlay and prop-combo strategies cannot be scored.</small></td>
+<td><a class='source' href='https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL' target='_blank' rel='noopener noreferrer'>source ↗</a></td></tr>
+<tr><td><b>G08</b></td><td>Are the operator&#x27;s void and push rules available?</td><td><span class='pill warn'>blocked</span></td>
+<td>0 operator rule sets<br><small>Combo strategies cannot be settled.</small></td>
+<td><a class='source' href='https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL' target='_blank' rel='noopener noreferrer'>source ↗</a></td></tr>
+<tr><td><b>G09</b></td><td>Is every score published with a multiplicity adjustment?</td><td><span class='pill ok'>pass</span></td>
+<td>alpha/test = 0.00500<br><small>A p-value is only called significant against this level.</small></td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>source ↗</a></td></tr>
+<tr><td><b>G10</b></td><td>Does any live strategy trigger its own kill condition?</td><td><span class='pill danger'>fail</span></td>
+<td>2 of 8 scored strategies have an upper bound below zero: S01, S03<br><small>Demoted strategies stay visible, labelled demoted, with their score retained.</small></td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>source ↗</a></td></tr>
+</tbody></table></div>
+
+<div class="callout"><div><div class="section-label">NEXT</div><h2>What to read first</h2>
+<p>Requirements first (what the brief asked for and what state each item is in), then the decisions the
+gates are waiting on.</p></div>
+<a class="button" href="requirements.html">Requirements →</a></div>
+</main>
+<footer class="wrap foot"><span><strong>NFL3 origination workspace</strong> · every row links to its source ·
+a value that could not be confirmed stays blank.</span>
+<span>Generated 2026-11-15</span></footer>
+</body></html>

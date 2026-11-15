@@ -1,0 +1,596 @@
+{
+ "built_at": "2026-11-15",
+ "design": {
+  "lambda_primary": 1.0,
+  "lambda_grid": [
+   0.0,
+   0.5,
+   1.0,
+   1.5,
+   2.0,
+   3.0,
+   5.0
+  ],
+  "fit_weeks": [
+   1,
+   6
+  ],
+  "holdout_weeks": [
+   7,
+   10
+  ],
+  "weight": "measured snap share of the unavailable player (community snap feed)",
+  "unavailability": "official game status Out/Doubtful on the captured report",
+  "fitted": false
+ },
+ "headline": {
+  "n_all": 137,
+  "mae_improvement_all": 0.022335766423357675,
+  "mae_improvement_holdout": -0.0031818181818182353,
+  "holdout_lo": -0.16590909090909078,
+  "holdout_hi": 0.1786363636363636
+ },
+ "grid": [
+  {
+   "lambda": 0.0,
+   "buckets": {
+    "fit": {
+     "n": 93,
+     "base_mae": 9.907588947516032,
+     "personnel_mae": 9.907588947516032,
+     "mae_improvement": 0.0,
+     "mae_improvement_lo": 0.0,
+     "mae_improvement_hi": 0.0,
+     "base_bias": 1.7178225370738218,
+     "personnel_bias": 1.7178225370738218,
+     "residual_sd": 12.581654821126719
+    },
+    "holdout": {
+     "n": 44,
+     "base_mae": 11.69824994946711,
+     "personnel_mae": 11.69824994946711,
+     "mae_improvement": 0.0,
+     "mae_improvement_lo": 0.0,
+     "mae_improvement_hi": 0.0,
+     "base_bias": 2.2973808341512822,
+     "personnel_bias": 2.2973808341512822,
+     "residual_sd": 14.671822377846349
+    },
+    "all": {
+     "n": 137,
+     "base_mae": 10.48269175106236,
+     "personnel_mae": 10.48269175106236,
+     "mae_improvement": 0.0,
+     "mae_improvement_lo": 0.0,
+     "mae_improvement_hi": 0.0,
+     "base_bias": 1.9039580485439551,
+     "personnel_bias": 1.9039580485439551,
+     "residual_sd": 13.237017500505965
+    }
+   }
+  },
+  {
+   "lambda": 0.5,
+   "buckets": {
+    "fit": {
+     "n": 93,
+     "base_mae": 9.907588947516032,
+     "personnel_mae": 9.9247932485913,
+     "mae_improvement": 0.017204301075268828,
+     "mae_improvement_lo": -0.07440860215053766,
+     "mae_improvement_hi": 0.040000000000000015,
+     "base_bias": 1.7178225370738218,
+     "personnel_bias": 1.7178225370738218,
+     "residual_sd": 12.586000834443894
+    },
+    "holdout": {
+     "n": 44,
+     "base_mae": 11.69824994946711,
+     "personnel_mae": 11.696659040376197,
+     "mae_improvement": -0.001590909090909168,
+     "mae_improvement_lo": -0.08295454545454534,
+     "mae_improvement_hi": 0.08931818181818185,
+     "base_bias": 2.2973808341512822,
+     "personnel_bias": 2.298971743242191,
+     "residual_sd": 14.676848604429376
+    },
+    "all": {
+     "n": 137,
+     "base_mae": 10.48269175106236,
+     "personnel_mae": 10.493859634274036,
+     "mae_improvement": 0.011167883211678815,
+     "mae_improvement_lo": -0.06014598540145979,
+     "mae_improvement_hi": 0.034014598540146025,
+     "base_bias": 1.9039580485439551,
+     "personnel_bias": 1.9044689974490645,
+     "residual_sd": 13.24158863862015
+    }
+   }
+  },
+  {
+   "lambda": 1.0,
+   "buckets": {
+    "fit": {
+     "n": 93,
+     "base_mae": 9.907588947516032,
+     "personnel_mae": 9.94199754966657,
+     "mae_improvement": 0.034408602150537676,
+     "mae_improvement_lo": -0.1488172043010753,
+     "mae_improvement_hi": 0.07999999999999993,
+     "base_bias": 1.7178225370738218,
+     "personnel_bias": 1.7178225370738223,
+     "residual_sd": 12.596419448707847
+    },
+    "holdout": {
+     "n": 44,
+     "base_mae": 11.69824994946711,
+     "personnel_mae": 11.695068131285286,
+     "mae_improvement": -0.0031818181818182353,
+     "mae_improvement_lo": -0.16590909090909078,
+     "mae_improvement_hi": 0.1786363636363636,
+     "base_bias": 2.2973808341512822,
+     "personnel_bias": 2.3005626523331006,
+     "residual_sd": 14.687445431831243
+    },
+    "all": {
+     "n": 137,
+     "base_mae": 10.48269175106236,
+     "personnel_mae": 10.505027517485718,
+     "mae_improvement": 0.022335766423357675,
+     "mae_improvement_lo": -0.12029197080291969,
+     "mae_improvement_hi": 0.068029197080292,
+     "base_bias": 1.9039580485439551,
+     "personnel_bias": 1.9049799463541746,
+     "residual_sd": 13.252016574050018
+    }
+   }
+  },
+  {
+   "lambda": 1.5,
+   "buckets": {
+    "fit": {
+     "n": 93,
+     "base_mae": 9.907588947516032,
+     "personnel_mae": 9.969545130295181,
+     "mae_improvement": 0.06195618277914704,
+     "mae_improvement_lo": -0.22679489245656642,
+     "mae_improvement_hi": 0.09645161290322582,
+     "base_bias": 1.7178225370738218,
+     "personnel_bias": 1.7178225370738218,
+     "residual_sd": 12.612895615498845
+    },
+    "holdout": {
+     "n": 44,
+     "base_mae": 11.69824994946711,
+     "personnel_mae": 11.693477222194378,
+     "mae_improvement": -0.0047727272727273225,
+     "mae_improvement_lo": -0.24886363636363626,
+     "mae_improvement_hi": 0.2679545454545455,
+     "base_bias": 2.2973808341512822,
+     "personnel_bias": 2.3021535614240096,
+     "residual_sd": 14.70360081592644
+    },
+    "all": {
+     "n": 137,
+     "base_mae": 10.48269175106236,
+     "personnel_mae": 10.523216751051129,
+     "mae_improvement": 0.04052499998876403,
+     "mae_improvement_lo": -0.18197080291970802,
+     "mae_improvement_hi": 0.09502244526671048,
+     "base_bias": 1.9039580485439551,
+     "personnel_bias": 1.905490895259283,
+     "residual_sd": 13.26828749771754
+    }
+   }
+  },
+  {
+   "lambda": 2.0,
+   "buckets": {
+    "fit": {
+     "n": 93,
+     "base_mae": 9.907588947516032,
+     "personnel_mae": 10.003953732445716,
+     "mae_improvement": 0.09636478492968463,
+     "mae_improvement_lo": -0.3153102150206596,
+     "mae_improvement_hi": 0.1199586021836415,
+     "base_bias": 1.7178225370738218,
+     "personnel_bias": 1.7178225370738218,
+     "residual_sd": 12.63540563827202
+    },
+    "holdout": {
+     "n": 44,
+     "base_mae": 11.69824994946711,
+     "personnel_mae": 11.706750692728944,
+     "mae_improvement": 0.008500743261835818,
+     "mae_improvement_lo": -0.3318181818181818,
+     "mae_improvement_hi": 0.3339076043854192,
+     "base_bias": 2.2973808341512822,
+     "personnel_bias": 2.303744470514918,
+     "residual_sd": 14.725296461552723
+    },
+    "all": {
+     "n": 137,
+     "base_mae": 10.48269175106236,
+     "personnel_mae": 10.55083742771916,
+     "mae_improvement": 0.06814567665679888,
+     "mae_improvement_lo": -0.251605769383228,
+     "mae_improvement_hi": 0.10712391891224089,
+     "base_bias": 1.9039580485439551,
+     "personnel_bias": 1.9060018441643929,
+     "residual_sd": 13.290379949572843
+    }
+   }
+  },
+  {
+   "lambda": 3.0,
+   "buckets": {
+    "fit": {
+     "n": 93,
+     "base_mae": 9.907588947516032,
+     "personnel_mae": 10.081681506600614,
+     "mae_improvement": 0.17409255908458088,
+     "mae_improvement_lo": -0.503891666650115,
+     "mae_improvement_hi": 0.13997930109182077,
+     "base_bias": 1.7178225370738218,
+     "personnel_bias": 1.7178225370738214,
+     "residual_sd": 12.698390298996735
+    },
+    "holdout": {
+     "n": 44,
+     "base_mae": 11.69824994946711,
+     "personnel_mae": 11.769932510910758,
+     "mae_improvement": 0.07168256144365402,
+     "mae_improvement_lo": -0.5168181818181818,
+     "mae_improvement_hi": 0.43636363636363645,
+     "base_bias": 2.2973808341512822,
+     "personnel_bias": 2.3069262886967365,
+     "residual_sd": 14.785204753058473
+    },
+    "all": {
+     "n": 137,
+     "base_mae": 10.48269175106236,
+     "personnel_mae": 10.623893507984894,
+     "mae_improvement": 0.14120175692253137,
+     "mae_improvement_lo": -0.41318661092589415,
+     "mae_improvement_hi": 0.10795694170702645,
+     "base_bias": 1.9039580485439551,
+     "personnel_bias": 1.9070237419746119,
+     "residual_sd": 13.351906234093901
+    }
+   }
+  },
+  {
+   "lambda": 5.0,
+   "buckets": {
+    "fit": {
+     "n": 93,
+     "base_mae": 9.907588947516032,
+     "personnel_mae": 10.282111614127496,
+     "mae_improvement": 0.3745226666114625,
+     "mae_improvement_lo": -0.8950254407829106,
+     "mae_improvement_hi": 0.11976424732837988,
+     "base_bias": 1.7178225370738218,
+     "personnel_bias": 1.7178225370738218,
+     "residual_sd": 12.894814490634259
+    },
+    "holdout": {
+     "n": 44,
+     "base_mae": 11.69824994946711,
+     "personnel_mae": 11.93414487866939,
+     "mae_improvement": 0.23589492920228122,
+     "mae_improvement_lo": -0.9795454545454544,
+     "mae_improvement_hi": 0.5394239958777365,
+     "base_bias": 2.2973808341512822,
+     "personnel_bias": 2.313289925060374,
+     "residual_sd": 14.970036420573647
+    },
+    "all": {
+     "n": 137,
+     "base_mae": 10.48269175106236,
+     "personnel_mae": 10.812691640695691,
+     "mae_improvement": 0.3299998896333314,
+     "mae_improvement_lo": -0.7782487714798307,
+     "mae_improvement_hi": 0.06106549505266467,
+     "base_bias": 1.9039580485439551,
+     "personnel_bias": 1.9090675375950499,
+     "residual_sd": 13.543066001051605
+    }
+   }
+  }
+ ],
+ "clubs": [
+  {
+   "club": "ARI",
+   "club_name": "Arizona Cardinals",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "ATL",
+   "club_name": "Atlanta Falcons",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "BAL",
+   "club_name": "Baltimore Ravens",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "BUF",
+   "club_name": "Buffalo Bills",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "CAR",
+   "club_name": "Carolina Panthers",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "CHI",
+   "club_name": "Chicago Bears",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "CIN",
+   "club_name": "Cincinnati Bengals",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "CLE",
+   "club_name": "Cleveland Browns",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "DAL",
+   "club_name": "Dallas Cowboys",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "DEN",
+   "club_name": "Denver Broncos",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "DET",
+   "club_name": "Detroit Lions",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "GB",
+   "club_name": "Green Bay Packers",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "HOU",
+   "club_name": "Houston Texans",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "IND",
+   "club_name": "Indianapolis Colts",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "JAX",
+   "club_name": "Jacksonville Jaguars",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "KC",
+   "club_name": "Kansas City Chiefs",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "LA",
+   "club_name": "Los Angeles Rams",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "LAC",
+   "club_name": "Los Angeles Chargers",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "LV",
+   "club_name": "Las Vegas Raiders",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "MIA",
+   "club_name": "Miami Dolphins",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "MIN",
+   "club_name": "Minnesota Vikings",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "NE",
+   "club_name": "New England Patriots",
+   "n_unavailable_with_measured_time": 2,
+   "lost_snap_share": 1.6,
+   "players": [
+    {
+     "player": "Ben Brown",
+     "status": "Out",
+     "snap_share": 1.0,
+     "source_url": "https://www.nfl.com/injuries/"
+    },
+    {
+     "player": "TreVeyon Henderson",
+     "status": "Out",
+     "snap_share": 0.6,
+     "source_url": "https://www.nfl.com/injuries/"
+    }
+   ],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "NO",
+   "club_name": "New Orleans Saints",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "NYG",
+   "club_name": "New York Giants",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "NYJ",
+   "club_name": "New York Jets",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "PHI",
+   "club_name": "Philadelphia Eagles",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "PIT",
+   "club_name": "Pittsburgh Steelers",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "SEA",
+   "club_name": "Seattle Seahawks",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "SF",
+   "club_name": "San Francisco 49ers",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "TB",
+   "club_name": "Tampa Bay Buccaneers",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "TEN",
+   "club_name": "Tennessee Titans",
+   "n_unavailable_with_measured_time": 0,
+   "lost_snap_share": 0.0,
+   "players": [],
+   "report_source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "club": "WAS",
+   "club_name": "Washington Commanders",
+   "n_unavailable_with_measured_time": 2,
+   "lost_snap_share": 1.46,
+   "players": [
+    {
+     "player": "Lucas Patrick",
+     "status": "Out",
+     "snap_share": 1.0,
+     "source_url": "https://www.nfl.com/injuries/"
+    },
+    {
+     "player": "Colson Yankoff",
+     "status": "Out",
+     "snap_share": 0.46,
+     "source_url": "https://www.nfl.com/injuries/"
+    }
+   ],
+   "report_source": "https://www.nfl.com/injuries/"
+  }
+ ],
+ "sources": {
+  "injury": "https://www.nfl.com/injuries/",
+  "snap": "https://github.com/nflverse/nflverse-data/releases/tag/snap_counts",
+  "depth": "decision-lab/data/official_snapshot.json"
+ },
+ "limits": [
+  "One official injury snapshot (2026-11-12). A player hurt after that observation is not in this ablation, so the personnel term under-counts late-week changes.",
+  "Snap share measures a role, not the value of a player. Replacing a high-share left tackle with another high-share player would show no effect by construction.",
+  "137 played games cannot resolve a 1-2 point effect on a 13.5 point margin sd. The interval is the result, not the point estimate.",
+  "\u03bb is not fitted. The full grid is published so a reader can see that no \u03bb rescues the signal in this sample."
+ ]
+}

@@ -1,0 +1,123 @@
+{
+ "built_at": "2026-11-15",
+ "floors": {
+  "publish_min_n": 50,
+  "promote_min_n": 200
+ },
+ "gates": [
+  {
+   "id": "G01",
+   "question": "Is every input to a scored strategy traceable to a named source and digest?",
+   "status": "pass",
+   "decided_by": "Every price row carries a release SHA-256 in data/raw/manifest.json; every outcome row carries the reconciliation record; every availability row carries the capture hash.",
+   "number": "272 events, 1 snapshot(s), 160 club checks",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+   "consequence": "Scored rows may be published with a source class on each row."
+  },
+  {
+   "id": "G02",
+   "question": "Was the rule frozen before the evaluation rows were scored?",
+   "status": "pass",
+   "decided_by": "Every strategy carries a content hash of its rule text and a registration version.",
+   "number": "10 registered rules, all hashed",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+   "consequence": "A rule change produces a new hash; the leaderboard shows the hash it scored."
+  },
+  {
+   "id": "G03",
+   "question": "Are there silent blanks, duplicate events or imputed values inside a score?",
+   "status": "pass",
+   "decided_by": "Results reconciliation is all-or-nothing, and every blank on the site is rendered as unverified.",
+   "number": "160/160 checks match",
+   "source": "https://www.nfl.com/standings/",
+   "consequence": "A failure here blocks every score on the page."
+  },
+  {
+   "id": "G04",
+   "question": "Does the results feed reproduce the official standings?",
+   "status": "pass",
+   "decided_by": "Wins, losses, ties, points for and points against for all 32 clubs, plus league totals.",
+   "number": "PF 6291 = official 6291",
+   "source": "https://www.nfl.com/standings/",
+   "consequence": "Settlement authority for every graded leg."
+  },
+  {
+   "id": "G05",
+   "question": "Does a market have both a pre-kickoff opening and a pre-kickoff close?",
+   "status": "blocked",
+   "decided_by": "The price store holds one observation, so opening and closing are the same number everywhere a pre-kickoff price exists. A CLV study is impossible until a second pre-kickoff capture lands.",
+   "number": "78 pre-kickoff market cells of 816; 1 snapshot(s)",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+   "consequence": "Blocks every closing-line-value claim. Grades on the stored number only."
+  },
+  {
+   "id": "G06",
+   "question": "Is there enough settled sample to publish a score at all?",
+   "status": "pass",
+   "decided_by": "Pre-registered floor n>=50 to publish; n>=200 to promote.",
+   "number": "137 graded legs on the largest strategy; 137 < 200 for promotion",
+   "source": "https://www.nfl.com/standings/",
+   "consequence": "Scores are published with intervals. No strategy may be called validated at this n."
+  },
+  {
+   "id": "G07",
+   "question": "Is a directly validated joint probability available for combos?",
+   "status": "blocked",
+   "decided_by": "No joint outcome series and no validated conditional model exist. Multiplying marginals is invalid under dependence, so S09/S10 stay BLOCKED rather than 'promising'.",
+   "number": "0 joint probabilities validated",
+   "source": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL",
+   "consequence": "Parlay and prop-combo strategies cannot be scored."
+  },
+  {
+   "id": "G08",
+   "question": "Are the operator's void and push rules available?",
+   "status": "blocked",
+   "decided_by": "No operator terms are held in this repository; grading uses the mechanical push rule in policy P06.",
+   "number": "0 operator rule sets",
+   "source": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL",
+   "consequence": "Combo strategies cannot be settled."
+  },
+  {
+   "id": "G09",
+   "question": "Is every score published with a multiplicity adjustment?",
+   "status": "pass",
+   "decided_by": "Bonferroni family-wise level over 10 strategies.",
+   "number": "alpha/test = 0.00500",
+   "source": "https://www.nfl.com/standings/",
+   "consequence": "A p-value is only called significant against this level."
+  },
+  {
+   "id": "G10",
+   "question": "Does any live strategy trigger its own kill condition?",
+   "status": "fail",
+   "decided_by": "A strategy whose Brier-skill interval is entirely below zero has failed its kill rule and is demoted to paper status.",
+   "number": "2 of 8 scored strategies have an upper bound below zero: S01, S03",
+   "source": "https://www.nfl.com/standings/",
+   "consequence": "Demoted strategies stay visible, labelled demoted, with their score retained."
+  }
+ ],
+ "summary": {
+  "pass": 6,
+  "fail": 1,
+  "blocked": 3
+ },
+ "demoted": [
+  "S01",
+  "S03"
+ ],
+ "passed": false,
+ "blocking": [
+  "G05",
+  "G07",
+  "G08",
+  "G10"
+ ],
+ "context_counts": {
+  "correlations_published": 2,
+  "correlations_withheld": 4,
+  "ablation_verdict": "no measurable effect",
+  "depth_clubs": 30,
+  "report_rows": 254,
+  "games_played": 137
+ }
+}

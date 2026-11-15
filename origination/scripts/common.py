@@ -110,10 +110,22 @@ def read_csv(path: Path | str) -> list[dict]:
         return list(csv.DictReader(handle))
 
 
+def _json_default(value):
+    """Only two things in this workspace are not JSON-native; both are paths."""
+    if isinstance(value, Path):
+        try:
+            return str(value.relative_to(ROOT))
+        except ValueError:
+            return str(value)
+    raise TypeError(f"not serialisable: {type(value).__name__}")
+
+
 def write_json(name: str, payload) -> Path:
     DATA.mkdir(parents=True, exist_ok=True)
     path = DATA / name
-    path.write_text(json.dumps(payload, indent=1, sort_keys=False) + "\n", encoding="utf-8")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=1, sort_keys=False, default=_json_default) + "\n",
+                    encoding="utf-8")
     return path
 
 
