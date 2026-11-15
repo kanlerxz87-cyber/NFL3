@@ -2085,3 +2085,19 @@ PR: opened and merged immediately after this entry; link recorded by the follow-
   `a1633c2011bc8fb4c6508ada2ed1cd32ddede8993300b5e03ef157f762ee73b1` is unchanged throughout. Corrected in
   `results-verification/scripts/build.py` (page banner), `readiness/build_readiness.py` (R2 row) and the
   `tests/test_readiness.py` pin, and rebuilt.
+## Claim — `arena/745d100d-nfl3` — 2026-11-15 UTC
+
+Session id `745d100d`. Branch fixed by Arena as `arena/745d100d-nfl3` (a `session-<id>/<task>` branch cannot be created here), based on `main` at `5368709a75e6898971f360a92a67b60a2c687d07`.
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| S1 Pre-registered shadow singles baseline: frozen rule text, gates, falsification fields, git-hash registration | in progress | `arena/745d100d-nfl3` | `shadow-board/PREREGISTRATION.md` (new) |
+| S2 Official-only team-strength model, Week 11 fair lines (probability + inputs + market-line blanks) | in progress | `arena/745d100d-nfl3` | `shadow-board/scripts/`, `shadow-board/data/` (new) |
+| S3 Weeks 1–9 walk-forward backtest ledger: proper scores, game-cluster bounds, multiplicity, control baselines, calibration, removal-of-luck panel, official-only correlations with n | in progress | `arena/745d100d-nfl3` | `shadow-board/` (new) |
+| S4 Week 11 slate capture (schedule page + game-centre venue sample) and corpus delta for the Week 2 "Hidden Score" game | in progress | `arena/745d100d-nfl3` | `shadow-board/data/` (new) |
+| S5 Static sub-site with fail-closed gate, questions/suggestions registers for this pass | in progress | `arena/745d100d-nfl3` | `shadow-board/index.html`, `shadow-board/*.html`, `shadow-board/assets/` (new) |
+| S6 Integration: additive root nav/README/exec-summary rows, flagged rows on `review.html`, validators, PR to `main`, Pages check | in progress | `arena/745d100d-nfl3` | `index.html` (one nav row), `README.md` (one table row), `EXECUTIVE_SUMMARY.md` (one dated section), `review.html` (appended rows), `COORDINATION.md` |
+
+**Overlap check.** The two most recent board entries are claims by `arena/2b0f3e11-nfl3` (both marked `in progress`, files `README.md`, `index.html`, `scripts/sync_landing_metrics.py`, `tests/check_site.py`, `ops-center/scripts/verify.py`, `verification/*`, `decision-lab/*`). Those claims' work is already on `main`: PR #77 merged as `212fd94`, followed by the data refresh `5368709` at 2026-11-15T12:42Z, which contains exactly the changes those entries describe (landing-metric sync from `catalog.json`, Ops Center metric relocation, regenerated integrity/audit reports). This session therefore does not edit any file listed in those claims except append-only edits to this board, `README.md` (one row), `index.html` (one nav row) and `EXECUTIVE_SUMMARY.md` (one appended section). Requests for `decision-desk/`, `decision-lab/`, `ops-center/`, `readiness/` and `.github/` owners are logged below, not applied.
+
+**Facts verified this session before claiming** (fetch tool, 2026-11-15 UTC): the official Week 11 schedule page (13 fixtures + 6 byes with records), the official Week 11 scores page, the 2026 schedule announcement (dated May 14, 2026; 18 weeks, 272 games), the Week 2 game centre for Washington at Dallas (final score published today: WAS 20, DAL 37 — the field the committed log leaves blank), the Houston game centre (stadium field "RELIANT STADIUM" while the same fixture's schedule-page travel link names "NRG Stadium" — flagged), and the official historical injury-report URL pattern `nfl.com/injuries/league/{season}/REG{week}` (past seasons render, but the records printed beside them are end-of-season values, so those pages are not point-in-time safe — flagged).
