@@ -9,6 +9,7 @@ commit recorded in the artifact does not exist in the repository history.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import subprocess
@@ -55,6 +56,34 @@ def main() -> int:
                 capture_output=True, text=True)
             if has_doc.returncode != 0:
                 fail("the registered commit does not contain docs/SKILL_LAB_PRE_REGISTRATION.md")
+            # The registration must be reachable from the published branch, not merely present in
+            # the object store: a commit no clone can fetch is not a registration a reader can check.
+            anc = subprocess.run(["git", "-C", str(ROOT), "merge-base", "--is-ancestor", reg, "HEAD"],
+                                 capture_output=True, text=True)
+            if anc.returncode != 0:
+                fail(f"pre-registration commit {reg} is not reachable from HEAD")
+            if not meta.get("pre_registration_reachable_from_head"):
+                fail("the artifact does not record the registration as reachable from HEAD")
+            digest = hashlib.sha256(subprocess.run(
+                ["git", "-C", str(ROOT), "show", f"{reg}:{meta['protocol_path']}"],
+                capture_output=True).stdout).hexdigest()
+            if digest != meta.get("pre_registration_file_sha256"):
+                fail("the protocol file at the registration commit does not match the recorded digest")
+            if not meta.get("pre_registration_content_unchanged"):
+                fail("the protocol file in the working tree differs from the registered version")
+            # A commit date is not enough: a rebase re-dates every commit it touches, so the only
+            # sound ordering check is the topological one.
+            res_commit = subprocess.run(
+                ["git", "-C", str(ROOT), "log", "--diff-filter=A", "--format=%H", "--",
+                 "skill-lab/data/results.json"], capture_output=True, text=True).stdout.strip().splitlines()
+            if not res_commit:
+                fail("the commit that added the results artifact is not in the history")
+            else:
+                order = subprocess.run(
+                    ["git", "-C", str(ROOT), "merge-base", "--is-ancestor", reg, res_commit[0]],
+                    capture_output=True, text=True)
+                if order.returncode != 0:
+                    fail("the protocol was not committed before the results artifact was added")
 
     # 2. corpus arithmetic
     primary = res["runs"]["primary"]

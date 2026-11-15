@@ -1,6 +1,6 @@
 # SL-PRE-01b — Two-sided "what would change our mind" field, and the next evaluation window
 
-**Amendment to:** `docs/SKILL_LAB_PRE_REGISTRATION.md` (SL-PRE-01, commit `d80b8453`)
+**Amendment to:** `docs/SKILL_LAB_PRE_REGISTRATION.md` (SL-PRE-01, commit `0d94a177dc399e1c5ea5c4c0e03968e6adba4fb1`)
 **Status:** committed after the first run's results exist, and therefore **not** applied to them.
 **Written:** 2026-11-15 UTC
 **Applies to:** the next evaluation window (2026 weeks 10–18, the games not in the SL-PRE-01 corpus)

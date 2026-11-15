@@ -3,10 +3,27 @@
   "protocol": "SL-PRE-01 (+ SL-PRE-01a)",
   "protocol_path": "docs/SKILL_LAB_PRE_REGISTRATION.md",
   "amendment_path": "docs/SKILL_LAB_PRE_REGISTRATION_AMENDMENT.md",
-  "pre_registration_commit": "d80b8453bf6148c74cfaf6b6388fa1ec8498fa21",
-  "code_commit": "4ad8ff6e83a19bcff7e3b93b8fa7ff34783c2b9e",
+  "amendment_2_path": "docs/SKILL_LAB_PRE_REGISTRATION_AMENDMENT_02.md",
+  "pre_registration_commit": "0d94a177dc399e1c5ea5c4c0e03968e6adba4fb1",
+  "pre_registration_commit_date": "2026-11-15T13:33:16+00:00",
+  "pre_registration_reachable_from_head": true,
+  "pre_registration_file_sha256": "4338c168e2fbd1bc56fc1f1747099e919fd962e920c2086735ca7c883cc0f59d",
+  "pre_registration_content_unchanged": true,
+  "pre_registration_note": "",
+  "pre_registration_history": [
+   {
+    "commit": "0d94a177dc399e1c5ea5c4c0e03968e6adba4fb1",
+    "reachable_from_head": true,
+    "file_sha256": "4338c168e2fbd1bc56fc1f1747099e919fd962e920c2086735ca7c883cc0f59d",
+    "same_content_as_registered": true
+   }
+  ],
+  "amendment_commit": "3d00c374d369b8d2c4936d042087ea354d26cecc",
+  "amendment_2_commit": "08383e671b46f07405595257055aaa2a68a8778e",
+  "amendment_2_reachable_from_head": true,
+  "code_commit": "5e6a512511879596f9f30dc6b9d8e6b8215ac33c",
   "branch": "arena/e9629801-nfl3",
-  "generated_at_utc": "2026-11-15T13:22:56+00:00",
+  "generated_at_utc": "2026-11-15T13:48:36+00:00",
   "primary_corpus": {
    "season": 2026,
    "weeks": "1-9",
@@ -43,8 +60,8 @@
   },
   "data": {
    "games_csv": "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv",
-   "games_sha256": "sha256:85e2dcb8211806d8fd77bfd8622e0cade40718af8e28a9cd9aa7c48337a31ebf",
-   "release_updated_utc": "2026-11-15T12:36:23Z",
+   "games_sha256": "sha256:9e2d0cdd49b9156537be3ff86b99229c81541ebf2d5c8cd9cdb485113002a08b",
+   "release_updated_utc": "2026-11-15T13:16:43Z",
    "authority": "community-maintained release (nflverse); NOT an official NFL price archive"
   },
   "official_sources": {

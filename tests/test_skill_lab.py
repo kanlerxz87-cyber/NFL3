@@ -108,16 +108,18 @@ class TestArtifact(unittest.TestCase):
         out = subprocess.run(["git", "-C", str(ROOT), "cat-file", "-e", f"{commit}^{{commit}}"],
                              capture_output=True, text=True)
         self.assertEqual(out.returncode, 0, "the registered commit must exist in the history")
-        # the registration commit must predate the first commit that changed the results artifact
-        reg_date = subprocess.run(
-            ["git", "-C", str(ROOT), "show", "-s", "--format=%cI", commit],
-            capture_output=True, text=True).stdout.strip()
-        res_date = subprocess.run(
-            ["git", "-C", str(ROOT), "log", "--diff-filter=A", "--format=%cI", "--",
-             "skill-lab/data/results.json"], capture_output=True, text=True).stdout.strip()
-        self.assertTrue(res_date, "the commit that added the results artifact must be in the history")
-        self.assertTrue(reg_date < res_date,
-                        "the protocol must be committed before the results artifact is added")
+        # The registration must be an ANCESTOR of the commit that added the results artifact.
+        # A commit date is not enough: a rebase re-dates every commit it touches, so the only
+        # sound check is the topological one.
+        res_commit = subprocess.run(
+            ["git", "-C", str(ROOT), "log", "--diff-filter=A", "--format=%H", "--",
+             "skill-lab/data/results.json"], capture_output=True, text=True).stdout.strip().splitlines()
+        self.assertTrue(res_commit, "the commit that added the results artifact must be in the history")
+        order = subprocess.run(
+            ["git", "-C", str(ROOT), "merge-base", "--is-ancestor", commit, res_commit[0]],
+            capture_output=True, text=True)
+        self.assertEqual(order.returncode, 0,
+                         "the protocol must be committed before the results artifact is added")
 
     def test_corpus_matches_the_registration(self):
         corpus = self.meta["primary_corpus"]

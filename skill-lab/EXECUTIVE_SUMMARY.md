@@ -1,7 +1,7 @@
 # Skill lab — executive summary
 
 **Written:** 2026-11-15 UTC · **Protocol:** SL-PRE-01 (+ SL-PRE-01a, SL-PRE-01b)
-**Registration commit:** `d80b8453bf6148c74cfaf6b6388fa1ec8498fa21` (committed before any result existed)
+**Registration commit:** `0d94a177dc399e1c5ea5c4c0e03968e6adba4fb1` (committed before any result existed; verified reachable from the published branch, with the protocol file hashing to the same SHA-256 as at registration)
 **Artifact:** `skill-lab/data/results.json` · **Pages:** `skill-lab/index.html`
 
 ---

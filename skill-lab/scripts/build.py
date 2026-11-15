@@ -60,6 +60,48 @@ MARKET_LABEL = {"spread": "Spread", "total": "Total", "moneyline": "Moneyline"}
 
 
 # --------------------------------------------------------------------------- helpers
+def registration(path: str) -> dict:
+    """Locate and verify the commit that registered the protocol file.
+
+    Returns the commit that ADDED ``path``, whether that commit is an ancestor of HEAD, the
+    SHA-256 of the file as committed and as it stands in the working tree, and a note when the
+    registration has been rewritten by a rebase (content identical, hash different).
+    """
+    commits = [c for c in git("log", "--diff-filter=A", "--format=%H", "--", path).splitlines() if c]
+    if not commits:
+        return {"commit": "", "date": "", "reachable": False, "sha256": "", "unchanged": False,
+                "note": f"no commit in the history added {path}"}
+    commit = commits[0]
+    date = git("show", "-s", "--format=%cI", commit)
+    ancestor = subprocess.run(["git", "-C", str(ROOT), "merge-base", "--is-ancestor", commit, "HEAD"],
+                               capture_output=True, text=True).returncode == 0
+    committed = hashlib.sha256(subprocess.run(
+        ["git", "-C", str(ROOT), "show", f"{commit}:{path}"],
+        capture_output=True).stdout).hexdigest()
+    working = hashlib.sha256((ROOT / path).read_bytes()).hexdigest()
+    # Every commit that ever added the file, reachable or not.  A rebase rewrites the hash of the
+    # registration commit without changing a single byte of the protocol, and the reader is
+    # entitled to see both hashes rather than only the current one.
+    history = []
+    for other in git("log", "--all", "--diff-filter=A", "--format=%H", "--", path).splitlines():
+        if not other:
+            continue
+        other_ancestor = subprocess.run(
+            ["git", "-C", str(ROOT), "merge-base", "--is-ancestor", other, "HEAD"],
+            capture_output=True, text=True).returncode == 0
+        same = hashlib.sha256(subprocess.run(
+            ["git", "-C", str(ROOT), "show", f"{other}:{path}"],
+            capture_output=True).stdout).hexdigest()
+        history.append({"commit": other, "reachable_from_head": other_ancestor,
+                        "file_sha256": same, "same_content_as_registered": same == committed})
+    note = ""
+    if not ancestor:
+        note = (f"{path} was registered in commit {commit[:12]}, which is not an ancestor of HEAD; "
+                "the protocol was re-committed after a rebase and its content is unchanged.")
+    return {"commit": commit, "date": date, "reachable": ancestor, "sha256": committed,
+            "unchanged": committed == working, "note": note, "history": history}
+
+
 def git(*args: str) -> str:
     try:
         return subprocess.run(["git", "-C", str(ROOT), *args], capture_output=True,
@@ -693,12 +735,30 @@ def main() -> int:
 
     manifest = loader.manifest()
     games_asset = manifest.get("files", {}).get("games", {})
-    reg_commit = git("rev-list", "--all", "--", "docs/SKILL_LAB_PRE_REGISTRATION.md")
+    # The registration commit must be a commit that EXISTS and is REACHABLE from the branch that
+    # publishes the result.  `git rev-list --all` was not safe here: after a rebase the old hash
+    # can linger in the object store as an unreachable object, and publishing it would point a
+    # reader at a commit that no clone can fetch.  The registration is therefore located as the
+    # commit that ADDED the protocol file and is verified to be an ancestor of HEAD.
+    reg = registration("docs/SKILL_LAB_PRE_REGISTRATION.md")
+    reg_commit = reg["commit"]
+    amd1 = registration("docs/SKILL_LAB_PRE_REGISTRATION_AMENDMENT.md")
+    amd2 = registration("docs/SKILL_LAB_PRE_REGISTRATION_AMENDMENT_02.md")
     meta = {
         "protocol": PROTOCOL_ID,
         "protocol_path": "docs/SKILL_LAB_PRE_REGISTRATION.md",
         "amendment_path": "docs/SKILL_LAB_PRE_REGISTRATION_AMENDMENT.md",
+        "amendment_2_path": "docs/SKILL_LAB_PRE_REGISTRATION_AMENDMENT_02.md",
         "pre_registration_commit": reg_commit,
+        "pre_registration_commit_date": reg["date"],
+        "pre_registration_reachable_from_head": reg["reachable"],
+        "pre_registration_file_sha256": reg["sha256"],
+        "pre_registration_content_unchanged": reg["unchanged"],
+        "pre_registration_note": reg["note"],
+        "pre_registration_history": reg["history"],
+        "amendment_commit": amd1["commit"],
+        "amendment_2_commit": amd2["commit"],
+        "amendment_2_reachable_from_head": amd2["reachable"],
         "code_commit": git("rev-parse", "HEAD"),
         "branch": git("rev-parse", "--abbrev-ref", "HEAD"),
         "generated_at_utc": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
