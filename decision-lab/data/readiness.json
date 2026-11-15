@@ -1,0 +1,193 @@
+{
+  "as_of": "2026-11-15",
+  "note": "Gate mapping is an operational summary of the current register, validator and pre-registration; it is not evidence that a model or betting strategy passed. A numeric target is supplied only where an existing check or written gate defines it. Unknown sample-size thresholds remain blank and are flagged.",
+  "requirements": [
+    {
+      "id": "R01",
+      "gate": "G03 · Completeness",
+      "blocker": "The register itself exists, but it does not establish completeness of every requested dataset or source entitlement.",
+      "clearance": "26 requirements in the current canonical register; reconcile 100% of the original requested scope to a requirement, evidence state and acceptance gate before claiming complete coverage.",
+      "number": "26 tracked rows; 100% scope reconciliation required."
+    },
+    {
+      "id": "R02",
+      "gate": "Site CI · links and citations",
+      "blocker": "Structural checks pass on this checkout; this is a publication capability, not an independent proof that every external source stays available.",
+      "clearance": "0 broken local links/assets and a source link on 100% of table rows; re-run on every change.",
+      "number": "0 broken links; 100% table-row citations."
+    },
+    {
+      "id": "R03",
+      "gate": "Review workflow · no auto-implementation",
+      "blocker": "The site presents review choices; no user review decision is recorded, and a browser-local choice is not a durable approval.",
+      "clearance": "Every proposed change has an explicit approve/defer/reject decision recorded in the repository before implementation.",
+      "number": "100% of implemented suggestions have a recorded decision."
+    },
+    {
+      "id": "R04",
+      "gate": "Decision questions · blocking unknowns",
+      "blocker": "The question register identifies missing facts; contracts, data rights, budget and legal jurisdiction remain unanswered.",
+      "clearance": "0 unanswered blocking questions for the particular decision being taken; leave unrelated questions open.",
+      "number": "0 blocking unknowns for that decision."
+    },
+    {
+      "id": "R05",
+      "gate": "G01 + G04 · provenance and executable price",
+      "blocker": "No permissioned historical market archive, market-data policy or complete timestamped quote/settlement record is established.",
+      "clearance": "Document source permission and price policy; capture quote time, market/side, odds, limits, vig and push/void/settlement terms. The performance pre-registration additionally requires at least 100 graded bets.",
+      "number": "100 graded bets (G1); price-policy approval is a prerequisite, not a numeric substitute."
+    },
+    {
+      "id": "R06",
+      "gate": "G05 + G06 · pre-registration and out-of-sample skill",
+      "blocker": "Hypotheses are listed, but no verified official-only, permissioned-price walk-forward evaluation has passed.",
+      "clearance": "Freeze model/rules/trial family before evaluation; use at least 4 prior seasons for training and at least 100 graded bets; clear the pre-registered uncertainty and multiplicity rules.",
+      "number": "≥4 prior training seasons; ≥100 graded bets (G1)."
+    },
+    {
+      "id": "R07",
+      "gate": "G10 · reward eligibility",
+      "blocker": "There are no eligible strategies, verified funding amount or approved reward/legal policy.",
+      "clearance": "All applicable evidence gates pass and funding plus legal/reward terms are documented. No funding amount is verified.",
+      "number": null,
+      "number_status": "Unverified — reward funding amount and legal policy are not established."
+    },
+    {
+      "id": "R08",
+      "gate": "G01–G10 · fail-closed validation",
+      "blocker": "The gate set exists and its synthetic tests run; no live strategy has cleared the gates.",
+      "clearance": "A strategy must pass every applicable gate with real, source-verified evaluation data; synthetic unit tests do not count.",
+      "number": "10/10 gates passed for each strategy; current eligible strategies: 0."
+    },
+    {
+      "id": "R09",
+      "gate": "G07 · dependence evidence",
+      "blocker": "No verified official-only, matched leg-outcome sample establishes published correlation values; correlation n is therefore not available.",
+      "clearance": "For every reported coefficient, publish sample n, method and uncertainty from training-only matched outcomes; preregister the minimum n before evaluating. No minimum n is currently specified.",
+      "number": null,
+      "number_status": "Unverified — minimum matched-outcome sample size has not been preregistered."
+    },
+    {
+      "id": "R10",
+      "gate": "G06 + G09 · benchmark skill and prospective evidence",
+      "blocker": "Luck cannot be removed; no strategy has a verified prospective skill result with game-cluster uncertainty.",
+      "clearance": "Freeze forecasts before kickoff; compare proper scores with a fixed baseline, game-cluster uncertainty and multiplicity adjustment. The exact Brier-skill threshold is not pre-registered.",
+      "number": null,
+      "number_status": "Unverified — Brier-skill effect threshold and sample size have not been preregistered."
+    },
+    {
+      "id": "R11",
+      "gate": "G01 + G03 + G08 · immutable availability",
+      "blocker": "The official report is mutable and the committed canonical capture is a dated snapshot, not a demonstrated daily archive through kickoff.",
+      "clearance": "Capture and retain raw hash and timestamp for each scheduled Wed/Thu/Fri-to-kickoff observation; reconcile all 32 clubs and flag conflicts without overwriting history.",
+      "number": "32/32 clubs; 0 missing scheduled captures and 0 silently resolved conflicts."
+    },
+    {
+      "id": "R12",
+      "gate": "G08 · verified depth/workload route",
+      "blocker": "The official club-depth route has not been established for every club; several charts are shallow, grouped, missing or difficult to parse.",
+      "clearance": "Verify an official club-chart or official snap-count route for every club before any team-level depth feature is trusted; preserve shared/empty slots.",
+      "number": "32/32 clubs covered by a verified route; otherwise abstain."
+    },
+    {
+      "id": "R13",
+      "gate": "Publication accuracy",
+      "blocker": "An executive summary exists; it can become stale as captures, checks and source availability change.",
+      "clearance": "Summary reflects the latest reproducible build, dates, open blockers and verified vs unverified counts.",
+      "number": "0 summary metrics that lack a dated evidence source."
+    },
+    {
+      "id": "R14",
+      "gate": "External authorization and governance",
+      "blocker": "Contracts, budget, legal review and third-party data permissions cannot be created or verified autonomously from repository evidence.",
+      "clearance": "Obtain documentary authorization before using restricted feeds or promising rewards; do not infer an approval.",
+      "number": null,
+      "number_status": "Unverified — a numeric value cannot establish contractual, budget or legal authorization."
+    },
+    {
+      "id": "R15",
+      "gate": "G01 + source/link audits",
+      "blocker": "The canonical pages label unknowns, but other preserved workspaces contain community or secondary evidence and must remain outside official-only claims.",
+      "clearance": "100% of published factual rows link to their evidence; unmatched/unverified values stay blank and explicitly flagged; zero unsupported values are marked verified.",
+      "number": "100% row provenance; 0 unsupported values labeled verified."
+    },
+    {
+      "id": "R16",
+      "gate": "Coordination and scope control",
+      "blocker": "COORDINATION.md contains historical claims and handoffs; stale in-progress labels must not be confused with current active work.",
+      "clearance": "Every currently active task has one owner and non-overlapping scope; reconcile or explicitly hand off stale claims before shared edits.",
+      "number": "1 owner per active task; 0 overlapping active file scopes."
+    },
+    {
+      "id": "R17",
+      "gate": "Build, checks and Pages deployment",
+      "blocker": "A successful deployment is evidenced for the current published revision; every future merge still requires its own passing validation and deployment.",
+      "clearance": "For each release, all configured validation checks pass, the Pages deployment succeeds, and the published URL is reachable.",
+      "number": "0 failed required checks and 1 successful deployment per release."
+    },
+    {
+      "id": "R18",
+      "gate": "G03 · explain unmatched joins",
+      "blocker": "The canonical capture at 2026-11-12 06:32Z has 254 report rows (185 exact depth joins, 69 unmatched). An independent read at 22:34Z found 279 rows, 25 additional rows and 4 field differences; the canonical availability join has not been reconciled to that later read. A fresh official-page read on 2026-11-15 showed the Week 10 page has changed again; its current row count was not established here. These are dated observations, not live totals.",
+      "clearance": "Republish immutable dated captures and account for every report row against depth or an explicit, source-linked reason; preserve additions and field differences rather than silently overwriting or inferring a replacement.",
+      "number": "279/279 report rows accounted for in the 2026-11-12 22:34Z read; depth-join clearance count for that 279-row read: blank/unverified."
+    },
+    {
+      "id": "R19",
+      "gate": "G03 · report-section completeness",
+      "blocker": "The 2026-11-12 06:32Z Week 10 capture recorded 28 of 28 expected club sections, but the later same-day read added 25 report rows; section counts and explicit no-injury sections must be reconciled on every recapture.",
+      "clearance": "For each slate, all 14 matchups have both club sections, including explicit no-injury sections where published.",
+      "number": "28/28 club sections for a 14-game slate; recalculate for other slate sizes."
+    },
+    {
+      "id": "R20",
+      "gate": "G08 · actual availability evidence",
+      "blocker": "The report capture has no complete active/inactive list or snap share join; designation alone does not prove the player or replacement participated.",
+      "clearance": "Before claiming an actual replacement, retain official game-day inactive evidence and official participation/snap evidence tied to the dated game and player.",
+      "number": "0 confirmed replacements without both dated evidence types; minimum sample size for reliability study is unset."
+    },
+    {
+      "id": "R21",
+      "gate": "G08 · grouped slots and playing-time depth",
+      "blocker": "Depth slots can be shared or empty, and rank is not a workload measure; actual snap-based replacement depth is not established.",
+      "clearance": "Preserve grouped/empty slots exactly; only publish replacement workload when official snap counts support it, with source and n.",
+      "number": "100% of captured slots preserve group/empty state; snap-depth threshold: blank/unverified."
+    },
+    {
+      "id": "R22",
+      "gate": "Independent source re-verification",
+      "blocker": "Live sources can change or be unreachable; an offline structural pass cannot establish current field equality.",
+      "clearance": "Each claimed field is either re-confirmed from the official source or marked drifted/unreachable and unverified; no mismatch is counted as a pass.",
+      "number": "100% fields classified; 0 unresolved mismatches labeled verified."
+    },
+    {
+      "id": "R23",
+      "gate": "Suggestion review completeness",
+      "blocker": "A review surface exists; review outcomes are not implementation authorization unless durably recorded.",
+      "clearance": "Every suggestion states dependency, cost/effort, expected benefit, risk and its review state before selection.",
+      "number": "100% of suggestions contain all five review fields."
+    },
+    {
+      "id": "R24",
+      "gate": "G01 + G02 · fixture and transaction context",
+      "blocker": "Published schedule facts provide some context, but a complete official fixture/venue register and dated roster-transaction series are not established.",
+      "clearance": "For every modeled fixture, retain an official game-centre venue/schedule citation and point-in-time roster-event evidence; no context is inferred.",
+      "number": null,
+      "number_status": "Unverified — complete fixture/venue coverage has not been measured."
+    },
+    {
+      "id": "R25",
+      "gate": "G01 + G04 + G06 · no unverified empirical claims",
+      "blocker": "Market/result permissions and settlement evidence remain absent; model output cannot be scored against an actionable price.",
+      "clearance": "Keep empirical prices, edges, ROI, CLV and correlation blank until source permission, timestamp, official result and market settlement are all present; then meet the pre-registered sample and skill gates.",
+      "number": "100% of published empirical values pass provenance; ≥100 graded bets for the current pre-registration."
+    },
+    {
+      "id": "R26",
+      "gate": "Decision-path review",
+      "blocker": "Path comparison exists, but a repository page cannot make a human legal, budget or product decision on the owner's behalf.",
+      "clearance": "Each path exposes prerequisites, cost, benefit and risk; record the chosen path and date before implementing dependent work.",
+      "number": "3 documented paths; 1 durable decision required before path-dependent implementation."
+    }
+  ]
+}
