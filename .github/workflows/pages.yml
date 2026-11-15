@@ -23,6 +23,10 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          # Full history: the readiness builder and the skill-lab test both check that a
+          # pre-registration commit predates the commit that added the results artifact.
+          fetch-depth: 0
       - name: Validate root pages, local links and table citations
         run: python3 scripts/validate_site.py
       - name: Existing root site checks

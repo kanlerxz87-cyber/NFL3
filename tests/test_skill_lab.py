@@ -26,6 +26,22 @@ def load() -> dict:
     return json.loads(RESULTS.read_text(encoding="utf-8"))
 
 
+def full_history() -> bool:
+    """True when the clone carries enough history to check commit ordering.
+
+    A shallow clone cannot see the commit that added a file, so the ordering check would
+    silently pass on missing data.  The full history is fetched when it is cheap and available;
+    otherwise the check is skipped loudly rather than passing on an absence.
+    """
+    out = subprocess.run(["git", "-C", str(ROOT), "rev-parse", "--is-shallow-repository"],
+                         capture_output=True, text=True)
+    if out.stdout.strip() != "true":
+        return True
+    fetch = subprocess.run(["git", "-C", str(ROOT), "fetch", "--unshallow", "origin"],
+                           capture_output=True, text=True)
+    return fetch.returncode == 0
+
+
 class TestScorelib(unittest.TestCase):
     def test_brier_and_log_loss_definitions(self):
         # A perfect forecast scores 0; a 50/50 forecast scores 0.25 on the Brier scale.
@@ -87,6 +103,8 @@ class TestArtifact(unittest.TestCase):
         self.assertTrue(self.meta["protocol"].startswith("SL-PRE-01"))
         commit = self.meta["pre_registration_commit"]
         self.assertRegex(commit, r"^[0-9a-f]{40}$")
+        if not full_history():
+            self.skipTest("full git history unavailable (shallow clone); the ordering check needs it")
         out = subprocess.run(["git", "-C", str(ROOT), "cat-file", "-e", f"{commit}^{{commit}}"],
                              capture_output=True, text=True)
         self.assertEqual(out.returncode, 0, "the registered commit must exist in the history")
@@ -97,6 +115,7 @@ class TestArtifact(unittest.TestCase):
         res_date = subprocess.run(
             ["git", "-C", str(ROOT), "log", "--diff-filter=A", "--format=%cI", "--",
              "skill-lab/data/results.json"], capture_output=True, text=True).stdout.strip()
+        self.assertTrue(res_date, "the commit that added the results artifact must be in the history")
         self.assertTrue(reg_date < res_date,
                         "the protocol must be committed before the results artifact is added")
 
