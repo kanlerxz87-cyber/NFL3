@@ -7,6 +7,27 @@ reward is funded.** Everything below is traced to an official page or is an expl
 
 ---
 
+## 0. Status at 2026-11-15 (this pass)
+
+**Where to look first:** the decision-readiness register, one row per requirement, with the gate that blocks it and the number that would clear it ([readiness.html](readiness.html); the same register is summarised on the [landing page](index.html)). It holds 64 rows: 29 not started, 18 partial, 14 blocked, 2 done and 1 with a decision recorded. The [repo review](repo-review.html) lists 14 irregularities, 8 of them high. Every row links to a repository file and an official NFL page; blanks are unverified.
+
+**What is verified today (opened 2026-11-15):**
+- The official injury page shows the three Lions designations (Kerby Joseph, Cade Mays, D.J. Reed) as "Out". The committed snapshot does not (RR-02).
+- The official transactions log shows two Colts receivers traded on 11/10: Keenan Allen and Josh Downs (V-02).
+- The official injury-policy article defines Questionable, Doubtful and Out, and gives no percentage for Questionable (V-03).
+- 149 of 676 club/unit/position slots in the committed depth data list more than one rank-1 player, as the brief says (V-04).
+
+**What is wrong and needs an owner (highest impact first):**
+- The published injury page is newer than anything in git. The committed snapshot is 254 rows from 2026-11-12; the published page is 347 rows from 2026-11-15, and it comes from a CI capture that is never committed (RR-01, RR-07).
+- The pre-registration cannot be shown to precede the results: the registration, engine changes and computed results were committed together in c25ae53 (RR-04).
+- The committed verification record was switched from a live run to an offline run whose status is "drift" (RR-06).
+- Depth still fails for the Texans and the Packers in the committed snapshot (RR-03).
+- No workflow raises an alert, and no workflow computes a residual. Capture and verification steps are allowed to fail without stopping the deploy (RR-08).
+
+**What is still blocked, and by what:** price data and a price-data policy (R01, R08); official game books and inactive lists (R35, R45); a verified snap-count source (R48); the Texans depth source (R57). No strategy is validated. No correlation, edge, ROI or leaderboard position is published.
+
+---
+
 ## 1. What the brief asked for, and where it stands
 
 | Requirement | State | Where it lives |
