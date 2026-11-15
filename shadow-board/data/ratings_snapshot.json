@@ -1,5 +1,5 @@
 {
-  "built_at_utc": "2026-11-15T13:56:26+00:00",
+  "built_at_utc": "2026-11-15T14:09:06+00:00",
   "as_of": "2026 weeks 1-9",
   "as_of_previous": "2026 weeks 1-8",
   "note": "Recomputed with the frozen rule on logs truncated at Week 9 and Week 8. This is an as-of comparison, not an archived immutable capture; the snapshot ledger (requirement A5/L10) is still not in place.",
