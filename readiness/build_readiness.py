@@ -164,6 +164,26 @@ def compute() -> dict:
     v["corpus_hold"] = man["split"]["holdout"]["games"]
     v["corpus_registered"] = ("registration " + man["corpus_registration"][:12] + "\u2026"
                               if man.get("corpus_registration") else "registration hash pending")
+    # Skill lab (proper scores, controls, uncertainty, multiplicity) and availability ledger.
+    skill = load_json("skill-lab/data/results.json")
+    prows = skill["runs"]["primary"]["rows"]
+    v["skill_rows"] = len(prows)
+    v["skill_eligible"] = sum(1 for r in prows if r.get("eligible_for_ranking"))
+    v["skill_corpus"] = skill["meta"]["primary_corpus"]["observed_games"]
+    v["skill_best"] = max(r["skill_brier"] for r in prows if "skill_brier" in r)
+    v["skill_prereg"] = skill["meta"]["pre_registration_commit"][:12]
+    v["skill_trials"] = prows[0].get("family_trials", 0)
+    v["skill_graded_rows"] = len(skill["runs"]["primary"]["graded"])
+
+    led = load_json("availability-ledger/data/ledger.json")
+    v["ledger_reserve"] = len(led["reserve_entries"])
+    v["ledger_trades"] = len(led["trade_events"])
+    v["ledger_stale"] = len(led["stale_depth_rows"])
+    v["ledger_same_day"] = len(led["same_day_depth_rows"])
+    v["ledger_traded_removed"] = len(led["traded_players_removed_from_former_club"])
+    v["ledger_not_on_report"] = sum(1 for c in led["report_coverage"] if not c["on_report"])
+    v["ledger_depth_checked"] = led["depth_capture"]["depth_rows"]
+    v["ledger_captures"] = len(led["captures"])
     return v
 
 
@@ -189,9 +209,9 @@ def rows(v: dict) -> list[dict]:
         "line-lab/data/model_outputs.json exists; it has no verified market comparison.",
         "line-lab/data/model_outputs.json", "Line-lab model outputs", NFL_STANDINGS, "NFL standings (official source for the inputs)")
     add("P3", G, "Publish the model's fair line, the market line and the difference as separate columns", "Partial",
-        "The three columns are published (pricing.html §05); market and difference cannot fill without a licensed price row (P1).",
+        "The three columns are published (pricing.html §05) and again on every graded skill-lab forecast; the market and difference columns cannot fill without a licensed price row (P1).",
         "Every published row has all three columns with a source link; difference is blank where the market line is.",
-        f"{v['residual_rows']} residual rows; the columns our fair line / market line / difference are published on pricing.html.",
+        f"{v['residual_rows']} residual rows and {v['skill_graded_rows']} graded skill-lab rows, each with our line, the market line and the gap as separate columns.",
         "pricing/residuals.csv", "Residual register (three separate columns)", NFL_ODDS, "NFL odds-widget boundary (support.nfl.com)")
     add("P4", G, "Publish every model total twice (two estimators, gap column) until one wins walk-forward", "Not started",
         "No second estimator and no walk-forward comparison has been run.",
@@ -218,18 +238,20 @@ def rows(v: dict) -> list[dict]:
         f"family pre-registration at {v['prereg_commit']} ({v['prereg_date']}); 0 backtest numbers in leaderboard cells.",
         "ops-center/leaderboard.html", "Ops-centre leaderboard (registration + backtest ban)", NFL_STATS, "NFL player stats (official inputs)")
     add("P9", G, "Freeze a rule before it sees data: commit rule text, sample window and gates; commit hash is the registration", "Partial",
-        "Frozen rule text exists for nine strategies, but sample windows are not fixed per strategy in a dated commit.",
+        "Three rule sets are now frozen in dated commits before their results existed, but the earlier strategies still share one pre-registration without per-strategy sample windows.",
         "A commit per strategy, dated before its evaluation window opens.",
-        f"1 pre-registration commit ({v['prereg_commit']}).", "docs/PRE_REGISTRATION.md", "Pre-registration file", NFL_STATS, "NFL player stats (official inputs)")
-    add("P10", G, "Strategy entries carry a two-sided 'what would change our mind' field", "Done",
-        "None for the canonical merged register: every ops-centre entry carries both sides (ops-center/data/mindchange.json). "
-        "The three upstream fragment registers are unchanged; requests are logged in COORDINATION.md.",
-        "Every strategy entry has both sides (what would confirm it, what would kill it).",
-        f"{v['strategy_change_field']} of {v['ops_strategies']} ops-centre strategy entries carry both sides.",
-        "ops-center/data/mindchange.json", "Two-sided falsification register (pre-registered)", NFL_ODDS, "NFL odds-widget boundary (support.nfl.com)")
-    add("P11", G, "Store every model output as a probability plus its inputs, not just a pick", "Not started",
-        "No model output with a probability and input list is published.", "Each output row: probability, inputs and their source links.",
-        "0 outputs in the required form.", "line-lab/data/model_outputs.json", "Line-lab model outputs", NFL_STANDINGS, "NFL standings (official inputs)")
+        f"Pre-registration commit {v['prereg_commit']} ({v['prereg_date']}) plus skill-lab protocol {v['skill_prereg']}, both committed before any result was computed.",
+        "docs/SKILL_LAB_PRE_REGISTRATION.md", "Skill-lab pre-registration", NFL_STATS, "NFL player stats (official inputs)")
+    add("P10", G, "Strategy entries carry a two-sided 'what would change our mind' field", "Partial",
+        "The ops-centre register and the skill lab both publish the field; the eight strategies registered outside those two registers still carry no field.",
+        "Two-sided field on every strategy entry in every register.",
+        f"{v['strategy_change_field']} of {v['ops_strategies']} ops-centre strategy entries and {v['skill_rows']} skill-lab rows carry both sides.",
+        "skill-lab/mind-change.html", "Skill-lab two-sided field", NFL_STATS, "NFL player stats (official inputs)")
+    add("P11", G, "Store every model output as a probability plus its inputs, not just a pick", "Partial",
+        "The skill lab stores the probability, both lines and both scores for every graded forecast; the input list is not yet itemised per output.",
+        "Each output row: probability, inputs and their source links.",
+        f"{v['skill_graded_rows']} outputs stored as a probability with our line, the market line, the gap and both scores; the source release link is on every row.",
+        "skill-lab/graded.html", "Skill-lab graded forecasts", NFL_STANDINGS, "NFL standings (official inputs)")
     add("P12", G, "Demotion gate that sends a live strategy back to paper", "Partial",
         "Gates are registered but no strategy is live, so no demotion has been exercised.",
         "At least one live strategy and one tested demotion.",
@@ -287,10 +309,10 @@ def rows(v: dict) -> list[dict]:
         f"{v['w10_observations']} reads of Week 10 (2026-11-12 06:32Z, 2026-11-12 22:25Z, 2026-11-13 12:40Z, {v['cap4_observed']}); deltas published at results-verification/delta.html.",
         "results-verification/data/captures/2026-11-15-nfl-injuries/manifest.json", "Fourth-observation capture manifest (347 rows, sha256 retained)", NFL_INJ, "NFL injury report (official)")
     add("A5", G, "Immutable multi-day availability snapshots with retained hashes", "Partial",
-        "Hashes are retained for two dates, but there is no scheduled capture and no alert on failure (S15).",
+        "Hashes are retained for the dated report reads and for the official transaction captures, but there is no scheduled capture and no alert on failure (S15).",
         "Daily capture of the official report and club depth pages for every game week, each with its SHA-256.",
-        f"2 capture dates with hashes (2026-11-12, 2026-11-13). Scheduled captures: 0 (alerts: {v['alert_hits']}).",
-        "decision-lab/data/official_snapshot.json", "Official snapshot with source_sha256", NFL_INJ, "NFL injury report (official)")
+        f"4 dated report reads with hashes plus {v['ledger_captures']} official transaction captures with SHA-256 (source URL and retrieval time retained). Scheduled captures: 0 (alerts: {v['alert_hits']}).",
+        "availability-ledger/data/ledger.json", "Availability ledger (capture manifest)", NFL_INJ, "NFL injury report (official)")
     add("A6", G, "Capture official inactive lists and snap counts", "Blocked",
         "No official inactive list is captured. The 2026 snap-count file is community nflverse data.",
         "Official inactive list for every game in the corpus.",
@@ -321,11 +343,11 @@ def rows(v: dict) -> list[dict]:
         "No playing-time source is verified. Rejecting roster-attribute ordering is a decision; the replacement method is not built.",
         "A playing-time depth model with the official snap source (A7) behind it.", "0 playing-time models.",
         "data/raw/snap_counts_2026.csv", "Community snap counts (not official)", NFL_STATS, "NFL player stats (official)")
-    add("A13", G, "Treat roster turnover as a first-class data event (versioned against the last official roster event)", "Not started",
-        "No transaction log is captured, so depth cannot be versioned against roster events.",
+    add("A13", G, "Treat roster turnover as a first-class data event (versioned against the last official roster event)", "Partial",
+        "Reserve-list placements and league trades are captured as dated, sourced events, but the monthly league pages show only part of each month.",
         "Every trade, release and IR move in scope recorded with its date and source.",
-        "0 roster events captured. The brief cites a Colts Week 10 article, which is not verified here.",
-        "decision-lab/data/availability.json", "Availability join (decision lab)", NFL_TEAMS, "NFL team pages (official)")
+        f"{v['ledger_reserve']} reserve-list placements and {v['ledger_trades']} league trades captured with date, official source and SHA-256.",
+        "availability-ledger/data/ledger.json", "Availability ledger (captures and joins)", NFL_TEAMS, "NFL team pages (official)")
     add("A14", G, "Announced-starter evidence field (dated starter changes, not inferred replacements)", "Not started",
         "No dated starter-change record is captured.", "Each announced change recorded with date and source.",
         "0 dated starter changes captured.", "decision-lab/data/availability.json", "Availability join (decision lab)", NFL_TEAMS, "NFL team pages (official)")
@@ -333,9 +355,11 @@ def rows(v: dict) -> list[dict]:
         "The snapshot's depth rows carry an observed time, source URL and hash; the register is not yet the single version of record.",
         "One register with date, source and hash on every row, with no unsourced row.",
         f"{v['snap_depth_rows']} depth rows in the 2026-11-12 snapshot, each with source and hash.", "decision-lab/data/official_snapshot.json", "Official snapshot (depth rows)", CLUB_PACKERS, "Packers depth chart (club site)")
-    add("A16", G, "Flag stale depth rows against the official transactions log", "Not started",
-        "No transactions log is captured; stale rows cannot be flagged.", "Every depth row checked against the transactions log, with the result recorded.",
-        "0 rows checked.", "decision-lab/data/availability.json", "Availability join (decision lab)", NFL_TEAMS, "NFL team pages (official)")
+    add("A16", G, "Flag stale depth rows against the official transactions log", "Partial",
+        "The committed depth capture is checked against the captured transaction log, but only for the windows those captures cover.",
+        "Every depth row checked against the transactions log, with the result recorded.",
+        f"{v['ledger_depth_checked']} published depth rows checked; {v['ledger_stale']} stale rows flagged, {v['ledger_same_day']} same-day row left unresolved, {v['ledger_traded_removed']} traded players confirmed absent from the club they left.",
+        "availability-ledger/depth-flags.html", "Availability ledger (depth flags)", NFL_TEAMS, "NFL team pages (official)")
     add("A17", G, "Populate the three missing Lions game-status designations (Joseph, Mays, Reed)", "Blocked",
         "The official article could not be re-fetched from this sandbox, so the three cells stay blank rather than being filled from memory.",
         "Three cells filled, each from the official article with its link.",
@@ -346,9 +370,11 @@ def rows(v: dict) -> list[dict]:
         "One published table, row count equal to the capture, with no club shown injury-free while listing players.",
         f"Published: {v['snap_inj_rows']} rows (decision-lab) and {v['ops_inj']} rows (ops-centre). Integration verification file: {v['published_rows_279']} rows.",
         "integration/data/verification.json", "Integration verification (279 rows)", NFL_INJ, "NFL injury report (official)")
-    add("A19", G, "Capture the reserve list so 'not listed' never means 'available'", "Not started",
-        "Reserve and IR lists are not captured.", "IR and reserve lists for each club, each week, with the date captured.",
-        "0 reserve-list captures.", "decision-lab/data/availability.json", "Availability join (decision lab)", NFL_TEAMS, "NFL team pages (official)")
+    add("A19", G, "Capture the reserve list so 'not listed' never means 'available'", "Partial",
+        "The official reserve list is captured with hashes, but the league's monthly page shows only part of each month, so coverage is not yet complete.",
+        "IR and reserve lists for each club, each week, with the date captured.",
+        f"{v['ledger_reserve']} reserve-list placements captured (October and November 2026 pages); {v['ledger_not_on_report']} of them do not appear on the weekly report, so the report alone cannot clear them.",
+        "availability-ledger/ledger.html", "Availability ledger (official ledger)", NFL_TEAMS, "NFL team pages (official)")
     add("A20", G, "Score injury-designation reliability (play rate per designation, with confidence intervals)", "Blocked",
         "Needs past official reports (R6) and official inactive lists (A6); neither exists.",
         "Play rate per designation over several seasons, with intervals, before the label becomes a feature.",
@@ -392,36 +418,46 @@ def rows(v: dict) -> list[dict]:
         "0 declarations captured.", "docs/PRE_REGISTRATION.md", "Pre-registration file", NFL_RULEBOOK, "2026 NFL rulebook (official)")
 
     G = "Leaderboard & governance"
-    add("L1", G, "Separate signal from staking in the leaderboard", "Done",
-        "None: the split is rendered on every strategy row; ranking reads the signal columns only, so staking luck cannot change a rank.",
+    add("L1", G, "Separate signal from staking in the leaderboard", "Partial",
+        "Signal and staking are separated in the canonical leaderboard, but no row passes the signal gates, so nothing can be promoted.",
         "At least one strategy shown with signal and staking columns apart.",
-        f"{v['ops_strategies']} of {v['ops_strategies']} rows render signal and staking columns separately (ops-center/leaderboard.html); 0 graded values.",
-        "ops-center/leaderboard.html", "Ops-centre leaderboard (signal/staking split)", NFL_STATS, "NFL player stats (official)")
-    add("L2", G, "Proper-score divisions: singles, game parlays, same-game parlays, prop combos", "Not started",
-        "No graded forecasts in any division.", "Each division with at least one pre-registered, graded entry.", "0 graded entries.",
-        "ops-center/leaderboard.html", "Ops-centre leaderboard", NFL_ODDS, "NFL odds-widget boundary (support.nfl.com)")
-    add("L3", G, "Rank by Brier skill with a game-cluster lower bound and a multiplicity adjustment", "Not started",
-        "No graded forecasts and no shadow baseline (L5).", "Brier skill with a lower bound for each entry in a division.", "0 scored forecasts.",
-        "ops-center/leaderboard.html", "Ops-centre leaderboard", NFL_STATS, "NFL player stats (official)")
-    add("L4", G, "Parlays and prop combos only behind a joint-evidence gate", "Blocked",
-        "No directly validated joint probability and no operator void/push rules are captured.",
+        f"Skill lab: {v['skill_rows']} rows with signal columns and a separate retrospective staking table that cannot promote a row. {v['skill_eligible']} eligible.",
+        "skill-lab/leaderboard.html", "Skill-lab leaderboard", NFL_STATS, "NFL player stats (official)")
+    add("L2", G, "Proper-score divisions: singles, game parlays, same-game parlays, prop combos", "Partial",
+        "The singles division is graded and published; the three combo divisions are published empty because no joint evidence can be validated.",
+        "Each division with at least one pre-registered, graded entry.",
+        f"Singles: {v['skill_rows']} rows graded on {v['skill_corpus']} games with Brier and log-loss scores. The three combo divisions are published empty with the reason.",
+        "skill-lab/leaderboard.html", "Skill-lab leaderboard", NFL_ODDS, "NFL odds-widget boundary (support.nfl.com)")
+    add("L3", G, "Rank by Brier skill with a game-cluster lower bound and a multiplicity adjustment", "Partial",
+        "The ranking mechanism exists and is published, but no row qualifies and the benchmark price is community-maintained.",
+        "Brier skill with a lower bound for each entry in a division.",
+        f"{v['skill_rows']} rows scored: Brier skill, 10,000-resample game-cluster interval and a Benjamini-Hochberg adjustment over {v['skill_trials']} trials. {v['skill_eligible']} eligible for ranking; best skill {v['skill_best']:+.4f}.",
+        "skill-lab/leaderboard.html", "Skill-lab leaderboard", NFL_STATS, "NFL player stats (official)")
+    add("L4", G, "Parlays and prop combos only behind a joint-evidence gate", "Partial",
+        "The gate is enforced and no combo is published or ranked, but the evidence it requires still does not exist.",
         "A validated joint probability and the operator's void/push rules for each combo.",
-        "0 combos with a joint probability; 0 void/push rules captured.", "ops-center/leaderboard.html", "Ops-centre leaderboard", NFL_ODDS, "NFL odds-widget boundary (support.nfl.com)")
-    add("L5", G, "Singles-only shadow baseline, frozen and forecast before kickoff", "Not started",
-        "No model version is frozen and no forecast is recorded before kickoff.", "Frozen version and a recorded forecast for each game, time-stamped before kickoff.",
-        "0 pre-kickoff forecasts.", "docs/PRE_REGISTRATION.md", "Pre-registration file", NFL_SCORES, "NFL scores (official)")
-    add("L6", G, "Control baseline (random picks; favourites only) in every leaderboard run", "Partial",
-        "Both controls are defined and shown beside every strategy on every run (a run missing either is invalid); "
-        "neither can run before the priced corpus exists — favourites-only is defined by the shorter licensed price.",
+        "0 combos with a joint probability; 0 void/push rules captured. The measured dependence between the legs of one game is published with n.",
+        "skill-lab/dependence.html", "Skill-lab dependence", NFL_ODDS, "NFL odds-widget boundary (support.nfl.com)")
+    add("L5", G, "Singles-only shadow baseline, frozen and forecast before kickoff", "Partial",
+        "The protocol and the model are frozen before the results were computed, but no forecast has yet been recorded prospectively before a kickoff.",
+        "Frozen version and a recorded forecast for each game, time-stamped before kickoff.",
+        f"Protocol SL-PRE-01 frozen at commit {v['skill_prereg']} before any result existed; walk-forward forecasts recorded for the {v['skill_corpus']}-game corpus. 0 prospective pre-kickoff forecasts.",
+        "docs/SKILL_LAB_PRE_REGISTRATION.md", "Skill-lab pre-registration", NFL_SCORES, "NFL scores (official)")
+    add("L6", G, "Control baseline (random picks; favourites only) in every leaderboard run", "Done",
+        "Both baselines are run and published beside every row of every run of the canonical leaderboard.",
         "Both baselines run and shown beside every strategy.",
-        "2 required controls registered (random side; favourites-only) on ops-center/leaderboard.html; 0 runs.",
-        "ops-center/leaderboard.html", "Ops-centre leaderboard (control baselines)", NFL_STANDINGS, "NFL standings (official)")
-    add("L7", G, "Two-stage leaderboard: proper-score qualification, then prospective CLV/ROI escrow", "Not started",
-        "No closing line value (no prices, P1) and no escrow rule.", "Qualification and escrow results for at least one strategy.", "0 qualifiers.",
-        "ops-center/leaderboard.html", "Ops-centre leaderboard", NFL_ODDS, "NFL odds-widget boundary (support.nfl.com)")
-    add("L8", G, "'What changed' weekly diff instead of a static snapshot", "Not started",
-        "Needs two weekly snapshots of the same tables.", "Two weekly snapshots and a diff column (rank, rating, availability).",
-        "1 weekly snapshot (Week 10).", "decision-lab/data/official_snapshot.json", "Official snapshot (Week 10)", NFL_INJ, "NFL injury report (official)")
+        "A 1,000-seed random-pick control and a favourites-only control are published in every run, with a base-rate control beside them.",
+        "skill-lab/controls.html", "Skill-lab controls", NFL_STANDINGS, "NFL standings (official)")
+    add("L7", G, "Two-stage leaderboard: proper-score qualification, then prospective CLV/ROI escrow", "Partial",
+        "Stage one is implemented and running; stage two cannot start because there is no dated price history and no escrow rule.",
+        "Qualification and escrow results for at least one strategy.",
+        f"Stage one: {v['skill_rows']} rows tested against gates G1-G7, {v['skill_eligible']} qualified. Stage two: 0 qualifiers, 0 escrow entries (no closing-line value is possible without dated prices).",
+        "skill-lab/leaderboard.html", "Skill-lab leaderboard", NFL_ODDS, "NFL odds-widget boundary (support.nfl.com)")
+    add("L8", G, "'What changed' weekly diff instead of a static snapshot", "Partial",
+        "Two diffs are now published — the injury-report read-to-read delta and the depth-versus-roster-event diff — but neither is driven by a scheduled weekly capture.",
+        "Two weekly snapshots and a diff column (rank, rating, availability).",
+        "Injury-report delta between dated reads is published; the availability ledger publishes a depth-versus-roster-event diff. Scheduled weekly captures: 0.",
+        "availability-ledger/diff.html", "Availability ledger (weekly diff)", NFL_INJ, "NFL injury report (official)")
     add("L9", G, "Drift alarm on every scraper: pin row counts and fields, fail loudly", "Partial",
         "Verification scripts exist, but the two published injury counts (254 and 279) were published without an alarm.",
         "Each scraper pinned to expected rows and required fields, failing the build on drift.",
