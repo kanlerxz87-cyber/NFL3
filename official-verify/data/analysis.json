@@ -1,0 +1,511 @@
+{
+  "generated_from": {
+    "corpus": "official-verify/data/games_2026_official.csv",
+    "standings": "official-verify/data/standings_2026_official.csv",
+    "evaluation": "official-verify/data/evaluation.json"
+  },
+  "luck": {
+    "method": "Observed win equivalents (ties counted 0.5) across the 32 official clubs are compared with the wins the pre-registered model expected out of sample, and with the Bernoulli variance the model's own probabilities imply. The ratio of implied Bernoulli variance to observed variance of club win totals is the share of club-win dispersion that is luck rather than signal.",
+    "n_clubs": 32,
+    "observed_variance_of_wins": 3.87,
+    "mean_implied_bernoulli_variance": 1.2003,
+    "luck_share_of_win_dispersion": 0.3102,
+    "skill_share_of_win_dispersion": 0.6898,
+    "clubs": [
+      {
+        "team": "ATL",
+        "games": 9,
+        "wins": 3,
+        "losses": 6,
+        "ties": 0,
+        "observed_win_equivalent": 3.0,
+        "model_expected_wins": 2.186,
+        "luck_delta": 0.814,
+        "model_games_scored": 6,
+        "expected_bernoulli_variance": 1.3679
+      },
+      {
+        "team": "AZ",
+        "games": 9,
+        "wins": 3,
+        "losses": 6,
+        "ties": 0,
+        "observed_win_equivalent": 3.0,
+        "model_expected_wins": 2.059,
+        "luck_delta": 0.941,
+        "model_games_scored": 6,
+        "expected_bernoulli_variance": 1.3061
+      },
+      {
+        "team": "BAL",
+        "games": 9,
+        "wins": 4,
+        "losses": 5,
+        "ties": 0,
+        "observed_win_equivalent": 4.0,
+        "model_expected_wins": 2.989,
+        "luck_delta": 1.011,
+        "model_games_scored": 6,
+        "expected_bernoulli_variance": 1.3053
+      },
+      {
+        "team": "BUF",
+        "games": 8,
+        "wins": 7,
+        "losses": 1,
+        "ties": 0,
+        "observed_win_equivalent": 7.0,
+        "model_expected_wins": 2.806,
+        "luck_delta": 4.194,
+        "model_games_scored": 5,
+        "expected_bernoulli_variance": 1.2216
+      },
+      {
+        "team": "CAR",
+        "games": 8,
+        "wins": 3,
+        "losses": 5,
+        "ties": 0,
+        "observed_win_equivalent": 3.0,
+        "model_expected_wins": 2.714,
+        "luck_delta": 0.286,
+        "model_games_scored": 5,
+        "expected_bernoulli_variance": 1.1993
+      },
+      {
+        "team": "CHI",
+        "games": 9,
+        "wins": 7,
+        "losses": 2,
+        "ties": 0,
+        "observed_win_equivalent": 7.0,
+        "model_expected_wins": 3.832,
+        "luck_delta": 3.168,
+        "model_games_scored": 6,
+        "expected_bernoulli_variance": 1.276
+      },
+      {
+        "team": "CIN",
+        "games": 8,
+        "wins": 6,
+        "losses": 2,
+        "ties": 0,
+        "observed_win_equivalent": 6.0,
+        "model_expected_wins": 3.056,
+        "luck_delta": 2.944,
+        "model_games_scored": 5,
+        "expected_bernoulli_variance": 1.0446
+      },
+      {
+        "team": "CLE",
+        "games": 9,
+        "wins": 5,
+        "losses": 4,
+        "ties": 0,
+        "observed_win_equivalent": 5.0,
+        "model_expected_wins": 3.066,
+        "luck_delta": 1.934,
+        "model_games_scored": 6,
+        "expected_bernoulli_variance": 1.4524
+      },
+      {
+        "team": "DAL",
+        "games": 9,
+        "wins": 4,
+        "losses": 5,
+        "ties": 0,
+        "observed_win_equivalent": 4.0,
+        "model_expected_wins": 3.646,
+        "luck_delta": 0.354,
+        "model_games_scored": 6,
+        "expected_bernoulli_variance": 1.4066
+      },
+      {
+        "team": "DEN",
+        "games": 9,
+        "wins": 7,
+        "losses": 2,
+        "ties": 0,
+        "observed_win_equivalent": 7.0,
+        "model_expected_wins": 3.075,
+        "luck_delta": 3.925,
+        "model_games_scored": 6,
+        "expected_bernoulli_variance": 1.3522
+      },
+      {
+        "team": "DET",
+        "games": 8,
+        "wins": 6,
+        "losses": 2,
+        "ties": 0,
+        "observed_win_equivalent": 6.0,
+        "model_expected_wins": 2.593,
+        "luck_delta": 3.407,
+        "model_games_scored": 5,
+        "expected_bernoulli_variance": 1.1678
+      },
+      {
+        "team": "GB",
+        "games": 9,
+        "wins": 6,
+        "losses": 3,
+        "ties": 0,
+        "observed_win_equivalent": 6.0,
+        "model_expected_wins": 2.452,
+        "luck_delta": 3.548,
+        "model_games_scored": 6,
+        "expected_bernoulli_variance": 1.3452
+      },
+      {
+        "team": "HOU",
+        "games": 8,
+        "wins": 3,
+        "losses": 5,
+        "ties": 0,
+        "observed_win_equivalent": 3.0,
+        "model_expected_wins": 2.493,
+        "luck_delta": 0.507,
+        "model_games_scored": 5,
+        "expected_bernoulli_variance": 1.1113
+      },
+      {
+        "team": "IND",
+        "games": 9,
+        "wins": 2,
+        "losses": 7,
+        "ties": 0,
+        "observed_win_equivalent": 2.0,
+        "model_expected_wins": 2.762,
+        "luck_delta": -0.762,
+        "model_games_scored": 6,
+        "expected_bernoulli_variance": 1.3195
+      },
+      {
+        "team": "JAX",
+        "games": 8,
+        "wins": 6,
+        "losses": 2,
+        "ties": 0,
+        "observed_win_equivalent": 6.0,
+        "model_expected_wins": 3.785,
+        "luck_delta": 2.215,
+        "model_games_scored": 5,
+        "expected_bernoulli_variance": 0.909
+      },
+      {
+        "team": "KC",
+        "games": 8,
+        "wins": 6,
+        "losses": 2,
+        "ties": 0,
+        "observed_win_equivalent": 6.0,
+        "model_expected_wins": 3.145,
+        "luck_delta": 2.855,
+        "model_games_scored": 5,
+        "expected_bernoulli_variance": 1.1146
+      },
+      {
+        "team": "LA",
+        "games": 9,
+        "wins": 5,
+        "losses": 4,
+        "ties": 0,
+        "observed_win_equivalent": 5.0,
+        "model_expected_wins": 3.884,
+        "luck_delta": 1.116,
+        "model_games_scored": 6,
+        "expected_bernoulli_variance": 1.2401
+      },
+      {
+        "team": "LAC",
+        "games": 8,
+        "wins": 0,
+        "losses": 8,
+        "ties": 0,
+        "observed_win_equivalent": 0.0,
+        "model_expected_wins": 1.282,
+        "luck_delta": -1.282,
+        "model_games_scored": 5,
+        "expected_bernoulli_variance": 0.9414
+      },
+      {
+        "team": "LV",
+        "games": 9,
+        "wins": 4,
+        "losses": 5,
+        "ties": 0,
+        "observed_win_equivalent": 4.0,
+        "model_expected_wins": 2.824,
+        "luck_delta": 1.176,
+        "model_games_scored": 6,
+        "expected_bernoulli_variance": 1.4338
+      },
+      {
+        "team": "MIA",
+        "games": 8,
+        "wins": 1,
+        "losses": 7,
+        "ties": 0,
+        "observed_win_equivalent": 1.0,
+        "model_expected_wins": 1.337,
+        "luck_delta": -0.337,
+        "model_games_scored": 5,
+        "expected_bernoulli_variance": 0.9619
+      },
+      {
+        "team": "MIN",
+        "games": 8,
+        "wins": 6,
+        "losses": 2,
+        "ties": 0,
+        "observed_win_equivalent": 6.0,
+        "model_expected_wins": 3.429,
+        "luck_delta": 2.571,
+        "model_games_scored": 5,
+        "expected_bernoulli_variance": 1.0183
+      },
+      {
+        "team": "NE",
+        "games": 9,
+        "wins": 5,
+        "losses": 4,
+        "ties": 0,
+        "observed_win_equivalent": 5.0,
+        "model_expected_wins": 3.251,
+        "luck_delta": 1.749,
+        "model_games_scored": 6,
+        "expected_bernoulli_variance": 1.3723
+      },
+      {
+        "team": "NO",
+        "games": 8,
+        "wins": 3,
+        "losses": 5,
+        "ties": 0,
+        "observed_win_equivalent": 3.0,
+        "model_expected_wins": 2.265,
+        "luck_delta": 0.735,
+        "model_games_scored": 5,
+        "expected_bernoulli_variance": 1.1437
+      },
+      {
+        "team": "NYG",
+        "games": 9,
+        "wins": 5,
+        "losses": 3,
+        "ties": 1,
+        "observed_win_equivalent": 5.5,
+        "model_expected_wins": 3.827,
+        "luck_delta": 1.673,
+        "model_games_scored": 6,
+        "expected_bernoulli_variance": 1.2047
+      },
+      {
+        "team": "NYJ",
+        "games": 9,
+        "wins": 2,
+        "losses": 7,
+        "ties": 0,
+        "observed_win_equivalent": 2.0,
+        "model_expected_wins": 2.526,
+        "luck_delta": -0.526,
+        "model_games_scored": 6,
+        "expected_bernoulli_variance": 1.3539
+      },
+      {
+        "team": "PHI",
+        "games": 9,
+        "wins": 2,
+        "losses": 7,
+        "ties": 0,
+        "observed_win_equivalent": 2.0,
+        "model_expected_wins": 2.679,
+        "luck_delta": -0.679,
+        "model_games_scored": 6,
+        "expected_bernoulli_variance": 1.2497
+      },
+      {
+        "team": "PIT",
+        "games": 8,
+        "wins": 6,
+        "losses": 2,
+        "ties": 0,
+        "observed_win_equivalent": 6.0,
+        "model_expected_wins": 2.643,
+        "luck_delta": 3.357,
+        "model_games_scored": 5,
+        "expected_bernoulli_variance": 1.2195
+      },
+      {
+        "team": "SEA",
+        "games": 9,
+        "wins": 5,
+        "losses": 4,
+        "ties": 0,
+        "observed_win_equivalent": 5.0,
+        "model_expected_wins": 3.375,
+        "luck_delta": 1.625,
+        "model_games_scored": 6,
+        "expected_bernoulli_variance": 1.3191
+      },
+      {
+        "team": "SF",
+        "games": 8,
+        "wins": 7,
+        "losses": 1,
+        "ties": 0,
+        "observed_win_equivalent": 7.0,
+        "model_expected_wins": 3.741,
+        "luck_delta": 3.259,
+        "model_games_scored": 5,
+        "expected_bernoulli_variance": 0.8791
+      },
+      {
+        "team": "TB",
+        "games": 9,
+        "wins": 3,
+        "losses": 6,
+        "ties": 0,
+        "observed_win_equivalent": 3.0,
+        "model_expected_wins": 2.819,
+        "luck_delta": 0.181,
+        "model_games_scored": 6,
+        "expected_bernoulli_variance": 1.4348
+      },
+      {
+        "team": "TEN",
+        "games": 8,
+        "wins": 1,
+        "losses": 7,
+        "ties": 0,
+        "observed_win_equivalent": 1.0,
+        "model_expected_wins": 1.505,
+        "luck_delta": -0.505,
+        "model_games_scored": 5,
+        "expected_bernoulli_variance": 1.0191
+      },
+      {
+        "team": "WAS",
+        "games": 9,
+        "wins": 3,
+        "losses": 5,
+        "ties": 1,
+        "observed_win_equivalent": 3.5,
+        "model_expected_wins": 0.956,
+        "luck_delta": 2.544,
+        "model_games_scored": 6,
+        "expected_bernoulli_variance": 0.7186
+      }
+    ],
+    "caveat": "This is not 'true skill'. It says how much of the spread in club win totals a coin-flip process could have produced. With one season and 32 clubs the estimate itself is uncertain, and it is conditional on the registered model."
+  },
+  "calibration": {
+    "n_games": 89,
+    "min_readable_bin": 10,
+    "bins": [
+      {
+        "bin": "0.00-0.40",
+        "n": 26,
+        "mean_predicted": 0.2934,
+        "observed_home_win_share": 0.25,
+        "readable": true,
+        "source_url": "official-verify corpus (nfl.com weekly schedule pages)"
+      },
+      {
+        "bin": "0.40-0.45",
+        "n": 13,
+        "mean_predicted": 0.4193,
+        "observed_home_win_share": 0.3077,
+        "readable": true,
+        "source_url": "official-verify corpus (nfl.com weekly schedule pages)"
+      },
+      {
+        "bin": "0.45-0.50",
+        "n": 9,
+        "mean_predicted": 0.483,
+        "observed_home_win_share": 0.3333,
+        "readable": false,
+        "source_url": "official-verify corpus (nfl.com weekly schedule pages)"
+      },
+      {
+        "bin": "0.50-0.55",
+        "n": 7,
+        "mean_predicted": 0.5185,
+        "observed_home_win_share": 0.8571,
+        "readable": false,
+        "source_url": "official-verify corpus (nfl.com weekly schedule pages)"
+      },
+      {
+        "bin": "0.55-0.60",
+        "n": 7,
+        "mean_predicted": 0.5708,
+        "observed_home_win_share": 0.5714,
+        "readable": false,
+        "source_url": "official-verify corpus (nfl.com weekly schedule pages)"
+      },
+      {
+        "bin": "0.60-1.00",
+        "n": 27,
+        "mean_predicted": 0.7308,
+        "observed_home_win_share": 0.5926,
+        "readable": true,
+        "source_url": "official-verify corpus (nfl.com weekly schedule pages)"
+      }
+    ],
+    "note": "Buckets with n below the readable threshold are published but marked unreadable."
+  },
+  "correlations": [
+    {
+      "pair": "points_for vs wins",
+      "a": "official points for",
+      "b": "official wins (ties=0.5)",
+      "n": 32,
+      "r": 0.6673,
+      "ci95_fisher": [
+        0.4153,
+        0.8242
+      ],
+      "use": "floor check: scoring and winning are related but not identical",
+      "note": "Single season, in-sample. n=32 clubs is small for a correlation."
+    },
+    {
+      "pair": "net_points vs wins",
+      "a": "official net points",
+      "b": "official wins (ties=0.5)",
+      "n": 32,
+      "r": 0.8452,
+      "ci95_fisher": [
+        0.7039,
+        0.9221
+      ],
+      "use": "the classic 'points explain wins' relationship",
+      "note": "Single season, in-sample. Wins are partly luck, which caps this r."
+    },
+    {
+      "pair": "model expected wins vs observed wins",
+      "a": "model expected wins (out-of-sample)",
+      "b": "observed wins (ties=0.5)",
+      "n": 32,
+      "r": 0.6889,
+      "ci95_fisher": [
+        0.4478,
+        0.8366
+      ],
+      "use": "how much of the club win table the model already accounts for",
+      "note": "Out-of-sample predictions only; clubs with no scored game are excluded."
+    },
+    {
+      "pair": "points scored vs points allowed per game",
+      "a": "points for per game",
+      "b": "points against per game",
+      "n": 32,
+      "r": -0.2041,
+      "ci95_fisher": [
+        -0.516,
+        0.1557
+      ],
+      "use": "tests the assumption that good offence and good defence are independent",
+      "note": "A positive r would mean good offences tend to face bad defences; the sign is reported as found."
+    }
+  ]
+}
