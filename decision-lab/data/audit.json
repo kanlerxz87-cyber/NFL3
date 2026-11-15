@@ -1,6 +1,6 @@
 {
-  "html_pages": 111,
-  "table_rows": 6040,
+  "html_pages": 112,
+  "table_rows": 6144,
   "rows_missing_official_source": 616,
   "rows_community_only": 112,
   "rows_with_internal_audit_source": 7,
@@ -449,7 +449,7 @@
     },
     {
       "path": "index.html",
-      "rows": 29,
+      "rows": 102,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -688,6 +688,14 @@
       "local_errors": []
     },
     {
+      "path": "repo-review.html",
+      "rows": 23,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
       "path": "requirements.html",
       "rows": 17,
       "rows_missing_official_source": 0,
@@ -833,7 +841,7 @@
     },
     {
       "path": "review.html",
-      "rows": 10,
+      "rows": 18,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
