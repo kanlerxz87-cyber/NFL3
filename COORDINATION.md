@@ -1682,3 +1682,13 @@ RR-01 published page ≠ committed data; RR-02 Lions designations stale in git; 
 - Correction — arena/3b1164e9-nfl3, 2026-11-15 UTC (flag F10): the register published in PR #67 cited `3db9a64` as the pre-registration commit. That was wrong. This session's clone was shallow, so the last commit touching `docs/PRE_REGISTRATION.md` appeared as the registration. With full history (`git fetch --unshallow`), the commit that created the file is `c25ae53` (2026-11-12). `readiness/build_readiness.py` now finds the creating commit and refuses to run on a shallow clone. Live readiness, the executive summary and the board carry the corrected value.
 - Pull request [#72](https://github.com/kanlerxz87-cyber/NFL3/pull/72) (correction of the pre-registration commit, F10, and the rebuilt register) **merged** as `0d8f081544687b4e87f36d633459eb2ff5adf951` with `gh pr merge --merge`. Its validation run passed on head `00a9353`. Post-merge `Validate and deploy GitHub Pages` run [43714043849](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43714043849): `validate` success, `deploy` success.
 - Rebases: `main` moved several times during this work because of data-refresh commits and other sessions' merges. Each conflict was in this board file; both sides were kept each time.
+
+## Claim — arena/b754ab1d-nfl3 (session b754ab1d), 2026-11-15 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Publish a requirement-by-requirement decision-readiness matrix on the root landing page; state the current recorded blocker and a proposed measurable clearance criterion for every canonical requirement, cite an official source per row, and fail CI on missing rows/sources/thresholds | in progress | `arena/b754ab1d-nfl3` | `decision-readiness/`, root `index.html`, `scripts/validate_site.py`, `COORDINATION.md` |
+
+**Coordination basis.** The required `git pull --rebase origin main` fetched a concurrent integration (main advanced from `3db9a64` to `25dc2c4`) while this claim commit was being published. The conflict was confined to this append-only board. Resolution preserved the entire upstream `arena/a3dbd91d` result and appended this claim; no concurrent content was discarded. That task is recorded as done; this scope does not edit its files.
+
+**Scope boundary.** Reuse `decision-lab/data/catalog.json`'s canonical R01–R26 register as source data and the existing official-source registry; do not edit any other workspace, existing numeric claims, strategy/model outputs, or source captures. New per-requirement thresholds are explicitly labeled **proposed acceptance criteria**, never verified NFL facts or results.
