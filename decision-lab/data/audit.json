@@ -1,8 +1,8 @@
 {
-  "html_pages": 113,
-  "table_rows": 6175,
-  "rows_missing_official_source": 616,
-  "rows_community_only": 112,
+  "html_pages": 126,
+  "table_rows": 6624,
+  "rows_missing_official_source": 738,
+  "rows_community_only": 234,
   "rows_with_internal_audit_source": 7,
   "conflict_files": [],
   "authority_claim_files": [],
@@ -12,7 +12,7 @@
       "id": "AUD-03",
       "severity": "High",
       "title": "Table rows without an official-source link",
-      "detail": "616 row(s) across the repository lack an official HTTPS source; 112 cite only community sources.",
+      "detail": "738 row(s) across the repository lack an official HTTPS source; 234 cite only community sources.",
       "files": [
         "dashboard/flagged.html",
         "dashboard/questions.html",
@@ -449,7 +449,7 @@
     },
     {
       "path": "index.html",
-      "rows": 57,
+      "rows": 58,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -684,6 +684,110 @@
       "rows": 80,
       "rows_missing_official_source": 20,
       "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "origination/availability.html",
+      "rows": 54,
+      "rows_missing_official_source": 46,
+      "rows_community_only": 46,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "origination/correlations.html",
+      "rows": 6,
+      "rows_missing_official_source": 1,
+      "rows_community_only": 1,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "origination/decisions.html",
+      "rows": 20,
+      "rows_missing_official_source": 3,
+      "rows_community_only": 3,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "origination/flagged.html",
+      "rows": 12,
+      "rows_missing_official_source": 3,
+      "rows_community_only": 3,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "origination/index.html",
+      "rows": 16,
+      "rows_missing_official_source": 4,
+      "rows_community_only": 4,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "origination/leaderboard.html",
+      "rows": 10,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "origination/lines.html",
+      "rows": 177,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "origination/luck.html",
+      "rows": 19,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "origination/prices.html",
+      "rows": 43,
+      "rows_missing_official_source": 43,
+      "rows_community_only": 43,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "origination/requirements.html",
+      "rows": 62,
+      "rows_missing_official_source": 17,
+      "rows_community_only": 17,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "origination/sources.html",
+      "rows": 10,
+      "rows_missing_official_source": 4,
+      "rows_community_only": 4,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "origination/strategies.html",
+      "rows": 10,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "origination/suggestions.html",
+      "rows": 9,
+      "rows_missing_official_source": 1,
+      "rows_community_only": 1,
       "rows_with_internal_audit_source": 0,
       "local_errors": []
     },

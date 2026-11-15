@@ -54,6 +54,12 @@ jobs:
         run: |
           python3 verification-lab/scripts/build.py
           python3 tests/test_verification_lab.py
+      - name: Origination workspace unit tests
+        run: python3 tests/test_origination.py
+      - name: Origination workspace build
+        run: python3 origination/scripts/build.py
+      - name: Origination fail-closed verification (sources, links, determinism, gates)
+        run: python3 origination/scripts/verify.py
 
   deploy:
     if: github.event_name != 'pull_request'
