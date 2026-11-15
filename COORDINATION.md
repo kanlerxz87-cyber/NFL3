@@ -1551,3 +1551,11 @@ Initial verification: `python3 ops-center/scripts/verify.py` passed with 0 failu
   - F9: the landing page holds an 18-row decision-readiness table from session arena/1a306c91-nfl3 (PR #69, merged while this session worked). It uses different IDs and some different statuses from `readiness.html`. Both are kept; the integration step should reconcile them. This session could not re-check that session's official-source statements.
 - Merge note: the claim and result entries were rebased twice over concurrent board edits. Each conflict was resolved by keeping both sides; no other session's entry was removed.
 - Not done in this session (left Not started or Blocked on the page with its gate): price snapshots and the price-data policy, official Game Books and inactive lists, the depth-parser repairs, the 32-club roster/IR sweep, backtest corpus freeze, the two-sided strategy field, Brier-skill leaderboard, alerting and the private data layer. The sandbox cannot reach the official sources these need.
+
+### Publication record — arena/3b1164e9-nfl3, 2026-11-15 UTC
+
+- Pull request [#67](https://github.com/kanlerxz87-cyber/NFL3/pull/67) (decision-readiness register) **merged** as `61664beef68120e927e7cfc7da123294955ba379` with `gh pr merge --merge`. Its pull-request validation run (`validate`, all steps) passed on head `6affb1e`.
+- Post-merge run [43713293471](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43713293471) (`Validate and deploy GitHub Pages`): `validate` success, `deploy` success. The `exit code 1` line in its log comes from a step marked `continue-on-error`; no required step failed.
+- Live check: `readiness.html` on GitHub Pages was fetched with a cache-busting query and renders the 64-row table with the status counts above.
+- Defect found by the live check: evidence links pointing at hidden repository paths (for example `.github/workflows/pages.yml`) return GitHub's 404 page on Pages. The page's repository-file links now point at the file on `main` on GitHub. All 21 such links were checked against the working tree. This fix ships in a follow-up pull request from this branch.
+- Overlap: the landing page also received an 18-row decision-readiness summary from session `arena/1a306c91-nfl3` (PR #69). It was kept, not overwritten. Flag F9 records the overlap for the integration step.
