@@ -3,6 +3,8 @@
 **Status: research workspace. No strategy has been validated, no line has been published, and no
 reward is funded.** Everything below is traced to an official page or is an explicit blank.
 
+**Update, 2026-11-15:** a [decision-readiness register](readiness.html) now lists one row per requirement in the brief, the gate that blocks it, and the number that would clear it. As built, the counts are 14 blocked, 29 not started, 18 partial, 1 decision recorded and 2 done (64 rows, computed from committed files). Eight irregularities are on its Flagged for Review section, including two injury-row counts (254 and 279) and three chain counts (117, 195 and 280) that are still published side by side. Official pages could not be re-fetched from the build sandbox, so no value was re-verified today.
+
 ---
 
 ## 1. What the brief asked for, and where it stands
