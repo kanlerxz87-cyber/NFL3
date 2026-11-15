@@ -41,9 +41,16 @@ def main() -> None:
     assert rows["A3"]["status"] == "Partial" and "139 game-status changes" in rows["A3"]["current"], "A3 must record the published per-player deltas"
     assert rows["A4"]["current"].count("20") >= 4 and "2026-11-15" in rows["A4"]["current"], "A4 must record four dated reads"
     status_counts2 = collections.Counter(r["status"] for r in rows.values())
-    assert status_counts2["Done"] == 8 and status_counts2["Partial"] == 20 and status_counts2["Blocked"] == 13 \
-        and status_counts2["Not started"] == 22 and status_counts2["Decision recorded"] == 1, \
+    # 8 Done / 20 Partial / 13 Blocked / 22 Not started / 1 Decision recorded after the
+    # pricing-corpus pass; the skill lab and the availability ledger moved 11 further rows
+    # (P3, P10, P11, A5, A13, A16, A19, L2, L3, L4, L5, L6, L7, L8).
+    assert status_counts2["Done"] == 7 and status_counts2["Partial"] == 31 and status_counts2["Blocked"] == 12 \
+        and status_counts2["Not started"] == 13 and status_counts2["Decision recorded"] == 1, \
         f"detailed register status arithmetic drifted: {status_counts2}"
+    for rid in ("P3", "P10", "P11", "A13", "A16", "A19", "L2", "L3", "L4", "L5", "L6", "L7", "L8"):
+        assert rows[rid]["status"] in ("Partial", "Done"), f"{rid} must record the skill-lab or ledger outcome"
+    assert rows["L6"]["status"] == "Done", "L6 is complete: both control baselines run in every leaderboard run"
+    assert "reserve" in rows["A19"]["current"], "A19 must record the captured reserve list"
     for rid in ("R1", "R2", "A3", "A4"):
         assert rows[rid]["official"].startswith("http"), f"{rid} must keep an official source link"
     print("Readiness checks passed: 26 canonical requirement rows, correct status arithmetic, detailed-register link, dated snapshot counts, verified-results/corpus-freeze/injury-delta rows.")

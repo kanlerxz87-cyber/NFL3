@@ -1,0 +1,35 @@
+# NFL3 official capture — reserve list, November 2026
+# source_url: https://www.nfl.com/transactions/league/reserve-list/2026/11
+# page_title: 2026 NFL reserve-list by month | NFL.com
+# retrieved_at_utc: 2026-11-15T12:56:00Z
+# retrieval_method: session fetch tool, rendered page text (markdown), read in full across both chunks
+# capture_scope: the reserve-list transaction table exactly as published. Site navigation and club
+#   logo markup are omitted; every published field of every row (club, date, name, transaction and the
+#   player link) is retained. The table on this page covers 11/07 to 11/14 only.
+# row_format: date | club | player | transaction | player link
+--- body ---
+11/14 | Saints | Christen Miller | Reserve/Injured | https://www.nfl.com/players/christen-miller/
+11/14 | Patriots | TreVeyon Henderson | Reserve/Injured | https://www.nfl.com/players/treveyon-henderson/
+11/14 | Browns | Michael Burton | Reserve/Injured | https://www.nfl.com/players/michael-burton/
+11/14 | Colts | Mo Alie-Cox | Reserve/Injured | https://www.nfl.com/players/mo-alie-cox/
+11/14 | Colts | Akeem Davis-Gaither | Reserve/Injured | https://www.nfl.com/players/akeem-davis-gaither/
+11/14 | Titans | Peter Skoronski | Reserve/Injured | https://www.nfl.com/players/peter-skoronski/
+11/14 | Titans | Tommy Townsend | Reserve/Injured | https://www.nfl.com/players/tommy-townsend/
+11/14 | Cowboys | Tyler Goodson | Reserve/Injured | https://www.nfl.com/players/tyler-goodson/
+11/14 | Packers | Josh Whyle | Reserve/Injured | https://www.nfl.com/players/josh-whyle/
+11/12 | Rams | Puka Nacua | Reserve/Injured | https://www.nfl.com/players/puka-nacua/
+11/10 | Rams | Jordan Whittington | Reserve/Injured | https://www.nfl.com/players/jordan-whittington/
+11/10 | Dolphins | Zach Sieler | Reserve/Injured | https://www.nfl.com/players/zach-sieler/
+11/10 | Dolphins | Malik Willis | Reserve/Injured | https://www.nfl.com/players/malik-willis/
+11/10 | 49ers | Gracen Halton | Reserve/Injured | https://www.nfl.com/players/gracen-halton/
+11/10 | Cardinals | Gardner Minshew | Reserve/Injured | https://www.nfl.com/players/gardner-minshew/
+11/10 | Cardinals | Michael Wilson | Reserve/Injured | https://www.nfl.com/players/michael-wilson/
+11/09 | Titans | James Williams | Reserve/Injured | https://www.nfl.com/players/james-williams-8/
+11/09 | Vikings | Demond Claiborne | Reserve/Injured | https://www.nfl.com/players/demond-claiborne/
+11/09 | Bills | Josh Palmer | Reserve/Injured | https://www.nfl.com/players/josh-palmer/
+11/07 | Falcons | Brian Robinson | Reserve/Injured | https://www.nfl.com/players/brian-robinson/
+11/07 | Rams | Jaylen Watson | Reserve/Injured | https://www.nfl.com/players/jaylen-watson/
+11/07 | Broncos | Eyioma Uwazurike | Reserve/Injured | https://www.nfl.com/players/eyioma-uwazurike/
+11/07 | Lions | Jack Campbell | Reserve/Injured | https://www.nfl.com/players/jack-campbell-3/
+11/07 | Cowboys | Malachi Lawrence | Reserve/Injured | https://www.nfl.com/players/malachi-lawrence/
+11/07 | Commanders | Dyami Brown | Reserve/Injured | https://www.nfl.com/players/dyami-brown/
