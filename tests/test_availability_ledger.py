@@ -118,6 +118,15 @@ class TestJoins(unittest.TestCase):
             self.assertTrue(row["source"].startswith("https://www.nfl.com/"))
             self.assertTrue(row["depth_source"].startswith("https://"))
 
+    def test_the_executive_summary_quotes_the_artifact(self):
+        summary = (LAB / "EXECUTIVE_SUMMARY.md").read_text(encoding="utf-8")
+        self.assertIn(f'{len(self.data["reserve_entries"])} reserve-list placements'
+                      .replace(" reserve-list placements", ""), summary)
+        self.assertIn(f'{len(self.data["stale_depth_rows"])} stale depth rows', summary)
+        self.assertIn(f'{len(self.data["same_day_depth_rows"])} unresolved row', summary)
+        self.assertIn(f'{len(self.data["traded_players_removed_from_former_club"])} control cases',
+                      summary)
+
     def test_the_baltimore_case_is_left_unresolved(self):
         case = self.data["baltimore_case"]
         self.assertEqual(case["status"], "unresolved")

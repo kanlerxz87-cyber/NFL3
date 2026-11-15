@@ -194,6 +194,16 @@ class TestPublishedNumbers(unittest.TestCase):
         eligible = sum(1 for r in self.res["runs"]["primary"]["rows"] if r["eligible_for_ranking"])
         self.assertIn(f'ELIGIBLE FOR RANKING</span><strong>{eligible}<', text)
 
+    def test_the_executive_summary_quotes_the_artifact(self):
+        summary = (LAB / "EXECUTIVE_SUMMARY.md").read_text(encoding="utf-8")
+        for row in self.res["runs"]["primary"]["rows"]:
+            boot = row["bootstrap"]
+            skill = f'{row["skill_brier"]:+.4f}'.replace("-", "\u2212")
+            self.assertIn(skill, summary, f"summary does not quote {row['strategy']} skill {skill}")
+            lo = f'{boot["lower95"]:+.4f}'.replace("-", "\u2212")
+            self.assertIn(lo, summary, f"summary does not quote {row['strategy']} lower bound {lo}")
+        self.assertIn("0 of 6 rows qualified", summary)
+
     def test_the_two_sided_field_is_published_for_every_row(self):
         text = (LAB / "mind-change.html").read_text(encoding="utf-8")
         for row in self.res["runs"]["primary"]["rows"]:

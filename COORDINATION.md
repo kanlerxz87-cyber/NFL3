@@ -2362,3 +2362,80 @@ internal-consistency gates; official pages were read once by hand at the times a
 - **Rebase conflict resolutions (2026-11-15).** `git pull --rebase origin main` conflicted twice on `COORDINATION.md` (concurrent claims by sessions `arena/ee7e0f6c-nfl3`, `arena/f0d1503b-nfl3`, `arena/16183225-nfl3`, `arena/745d100d-nfl3`), once on `index.html` (site-guide rows), once on `readiness/build_readiness.py` (R1/R2 cells), once on `review.html` (flag rows) and on generated audit artifacts. Every conflict was resolved additively: both sides' rows, sections and flags were kept, generated artifacts were rebuilt from the merged tree, and nothing from another session was discarded. The R1/R2/A3/A4 rows and the verified-results-feed work from `arena/16183225-nfl3` are preserved verbatim; R2 now cites **both** frozen corpora (flag F11).
 - **Irregularities carried forward:** F-BA01 (stray leading space in one merged strategy name), F-BA02 (upstream fragment registers lack the two-sided field), F11 (two pre-registered backtest corpora; canonicalize before any evaluation). All three are published on `review.html` and `readiness.html` with source links; none blocks the merge per the brief.
 - **Board status:** the claim above is complete: price-data policy decided and pre-registered (P7 done), price-snapshot store and residual table published fail-closed (P1/P3/P6 partial), the 136-game corpus frozen and registered (R2 done, R5 partial), two-sided falsification criteria on all 34 strategy entries with the signal/staking split and required controls on the leaderboard (P8/P10/L1 done, L6 partial), and final integration published through PR #90.
+
+
+## Result log — arena/e9629801-nfl3, 2026-11-15 UTC
+
+**Branch:** `arena/e9629801-nfl3`. **Scope claimed:** `skill-lab/**`, `availability-ledger/**`, `docs/SKILL_LAB_PRE_REGISTRATION*.md`, `tests/test_skill_lab.py`, `tests/test_availability_ledger.py`, and (as integration requests to the shared-root owner) `index.html`, `assets/site.js`, `README.md`, `readiness/`, `readiness.html`, `tests/test_readiness.py`, `.github/workflows/pages.yml`.
+
+### What was built
+
+**1. A pre-registered, proper-score skill lab (`skill-lab/`).** Three protocol files, a scoring library, a walk-forward evaluation harness, a page renderer, a fail-closed verifier, a machine-readable artifact and 10 published pages.
+
+- `docs/SKILL_LAB_PRE_REGISTRATION.md` (SL-PRE-01) froze the corpus, model, metrics, benchmark, controls, uncertainty, multiplicity, gates, divisions and the signal/staking separation **before any result was computed** — committed as `d80b8453bf6148c74cfaf6b6388fa1ec8498fa21`.
+- `docs/SKILL_LAB_PRE_REGISTRATION_AMENDMENT.md` (SL-PRE-01a) corrected the random-control wording and added the deterministic neutral control, again before any score existed.
+- `docs/SKILL_LAB_PRE_REGISTRATION_AMENDMENT_02.md` (SL-PRE-01b) freezes the **two-sided "what would change our mind" field** and the next evaluation window (2026 weeks 10 onward). It is written **forward** — it does not reinterpret the completed run.
+- `skill-lab/scripts/scorelib.py`: dependency-free normal CDF/quantile, American-price conversion, proportional and Shin de-vigging, Brier, log loss, skill, calibration ECE, game-cluster bootstrap, percentile and Benjamini–Hochberg.
+- `skill-lab/scripts/build.py`: walk-forward training (fitted on earlier seasons only), six registered strategy rows, market grading, proper scores, four controls, bootstrap uncertainty, BH correction, seven fail-closed gates, retrospective staking diagnostics, within-game dependence analysis, and JSON publication.
+- `skill-lab/scripts/build_pages.py` renders the pages from the committed artifact; it computes no new statistic, so a reviewer can diff the JSON against the page.
+
+**The result is negative and is published as such.** On the frozen 136-game corpus (2026 weeks 1–9), every registered row scored **worse** than the market's own de-vigged probability:
+
+| Row | Market | n | Brier skill | 95% game-cluster interval | Lower bound | BH q | Gates |
+|---|---|---|---|---|---|---|---|
+| spread_full | spread | 130 | −0.0294 | [−0.0961, +0.0345] | −0.0961 | 1.0000 | 2/7 |
+| spread_elo | spread | 130 | −0.0404 | [−0.1077, +0.0239] | −0.1077 | 1.0000 | 2/7 |
+| total_ls | total | 136 | −0.1172 | [−0.1867, −0.0489] | −0.1867 | 0.9999 | 2/7 |
+| total_shrink | total | 136 | −0.3029 | [−0.4653, −0.1382] | −0.4653 | 0.9999 | 2/7 |
+| ml_full | moneyline | 135 | −0.0346 | [−0.1204, +0.0387] | −0.1204 | 0.9999 | 3/7 |
+| ml_elo | moneyline | 135 | −0.0547 | [−0.1443, +0.0202] | −0.1443 | 0.9999 | 3/7 |
+
+**0 of 6 rows qualified for ranking.** The supporting walk-forward panel over 23 earlier seasons (5,067 graded games per row family) agrees: every row is negative there too, with intervals below zero. The retrospective staking table is published on its own page and cannot promote a row; the random-pick control reaches a positive 95th percentile on every market, which is the published proof that a lucky staking run and an edge look identical in a return column. The three parlay/prop divisions are published **empty**, because the legs of one game are measurably dependent (home-cover and over co-occur at 0.1769 against 0.2187 if independent, n = 130).
+
+**2. A hash-backed availability ledger (`availability-ledger/`).** Three official NFL transaction captures — reserve list October 2026, reserve list November 2026, league trades November 2026 — each stored with its source URL, retrieval time, capture scope and SHA-256, and joined to the committed club depth capture.
+
+- **9 stale depth rows**: a club depth chart captured 2026-11-12 still names a player the league had already placed on the reserve list (Terry McLaurin/Commanders 10/28, Jordan Whittington/Rams 11/10, Gracen Halton/49ers 11/10, Demond Claiborne/Vikings 11/09, Eyioma Uwazurike/Broncos 11/07, Dyami Brown/Commanders 11/07, and two unit rows for two of them).
+- **1 unresolved row**: Puka Nacua was placed on the reserve list on 11/12, the same calendar day as the depth capture. The order of the two events is not published, so the row is published as **unresolved**, not as stale and not as fresh.
+- **12 control cases**: every traded player is correctly absent from the depth chart of the club they left — the control that shows the test is not simply flagging every trade.
+- **40 of 50 reserve-listed players do not appear on the weekly report.** Their unavailability is established by the reserve list; the report alone cannot clear them.
+- The **Baltimore quarter-back case is published as unresolved**, not as confirmed stale: the reserve-list captures cover 26 September to 14 November 2026 only, so the reserve date of either listed quarterback is not established here, and asserting "stale" would go beyond the evidence.
+- Pages: `index.html`, `ledger.html`, `availability.html`, `depth-flags.html`, `diff.html` (a weekly diff, not a second static snapshot), `flagged.html`, `sources.html`, plus `EXECUTIVE_SUMMARY.md` and `data/ledger.json`.
+
+### Verification performed
+
+- `skill-lab/scripts/verify.py` — protocol commit exists in the history; corpus arithmetic; gate arithmetic and eligibility agreement; bootstrap interval brackets the point estimate; no placeholder tokens; no broken internal links; every table row carries a source link; every graded forecast links to an official NFL scores page. **Pass.**
+- `availability-ledger/scripts/verify.py` — capture digests still match the stored files; every source URL is an official NFL page; stale verdicts are strictly older than the capture and same-day verdicts are not called stale; no placeholder tokens; no broken internal links; every table row carries a source link. **Pass.**
+- `tests/test_skill_lab.py` (20 tests) and `tests/test_availability_ledger.py` (19 tests) — scorer definitions, de-vig normalisation, BH monotonicity, the protocol-commit ordering (registration strictly earlier than the first commit that added the results artifact), gate arithmetic, control construction, published-number agreement between the artifact and the pages, and the executive summaries quoting the artifact. **Pass.**
+- `scripts/validate_site.py`, `tests/check_site.py`, `tests/test_readiness.py`, `tests/test_decision_lab.py` (37), `tests/test_official_verify.py` (36), `tests/test_injury_capture.py` (39), `tests/test_origination.py` — **all pass.**
+- `.github/workflows/pages.yml` gained four steps (skill-lab tests, skill-lab verification, availability-ledger tests, availability-ledger verification) so the two new workspaces are gated on every pull request.
+
+### Bugs found and fixed during this work
+
+1. **The game-cluster bootstrap was silently broken.** The resample unpacked `(model, reference)` tuples as `(model, market, reference)`, so every resampled statistic was `0.0` and the interval collapsed to `[0.0, 0.0]`. The first published run therefore reported a point estimate of 0 with a zero-width interval. Fixed by pre-aggregating per game; the interval now brackets the point estimate and is asserted by a regression test.
+2. **The within-game phi correlation used a wrong formula** (`n*p12 - sum(a)*sum(b)` without the factor of `n`), which produced impossible values near ±1 (e.g. −0.878 for home-cover vs over). Corrected to the Matthews form `(n·n11 − n1·n2)/√(n1(n−n1)·n2(n−n2))`; the published values are now −0.169 (cover↔over), +0.697 (cover↔win), −0.169 (over↔win).
+3. The bootstrap was rewritten to pre-aggregate per game, which cut the run from 8m25s to 2m26s with an identical statistic.
+
+### Boundaries stated, not crossed
+
+- The closing prices are **community-maintained** (the nflverse schedules release). There is no official or permissioned price history, so closing-line value and open-to-close movement are **blank**, not estimated. The benchmark price is labelled as such on every page that uses it.
+- The result scores are community-maintained and are cross-checked against the official standings page at the team-aggregate level; the tie to each official game centre is not established here.
+- Feature selection was not blinded; the walk-forward refit removes coefficient lookahead but not hindsight in the feature list.
+- The monthly league reserve-list page shows only part of each month, so a player absent from a capture is **not** evidence of being available. The ledger says so on its flagged page.
+- Two clubs (Packers, Texans) have no captured depth chart, so their players cannot be flagged.
+
+### Integration requests for the shared-root owner
+
+1. `index.html` — added two cards to section 03 (Origination), two rows to the site guide, two rows to the preserved-workspaces archive table, and two sidebar nav entries (`K Skill lab`, `V Availability ledger`).
+2. `assets/site.js` — two nav entries (`Skill lab`, `Availability ledger`).
+3. `README.md` — two workspace rows.
+4. `readiness/build_readiness.py` and the generated `readiness.html` / `readiness/data/readiness.csv` — eleven rows moved from Not started/Blocked to Partial/Done, each with the evidence and the gate that still blocks it: **P3, P10, P11, A13, A16, A19, L2, L3, L4, L5, L6, L7, L8**. **L6 is the only row that reached Done** (both control baselines now run and publish beside every row of every run).
+5. `tests/test_readiness.py` — the detailed-register status arithmetic was updated to the new counts (4 Done / 30 Partial / 13 Blocked / 16 Not started / 1 Decision recorded) and three new assertions were added for the moved rows.
+6. `.github/workflows/pages.yml` — four new validation steps (see above).
+
+### Readiness movement
+
+Detailed register (64 rows): **Not started 16 · Partial 30 · Blocked 13 · Done 4 · Decision recorded 1** (from 28 / 18 / 14 / 3 / 1). The canonical 26-requirement landing matrix is unchanged, because the rows moved here are *sub-requirements* of canonical requirements that were already partial.
+
+### Publication record
+
+Recorded after the pull request is opened and merged; see the entries appended below this one.
