@@ -1,0 +1,1097 @@
+{
+  "built_at_utc": "2026-11-15T13:19:14+00:00",
+  "model_version": "shadow-v1.0.0",
+  "config_hash": "101e9d2393e18899",
+  "corpus": {
+    "rows": 136,
+    "with_scores": 135,
+    "blank_scores": 1,
+    "weeks": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "ties": 1
+  },
+  "verification": {
+    "readings": 21,
+    "match": 17,
+    "blank_in_log": 2,
+    "differs": 0,
+    "rows": [
+      {
+        "id": "VR-01",
+        "week": "2",
+        "away": "WAS",
+        "home": "DAL",
+        "field": "away_score",
+        "value_read": "20",
+        "official_url": "https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2",
+        "read_window_utc": "2026-11-15T12:52Z/2026-11-15T13:00Z",
+        "scope": "game-centre score block",
+        "note": "The committed 2026 log leaves this cell blank (recorded 2026-11-12 as a Hidden Score). The game centre now publishes the final score, so the blank is closable by the file owner, not by this workspace.",
+        "log_value": "blank (recorded as Hidden Score)",
+        "verdict": "BLANK IN LOG - official page now carries a value"
+      },
+      {
+        "id": "VR-02",
+        "week": "2",
+        "away": "WAS",
+        "home": "DAL",
+        "field": "home_score",
+        "value_read": "37",
+        "official_url": "https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2",
+        "read_window_utc": "2026-11-15T12:52Z/2026-11-15T13:00Z",
+        "scope": "game-centre score block",
+        "note": "Same fixture as VR-01.",
+        "log_value": "blank (recorded as Hidden Score)",
+        "verdict": "BLANK IN LOG - official page now carries a value"
+      },
+      {
+        "id": "VR-03",
+        "week": "2",
+        "away": "WAS",
+        "home": "DAL",
+        "field": "quarter_sum_away",
+        "value_read": "20",
+        "official_url": "https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2",
+        "read_window_utc": "2026-11-15T12:52Z/2026-11-15T13:00Z",
+        "scope": "scoring-drives block",
+        "note": "Quarter scores 0/10/3/7 sum to the published final of 20 - an internal consistency check of the official page, not of this repository.",
+        "log_value": "",
+        "verdict": "internal check of the official page (no log field to compare)"
+      },
+      {
+        "id": "VR-04",
+        "week": "2",
+        "away": "WAS",
+        "home": "DAL",
+        "field": "quarter_sum_home",
+        "value_read": "37",
+        "official_url": "https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2",
+        "read_window_utc": "2026-11-15T12:52Z/2026-11-15T13:00Z",
+        "scope": "scoring-drives block",
+        "note": "Quarter scores 10/7/10/10 sum to the published final of 37.",
+        "log_value": "",
+        "verdict": "internal check of the official page (no log field to compare)"
+      },
+      {
+        "id": "VR-05",
+        "week": "9",
+        "away": "BUF",
+        "home": "MIN",
+        "field": "away_score",
+        "value_read": "23",
+        "official_url": "https://www.nfl.com/games/vikings-at-49ers-2026-reg-11",
+        "read_window_utc": "2026-11-15T12:52Z/2026-11-15T13:00Z",
+        "scope": "team previous-results module",
+        "note": "Read from the Vikings results strip on the Week 11 game centre, an official page other than the one the log was transcribed from.",
+        "log_value": "23",
+        "verdict": "MATCH"
+      },
+      {
+        "id": "VR-06",
+        "week": "8",
+        "away": "MIN",
+        "home": "DET",
+        "field": "away_score",
+        "value_read": "15",
+        "official_url": "https://www.nfl.com/games/vikings-at-49ers-2026-reg-11",
+        "read_window_utc": "2026-11-15T12:52Z/2026-11-15T13:00Z",
+        "scope": "team previous-results module",
+        "note": "Cross-page check of a row the log already carries.",
+        "log_value": "15",
+        "verdict": "MATCH"
+      },
+      {
+        "id": "VR-07",
+        "week": "8",
+        "away": "MIN",
+        "home": "DET",
+        "field": "home_score",
+        "value_read": "19",
+        "official_url": "https://www.nfl.com/games/vikings-at-49ers-2026-reg-11",
+        "read_window_utc": "2026-11-15T12:52Z/2026-11-15T13:00Z",
+        "scope": "team previous-results module",
+        "note": "Cross-page check of a row the log already carries.",
+        "log_value": "19",
+        "verdict": "MATCH"
+      },
+      {
+        "id": "VR-08",
+        "week": "7",
+        "away": "IND",
+        "home": "MIN",
+        "field": "away_score",
+        "value_read": "10",
+        "official_url": "https://www.nfl.com/games/vikings-at-49ers-2026-reg-11",
+        "read_window_utc": "2026-11-15T12:52Z/2026-11-15T13:00Z",
+        "scope": "team previous-results module",
+        "note": "Cross-page check of a row the log already carries.",
+        "log_value": "10",
+        "verdict": "MATCH"
+      },
+      {
+        "id": "VR-09",
+        "week": "7",
+        "away": "IND",
+        "home": "MIN",
+        "field": "home_score",
+        "value_read": "16",
+        "official_url": "https://www.nfl.com/games/vikings-at-49ers-2026-reg-11",
+        "read_window_utc": "2026-11-15T12:52Z/2026-11-15T13:00Z",
+        "scope": "team previous-results module",
+        "note": "Cross-page check of a row the log already carries.",
+        "log_value": "16",
+        "verdict": "MATCH"
+      },
+      {
+        "id": "VR-10",
+        "week": "5",
+        "away": "MIN",
+        "home": "NO",
+        "field": "away_score",
+        "value_read": "23",
+        "official_url": "https://www.nfl.com/games/vikings-at-49ers-2026-reg-11",
+        "read_window_utc": "2026-11-15T12:52Z/2026-11-15T13:00Z",
+        "scope": "team previous-results module",
+        "note": "Cross-page check of a row the log already carries.",
+        "log_value": "23",
+        "verdict": "MATCH"
+      },
+      {
+        "id": "VR-11",
+        "week": "5",
+        "away": "MIN",
+        "home": "NO",
+        "field": "home_score",
+        "value_read": "13",
+        "official_url": "https://www.nfl.com/games/vikings-at-49ers-2026-reg-11",
+        "read_window_utc": "2026-11-15T12:52Z/2026-11-15T13:00Z",
+        "scope": "team previous-results module",
+        "note": "Cross-page check of a row the log already carries.",
+        "log_value": "13",
+        "verdict": "MATCH"
+      },
+      {
+        "id": "VR-12",
+        "week": "1",
+        "away": "SF",
+        "home": "LA",
+        "field": "away_score",
+        "value_read": "27",
+        "official_url": "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "read_window_utc": "2026-11-15T12:52Z/2026-11-15T13:00Z",
+        "scope": "official Week 1 schedule page",
+        "note": "First-ever regular-season game played in Australia; shown as the East Melbourne block.",
+        "log_value": "27",
+        "verdict": "MATCH"
+      },
+      {
+        "id": "VR-13",
+        "week": "1",
+        "away": "SF",
+        "home": "LA",
+        "field": "home_score",
+        "value_read": "7",
+        "official_url": "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "read_window_utc": "2026-11-15T12:52Z/2026-11-15T13:00Z",
+        "scope": "official Week 1 schedule page",
+        "note": "Same fixture as VR-12.",
+        "log_value": "7",
+        "verdict": "MATCH"
+      },
+      {
+        "id": "VR-14",
+        "week": "1",
+        "away": "NE",
+        "home": "SEA",
+        "field": "away_score",
+        "value_read": "10",
+        "official_url": "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "read_window_utc": "2026-11-15T12:52Z/2026-11-15T13:00Z",
+        "scope": "official Week 1 schedule page",
+        "note": "Kickoff game.",
+        "log_value": "10",
+        "verdict": "MATCH"
+      },
+      {
+        "id": "VR-15",
+        "week": "1",
+        "away": "NE",
+        "home": "SEA",
+        "field": "home_score",
+        "value_read": "13",
+        "official_url": "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "read_window_utc": "2026-11-15T12:52Z/2026-11-15T13:00Z",
+        "scope": "official Week 1 schedule page",
+        "note": "Same fixture as VR-14.",
+        "log_value": "13",
+        "verdict": "MATCH"
+      },
+      {
+        "id": "VR-16",
+        "week": "1",
+        "away": "BUF",
+        "home": "HOU",
+        "field": "away_score",
+        "value_read": "36",
+        "official_url": "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "read_window_utc": "2026-11-15T12:52Z/2026-11-15T13:00Z",
+        "scope": "official Week 1 schedule page",
+        "note": "Bills at Texans on the opening Sunday (BUF listed away",
+        "null": [
+          " HOU home)."
+        ],
+        "log_value": "36",
+        "verdict": "MATCH"
+      },
+      {
+        "id": "VR-17",
+        "week": "1",
+        "away": "BUF",
+        "home": "HOU",
+        "field": "home_score",
+        "value_read": "31",
+        "official_url": "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "read_window_utc": "2026-11-15T12:52Z/2026-11-15T13:00Z",
+        "scope": "official Week 1 schedule page",
+        "note": "Same fixture as VR-16.",
+        "log_value": "31",
+        "verdict": "MATCH"
+      },
+      {
+        "id": "VR-18",
+        "week": "1",
+        "away": "BAL",
+        "home": "IND",
+        "field": "away_score",
+        "value_read": "41",
+        "official_url": "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "read_window_utc": "2026-11-15T12:52Z/2026-11-15T13:00Z",
+        "scope": "official Week 1 schedule page",
+        "note": "Ravens at Colts on the opening Sunday.",
+        "log_value": "41",
+        "verdict": "MATCH"
+      },
+      {
+        "id": "VR-19",
+        "week": "1",
+        "away": "BAL",
+        "home": "IND",
+        "field": "home_score",
+        "value_read": "23",
+        "official_url": "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "read_window_utc": "2026-11-15T12:52Z/2026-11-15T13:00Z",
+        "scope": "official Week 1 schedule page",
+        "note": "Same fixture as VR-18.",
+        "log_value": "23",
+        "verdict": "MATCH"
+      },
+      {
+        "id": "VR-20",
+        "week": "1",
+        "away": "CHI",
+        "home": "CAR",
+        "field": "away_score",
+        "value_read": "59",
+        "official_url": "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "read_window_utc": "2026-11-15T12:52Z/2026-11-15T13:00Z",
+        "scope": "official Week 1 schedule page",
+        "note": "High-scoring opener checked against the log row.",
+        "log_value": "59",
+        "verdict": "MATCH"
+      },
+      {
+        "id": "VR-21",
+        "week": "1",
+        "away": "CHI",
+        "home": "CAR",
+        "field": "home_score",
+        "value_read": "37",
+        "official_url": "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "read_window_utc": "2026-11-15T12:52Z/2026-11-15T13:00Z",
+        "scope": "official Week 1 schedule page",
+        "note": "Same fixture as VR-20.",
+        "log_value": "37",
+        "verdict": "MATCH"
+      }
+    ]
+  },
+  "backtest": {
+    "graded_games": 118,
+    "graded_games_with_ties": 119,
+    "ties_excluded": 1,
+    "entries": {
+      "SB1-ML": {
+        "n": 118,
+        "brier": 0.24164536331801553,
+        "brier_base": 0.25923594330508437,
+        "skill": 0.06785548239492079,
+        "skill_lo": -0.05166947114005871,
+        "skill_hi": 0.18099710784741274,
+        "p_value": 0.1265746850629874,
+        "log_score": 0.6760990689175486,
+        "hits": 76,
+        "hit_rate": 0.6440677966101694,
+        "wilson_lo": 0.5543867776807746,
+        "wilson_hi": 0.7246640555321838,
+        "half_1_skill": 0.021341914386734384,
+        "half_2_skill": 0.11565848407575774,
+        "required_n": 352,
+        "ties_excluded": 1,
+        "bh_pass": false
+      },
+      "SB1-ML-S": {
+        "n": 62,
+        "brier": 0.2528872744891452,
+        "brier_base": 0.25194417838709665,
+        "skill": -0.003743274038265465,
+        "skill_lo": -0.22975396857046615,
+        "skill_hi": 0.20788251129007906,
+        "p_value": 0.509498100379924,
+        "log_score": 0.6985796674192039,
+        "hits": 35,
+        "hit_rate": 0.5645161290322581,
+        "wilson_lo": 0.4409276740746584,
+        "wilson_hi": 0.6805760560898578,
+        "half_1_skill": 0.02933225879898871,
+        "half_2_skill": -0.036987138292675636,
+        "required_n": Infinity,
+        "ties_excluded": 1,
+        "bh_pass": false
+      },
+      "SB1-TOT": {
+        "n": 119,
+        "brier": 0.23971257802260867,
+        "brier_base": 0.2570834678151257,
+        "skill": 0.06756906595413137,
+        "skill_lo": -0.05262706006757267,
+        "skill_hi": 0.1826152591919018,
+        "p_value": 0.14837032593481303,
+        "log_score": 0.6764427303563662,
+        "hits": 76,
+        "hit_rate": 0.6386554621848739,
+        "wilson_lo": 0.5492559860401527,
+        "wilson_hi": 0.7193826510339328,
+        "half_1_skill": 0.010362563822622128,
+        "half_2_skill": 0.12404690123461914,
+        "required_n": Infinity,
+        "ties_excluded": 0,
+        "rmse": 14.747149133409659,
+        "rmse_base": 14.058325533530756,
+        "mae": 12.25453781512605,
+        "quad_skill": -0.10039587358092672,
+        "quad_skill_lo": -0.21710172653444948,
+        "quad_skill_hi": 0.007750362759679885,
+        "quad_skill_p": 0.9648070385922816,
+        "mean_sq_improvement_pts2": -19.841890756302508,
+        "bh_pass": null
+      },
+      "CT-HOME": {
+        "n": 118,
+        "brier": 0.25923594330508437,
+        "brier_base": 0.25923594330508437,
+        "skill": 0.0,
+        "skill_lo": 0.0,
+        "skill_hi": 0.0,
+        "p_value": 1.0,
+        "log_score": 0.711923944510346,
+        "hits": 50,
+        "hit_rate": 0.423728813559322,
+        "wilson_lo": 0.338356999194349,
+        "wilson_hi": 0.5139102067517317,
+        "half_1_skill": 0.0,
+        "half_2_skill": 0.0,
+        "required_n": Infinity,
+        "ties_excluded": 1,
+        "bh_pass": false
+      },
+      "CT-RAND": {
+        "n": 118,
+        "brier": 0.25,
+        "brier_base": 0.25923594330508437,
+        "skill": 0.03562755684004426,
+        "skill_lo": -0.00554659776015165,
+        "skill_hi": 0.07380334847894232,
+        "p_value": 0.04479104179164167,
+        "log_score": 0.6931471805599461,
+        "hits": 56,
+        "hit_rate": 0.4745762711864407,
+        "wilson_lo": 0.3867064050210384,
+        "wilson_hi": 0.5640493302943217,
+        "half_1_skill": 0.04863400264324125,
+        "half_2_skill": 0.02226055066923427,
+        "required_n": 147,
+        "ties_excluded": 1,
+        "bh_pass": false
+      }
+    }
+  },
+  "correlations": [
+    {
+      "measure": "expected margin vs actual margin",
+      "r": 0.1961643387674225,
+      "n": 119,
+      "ci": [
+        0.016757242431951754,
+        0.3633340364319014
+      ]
+    },
+    {
+      "measure": "expected total vs actual total",
+      "r": -0.05582520654938141,
+      "n": 119,
+      "ci": [
+        -0.23347789464519592,
+        0.12543399665684038
+      ]
+    },
+    {
+      "measure": "confidence |margin| vs realised |margin|",
+      "r": -0.017240607804518037,
+      "n": 119,
+      "ci": [
+        -0.196629194245938,
+        0.1632648336104372
+      ]
+    },
+    {
+      "measure": "same-game dependence: home win vs total above our number (phi)",
+      "r": -0.07936507936507936,
+      "n": 119,
+      "ci": [
+        -0.2557108750964512,
+        0.1020921536619569
+      ]
+    }
+  ],
+  "luck": {
+    "moneyline": {
+      "n": 118,
+      "observed_hits": 76,
+      "expected_hits_mean": 76.6749,
+      "expected_hits_sd": 5.045352591161488,
+      "hits_percentile": 0.4817,
+      "observed_brier": 0.24164536331801553,
+      "simulated_brier_mean": 0.21737501668178874,
+      "simulated_brier_p025": 0.1914683545663101,
+      "simulated_brier_p975": 0.24599464763896983,
+      "brier_percentile": 0.048,
+      "draws": 20000
+    },
+    "selective": {
+      "n": 62,
+      "observed_hits": 35,
+      "expected_hits_mean": 45.30155,
+      "expected_hits_sd": 3.501832483006373,
+      "hits_percentile": 0.0037,
+      "observed_brier": 0.2528872744891452,
+      "simulated_brier_mean": 0.19268159827412645,
+      "simulated_brier_p025": 0.1446304329206746,
+      "simulated_brier_p975": 0.24529462808201702,
+      "brier_percentile": 0.0128,
+      "draws": 20000
+    },
+    "variance": {
+      "var_actual": 171.78336419313484,
+      "var_expected": 44.99865694879218,
+      "var_residual": 182.28827347065516,
+      "share_explained": 0.2619500273507306
+    }
+  },
+  "graded_for_win_grading": 118,
+  "fixtures": 13,
+  "forecast_records": 65,
+  "prospective_graded": 0,
+  "issued_before_first_kickoff": true,
+  "first_kickoff_iso": "2026-11-19T20:15:00-05:00",
+  "as_of_data": "2026 weeks 1-9",
+  "last_verified_game_date": "2026-11-09",
+  "rank_now": {
+    "JAX": {
+      "rank": 1,
+      "net": 10.8166,
+      "att": 27.4959,
+      "def": 16.6793,
+      "w": 6,
+      "l": 2,
+      "t": 0
+    },
+    "SF": {
+      "rank": 2,
+      "net": 7.9166,
+      "att": 28.0959,
+      "def": 20.1793,
+      "w": 7,
+      "l": 1,
+      "t": 0
+    },
+    "BUF": {
+      "rank": 3,
+      "net": 6.9166,
+      "att": 30.1959,
+      "def": 23.2793,
+      "w": 7,
+      "l": 1,
+      "t": 0
+    },
+    "CIN": {
+      "rank": 4,
+      "net": 6.5166,
+      "att": 28.5959,
+      "def": 22.0793,
+      "w": 6,
+      "l": 2,
+      "t": 0
+    },
+    "KC": {
+      "rank": 5,
+      "net": 5.9166,
+      "att": 24.7959,
+      "def": 18.8793,
+      "w": 6,
+      "l": 2,
+      "t": 0
+    },
+    "CHI": {
+      "rank": 6,
+      "net": 5.1969,
+      "att": 26.0872,
+      "def": 20.8902,
+      "w": 7,
+      "l": 2,
+      "t": 0
+    },
+    "SEA": {
+      "rank": 7,
+      "net": 3.6515,
+      "att": 22.5417,
+      "def": 18.8902,
+      "w": 5,
+      "l": 4,
+      "t": 0
+    },
+    "PIT": {
+      "rank": 8,
+      "net": 3.6166,
+      "att": 22.5959,
+      "def": 18.9793,
+      "w": 6,
+      "l": 2,
+      "t": 0
+    },
+    "DET": {
+      "rank": 9,
+      "net": 3.3166,
+      "att": 26.7959,
+      "def": 23.4793,
+      "w": 6,
+      "l": 2,
+      "t": 0
+    },
+    "MIN": {
+      "rank": 10,
+      "net": 3.0166,
+      "att": 19.1959,
+      "def": 16.1793,
+      "w": 6,
+      "l": 2,
+      "t": 0
+    },
+    "LA": {
+      "rank": 11,
+      "net": 3.0151,
+      "att": 23.6326,
+      "def": 20.6175,
+      "w": 5,
+      "l": 4,
+      "t": 0
+    },
+    "GB": {
+      "rank": 12,
+      "net": 2.2878,
+      "att": 23.8144,
+      "def": 21.5266,
+      "w": 6,
+      "l": 3,
+      "t": 0
+    },
+    "TB": {
+      "rank": 13,
+      "net": 2.1969,
+      "att": 22.5417,
+      "def": 20.3448,
+      "w": 3,
+      "l": 6,
+      "t": 0
+    },
+    "HOU": {
+      "rank": 14,
+      "net": 1.7166,
+      "att": 25.4959,
+      "def": 23.7793,
+      "w": 3,
+      "l": 5,
+      "t": 0
+    },
+    "DEN": {
+      "rank": 15,
+      "net": 1.106,
+      "att": 22.1781,
+      "def": 21.0721,
+      "w": 7,
+      "l": 2,
+      "t": 0
+    },
+    "NYG": {
+      "rank": 16,
+      "net": 1.0166,
+      "att": 22.7959,
+      "def": 21.7793,
+      "w": 5,
+      "l": 2,
+      "t": 1
+    },
+    "NE": {
+      "rank": 17,
+      "net": 0.3787,
+      "att": 23.3599,
+      "def": 22.9812,
+      "w": 5,
+      "l": 4,
+      "t": 0
+    },
+    "DAL": {
+      "rank": 18,
+      "net": -0.6834,
+      "att": 25.4959,
+      "def": 26.1793,
+      "w": 3,
+      "l": 5,
+      "t": 0
+    },
+    "WAS": {
+      "rank": 19,
+      "net": -1.426,
+      "att": 21.9954,
+      "def": 23.4214,
+      "w": 2,
+      "l": 4,
+      "t": 1
+    },
+    "CAR": {
+      "rank": 20,
+      "net": -1.9834,
+      "att": 24.4959,
+      "def": 26.4793,
+      "w": 3,
+      "l": 5,
+      "t": 0
+    },
+    "LV": {
+      "rank": 21,
+      "net": -2.7122,
+      "att": 25.8144,
+      "def": 28.5266,
+      "w": 4,
+      "l": 5,
+      "t": 0
+    },
+    "NO": {
+      "rank": 22,
+      "net": -3.0834,
+      "att": 23.0959,
+      "def": 26.1793,
+      "w": 3,
+      "l": 5,
+      "t": 0
+    },
+    "ATL": {
+      "rank": 23,
+      "net": -3.1667,
+      "att": 21.269,
+      "def": 24.4357,
+      "w": 3,
+      "l": 6,
+      "t": 0
+    },
+    "CLE": {
+      "rank": 24,
+      "net": -3.1667,
+      "att": 18.8144,
+      "def": 21.9812,
+      "w": 5,
+      "l": 4,
+      "t": 0
+    },
+    "NYJ": {
+      "rank": 25,
+      "net": -3.7122,
+      "att": 20.7235,
+      "def": 24.4357,
+      "w": 2,
+      "l": 7,
+      "t": 0
+    },
+    "BAL": {
+      "rank": 26,
+      "net": -4.2576,
+      "att": 21.3599,
+      "def": 25.6175,
+      "w": 4,
+      "l": 5,
+      "t": 0
+    },
+    "TEN": {
+      "rank": 27,
+      "net": -5.4834,
+      "att": 18.9959,
+      "def": 24.4793,
+      "w": 1,
+      "l": 7,
+      "t": 0
+    },
+    "IND": {
+      "rank": 28,
+      "net": -5.894,
+      "att": 20.9053,
+      "def": 26.7993,
+      "w": 2,
+      "l": 7,
+      "t": 0
+    },
+    "PHI": {
+      "rank": 29,
+      "net": -6.6213,
+      "att": 17.6326,
+      "def": 24.2539,
+      "w": 2,
+      "l": 7,
+      "t": 0
+    },
+    "ARI": {
+      "rank": 30,
+      "net": -6.9849,
+      "att": 20.3599,
+      "def": 27.3448,
+      "w": 3,
+      "l": 6,
+      "t": 0
+    },
+    "MIA": {
+      "rank": 31,
+      "net": -7.3834,
+      "att": 17.1959,
+      "def": 24.5793,
+      "w": 1,
+      "l": 7,
+      "t": 0
+    },
+    "LAC": {
+      "rank": 32,
+      "net": -9.7834,
+      "att": 16.6959,
+      "def": 26.4793,
+      "w": 0,
+      "l": 8,
+      "t": 0
+    }
+  },
+  "rank_prev": {
+    "JAX": {
+      "rank": 1,
+      "net": 9.4611,
+      "att": 26.91,
+      "def": 17.449,
+      "w": 5,
+      "l": 2,
+      "t": 0
+    },
+    "SF": {
+      "rank": 2,
+      "net": 6.4611,
+      "att": 27.0211,
+      "def": 20.5601,
+      "w": 6,
+      "l": 1,
+      "t": 0
+    },
+    "BUF": {
+      "rank": 3,
+      "net": 5.7944,
+      "att": 31.0211,
+      "def": 25.2267,
+      "w": 6,
+      "l": 1,
+      "t": 0
+    },
+    "CHI": {
+      "rank": 4,
+      "net": 5.415,
+      "att": 26.019,
+      "def": 20.6041,
+      "w": 6,
+      "l": 2,
+      "t": 0
+    },
+    "CIN": {
+      "rank": 5,
+      "net": 5.35,
+      "att": 28.0211,
+      "def": 22.6712,
+      "w": 5,
+      "l": 2,
+      "t": 0
+    },
+    "MIN": {
+      "rank": 6,
+      "net": 5.2388,
+      "att": 20.6878,
+      "def": 15.449,
+      "w": 6,
+      "l": 1,
+      "t": 0
+    },
+    "KC": {
+      "rank": 7,
+      "net": 4.0166,
+      "att": 23.6878,
+      "def": 19.6712,
+      "w": 5,
+      "l": 2,
+      "t": 0
+    },
+    "PIT": {
+      "rank": 8,
+      "net": 3.615,
+      "att": 22.619,
+      "def": 19.0041,
+      "w": 6,
+      "l": 2,
+      "t": 0
+    },
+    "TB": {
+      "rank": 9,
+      "net": 2.715,
+      "att": 22.419,
+      "def": 19.7041,
+      "w": 3,
+      "l": 5,
+      "t": 0
+    },
+    "LA": {
+      "rank": 10,
+      "net": 2.615,
+      "att": 24.019,
+      "def": 21.4041,
+      "w": 4,
+      "l": 4,
+      "t": 0
+    },
+    "SEA": {
+      "rank": 11,
+      "net": 2.615,
+      "att": 23.119,
+      "def": 20.5041,
+      "w": 4,
+      "l": 4,
+      "t": 0
+    },
+    "DET": {
+      "rank": 12,
+      "net": 2.5722,
+      "att": 27.6878,
+      "def": 25.1156,
+      "w": 5,
+      "l": 2,
+      "t": 0
+    },
+    "NE": {
+      "rank": 13,
+      "net": 2.215,
+      "att": 23.019,
+      "def": 20.8041,
+      "w": 5,
+      "l": 3,
+      "t": 0
+    },
+    "DEN": {
+      "rank": 14,
+      "net": 0.715,
+      "att": 21.819,
+      "def": 21.1041,
+      "w": 6,
+      "l": 2,
+      "t": 0
+    },
+    "GB": {
+      "rank": 15,
+      "net": 0.715,
+      "att": 21.719,
+      "def": 21.0041,
+      "w": 5,
+      "l": 3,
+      "t": 0
+    },
+    "NYG": {
+      "rank": 16,
+      "net": 0.2388,
+      "att": 23.2433,
+      "def": 23.0045,
+      "w": 4,
+      "l": 2,
+      "t": 1
+    },
+    "HOU": {
+      "rank": 17,
+      "net": -0.5389,
+      "att": 23.4656,
+      "def": 24.0045,
+      "w": 2,
+      "l": 5,
+      "t": 0
+    },
+    "WAS": {
+      "rank": 18,
+      "net": -0.7313,
+      "att": 23.1488,
+      "def": 23.8801,
+      "w": 2,
+      "l": 3,
+      "t": 1
+    },
+    "LV": {
+      "rank": 19,
+      "net": -0.885,
+      "att": 26.719,
+      "def": 27.6041,
+      "w": 4,
+      "l": 4,
+      "t": 0
+    },
+    "DAL": {
+      "rank": 20,
+      "net": -1.2056,
+      "att": 25.3545,
+      "def": 26.5601,
+      "w": 2,
+      "l": 5,
+      "t": 0
+    },
+    "CAR": {
+      "rank": 21,
+      "net": -1.65,
+      "att": 24.91,
+      "def": 26.5601,
+      "w": 3,
+      "l": 4,
+      "t": 0
+    },
+    "ATL": {
+      "rank": 22,
+      "net": -1.785,
+      "att": 21.719,
+      "def": 23.5041,
+      "w": 3,
+      "l": 5,
+      "t": 0
+    },
+    "NYJ": {
+      "rank": 23,
+      "net": -1.785,
+      "att": 21.619,
+      "def": 23.4041,
+      "w": 2,
+      "l": 6,
+      "t": 0
+    },
+    "BAL": {
+      "rank": 24,
+      "net": -2.385,
+      "att": 22.519,
+      "def": 24.9041,
+      "w": 4,
+      "l": 4,
+      "t": 0
+    },
+    "CLE": {
+      "rank": 25,
+      "net": -3.385,
+      "att": 18.519,
+      "def": 21.9041,
+      "w": 5,
+      "l": 3,
+      "t": 0
+    },
+    "NO": {
+      "rank": 26,
+      "net": -3.5389,
+      "att": 23.1322,
+      "def": 26.6712,
+      "w": 2,
+      "l": 5,
+      "t": 0
+    },
+    "TEN": {
+      "rank": 27,
+      "net": -5.485,
+      "att": 19.019,
+      "def": 24.5041,
+      "w": 1,
+      "l": 7,
+      "t": 0
+    },
+    "IND": {
+      "rank": 28,
+      "net": -6.085,
+      "att": 20.719,
+      "def": 26.8041,
+      "w": 2,
+      "l": 6,
+      "t": 0
+    },
+    "ARI": {
+      "rank": 29,
+      "net": -6.285,
+      "att": 22.119,
+      "def": 28.4041,
+      "w": 3,
+      "l": 5,
+      "t": 0
+    },
+    "PHI": {
+      "rank": 30,
+      "net": -6.485,
+      "att": 18.319,
+      "def": 24.8041,
+      "w": 2,
+      "l": 6,
+      "t": 0
+    },
+    "MIA": {
+      "rank": 31,
+      "net": -7.0945,
+      "att": 18.1322,
+      "def": 25.2267,
+      "w": 1,
+      "l": 6,
+      "t": 0
+    },
+    "LAC": {
+      "rank": 32,
+      "net": -8.4278,
+      "att": 16.1322,
+      "def": 24.5601,
+      "w": 0,
+      "l": 7,
+      "t": 0
+    }
+  }
+}
