@@ -1,0 +1,143 @@
+{
+  "updated": "2026-11-15",
+  "registered_by": "arena/ba6c5155-nfl3",
+  "basis": "Pre-registered two-sided falsification criteria: what would confirm the hypothesis, and what would change our mind and retire it. These are proposed decision rules written before any strategy was run; they are not findings, effects or performance claims. Every test named here needs official settlement data and, where prices appear, licensed rows in the pricing store.",
+  "entries": {
+    "Availability-adjusted line versus market": {
+      "confirms": "With licensed prices in the store, the availability-adjusted fair line earns positive closing-line value at the pre-registered threshold on a prospective sample, after de-vigging.",
+      "kills": "The prospective CLV lower bound is at or below zero, or the adjustment moves the line away from the closing line on balance."
+    },
+    "Backup QB start – total under": {
+      "confirms": "On official game books naming a backup starter at quarterback, the pre-registered total-under rule shows positive Brier skill versus the no-information baseline over a multi-season official sample.",
+      "kills": "The skill interval includes zero, or unders and overs split evenly in the backup-quarterback subsample."
+    },
+    "Control: favorites only": {
+      "confirms": "As a control it succeeds by being beaten: a candidate must out-earn this baseline on the same games to be considered skilful at all.",
+      "kills": "A leaderboard run that omits this control beside every strategy is invalid and its results are discarded."
+    },
+    "Control: random side each game": {
+      "confirms": "As a control it succeeds by being beaten: a seeded random side is the luck benchmark every candidate must outscore on Brier skill.",
+      "kills": "A leaderboard run that omits this control beside every strategy is invalid and its results are discarded."
+    },
+    "Cross-game parlay value": {
+      "confirms": "A directly validated joint probability for the leg set, from official settlement data with published n, differs from the operator price after the void/push rules are applied.",
+      "kills": "No validated joint probability exists, or the operator price sits inside the joint price interval; no combo is ever ranked."
+    },
+    "Defensive depth deficiency (secondary/line)": {
+      "confirms": "A pre-registered ablation comparing identical models with and without verified defensive-absence features shows opponent scoring forecasts improving on official chronological holdouts, interval above zero.",
+      "kills": "The ablation difference interval includes zero, or the effect appears only in seasons used for fitting."
+    },
+    "Divisional compression": {
+      "confirms": "Adding a divisional-game indicator improves spread or total forecasts over the team-strength baseline in a pre-registered chronological comparison, lower bound above zero.",
+      "kills": "No out-of-sample improvement, and the indicator is retired."
+    },
+    "Injury-news timing reaction": {
+      "confirms": "Forecasts updated only after official status changes beat stale baselines on proper scores in a pre-registered replay with clock-time stamps.",
+      "kills": "The replay shows no improvement, or the update cannot be recorded before the market moves."
+    },
+    "Injury-status change fade": {
+      "confirms": "When a starter moves to Out on the official Friday designation, the pre-registered fade rule earns positive closing-line value against licensed closing prices, lower bound above zero.",
+      "kills": "The CLV lower bound is at or below zero, or the closing line already fully reprices the change."
+    },
+    "Line movement after injury news (CLV)": {
+      "confirms": "With licensed price snapshots at official news timestamps, post-news quotes differ from closing quotes in the pre-registered direction at the declared threshold.",
+      "kills": "No systematic difference remains after de-vigging, or the direction reverses out of sample."
+    },
+    "Net injury differential – spread": {
+      "confirms": "A pre-registered net-availability count from official reports and game books explains spread-forecast residuals beyond the team-strength baseline, interval above zero.",
+      "kills": "The interval includes zero once opponent quality and market information are controlled for."
+    },
+    "Offensive line replacement – rushing under": {
+      "confirms": "Official game books naming backup offensive linemen are followed by lower rushing output than the pre-registered prop baseline implies, on samples settled from official stats.",
+      "kills": "No under bias in the subsample, or its interval includes zero."
+    },
+    "Offensive-line replacement stress": {
+      "confirms": "The pre-registered ablation shows team-scoring forecasts improve when verified offensive-line availability features are included, on chronological holdouts, interval above zero.",
+      "kills": "The ablation difference interval includes zero."
+    },
+    "Opponent-adjusted team strength": {
+      "confirms": "Rolling opponent-adjusted efficiency beats the simple baseline on Brier skill over pre-registered holdout games, lower bound above zero.",
+      "kills": "No out-of-sample skill gain over the simple baseline."
+    },
+    " Pace and possession efficiency": {
+      "confirms": "In a pre-registered walk-forward on the official game log, the total forecast using neutral pace and points-per-possession beats the raw-points baseline on Brier score, with the game-cluster lower bound above zero.",
+      "kills": "The lower bound touches zero, or the gain vanishes on the holdout block; pace and possession then add nothing beyond raw scoring and the strategy is retired."
+    },
+    "Practice-trend signal (DNP→LP→FP)": {
+      "confirms": "Multi-season official designations joined to official inactives show the DNP-to-LP-to-FP progression raising play probability over LP-to-DNP, with an interval excluding no difference, computed before any model uses the label.",
+      "kills": "The interval includes no difference, or the direction reverses out of sample."
+    },
+    "Pythagorean luck regression": {
+      "confirms": "Clubs whose win total exceeds the Pythagorean expectation regress toward it in later official results, in the pre-registered direction, interval above zero.",
+      "kills": "No regression beyond chance, or the gap is already inside the closing line."
+    },
+    "Quarterback availability shock": {
+      "confirms": "The pre-registered ablation comparing identical models with and without verified quarterback-availability features shows improved team-scoring forecasts on official holdouts, interval above zero.",
+      "kills": "The ablation difference interval includes zero."
+    },
+    "Quarterback-out offence fade": {
+      "confirms": "Fading the side missing a verified starting quarterback earns positive prospective closing-line value at the pre-registered threshold against licensed closing prices.",
+      "kills": "The CLV lower bound is at or below zero."
+    },
+    "Rating-mismatch spread": {
+      "confirms": "Entries taken only when the model margin disagrees with the licensed closing line by more than the pre-registered threshold earn positive Brier skill and CLV prospectively.",
+      "kills": "Either lower bound is at or below zero."
+    },
+    "Receiver opportunity prop": {
+      "confirms": "Official participation and target data show reception and yardage forecasts improve when verified personnel-shift features are included, on pre-registered prop samples settled from official stats.",
+      "kills": "No improvement over the prop baseline, or settlement cannot be sourced officially."
+    },
+    "Receiver target-share prop": {
+      "confirms": "Pre-registered volume props settled from official stats show positive skill versus the market-implied baseline once licensed prices exist.",
+      "kills": "No skill edge, or the share signal is stale by kickoff."
+    },
+    "Rest and schedule asymmetry": {
+      "confirms": "Published schedule facts (byes, Thursday turnarounds, international travel) improve forecasts over the baseline in a pre-registered comparison, interval above zero, before any price comparison.",
+      "kills": "No gain from the schedule features, or the gain is smaller than the vig."
+    },
+    "Running-back workload prop": {
+      "confirms": "Verified rising snap and carry share from official participation data predicts rushing props better than the pre-registered baseline, interval above zero.",
+      "kills": "No predictive gain, or the workload is already priced at kickoff."
+    },
+    "Rushing workload prop combo": {
+      "confirms": "A directly validated joint probability for the workload legs exists from official settlement data with published n, and the operator void/push rules are documented.",
+      "kills": "Either is missing, and the combo stays unranked."
+    },
+    "Same-game parlay: QB passing yards over + WR1 receptions over": {
+      "confirms": "A validated joint probability from official settlement data with published n exceeds the independence product, and the operator price does not reflect the gap.",
+      "kills": "The joint probability is not validated, or the price already reflects it."
+    },
+    "Same-game script combination": {
+      "confirms": "Conditional joint modelling of game-script legs beats marginal multiplication on held-out official settlements, interval above zero.",
+      "kills": "No advantage over marginals, or the joint sample is below the pre-registered n."
+    },
+    "Secondary attrition versus the pass": {
+      "confirms": "Official game books naming backup defensive backs show opponent passing efficiency rising, in a pre-registered ablation on official data, interval above zero.",
+      "kills": "The ablation difference interval includes zero."
+    },
+    "Secondary replacement exposure": {
+      "confirms": "Coverage-role-weighted availability features improve passing forecasts on official holdouts versus the same model without them, interval above zero.",
+      "kills": "No improvement, or the coverage role cannot be established from official sources."
+    },
+    "Team total under + game total under (parlay)": {
+      "confirms": "A validated joint probability from official settlements with published n prices the pair differently from the operator price after void/push rules.",
+      "kills": "No validated joint probability, and the pair is never ranked."
+    },
+    "Three-leg same-game script parlay": {
+      "confirms": "A directly validated three-leg joint probability from official settlement data, with published n, shows the operator price materially above the joint price.",
+      "kills": "The joint probability is not validated, or the price gap sits inside its interval."
+    },
+    "Two-leg cross-game parlay": {
+      "confirms": "Cross-game legs are near-independent in official settlement data with published n, so the de-vigged product rule prices the combo within its interval; edge exists only if the operator price differs.",
+      "kills": "The legs are not independent in the data, or the operator price matches the joint price."
+    },
+    "Two-leg same-game parlay (team total + spread)": {
+      "confirms": "A validated same-game joint probability with published n shows the independent-leg price is materially wrong in the pre-registered direction.",
+      "kills": "No validated joint probability, or the mispricing is inside the interval."
+    },
+    "Uncorrelated 2-leg parlay of two single games (control)": {
+      "confirms": "As a control it succeeds when the correlation-adjusted method beats the unadjusted product rule on held-out official settlements.",
+      "kills": "A run that omits this control for combo divisions is invalid and its results are discarded."
+    }
+  }
+}

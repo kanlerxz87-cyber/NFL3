@@ -29,19 +29,20 @@ def main() -> None:
 
     # Detailed 64-row register (rebuilt by readiness/build_readiness.py): regression checks for the
     # verified results feed, the corpus freeze and the published injury-hub delta (session
-    # arena/16183225-nfl3, 2026-11-15). The landing matrix keeps its dated catalog labels and is
+    # arena/16183225-nfl3, 2026-11-15), reconciled with the pricing/corpus work (session
+    # arena/ba6c5155-nfl3, 2026-11-15). The landing matrix keeps its dated catalog labels and is
     # deliberately not asserted against these.
     register = (ROOT / "readiness" / "data" / "readiness.csv").read_text(encoding="utf-8")
     rows = {r["id"]: r for r in csv.DictReader(register.splitlines())}
     assert len(rows) == 64, f"detailed register should hold 64 rows, found {len(rows)}"
     assert rows["R1"]["status"] == "Done" and "136/136" in rows["R1"]["current"], "R1 must record the 136/136 official verification"
-    assert rows["R2"]["status"] == "Partial" and "76f4c7d775b8" in rows["R2"]["current"], "R2 must record the corpus freeze commit"
+    assert rows["R2"]["status"] == "Done" and "76f4c7d775b8" in rows["R2"]["current"], "R2 must record the corpus freeze commit (its clears rule: frozen before any evaluation)"
     assert "a1633c20" in rows["R2"]["current"], "R2 must record the frozen corpus hash"
     assert rows["A3"]["status"] == "Partial" and "139 game-status changes" in rows["A3"]["current"], "A3 must record the published per-player deltas"
     assert rows["A4"]["current"].count("20") >= 4 and "2026-11-15" in rows["A4"]["current"], "A4 must record four dated reads"
     status_counts2 = collections.Counter(r["status"] for r in rows.values())
-    assert status_counts2["Done"] == 3 and status_counts2["Partial"] == 18 and status_counts2["Blocked"] == 14 \
-        and status_counts2["Not started"] == 28 and status_counts2["Decision recorded"] == 1, \
+    assert status_counts2["Done"] == 8 and status_counts2["Partial"] == 20 and status_counts2["Blocked"] == 13 \
+        and status_counts2["Not started"] == 22 and status_counts2["Decision recorded"] == 1, \
         f"detailed register status arithmetic drifted: {status_counts2}"
     for rid in ("R1", "R2", "A3", "A4"):
         assert rows[rid]["official"].startswith("http"), f"{rid} must keep an official source link"

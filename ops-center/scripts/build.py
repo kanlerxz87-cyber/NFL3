@@ -706,7 +706,11 @@ def page_leaderboard(ctx: dict) -> str:
             f'<td>{pill(s["status"] or "not run", "danger" if "block" in (s["status"] or "").lower() else "warn")}</td>'
             + blank() + blank() + blank() +
             f'<td>{pill("no", "danger")}</td>'
-            f'<td class="fine">{e(", ".join(s["provenance"]))}</td>'
+            + (f'<td>{e(s["mind_confirms"])}</td><td>{e(s["mind_kills"])}</td>'
+               if s.get("mind_confirms") and s.get("mind_kills") else blank() + blank())
+            + (f'<td class="fine">registration {e(s["registration"][:12])}&#8230;</td>'
+               if s.get("registration") else blank())
+            + f'<td class="fine">{e(", ".join(s["provenance"]))}</td>'
             + sources_cell(s["sources"]) + "</tr>"
         )
 
@@ -730,6 +734,9 @@ def page_leaderboard(ctx: dict) -> str:
                "print a score."),
         metrics([
             ("Strategies registered", str(len(strat)), "hypotheses, not results"),
+            ("Two-sided falsification fields",
+             f"{sum(1 for s in strat if s.get('mind_confirms') and s.get('mind_kills'))} / {len(strat)}",
+             "pre-registered criteria"),
             ("Validated", "0", "all blocked at the data gate"),
             ("Gates", str(len(gates)), "merged and deduplicated"),
             ("Gates passed by any strategy", "0", "nothing has been evaluated"),
@@ -741,9 +748,76 @@ def page_leaderboard(ctx: dict) -> str:
         'that matter, and they are empty because there is nothing to put in them.</p>',
         filter_box("st-table", "strategy or market"),
         table(["#", "Strategy", "Type", "Hypothesis", "Basis", "Status", "Edge", "CLV", "Rank",
-               "Reward", "Merged from", "Sources"],
+               "Reward", "What would confirm it", "What would change our mind", "Registration",
+               "Merged from", "Sources"],
               srows, table_id="st-table",
-              caption="All registered strategies. Edge, CLV, rank and reward are unverified and blank."),
+              caption="All registered strategies with their pre-registered two-sided falsification "
+                      "criteria. Edge, CLV, rank and reward are unverified and blank."),
+        '</div>',
+        '<div class="section"><h2>Signal and staking, separated</h2>'
+        '<p>Ranking uses only the signal columns. Staking is reported for transparency and never enters '
+        'the rank, so a lucky staking run cannot mask a bad signal. Every cell is empty because no '
+        'strategy has been run; the split exists before the first run so that run cannot blur it.</p>',
+        table(["#", "Strategy", "Signal: edge vs benchmark", "Signal: Brier skill",
+               "Signal: skill lower bound", "Staking: rule", "Staking: bankroll fraction",
+               "Staking: realised return", "Rank basis", "Sources"],
+              ["<tr>" + f"<td>{e(s['id'])}</td><td><b>{e(s['name'])}</b></td>"
+               + blank() + blank() + blank() + blank() + blank() + blank()
+               + '<td class="fine">signal columns only</td>'
+               + sources_cell(s["sources"]) + "</tr>" for s in strat],
+              caption="Signal columns feed the rank. Staking columns are reported and never ranked. "
+                      "Nothing here is a result."),
+        '</div>',
+        '<div class="section"><h2>Control baselines on every leaderboard run</h2>'
+        '<p>Every run shows both controls beside every strategy. A run that omits either control is '
+        'invalid and its results are discarded. The controls are the luck benchmark: a candidate that '
+        'cannot beat them has no claim.</p>',
+        table(["Control", "Frozen rule", "Where it appears", "Status", "Sources"],
+              ["<tr><td><b>Random side each game</b></td>"
+               '<td>Seeded random side on every graded game; the seed is recorded with the run</td>'
+               '<td>every leaderboard run, beside every strategy</td>'
+               '<td>required baseline &#8212; not run</td>'
+               + sources_cell(["https://github.com/kanlerxz87-cyber/NFL3/blob/main/ops-center/data/mindchange.json"])
+               + "</tr>",
+               "<tr><td><b>Favorites only</b></td>"
+               '<td>Back the shorter licensed price in every graded game; undefined without licensed '
+               'prices, so the control cannot run before the pricing store has rows</td>'
+               '<td>every leaderboard run, beside every strategy</td>'
+               '<td>required baseline &#8212; not run</td>'
+               + sources_cell(["https://github.com/kanlerxz87-cyber/NFL3/blob/main/pricing/PRICE_DATA_POLICY.md"])
+               + "</tr>"],
+              caption="Required controls. Both are shown beside every strategy on every run; "
+                      "neither has run because nothing has run."),
+        '</div>',
+        '<div class="section"><h2>Pre-registration and the backtest ban</h2>'
+        '<p>Rules adopted with the corpus registration. They are enforced by construction: the result '
+        'cells above stay blank until a prospective, pre-registered run settles them.</p>',
+        table(["Rule", "Mechanism", "Status", "Sources"],
+              ["<tr><td><b>Registration freeze</b></td>"
+               '<td>Every strategy row carries the registration hash; adding a strategy needs a dated '
+               'addendum committed before its results exist</td><td>in force</td>'
+               + sources_cell(["https://github.com/kanlerxz87-cyber/NFL3/blob/main/corpus/PRE_REGISTRATION.md"])
+               + "</tr>",
+               "<tr><td><b>Backtest ban</b></td>"
+               '<td>Corpus backtest numbers may never fill leaderboard result cells; those cells accept '
+               'only forecasts recorded before kickoff and settled from official results</td><td>in force</td>'
+               + sources_cell(["https://github.com/kanlerxz87-cyber/NFL3/blob/main/corpus/PRE_REGISTRATION.md"])
+               + "</tr>",
+               "<tr><td><b>Signal/staking split</b></td>"
+               '<td>Rank on the signal columns only; staking columns are reported beside them</td>'
+               '<td>in force</td>'
+               + sources_cell(["https://github.com/kanlerxz87-cyber/NFL3/blob/main/ops-center/data/mindchange.json"])
+               + "</tr>",
+               "<tr><td><b>Controls required</b></td>"
+               '<td>Both control baselines appear beside every strategy on every run</td><td>in force</td>'
+               + sources_cell(["https://github.com/kanlerxz87-cyber/NFL3/blob/main/ops-center/data/mindchange.json"])
+               + "</tr>",
+               "<tr><td><b>Demotion gate</b></td>"
+               '<td>A live strategy whose rolling pre-registered lower bound falls below zero returns to '
+               'paper status</td><td>in force; not yet exercised, because no strategy is live</td>'
+               + sources_cell(["https://github.com/kanlerxz87-cyber/NFL3/blob/main/pricing/PRICE_DATA_POLICY.md"])
+               + "</tr>"],
+              caption="Governance rules frozen before any evaluation exists."),
         '</div>',
         '<div class="section"><h2>Validation gates</h2>'
         '<p>A strategy enters a leaderboard only by passing all applicable gates. Ordered cheapest-first so a '

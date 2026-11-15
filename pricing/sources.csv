@@ -1,0 +1,5 @@
+source_id,class,example,terms_status,permitted_use,status,source_link
+PS-01,Licensed operator feed (two-sided timestamped),,No written terms obtained,Would permit: store open/close quotes; residual CLV and backtest publication,0 licensed — blocking,https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL
+PS-02,NFL-surface odds widgets (partner books),"FanDuel, Caesars, DraftKings",No reuse grant located,Viewing only; no machine capture and no republication,not usable for the store,https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL
+PS-03,Community game file moneyline columns (nflverse),data/raw/games.csv,No licence grant located; prices undated,None under this policy,excluded,https://github.com/nflverse/nflverse-data/releases
+PS-04,Public book web pages,,No terms obtained,None under this policy,excluded,https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL

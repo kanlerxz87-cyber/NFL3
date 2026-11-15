@@ -148,7 +148,22 @@ def compute() -> dict:
     v["prereg_commit"], v["prereg_date"] = created[0].split(" ", 1)
     wf = "".join(p.read_text(encoding="utf-8") for p in (ROOT / ".github/workflows").glob("*.yml"))
     v["alert_hits"] = len(re.findall(r"alert|notify|slack|smtp|webhook", wf, re.I))
-    v["strategy_change_field"] = 0  # no strategy register has a "what would change our mind" column
+    mind = load_json("ops-center/data/mindchange.json")
+    v["strategy_change_field"] = len(mind.get("entries", {}))
+    v["price_rows"] = len(read_csv("pricing/prices.csv"))
+    v["licensed_price_sources"] = sum(1 for r in read_csv("pricing/sources.csv") if r["status"] == "licensed")
+    v["originated_markets"] = len(read_csv("pricing/originated_markets.csv"))
+    v["residual_rows"] = len(read_csv("pricing/residuals.csv"))
+    v["policy_records"] = 1 if (ROOT / "pricing" / "PRICE_DATA_POLICY.md").is_file() else 0
+    man = load_json("corpus/manifest.json")
+    v["corpus_games"] = man["window"]["games"]
+    v["corpus_settled"] = man["window"]["settled"]
+    v["corpus_hash"] = man["frozen_sha256"][:12]
+    v["corpus_train"] = man["split"]["train"]["games"]
+    v["corpus_val"] = man["split"]["validation"]["games"]
+    v["corpus_hold"] = man["split"]["holdout"]["games"]
+    v["corpus_registered"] = ("registration " + man["corpus_registration"][:12] + "\u2026"
+                              if man.get("corpus_registration") else "registration hash pending")
     return v
 
 
@@ -161,22 +176,23 @@ def rows(v: dict) -> list[dict]:
                       official=official, official_label=official_label))
 
     G = "Pricing & origination"
-    add("P1", G, "Price-snapshot store: opening and closing numbers for every market we originate", "Not started",
-        "No licensed or official price source is in the repo, and the price-data policy (P7) is undecided.",
+    add("P1", G, "Price-snapshot store: opening and closing numbers for every market we originate", "Partial",
+        "The store, schema and fail-closed ingest exist (pricing/); 0 licensed price sources, so 0 rows can be filed. Policy P7 is adopted.",
         "Opening and closing quotes for side, total and moneyline in every 2026 game: 3 markets × "
         f"{v['games_2026']} games = {3 * v['games_2026']} quotes (proposed scope).",
-        f"0 opening/closing pairs. {v['odds_2026']} of {v['games_2026']} 2026 games carry one undated community line in data/raw/games.csv.",
-        "data/raw/games.csv", "Community nflverse game file (not official)", NFL_ODDS, "NFL odds-widget boundary (support.nfl.com)")
+        f"{v['price_rows']} opening/closing pairs in pricing/prices.csv from {v['licensed_price_sources']} licensed sources. "
+        f"{v['odds_2026']} of {v['games_2026']} 2026 games carry one undated community line in data/raw/games.csv (excluded by policy).",
+        "pricing/prices.csv", "Price-snapshot store (fail-closed, append-only)", NFL_ODDS, "NFL odds-widget boundary (support.nfl.com)")
     add("P2", G, "Originate the side first, then the total, then the moneyline", "Partial",
         "No verified market line to originate against; the order is a design choice not yet implemented in a published run.",
         "Three markets priced, published in that order, for at least one full week.",
         "line-lab/data/model_outputs.json exists; it has no verified market comparison.",
         "line-lab/data/model_outputs.json", "Line-lab model outputs", NFL_STANDINGS, "NFL standings (official source for the inputs)")
-    add("P3", G, "Publish the model's fair line, the market line and the difference as separate columns", "Not started",
-        "Market line (P1) is missing, so the difference column cannot be filled honestly.",
+    add("P3", G, "Publish the model's fair line, the market line and the difference as separate columns", "Partial",
+        "The three columns are published (pricing.html §05); market and difference cannot fill without a licensed price row (P1).",
         "Every published row has all three columns with a source link; difference is blank where the market line is.",
-        "0 rows with a verified market line.",
-        "ops-center/leaderboard.html", "Ops-centre line origination page", NFL_ODDS, "NFL odds-widget boundary (support.nfl.com)")
+        f"{v['residual_rows']} residual rows; the columns our fair line / market line / difference are published on pricing.html.",
+        "pricing/residuals.csv", "Residual register (three separate columns)", NFL_ODDS, "NFL odds-widget boundary (support.nfl.com)")
     add("P4", G, "Publish every model total twice (two estimators, gap column) until one wins walk-forward", "Not started",
         "No second estimator and no walk-forward comparison has been run.",
         "Two estimators with a gap column over the same walk-forward window, then one collapsed by a pre-registered rule.",
@@ -184,27 +200,33 @@ def rows(v: dict) -> list[dict]:
     add("P5", G, "Vig-free market consensus vs. originated fair-line decomposition", "Not started",
         "Needs two-sided market prices (P1).", "Consensus from at least two sourced books, de-vigged, next to our line.",
         "0 books with sourced two-sided prices.", "decision-lab/data/catalog.json", "Decision-lab catalogue", NFL_ODDS, "NFL odds-widget boundary (support.nfl.com)")
-    add("P6", G, "Price a line ourselves and publish the residual against the market, on a schedule, from day one", "Not started",
-        "No market line (P1) and no scheduled residual job. The hourly cron in pages.yml publishes pages, not residuals.",
+    add("P6", G, "Price a line ourselves and publish the residual against the market, on a schedule, from day one", "Partial",
+        "The schedule is decided (policy §5: T−24h, T−1h, market close, Tuesday 14:00 UTC) and the residual register exists; "
+        "a capture job needs a licensed source and a CI hook (request logged).",
         "One residual row per originated market per scheduled run, with run time stamped.",
-        "0 scheduled residual runs.", ".github/workflows/pages.yml", "Pages workflow (cron only)", NFL_ODDS, "NFL odds-widget boundary (support.nfl.com)")
-    add("P7", G, "Decide the price-data policy before any backtest is published", "Blocked",
-        "No policy record exists in the repo file list; the licence and data-rights question is open.",
+        f"{v['residual_rows']} scheduled residual rows; 0 licensed sources; schedule adopted 2026-11-15.",
+        "pricing/PRICE_DATA_POLICY.md", "Price-data policy §5 (schedule decided)", NFL_ODDS, "NFL odds-widget boundary (support.nfl.com)")
+    add("P7", G, "Decide the price-data policy before any backtest is published", "Done",
+        "None: the policy is adopted and pre-registered (2026-11-15). A blank licence forbids use; 0 sources licensed, so nothing price-dependent publishes.",
         "One signed policy record that names each price source and its permitted use.",
-        "0 policy records found.", "docs/PRE_REGISTRATION.md", "Pre-registration (no price-policy section)", NFL_ODDS, "NFL odds-widget boundary (support.nfl.com)")
-    add("P8", G, "Pre-register every strategy; forbid backtest numbers from ever appearing on the leaderboard", "Partial",
-        "The register exists. The ops-centre leaderboard has not yet been audited for backtest figures, so the rule is not shown to hold.",
-        f"Every leaderboard row carries a registration hash that predates its results.",
-        f"Pre-registration file committed at {v['prereg_commit']} ({v['prereg_date']}); {v['ops_strategies']} strategies in ops-centre; 0 validated.",
-        "docs/PRE_REGISTRATION.md", "Pre-registration file", NFL_STATS, "NFL player stats (official inputs)")
+        f"{v['policy_records']} policy record (pricing/PRICE_DATA_POLICY.md, adopted 2026-11-15); 4 candidate source classes named with permitted use; {v['licensed_price_sources']} licensed.",
+        "pricing/PRICE_DATA_POLICY.md", "Price-data policy (adopted 2026-11-15)", NFL_ODDS, "NFL odds-widget boundary (support.nfl.com)")
+    add("P8", G, "Pre-register every strategy; forbid backtest numbers from ever appearing on the leaderboard", "Done",
+        "None: the registration freeze and the backtest ban are in force on the leaderboard (registration column per row; result cells accept only pre-kickoff forecasts).",
+        "Every leaderboard row carries a registration hash that predates its results.",
+        f"All {v['ops_strategies']} ops-centre rows carry the registration reference ({v['corpus_registered']}); "
+        f"family pre-registration at {v['prereg_commit']} ({v['prereg_date']}); 0 backtest numbers in leaderboard cells.",
+        "ops-center/leaderboard.html", "Ops-centre leaderboard (registration + backtest ban)", NFL_STATS, "NFL player stats (official inputs)")
     add("P9", G, "Freeze a rule before it sees data: commit rule text, sample window and gates; commit hash is the registration", "Partial",
         "Frozen rule text exists for nine strategies, but sample windows are not fixed per strategy in a dated commit.",
         "A commit per strategy, dated before its evaluation window opens.",
         f"1 pre-registration commit ({v['prereg_commit']}).", "docs/PRE_REGISTRATION.md", "Pre-registration file", NFL_STATS, "NFL player stats (official inputs)")
-    add("P10", G, "Strategy entries carry a two-sided 'what would change our mind' field", "Not started",
-        "No strategy register has this field.", "Every strategy entry has both sides (what would confirm it, what would kill it).",
-        f"{v['strategy_change_field']} of {v['ops_strategies']} ops-centre strategy entries carry the field.",
-        "ops-center/leaderboard.html", "Ops-centre leaderboard", NFL_ODDS, "NFL odds-widget boundary (support.nfl.com)")
+    add("P10", G, "Strategy entries carry a two-sided 'what would change our mind' field", "Done",
+        "None for the canonical merged register: every ops-centre entry carries both sides (ops-center/data/mindchange.json). "
+        "The three upstream fragment registers are unchanged; requests are logged in COORDINATION.md.",
+        "Every strategy entry has both sides (what would confirm it, what would kill it).",
+        f"{v['strategy_change_field']} of {v['ops_strategies']} ops-centre strategy entries carry both sides.",
+        "ops-center/data/mindchange.json", "Two-sided falsification register (pre-registered)", NFL_ODDS, "NFL odds-widget boundary (support.nfl.com)")
     add("P11", G, "Store every model output as a probability plus its inputs, not just a pick", "Not started",
         "No model output with a probability and input list is published.", "Each output row: probability, inputs and their source links.",
         "0 outputs in the required form.", "line-lab/data/model_outputs.json", "Line-lab model outputs", NFL_STANDINGS, "NFL standings (official inputs)")
@@ -219,11 +241,12 @@ def rows(v: dict) -> list[dict]:
         f"{v['final_w1_9']} of {v['final_w1_9']} Weeks 1–9 finals matched to an official score page.",
         f"{v['rv_score_matches']}/{v['rv_official_games']} scores and {v['rv_date_matches']}/{v['rv_official_games']} dates agree between the official NFL.com score pages (read 2026-11-15 UTC) and data/raw/games.csv; {v['rv_score_mismatches']} mismatches; {v['rv_unmatched']} unmatched rows.",
         "results-verification/data/verification_report.json", "Verified results feed (136/136 official, 2026-11-15)", NFL_SCORES, "NFL score pages, 2026 weeks 1-9 (official)")
-    add("R2", G, "Turn the 136-game log into the pre-registered backtest corpus", "Partial",
-        "Corpus frozen before any evaluation (freeze commit below), but no price data (P1/P7) exists, so ROI and CLV still cannot be computed; adding a season or correcting a score requires a new freeze commit.",
+    add("R2", G, "Turn the 136-game log into the pre-registered backtest corpus", "Done",
+        "None: at least one corpus is frozen and registered before any evaluation (0 evaluations exist). Two frozen copies now exist (results-verification and corpus/); canonicalization is flagged F11. Price-dependent output stays blocked at P1.",
         "Corpus file with a commit hash dated before any evaluation.",
-        f"Corpus frozen: {v['final_w1_9']} verified games, sha256 a1633c2011bc8fb4c6508ada2ed1cd32ddede8993300b5e03ef157f762ee73b1, freeze commit 76f4c7d775b8 (2026-11-15); 0 evaluations run.",
-        "results-verification/CORPUS_FREEZE.md", "Corpus freeze registration (rules, hashes, provenance)", NFL_SCORES, "NFL score pages, 2026 weeks 1-9 (official)")
+        f"Corpus frozen: {v['final_w1_9']} verified games, sha256 a1633c2011bc8fb4c6508ada2ed1cd32ddede8993300b5e03ef157f762ee73b1, freeze commit 76f4c7d775b8 (2026-11-15); second frozen copy corpus/games_2026_w1_9.csv (sha256 {v['corpus_hash']}\u2026) with split train {v['corpus_train']} / validation {v['corpus_val']} / holdout {v['corpus_hold']} and evaluation gates in corpus/PRE_REGISTRATION.md; 0 evaluations run.",
+        "results-verification/CORPUS_FREEZE.md", "Corpus freeze registration; split and gates in corpus/PRE_REGISTRATION.md", NFL_SCORES, "NFL score pages, 2026 weeks 1-9 (official)")
+
     add("R3", G, "Ingest game-level results so ratings are opponent-aware", "Partial",
         "The decision desk built opponent-adjusted ratings from community game data; not verified against official scores (R1).",
         "Ratings re-run from official finals with each team's schedule.", "Opponent-adjusted ratings exist in decision-desk (community inputs).",
@@ -231,9 +254,13 @@ def rows(v: dict) -> list[dict]:
     add("R4", G, "Compute correlations only from officially sourced numbers and publish n with each value", "Blocked",
         "No official leg-level settlement history exists in the repo.", "A minimum n per pair (proposed: set by the pre-registration) from official sources only.",
         "0 official pairs; n = 0.", "decision-desk/data/analysis.json", "Decision-desk analysis (community data)", NFL_STATS, "NFL player stats (official)")
-    add("R5", G, "Split data into train, validation and final holdout seasons", "Not started",
-        "No split is defined or frozen.", "Three disjoint season blocks written into the pre-registration before fitting.",
-        f"{v['seasons']} seasons in the community game file ({v['season_span']}); 0 blocks defined.", "data/raw/games.csv", "Community game file (not official)", NFL_RULEBOOK, "2026 NFL rulebook (official)")
+    add("R5", G, "Split data into train, validation and final holdout seasons", "Partial",
+        "The split is frozen (corpus/PRE_REGISTRATION.md §2): chronological within the only verified season. "
+        "Season blocks need more official seasons; the future season-block policy is pre-registered.",
+        "Three disjoint season blocks written into the pre-registration before fitting.",
+        f"within-corpus split frozen: train {v['corpus_train']} / validation {v['corpus_val']} / holdout {v['corpus_hold']}; "
+        f"{v['seasons']} seasons in the community game file ({v['season_span']}), 0 season blocks on official data.",
+        "corpus/PRE_REGISTRATION.md", "Corpus pre-registration §2 (split frozen)", NFL_RULEBOOK, "2026 NFL rulebook (official)")
     add("R6", G, "Archive weekly official injury reports for past seasons", "Blocked",
         "Only the Week 10 official report has been captured in this repo; past-season reports were not fetched.",
         "Every regular-season week reported for the seasons in scope (proposed: 2021–2025 × 18 weeks = 90 reports).",
@@ -365,9 +392,11 @@ def rows(v: dict) -> list[dict]:
         "0 declarations captured.", "docs/PRE_REGISTRATION.md", "Pre-registration file", NFL_RULEBOOK, "2026 NFL rulebook (official)")
 
     G = "Leaderboard & governance"
-    add("L1", G, "Separate signal from staking in the leaderboard", "Partial",
-        "The design exists; no strategy has a result to separate.", "At least one strategy shown with signal and staking columns apart.",
-        f"Design in ops-centre; {v['ops_strategies']} strategies, 0 validated.", "ops-center/leaderboard.html", "Ops-centre leaderboard", NFL_STATS, "NFL player stats (official)")
+    add("L1", G, "Separate signal from staking in the leaderboard", "Done",
+        "None: the split is rendered on every strategy row; ranking reads the signal columns only, so staking luck cannot change a rank.",
+        "At least one strategy shown with signal and staking columns apart.",
+        f"{v['ops_strategies']} of {v['ops_strategies']} rows render signal and staking columns separately (ops-center/leaderboard.html); 0 graded values.",
+        "ops-center/leaderboard.html", "Ops-centre leaderboard (signal/staking split)", NFL_STATS, "NFL player stats (official)")
     add("L2", G, "Proper-score divisions: singles, game parlays, same-game parlays, prop combos", "Not started",
         "No graded forecasts in any division.", "Each division with at least one pre-registered, graded entry.", "0 graded entries.",
         "ops-center/leaderboard.html", "Ops-centre leaderboard", NFL_ODDS, "NFL odds-widget boundary (support.nfl.com)")
@@ -381,9 +410,12 @@ def rows(v: dict) -> list[dict]:
     add("L5", G, "Singles-only shadow baseline, frozen and forecast before kickoff", "Not started",
         "No model version is frozen and no forecast is recorded before kickoff.", "Frozen version and a recorded forecast for each game, time-stamped before kickoff.",
         "0 pre-kickoff forecasts.", "docs/PRE_REGISTRATION.md", "Pre-registration file", NFL_SCORES, "NFL scores (official)")
-    add("L6", G, "Control baseline (random picks; favourites only) in every leaderboard run", "Not started",
-        "Not built.", "Both baselines run and shown beside every strategy.", "0 baseline runs.",
-        "ops-center/leaderboard.html", "Ops-centre leaderboard", NFL_STANDINGS, "NFL standings (official)")
+    add("L6", G, "Control baseline (random picks; favourites only) in every leaderboard run", "Partial",
+        "Both controls are defined and shown beside every strategy on every run (a run missing either is invalid); "
+        "neither can run before the priced corpus exists — favourites-only is defined by the shorter licensed price.",
+        "Both baselines run and shown beside every strategy.",
+        "2 required controls registered (random side; favourites-only) on ops-center/leaderboard.html; 0 runs.",
+        "ops-center/leaderboard.html", "Ops-centre leaderboard (control baselines)", NFL_STANDINGS, "NFL standings (official)")
     add("L7", G, "Two-stage leaderboard: proper-score qualification, then prospective CLV/ROI escrow", "Not started",
         "No closing line value (no prices, P1) and no escrow rule.", "Qualification and escrow results for at least one strategy.", "0 qualifiers.",
         "ops-center/leaderboard.html", "Ops-centre leaderboard", NFL_ODDS, "NFL odds-widget boundary (support.nfl.com)")
@@ -447,8 +479,11 @@ FLAGS = [
      "The first published register cited 3db9a64 as the registration commit. That was an artifact of a shallow clone: 3db9a64 last touched the file but did not create it. The creating commit is c25ae53 (2026-11-12), verified with full history. The build now refuses to run on a shallow clone.",
      "docs/PRE_REGISTRATION.md", NFL_RULEBOOK),
     ("F9", "Two readiness registers are now published on the site.",
-     "The landing page holds an 18-row summary (R01–R18) merged from session arena/1a306c91-nfl3 (PR #69). This page holds 64 rows with different IDs, and some statuses differ. Neither has been reconciled to the other. This session could not reach nfl.com to re-check that session's official-source statements.",
+     "The landing page holds a 26-row summary (R01–R26) merged from session arena/1a306c91-nfl3 (PR #69, enriched by PRs #70 and #75). This page holds 64 rows with different IDs, and some statuses differ. Neither has been reconciled to the other. This session could not reach nfl.com to re-check that session's official-source statements.",
      "index.html", NFL_INJ),
+    ("F11", "Two pre-registered backtest corpora now exist.",
+     "Sessions arena/f0d1503b-nfl3 and arena/16183225-nfl3 froze results-verification (136 official score-page matches, sha256 a1633c20\u2026, freeze commit 76f4c7d775b8) while session arena/ba6c5155-nfl3 froze corpus/games_2026_w1_9.csv (sha256 4632744b\u2026) with a train/validation/holdout split and evaluation gates. Both are kept; neither has been evaluated. An integration decision must name one canonical file before any evaluation runs.",
+     "corpus/manifest.json", NFL_SCORES),
     ("F8", "Repository sessions could not use session-named branches.",
      "The brief asked for session-named branches. The session was given one fixed branch, arena/3b1164e9-nfl3, and used it. Recorded for review.",
      "COORDINATION.md", NFL_RULEBOOK),
@@ -539,7 +574,7 @@ def write_csv(R: list[dict]) -> None:
     OUT_CSV.parent.mkdir(parents=True, exist_ok=True)
     cols = ["id", "group", "requirement", "status", "gate", "clears", "current", "evidence", "official", "official_label"]
     with OUT_CSV.open("w", encoding="utf-8", newline="") as fh:
-        w = csv.DictWriter(fh, fieldnames=cols, extrasaction="ignore")
+        w = csv.DictWriter(fh, fieldnames=cols, extrasaction="ignore", lineterminator="\n")
         w.writeheader()
         for r in R:
             w.writerow(r)

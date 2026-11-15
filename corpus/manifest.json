@@ -1,0 +1,47 @@
+{
+  "corpus_id": "nfl3-2026-w1-9-official",
+  "frozen_at_utc": "2026-11-15T12:55:00Z",
+  "frozen_by_session": "arena/ba6c5155-nfl3",
+  "window": {
+    "season": 2026,
+    "weeks": [
+      1,
+      9
+    ],
+    "games": 136,
+    "settled": 135,
+    "unsettled_hidden_score": 1
+  },
+  "frozen_file": "corpus/games_2026_w1_9.csv",
+  "frozen_sha256": "4632744b44d59ff2c482c219ed65c6f6cf4924079013b82021933e91c2f6c9f7",
+  "source_file": "decision-desk/data/games_2026.csv",
+  "source_sha256_at_freeze": "4632744b44d59ff2c482c219ed65c6f6cf4924079013b82021933e91c2f6c9f7",
+  "source_basis": "rows cross-checked by decision-desk/scripts/check.py against official standings; each row carries its official schedule-page URL",
+  "split": {
+    "policy": "chronological within the only verified season; season-block policy for future data is in PRE_REGISTRATION.md \u00a72",
+    "train": {
+      "weeks": [
+        1,
+        6
+      ],
+      "games": 93
+    },
+    "validation": {
+      "weeks": [
+        7,
+        8
+      ],
+      "games": 28
+    },
+    "holdout": {
+      "weeks": [
+        9
+      ],
+      "games": 15
+    }
+  },
+  "rules": "corpus/PRE_REGISTRATION.md",
+  "corpus_registration": "b1b0bf5621a24d6dc1009d2344883b4591aa5529",
+  "policy_registration": "b1b0bf5621a24d6dc1009d2344883b4591aa5529",
+  "notes": "corpus_registration and policy_registration are the creating commit hashes of corpus/PRE_REGISTRATION.md and pricing/PRICE_DATA_POLICY.md, written here by the commit immediately following their creation. Blank until that commit lands; never guessed."
+}

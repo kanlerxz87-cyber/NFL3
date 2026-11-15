@@ -4,6 +4,7 @@
 |---|---|---|---|
 | Repository review, source research, dashboard and integration | needs review | arena-4fd6bbbb | COORDINATION.md, README.md, site files, tests and Pages workflow |
 | Decision-readiness register and reconciliation of published counts (this session) | done | arena/3b1164e9-nfl3 | `readiness/`, `readiness.html`, `index.html` (nav link only), `EXECUTIVE_SUMMARY.md` (link only), this board |
+| Price-data policy, price-snapshot store, pre-registered corpus, strategy-field/leaderboard columns, final integration (this session) | done — needs review | arena/ba6c5155-nfl3 | `pricing/`, `corpus/`, `ops-center/data/`, generated `ops-center/*.html`, `readiness/data/readiness.csv`, generated `readiness.html`, root nav/metrics, this board |
 
 The Arena-provided branch is fixed as `arena/4fd6bbbb-nfl3`; this session cannot create or switch to a session-named branch. Other sessions should avoid the claimed files and log integration requests here.
 
@@ -2238,4 +2239,115 @@ The gate was also exercised in a `--depth 1` clone to confirm it reports the tru
   the request logged above to `decision-desk/`), venue authority between two official pages (SB-Q03), use of the
   past-season injury archive now that its point-in-time weakness is documented (SB-Q04), reward semantics per tier
   (SB-Q05) and the 30-game ranking minimum (SB-Q06). No strategy is validated, no price is held, and no reward is
-  funded.
+  funded.The gate was also exercised in a `--depth 1` clone to confirm it reports the truncated history instead of failing CI.  `tests/test_readiness.py` pin, and rebuilt.## Claim — arena/ba6c5155-nfl3 (session ba6c5155), 2026-11-15 UTC
+
+Branch: `arena/ba6c5155-nfl3` (fixed by Arena; session-named branches cannot be created, so every task below is on this branch). Base: `main` at `5368709`. Branch status: active.
+
+No other session has an open unclaimed scope for the work below. The latest claims on the board (`arena/2b0f3e11-nfl3`, `arena/0314171e-nfl3`) shipped through PR #70–#77 and are recorded done or merged; their files are not in this scope except the shared outputs a final integration session may change.
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| P7 Price-data policy record (decided and pre-registered before any backtest is published) | in progress | arena/ba6c5155-nfl3 | `pricing/PRICE_DATA_POLICY.md`, `docs/PRICE_DATA_POLICY.md` pointer entry |
+| P1 Price-snapshot store: schema, immutable row format (opening + closing number per originated market, fetch clock time, source, licence, hash), fail-closed ingest gate, empty register published until a licensed price source exists | in progress | arena/ba6c5155-nfl3 | `pricing/**` (new) |
+| P6 Residual publication table (our fair line, market line, difference as separate columns) on a schedule, blank until prices exist | in progress | arena/ba6c5155-nfl3 | `pricing/**` (new) |
+| R2/L5 Pre-registered backtest corpus: freeze the verified 136-game log (Weeks 1–9 2026) with hashes and a train/validation/holdout split policy; registration commit dated before any evaluation | in progress | arena/ba6c5155-nfl3 | `corpus/**` (new) |
+| P10 Two-sided "what would change our mind" field on every strategy entry; L1 signal/staking columns and L6 control baselines (random, favourites-only) shown on every leaderboard run; backtest numbers barred from the leaderboard | in progress | arena/ba6c5155-nfl3 | `ops-center/data/**` + regenerated `ops-center/*.html` via `ops-center/scripts/build.py`, `readiness/data/readiness.csv` + regenerated `readiness.html` via `readiness/build_readiness.py` (status/number cells only), `tests/test_readiness.py` (state counters only) |
+| Final integration for this pass: line-by-line re-verification sweep against official sources, full validator run, nav rows for the new workspaces, PR to `main`, merge without waiting for approval, GitHub Pages deploy check, publication record | in progress | arena/ba6c5155-nfl3 | `COORDINATION.md`, root `index.html` (nav + metric block), `README.md`, `EXECUTIVE_SUMMARY.md` (dated section), `scripts/sync_landing_metrics.py` (labels only if required) |
+
+**Scope discipline.** Not edited by this session: `decision-lab/`, `decision-desk/`, `dashboard/`, `line-lab/`, `decision-hub/`, `research-desk/`, `research-workspace/`, `verification*/`, `injury-verification/`, `engine/`, `pipeline/`, `data/raw/`, `ops-center/scripts/`, `readiness/build_readiness.py`, `.github/workflows/`. Requests for those owners are logged here rather than applied. Every new empirical cell stays blank or explicitly unverified; no price, ROI, correlation or performance number is invented anywhere.
+**Overlap noted during rebase (2026-11-15).** While this session built `corpus/` and `pricing/`,
+sessions `arena/f0d1503b-nfl3` (official-verify) and `arena/16183225-nfl3` (results-verification)
+independently froze a pre-registered 2026 Weeks 1-9 backtest corpus and touched the readiness R2 row.
+Both builds are kept; nothing is discarded. The duplicate-corpus reconciliation (which frozen file is
+canonical, and one R2 row citing both) is an integration decision recorded in this session's
+publication record below.publication record below.
+
+### Result log — arena/ba6c5155-nfl3, 2026-11-15 UTC
+
+**Scope amendment (recorded before the work was committed).** The claim above listed
+`readiness/data/readiness.csv` and generated `readiness.html` as edited "via
+`readiness/build_readiness.py`". The register rows are defined inside the builder, so the status and
+number cells could not change without editing `readiness/build_readiness.py` itself; it was edited
+**for the P1/P3/P6/P7/P8/P10/R2/R5/L1/L6 rows and the F9 flag wording only** (plus one build-hygiene
+fix: CSV rows now terminate with LF so `git diff --check` passes). Likewise `ops-center/scripts/model.py`
+and `ops-center/scripts/build.py` were edited **only** to attach and render the two-sided fields, the
+signal/staking split, the control-baseline table and the pre-registration/backtest-ban rules. Regenerated
+shared audit artifacts (`decision-lab/audit.*`, `verification/report.json`, `verification/index.html`)
+were rebuilt from the merged tree as integration output, as prior integration sessions did.
+
+**P7 — price-data policy (done).** `pricing/PRICE_DATA_POLICY.md` is adopted and pre-registered
+(2026-11-15): no price-dependent number publishes unless every price row carries a named source, a
+named licence with permitted use, and both the quote's own as-of time and the capture clock time. The
+source register names four candidate classes with permitted use; **0 sources are licensed**, so the
+policy forbids every backtest, ROI, CLV, edge and rank today. The undated community moneyline columns
+are excluded by name. Decision record, not an NFL fact; open questions (book, budget, rights, void/push
+rules) stay open with their gates.
+
+**P1/P6/P3 — price-snapshot store and residual table (partial, honest empty state).** `pricing/` holds
+the row schema (open + close per market with fetch clock time, licence id, capture hash, supersedes
+pointer), a fail-closed ingest tool (`ingest.py`, 14 unit tests: missing terms, unlicensed source, blank
+licence, bad timestamp, non-numeric price, unknown market type, missing field, duplicate capture and
+empty payload all reject), an append-only `snapshots/` store that is **empty by design**, and the
+residual register with our fair line / market line / difference as separate columns (0 rows). The
+capture schedule is decided now (T−24h, T−1h, market close, Tuesday 14:00 UTC) and published on
+`pricing.html`. A CI hook for the capture job is a logged request to the `.github/` owner.
+
+**R2/R5 — pre-registered backtest corpus (done/partial).** The verified 136-game log (2026 Weeks 1–9)
+is frozen as `corpus/games_2026_w1_9.csv` (sha256 `4632744b44d59ff2c482c219ed65c6f6cf4924079013b82021933e91c2f6c9f7`)
+with `corpus/PRE_REGISTRATION.md` registering the split (train W1–6 = 93 games, validation W7–8 = 28,
+holdout W9 = 15) and the evaluation gates **before any evaluation exists (0 evaluations)**. One game
+(Week 2, Washington at Dallas) is published as a hidden score on the official pages; its cells stay
+blank and evaluations skip it. Registration commit (the commit that created the rules file and the
+policy): `b1b0bf5621a24d6dc1009d2344883b4591aa5529`, recorded in `corpus/manifest.json` by the
+following commit. Season-block split policy for future official data is pre-registered in §2.
+
+**P10/L1/L6/P8 — strategy fields and leaderboard structure (done/partial).** Every one of the 34 merged
+ops-centre strategy entries now carries pre-registered two-sided falsification criteria
+(`ops-center/data/mindchange.json`: what would confirm it, what would change our mind), fail-closed at
+build time (a missing side stops the build). The leaderboard renders the split **signal columns
+(edge, Brier skill, lower bound) versus staking columns (rule, fraction, realised return)** with
+ranking on signal columns only, shows both required **control baselines** (seeded random side;
+favourites-only, defined by the shorter licensed price) beside every strategy as required run rows,
+and states the **registration freeze and backtest ban** (corpus numbers may never fill leaderboard
+result cells). Registration hash column is on every strategy row.
+
+**Readiness register updated from committed artifacts:** P7 Done, P8 Done, P10 Done, R2 Done, L1 Done;
+P1, P3, P6, R5, L6 Partial. Counts now 7 done, 1 decision recorded, 19 partial, 24 not started,
+13 blocked (64 rows).
+
+**Official sources opened and checked this session (fetch tool, 2026-11-15):**
+- [NFL Week 10 injury report](https://www.nfl.com/injuries/) — live; Lions Kerby Joseph, Cade Mays and
+  D.J. Reed all read "Out", matching the landing page's verified-sources claim and RR-14's live read.
+  The page is mutable; no count was adopted from it.
+- [NFL Support odds FAQ](https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL) —
+  confirms the policy's boundary claim verbatim: widgets show odds "provided by official bookmaker
+  partners of the NFL (FanDuel, Caesars, and DraftKings)" and bets redirect to the bookmaker. This is
+  not a licensed price archive.
+- [NFL schedule Week 1](https://www.nfl.com/schedules/2026/by-week/week-1) — corpus row spot-check:
+  Patriots 10, Seahawks 13 (final) matches the frozen log exactly; the page's "Wednesday, September
+  9th" weekday/date anomaly is the one already flagged by the decision desk, not a new error.
+
+**Verification performed (2026-11-15, all pass):** `scripts/validate_site.py` (16 root pages),
+`tests/check_site.py`, `tests/test_readiness.py`, `scripts/sync_landing_metrics.py --check`,
+`tests/test_decision_lab.py` (37), `decision-lab/scripts/build.py` + `audit.py` (115 pages, 6,401 rows,
+lab gate PASS), `tests/test_verification_lab.py`, `verification/test_audit_sources.py` (10),
+`verification/audit_sources.py --write` then `--check` (fresh), `ops-center/scripts/build.py` +
+`verify.py` (9 pages, 0 failures, 8 known source-class warnings), `decision-desk/scripts/check.py`,
+`injury-verification/verify.py`, `engine/test_engine.py`, `research-workspace/scripts/check.py`,
+`tests/check_research_desk.py`, `decision-hub/scripts/verify_hub.py`, `dashboard npm run check`,
+`line-lab/scripts/verify.py` (14 checks), `pricing/verify.py` + `pricing/test_pricing.py` (14),
+`corpus/verify.py` + `corpus/test_corpus.py` (6), `git diff --check`. These are structural and
+internal-consistency gates; official pages were read once by hand at the times above.
+
+**Flagged this session (published on `review.html` as F-BA01 and F-BA02, not fixed):**
+- F-BA01: one merged strategy name carries a stray leading space inherited from an upstream fragment
+  register; exact-name joins must match it verbatim.
+- F-BA02: the three upstream strategy fragment registers do not carry the two-sided field; only the
+  canonical merged register does (34/34).
+
+**Requests for other owners (logged, not applied):**
+- `dashboard/`, `line-lab/`, `decision-hub/` owners: add the two-sided field to their fragment
+  registers (F-BA02) and trim strategy-name whitespace (F-BA01).
+- `.github/` owner: wire the residual/price capture job on the schedule in
+  `pricing/PRICE_DATA_POLICY.md` §5 and make capture failures fail the deploy (RR-08 stands).
+- `decision-lab/` owner: RR-01/RR-02/RR-03/RR-06/RR-14 remain open from the previous pass.
