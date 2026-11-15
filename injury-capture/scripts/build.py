@@ -222,14 +222,15 @@ def render(entries, distinct, deltas, latest, ok_reads, failures) -> str:
 {''.join(designation_rows) or '<tr><td colspan="7">No game-status designations in the latest read.</td></tr>'}
 </tbody></table></div>
 
-<div class="section-head"><div><div class="section-label">04 / DETROIT LIONS</div><h2>Lions rows in the latest read ({lions_count} listed)</h2></div><p>Kerby Joseph, Cade Mays and D.J. Reed had blank game-status cells in the dashboard table; this section shows what the official page published in the latest read.</p></div>
+<div class="section-head"><div><div class="section-label">04 / DETROIT LIONS</div><h2>Lions rows in the latest read ({lions_count} listed)</h2></div><p>Kerby Joseph, Cade Mays and D.J. Reed had blank game-status cells in the dashboard table. This section shows what the official page published in the latest read. A separate read of the same official page on 15 Nov 2026 showed the same three rows (Did Not Participate in Practice, game status Out).</p></div>
 <div class="table-wrap"><table><thead><tr><th scope="col">Player</th><th scope="col">Injury</th><th scope="col">Practice status</th><th scope="col">Game status</th><th scope="col">Source</th></tr></thead><tbody>
 {''.join(lions_rows) or '<tr><td colspan="5">No Lions rows in the latest read.</td></tr>'}
 </tbody></table></div>
 
 <div class="section-head"><div><div class="section-label">05 / FLAGS</div><h2>Flagged for review</h2></div><p>Structural failures and internal conflicts are listed, not corrected. Each carries its source.</p></div>
 <div class="callout"><div><h2>Irregularities recorded for review</h2><ul>
-<li><b>IC-1 · Repository snapshot is older than the live site.</b> <code>decision-lab/data/official_snapshot.json</code> was observed 2026-11-12T06:32:36Z. The deployed decision-lab integrity page reports a capture at 2026-11-15T12:42Z that was never committed. {source_link(SOURCE)}</li>
+<li><b>IC-1 · Repository snapshot is older than the live site.</b> <code>decision-lab/data/official_snapshot.json</code> was observed 2026-11-12T06:32:36Z (254 injury rows, 4 no-injury teams). The deployed decision-lab integrity page reports a capture at 2026-11-15T12:42Z that was never committed. {source_link(SOURCE)}</li>
+<li><b>IC-6 · Older row counts are superseded.</b> The 254-row decision-lab table and the 279-row ops-centre figure both predate this read, which holds {plural(len(latest['rows']), 'player row')} across {len({r['team'] for r in latest['rows']})} teams with a listed injury and {len(latest['no_results'])} teams with “No Injuries Reported”. Neither older table was edited here. {source_link(SOURCE)}</li>
 <li><b>IC-2 · Dashboard table is stale.</b> <code>dashboard/data/injuries_2026_w10.csv</code> shows Kerby Joseph as Limited Participation with a blank game status; the latest read shows the designations in section 04. The dashboard table was not edited here. {source_link(SOURCE)}</li>
 <li><b>IC-3 · Baseline is parsed-only.</b> The 12 Nov baseline's raw bytes were not retained (its hash is recorded). Deltas from it depend on the parser version.</li>
 <li><b>IC-4 · Raw captures are public.</b> The raw files sit under the Pages root and are published with the site. Moving them to a private store is not implemented.</li>

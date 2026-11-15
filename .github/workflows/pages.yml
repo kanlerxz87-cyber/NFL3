@@ -35,6 +35,8 @@ jobs:
         run: python3 decision-lab/scripts/verify_sources.py
       - name: Build canonical decision lab
         run: python3 decision-lab/scripts/build.py
+      - name: Injury-report archive tests (synthetic fixtures, no network)
+        run: python3 tests/test_injury_capture.py
       - name: Check decision-readiness matrix and unknown-threshold flags
         run: python3 tests/test_readiness.py
       - name: Independent source/link audit
