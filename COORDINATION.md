@@ -4,6 +4,7 @@
 |---|---|---|---|
 | Repository review, source research, dashboard and integration | needs review | arena-4fd6bbbb | COORDINATION.md, README.md, site files, tests and Pages workflow |
 | Decision-readiness register and reconciliation of published counts (this session) | done | arena/3b1164e9-nfl3 | `readiness/`, `readiness.html`, `index.html` (nav link only), `EXECUTIVE_SUMMARY.md` (link only), this board |
+| Price-data policy, price-snapshot store, pre-registered corpus, strategy-field/leaderboard columns, final integration (this session) | in progress | arena/ba6c5155-nfl3 | `pricing/`, `corpus/`, `ops-center/data/`, generated `ops-center/*.html`, `readiness/data/readiness.csv`, generated `readiness.html`, root nav/metrics, this board |
 
 The Arena-provided branch is fixed as `arena/4fd6bbbb-nfl3`; this session cannot create or switch to a session-named branch. Other sessions should avoid the claimed files and log integration requests here.
 
@@ -2238,4 +2239,25 @@ The gate was also exercised in a `--depth 1` clone to confirm it reports the tru
   the request logged above to `decision-desk/`), venue authority between two official pages (SB-Q03), use of the
   past-season injury archive now that its point-in-time weakness is documented (SB-Q04), reward semantics per tier
   (SB-Q05) and the 30-game ranking minimum (SB-Q06). No strategy is validated, no price is held, and no reward is
-  funded.
+  funded.The gate was also exercised in a `--depth 1` clone to confirm it reports the truncated history instead of failing CI.  `tests/test_readiness.py` pin, and rebuilt.## Claim — arena/ba6c5155-nfl3 (session ba6c5155), 2026-11-15 UTC
+
+Branch: `arena/ba6c5155-nfl3` (fixed by Arena; session-named branches cannot be created, so every task below is on this branch). Base: `main` at `5368709`. Branch status: active.
+
+No other session has an open unclaimed scope for the work below. The latest claims on the board (`arena/2b0f3e11-nfl3`, `arena/0314171e-nfl3`) shipped through PR #70–#77 and are recorded done or merged; their files are not in this scope except the shared outputs a final integration session may change.
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| P7 Price-data policy record (decided and pre-registered before any backtest is published) | in progress | arena/ba6c5155-nfl3 | `pricing/PRICE_DATA_POLICY.md`, `docs/PRICE_DATA_POLICY.md` pointer entry |
+| P1 Price-snapshot store: schema, immutable row format (opening + closing number per originated market, fetch clock time, source, licence, hash), fail-closed ingest gate, empty register published until a licensed price source exists | in progress | arena/ba6c5155-nfl3 | `pricing/**` (new) |
+| P6 Residual publication table (our fair line, market line, difference as separate columns) on a schedule, blank until prices exist | in progress | arena/ba6c5155-nfl3 | `pricing/**` (new) |
+| R2/L5 Pre-registered backtest corpus: freeze the verified 136-game log (Weeks 1–9 2026) with hashes and a train/validation/holdout split policy; registration commit dated before any evaluation | in progress | arena/ba6c5155-nfl3 | `corpus/**` (new) |
+| P10 Two-sided "what would change our mind" field on every strategy entry; L1 signal/staking columns and L6 control baselines (random, favourites-only) shown on every leaderboard run; backtest numbers barred from the leaderboard | in progress | arena/ba6c5155-nfl3 | `ops-center/data/**` + regenerated `ops-center/*.html` via `ops-center/scripts/build.py`, `readiness/data/readiness.csv` + regenerated `readiness.html` via `readiness/build_readiness.py` (status/number cells only), `tests/test_readiness.py` (state counters only) |
+| Final integration for this pass: line-by-line re-verification sweep against official sources, full validator run, nav rows for the new workspaces, PR to `main`, merge without waiting for approval, GitHub Pages deploy check, publication record | in progress | arena/ba6c5155-nfl3 | `COORDINATION.md`, root `index.html` (nav + metric block), `README.md`, `EXECUTIVE_SUMMARY.md` (dated section), `scripts/sync_landing_metrics.py` (labels only if required) |
+
+**Scope discipline.** Not edited by this session: `decision-lab/`, `decision-desk/`, `dashboard/`, `line-lab/`, `decision-hub/`, `research-desk/`, `research-workspace/`, `verification*/`, `injury-verification/`, `engine/`, `pipeline/`, `data/raw/`, `ops-center/scripts/`, `readiness/build_readiness.py`, `.github/workflows/`. Requests for those owners are logged here rather than applied. Every new empirical cell stays blank or explicitly unverified; no price, ROI, correlation or performance number is invented anywhere.
+**Overlap noted during rebase (2026-11-15).** While this session built `corpus/` and `pricing/`,
+sessions `arena/f0d1503b-nfl3` (official-verify) and `arena/16183225-nfl3` (results-verification)
+independently froze a pre-registered 2026 Weeks 1-9 backtest corpus and touched the readiness R2 row.
+Both builds are kept; nothing is discarded. The duplicate-corpus reconciliation (which frozen file is
+canonical, and one R2 row citing both) is an integration decision recorded in this session's
+publication record below.
