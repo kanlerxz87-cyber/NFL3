@@ -1,0 +1,228 @@
+{
+ "built_at": "2026-11-15",
+ "corpus": {
+  "games_played": 137,
+  "weeks": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "reconciliation": "160/160 club x field checks match official standings",
+  "settlement": "official final score, reconciled (see policy P07)",
+  "source_url": "https://www.nfl.com/standings/"
+ },
+ "sample_size_table": [
+  {
+   "edge": 0.02,
+   "win_probability": 0.52,
+   "n_required_80pct": 3863,
+   "n_required_90pct": 5349,
+   "n_available_now": 137,
+   "still_needed": 3726
+  },
+  {
+   "edge": 0.05,
+   "win_probability": 0.55,
+   "n_required_80pct": 617,
+   "n_required_90pct": 853,
+   "n_available_now": 137,
+   "still_needed": 480
+  },
+  {
+   "edge": 0.1,
+   "win_probability": 0.6,
+   "n_required_80pct": 153,
+   "n_required_90pct": 211,
+   "n_available_now": 137,
+   "still_needed": 16
+  }
+ ],
+ "separations": [
+  {
+   "id": "S01",
+   "name": "Model spread vs market spread (no threshold)",
+   "family": "singles",
+   "n": 131,
+   "wins": 66,
+   "win_rate": 0.5038167938931297,
+   "wilson_lo": 0.4193159467511274,
+   "wilson_hi": 0.5881001622241442,
+   "bss": -0.10594115811246096,
+   "bss_lo": -0.053564939974447626,
+   "bss_hi": -0.00041210309698302126,
+   "calibration_gap": 0.12028843463799962,
+   "verdict": "worse than benchmark: interval below zero"
+  },
+  {
+   "id": "S02",
+   "name": "Model spread vs market spread (\u0394 \u2265 1.5)",
+   "family": "singles",
+   "n": 105,
+   "wins": 53,
+   "win_rate": 0.5047619047619047,
+   "wilson_lo": 0.4106626869610328,
+   "wilson_hi": 0.5985249765793781,
+   "bss": -0.12781106506896878,
+   "bss_lo": -0.0666861458641262,
+   "bss_hi": 0.0006882385687462715,
+   "calibration_gap": 0.14389653924082507,
+   "verdict": "no distinguishable signal: interval includes zero"
+  },
+  {
+   "id": "S03",
+   "name": "Model total vs market total",
+   "family": "singles",
+   "n": 113,
+   "wins": 51,
+   "win_rate": 0.45132743362831856,
+   "wilson_lo": 0.36268169477968215,
+   "wilson_hi": 0.5431737539646008,
+   "bss": -0.1192733790346141,
+   "bss_lo": -0.05145278496169505,
+   "bss_hi": -0.007555249689635156,
+   "calibration_gap": 0.15358778326883574,
+   "verdict": "worse than benchmark: interval below zero"
+  },
+  {
+   "id": "S04",
+   "name": "Model win probability vs de-vigged moneyline",
+   "family": "singles",
+   "n": 113,
+   "wins": 42,
+   "win_rate": 0.37168141592920356,
+   "wilson_lo": 0.28817291567663905,
+   "wilson_hi": 0.46362781283101584,
+   "bss": -0.1293113340542722,
+   "bss_lo": -0.06089923780322334,
+   "bss_hi": 0.0032564736280048584,
+   "calibration_gap": 0.17248712943778802,
+   "verdict": "no distinguishable signal: interval includes zero"
+  },
+  {
+   "id": "S05",
+   "name": "Control: always take the home side",
+   "family": "controls",
+   "n": 131,
+   "wins": 56,
+   "win_rate": 0.42748091603053434,
+   "wilson_lo": 0.34601929472299015,
+   "wilson_hi": 0.513074634746847,
+   "bss": 0.0,
+   "bss_lo": 0.0,
+   "bss_hi": 0.0,
+   "calibration_gap": 0.07251908396946564,
+   "verdict": "no distinguishable signal: interval includes zero"
+  },
+  {
+   "id": "S06",
+   "name": "Control: always take the favourite",
+   "family": "controls",
+   "n": 131,
+   "wins": 64,
+   "win_rate": 0.48854961832061067,
+   "wilson_lo": 0.4045028423085701,
+   "wilson_hi": 0.5732488307656145,
+   "bss": 0.0,
+   "bss_lo": 0.0,
+   "bss_hi": 0.0,
+   "calibration_gap": 0.011450381679389313,
+   "verdict": "no distinguishable signal: interval includes zero"
+  },
+  {
+   "id": "S07",
+   "name": "Control: always take the underdog",
+   "family": "controls",
+   "n": 131,
+   "wins": 67,
+   "win_rate": 0.5114503816793893,
+   "wilson_lo": 0.4267511692343854,
+   "wilson_hi": 0.5954971576914297,
+   "bss": 0.0,
+   "bss_lo": 0.0,
+   "bss_hi": 0.0,
+   "calibration_gap": -0.011450381679389313,
+   "verdict": "no distinguishable signal: interval includes zero"
+  },
+  {
+   "id": "S08",
+   "name": "Control: always take the over",
+   "family": "controls",
+   "n": 137,
+   "wins": 71,
+   "win_rate": 0.5182481751824818,
+   "wilson_lo": 0.4352266653017307,
+   "wilson_hi": 0.600274209439823,
+   "bss": 0.0,
+   "bss_lo": 0.0,
+   "bss_hi": 0.0,
+   "calibration_gap": -0.01824817518248175,
+   "verdict": "no distinguishable signal: interval includes zero"
+  }
+ ],
+ "fluke_probability": [
+  {
+   "id": "S01",
+   "n": 131,
+   "wins": 66,
+   "p_at_least_this_many_by_chance": 0.5000000000000197,
+   "note": "two-sided-agnostic one-tailed tail probability under p=0.5"
+  },
+  {
+   "id": "S02",
+   "n": 105,
+   "wins": 53,
+   "p_at_least_this_many_by_chance": 0.5000000000000075,
+   "note": "two-sided-agnostic one-tailed tail probability under p=0.5"
+  },
+  {
+   "id": "S03",
+   "n": 113,
+   "wins": 51,
+   "p_at_least_this_many_by_chance": 0.8705689999173651,
+   "note": "two-sided-agnostic one-tailed tail probability under p=0.5"
+  },
+  {
+   "id": "S04",
+   "n": 113,
+   "wins": 42,
+   "p_at_least_this_many_by_chance": 0.9977232217670076,
+   "note": "two-sided-agnostic one-tailed tail probability under p=0.5"
+  },
+  {
+   "id": "S05",
+   "n": 131,
+   "wins": 56,
+   "p_at_least_this_many_by_chance": 0.9599150296447432,
+   "note": "two-sided-agnostic one-tailed tail probability under p=0.5"
+  },
+  {
+   "id": "S06",
+   "n": 131,
+   "wins": 64,
+   "p_at_least_this_many_by_chance": 0.636561948516795,
+   "note": "two-sided-agnostic one-tailed tail probability under p=0.5"
+  },
+  {
+   "id": "S07",
+   "n": 131,
+   "wins": 67,
+   "p_at_least_this_many_by_chance": 0.4306844655255958,
+   "note": "two-sided-agnostic one-tailed tail probability under p=0.5"
+  },
+  {
+   "id": "S08",
+   "n": 137,
+   "wins": 71,
+   "p_at_least_this_many_by_chance": 0.3663420467955023,
+   "note": "two-sided-agnostic one-tailed tail probability under p=0.5"
+  }
+ ],
+ "panel_statement": "Sample size first, score second, money never. With 137 played games in the corpus, a 11-9 record and a 19-1 record are both ordinary outcomes for a coin. Only a proper score with an interval can tell them apart \u2014 and at this n, even that cannot resolve an edge smaller than the intervals below."
+}
