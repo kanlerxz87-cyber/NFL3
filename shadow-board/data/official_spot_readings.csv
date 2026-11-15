@@ -1,0 +1,22 @@
+id,week,away,home,field,value_read,official_url,read_window_utc,scope,note
+VR-01,2,WAS,DAL,away_score,20,https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2,2026-11-15T12:52Z/2026-11-15T13:00Z,game-centre score block,"The committed 2026 log leaves this cell blank (recorded 2026-11-12 as a Hidden Score). The game centre now publishes the final score, so the blank is closable by the file owner, not by this workspace."
+VR-02,2,WAS,DAL,home_score,37,https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2,2026-11-15T12:52Z/2026-11-15T13:00Z,game-centre score block,Same fixture as VR-01.
+VR-03,2,WAS,DAL,quarter_sum_away,20,https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2,2026-11-15T12:52Z/2026-11-15T13:00Z,scoring-drives block,"Quarter scores 0/10/3/7 sum to the published final of 20 - an internal consistency check of the official page, not of this repository."
+VR-04,2,WAS,DAL,quarter_sum_home,37,https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2,2026-11-15T12:52Z/2026-11-15T13:00Z,scoring-drives block,Quarter scores 10/7/10/10 sum to the published final of 37.
+VR-05,9,BUF,MIN,away_score,23,https://www.nfl.com/games/vikings-at-49ers-2026-reg-11,2026-11-15T12:52Z/2026-11-15T13:00Z,team previous-results module,"Read from the Vikings results strip on the Week 11 game centre, an official page other than the one the log was transcribed from."
+VR-06,8,MIN,DET,away_score,15,https://www.nfl.com/games/vikings-at-49ers-2026-reg-11,2026-11-15T12:52Z/2026-11-15T13:00Z,team previous-results module,Cross-page check of a row the log already carries.
+VR-07,8,MIN,DET,home_score,19,https://www.nfl.com/games/vikings-at-49ers-2026-reg-11,2026-11-15T12:52Z/2026-11-15T13:00Z,team previous-results module,Cross-page check of a row the log already carries.
+VR-08,7,IND,MIN,away_score,10,https://www.nfl.com/games/vikings-at-49ers-2026-reg-11,2026-11-15T12:52Z/2026-11-15T13:00Z,team previous-results module,Cross-page check of a row the log already carries.
+VR-09,7,IND,MIN,home_score,16,https://www.nfl.com/games/vikings-at-49ers-2026-reg-11,2026-11-15T12:52Z/2026-11-15T13:00Z,team previous-results module,Cross-page check of a row the log already carries.
+VR-10,5,MIN,NO,away_score,23,https://www.nfl.com/games/vikings-at-49ers-2026-reg-11,2026-11-15T12:52Z/2026-11-15T13:00Z,team previous-results module,Cross-page check of a row the log already carries.
+VR-11,5,MIN,NO,home_score,13,https://www.nfl.com/games/vikings-at-49ers-2026-reg-11,2026-11-15T12:52Z/2026-11-15T13:00Z,team previous-results module,Cross-page check of a row the log already carries.
+VR-12,1,SF,LA,away_score,27,https://www.nfl.com/schedules/2026/by-week/week-1,2026-11-15T12:52Z/2026-11-15T13:00Z,official Week 1 schedule page,First-ever regular-season game played in Australia; shown as the East Melbourne block.
+VR-13,1,SF,LA,home_score,7,https://www.nfl.com/schedules/2026/by-week/week-1,2026-11-15T12:52Z/2026-11-15T13:00Z,official Week 1 schedule page,Same fixture as VR-12.
+VR-14,1,NE,SEA,away_score,10,https://www.nfl.com/schedules/2026/by-week/week-1,2026-11-15T12:52Z/2026-11-15T13:00Z,official Week 1 schedule page,Kickoff game.
+VR-15,1,NE,SEA,home_score,13,https://www.nfl.com/schedules/2026/by-week/week-1,2026-11-15T12:52Z/2026-11-15T13:00Z,official Week 1 schedule page,Same fixture as VR-14.
+VR-16,1,BUF,HOU,away_score,36,https://www.nfl.com/schedules/2026/by-week/week-1,2026-11-15T12:52Z/2026-11-15T13:00Z,official Week 1 schedule page,Bills at Texans on the opening Sunday (BUF listed away, HOU home).
+VR-17,1,BUF,HOU,home_score,31,https://www.nfl.com/schedules/2026/by-week/week-1,2026-11-15T12:52Z/2026-11-15T13:00Z,official Week 1 schedule page,Same fixture as VR-16.
+VR-18,1,BAL,IND,away_score,41,https://www.nfl.com/schedules/2026/by-week/week-1,2026-11-15T12:52Z/2026-11-15T13:00Z,official Week 1 schedule page,Ravens at Colts on the opening Sunday.
+VR-19,1,BAL,IND,home_score,23,https://www.nfl.com/schedules/2026/by-week/week-1,2026-11-15T12:52Z/2026-11-15T13:00Z,official Week 1 schedule page,Same fixture as VR-18.
+VR-20,1,CHI,CAR,away_score,59,https://www.nfl.com/schedules/2026/by-week/week-1,2026-11-15T12:52Z/2026-11-15T13:00Z,official Week 1 schedule page,High-scoring opener checked against the log row.
+VR-21,1,CHI,CAR,home_score,37,https://www.nfl.com/schedules/2026/by-week/week-1,2026-11-15T12:52Z/2026-11-15T13:00Z,official Week 1 schedule page,Same fixture as VR-20.
