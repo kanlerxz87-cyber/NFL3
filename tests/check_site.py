@@ -35,5 +35,11 @@ metrics = subprocess.run(
 )
 if metrics.returncode:
     errors.append('landing metrics are stale: ' + (metrics.stdout or metrics.stderr).strip())
+ops = subprocess.run(
+    [sys.executable, str(ROOT / 'ops-center' / 'scripts' / 'verify.py')],
+    cwd=ROOT, capture_output=True, text=True,
+)
+if ops.returncode:
+    errors.append('ops-centre verification failed: ' + (ops.stdout or ops.stderr).strip())
 if errors: raise SystemExit('\n'.join(errors))
-print('Site checks passed: local links, row citations and decision-readiness metrics.')
+print('Site checks passed: local links, row citations, decision-readiness and ops-centre metrics.')

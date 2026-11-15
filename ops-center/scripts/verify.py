@@ -154,7 +154,7 @@ def metric_value(text: str, label: str) -> int | None:
     return int(digits) if digits else None
 
 
-def check_landing_counts(warnings: list[str]) -> None:
+def check_landing_counts(errors: list[str]) -> None:
     """Check each dashboard's own headline metrics against its source registers.
 
     The shared root page is a decision-readiness dashboard; availability counts
@@ -167,7 +167,9 @@ def check_landing_counts(warnings: list[str]) -> None:
     derived_path = OPS / "data" / "derived.json"
     catalog_path = ROOT / "decision-lab" / "data" / "catalog.json"
     required = (root_page, ops_page, flags_page, derived_path, catalog_path)
-    if not all(path.exists() for path in required):
+    missing = [path.relative_to(ROOT).as_posix() for path in required if not path.exists()]
+    if missing:
+        errors.append("landing metric check skipped; required files are missing: " + ", ".join(missing))
         return
 
     root_text = root_page.read_text(encoding="utf-8")
@@ -176,10 +178,12 @@ def check_landing_counts(warnings: list[str]) -> None:
     data = json.loads(derived_path.read_text(encoding="utf-8"))
     catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
     requirements = catalog.get("requirements", [])
+    if not requirements:
+        errors.append("decision-lab/data/catalog.json: requirement register is empty")
     state_counts = {state: sum(1 for row in requirements if row.get("state") == state)
                     for state in ("implemented", "partial", "blocked")}
     if sum(state_counts.values()) != len(requirements):
-        warnings.append("decision-lab/data/catalog.json: a requirement is missing or has an unrecognized state")
+        errors.append("decision-lab/data/catalog.json: a requirement is missing or has an unrecognized state")
 
     root_expected = {
         "REQUIREMENTS TRACKED": len(requirements),
@@ -194,14 +198,14 @@ def check_landing_counts(warnings: list[str]) -> None:
     for label, expected in root_expected.items():
         observed = metric_value(root_text, label)
         if observed != expected:
-            warnings.append(f"index.html: {label} metric expected {expected}, found {observed}")
+            errors.append(f"index.html: {label} metric expected {expected}, found {observed}")
 
     chains = sum(1 for chain in data.get("chains", [])
                  if chain.get("chain_status") == "chain-identified")
     try:
         depth_rows = len(builder.model.load_snapshot().get("depth_rows", []))
     except (OSError, ValueError, KeyError) as exc:
-        warnings.append(f"ops-center/data/official_snapshot.json: depth-row count unavailable ({exc})")
+        errors.append(f"ops-center/data/official_snapshot.json: depth-row count unavailable ({exc})")
         depth_rows = None
     ops_expected = {
         "Injury rows (current official view)": data.get("injury_rows_current"),
@@ -212,12 +216,12 @@ def check_landing_counts(warnings: list[str]) -> None:
     for label, expected in ops_expected.items():
         observed = metric_value(ops_text, label)
         if observed != expected:
-            warnings.append(f"ops-center/index.html: {label} metric expected {expected}, found {observed}")
+            errors.append(f"ops-center/index.html: {label} metric expected {expected}, found {observed}")
 
     flag_rows = sum(1 for row in ROW.findall(flags_text) if "<th" not in row)
     expected_flags = len(data.get("flags", []))
     if flag_rows != expected_flags:
-        warnings.append(f"ops-center/flagged.html: {flag_rows} flag rows do not match {expected_flags} records in derived.json")
+        errors.append(f"ops-center/flagged.html: {flag_rows} flag rows do not match {expected_flags} records in derived.json")
 
 
 def main() -> int:
@@ -225,7 +229,7 @@ def main() -> int:
     warnings: list[str] = []
     check_pages(errors, warnings)
     check_determinism(errors)
-    check_landing_counts(warnings)
+    check_landing_counts(errors)
 
     for w in warnings:
         print(f"WARN  {w}")

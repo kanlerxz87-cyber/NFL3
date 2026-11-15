@@ -376,6 +376,22 @@ class CatalogTests(unittest.TestCase):
         self.assertEqual(page, decision_lab_pages.build_integrity())
         self.assertNotIn(f'{report["row_totals"]["mismatched"]} mismatch count', page)
 
+    def test_offline_aggregate_mismatches_explain_empty_detail_list(self):
+        report = json.loads((ROOT / "decision-lab/data/verification.json").read_text())
+        self.assertEqual(report["mode"], "offline-structural")
+        self.assertEqual(report["row_totals"]["mismatched"], 2)
+        self.assertEqual(report["mismatch_count"], 0)
+        self.assertEqual(report["mismatches"], [])
+
+        page = decision_lab_pages.build_integrity()
+        self.assertIn("Aggregate row mismatches are not retained row/field details", page)
+        self.assertIn("2 mismatched units", page)
+        self.assertIn("reports 0 itemized records", page)
+        self.assertIn("F8 Club depth coverage: 2 of 32", page)
+        self.assertIn("Houston Texans not parsed", page)
+        self.assertIn("Green Bay Packers not parsed", page)
+        self.assertIn("This offline run made no live field-by-field comparison", page)
+
     def test_live_integrity_report_qualifies_drift_and_links_injury_source(self):
         report = {
             "mode": "live", "status": "drift", "run_at": "2026-11-15T00:00:00+00:00",

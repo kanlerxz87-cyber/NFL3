@@ -160,6 +160,34 @@ def build_integrity() -> str:
                     'and does not verify current official-source content. A live re-fetch is attempted by the scheduled '
                     'publication workflow and uploaded as a per-run <code>live-verification</code> artifact; it is not '
                     'written back to this repository.</div>')
+
+    totals = doc.get("row_totals", {})
+    aggregate_mismatches = int(totals.get("mismatched", 0) or 0)
+    retained_details = int(doc.get("mismatch_count", len(doc.get("mismatches", []))) or 0)
+    if aggregate_mismatches and not retained_details:
+        mismatch_families = [family for family in doc.get("families", [])
+                             if int(family.get("mismatched", 0) or 0) > 0]
+        family_notes = "; ".join(
+            f'{family.get("id", "")} {family.get("name", "")}: '
+            f'{family.get("mismatched", 0)} of {family.get("rows_checked", 0)} '
+            f'({family.get("coverage", "coverage not stated")}; {family.get("note", "")})'
+            for family in mismatch_families
+        )
+        detail_limit = (
+            "This offline run made no live field-by-field comparison."
+            if mode == "offline-structural" else
+            "Review the listed family methods and notes; this report retains no itemized row/field differences."
+        )
+        content += (
+            '<div class="notice warn"><strong>Aggregate row mismatches are not retained row/field details.</strong> '
+            f'The family totals sum to {e(str(aggregate_mismatches))} mismatched units; '
+            f'<code>mismatch_count</code> reports {e(str(retained_details))} itemized records in '
+            '<code>mismatches</code>. The aggregate count is computed from family-level coverage counts, while '
+            'the detail list is for retained row/field differences; the two fields do not count the same thing. '
+            f'Family-level mismatch source: {e(family_notes or "not specified in this artifact")}. '
+            'Thus, zero retained detail records do not cancel the aggregate mismatch count. '
+            f'{e(detail_limit)}</div>'
+        )
     fam = [[td(e(f["id"])), td(e(f["name"])),
             td(pill(f["status"], "ok" if f["status"] == "match" else ("danger" if f["status"] in {"drift", "unreachable"} else "warn"))),
             td(e(f["method"])), td(f'{f["matched"]}/{f["rows_checked"]}' if f["rows_checked"] else "—"),

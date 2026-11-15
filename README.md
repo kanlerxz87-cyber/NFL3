@@ -39,7 +39,7 @@ Nothing here is betting advice, a sportsbook, or an approved wagering system.
 ## Canonical decision lab checks
 
 ```bash
-python3 tests/test_decision_lab.py          # 30 offline unit tests (synthetic fixtures only)
+python3 tests/test_decision_lab.py          # 37 offline unit tests (synthetic fixtures only)
 python3 decision-lab/scripts/availability.py # injury -> club depth join; regenerated artifact is committed
 python3 decision-lab/scripts/verify_live.py --offline   # structural families, no network
 python3 decision-lab/scripts/verify_live.py             # live field-by-field re-fetch (needs egress)
