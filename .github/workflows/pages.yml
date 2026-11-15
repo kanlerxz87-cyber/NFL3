@@ -29,6 +29,8 @@ jobs:
         run: python3 tests/check_site.py
       - name: Decision desk checks (data, links, row citations, blanks)
         run: python3 decision-desk/scripts/check.py
+      - name: Shadow board gate (pre-registration order, price firewall, reproducibility)
+        run: python3 shadow-board/scripts/check.py
       - name: Decision lab offline tests
         run: python3 tests/test_decision_lab.py
       - name: Independent line-by-line source verification

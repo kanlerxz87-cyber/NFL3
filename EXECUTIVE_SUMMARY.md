@@ -118,3 +118,50 @@ then secure written odds terms, then run a single pre-registered singles baselin
 before the first two produces numbers that look like evidence and are not. The
 [suggestions page](ops-center/suggestions.html) is set up for exactly this review — pick a path,
 record the decision, export it.
+
+---
+
+## 7. Update, 2026-11-15 (session `arena/745d100d-nfl3`): the pre-registered singles baseline is now built
+
+The third step of the sequencing in §6 — "run a single pre-registered singles baseline" — has been carried out in a
+new workspace, [`shadow-board/`](shadow-board/index.html), with the first two steps still unapproved. That is the
+honest reading of what follows: a baseline that can be scored, not a baseline that can be priced.
+
+**What is now in place.** `shadow-board/PREREGISTRATION.md` was committed at 13:00:32Z **before** any model file,
+data artifact or page in that workspace, and the git hash of that commit is the registration record (the sequence
+is re-checked by `python3 shadow-board/scripts/check.py`, which fails if a result artifact predates the rule text).
+It freezes one model, five declared entries (two real strategies, one totals strategy, two controls — a
+no-team-information home-rate benchmark and a coin flip), eight fail-closed gates and the evaluation window, with
+both a falsification and a confirmation condition for every entry. The leaderboard page shows only the prospective
+window; nothing computed from finished games can appear beside a ranking, and the build refuses if a backtest value
+is echoed there. The 2026 schedule page was captured for Week 11 (13 fixtures, kickoff slots, published records, six
+byes), and originated side, total and moneyline probability were issued for all 13 fixtures on 2026-11-15, before
+the Thursday 8:15 PM ET kickoff, with the inputs of every forecast stored alongside it.
+
+**What the pass measured, on 118 finished games from the official log.** The model's Brier skill against that
+no-team-information benchmark is **+0.068 with a game-cluster lower bound of −0.052** (bootstrap p = 0.13), so it is
+not distinguishable from zero at this sample size. The selective variant is **−0.004**: filtering for big projected
+margins did not help. Totals are worse than naming the league average (**skill −0.100**). The coin-flip control
+reaches p = 0.045 on the same window and still has an interval covering zero, which is the clearest argument on the
+site for why win-rate and single-number leaderboards mislead. Roughly a quarter of the variance in margins sits
+inside what an expectation can address, and the calibration table shows over-confidence in the 0.6–0.8 band. The
+sample size for a positive lower bound at the current effect is on the order of hundreds of games, so the register's
+default state — "not ranked — record only" — is the correct state today.
+
+**What was verified against official pages, line by line.** 21 values were read off official pages and compared with
+the committed log field by field: 17 match, 0 disagree, and 2 fill cells the log leaves blank. The repo-review
+register now carries 19 findings (from 14) and 9 verified checks: Week 2 Washington at Dallas is now published
+20-37, so the corpus is 135 graded of 136 and the blank is closable by the log's owner, not by this workspace; two
+official pages disagree about the Houston venue (game centre "RELIANT STADIUM" against the schedule page's travel
+link "NRG Stadium"), so 11 of 13 Week 11 venue cells are blank rather than guessed; the past-season injury archive
+`nfl.com/injuries/league/{season}/REG{week}` does render, which **narrows** the archive gap in `flagged.html`, but the
+win-loss records printed beside it are end-of-season values, so it is not point-in-time safe and must not be used to
+calibrate "Questionable" against inactives; and those pages' titles state a different week from their own body
+headers, which would mislabel every capture by a week for a parser keyed on the title.
+
+**Decisions this workspace still needs (nothing here acts on them):** the price-data policy, which is the single
+gate in front of opening/closing snapshots, residuals, vig-free consensus, CLV, ROI and the top reward tier;
+whether the verified game log is extended and hashed weekly, which is what makes rest-day, form and availability
+features possible at all; which official field is authoritative for venue; and what a tier pays. Each is written as
+a row with its unblocking effect on [`shadow-board/registers.html`](shadow-board/registers.html), next to six
+suggestions with cost and blocker stated, so a path can be chosen before anything else is implemented.
