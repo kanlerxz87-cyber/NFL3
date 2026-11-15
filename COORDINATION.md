@@ -1847,3 +1847,25 @@ correction made at the source rather than a rounding of the claim.
 **No claim added:** no ROI, closing-line value, vig, market residual, depth ordering, snap share,
 inactive list or validated strategy. The pre-registered model is published as **unvalidated**
 because its own gate fails.
+
+## Claim — `arena/99122105-nfl3` (session 99122105), 2026-11-15 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Origination workspace: price-snapshot store (opening/closing), verified results feed, line origination for side → total → moneyline with fair/market/difference columns, proper-score leaderboard with uncertainty + controls, pre-registration and demotion gates, correlations with n, luck-removal panel, availability/depth graph, decision-readiness table, suggestions review section, flagged items, executive summary, and the final integration + Pages publication for this pass | in progress | `arena/99122105-nfl3` | `origination/` (new), `data/prices/` (new), `tests/test_origination.py` (new), `COORDINATION.md`, and — as the final integration session — root `index.html` navigation block, `README.md` table row and `.github/workflows/pages.yml` step |
+
+**Board read first.** All prior claims are merged (PRs #1–#77); `main` at `5368709` is the starting point and the
+latest entries from `arena/2b0f3e11-nfl3` and `arena/b754ab1d-nfl3` are published. No other session is active, so no
+file below is owned by a live claim.
+
+**Scope discipline.** This session does not edit existing workspace data, the canonical `decision-lab` register, the
+ops-centre derived data, or any published NFL row. It *reads* `decision-lab/data/official_snapshot.json` and
+`decision-lab/data/catalog.json` as inputs. New numbers are computed only in `origination/data/`.
+Root navigation/README/workflow are touched only in the final integration step, after the new workspace builds.
+
+**Evidence rules for every number published here.**
+
+1. Official label ⇒ value came from `nfl.com` (or an official club page) and the row links to that page.
+2. Community label ⇒ value came from the repo's digest-verified nflverse snapshot; the row says so, links to the
+   release asset, and is excluded from every official-only gate.
+3. Cannot be confirmed ⇒ cell stays blank, the row says `unverified`, and the item is published on Flagged for Review.
