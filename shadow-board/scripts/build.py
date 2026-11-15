@@ -921,11 +921,15 @@ def render(res: dict, fixtures, readings, ledger, graded, graded_ml) -> dict[str
                                 "What is frozen, what is measured, and what would change each entry's mind. The "
                                 "gates are fail-closed: the default state of a strategy is not ranked.",
                                 para + "<h2>Declared strategies</h2>" + strat +
-                                "<h2>The same question is registered twice in this repository</h2>"
+                                "<h2>The same question is now registered three times in this repository</h2>"
                                 + "<p class='para'>A second session registered a comparable evaluation on the same "
                                   "official corpus while this one was being built. The two are not corrections of each "
                                   "other and neither is a replication of the other: they differ in model form, window "
-                                  "and sigma treatment, so their numbers must not be pooled or averaged. This table "
+                                  "and sigma treatment, so their numbers must not be pooled or averaged. A fourth, "
+                                  "older registration of a nine-strategy family exists in "
+                                  "<code>docs/PRE_REGISTRATION.md</code>; its registration order is unproven (finding "
+                                  "RR-04), so it is counted here but its results are not treated as registered "
+                                  "evidence. This table "
                                   "exists so a reader can see which claim comes from which registration. The one thing "
                                   "the two registrations do agree on is the verdict that matters: neither model's "
                                   "skill clears a game-cluster lower bound above zero on the 2026 corpus, so a claim "
