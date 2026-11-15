@@ -3,19 +3,13 @@
 **Status: research workspace. No strategy has been validated, no line has been published, and no
 reward is funded.** Everything below is traced to an official page or is an explicit blank.
 
+**Update, 2026-11-15:** a [decision-readiness register](readiness.html) now lists one row per requirement in the brief, the gate that blocks it, and the number that would clear it. As built, the counts are 14 blocked, 29 not started, 18 partial, 1 decision recorded and 2 done (64 rows, computed from committed files). The landing page also holds a separate 18-row summary from another session; the two are not reconciled (flag F9). Nine irregularities are on its Flagged for Review section, including two injury-row counts (254 and 279) and three chain counts (117, 195 and 280) that are still published side by side. Official pages could not be re-fetched from the build sandbox, so no value was re-verified today.
+
 ---
 
 ## 0. Status at 2026-11-15 (this pass)
 
-**Where to look first:** the [decision-readiness table](index.html#readiness) (one row per requirement, 72 rows) and the [repo review](repo-review.html) (14 irregularities, 8 high). Every row links to a repository file and to an official NFL page; blanks are unverified.
-
-| Readiness state (72 requirements) | Count |
-|---|---|
-| Done | 6 |
-| Partial | 28 |
-| Blocked (a named gate stops it) | 15 |
-| Not built | 22 |
-| In progress (this merge) | 1 |
+**Where to look first:** the decision-readiness register, one row per requirement, with the gate that blocks it and the number that would clear it ([readiness.html](readiness.html); the same register is summarised on the [landing page](index.html)). It holds 64 rows: 29 not started, 18 partial, 14 blocked, 2 done and 1 with a decision recorded. The [repo review](repo-review.html) lists 14 irregularities, 8 of them high. Every row links to a repository file and an official NFL page; blanks are unverified.
 
 **What is verified today (opened 2026-11-15):**
 - The official injury page shows the three Lions designations (Kerby Joseph, Cade Mays, D.J. Reed) as "Out". The committed snapshot does not (RR-02).

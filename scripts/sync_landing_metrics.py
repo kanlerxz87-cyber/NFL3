@@ -60,13 +60,19 @@ def rewrite(text: str, metrics: dict[str, str]) -> str:
     start = text.index('<div class="metrics">')
     end = text.index("</div></div>", start) + len("</div></div>")
     block = text[start:end]
-    for label, value in metrics.items():
+    present = {label: value for label, value in metrics.items()
+               if re.search(r'<span>' + re.escape(label) + r'</span><strong>', block)}
+    absent = [label for label in metrics if label not in present]
+    if not present:
+        raise SystemExit("landing page: none of the expected metric labels were found")
+    for label, value in present.items():
         pattern = re.compile(
             r'(<span>' + re.escape(label) + r'</span><strong>)([^<]*)(</strong>)'
         )
-        if not pattern.search(block):
-            raise SystemExit(f"landing page: metric label not found: {label}")
         block = pattern.sub(lambda m: m.group(1) + value + m.group(3), block, count=1)
+    if absent:
+        # Labels not on the landing page (removed by the readiness register, PR #67) are reported, not guessed.
+        print("not on landing page, not synced: " + ", ".join(absent))
     return text[:start] + block + text[end:]
 
 

@@ -1,8 +1,8 @@
 {
-  "html_pages": 112,
-  "table_rows": 6144,
-  "rows_missing_official_source": 616,
-  "rows_community_only": 112,
+  "html_pages": 113,
+  "table_rows": 6170,
+  "rows_missing_official_source": 617,
+  "rows_community_only": 113,
   "rows_with_internal_audit_source": 7,
   "conflict_files": [],
   "authority_claim_files": [],
@@ -12,7 +12,7 @@
       "id": "AUD-03",
       "severity": "High",
       "title": "Table rows without an official-source link",
-      "detail": "616 row(s) across the repository lack an official HTTPS source; 112 cite only community sources.",
+      "detail": "617 row(s) across the repository lack an official HTTPS source; 113 cite only community sources.",
       "files": [
         "dashboard/flagged.html",
         "dashboard/questions.html",
@@ -449,7 +449,7 @@
     },
     {
       "path": "index.html",
-      "rows": 102,
+      "rows": 54,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -688,8 +688,16 @@
       "local_errors": []
     },
     {
+      "path": "readiness.html",
+      "rows": 73,
+      "rows_missing_official_source": 1,
+      "rows_community_only": 1,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
       "path": "repo-review.html",
-      "rows": 23,
+      "rows": 24,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
