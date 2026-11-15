@@ -38,6 +38,12 @@ OFFICIAL = {
     "odds": ("NFL odds page", "https://www.nfl.com/odds/", False),
     "stats": ("NFL stats", "https://www.nfl.com/stats/", False),
     "ops": ("NFL operations site", "https://operations.nfl.com/", False),
+    "week11_schedule": ("NFL 2026 Week 11 schedule page", "https://www.nfl.com/schedules/2026/by-week/week-11", True),
+    "scores_w11": ("NFL 2026 Week 11 scores page", "https://www.nfl.com/scores/2026/week-11", True),
+    "gamecentre_w11": ("NFL game centre: Colts at Texans, 2026 Week 11", "https://www.nfl.com/games/colts-at-texans-2026-reg-11", True),
+    "gamecentre_w2": ("NFL game centre: Commanders at Cowboys, 2026 Week 2", "https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2", True),
+    "sched_week1": ("NFL 2026 Week 1 schedule page", "https://www.nfl.com/schedules/2026/by-week/week-1", True),
+    "injuries_hist": ("NFL injury report at a past-season URL (2024, REG 4)", "https://www.nfl.com/injuries/league/2024/REG4", True),
 }
 
 # Repo-review findings: (id, severity, finding, evidence, action, official key or None, repo path, github-path)
@@ -94,6 +100,50 @@ REVIEW = [
      "Designations move within the week, and the records disagree about when. The independent baseline (verification_baseline.json, transcribed 2026-11-12) records Kerby Joseph as 'Full Participation' with game status 'Out'. The official page read on 2026-11-15 records 'Did Not Participate' with 'Out'. The verifier reports this as source_updated, not as a mismatch, and no timestamped capture shows when the change happened.",
      "decision-lab/data/verification_baseline.json (transcribed_at 2026-11-12); python3 decision-lab/scripts/verify_sources.py (SOURCE-UPDATED rows); official page https://www.nfl.com/injuries/ (read 2026-11-15).",
      "Store each capture with its time so a change can be dated; re-transcribe the baseline from a stored capture.", "injuries", "decision-lab/data/verification_baseline.json"),
+    ("RR-15", "High",
+     "The committed 2026 game log leaves one fixture without a score (Week 2, Washington at Dallas, recorded on "
+     "2026-11-12 as a 'Hidden Score'). The official game centre published the final on 2026-11-15: Washington 20, "
+     "Dallas 37, with quarter scores that sum to the final. Every page that calls the corpus '136 games' is one "
+     "game short of what it can grade.",
+     "decision-desk/data/games_2026.csv (week 2 WAS@DAL row: blank scores, verification note). Official read: "
+     "https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2 on 2026-11-15.",
+     "The log owner fills the two cells from the game centre and records the read time. Until then any count must "
+     "say 135 graded of 136.", "gamecentre_w2", "decision-desk/data/games_2026.csv"),
+    ("RR-16", "Medium",
+     "Venue provenance conflicts between two official pages for the same fixture. The Week 11 game centre's Game "
+     "Info block says RELIANT STADIUM for Indianapolis at Houston, while the same fixture's club travel link on the "
+     "Week 11 schedule page says NRG Stadium. The Cincinnati at Washington travel link says FedEx Field and was not "
+     "checked against its game centre in this pass.",
+     "shadow-board/data/fixtures_2026_w11.csv (venue_game_centre vs venue_schedule_page columns; 2 of 13 fixtures "
+     "carry a game-centre read, 11 are blank by design).",
+     "Decide which official field is authoritative for venue before any roof, surface or travel feature is built; "
+     "blank the venue rather than choosing by preference.", "gamecentre_w11", "shadow-board/data/fixtures_2026_w11.csv"),
+    ("RR-17", "High",
+     "The official injury report is queryable for past seasons at nfl.com/injuries/league/{season}/REG{week}, but "
+     "the win-loss records printed beside each past-week table are end-of-season values (the 2024 Week 4 page shows "
+     "Dallas 7-10 and the New York Giants 3-14). The page therefore is a re-rendered query, not the report as it "
+     "stood, so it is not point-in-time safe.",
+     "https://www.nfl.com/injuries/league/2024/REG4 (opened 2026-11-15); the selector offers seasons 1965-2026 and "
+     "weeks 1-18 plus playoffs.",
+     "Either use the archive with an explicit lookahead flag on every row, or wait for dated captures. Do not "
+     "describe it as a point-in-time archive, and do not calibrate 'Questionable' against inactives from it.",
+     "injuries_hist", "shadow-board/sources.html"),
+    ("RR-18", "Low",
+     "The injury-report page's title states a different week from its own body header: 'Week 10 of the 2026 Season' "
+     "sits above 'Injuries - WEEK 9', and the 2024 Week 4 page repeats the pattern. A parser keyed on the title "
+     "would mislabel every capture by a week.",
+     "Both pages opened 2026-11-15; the same mismatch was independently recorded by an earlier session for the "
+     "Week 9 URL.",
+     "Key captures on the request URL and the body header, and assert the two agree in the drift alarm.",
+     "injuries_hist", "shadow-board/sources.html"),
+    ("RR-19", "Medium",
+     "Pre-registration is now demonstrated in one place only. shadow-board/PREREGISTRATION.md is registered by "
+     "commit f7f6c18 (2026-11-15T13:00:32Z) with every artifact of that workspace committed after it, and its gate "
+     "refuses a build whose artifacts predate the rule file. The nine research-desk strategies described in "
+     "docs/PRE_REGISTRATION.md remain in the RR-04 state.",
+     "git log --format=%H\ %cI -- shadow-board/PREREGISTRATION.md; python3 shadow-board/scripts/check.py; RR-04.",
+     "Either re-register the research-desk family in a commit that precedes its results, or keep its 'written "
+     "before results were inspected' sentence off the published pages.", None, "shadow-board/PREREGISTRATION.md"),
     ("RR-13", "Low",
      "Branch rule: the brief asks for session-named branches (session-<id>/<task>). This session runs on the Arena-fixed branch arena/ecdea533-nfl3, so each task is a commit on that branch, not its own branch.",
      "Branch note in the session brief; COORDINATION.md claim section.",
@@ -106,6 +156,10 @@ VERIFIED = [
     ("V-03", "Official injury-policy article (opened 2026-11-15): Practice report uses Did Not Participate, Limited and Full Participation; Game Status uses Questionable, Doubtful and Out; 'Probable' removed; no percentage defines Questionable.", "injury_policy"),
     ("V-04", "Depth rows in the committed snapshot: 676 team-unit-position slots; 149 with more than one rank-1 player. Recomputed in this session; matches the brief.", "teams"),
     ("V-05", "Week 10 slate: 14 fixtures with kickoff date, kickoff time and slot. Thursday 8:15 PM and Sunday 9:30 AM match the official page headers. Venues are not verified (RR-05).", "week10_news"),
+    ("V-06", "Week 11 slate (read 2026-11-15 from two official pages): 13 fixtures with date, kickoff time in ET, network, both clubs' published records, and 6 clubs on bye (ATL, CLE, GB, LA, NE, SEA). The schedule page and the scores page agree on the matchup list.", "scores_w11"),
+    ("V-07", "Week 2 Washington at Dallas is now published as WAS 20, DAL 37, with quarter scores 0/10/3/7 and 10/7/10/10 summing to each final - an internal consistency check of the official page.", "gamecentre_w2"),
+    ("V-08", "The dated schedule announcement (media.nfl.com, '2026 NFL Schedule Announced', 14 May 2026) states an 18-week, 272-game regular season kicking off Wednesday, 9 September in Seattle, with nine international games including Week 11 in Mexico City. This closes the earlier note that a Wednesday Week 1 kickoff date was anomalous. Press-release URL recorded as text: https://media.nfl.com/football-information/2026/news/2026-nfl-schedule-announced (a non-official-host link in the root validator's allowlist, so it is not cited as a source link).", "sched_week1"),
+    ("V-09", "19 of 21 values read off official pages reproduce the committed 2026 game log exactly (Week 1, 5, 7, 8 and 9 samples); the other 2 are the Week 2 blank cells described in RR-15. No value disagreed.", "gamecentre_w2"),
 ]
 
 

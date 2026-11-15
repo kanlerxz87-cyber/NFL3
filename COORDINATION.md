@@ -2085,3 +2085,123 @@ PR: opened and merged immediately after this entry; link recorded by the follow-
   `a1633c2011bc8fb4c6508ada2ed1cd32ddede8993300b5e03ef157f762ee73b1` is unchanged throughout. Corrected in
   `results-verification/scripts/build.py` (page banner), `readiness/build_readiness.py` (R2 row) and the
   `tests/test_readiness.py` pin, and rebuilt.
+## Claim — `arena/745d100d-nfl3` — 2026-11-15 UTC
+
+Session id `745d100d`. Branch fixed by Arena as `arena/745d100d-nfl3` (a `session-<id>/<task>` branch cannot be created here), based on `main` at `5368709a75e6898971f360a92a67b60a2c687d07`.
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| S1 Pre-registered shadow singles baseline: frozen rule text, gates, falsification fields, git-hash registration | in progress | `arena/745d100d-nfl3` | `shadow-board/PREREGISTRATION.md` (new) |
+| S2 Official-only team-strength model, Week 11 fair lines (probability + inputs + market-line blanks) | in progress | `arena/745d100d-nfl3` | `shadow-board/scripts/`, `shadow-board/data/` (new) |
+| S3 Weeks 1–9 walk-forward backtest ledger: proper scores, game-cluster bounds, multiplicity, control baselines, calibration, removal-of-luck panel, official-only correlations with n | in progress | `arena/745d100d-nfl3` | `shadow-board/` (new) |
+| S4 Week 11 slate capture (schedule page + game-centre venue sample) and corpus delta for the Week 2 "Hidden Score" game | in progress | `arena/745d100d-nfl3` | `shadow-board/data/` (new) |
+| S5 Static sub-site with fail-closed gate, questions/suggestions registers for this pass | in progress | `arena/745d100d-nfl3` | `shadow-board/index.html`, `shadow-board/*.html`, `shadow-board/assets/` (new) |
+| S6 Integration: additive root nav/README/exec-summary rows, flagged rows on `review.html`, validators, PR to `main`, Pages check | in progress | `arena/745d100d-nfl3` | `index.html` (one nav row), `README.md` (one table row), `EXECUTIVE_SUMMARY.md` (one dated section), `review.html` (appended rows), `COORDINATION.md` |
+
+**Overlap check.** The two most recent board entries are claims by `arena/2b0f3e11-nfl3` (both marked `in progress`, files `README.md`, `index.html`, `scripts/sync_landing_metrics.py`, `tests/check_site.py`, `ops-center/scripts/verify.py`, `verification/*`, `decision-lab/*`). Those claims' work is already on `main`: PR #77 merged as `212fd94`, followed by the data refresh `5368709` at 2026-11-15T12:42Z, which contains exactly the changes those entries describe (landing-metric sync from `catalog.json`, Ops Center metric relocation, regenerated integrity/audit reports). This session therefore does not edit any file listed in those claims except append-only edits to this board, `README.md` (one row), `index.html` (one nav row) and `EXECUTIVE_SUMMARY.md` (one appended section). Requests for `decision-desk/`, `decision-lab/`, `ops-center/`, `readiness/` and `.github/` owners are logged below, not applied.
+
+**Facts verified this session before claiming** (fetch tool, 2026-11-15 UTC): the official Week 11 schedule page (13 fixtures + 6 byes with records), the official Week 11 scores page, the 2026 schedule announcement (dated May 14, 2026; 18 weeks, 272 games), the Week 2 game centre for Washington at Dallas (final score published today: WAS 20, DAL 37 — the field the committed log leaves blank), the Houston game centre (stadium field "RELIANT STADIUM" while the same fixture's schedule-page travel link names "NRG Stadium" — flagged), and the official historical injury-report URL pattern `nfl.com/injuries/league/{season}/REG{week}` (past seasons render, but the records printed beside them are end-of-season values, so those pages are not point-in-time safe — flagged).
+
+## Completion — `arena/745d100d-nfl3` — 2026-11-15 UTC
+
+Session id `745d100d`. Work done on the Arena-fixed branch `arena/745d100d-nfl3` (a `session-<id>/<task>` branch
+cannot be created from this environment); based on `main` at `5368709a75e6898971f360a92a67b60a2c687d07`, after
+`git fetch --unshallow origin`. Status of tasks S1–S6 above: **done — needs review**.
+
+**What was built.** A new workspace, `shadow-board/`, carrying the one item in the brief that no previous session had
+implemented: a pre-registered, singles-only shadow baseline with the leaderboard separated from staking.
+`PREREGISTRATION.md` (commit `f7f6c18`, 13:00:32Z) was committed **before** every other file in the workspace and
+freezes the data the model may read, the feature formula, the forecast formula, the constants (`k = 2.0` shrinkage
+games, margin-sd clipped to 10.0–17.0, lines rounded to 0.5), the evaluation window (backtest Weeks 2–9;
+prospective from the registration commit; Weeks 15–18 and 2027 reserved), eight fail-closed gates (A provenance,
+B sample, C cluster-bootstrap skill bound, D Benjamini-Hochberg `q = 0.10`, E both halves, F no leakage,
+G price firewall, H joint evidence), a five-entry declared family, a demotion gate and the two-stage escrow opening
+condition. `scripts/model.py` and `scripts/scoring.py` implement it with the standard library only;
+`scripts/build.py` regenerates `data/` and six pages; `scripts/check.py` is the gate and CI now runs it
+(one added step in `.github/workflows/pages.yml`, after the decision-desk check).
+
+**Artifacts.** `data/fixtures_2026_w11.csv` (13 Week 11 fixtures, kickoff slots, pregame records, six byes, venue
+status per fixture), `data/official_spot_readings.csv` (21 values read off official pages), `data/verification_rows.csv`
+(each compared with the committed log field by field), `data/fair_lines_2026_w11.csv` (originated side → total →
+moneyline-equivalent probability for every fixture, with market line and residual columns present and empty),
+`data/forecast_records.jsonl` (65 records: 13 fixtures × 5 declared entries, each storing the probability, the inputs
+that produced it, the config hash and its official source URLs), `data/backtest_ledger.csv` (120 rows, 119 with two
+published scores), `data/ratings_snapshot.json` (the same rule applied at two as-of points for the weekly diff),
+`data/summary.json`. Pages: `index.html` (prospective leaderboard only), `forecasts.html`, `backtest.html`,
+`method.html`, `sources.html`, `registers.html`.
+
+**Verification performed.** The model's inputs are only `decision-desk/data/games_2026.csv`, and 21 of its values
+were re-read from official pages inside a stated window (2026-11-15T12:52Z–13:22Z): 17 match the committed log, 0
+disagree, 2 fill cells the log leaves blank. The Week 2 game centre for Washington at Dallas now publishes 20-37
+with quarter scores that sum to each final (VR-01…VR-04); the Week 11 slate was read from two official pages
+(`schedules/2026/by-week/week-11` and `scores/2026/week-11`); the dated schedule announcement (14 May 2026,
+18 weeks / 272 games, kickoff Wednesday 9 September in Seattle, nine international games including Week 11 in
+Mexico City) confirms the fixture context; the Week 10 page establishes the exact corpus boundary. Every table row on
+every new page carries an https link to an official page; the gate fails on a row without one, on any
+`n/a`/`TBD`-style placeholder cell, and on a venue claim that the venue status column does not support.
+Backtest numbers are computed but appear only on `backtest.html`: `check.py` scans `index.html` for any ledger value
+and fails if one is found, so a backtest figure cannot become a leaderboard claim by accident.
+
+**Result, stated as measured (backtest, not leaderboard).** 118 games that decided a side, graded walk-forward:
+SB1-ML Brier skill +0.0679, game-cluster 95 % lower bound −0.0517, bootstrap p 0.127, no BH survival;
+the selective variant −0.0037 (the filter did not help); totals −0.1004 on the squared-error scale (worse than naming
+the league mean); the two controls score 0.0000 (home-rate) and +0.0356 (coin flip, p 0.045 — an interval still
+covering zero, which is the site's argument against point-estimate leaderboards). The removal-of-luck panel puts the
+observed 76/118 hits at the 48th percentile of seasons the model itself would produce, its realised Brier at the
+5th percentile of that distribution, and the variance of the expectation over the variance of the realised margin at
+26.2 %. Correlations print n: expected vs actual margin r = 0.196 (n = 119), expected vs actual total r = −0.056,
+same-game home-win/total-above-our-number φ = −0.079. Nothing here is evidence of skill and the page says so.
+
+**Irregularities found and flagged (not fixed by this session, five new rows in the review register).** RR-15: the
+log's one blank fixture is now published officially, so "136 games" is really 135 graded and one closable blank; the
+log's owner should fill it, not this workspace. RR-16: two official pages disagree about the Houston venue
+(game centre "RELIANT STADIUM" vs the schedule page's travel link "NRG Stadium"), so 11 of 13 Week 11 venue cells are
+blank. RR-17: `nfl.com/injuries/league/{season}/REG{week}` renders past seasons — which **narrows** the
+"establish archive coverage" row on `flagged.html`, now amended in place — but the win-loss records printed beside
+those tables are end-of-season values, so it is not point-in-time safe and must not be used to calibrate
+"Questionable" against inactives. RR-18: those pages' titles state a different week from their own body headers, which
+would mislabel every capture by a week for a title-keyed parser. RR-19: pre-registration is demonstrable for this
+workspace only; the nine research-desk strategies remain in the RR-04 state.
+
+**Overlap with a concurrent session (logged, not resolved here).** Between the claim and the merge of this session,
+`main` gained `official-verify/` (registrations by `arena/f0d1503b-nfl3` / merged through PR #86 by
+`arena/16183225-nfl3`), which pre-registers a ridge attack/defence team-strength model over Weeks 4–10 of the same
+official 2026 corpus, with three controls and its own `check_prereg.py`. That is a second registration of much of
+task S3 in this session's list. Nothing in `official-verify/` was edited: the two registrations are cross-referenced
+from `shadow-board/method.html` with a side-by-side table, `EXECUTIVE_SUMMARY.md` §7 states the relationship, and the
+numbers are never pooled. **Request to the `official-verify/` owner:** add a reciprocal line pointing at
+`shadow-board/` so a reader cannot mistake one registration's interval for the other's, and decide which workspace is
+canonical for the prospective leaderboard — only `shadow-board/` holds pre-kickoff forecast records, and only the
+owner can say whether that asymmetry is intended.
+
+**Requests to other owners (not applied here, per the board rule).**
+- `decision-desk/` (claim of `arena/6490936b-nfl3`): append the Week 10 Thursday result (WAS 24, NYG 21,
+  2026-11-12) and the now-published Week 2 score to `data/games_2026.csv`, then re-run
+  `python3 decision-desk/scripts/crosscheck_games.py`; publish the row count rather than the inherited "136-game"
+  figure. The Week 10 Sunday slate had **not** been played inside this read window, so no other Week 10 result exists
+  to add.
+- `ops-center/` owner: three injury counts (254 / 279 / 347, RR-07) and two requirement registers (a 26-row
+  catalogue summary on the landing page, a 64-row `readiness/data/readiness.csv`) are still published side by side.
+  This workspace cites both with their own labels and did not merge them.
+- `verification-lab/`, `.github/` owners: no capture step is failure-gated or alerted (RR-08), so the staleness this
+  workspace prints per fixture would stay invisible in CI. One step was added for this workspace's own gate only.
+- Owner decisions needed, listed with their unblocking effect on `shadow-board/registers.html`: the price-data policy
+  (SB-Q01), a weekly hashed log refresh (SB-Q02), venue authority (SB-Q03), use of the past injury archive (SB-Q04),
+  reward semantics (SB-Q05), and the 30-game ranking minimum (SB-Q06).
+
+**Regeneration note (transparency).** Adding pages changes repository-wide counts, so this session re-ran the
+*existing* generators and committed their output byte-for-byte: `scripts/build_repo_review.py`,
+`readiness/build_readiness.py`, `decision-lab/scripts/build.py` + `audit.py`, and
+`verification/audit_sources.py --write`. No script logic of another workspace was modified, and no data value in
+another workspace was edited. `verification/audit_sources.py --check`, which failed on staleness after the page
+additions, passes again (119 pages / 6,363 rows canonical; 118 / 6,301 under the independent scanner's own scan —
+the pre-existing SRC-04 methodological difference, still published as a finding and not declared resolved).
+
+**Checkers run after the change (all pass).** `scripts/validate_site.py`; `tests/check_site.py`;
+`decision-desk/scripts/check.py`; `tests/test_decision_lab.py`; `tests/test_readiness.py`;
+`decision-lab/scripts/audit.py` (lab gate PASS); `verification/audit_sources.py --check`;
+`ops-center/scripts/verify.py` (0 failures, 8 pre-existing source-class warnings); `tests/test_verification_lab.py`;
+`scripts/build_repo_review.py --check` (19 findings); `shadow-board/scripts/check.py` (6 pages, 13 checks);
+plus `engine/test_engine.py`, `research-desk/scripts/check.py`, `line-lab/scripts/verify.py`,
+`node dashboard/scripts/check.mjs` and `injury-verification/verify.py`, which were not touched by this change.
+The gate was also exercised in a `--depth 1` clone to confirm it reports the truncated history instead of failing CI.
