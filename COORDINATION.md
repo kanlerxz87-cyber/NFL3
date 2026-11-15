@@ -1869,3 +1869,66 @@ Root navigation/README/workflow are touched only in the final integration step, 
 2. Community label ⇒ value came from the repo's digest-verified nflverse snapshot; the row says so, links to the
    release asset, and is excluded from every official-only gate.
 3. Cannot be confirmed ⇒ cell stays blank, the row says `unverified`, and the item is published on Flagged for Review.
+
+## Completion — `arena/99122105-nfl3` (session 99122105), 2026-11-15 UTC
+
+| Task | Status | Owner | File scope delivered |
+|---|---|---|---|
+| Origination workspace, price store, results feed, leaderboard, availability graph, registers and site | done — needs review for 12 flagged items | `arena/99122105-nfl3` | `origination/**` (new, 58 files), `tests/test_origination.py` (new), this board, root `index.html` (nav + one table row), `README.md` (one row), `.github/workflows/pages.yml` (three steps) |
+
+**What was built, and what it proves.**
+
+* `origination/data/prices/` — an immutable price-snapshot store plus a ten-point policy committed with a
+  content hash. One snapshot exists. 78 of 816 event × market cells have a pre-kickoff number; 411 are
+  post-hoc only and 327 are empty. Policy P02 forbids a post-hoc number from ever becoming an open, a
+  close, or closing-line-value evidence, and the ledger labels every cell.
+* `origination/data/results.json` — a verified results feed. 137 played games aggregated to 32 clubs;
+  **160/160** club × field checks reproduce nfl.com's official 2026 standings, and league points-for equals
+  points-against at **6,291**. An independent spot-check of 18 games read directly from nfl.com's week 1
+  and week 5 scoreboards matched 18/18.
+* `origination/data/origination_walkforward.json` — side, total then moneyline, fitted only on prior
+  seasons. The model trails the market (side MAE 10.48 vs 9.45; total 11.36 vs 10.55) and that is
+  published as the baseline rather than hidden.
+* `origination/data/leaderboard.json` + `gates.json` — 10 pre-registered rules hashed and scored on
+  proper scores with a paired game-cluster bootstrap, Wilson intervals, four control arms and a
+  multiplicity adjustment over 10 trials. Gate G10 demoted **S01 and S03**, two of this session's own
+  rules, because their skill intervals sit entirely below zero.
+* `origination/data/availability_graph.json` — 1,386 published slots over 30 clubs, 149 rank-1 slots that
+  name more than one player (kept as groups), 254 official report rows, 400 reserve rows, 12,785
+  playing-time rows. Depth is measured from snap share in 46 groups; disagreement with the published
+  order is published, not resolved.
+* `origination/data/ablation.json` — the injury/personnel ablation the brief asked for: same model with
+  and without availability features, chronological holdout (weeks 7–10), **λ not fitted**, full grid
+  published. Holdout MAE improvement **−0.003 [−0.166, +0.179]** — the interval spans zero for every λ,
+  and the page says that is a finding about the sample, not about injuries.
+* `origination/data/requirements.json` — **62** requirements: 33 implemented, 21 partial, 8 blocked,
+  **0 validated**. Every row names its blocking gate and a measurable clearance number.
+* `origination/data/questions.json` (20) and `suggestions.json` (9) — every question names what it blocks
+  and how to close it; every suggestion names the requirements it unblocks, its cost, its risk and the
+  decision it needs.
+
+**Verification performed (all re-run on the committed tree).**
+
+* `python3 tests/test_origination.py` — 35 tests pass, including a sign-convention regression (during
+  development a losing rule was published as a "skill signal" because the bootstrap difference had the
+  wrong sign; the test now pins the direction), the push rule, the sample-size closed form, the price
+  policy, settlement balance, and the demotion agreement between gate and leaderboard.
+* `python3 origination/scripts/verify.py` — 13 pages, 448 table rows, **0** without a source link, 326
+  carrying an official nfl.com link, 0 broken local links, 0 conflict markers, no placeholder tokens, and
+  a rebuild that produces byte-identical output.
+* `python3 scripts/validate_site.py` (14 root pages), `python3 tests/check_site.py`,
+  `python3 decision-lab/scripts/audit.py` (126 pages, 6,624 rows, 1 finding, lab gate PASS),
+  `python3 tests/test_decision_lab.py` (37), `python3 engine/test_engine.py` (ALL PASSED),
+  `python3 ops-center/scripts/verify.py` (9 pages, 0 failures, 8 pre-existing source-class warnings).
+  No existing artifact or published NFL row was edited.
+
+**Irregularities flagged for review (published on `origination/flagged.html`, none blocking):** one price
+observation · two clubs with no parseable depth chart · no inactive lists · the ablation cannot resolve an
+effect · AZ/ARI alias · kickoff time zone absent · two strategies already demoted · no reward funding ·
+a club with no report section is not injury-free · one correlation mixes a community price with an
+official score · unjoined report rows · the site's own model trails the market.
+
+**Scope note for the next session.** The three shared files this session touched are listed in the table
+above: root `index.html` (an additive nav block and one table row), `README.md` (one table row) and
+`.github/workflows/pages.yml` (three additive validation steps). No other workspace was modified and no
+existing numeric claim was changed.
