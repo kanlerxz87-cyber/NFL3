@@ -55,8 +55,8 @@
    "wilson_lo": 0.4193159467511274,
    "wilson_hi": 0.5881001622241442,
    "bss": -0.10594115811246096,
-   "bss_lo": -0.053564939974447626,
-   "bss_hi": -0.00041210309698302126,
+   "bss_lo": -0.21425975989779023,
+   "bss_hi": -0.0016484123879321189,
    "calibration_gap": 0.12028843463799962,
    "verdict": "worse than benchmark: interval below zero"
   },
@@ -70,8 +70,8 @@
    "wilson_lo": 0.4106626869610328,
    "wilson_hi": 0.5985249765793781,
    "bss": -0.12781106506896878,
-   "bss_lo": -0.0666861458641262,
-   "bss_hi": 0.0006882385687462715,
+   "bss_lo": -0.2667445834565052,
+   "bss_hi": 0.00275295427498512,
    "calibration_gap": 0.14389653924082507,
    "verdict": "no distinguishable signal: interval includes zero"
   },
@@ -85,8 +85,8 @@
    "wilson_lo": 0.36268169477968215,
    "wilson_hi": 0.5431737539646008,
    "bss": -0.1192733790346141,
-   "bss_lo": -0.05145278496169505,
-   "bss_hi": -0.007555249689635156,
+   "bss_lo": -0.20581113984678012,
+   "bss_hi": -0.030220998758541118,
    "calibration_gap": 0.15358778326883574,
    "verdict": "worse than benchmark: interval below zero"
   },
@@ -100,8 +100,8 @@
    "wilson_lo": 0.28817291567663905,
    "wilson_hi": 0.46362781283101584,
    "bss": -0.1293113340542722,
-   "bss_lo": -0.06089923780322334,
-   "bss_hi": 0.0032564736280048584,
+   "bss_lo": -0.3087561940547492,
+   "bss_hi": 0.012868640517716412,
    "calibration_gap": 0.17248712943778802,
    "verdict": "no distinguishable signal: interval includes zero"
   },

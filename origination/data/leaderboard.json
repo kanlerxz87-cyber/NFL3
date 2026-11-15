@@ -25,12 +25,14 @@
     "accuracy": 0.5038167938931297,
     "bench_accuracy": 1.0,
     "calibration_gap": 0.12028843463799962,
-    "point": -0.02648528952811523,
-    "lo": -0.053564939974447626,
-    "hi": -0.00041210309698302126,
+    "point": -0.10594115811246096,
+    "lo": -0.21425975989779023,
+    "hi": -0.0016484123879321189,
     "n_clusters": 131,
     "n_boot": 2000,
     "seed": 20261115,
+    "quantity": "Brier skill score (same scale as the published point estimate)",
+    "point_check": 0.0,
     "wilson": [
      0.4193159467511274,
      0.5881001622241442
@@ -5399,12 +5401,14 @@
     "accuracy": 0.5047619047619047,
     "bench_accuracy": 1.0,
     "calibration_gap": 0.14389653924082507,
-    "point": -0.03195276626724221,
-    "lo": -0.0666861458641262,
-    "hi": 0.0006882385687462715,
+    "point": -0.12781106506896878,
+    "lo": -0.2667445834565052,
+    "hi": 0.00275295427498512,
     "n_clusters": 105,
     "n_boot": 2000,
     "seed": 20261115,
+    "quantity": "Brier skill score (same scale as the published point estimate)",
+    "point_check": 0.0,
     "wilson": [
      0.4106626869610328,
      0.5985249765793781
@@ -9681,12 +9685,14 @@
     "accuracy": 0.45132743362831856,
     "bench_accuracy": 1.0,
     "calibration_gap": 0.15358778326883574,
-    "point": -0.02981834475865351,
-    "lo": -0.05145278496169505,
-    "hi": -0.007555249689635156,
+    "point": -0.1192733790346141,
+    "lo": -0.20581113984678012,
+    "hi": -0.030220998758541118,
     "n_clusters": 113,
     "n_boot": 2000,
     "seed": 20261115,
+    "quantity": "Brier skill score (same scale as the published point estimate)",
+    "point_check": 0.0,
     "wilson": [
      0.36268169477968215,
      0.5431737539646008
@@ -14119,12 +14125,14 @@
     "accuracy": 0.37168141592920356,
     "bench_accuracy": 0.18584070796460178,
     "calibration_gap": 0.17248712943778802,
-    "point": -0.028674086648277492,
-    "lo": -0.06089923780322334,
-    "hi": 0.0032564736280048584,
+    "point": -0.1293113340542722,
+    "lo": -0.3087561940547492,
+    "hi": 0.012868640517716412,
     "n_clusters": 113,
     "n_boot": 2000,
     "seed": 20261115,
+    "quantity": "Brier skill score (same scale as the published point estimate)",
+    "point_check": 0.0,
     "wilson": [
      0.28817291567663905,
      0.46362781283101584
@@ -18602,6 +18610,8 @@
     "n_clusters": 131,
     "n_boot": 2000,
     "seed": 20261115,
+    "quantity": "Brier skill score (same scale as the published point estimate)",
+    "point_check": 0.0,
     "wilson": [
      0.34601929472299015,
      0.513074634746847
@@ -23976,6 +23986,8 @@
     "n_clusters": 131,
     "n_boot": 2000,
     "seed": 20261115,
+    "quantity": "Brier skill score (same scale as the published point estimate)",
+    "point_check": 0.0,
     "wilson": [
      0.4045028423085701,
      0.5732488307656145
@@ -29350,6 +29362,8 @@
     "n_clusters": 131,
     "n_boot": 2000,
     "seed": 20261115,
+    "quantity": "Brier skill score (same scale as the published point estimate)",
+    "point_check": 0.0,
     "wilson": [
      0.4267511692343854,
      0.5954971576914297
@@ -34724,6 +34738,8 @@
     "n_clusters": 137,
     "n_boot": 2000,
     "seed": 20261115,
+    "quantity": "Brier skill score (same scale as the published point estimate)",
+    "point_check": 0.0,
     "wilson": [
      0.4352266653017307,
      0.600274209439823
