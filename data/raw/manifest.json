@@ -65,10 +65,10 @@
       "asset_url": "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv",
       "bytes": 2190033,
       "path": "data/raw/games.csv",
-      "release_asset_updated_utc": "2026-11-15T12:06:41Z",
+      "release_asset_updated_utc": "2026-11-15T12:16:47Z",
       "release_tag": "schedules",
       "release_url": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
-      "sha256": "sha256:f3221bc27a4c69b2cfad52d8741a573f5434dc7296675ab498bfa879c82db9cf",
+      "sha256": "sha256:8accd1cd7a3f6bf909f7e9674fca677ec23eb751180a6eb871f7a21582c13992",
       "stored_as": "games.csv.gz",
       "url": "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv",
       "verified": true
@@ -194,6 +194,6 @@
       "verified": true
     }
   },
-  "generated_utc": "2026-11-15T12:16:45Z",
+  "generated_utc": "2026-11-15T12:20:16Z",
   "source_repo": "https://github.com/nflverse/nflverse-data"
 }
