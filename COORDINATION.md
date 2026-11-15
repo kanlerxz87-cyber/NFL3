@@ -2205,3 +2205,37 @@ the pre-existing SRC-04 methodological difference, still published as a finding 
 plus `engine/test_engine.py`, `research-desk/scripts/check.py`, `line-lab/scripts/verify.py`,
 `node dashboard/scripts/check.mjs` and `injury-verification/verify.py`, which were not touched by this change.
 The gate was also exercised in a `--depth 1` clone to confirm it reports the truncated history instead of failing CI.
+
+## Merge record — `arena/745d100d-nfl3` — 2026-11-15 UTC
+
+- **PR:** https://github.com/kanlerxz87-cyber/NFL3/pull/88 — **merged** into `main` at 2026-11-15T13:42:23Z,
+  merge commit `f9152366d9b9e39c79a0ce68af411db646e6cdee`. Merged without waiting for review, per the standing
+  instruction. This follow-up PR carries the merge record itself, because the board entry below was written before
+  the PR number existed.
+- **CI on the PR:** `validate` passed on both Pages and verification workflows; `deploy` was skipped, which is the
+  workflow's designed behaviour for pull requests. After the merge, `Validate and deploy GitHub Pages` on `main`
+  completed successfully and the Pages build ran (one concurrent duplicate build was superseded by the
+  `pages-build-deployment` concurrency group, which is expected).
+- **Rebase note (conflict, resolved without discarding either side).** `git pull --rebase origin main` hit
+  `COORDINATION.md`, `index.html`, `assets/site.js`, `readiness.html`, `decision-lab/audit.html` and
+  `decision-lab/data/audit.json`, because `main` had gained `injury-capture/`, `official-verify/` and their nav rows
+  while this session worked. Resolution: keep main's versions of the shared generated files and re-apply this
+  session's two additive rows on top, then re-run the affected generators (`build_repo_review.py`,
+  `readiness/build_readiness.py`, `decision-lab/scripts/build.py` + `audit.py`,
+  `verification/audit_sources.py --write`) so the counts match the merged tree; the pre-rebase audit-refresh commit
+  was dropped as superseded by that regeneration. No conflict markers remain (`grep -cE '^<<<<<<<|^=======|^>>>>>>>'`
+  over `COORDINATION.md` is 0) and the whole checker set passes on the merged tree.
+- **Live confirmation.** Fetched with a cache-busting query after the deploy:
+  https://kanlerxz87-cyber.github.io/NFL3/shadow-board/index.html?cb=f915236 renders the prospective leaderboard
+  (0 graded games, all five declared entries at Tier 1 / control-not-applicable, gates A–H with their numbers), and
+  the relative links to `PREREGISTRATION.md`, `sources.html`, `backtest.html`, `../readiness.html` and
+  `../review.html` resolve on the deployed host. The gate step ran in CI as
+  `Shadow board gate (pre-registration order, price firewall, reproducibility)` in the validate job, and separately
+  in a `--depth 1` clone to confirm it degrades to a note rather than a false failure when history is truncated.
+- **Open state after this session.** `shadow-board/` tasks S1–S6 are **done — needs review**. The blocking decisions
+  remain owner decisions, listed on `shadow-board/registers.html`: the price-data policy (SB-Q01, unblocks P1/P3/P5/P6
+  and the top reward tier), a weekly hashed refresh of the verified log (SB-Q02, unblocks rest/form/availability and
+  the request logged above to `decision-desk/`), venue authority between two official pages (SB-Q03), use of the
+  past-season injury archive now that its point-in-time weakness is documented (SB-Q04), reward semantics per tier
+  (SB-Q05) and the 30-game ranking minimum (SB-Q06). No strategy is validated, no price is held, and no reward is
+  funded.
