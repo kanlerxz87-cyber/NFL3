@@ -1,0 +1,59 @@
+name: injury-capture
+
+# Archives the official NFL injury report (https://www.nfl.com/injuries/) every six hours.
+# Each read gets a clock time and a SHA-256 of the raw bytes, and is appended to
+# captures/nfl-injuries/index.jsonl whether it succeeded or not. A structural drift or a failed
+# fetch is recorded and then fails this run, so the failure is visible to repository watchers.
+# GitHub runs scheduled workflows only from the default branch.
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: injury-capture-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Offline tests (synthetic fixtures, no network)
+        run: python3 tests/test_injury_capture.py
+      - name: Capture and verify the official injury report
+        id: capture
+        run: python3 injury-capture/scripts/capture.py
+      - name: Build the timestamped page and deltas
+        if: always()
+        run: python3 injury-capture/scripts/build.py
+      - name: Commit the archive read
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add captures/nfl-injuries injury-capture/index.html
+          if git diff --cached --quiet; then
+            echo "No archive change to commit."
+            exit 0
+          fi
+          git commit -m "chore(injury-capture): archive official injury-report read $(date -u +%Y-%m-%dT%H:%MZ) [skip ci]"
+          for attempt in 1 2 3; do
+            if git pull --rebase -q origin "$GITHUB_REF_NAME" && git push -q origin "HEAD:$GITHUB_REF_NAME"; then
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::error::Could not push the archive read after 3 attempts."
+          exit 1
