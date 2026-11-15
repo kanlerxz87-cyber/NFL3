@@ -3,12 +3,12 @@
   "files": {
     "depth_charts": {
       "asset_url": "https://github.com/nflverse/nflverse-data/releases/download/depth_charts/depth_charts_2026.csv",
-      "bytes": 75240774,
+      "bytes": 75464897,
       "path": "data/raw/depth_charts_2026.csv",
-      "release_asset_updated_utc": "2026-11-14T14:04:48Z",
+      "release_asset_updated_utc": "2026-11-15T07:01:54Z",
       "release_tag": "depth_charts",
       "release_url": "https://github.com/nflverse/nflverse-data/releases/tag/depth_charts",
-      "sha256": "sha256:b3f5b9d6effd78f4a3e65825921a31c225762e9d64970ffb19c5087a021beea5",
+      "sha256": "sha256:3e9d34835327a3afbe21bb13c8485130487797c5973e5ede1c34aaf9db5f20da",
       "stored_as": "depth_charts_2026.csv.gz",
       "url": "https://github.com/nflverse/nflverse-data/releases/download/depth_charts/depth_charts_2026.csv",
       "verified": true
@@ -63,24 +63,24 @@
     },
     "games": {
       "asset_url": "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv",
-      "bytes": 2190034,
+      "bytes": 2190033,
       "path": "data/raw/games.csv",
-      "release_asset_updated_utc": "2026-11-14T16:16:41Z",
+      "release_asset_updated_utc": "2026-11-15T12:06:41Z",
       "release_tag": "schedules",
       "release_url": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
-      "sha256": "sha256:2df1e265db82c55f5ff4bd2f76026eca624adc2fa081378a0de4a634cc148eda",
+      "sha256": "sha256:f3221bc27a4c69b2cfad52d8741a573f5434dc7296675ab498bfa879c82db9cf",
       "stored_as": "games.csv.gz",
       "url": "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv",
       "verified": true
     },
     "injuries": {
       "asset_url": "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv",
-      "bytes": 362340,
+      "bytes": 362797,
       "path": "data/raw/injuries_2026.csv",
-      "release_asset_updated_utc": "2026-11-14T14:04:18Z",
+      "release_asset_updated_utc": "2026-11-15T07:01:22Z",
       "release_tag": "injuries",
       "release_url": "https://github.com/nflverse/nflverse-data/releases/tag/injuries",
-      "sha256": "sha256:1a0242ef9bbb956233928c66a8977fbde46c45e84d7c368b911f5dca23541754",
+      "sha256": "sha256:8169fb6947f3e86b436fabd025df6211f77eca5f2a38c3d91d2412b568b58441",
       "stored_as": "injuries_2026.csv.gz",
       "url": "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv",
       "verified": true
@@ -161,7 +161,7 @@
       "asset_url": "https://github.com/nflverse/nflverse-data/releases/download/rosters/roster_2026.csv",
       "bytes": 983401,
       "path": "data/raw/roster_2026.csv",
-      "release_asset_updated_utc": "2026-11-14T14:07:15Z",
+      "release_asset_updated_utc": "2026-11-15T07:02:35Z",
       "release_tag": "rosters",
       "release_url": "https://github.com/nflverse/nflverse-data/releases/tag/rosters",
       "sha256": "sha256:929be7558faa71f8442e49d1eb29b84883135e3388369f47b03c7316197e9528",
@@ -185,15 +185,15 @@
       "asset_url": "https://github.com/nflverse/nflverse-data/releases/download/stats_team/stats_team_week_2026.csv",
       "bytes": 111662,
       "path": "data/raw/stats_team_week_2026.csv",
-      "release_asset_updated_utc": "2026-11-14T15:48:36Z",
+      "release_asset_updated_utc": "2026-11-15T10:06:07Z",
       "release_tag": "stats_team",
       "release_url": "https://github.com/nflverse/nflverse-data/releases/tag/stats_team",
-      "sha256": "sha256:53e15e7c0f527824f127a4232f2a7cd88014e5bcb2461fd8972952103189d127",
+      "sha256": "sha256:3ec00f4b9cd7dac765ac45d6f5f4866cdd7da9676de4235e6286339a125a2804",
       "stored_as": "stats_team_week_2026.csv.gz",
       "url": "https://github.com/nflverse/nflverse-data/releases/download/stats_team/stats_team_week_2026.csv",
       "verified": true
     }
   },
-  "generated_utc": "2026-11-14T16:38:18Z",
+  "generated_utc": "2026-11-15T12:13:52Z",
   "source_repo": "https://github.com/nflverse/nflverse-data"
 }
