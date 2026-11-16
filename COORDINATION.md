@@ -3831,3 +3831,95 @@ Coordination notes:
   `readiness/data/readiness.csv`, `decision-lab/**`, `forward-ledger/**`, `matchup/**`, `skill-lab/**`,
   `origination/**`, `pricing/**`, `corpus/**`, `shadow-board/**`, `availability-ledger/**`, `injury-archive/data/*`
   apart from the one contract file listed above.
+
+### Result — `arena/95dedf16-nfl3` — 2026-11-16 UTC (final integration pass)
+
+**F1 · The three stale open PRs are closed; their unique content is published.** Verified before acting:
+`git merge-base --is-ancestor origin/main <branch>` is **false** for all three, and
+`git diff --stat origin/main origin/arena/b0dd4900-nfl3` reports **189 files changed, 26,602 insertions,
+147,539 deletions**. Those branches were cut from an old `main`, so the diff is dominated by *deletions of
+work other sessions have since merged*. Merging any of them would have removed the forward ledger, the
+matchup desk, the injury archive, the skill lab and five more workspaces.
+
+| PR | Unique content | Where it went |
+|---|---|---|
+| [#99](https://github.com/kanlerxz87-cyber/NFL3/pull/99) | none — a `COORDINATION.md` append superseded by the board's own later entries | closed without salvage |
+| [#100](https://github.com/kanlerxz87-cyber/NFL3/pull/100) | `venues/**` (9 files) | carried across verbatim; verify passes, pages reproduce |
+| [#105](https://github.com/kanlerxz87-cyber/NFL3/pull/105) | `injury-archive/flags.html` + the 4-line render/build/contract change; `EXECUTIVE_SUMMARY.md` §9 | carried across; rebuild produces 9 pages, 2,187 checks, 0 failures |
+
+**Independent re-verification of the venues register against the official pages (2026-11-16, this session, not
+inherited):** all 13 Week 11 kickoff times and networks re-read from
+[nfl.com/schedules/2026/by-week/week-11](https://www.nfl.com/schedules/2026/by-week/week-11) and matched; the
+Game Info block of three game centres re-read individually —
+[colts-at-texans](https://www.nfl.com/games/colts-at-texans-2026-reg-11) (`HOUSTON, TX` / `RELIANT STADIUM`),
+[cardinals-at-chiefs](https://www.nfl.com/games/cardinals-at-chiefs-2026-reg-11) (`KANSASAS CITY, MO` /
+`ARROWHEAD STADIUM`),
+[vikings-at-49ers](https://www.nfl.com/games/vikings-at-49ers-2026-reg-11) (`MEXICO CITY` / `ESTADIO BANORTE`).
+The venue strings are transcribed as the official page publishes them, which is why "RELIANT STADIUM" and
+"ARROWHEAD STADIUM" appear where a reader might expect the current commercial names. The dated announcement
+[media.nfl.com, 2026 NFL Schedule Announced](https://media.nfl.com/football-information/2026/news/2026-nfl-schedule-announced)
+was re-read: *Football Communications, May 14, 2026*, "Complete 18-Week, 272-Game Regular-Season Schedule", and it
+names the Week 11 Mexico City game — consistent with the register row.
+
+**F2 · Suggestion review desk (`suggestion-desk/**`, new).** Four pages, one curated data file, one fail-closed
+gate. All 75 register proposals assigned to exactly one of twelve decisions, no overlaps, none left over — the
+generator refuses to run otherwise. Each decision: what is verified (with its committed artifact), what is missing,
+the 2–3 paths proposed for it with buys/leaves-open/cost/risk, the number that would clear it, and the register
+questions it depends on. `paths.html` flattens all 33 paths and lists every proposal with the path that would adopt
+it (or a note that none does). `discovery.html` lists 35 cited register questions with what to do, where to look,
+and what the answer would change. Reviewer choices are browser-local by design: an approval that silently edited
+files is the failure mode register question Q-94 asks about.
+
+**Numbers re-derived from their artifacts while writing the desk, not copied from prose:** 163 of 272 community
+lines recomputed from `data/raw/games.csv`; corpus 136 games / 135 exact matches / 1 blank ("Hidden Score");
+forward ledger 150 fixtures / 149 graded / 160-of-160 standings checks / 31 clubs; injury archive 347 rows,
+147 inactives, 171 designations with Wilson intervals re-derived from `designations.json` (Out n=64 75.0%
+63.2–84.0%, Doubtful n=10 40.0% 16.8–68.7%, Questionable n=82 18.3% 11.4–28.0%: 67 inactive + 89 active +
+15 uncovered + 0 ambiguous); matrix 224 cells / 166 published / 58 blank (29 no chart captured, 26 group not
+published, 3 both); skill lab 6 rows over 130–136 games, **all negative**, best −0.029 (CI −0.096 to +0.035),
+worst −0.303; availability ledger 50 reserve entries, 12 trades, 9 stale depth rows; 200 HTML pages across 17 root
+pages and 24 workspace directories.
+
+**F3 · SD-F02 fixed.** The generated `suggestions.html` rendered its heading block **twice**:
+`questions/data/suggestions_intro.html` began with a `<div class="hrow">` that `questions/build.py`'s `page()`
+helper also emits, so the page opened with two near-identical headers in sequence. No link checker could catch it,
+because a duplicated section is not a broken link. The fragment now starts at the intro paragraph and the
+generator's shape assertion was retightened to require that.
+
+**F6 · Six irregularities published, not buried.** `suggestion-desk/flagged.html`: SD-F01 (stale PRs), SD-F02
+(duplicated header, fixed), SD-F03 (top nav omits 11 workspace directories — this pass added 6, deliberately not
+all, because a 36-item top bar is worse than a 24-item one and the landing page's site-guide table lists every
+page), SD-F04 (register `observation_date` 2026-11-12 and `injury_rows_current` 279 against two independent
+2026-11-16 transcriptions of 347), SD-F05 (register status is a free-text field), SD-F06 (13 of 272 venues, no
+hashed raw capture).
+
+**Verification run.** `scripts/validate_site.py`, `tests/check_site.py`, `questions/build.py --check`,
+`suggestion-desk/scripts/check.py`, `venues/scripts/verify.py`, `injury-archive/scripts/verify.py` (2,187 checks,
+0 failures, byte-identical second build), `decision-desk/scripts/check.py`, `shadow-board/scripts/check.py`,
+`tests/test_readiness.py`, `tests/test_decision_lab.py`, `decision-lab/scripts/audit.py`,
+`matchup/scripts/check.py`, `availability-ledger/scripts/verify.py`, `skill-lab/scripts/verify.py`,
+`origination/scripts/verify.py` — all pass. Two known environment-only local failures, both green in CI:
+skill-lab's pre-registration ancestry check (the sandbox clone is shallow) and origination's determinism check on
+first run (a second `build.py` then `verify.py` passes).
+
+**Files touched.** New: `suggestion-desk/**`, `venues/**` (from #100), `injury-archive/flags.html`.
+Edited: `injury-archive/scripts/{render,build}.py`, `injury-archive/data/render_contract.json` (4 lines total, from
+#105), `questions/data/suggestions_intro.html` (header removed), `questions/build.py` (assertion retightened),
+`index.html` (2 site-guide rows, 1 sidebar entry), `README.md` (2 rows, 4 commands, the opening shortcut),
+`assets/site.js` (6 nav entries), `EXECUTIVE_SUMMARY.md` (§9 recovered from #105, §10 new),
+`.github/workflows/pages.yml` (4 steps), this board, and the regenerated `suggestions.html`.
+**Not edited:** `ops-center/data/derived.json`, `readiness/data/readiness.csv`, `decision-lab/**`,
+`forward-ledger/**`, `matchup/**`, `skill-lab/**`, `origination/**`, `pricing/**`, `corpus/**`, `shadow-board/**`,
+`availability-ledger/**`, `decision-desk/**`, and `injury-archive/data/*` apart from the one contract file.
+
+**Integration requests logged, not acted on.**
+- **To the `ops-center/data/derived.json` owner:** SD-F04 — the register is dated 2026-11-12 and counts 279
+  injury rows while two independent 2026-11-16 readings of the same page agree on 347. The two root pages built
+  from it therefore describe a different week from the injury archive, the matchup desk and the forward ledger.
+- **To the `assets/site.js` owner:** SD-F03 — 11 workspace directories still have no top-bar entry
+  (dashboard, decision desk, decision hub, line lab, research desk, research workspace, results verification,
+  verification, verification lab, injury verification, questions).
+- **To the `injury-archive/` owner:** the Week 11 report is now the live one; `injury-archive/data/index.jsonl`
+  still holds one 2026 Week 10 pair with `raw_bytes_retained: false` on every line.
+- **To the `venues/` owner (absent):** 259 of 272 fixtures are untranscribed and neither the schedule page nor the
+  announcement has a retained raw capture. Published as decision D7 with its clearing number.
