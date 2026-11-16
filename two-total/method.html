@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Two total estimators published side by side with a gap column, scored on the frozen pre-registered backtest corpus. Backtest corpus - not a leaderboard result.">
+<title>How the two totals are built and checked | Two totals | NFL3</title>
+<link rel="stylesheet" href="assets/style.css"></head>
+<body><header class="hd"><div class="hd-in"><a class="brand" href="index.html"><b>2T</b> Two totals</a>
+<nav class="nav"><a href='index.html'>Summary</a><a href='rows.html'>Every game</a><a href='method.html' class=on>Method</a><a href='flagged.html'>Flagged</a></nav><a class="home" href="../index.html">NFL3 home</a></div></header>
+<main class="wrap"><p class="eyebrow">BACKTEST CORPUS &middot; NOT A LEADERBOARD RESULT &middot; NO PRICES</p>
+<h1>How the two totals are built and checked</h1>
+<p class="lede">The definitions, the leakage rule, the bootstrap and the commands that gate publication.</p>
+
+<h2>The two definitions, exactly as registered</h2>
+<div class="tw"><table><caption>Frozen in <code>PRE_REGISTRATION.md</code> §2 before the corpus was
+read. The registration commit is <code>433e50842e498e80ffa092c549d1f0765e0f31f2</code>.</caption>
+<thead><tr><th scope="col">ID</th><th scope="col">Definition as registered</th>
+<th scope="col">Parameters</th><th scope="col">Source</th></tr></thead><tbody>
+<tr><td><b>T1</b></td><td>ridge least squares on six prior seasons; level + pace_home + pace_away</td>
+<td>six prior seasons; ridge 4.0; home-field prior 2.0 points; minimum 700 training games</td>
+<td><a class="source" href="https://www.nfl.com/standings/" target="_blank"
+rel="noopener noreferrer">NFL standings &#8599;</a></td></tr>
+<tr><td><b>T2</b></td><td>mean_train_total + (form_mean_points - mean_train_total)/3</td>
+<td>form window 6 prior games per club; shrink
+0.3333; league level 46.172043 over
+93 training games</td>
+<td><a class="source" href="https://www.nfl.com/schedules/2026/by-week/week-6" target="_blank"
+rel="noopener noreferrer">official Week 6 schedule page &#8599;</a></td></tr>
+</tbody></table></div>
+
+<h2>Leakage: the rule, and the recomputation</h2>
+<div class="tw"><table><caption>PRE_REGISTRATION.md §3. These are recomputed by the build over the
+whole community snapshot, not asserted in prose.</caption>
+<thead><tr><th scope="col">Check</th><th class="num" scope="col">Games checked</th>
+<th class="num" scope="col">Violations</th><th scope="col">Source</th></tr></thead><tbody>
+<tr><td>T1 uses no current-season game in a current-season fit</td>
+<td class="num">135</td><td class="num">0</td>
+<td><a class="source" href="https://www.nfl.com/standings/" target="_blank"
+rel="noopener noreferrer">NFL standings &#8599;</a></td></tr>
+<tr><td>T2's newest rolling input is strictly earlier than the fixture date</td>
+<td class="num">7116</td><td class="num">0</td>
+<td><a class="source" href="https://www.nfl.com/schedules/2026/by-week/week-9" target="_blank"
+rel="noopener noreferrer">official Week 9 schedule page &#8599;</a></td></tr>
+</tbody></table></div>
+<p class="para">A same-date game is excluded from a fixture's form window unconditionally. That can only
+lose information, never leak it — the conservative direction.</p>
+
+<h2>The bootstrap</h2>
+<div class="tw"><table><caption>Paired, game-clustered. The unit is the game because both estimators
+price the same game; resampling games preserves the within-game correlation that a row bootstrap would
+break.</caption>
+<thead><tr><th scope="col">Parameter</th><th scope="col">Value</th><th scope="col">Source</th></tr></thead>
+<tbody>
+<tr><td>Resamples</td><td class="num">10,000</td>
+<td><a class="source" href="https://www.nfl.com/schedules/2026/by-week/week-7" target="_blank"
+rel="noopener noreferrer">official Week 7 schedule page &#8599;</a></td></tr>
+<tr><td>Seed</td><td class="num">20261116</td>
+<td><a class="source" href="https://www.nfl.com/schedules/2026/by-week/week-7" target="_blank"
+rel="noopener noreferrer">official Week 7 schedule page &#8599;</a></td></tr>
+<tr><td>Interval</td><td>percentile, 2.5% and 97.5% of the resampled difference</td>
+<td><a class="source" href="https://www.nfl.com/schedules/2026/by-week/week-8" target="_blank"
+rel="noopener noreferrer">official Week 8 schedule page &#8599;</a></td></tr>
+<tr><td>Registration commit transposition</td><td>identity rewritten once by a rebase onto
+<code>main</code>; recorded pre-rebase value <code>468344acd5f4&hellip;</code>,
+rule-text SHA-256 unchanged</td>
+<td><a class="source" href="https://www.nfl.com/schedules/2026/by-week/week-7" target="_blank"
+rel="noopener noreferrer">official Week 7 schedule page &#8599;</a></td></tr>
+<tr><td>Point estimate, validation block</td><td class="num">-2.25</td>
+<td><a class="source" href="https://www.nfl.com/schedules/2026/by-week/week-8" target="_blank"
+rel="noopener noreferrer">official Week 8 schedule page &#8599;</a></td></tr>
+<tr><td>Lower bound</td><td class="num">-4.81</td>
+<td><a class="source" href="https://www.nfl.com/schedules/2026/by-week/week-8" target="_blank"
+rel="noopener noreferrer">official Week 8 schedule page &#8599;</a></td></tr>
+</tbody></table></div>
+
+<h2>The scored quantity, and what is deliberately not scored</h2>
+<p class="para">Primary statistic: the paired difference in mean absolute error on the same games.
+Companion: root mean squared error, so a mean-absolute-error result cannot be reported alone. Win rate of
+"which estimator was closer" is printed as a descriptive count and is <b>not</b> treated as a skill
+measure. No price, ROI, CLV or staking number is computed anywhere in this workspace.</p>
+<div class="tw"><table><caption>Reproduction commands. Each must pass for a page to be published.</caption>
+<thead><tr><th scope="col">Command</th><th scope="col">What it proves</th><th scope="col">Source</th></tr></thead>
+<tbody>
+<tr><td><code>python3 two-total/scripts/build.py</code></td><td>rebuilds the artifact from committed inputs</td>
+<td><a class="source" href="https://www.nfl.com/schedules/2026/by-week/week-1" target="_blank"
+rel="noopener noreferrer">official schedules &#8599;</a></td></tr>
+<tr><td><code>python3 two-total/scripts/verify.py</code></td><td>fails closed: registration order, corpus
+hash, row citations, arithmetic reconciliation, blank discipline, no price column, determinism</td>
+<td><a class="source" href="https://www.nfl.com/scores/2026/week-9" target="_blank"
+rel="noopener noreferrer">official Week 9 scores &#8599;</a></td></tr>
+</tbody></table></div>
+
+</main>
+<footer class="ft">Two totals &middot; registration <code>433e50842e49&hellip;</code> (the commit that created the file is the registration; written here by a later commit) &middot; research record, not betting advice.
+Every unformed value is blank by design. <span class="small">Also: <a href='../origination/lines.html'>Origination: fair line</a><a href='../corpus.html'>Frozen corpus</a><a href='../readiness.html'>Decision readiness</a><a href='../review.html'>Flagged for review</a></span></footer>
+</body></html>

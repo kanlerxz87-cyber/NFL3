@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Two total estimators published side by side with a gap column, scored on the frozen pre-registered backtest corpus. Backtest corpus - not a leaderboard result.">
+<title>Every model total, twice | Two totals | NFL3</title>
+<link rel="stylesheet" href="assets/style.css"></head>
+<body><header class="hd"><div class="hd-in"><a class="brand" href="index.html"><b>2T</b> Two totals</a>
+<nav class="nav"><a href='index.html' class=on>Summary</a><a href='rows.html'>Every game</a><a href='method.html'>Method</a><a href='flagged.html'>Flagged</a></nav><a class="home" href="../index.html">NFL3 home</a></div></header>
+<main class="wrap"><p class="eyebrow">BACKTEST CORPUS &middot; NOT A LEADERBOARD RESULT &middot; NO PRICES</p>
+<h1>Every model total, twice</h1>
+<p class="lede">One corpus, two total estimators, a gap column and a pre-registered collapse rule. Scored against official final totals only.</p>
+
+<div class='notice flag'><b>Not collapsed by rule.</b> Both estimators stay published with the gap column, which is what requirement P4 asks for until one wins walk-forward. Four of the five pre-registered conditions fail on the validation block; the numbers that fail them are printed below, not summarised away.</div>
+
+<div class="notice"><b>What this page is.</b> Requirement <b>P4</b> of the decision-readiness register
+asks that every model total be published <em>twice</em>, with a gap column, until one estimator wins a
+walk-forward comparison. This workspace does exactly that on the frozen pre-registered corpus: 136
+games, 2026 Weeks 1–9, hash <code>4632744b44d59ff2…</code>. It publishes no price, no
+ROI and no staking number, because the price firewall in <code>pricing/PRICE_DATA_POLICY.md</code> is
+still closed at zero licensed sources.</div>
+
+<h2>The pair, and why these two</h2>
+<div class="tw"><table><caption>The two estimators, both frozen before the corpus was read. Neither
+definition was written or tuned by this session: both already existed in committed code.</caption>
+<thead><tr><th scope="col">ID</th><th scope="col">Definition</th><th scope="col">Where it already exists</th>
+<th scope="col">Changed here?</th><th scope="col">Source</th></tr></thead><tbody>
+<tr><td><b>T1</b></td><td>prior-season pace fit — ridge least squares on six prior seasons; level + pace_home + pace_away</td>
+<td><code>origination/scripts/model.py fit_total()</code></td><td><span class='pill ok'>no</span></td>
+<td><a class="source" href="https://www.nfl.com/standings/" target="_blank"
+rel="noopener noreferrer">NFL standings (the official inputs) &#8599;</a></td></tr>
+<tr><td><b>T2</b></td><td>league mean plus one third of the form gap — mean_train_total + (form_mean_points - mean_train_total)/3.
+Form window 6 prior games; shrink
+0.3333; league level 46.172043 points from
+93 training games.</td>
+<td><code>skill-lab/scripts/build.py shrink_total() rule, applied to points-for/allowed</code></td><td><span class='pill ok'>no</span></td>
+<td><a class="source" href="https://www.nfl.com/schedules/2026/by-week/week-1" target="_blank"
+rel="noopener noreferrer">official Week 1 schedule page &#8599;</a></td></tr>
+</tbody></table></div>
+
+<h2>Headline scores on the whole corpus</h2>
+<div class="tw"><table><caption>Every row below is computed from the published per-game columns on
+<a href="rows.html">the every-game page</a>, which can be recomputed by hand.</caption>
+<thead><tr><th scope="col">Statistic</th><th class="num" scope="col">T1</th>
+<th class="num" scope="col">T2</th><th scope="col">Reading</th><th scope="col">Source</th></tr></thead>
+<tbody>
+<tr><td>Mean absolute error (n = 135)</td><td class="num">11.46</td>
+<td class="num">12.67</td><td>points of total, per game</td>
+<td><a class="source" href="https://www.nfl.com/schedules/2026/by-week/week-1" target="_blank"
+rel="noopener noreferrer">official schedules, weeks 1–9 &#8599;</a></td></tr>
+<tr><td>Root mean squared error</td><td class="num">14.08</td>
+<td class="num">16.09</td><td>same units, squarer penalty</td>
+<td><a class="source" href="https://www.nfl.com/schedules/2026/by-week/week-9" target="_blank"
+rel="noopener noreferrer">official Week 9 schedule page &#8599;</a></td></tr>
+<tr><td>Mean gap (T2 − T1)</td><td colspan="2" class="num">-7.36</td>
+<td>the gap column, averaged; negative means T2 prices lower</td>
+<td><a class="source" href="https://www.nfl.com/schedules/2026/by-week/week-5" target="_blank"
+rel="noopener noreferrer">official Week 5 schedule page &#8599;</a></td></tr>
+<tr><td>Games with both estimators and a final score</td><td colspan="2" class="num">135</td>
+<td>of 136 corpus rows; 1 has a blank score and
+0 could not be priced</td>
+<td><a class="source" href="https://www.nfl.com/schedules/2026/by-week/week-2" target="_blank"
+rel="noopener noreferrer">official Week 2 schedule page &#8599;</a></td></tr>
+</tbody></table></div>
+
+<h2>The collapse rule, and its verdict</h2>
+<div class="tw"><table><caption>The five pre-registered collapse conditions, evaluated
+on the frozen validation block (weeks 7–8). The rule text was committed before this run.</caption>
+<thead><tr><th scope="col">#</th><th scope="col">Condition</th><th scope="col">State</th>
+<th scope="col">The number that decides it</th><th scope="col">Source</th></tr></thead>
+<tbody><tr><td><code>C1</code></td><td>challenger better</td><td><span class='pill bad'>fail</span></td><td>MAE T1 11.008969 vs T2 13.257648 on n=28</td><td><a class='source' href='https://www.nfl.com/schedules/2026/by-week/week-8' target='_blank' rel='noopener noreferrer'>official week 8 schedule &#8599;</a></td></tr><tr><td><code>C2</code></td><td>interval lower gt 0</td><td><span class='pill bad'>fail</span></td><td>95% cluster lower bound -4.8055</td><td><a class='source' href='https://www.nfl.com/schedules/2026/by-week/week-8' target='_blank' rel='noopener noreferrer'>official week 8 schedule &#8599;</a></td></tr><tr><td><code>C3</code></td><td>rmse agrees</td><td><span class='pill bad'>fail</span></td><td>RMSE T1 14.003971 vs T2 15.865225</td><td><a class='source' href='https://www.nfl.com/schedules/2026/by-week/week-8' target='_blank' rel='noopener noreferrer'>official week 8 schedule &#8599;</a></td></tr><tr><td><code>C4</code></td><td>both halves agree</td><td><span class='pill bad'>fail</span></td><td>week 7 diff -2.8566 (n=14), week 8 diff -1.6407 (n=14)</td><td><a class='source' href='https://www.nfl.com/schedules/2026/by-week/week-8' target='_blank' rel='noopener noreferrer'>official week 8 schedule &#8599;</a></td></tr><tr><td><code>C5</code></td><td>min n</td><td><span class='pill ok'>pass</span></td><td>28 scored validation games against a floor of 20</td><td><a class='source' href='https://www.nfl.com/schedules/2026/by-week/week-8' target='_blank' rel='noopener noreferrer'>official week 8 schedule &#8599;</a></td></tr></tbody></table></div>
+<p class="para">The verdict above is produced by the build from these five booleans. Nothing about it is
+typed by hand.</p>
+
+<h2>Scores by frozen block</h2>
+<div class="tw"><table><caption>Differences are <b>T1 error minus T2 error</b>: a positive
+number means T2 was closer. The interval is a 10,000-resample game-cluster bootstrap (seed
+20261116).
+"Closer" counts are descriptive only and are not a skill measure.</caption>
+<thead><tr><th scope="col">Block</th><th class="num" scope="col">Games</th>
+<th class="num" scope="col">Scored (n)</th><th class="num" scope="col">MAE T1</th>
+<th class="num" scope="col">MAE T2</th><th class="num" scope="col">MAE diff</th>
+<th class="num" scope="col">95% cluster CI on the diff</th><th class="num" scope="col">RMSE T1</th>
+<th class="num" scope="col">RMSE T2</th><th class="num" scope="col">closer (descriptive)</th>
+<th scope="col">Excluded</th><th scope="col">Source</th></tr></thead>
+<tbody><tr><td><b>Train</b><br><span class='small'>weeks 1–6</span></td><td class='num'>93</td><td class='num'>92</td><td class='num'>11.62</td><td class='num'>12.43</td><td class='num'>-0.82</td><td class='num'>-2.20 … 0.60</td><td class='num'>14.03</td><td class='num'>16.29</td><td class='num'>47 / 45</td><td>1</td><td><a class='source' href='https://www.nfl.com/schedules/2026/by-week/week-1' target='_blank' rel='noopener noreferrer'>official schedule page &#8599;</a></td></tr><tr><td><b>Validation</b><br><span class='small'>weeks 7–8</span></td><td class='num'>28</td><td class='num'>28</td><td class='num'>11.01</td><td class='num'>13.26</td><td class='num'>-2.25</td><td class='num'>-4.81 … 0.48</td><td class='num'>14.00</td><td class='num'>15.87</td><td class='num'>19 / 9</td><td>0</td><td><a class='source' href='https://www.nfl.com/schedules/2026/by-week/week-7' target='_blank' rel='noopener noreferrer'>official schedule page &#8599;</a></td></tr><tr><td><b>Holdout</b><br><span class='small'>weeks 9</span></td><td class='num'>15</td><td class='num'>15</td><td class='num'>11.31</td><td class='num'>13.04</td><td class='num'>-1.73</td><td class='num'>-5.26 … 2.06</td><td class='num'>14.57</td><td class='num'>15.28</td><td class='num'>10 / 5</td><td>0</td><td><a class='source' href='https://www.nfl.com/schedules/2026/by-week/week-9' target='_blank' rel='noopener noreferrer'>official schedule page &#8599;</a></td></tr></tbody></table></div>
+<p class="para"><b>Read the holdout with care.</b> It is printed because the registration requires it to
+be printed once, after the decision, and it cannot reverse the decision. With n = 15 a single blowout
+moves the number by a point; the interval spans zero comfortably.</p>
+
+<h2>What the gap column exposed</h2>
+<div class="tw"><table><caption>Why T2 loses, measured rather than argued. Bias is the mean
+signed error (prediction minus truth); a bias-corrected MAE subtracts that constant error from every
+prediction, which is a diagnostic only — it is not a new published estimator.</caption>
+<thead><tr><th scope="col">Estimator</th><th class="num" scope="col">Bias</th>
+<th class="num" scope="col">SD of error</th><th class="num" scope="col">SD of prediction</th>
+<th class="num" scope="col">Corr(prediction, truth)</th><th class="num" scope="col">MAE</th>
+<th class="num" scope="col">Bias-corrected MAE (diagnostic)</th><th scope="col">Source</th></tr></thead>
+<tbody><tr><td><b>T1</b></td><td class='num'>-0.11</td><td class='num'>14.14</td><td class='num'>1.69</td><td class='num'>0.1724</td><td class='num'>11.46</td><td class='num'>11.46</td><td><a class='source' href='https://www.nfl.com/schedules/2026/by-week/week-9' target='_blank' rel='noopener noreferrer'>official Week 9 schedule page &#8599;</a></td></tr><tr><td><b>T2</b></td><td class='num'>-7.46</td><td class='num'>14.31</td><td class='num'>0.67</td><td class='num'>0.0550</td><td class='num'>12.67</td><td class='num'>11.59</td><td><a class='source' href='https://www.nfl.com/schedules/2026/by-week/week-9' target='_blank' rel='noopener noreferrer'>official Week 9 schedule page &#8599;</a></td></tr></tbody></table></div>
+<p class="para">T2 prices 7.46 points below the realised total on average, while T1&#x27;s bias is -0.11. Subtracting that constant only takes T2 from MAE 12.67 to 11.59, so the bias is not the whole story: T2&#x27;s prediction spread is 0.67 points against a realised spread of 14.33, and its correlation with the realised total is 0.055 against 0.172 for T1. An estimator that varies by under a point cannot track a target that varies by fourteen. The cause is mechanical and is stated in the flagged table rather than repaired here: the registered T2 rule shrinks a mean of points-for and points-allowed toward a league level, and that mean sits near the league level by construction. Repairing it would be a new estimator, which the registration forbids after the fact.</p>
+
+<h2>What this cannot tell you</h2>
+<div class="tw"><table><caption>Honest limits, stated before anyone reads a number as an edge.</caption>
+<thead><tr><th scope="col">Limit</th><th scope="col">Why it matters here</th><th scope="col">Source</th></tr></thead>
+<tbody>
+<tr><td>No price, no ROI, no CLV</td><td>The comparison is between two models on official final totals.
+It says nothing about beating a market, because no licensed price source exists in this repository.</td>
+<td><a class="source" href="https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL" target="_blank" rel="noopener noreferrer">NFL odds-widget boundary &#8599;</a></td></tr>
+<tr><td>One season, nine weeks</td><td>135 scored games. A season-level claim needs more
+seasons; the corpus freeze covers 2026 only.</td>
+<td><a class="source" href="https://www.nfl.com/standings/" target="_blank"
+rel="noopener noreferrer">NFL standings &#8599;</a></td></tr>
+<tr><td>Estimator inputs are community data</td><td>T1's fit window and T2's rolling form both come from
+the digest-verified community schedule snapshot. The <em>scored truth</em> is official; the inputs are
+not, and are labelled so on every row.</td>
+<td><a class="source" href="https://www.nfl.com/schedules/2026/by-week/week-9" target="_blank"
+rel="noopener noreferrer">official Week 9 schedule page &#8599;</a></td></tr>
+<tr><td>Not a leaderboard result</td><td>Nothing here may enter a leaderboard result cell. The
+pre-registration and the corpus rules both forbid it.</td>
+<td><a class="source" href="https://www.nfl.com/scores/2026/week-9" target="_blank"
+rel="noopener noreferrer">official Week 9 scores &#8599;</a></td></tr>
+</tbody></table></div>
+
+<h2>Where to go next</h2>
+<p class="para">Every one of the 136 corpus rows, with both totals, the gap and the
+official final total, is on <a href="rows.html">the every-game page</a>. The two definitions, the
+leakage rule and the bootstrap are on <a href="method.html">the method page</a>. Every blank, every
+irregularity and every question that blocks a stronger answer is on
+<a href="flagged.html">flagged for review</a>.</p>
+
+</main>
+<footer class="ft">Two totals &middot; registration <code>433e50842e49&hellip;</code> (the commit that created the file is the registration; written here by a later commit) &middot; research record, not betting advice.
+Every unformed value is blank by design. <span class="small">Also: <a href='../origination/lines.html'>Origination: fair line</a><a href='../corpus.html'>Frozen corpus</a><a href='../readiness.html'>Decision readiness</a><a href='../review.html'>Flagged for review</a></span></footer>
+</body></html>

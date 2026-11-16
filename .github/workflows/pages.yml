@@ -47,6 +47,9 @@ jobs:
           python3 corpus/build.py
           python3 corpus/verify.py
           git diff --exit-code -- corpus corpus.html
+      - name: Two-total workspace (registration order, corpus hash, arithmetic, blanks, determinism)
+        run: python3 two-total/scripts/verify.py
+
       - name: Decision lab offline tests
         run: python3 tests/test_decision_lab.py
       - name: Independent line-by-line source verification

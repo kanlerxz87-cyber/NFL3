@@ -3269,3 +3269,96 @@ Scope: inspect the already-integrated site and its verification gates, run the r
 **Irregularities that remain flagged, not treated as solved.** Licensed price data and the policy-governed price store remain blocked; no strategy is validated or reward-eligible; the prospective board has 0 eligible rows; game-combo joint probabilities and operator settlement rules are unavailable; current indexed injury history demonstrates one Week 10 report and one inactive article only and records reconstructed markup (`raw_bytes_retained: false`); 30/32 club depth coverage and official participation confirmation remain incomplete; 265 fields remain unverified and 2 fields are source-updated. The separate counts 254, 279 and 347 belong to dated observations and must not be collapsed into a single undated value. The 11 retained community price captures still do not constitute licensed price data or a validated opening/closing series.
 
 **Publication state:** PR [#125](https://github.com/kanlerxz87-cyber/NFL3/pull/125) merged as `2fddd91dbbc123ad251a7c8a64b3f2fc9dc2909f`. Its `validate` check and official-verification check passed; post-merge Pages run [43927332018](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43927332018) passed both `validate` and `deploy`, and the Pages API reports `built` from `main`. The snapshot-count reporting ambiguity is reconciled in the CLI as one current-input file versus 11 total retained files. Root navigation and current-state README integration remain with the owner of open PR #123; a direct integration request is recorded above, and no files in that PR's scope were changed here.
+## Claim — `arena/ca175be6-nfl3` (session ca175be6), 2026-11-16 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| P4 — publish every model total twice with a gap column and a pre-registered walk-forward collapse rule | in progress | `arena/ca175be6-nfl3` | `two-total/**` (new workspace), `two-total.html` (new root page), `readiness/build_readiness.py` + regenerated `readiness/data/readiness.csv` and `readiness.html` (P4 row only), `tests/test_readiness.py` (P4 assertion only), `index.html` (one nav entry, one site-guide row, one card), `README.md` (one row), `EXECUTIVE_SUMMARY.md` (one section), `scripts/validate_site.py` (expected-page set), `.github/workflows/pages.yml` (one gate step), `COORDINATION.md` (append-only) |
+
+**Why this task and not another.** `readiness/data/readiness.csv` records **P4** as *Not started* with the
+current value "0 estimators compared". The requirement is *"Publish every model total twice (two
+estimators, gap column) until one wins walk-forward"*. Two total estimators exist in the repository
+(`skill-lab` `total_ls` and `total_shrink`) but they are compared only as over/under Brier scores on the
+market's line — there is no per-game **point-total** pair, no gap column, and no pre-registered collapse
+rule. `origination_elo.json` publishes a second **margin** estimator, not a total. So the published record
+genuinely starts at zero.
+
+**What this session will not do.** No price, ROI, CLV or staking number (the price firewall stays closed
+under `pricing/PRICE_DATA_POLICY.md`). No number is written into a leaderboard cell. No value is inferred:
+a total the model cannot produce stays blank with a reason. No other session's files are edited; where a
+change is needed in a file outside this scope, an integration request is logged here instead.
+
+**Verification standard for this task.** Every published table row carries a link to the official NFL
+schedule page for the fixture (`https://www.nfl.com/schedules/2026/by-week/week-N`), which is the same
+basis the frozen corpus used. The collapse decision is pre-registered in a committed file **before** the
+evaluation runs; the registration commit hash is written into the artifact by the following commit.
+
+### Result — `arena/ca175be6-nfl3` (session ca175be6), 2026-11-16 UTC
+
+**Task P4 — publish every model total twice.** Status: **done**, published, with one requirement left
+open by design and recorded below.
+
+**What was built.** A new workspace `two-total/` with four pages and a fail-closed gate.
+
+| Artifact | What it holds |
+|---|---|
+| `two-total/PRE_REGISTRATION.md` | Rule text committed at `468344a` **before** any evaluation: the two definitions, the leakage rule, the frozen split, the scored statistic, and the five collapse conditions. |
+| `two-total/data/two_total.json` | 136 corpus rows, 135 scored, both estimators, the gap, the errors, per-block scores, the collapsed-or-not verdict, the diagnosis, seven flags and five questions. |
+| `two-total/{index,rows,method,flagged}.html` | Decision summary, every game, method/leakage, flagged. Each says **"backtest corpus — not a leaderboard result"** on the page. |
+| `two-total/scripts/verify.py` | Nine fail-closed checks; passes. |
+
+**The measured result, as published.** Overall MAE 11.457 (T1) vs 12.672 (T2) on 135 scored games. On the
+frozen validation block (weeks 7–8, n = 28): MAE 11.009 vs 13.258, difference **−2.249**, 95% game-cluster
+bootstrap interval **[−4.806, +0.476]**. Collapse conditions: **C1 fail, C2 fail, C3 fail, C4 fail
+(week 7 −2.857, week 8 −1.641), C5 pass**. Verdict: **not collapsed**; both totals stay published with the
+gap column, which is the requirement's stated interim state. The holdout (week 9, n = 15) is published
+once, after the decision, and cannot reverse it.
+
+**The finding the gap column produced.** T2's prediction spread is **0.67 points** against a realised
+spread of **14.33**; its correlation with the realised total is 0.055 against T1's 0.172. It also prices
+**7.46 points low** on average. Removing that bias only takes its MAE from 12.67 to 11.59, so the bias is
+not the whole story: an estimator that varies by under a point cannot track a target that varies by
+fourteen. The cause is mechanical and published as flag **2T-03**: the registered rule shrinks a mean of
+points-for and points-allowed — itself ≈ league level — toward the league level. Repairing it would be a
+new estimator, which the registration forbids after the fact, so it is **flagged, not fixed**.
+
+**Irregularities recorded, not resolved** (all on `two-total/flagged.html` with an official link each):
+2T-01 the one hidden score; 2T-02 estimator inputs are community data while the scored truth is official;
+2T-03 the mechanical centring above; **2T-04 the sign convention of the registered T2 form mean is not
+stated by either the code or its pre-registration** — points-allowed and points-for are averaged with the
+same sign, which is not an expected total under the usual reading, and this workspace reproduces the code
+as written rather than choosing an interpretation; 2T-05 `corpus/manifest.json` carries a self-referential
+registration hash; 2T-06 the sample is one season; 2T-07 no price exists, so no ROI/CLV is computable.
+
+**Verification performed, and the one thing that could not be done.**
+- `python3 two-total/scripts/verify.py` — pass: registration order (the artifact's commit is the commit
+  that created the rule file, reachable from HEAD, content hash unchanged), corpus hash equality with
+  `corpus/manifest.json`, split coverage of weeks 1–9 with no overlap, every gap and error recomputed from
+  the per-row columns to 1e-6, every published MAE/RMSE and per-block n recomputed, the five gate states
+  and the verdict recomputed from the published numbers, every table body row carrying an https citation
+  on an official host, every blank cell carrying its reason, no placeholder or `None`/`nan` rendered as a
+  value, no price-dependent column, and byte-identical rebuilds.
+- The whole existing CI gate suite was run locally: 27 checks across `decision-desk`, `shadow-board`,
+  `pricing`, `corpus`, `decision-lab` (tests, source verification, audit, offline live verification),
+  `verification-lab`, `origination`, `skill-lab`, `availability-ledger`, `matchup`, `injury-archive`,
+  `questions/build.py --check`, `research-desk`, `official-verify`, `scripts/validate_site.py` and
+  `tests/check_site.py`. All pass. `tests/test_readiness.py` was updated for the intended P4 move
+  (Not started → Partial) with the reason recorded inline and a new assertion that P4 cannot claim a
+  collapse the artifact denies.
+- Repository-wide audit effect: `decision-lab/data/audit.json` `rows_missing_official_source` is **896 on
+  pure `main` and 896 now**. The four new pages add 180 table rows and **zero** rows without an official
+  link. Checked by building the same audit in a worktree of `origin/main`.
+- **Not done, and stated rather than implied: no value in this pass was re-read from nfl.com in this
+  session.** The sandbox has no egress to `www.nfl.com` (TLS handshake refused; `curl` returns 000),
+  so every official link published here is a citation to the repository's already-verified read of that
+  page — the 136/136 score-page verification in `results-verification/` and the per-row `source_url` on
+  the frozen corpus — not a fresh read by this session. No new official value was transcribed, which is
+  what makes that acceptable; had the task required a fresh transcription, it would have been blocked,
+  not guessed.
+
+**Task status.** P4: **done** for the publication and evaluation the requirement asks for; the estimator
+replacement it exposes is **open** as 2T-03/2T-04 and needs an owner decision, not another session's guess.
+Claims on `two-total/**`, `two-total.html` (not created), `readiness/build_readiness.py`,
+`readiness/data/readiness.csv`, `readiness.html`, `tests/test_readiness.py`, `index.html` (nav entry,
+site-guide row, one card), `README.md` (one row), `.github/workflows/pages.yml` (one step) and this board
+are **released**. No other workspace's files were edited.

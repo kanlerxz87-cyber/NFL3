@@ -46,9 +46,16 @@ def main() -> None:
     # (P3, P10, P11, A5, A13, A16, A19, L2, L3, L4, L5, L6, L7, L8). The injury archive
     # (session d37d5907, 2026-11-16) moved R6, A6, A20 and A21 from Blocked to Partial: the
     # mechanism is now scheduled and hashed, the coverage and the sample size are not yet there.
-    assert status_counts2["Done"] == 7 and status_counts2["Partial"] == 35 and status_counts2["Blocked"] == 8 \
-        and status_counts2["Not started"] == 13 and status_counts2["Decision recorded"] == 1, \
+    # The two-total workspace (session ca175be6, 2026-11-16) moved P4 from Not started to Partial: the
+    # pair, the gap column and the pre-registered collapse rule are now published and evaluated, and the
+    # rule did not fire (4 of 5 conditions fail), which is the requirement's stated interim state.
+    assert status_counts2["Done"] == 7 and status_counts2["Partial"] == 36 and status_counts2["Blocked"] == 8 \
+        and status_counts2["Not started"] == 12 and status_counts2["Decision recorded"] == 1, \
         f"detailed register status arithmetic drifted: {status_counts2}"
+    # P4 must cite the artifact that answers it, and must not claim a collapse the artifact denies.
+    assert rows["P4"]["status"] == "Partial", "P4 must record the published two-estimator pair"
+    assert "two-total/data/two_total.json" == rows["P4"]["evidence"], "P4 must cite the two-total artifact"
+    assert "not collapsed" in rows["P4"]["current"], "P4 must record the collapse verdict the artifact produced"
     for rid in ("P3", "P10", "P11", "A13", "A16", "A19", "L2", "L3", "L4", "L5", "L6", "L7", "L8"):
         assert rows[rid]["status"] in ("Partial", "Done"), f"{rid} must record the skill-lab or ledger outcome"
     assert rows["L6"]["status"] == "Done", "L6 is complete: both control baselines run in every leaderboard run"

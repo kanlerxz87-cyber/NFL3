@@ -1,0 +1,4533 @@
+{
+  "workspace": "two-total",
+  "generated_by": "two-total/scripts/build.py",
+  "season": 2026,
+  "requirement": "P4 publish every model total twice (two estimators, gap column) until one wins walk-forward",
+  "label": "backtest corpus \u2014 not a leaderboard result",
+  "registration": {
+    "commit": "433e50842e498e80ffa092c549d1f0765e0f31f2",
+    "file": "two-total/PRE_REGISTRATION.md",
+    "file_sha256": "e2a2a98ef314beb275b0d58d72191e8b4fee897190c64ed0eb3a727898929f3c",
+    "rule": "the commit that created the file is the registration; written here by a later commit",
+    "transposed_from": "468344acd5f4cc5cb44dbcee637a742f859999b5",
+    "transposition_note": "Registration commit identity was rewritten once by a rebase onto main. The registration content is unchanged: the file hash is the value the pre-rebase artifact held."
+  },
+  "corpus": {
+    "file": "corpus/games_2026_w1_9.csv",
+    "sha256": "4632744b44d59ff2c482c219ed65c6f6cf4924079013b82021933e91c2f6c9f7",
+    "games": 136,
+    "settled": 135,
+    "unsettled_hidden_score": 1,
+    "registration": "b1b0bf5621a24d6dc1009d2344883b4591aa5529"
+  },
+  "estimators": {
+    "T1": {
+      "name": "prior-season pace fit",
+      "definition": "ridge least squares on six prior seasons; level + pace_home + pace_away",
+      "implemented_in": "origination/scripts/model.py fit_total()",
+      "changed_by_this_session": false
+    },
+    "T2": {
+      "name": "league mean plus one third of the form gap",
+      "definition": "mean_train_total + (form_mean_points - mean_train_total)/3",
+      "implemented_in": "skill-lab/scripts/build.py shrink_total() rule, applied to points-for/allowed",
+      "changed_by_this_session": false,
+      "params": {
+        "form_window": 6,
+        "shrink": 0.3333333333333333,
+        "league_level": 46.172043,
+        "league_level_n_train": 93
+      }
+    }
+  },
+  "split": {
+    "train": {
+      "weeks": [
+        1,
+        6
+      ],
+      "games": 93
+    },
+    "validation": {
+      "weeks": [
+        7,
+        8
+      ],
+      "games": 28
+    },
+    "holdout": {
+      "weeks": [
+        9,
+        9
+      ],
+      "games": 15
+    }
+  },
+  "scores": {
+    "by_block": {
+      "train": {
+        "games_in_block": 93,
+        "scored": 92,
+        "excluded": 1,
+        "excluded_reasons": [],
+        "mae_t1": 11.617022,
+        "mae_t2": 12.433234,
+        "rmse_t1": 14.027716,
+        "rmse_t2": 16.286714,
+        "mae_diff": -0.816212,
+        "bootstrap_mae_diff": {
+          "n": 92,
+          "point": -0.8162121943665266,
+          "lower95": -2.1962940580099737,
+          "upper95": 0.6032844576125918,
+          "resamples": 10000,
+          "seed": 20261116,
+          "p_one_sided": 0.8681
+        },
+        "bootstrap_rmse_diff": {
+          "n": 92,
+          "point": -2.258997986392302,
+          "lower95": -3.495102184429193,
+          "upper95": -0.8902827538789886,
+          "resamples": 10000,
+          "seed": 20261116,
+          "p_one_sided": 0.9991
+        },
+        "closer_t1": 47,
+        "closer_t2": 45,
+        "ties": 0
+      },
+      "validation": {
+        "games_in_block": 28,
+        "scored": 28,
+        "excluded": 0,
+        "excluded_reasons": [],
+        "mae_t1": 11.008969,
+        "mae_t2": 13.257648,
+        "rmse_t1": 14.003971,
+        "rmse_t2": 15.865225,
+        "mae_diff": -2.24868,
+        "bootstrap_mae_diff": {
+          "n": 28,
+          "point": -2.2486796323604707,
+          "lower95": -4.805502447772657,
+          "upper95": 0.4764478333333333,
+          "resamples": 10000,
+          "seed": 20261116,
+          "p_one_sided": 0.9476
+        },
+        "bootstrap_rmse_diff": {
+          "n": 28,
+          "point": -1.8612534542421404,
+          "lower95": -4.365200655099848,
+          "upper95": 0.9520509801975106,
+          "resamples": 10000,
+          "seed": 20261116,
+          "p_one_sided": 0.9067
+        },
+        "closer_t1": 19,
+        "closer_t2": 9,
+        "ties": 0
+      },
+      "holdout": {
+        "games_in_block": 15,
+        "scored": 15,
+        "excluded": 0,
+        "excluded_reasons": [],
+        "mae_t1": 11.314254,
+        "mae_t2": 13.044176,
+        "rmse_t1": 14.572158,
+        "rmse_t2": 15.276995,
+        "mae_diff": -1.729921,
+        "bootstrap_mae_diff": {
+          "n": 15,
+          "point": -1.729921293906811,
+          "lower95": -5.260602779928316,
+          "upper95": 2.060348495818399,
+          "resamples": 10000,
+          "seed": 20261116,
+          "p_one_sided": 0.8266
+        },
+        "bootstrap_rmse_diff": {
+          "n": 15,
+          "point": -0.7048371640061006,
+          "lower95": -4.1091652121884366,
+          "upper95": 3.190758364007987,
+          "resamples": 10000,
+          "seed": 20261116,
+          "p_one_sided": 0.6529
+        },
+        "closer_t1": 10,
+        "closer_t2": 5,
+        "ties": 0
+      }
+    },
+    "overall": {
+      "games_in_block": 136,
+      "scored": 135,
+      "excluded": 1,
+      "excluded_reasons": [],
+      "mae_t1": 11.457266,
+      "mae_t2": 12.672106,
+      "rmse_t1": 14.084349,
+      "rmse_t2": 16.090531,
+      "mae_diff": -1.21484,
+      "bootstrap_mae_diff": {
+        "n": 135,
+        "point": -1.2148397851586363,
+        "lower95": -2.3739476098234444,
+        "upper95": -0.04993560977034406,
+        "resamples": 10000,
+        "seed": 20261116,
+        "p_one_sided": 0.9797
+      },
+      "bootstrap_rmse_diff": {
+        "n": 135,
+        "point": -2.0061818387151895,
+        "lower95": -3.0840075397337596,
+        "upper95": -0.8718881152079909,
+        "resamples": 10000,
+        "seed": 20261116,
+        "p_one_sided": 0.9998
+      },
+      "closer_t1": 76,
+      "closer_t2": 59,
+      "ties": 0
+    },
+    "week7": {
+      "games_in_block": 14,
+      "scored": 14,
+      "excluded": 0,
+      "excluded_reasons": [],
+      "mae_t1": 9.932512,
+      "mae_t2": 12.789139,
+      "rmse_t1": 11.921035,
+      "rmse_t2": 13.588681,
+      "mae_diff": -2.856626,
+      "bootstrap_mae_diff": {
+        "n": 14,
+        "point": -2.856626433435739,
+        "lower95": -6.295246985919101,
+        "upper95": 0.9411106507936502,
+        "resamples": 10000,
+        "seed": 20261116,
+        "p_one_sided": 0.9319
+      },
+      "bootstrap_rmse_diff": {
+        "n": 14,
+        "point": -1.6676459250154405,
+        "lower95": -5.6371200180468035,
+        "upper95": 2.0553826564661364,
+        "resamples": 10000,
+        "seed": 20261116,
+        "p_one_sided": 0.8137
+      },
+      "closer_t1": 10,
+      "closer_t2": 4,
+      "ties": 0
+    },
+    "week8": {
+      "games_in_block": 14,
+      "scored": 14,
+      "excluded": 0,
+      "excluded_reasons": [],
+      "mae_t1": 12.085426,
+      "mae_t2": 13.726158,
+      "rmse_t1": 15.814909,
+      "rmse_t2": 17.853808,
+      "mae_diff": -1.640733,
+      "bootstrap_mae_diff": {
+        "n": 14,
+        "point": -1.6407328312852023,
+        "lower95": -5.171442177419353,
+        "upper95": 2.284768046594982,
+        "resamples": 10000,
+        "seed": 20261116,
+        "p_one_sided": 0.8049
+      },
+      "bootstrap_rmse_diff": {
+        "n": 14,
+        "point": -2.0388990322972447,
+        "lower95": -5.190778493589757,
+        "upper95": 2.171575387991748,
+        "resamples": 10000,
+        "seed": 20261116,
+        "p_one_sided": 0.8447
+      },
+      "closer_t1": 9,
+      "closer_t2": 5,
+      "ties": 0
+    }
+  },
+  "decision": {
+    "rule": "PRE_REGISTRATION.md \u00a76",
+    "checks": {
+      "C1_challenger_better": false,
+      "C2_interval_lower_gt_0": false,
+      "C3_rmse_agrees": false,
+      "C4_both_halves_agree": false,
+      "C5_min_n": true
+    },
+    "numbers": {
+      "C1_challenger_better": "MAE T1 11.008969 vs T2 13.257648 on n=28",
+      "C2_interval_lower_gt_0": "95% cluster lower bound -4.8055",
+      "C3_rmse_agrees": "RMSE T1 14.003971 vs T2 15.865225",
+      "C4_both_halves_agree": "week 7 diff -2.8566 (n=14), week 8 diff -1.6407 (n=14)",
+      "C5_min_n": "28 scored validation games against a floor of 20"
+    },
+    "collapsed": false,
+    "state": "not collapsed: both estimators stay published with the gap column"
+  },
+  "diagnosis": {
+    "bias": {
+      "t1": {
+        "bias": -0.114698,
+        "sd_error": 14.136336,
+        "sd_prediction": 1.688517,
+        "sd_truth": 14.329214,
+        "corr_with_actual": 0.172379,
+        "mae": 11.457266,
+        "bias_corrected_mae": 11.459815
+      },
+      "t2": {
+        "bias": -7.463391,
+        "sd_error": 14.308019,
+        "sd_prediction": 0.66834,
+        "sd_truth": 14.329214,
+        "corr_with_actual": 0.05501,
+        "mae": 12.672106,
+        "bias_corrected_mae": 11.585583
+      }
+    },
+    "mae": {
+      "t1": 11.457266,
+      "t2": 12.672106
+    },
+    "bias_corrected_mae": {
+      "t1": 11.459815,
+      "t2": 11.585583
+    },
+    "reading": "T2 prices 7.46 points below the realised total on average, while T1's bias is -0.11. Subtracting that constant only takes T2 from MAE 12.67 to 11.59, so the bias is not the whole story: T2's prediction spread is 0.67 points against a realised spread of 14.33, and its correlation with the realised total is 0.055 against 0.172 for T1. An estimator that varies by under a point cannot track a target that varies by fourteen. The cause is mechanical and is stated in the flagged table rather than repaired here: the registered T2 rule shrinks a mean of points-for and points-allowed toward a league level, and that mean sits near the league level by construction. Repairing it would be a new estimator, which the registration forbids after the fact.",
+    "inputs": {
+      "scored_games": 135,
+      "note": "computed from the published per-game columns on rows.html; no new estimator is introduced"
+    }
+  },
+  "flags": [
+    {
+      "id": "2T-01",
+      "title": "One corpus game has no published final score",
+      "detail": "1 corpus row(s) \u2014 WAS at DAL (week 2) \u2014 carry blank score cells on the official page. The row is published with both estimator values and a blank truth, and is excluded from every score. It is not inferred.",
+      "state": "blank, excluded, published",
+      "tone": "warn",
+      "source": "https://www.nfl.com/schedules/2026/by-week/week-2",
+      "source_label": "official Week 2 schedule page"
+    },
+    {
+      "id": "2T-02",
+      "title": "Estimator inputs are community data, the scored truth is official",
+      "detail": "T1's fit window and T2's rolling form both read the digest-verified community schedule snapshot (data/raw/games.csv, SHA-256 in data/raw/manifest.json). The comparison is therefore a comparison of two estimators on community inputs, scored against official finals. It is labelled that way on every page and is excluded from any official-only gate.",
+      "state": "labelled",
+      "tone": "warn",
+      "source": "https://www.nfl.com/schedules/2026/by-week/week-1",
+      "source_label": "official Week 1 schedule page"
+    },
+    {
+      "id": "2T-03",
+      "title": "The registered T2 rule is mechanically centred on the league level",
+      "detail": "T2 shrinks a mean of points-for and points-allowed (which is itself \u2248 league level) toward the league level, so its prediction spread is 0.67 points. It loses to T1 on every pre-registered condition. Fixing it would mean registering a new estimator; this session does not do that after seeing the result.",
+      "state": "published as measured",
+      "tone": "bad",
+      "source": "https://www.nfl.com/schedules/2026/by-week/week-7",
+      "source_label": "official Week 7 schedule page"
+    },
+    {
+      "id": "2T-04",
+      "title": "Sign convention in the T2 form mean is not stated by the source code",
+      "detail": "The registered skill-lab rule averages points-for and points-allowed together. If the intent were an expected total, points-allowed should carry the opposite sign to the opponent's points-for. The repository's code and its pre-registration agree with each other but neither states the intent, so this workspace reproduces the code as written and flags the ambiguity for the owner instead of choosing an interpretation.",
+      "state": "needs owner decision",
+      "tone": "warn",
+      "source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+      "source_label": "official Week 8 schedule page"
+    },
+    {
+      "id": "2T-05",
+      "title": "Corpus registration hash is self-referential in the manifest",
+      "detail": "corpus/manifest.json records corpus_registration as the commit that created its own pre-registration file, which cannot be known at the moment that file is created. The value is therefore a forward reference written by a later commit. This workspace verifies the corpus file hash instead, and does not treat the recorded hash as proof of ordering.",
+      "state": "flagged, not relied on",
+      "tone": "warn",
+      "source": "https://www.nfl.com/standings/",
+      "source_label": "NFL standings"
+    },
+    {
+      "id": "2T-06",
+      "title": "One season, nine weeks, 135 scored games",
+      "detail": "The collapse decision is made on 28 validation games. That is above the frozen floor of 20 but small: a single 60-point game moves the mean absolute error by roughly a point. The interval, not the point estimate, is the published statistic.",
+      "state": "sample size stated",
+      "tone": "warn",
+      "source": "https://www.nfl.com/scores/2026/week-9",
+      "source_label": "official Week 9 scores"
+    },
+    {
+      "id": "2T-07",
+      "title": "Nothing here is a price, an edge, ROI or a leaderboard result",
+      "detail": "The price firewall is closed at zero licensed sources, so no ROI, CLV or staking number is computable from this workspace by rule. The comparison is between two models on official final totals and carries no market claim.",
+      "state": "by design",
+      "tone": "ok",
+      "source": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL",
+      "source_label": "NFL odds-widget boundary"
+    }
+  ],
+  "questions": [
+    {
+      "id": "2T-Q1",
+      "question": "Should T2 be re-registered as an expected-total estimator with an explicit sign convention?",
+      "known": "The registered rule and its code agree; both shrink a mean of points-for and points-allowed.",
+      "missing": "A statement of intent from the owner: is the form term meant to be an expected total?",
+      "route": "Register T2b in a new commit, then re-run; the current pair stays published meanwhile.",
+      "source": "https://www.nfl.com/schedules/2026/by-week/week-7",
+      "source_label": "official Week 7 schedule page"
+    },
+    {
+      "id": "2T-Q2",
+      "question": "Does the pair hold up on a second season?",
+      "known": "135 scored games from one season; T1 wins on all four failing conditions.",
+      "missing": "A frozen corpus for any other season, verified against official finals.",
+      "route": "Freeze 2025 the same way 2026 was frozen, then re-run this build unchanged.",
+      "source": "https://www.nfl.com/standings/",
+      "source_label": "NFL standings"
+    },
+    {
+      "id": "2T-Q3",
+      "question": "Should the league level be estimated from a rolling window rather than the train block?",
+      "known": "The level is 46.17 points from 93 training games, frozen before validation.",
+      "missing": "A pre-registered rule for refitting the level forward, and a decision on whether that is a new estimator.",
+      "route": "Write the rule as T2b before looking at any later week; it cannot be adopted retrospectively.",
+      "source": "https://www.nfl.com/scores/2026/week-9",
+      "source_label": "official Week 9 scores"
+    },
+    {
+      "id": "2T-Q4",
+      "question": "Can either estimator be scored against a market total?",
+      "known": "A community total line exists for most 2026 games; the price policy excludes it from any published number.",
+      "missing": "One licensed price source with a named permitted use and both timestamps.",
+      "route": "Satisfy pricing/PRICE_DATA_POLICY.md \u00a74; until then the market column stays blank.",
+      "source": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL",
+      "source_label": "NFL odds-widget boundary"
+    },
+    {
+      "id": "2T-Q5",
+      "question": "Is the club-code join ('AZ' \u2192 'ARI') the only alias this corpus needs?",
+      "known": "The repository's audited cross-check matched 136/136 official finals using exactly this one mapping, and this workspace joined 136/136 rows with it.",
+      "missing": "Nothing for 2026. A future season could introduce another rendering difference.",
+      "route": "The next freeze records any new alias in its own pre-registration before use.",
+      "source": "https://www.nfl.com/schedules/2026/by-week/week-1",
+      "source_label": "official Week 1 schedule page"
+    }
+  ],
+  "leakage": {
+    "rule": "PRE_REGISTRATION.md \u00a73: every rolling input strictly earlier than the fixture kickoff date",
+    "t1_uses_current_season": false,
+    "t1_note": "T1 is fitted on seasons s-6..s-1 only; no 2026 game enters any 2026 fit",
+    "t1_fit_window_checked": true,
+    "t2_games_checked": 7116,
+    "t2_violations": [],
+    "t2_violation_count": 0
+  },
+  "counts": {
+    "corpus_rows": 136,
+    "rows_with_both_estimators": 136,
+    "rows_scored": 135,
+    "rows_with_blank_estimator": 0,
+    "rows_with_blank_actual_total": 1
+  },
+  "price_firewall": {
+    "licensed_price_sources": 0,
+    "roi_rows": 0,
+    "clv_rows": 0,
+    "policy": "pricing/PRICE_DATA_POLICY.md"
+  },
+  "determinism": "no wall-clock value is recorded in this artifact; a rebuild from the committed inputs must be byte-identical, which two-total/scripts/verify.py enforces",
+  "rows": [
+    {
+      "season": 2026,
+      "week": 1,
+      "kickoff_date_et": "2026-09-09",
+      "slot": "SNF",
+      "away": "NE",
+      "home": "SEA",
+      "actual_total": 23,
+      "t1_total": 44.380953,
+      "t2_total": 38.364695,
+      "gap": -6.016258,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.75,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-1",
+      "corpus_verification": "Final score read from the official Week 1 schedule page; score and quarter breakdown independently confirmed on the NFL.com game center page https://www.nfl.com/games/patriots-at-seahawks-2026-reg-1 . NFL.com lists the date as Wednesday, September 9th; that weekday/date combination is anomalous and is flagged for review.",
+      "t1_error_abs": 21.380952999999998,
+      "t2_error_abs": 15.36469534050179,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 1,
+      "kickoff_date_et": "2026-09-10",
+      "slot": "TNF",
+      "away": "SF",
+      "home": "LA",
+      "actual_total": 34,
+      "t1_total": 45.714618,
+      "t2_total": 40.142473,
+      "gap": -5.572145,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 28.083333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-1",
+      "corpus_verification": "Final score read from the official Week 1 schedule page",
+      "t1_error_abs": 11.714618000000002,
+      "t2_error_abs": 6.142473118279568,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 1,
+      "kickoff_date_et": "2026-09-13",
+      "slot": "Early",
+      "away": "CHI",
+      "home": "CAR",
+      "actual_total": 96,
+      "t1_total": 43.974423,
+      "t2_total": 37.864695,
+      "gap": -6.109728,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 21.25,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-1",
+      "corpus_verification": "Final score read from the official Week 1 schedule page",
+      "t1_error_abs": 52.025577,
+      "t2_error_abs": 58.1353046594982,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 1,
+      "kickoff_date_et": "2026-09-13",
+      "slot": "Early",
+      "away": "TB",
+      "home": "CIN",
+      "actual_total": 60,
+      "t1_total": 48.041477,
+      "t2_total": 38.364695,
+      "gap": -9.676782,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.75,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-1",
+      "corpus_verification": "Final score read from the official Week 1 schedule page",
+      "t1_error_abs": 11.958523,
+      "t2_error_abs": 21.63530465949821,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 1,
+      "kickoff_date_et": "2026-09-13",
+      "slot": "Early",
+      "away": "NO",
+      "home": "DET",
+      "actual_total": 61,
+      "t1_total": 47.297803,
+      "t2_total": 38.767473,
+      "gap": -8.53033,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 23.958333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-1",
+      "corpus_verification": "Final score read from the official Week 1 schedule page",
+      "t1_error_abs": 13.702196999999998,
+      "t2_error_abs": 22.232526881720432,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 1,
+      "kickoff_date_et": "2026-09-13",
+      "slot": "Early",
+      "away": "BUF",
+      "home": "HOU",
+      "actual_total": 67,
+      "t1_total": 46.764513,
+      "t2_total": 38.517473,
+      "gap": -8.24704,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 23.208333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-1",
+      "corpus_verification": "Final score read from the official Week 1 schedule page",
+      "t1_error_abs": 20.235487,
+      "t2_error_abs": 28.482526881720432,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 1,
+      "kickoff_date_et": "2026-09-13",
+      "slot": "Early",
+      "away": "BAL",
+      "home": "IND",
+      "actual_total": 64,
+      "t1_total": 47.378336,
+      "t2_total": 39.031362,
+      "gap": -8.346974,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 24.75,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-1",
+      "corpus_verification": "Final score read from the official Week 1 schedule page",
+      "t1_error_abs": 16.621664000000003,
+      "t2_error_abs": 24.96863799283154,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 1,
+      "kickoff_date_et": "2026-09-13",
+      "slot": "Early",
+      "away": "CLE",
+      "home": "JAX",
+      "actual_total": 44,
+      "t1_total": 44.493415,
+      "t2_total": 38.017473,
+      "gap": -6.475942,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 21.708333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-1",
+      "corpus_verification": "Final score read from the official Week 1 schedule page",
+      "t1_error_abs": 0.4934149999999988,
+      "t2_error_abs": 5.982526881720432,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 1,
+      "kickoff_date_et": "2026-09-13",
+      "slot": "Early",
+      "away": "ATL",
+      "home": "PIT",
+      "actual_total": 33,
+      "t1_total": 43.891282,
+      "t2_total": 38.18414,
+      "gap": -5.707142,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.208333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-1",
+      "corpus_verification": "Final score read from the official Week 1 schedule page",
+      "t1_error_abs": 10.891281999999997,
+      "t2_error_abs": 5.18413978494624,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 1,
+      "kickoff_date_et": "2026-09-13",
+      "slot": "Early",
+      "away": "NYJ",
+      "home": "TEN",
+      "actual_total": 33,
+      "t1_total": 43.984333,
+      "t2_total": 38.906362,
+      "gap": -5.077971,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 24.375,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-1",
+      "corpus_verification": "Final score read from the official Week 1 schedule page",
+      "t1_error_abs": 10.984333,
+      "t2_error_abs": 5.906362007168461,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 1,
+      "kickoff_date_et": "2026-09-13",
+      "slot": "Late",
+      "away": "AZ",
+      "home": "LAC",
+      "actual_total": 40,
+      "t1_total": 46.870291,
+      "t2_total": 38.225806,
+      "gap": -8.644485,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.333333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-1",
+      "corpus_verification": "Final score read from the official Week 1 schedule page",
+      "t1_error_abs": 6.870291000000002,
+      "t2_error_abs": 1.774193548387096,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 1,
+      "kickoff_date_et": "2026-09-13",
+      "slot": "Late",
+      "away": "MIA",
+      "home": "LV",
+      "actual_total": 40,
+      "t1_total": 46.117624,
+      "t2_total": 37.823029,
+      "gap": -8.294595,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 21.125,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-1",
+      "corpus_verification": "Final score read from the official Week 1 schedule page",
+      "t1_error_abs": 6.117623999999999,
+      "t2_error_abs": 2.1769713261648747,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 1,
+      "kickoff_date_et": "2026-09-13",
+      "slot": "Late",
+      "away": "GB",
+      "home": "MIN",
+      "actual_total": 61,
+      "t1_total": 46.383963,
+      "t2_total": 37.503584,
+      "gap": -8.880379,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 20.166667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-1",
+      "corpus_verification": "Final score read from the official Week 1 schedule page",
+      "t1_error_abs": 14.616036999999999,
+      "t2_error_abs": 23.496415770609318,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 1,
+      "kickoff_date_et": "2026-09-13",
+      "slot": "Late",
+      "away": "WAS",
+      "home": "PHI",
+      "actual_total": 46,
+      "t1_total": 46.100695,
+      "t2_total": 37.711918,
+      "gap": -8.388777,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 20.791667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-1",
+      "corpus_verification": "Final score read from the official Week 1 schedule page",
+      "t1_error_abs": 0.10069500000000176,
+      "t2_error_abs": 8.288082437275989,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 1,
+      "kickoff_date_et": "2026-09-13",
+      "slot": "SNF",
+      "away": "DAL",
+      "home": "NYG",
+      "actual_total": 48,
+      "t1_total": 46.403397,
+      "t2_total": 39.545251,
+      "gap": -6.858146,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 26.291667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-1",
+      "corpus_verification": "Final score read from the official Week 1 schedule page",
+      "t1_error_abs": 1.5966030000000018,
+      "t2_error_abs": 8.454749103942653,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 1,
+      "kickoff_date_et": "2026-09-14",
+      "slot": "MNF",
+      "away": "DEN",
+      "home": "KC",
+      "actual_total": 41,
+      "t1_total": 44.164099,
+      "t2_total": 37.378584,
+      "gap": -6.785515,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 19.791667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-1",
+      "corpus_verification": "Final score read from the official Week 1 schedule page",
+      "t1_error_abs": 3.164099,
+      "t2_error_abs": 3.6214157706093175,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 2,
+      "kickoff_date_et": "2026-09-17",
+      "slot": "TNF",
+      "away": "DET",
+      "home": "BUF",
+      "actual_total": 72,
+      "t1_total": 50.303491,
+      "t2_total": 39.781362,
+      "gap": -10.522129,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 27.0,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-2",
+      "corpus_verification": "Final score read from the official Week 2 schedule page",
+      "t1_error_abs": 21.696509,
+      "t2_error_abs": 32.21863799283154,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 2,
+      "kickoff_date_et": "2026-09-20",
+      "slot": "Early",
+      "away": "CAR",
+      "home": "ATL",
+      "actual_total": 37,
+      "t1_total": 44.652778,
+      "t2_total": 38.698029,
+      "gap": -5.954749,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 23.75,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-2",
+      "corpus_verification": "Final score read from the official Week 2 schedule page",
+      "t1_error_abs": 7.652777999999998,
+      "t2_error_abs": 1.6980286738351253,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 2,
+      "kickoff_date_et": "2026-09-20",
+      "slot": "Early",
+      "away": "NO",
+      "home": "BAL",
+      "actual_total": 41,
+      "t1_total": 44.942399,
+      "t2_total": 38.795251,
+      "gap": -6.147148,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 24.041667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-2",
+      "corpus_verification": "Final score read from the official Week 2 schedule page",
+      "t1_error_abs": 3.9423990000000018,
+      "t2_error_abs": 2.204749103942653,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 2,
+      "kickoff_date_et": "2026-09-20",
+      "slot": "Early",
+      "away": "MIN",
+      "home": "CHI",
+      "actual_total": 12,
+      "t1_total": 45.370986,
+      "t2_total": 38.628584,
+      "gap": -6.742402,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 23.541667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-2",
+      "corpus_verification": "Final score read from the official Week 2 schedule page",
+      "t1_error_abs": 33.370986,
+      "t2_error_abs": 26.628584229390682,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 2,
+      "kickoff_date_et": "2026-09-20",
+      "slot": "Early",
+      "away": "CIN",
+      "home": "HOU",
+      "actual_total": 26,
+      "t1_total": 46.595892,
+      "t2_total": 39.350806,
+      "gap": -7.245086,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 25.708333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-2",
+      "corpus_verification": "Final score read from the official Week 2 schedule page",
+      "t1_error_abs": 20.595892,
+      "t2_error_abs": 13.350806451612904,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 2,
+      "kickoff_date_et": "2026-09-20",
+      "slot": "Early",
+      "away": "PIT",
+      "home": "NE",
+      "actual_total": 23,
+      "t1_total": 42.275613,
+      "t2_total": 38.225806,
+      "gap": -4.049807,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.333333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-2",
+      "corpus_verification": "Final score read from the official Week 2 schedule page",
+      "t1_error_abs": 19.275613,
+      "t2_error_abs": 15.225806451612904,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 2,
+      "kickoff_date_et": "2026-09-20",
+      "slot": "Early",
+      "away": "GB",
+      "home": "NYJ",
+      "actual_total": 37,
+      "t1_total": 44.568909,
+      "t2_total": 38.656362,
+      "gap": -5.912547,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 23.625,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-2",
+      "corpus_verification": "Final score read from the official Week 2 schedule page",
+      "t1_error_abs": 7.568908999999998,
+      "t2_error_abs": 1.656362007168461,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 2,
+      "kickoff_date_et": "2026-09-20",
+      "slot": "Early",
+      "away": "CLE",
+      "home": "TB",
+      "actual_total": 42,
+      "t1_total": 45.402154,
+      "t2_total": 37.850806,
+      "gap": -7.551348,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 21.208333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-2",
+      "corpus_verification": "Final score read from the official Week 2 schedule page",
+      "t1_error_abs": 3.402154000000003,
+      "t2_error_abs": 4.149193548387096,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 2,
+      "kickoff_date_et": "2026-09-20",
+      "slot": "Early",
+      "away": "PHI",
+      "home": "TEN",
+      "actual_total": 44,
+      "t1_total": 45.914698,
+      "t2_total": 38.114695,
+      "gap": -7.800003,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.0,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-2",
+      "corpus_verification": "Final score read from the official Week 2 schedule page",
+      "t1_error_abs": 1.9146980000000013,
+      "t2_error_abs": 5.885304659498203,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 2,
+      "kickoff_date_et": "2026-09-20",
+      "slot": "Late",
+      "away": "JAX",
+      "home": "DEN",
+      "actual_total": 33,
+      "t1_total": 43.960818,
+      "t2_total": 38.55914,
+      "gap": -5.401678,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 23.333333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-2",
+      "corpus_verification": "Final score read from the official Week 2 schedule page",
+      "t1_error_abs": 10.960818000000003,
+      "t2_error_abs": 5.55913978494624,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 2,
+      "kickoff_date_et": "2026-09-20",
+      "slot": "Late",
+      "away": "LV",
+      "home": "LAC",
+      "actual_total": 40,
+      "t1_total": 46.386002,
+      "t2_total": 36.961918,
+      "gap": -9.424084,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 18.541667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-2",
+      "corpus_verification": "Final score read from the official Week 2 schedule page",
+      "t1_error_abs": 6.386001999999998,
+      "t2_error_abs": 3.038082437275989,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 2,
+      "kickoff_date_et": "2026-09-20",
+      "slot": "Late",
+      "away": "SEA",
+      "home": "AZ",
+      "actual_total": 38,
+      "t1_total": 46.73507,
+      "t2_total": 38.364695,
+      "gap": -8.370375,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.75,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-2",
+      "corpus_verification": "Final score read from the official Week 2 schedule page",
+      "t1_error_abs": 8.73507,
+      "t2_error_abs": 0.36469534050178964,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 2,
+      "kickoff_date_et": "2026-09-20",
+      "slot": "Late",
+      "away": "WAS",
+      "home": "DAL",
+      "actual_total": null,
+      "t1_total": 48.419764,
+      "t2_total": 39.18414,
+      "gap": -9.235624,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 25.208333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-2",
+      "corpus_verification": "UNVERIFIED: the official schedule page and the official game center page (https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2) both render this game as \"Hidden Score\". Final score left blank; not inferred.",
+      "t1_error_abs": null,
+      "t2_error_abs": null,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 2,
+      "kickoff_date_et": "2026-09-20",
+      "slot": "Late",
+      "away": "MIA",
+      "home": "SF",
+      "actual_total": 48,
+      "t1_total": 46.217279,
+      "t2_total": 38.80914,
+      "gap": -7.408139,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 24.083333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-2",
+      "corpus_verification": "Final score read from the official Week 2 schedule page",
+      "t1_error_abs": 1.7827210000000022,
+      "t2_error_abs": 9.19086021505376,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 2,
+      "kickoff_date_et": "2026-09-20",
+      "slot": "SNF",
+      "away": "IND",
+      "home": "KC",
+      "actual_total": 63,
+      "t1_total": 46.93489,
+      "t2_total": 38.142473,
+      "gap": -8.792417,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.083333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-2",
+      "corpus_verification": "Final score read from the official Week 2 schedule page",
+      "t1_error_abs": 16.065109999999997,
+      "t2_error_abs": 24.857526881720432,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 2,
+      "kickoff_date_et": "2026-09-21",
+      "slot": "MNF",
+      "away": "NYG",
+      "home": "LA",
+      "actual_total": 34,
+      "t1_total": 43.280478,
+      "t2_total": 39.448029,
+      "gap": -3.832449,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 26.0,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-2",
+      "corpus_verification": "Final score read from the official Week 2 schedule page",
+      "t1_error_abs": 9.280478000000002,
+      "t2_error_abs": 5.448028673835125,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 3,
+      "kickoff_date_et": "2026-09-24",
+      "slot": "TNF",
+      "away": "ATL",
+      "home": "GB",
+      "actual_total": 49,
+      "t1_total": 46.015608,
+      "t2_total": 38.267473,
+      "gap": -7.748135,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.458333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-3",
+      "corpus_verification": "Final score read from the official Week 3 schedule page",
+      "t1_error_abs": 2.9843919999999997,
+      "t2_error_abs": 10.732526881720432,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 3,
+      "kickoff_date_et": "2026-09-27",
+      "slot": "Early",
+      "away": "LAC",
+      "home": "BUF",
+      "actual_total": 40,
+      "t1_total": 47.983423,
+      "t2_total": 38.198029,
+      "gap": -9.785394,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.25,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-3",
+      "corpus_verification": "Final score read from the official Week 3 schedule page",
+      "t1_error_abs": 7.983423000000002,
+      "t2_error_abs": 1.8019713261648747,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 3,
+      "kickoff_date_et": "2026-09-27",
+      "slot": "Early",
+      "away": "CAR",
+      "home": "CLE",
+      "actual_total": 39,
+      "t1_total": 43.696413,
+      "t2_total": 37.725806,
+      "gap": -5.970607,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 20.833333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-3",
+      "corpus_verification": "Final score read from the official Week 3 schedule page",
+      "t1_error_abs": 4.696413,
+      "t2_error_abs": 1.274193548387096,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 3,
+      "kickoff_date_et": "2026-09-27",
+      "slot": "Early",
+      "away": "NYJ",
+      "home": "DET",
+      "actual_total": 55,
+      "t1_total": 47.005212,
+      "t2_total": 39.073029,
+      "gap": -7.932183,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 24.875,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-3",
+      "corpus_verification": "Final score read from the official Week 3 schedule page",
+      "t1_error_abs": 7.994788,
+      "t2_error_abs": 15.926971326164875,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 3,
+      "kickoff_date_et": "2026-09-27",
+      "slot": "Early",
+      "away": "HOU",
+      "home": "IND",
+      "actual_total": 36,
+      "t1_total": 46.194762,
+      "t2_total": 39.739695,
+      "gap": -6.455067,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 26.875,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-3",
+      "corpus_verification": "Final score read from the official Week 3 schedule page",
+      "t1_error_abs": 10.194761999999997,
+      "t2_error_abs": 3.7396953405017896,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 3,
+      "kickoff_date_et": "2026-09-27",
+      "slot": "Early",
+      "away": "NE",
+      "home": "JAX",
+      "actual_total": 41,
+      "t1_total": 43.834112,
+      "t2_total": 38.43414,
+      "gap": -5.399972,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.958333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-3",
+      "corpus_verification": "Final score read from the official Week 3 schedule page",
+      "t1_error_abs": 2.8341119999999975,
+      "t2_error_abs": 2.5658602150537604,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 3,
+      "kickoff_date_et": "2026-09-27",
+      "slot": "Early",
+      "away": "KC",
+      "home": "MIA",
+      "actual_total": 34,
+      "t1_total": 45.83554,
+      "t2_total": 37.850806,
+      "gap": -7.984734,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 21.208333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-3",
+      "corpus_verification": "Final score read from the official Week 3 schedule page",
+      "t1_error_abs": 11.835540000000002,
+      "t2_error_abs": 3.850806451612904,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 3,
+      "kickoff_date_et": "2026-09-27",
+      "slot": "Early",
+      "away": "TEN",
+      "home": "NYG",
+      "actual_total": 19,
+      "t1_total": 43.350706,
+      "t2_total": 38.239695,
+      "gap": -5.111011,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.375,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-3",
+      "corpus_verification": "Final score read from the official Week 3 schedule page",
+      "t1_error_abs": 24.350706000000002,
+      "t2_error_abs": 19.23969534050179,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 3,
+      "kickoff_date_et": "2026-09-27",
+      "slot": "Early",
+      "away": "CIN",
+      "home": "PIT",
+      "actual_total": 57,
+      "t1_total": 45.57424,
+      "t2_total": 37.531362,
+      "gap": -8.042878,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 20.25,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-3",
+      "corpus_verification": "Final score read from the official Week 3 schedule page",
+      "t1_error_abs": 11.425759999999997,
+      "t2_error_abs": 19.46863799283154,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 3,
+      "kickoff_date_et": "2026-09-27",
+      "slot": "Early",
+      "away": "SEA",
+      "home": "WAS",
+      "actual_total": 64,
+      "t1_total": 45.932664,
+      "t2_total": 37.961918,
+      "gap": -7.970746,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 21.541667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-3",
+      "corpus_verification": "Final score read from the official Week 3 schedule page",
+      "t1_error_abs": 18.067335999999997,
+      "t2_error_abs": 26.03808243727599,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 3,
+      "kickoff_date_et": "2026-09-27",
+      "slot": "Late",
+      "away": "AZ",
+      "home": "SF",
+      "actual_total": 66,
+      "t1_total": 46.773249,
+      "t2_total": 39.18414,
+      "gap": -7.589109,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 25.208333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-3",
+      "corpus_verification": "Final score read from the official Week 3 schedule page",
+      "t1_error_abs": 19.226751,
+      "t2_error_abs": 26.81586021505376,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 3,
+      "kickoff_date_et": "2026-09-27",
+      "slot": "Late",
+      "away": "MIN",
+      "home": "TB",
+      "actual_total": 39,
+      "t1_total": 46.726874,
+      "t2_total": 37.489695,
+      "gap": -9.237179,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 20.125,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-3",
+      "corpus_verification": "Final score read from the official Week 3 schedule page",
+      "t1_error_abs": 7.726874000000002,
+      "t2_error_abs": 1.5103046594982033,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 3,
+      "kickoff_date_et": "2026-09-27",
+      "slot": "Late",
+      "away": "LV",
+      "home": "NO",
+      "actual_total": 62,
+      "t1_total": 44.781038,
+      "t2_total": 37.656362,
+      "gap": -7.124676,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 20.625,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-3",
+      "corpus_verification": "Final score read from the official Week 3 schedule page",
+      "t1_error_abs": 17.218961999999998,
+      "t2_error_abs": 24.34363799283154,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 3,
+      "kickoff_date_et": "2026-09-27",
+      "slot": "Late",
+      "away": "BAL",
+      "home": "DAL",
+      "actual_total": 65,
+      "t1_total": 48.899244,
+      "t2_total": 39.336918,
+      "gap": -9.562326,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 25.666667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-3",
+      "corpus_verification": "Final score read from the official Week 3 schedule page",
+      "t1_error_abs": 16.100755999999997,
+      "t2_error_abs": 25.66308243727599,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 3,
+      "kickoff_date_et": "2026-09-27",
+      "slot": "SNF",
+      "away": "LA",
+      "home": "DEN",
+      "actual_total": 56,
+      "t1_total": 43.871841,
+      "t2_total": 38.68414,
+      "gap": -5.187701,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 23.708333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-3",
+      "corpus_verification": "Final score read from the official Week 3 schedule page",
+      "t1_error_abs": 12.128158999999997,
+      "t2_error_abs": 17.31586021505376,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 3,
+      "kickoff_date_et": "2026-09-28",
+      "slot": "MNF",
+      "away": "PHI",
+      "home": "CHI",
+      "actual_total": 34,
+      "t1_total": 45.486297,
+      "t2_total": 38.128584,
+      "gap": -7.357713,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.041667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-3",
+      "corpus_verification": "Final score read from the official Week 3 schedule page",
+      "t1_error_abs": 11.486297,
+      "t2_error_abs": 4.1285842293906825,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 4,
+      "kickoff_date_et": "2026-10-01",
+      "slot": "TNF",
+      "away": "PIT",
+      "home": "CLE",
+      "actual_total": 51,
+      "t1_total": 42.934916,
+      "t2_total": 37.170251,
+      "gap": -5.764665,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 19.166667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-4",
+      "corpus_verification": "Final score read from the official Week 4 schedule page",
+      "t1_error_abs": 8.065083999999999,
+      "t2_error_abs": 13.829749103942653,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 4,
+      "kickoff_date_et": "2026-10-04",
+      "slot": "Early",
+      "away": "IND",
+      "home": "WAS",
+      "actual_total": 43,
+      "t1_total": 46.898857,
+      "t2_total": 39.864695,
+      "gap": -7.034162,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 27.25,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-4",
+      "corpus_verification": "Final score read from the official Week 4 schedule page",
+      "t1_error_abs": 3.8988569999999996,
+      "t2_error_abs": 3.1353046594982104,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 4,
+      "kickoff_date_et": "2026-10-04",
+      "slot": "Early",
+      "away": "TEN",
+      "home": "BAL",
+      "actual_total": 42,
+      "t1_total": 45.846552,
+      "t2_total": 38.781362,
+      "gap": -7.06519,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 24.0,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-4",
+      "corpus_verification": "Final score read from the official Week 4 schedule page",
+      "t1_error_abs": 3.8465520000000026,
+      "t2_error_abs": 3.218637992831539,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 4,
+      "kickoff_date_et": "2026-10-04",
+      "slot": "Early",
+      "away": "NE",
+      "home": "BUF",
+      "actual_total": 55,
+      "t1_total": 45.916898,
+      "t2_total": 38.128584,
+      "gap": -7.788314,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.041667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-4",
+      "corpus_verification": "Final score read from the official Week 4 schedule page",
+      "t1_error_abs": 9.083101999999997,
+      "t2_error_abs": 16.871415770609318,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 4,
+      "kickoff_date_et": "2026-10-04",
+      "slot": "Early",
+      "away": "NYJ",
+      "home": "CHI",
+      "actual_total": 35,
+      "t1_total": 43.555932,
+      "t2_total": 38.420251,
+      "gap": -5.135681,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.916667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-4",
+      "corpus_verification": "Final score read from the official Week 4 schedule page",
+      "t1_error_abs": 8.555931999999999,
+      "t2_error_abs": 3.420250896057347,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 4,
+      "kickoff_date_et": "2026-10-04",
+      "slot": "Early",
+      "away": "JAX",
+      "home": "CIN",
+      "actual_total": 39,
+      "t1_total": 47.132739,
+      "t2_total": 38.531362,
+      "gap": -8.601377,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 23.25,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-4",
+      "corpus_verification": "Final score read from the official Week 4 schedule page",
+      "t1_error_abs": 8.132739,
+      "t2_error_abs": 0.46863799283153895,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 4,
+      "kickoff_date_et": "2026-10-04",
+      "slot": "Early",
+      "away": "DAL",
+      "home": "HOU",
+      "actual_total": 64,
+      "t1_total": 47.71567,
+      "t2_total": 39.142473,
+      "gap": -8.573197,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 25.083333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-4",
+      "corpus_verification": "Final score read from the official Week 4 schedule page",
+      "t1_error_abs": 16.284329999999997,
+      "t2_error_abs": 24.857526881720432,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 4,
+      "kickoff_date_et": "2026-10-04",
+      "slot": "Early",
+      "away": "AZ",
+      "home": "NYG",
+      "actual_total": 60,
+      "t1_total": 44.339109,
+      "t2_total": 38.031362,
+      "gap": -6.307747,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 21.75,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-4",
+      "corpus_verification": "Final score read from the official Week 4 schedule page",
+      "t1_error_abs": 15.660891,
+      "t2_error_abs": 21.96863799283154,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 4,
+      "kickoff_date_et": "2026-10-04",
+      "slot": "Early",
+      "away": "LA",
+      "home": "PHI",
+      "actual_total": 44,
+      "t1_total": 45.84447,
+      "t2_total": 38.336918,
+      "gap": -7.507552,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.666667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-4",
+      "corpus_verification": "Final score read from the official Week 4 schedule page",
+      "t1_error_abs": 1.8444700000000012,
+      "t2_error_abs": 5.663082437275989,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 4,
+      "kickoff_date_et": "2026-10-04",
+      "slot": "Early",
+      "away": "GB",
+      "home": "TB",
+      "actual_total": 31,
+      "t1_total": 46.693141,
+      "t2_total": 38.003584,
+      "gap": -8.689557,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 21.666667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-4",
+      "corpus_verification": "Final score read from the official Week 4 schedule page",
+      "t1_error_abs": 15.693140999999997,
+      "t2_error_abs": 7.0035842293906825,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 4,
+      "kickoff_date_et": "2026-10-04",
+      "slot": "Late",
+      "away": "MIA",
+      "home": "MIN",
+      "actual_total": 25,
+      "t1_total": 46.23182,
+      "t2_total": 37.253584,
+      "gap": -8.978236,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 19.416667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-4",
+      "corpus_verification": "Final score read from the official Week 4 schedule page",
+      "t1_error_abs": 21.23182,
+      "t2_error_abs": 12.253584229390682,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 4,
+      "kickoff_date_et": "2026-10-04",
+      "slot": "Late",
+      "away": "KC",
+      "home": "LV",
+      "actual_total": 57,
+      "t1_total": 45.907221,
+      "t2_total": 37.55914,
+      "gap": -8.348081,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 20.333333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-4",
+      "corpus_verification": "Final score read from the official Week 4 schedule page",
+      "t1_error_abs": 11.092779,
+      "t2_error_abs": 19.44086021505376,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 4,
+      "kickoff_date_et": "2026-10-04",
+      "slot": "Late",
+      "away": "LAC",
+      "home": "SEA",
+      "actual_total": 53,
+      "t1_total": 46.447479,
+      "t2_total": 37.475806,
+      "gap": -8.971673,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 20.083333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-4",
+      "corpus_verification": "Final score read from the official Week 4 schedule page",
+      "t1_error_abs": 6.552520999999999,
+      "t2_error_abs": 15.524193548387096,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 4,
+      "kickoff_date_et": "2026-10-04",
+      "slot": "Late",
+      "away": "DEN",
+      "home": "SF",
+      "actual_total": 38,
+      "t1_total": 44.545838,
+      "t2_total": 38.531362,
+      "gap": -6.014476,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 23.25,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-4",
+      "corpus_verification": "Final score read from the official Week 4 schedule page",
+      "t1_error_abs": 6.545838000000003,
+      "t2_error_abs": 0.531362007168461,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 4,
+      "kickoff_date_et": "2026-10-04",
+      "slot": "SNF",
+      "away": "DET",
+      "home": "CAR",
+      "actual_total": 58,
+      "t1_total": 47.423703,
+      "t2_total": 38.989695,
+      "gap": -8.434008,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 24.625,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-4",
+      "corpus_verification": "Final score read from the official Week 4 schedule page",
+      "t1_error_abs": 10.576296999999997,
+      "t2_error_abs": 19.01030465949821,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 4,
+      "kickoff_date_et": "2026-10-05",
+      "slot": "MNF",
+      "away": "ATL",
+      "home": "NO",
+      "actual_total": 69,
+      "t1_total": 44.526878,
+      "t2_total": 38.364695,
+      "gap": -6.162183,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.75,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-4",
+      "corpus_verification": "Final score read from the official Week 4 schedule page",
+      "t1_error_abs": 24.473121999999996,
+      "t2_error_abs": 30.63530465949821,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 5,
+      "kickoff_date_et": "2026-10-08",
+      "slot": "TNF",
+      "away": "TB",
+      "home": "DAL",
+      "actual_total": 40,
+      "t1_total": 49.161255,
+      "t2_total": 38.795251,
+      "gap": -10.366004,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 24.041667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-5",
+      "corpus_verification": "Final score read from the official Week 5 schedule page",
+      "t1_error_abs": 9.161254999999997,
+      "t2_error_abs": 1.2047491039426532,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 5,
+      "kickoff_date_et": "2026-10-11",
+      "slot": "Early",
+      "away": "PHI",
+      "home": "JAX",
+      "actual_total": 36,
+      "t1_total": 45.933447,
+      "t2_total": 37.43414,
+      "gap": -8.499307,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 19.958333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-5",
+      "corpus_verification": "Final score read from the official Week 5 schedule page",
+      "t1_error_abs": 9.933447000000001,
+      "t2_error_abs": 1.4341397849462396,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 5,
+      "kickoff_date_et": "2026-10-11",
+      "slot": "Early",
+      "away": "CIN",
+      "home": "MIA",
+      "actual_total": 55,
+      "t1_total": 47.546423,
+      "t2_total": 37.767473,
+      "gap": -9.77895,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 20.958333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-5",
+      "corpus_verification": "Final score read from the official Week 5 schedule page",
+      "t1_error_abs": 7.453577000000003,
+      "t2_error_abs": 17.232526881720432,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 5,
+      "kickoff_date_et": "2026-10-11",
+      "slot": "Early",
+      "away": "LV",
+      "home": "NE",
+      "actual_total": 62,
+      "t1_total": 44.319477,
+      "t2_total": 37.878584,
+      "gap": -6.440893,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 21.291667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-5",
+      "corpus_verification": "Final score read from the official Week 5 schedule page",
+      "t1_error_abs": 17.680523,
+      "t2_error_abs": 24.121415770609318,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 5,
+      "kickoff_date_et": "2026-10-11",
+      "slot": "Early",
+      "away": "MIN",
+      "home": "NO",
+      "actual_total": 36,
+      "t1_total": 44.895233,
+      "t2_total": 37.975806,
+      "gap": -6.919427,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 21.583333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-5",
+      "corpus_verification": "Final score read from the official Week 5 schedule page",
+      "t1_error_abs": 8.895232999999998,
+      "t2_error_abs": 1.975806451612904,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 5,
+      "kickoff_date_et": "2026-10-11",
+      "slot": "Early",
+      "away": "CLE",
+      "home": "NYJ",
+      "actual_total": 29,
+      "t1_total": 43.277922,
+      "t2_total": 37.55914,
+      "gap": -5.718782,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 20.333333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-5",
+      "corpus_verification": "Final score read from the official Week 5 schedule page",
+      "t1_error_abs": 14.277921999999997,
+      "t2_error_abs": 8.55913978494624,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 5,
+      "kickoff_date_et": "2026-10-11",
+      "slot": "Early",
+      "away": "IND",
+      "home": "PIT",
+      "actual_total": 56,
+      "t1_total": 45.17311,
+      "t2_total": 38.378584,
+      "gap": -6.794526,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.791667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-5",
+      "corpus_verification": "Final score read from the official Week 5 schedule page",
+      "t1_error_abs": 10.826889999999999,
+      "t2_error_abs": 17.621415770609318,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 5,
+      "kickoff_date_et": "2026-10-11",
+      "slot": "Early",
+      "away": "HOU",
+      "home": "TEN",
+      "actual_total": 29,
+      "t1_total": 44.662979,
+      "t2_total": 38.323029,
+      "gap": -6.33995,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.625,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-5",
+      "corpus_verification": "Final score read from the official Week 5 schedule page",
+      "t1_error_abs": 15.662979,
+      "t2_error_abs": 9.323028673835125,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 5,
+      "kickoff_date_et": "2026-10-11",
+      "slot": "Early",
+      "away": "NYG",
+      "home": "WAS",
+      "actual_total": 54,
+      "t1_total": 43.536703,
+      "t2_total": 38.55914,
+      "gap": -4.977563,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 23.333333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-5",
+      "corpus_verification": "Final score read from the official Week 5 schedule page",
+      "t1_error_abs": 10.463296999999997,
+      "t2_error_abs": 15.44086021505376,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 5,
+      "kickoff_date_et": "2026-10-11",
+      "slot": "Early",
+      "away": "CHI",
+      "home": "GB",
+      "actual_total": 38,
+      "t1_total": 45.337252,
+      "t2_total": 38.475806,
+      "gap": -6.861446,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 23.083333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-5",
+      "corpus_verification": "Final score read from the official Week 5 schedule page",
+      "t1_error_abs": 7.337251999999999,
+      "t2_error_abs": 0.4758064516129039,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 5,
+      "kickoff_date_et": "2026-10-11",
+      "slot": "Late",
+      "away": "DEN",
+      "home": "LAC",
+      "actual_total": 40,
+      "t1_total": 44.642881,
+      "t2_total": 37.086918,
+      "gap": -7.555963,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 18.916667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-5",
+      "corpus_verification": "Final score read from the official Week 5 schedule page",
+      "t1_error_abs": 4.642881000000003,
+      "t2_error_abs": 2.913082437275989,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 5,
+      "kickoff_date_et": "2026-10-11",
+      "slot": "Late",
+      "away": "DET",
+      "home": "AZ",
+      "actual_total": 66,
+      "t1_total": 49.190359,
+      "t2_total": 39.475806,
+      "gap": -9.714553,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 26.083333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-5",
+      "corpus_verification": "Final score read from the official Week 5 schedule page",
+      "t1_error_abs": 16.809641,
+      "t2_error_abs": 26.524193548387096,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 5,
+      "kickoff_date_et": "2026-10-11",
+      "slot": "Late",
+      "away": "SF",
+      "home": "SEA",
+      "actual_total": 61,
+      "t1_total": 46.350436,
+      "t2_total": 37.906362,
+      "gap": -8.444074,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 21.375,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-5",
+      "corpus_verification": "Final score read from the official Week 5 schedule page",
+      "t1_error_abs": 14.649563999999998,
+      "t2_error_abs": 23.09363799283154,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 5,
+      "kickoff_date_et": "2026-10-11",
+      "slot": "SNF",
+      "away": "BAL",
+      "home": "ATL",
+      "actual_total": 53,
+      "t1_total": 46.096507,
+      "t2_total": 39.142473,
+      "gap": -6.954034,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 25.083333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-5",
+      "corpus_verification": "Final score read from the official Week 5 schedule page",
+      "t1_error_abs": 6.903492999999997,
+      "t2_error_abs": 13.857526881720432,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 5,
+      "kickoff_date_et": "2026-10-12",
+      "slot": "MNF",
+      "away": "BUF",
+      "home": "LA",
+      "actual_total": 71,
+      "t1_total": 47.212383,
+      "t2_total": 38.80914,
+      "gap": -8.403243,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 24.083333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-5",
+      "corpus_verification": "Final score read from the official Week 5 schedule page",
+      "t1_error_abs": 23.787616999999997,
+      "t2_error_abs": 32.19086021505376,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 6,
+      "kickoff_date_et": "2026-10-15",
+      "slot": "TNF",
+      "away": "SEA",
+      "home": "DEN",
+      "actual_total": 31,
+      "t1_total": 44.507659,
+      "t2_total": 37.517473,
+      "gap": -6.990186,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 20.208333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-6",
+      "corpus_verification": "Final score read from the official Week 6 schedule page",
+      "t1_error_abs": 13.507658999999997,
+      "t2_error_abs": 6.517473118279568,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 6,
+      "kickoff_date_et": "2026-10-18",
+      "slot": "Early",
+      "away": "HOU",
+      "home": "JAX",
+      "actual_total": 65,
+      "t1_total": 44.681728,
+      "t2_total": 38.156362,
+      "gap": -6.525366,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.125,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-6",
+      "corpus_verification": "Final score read from the official Week 6 schedule page",
+      "t1_error_abs": 20.318272,
+      "t2_error_abs": 26.84363799283154,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 6,
+      "kickoff_date_et": "2026-10-18",
+      "slot": "Early",
+      "away": "CHI",
+      "home": "ATL",
+      "actual_total": 54,
+      "t1_total": 45.002631,
+      "t2_total": 38.100806,
+      "gap": -6.901825,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 21.958333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-6",
+      "corpus_verification": "Final score read from the official Week 6 schedule page",
+      "t1_error_abs": 8.997368999999999,
+      "t2_error_abs": 15.899193548387096,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 6,
+      "kickoff_date_et": "2026-10-18",
+      "slot": "Early",
+      "away": "BAL",
+      "home": "CLE",
+      "actual_total": 23,
+      "t1_total": 45.140142,
+      "t2_total": 38.531362,
+      "gap": -6.60878,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 23.25,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-6",
+      "corpus_verification": "Final score read from the official Week 6 schedule page",
+      "t1_error_abs": 22.140141999999997,
+      "t2_error_abs": 15.531362007168461,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 6,
+      "kickoff_date_et": "2026-10-18",
+      "slot": "Early",
+      "away": "TEN",
+      "home": "IND",
+      "actual_total": 46,
+      "t1_total": 46.71286,
+      "t2_total": 38.350806,
+      "gap": -8.362054,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.708333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-6",
+      "corpus_verification": "Final score read from the official Week 6 schedule page",
+      "t1_error_abs": 0.7128599999999992,
+      "t2_error_abs": 7.649193548387096,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 6,
+      "kickoff_date_et": "2026-10-18",
+      "slot": "Early",
+      "away": "NYJ",
+      "home": "NE",
+      "actual_total": 45,
+      "t1_total": 42.618619,
+      "t2_total": 37.503584,
+      "gap": -5.115035,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 20.166667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-6",
+      "corpus_verification": "Final score read from the official Week 6 schedule page",
+      "t1_error_abs": 2.3813809999999975,
+      "t2_error_abs": 7.4964157706093175,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 6,
+      "kickoff_date_et": "2026-10-18",
+      "slot": "Early",
+      "away": "NO",
+      "home": "NYG",
+      "actual_total": 61,
+      "t1_total": 42.446553,
+      "t2_total": 38.711918,
+      "gap": -3.734635,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 23.791667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-6",
+      "corpus_verification": "Final score read from the official Week 6 schedule page",
+      "t1_error_abs": 18.553447,
+      "t2_error_abs": 22.28808243727599,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 6,
+      "kickoff_date_et": "2026-10-18",
+      "slot": "Early",
+      "away": "CAR",
+      "home": "PHI",
+      "actual_total": 39,
+      "t1_total": 45.136445,
+      "t2_total": 38.30914,
+      "gap": -6.827305,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.583333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-6",
+      "corpus_verification": "Final score read from the official Week 6 schedule page",
+      "t1_error_abs": 6.136445000000002,
+      "t2_error_abs": 0.6908602150537604,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 6,
+      "kickoff_date_et": "2026-10-18",
+      "slot": "Early",
+      "away": "PIT",
+      "home": "TB",
+      "actual_total": 45,
+      "t1_total": 44.568814,
+      "t2_total": 37.892473,
+      "gap": -6.676341,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 21.333333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-6",
+      "corpus_verification": "Final score read from the official Week 6 schedule page",
+      "t1_error_abs": 0.43118599999999674,
+      "t2_error_abs": 7.107526881720432,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 6,
+      "kickoff_date_et": "2026-10-18",
+      "slot": "Late",
+      "away": "AZ",
+      "home": "LA",
+      "actual_total": 34,
+      "t1_total": 46.099252,
+      "t2_total": 39.43414,
+      "gap": -6.665112,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 25.958333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-6",
+      "corpus_verification": "Final score read from the official Week 6 schedule page",
+      "t1_error_abs": 12.099252,
+      "t2_error_abs": 5.43413978494624,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 6,
+      "kickoff_date_et": "2026-10-18",
+      "slot": "Late",
+      "away": "LAC",
+      "home": "KC",
+      "actual_total": 28,
+      "t1_total": 46.103918,
+      "t2_total": 37.573029,
+      "gap": -8.530889,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 20.375,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-6",
+      "corpus_verification": "Final score read from the official Week 6 schedule page",
+      "t1_error_abs": 18.103918,
+      "t2_error_abs": 9.573028673835125,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 6,
+      "kickoff_date_et": "2026-10-18",
+      "slot": "Late",
+      "away": "BUF",
+      "home": "LV",
+      "actual_total": 63,
+      "t1_total": 47.786725,
+      "t2_total": 39.600806,
+      "gap": -8.185919,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 26.458333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-6",
+      "corpus_verification": "Final score read from the official Week 6 schedule page",
+      "t1_error_abs": 15.213275000000003,
+      "t2_error_abs": 23.399193548387096,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 6,
+      "kickoff_date_et": "2026-10-18",
+      "slot": "SNF",
+      "away": "DAL",
+      "home": "GB",
+      "actual_total": 36,
+      "t1_total": 48.818344,
+      "t2_total": 38.55914,
+      "gap": -10.259204,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 23.333333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-6",
+      "corpus_verification": "Final score read from the official Week 6 schedule page",
+      "t1_error_abs": 12.818344000000003,
+      "t2_error_abs": 2.5591397849462396,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 6,
+      "kickoff_date_et": "2026-10-19",
+      "slot": "MNF",
+      "away": "WAS",
+      "home": "SF",
+      "actual_total": 40,
+      "t1_total": 45.970843,
+      "t2_total": 38.670251,
+      "gap": -7.300592,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 23.666667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-6",
+      "corpus_verification": "Final score read from the official Week 6 schedule page",
+      "t1_error_abs": 5.970843000000002,
+      "t2_error_abs": 1.3297491039426532,
+      "block": "train"
+    },
+    {
+      "season": 2026,
+      "week": 7,
+      "kickoff_date_et": "2026-10-22",
+      "slot": "TNF",
+      "away": "NE",
+      "home": "CHI",
+      "actual_total": 54,
+      "t1_total": 43.386962,
+      "t2_total": 37.975806,
+      "gap": -5.411156,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 21.583333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-7",
+      "corpus_verification": "Final score read from the official Week 7 schedule page",
+      "t1_error_abs": 10.613038000000003,
+      "t2_error_abs": 16.024193548387096,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 7,
+      "kickoff_date_et": "2026-10-25",
+      "slot": "Early",
+      "away": "PIT",
+      "home": "NO",
+      "actual_total": 26,
+      "t1_total": 42.737174,
+      "t2_total": 39.045251,
+      "gap": -3.691923,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 24.791667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-7",
+      "corpus_verification": "Final score read from the official Week 7 schedule page",
+      "t1_error_abs": 16.737174000000003,
+      "t2_error_abs": 13.045250896057347,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 7,
+      "kickoff_date_et": "2026-10-25",
+      "slot": "Early",
+      "away": "SF",
+      "home": "ATL",
+      "actual_total": 49,
+      "t1_total": 46.034801,
+      "t2_total": 38.864695,
+      "gap": -7.170106,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 24.25,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-7",
+      "corpus_verification": "Final score read from the official Week 7 schedule page",
+      "t1_error_abs": 2.9651989999999984,
+      "t2_error_abs": 10.13530465949821,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 7,
+      "kickoff_date_et": "2026-10-25",
+      "slot": "Early",
+      "away": "CIN",
+      "home": "BAL",
+      "actual_total": 48,
+      "t1_total": 47.779466,
+      "t2_total": 38.600806,
+      "gap": -9.17866,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 23.458333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-7",
+      "corpus_verification": "Final score read from the official Week 7 schedule page",
+      "t1_error_abs": 0.22053400000000067,
+      "t2_error_abs": 9.399193548387096,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 7,
+      "kickoff_date_et": "2026-10-25",
+      "slot": "Early",
+      "away": "TB",
+      "home": "CAR",
+      "actual_total": 56,
+      "t1_total": 45.330311,
+      "t2_total": 38.503584,
+      "gap": -6.826727,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 23.166667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-7",
+      "corpus_verification": "Final score read from the official Week 7 schedule page",
+      "t1_error_abs": 10.669688999999998,
+      "t2_error_abs": 17.496415770609318,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 7,
+      "kickoff_date_et": "2026-10-25",
+      "slot": "Early",
+      "away": "NYG",
+      "home": "HOU",
+      "actual_total": 48,
+      "t1_total": 42.832608,
+      "t2_total": 38.600806,
+      "gap": -4.231802,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 23.458333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-7",
+      "corpus_verification": "Final score read from the official Week 7 schedule page",
+      "t1_error_abs": 5.1673919999999995,
+      "t2_error_abs": 9.399193548387096,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 7,
+      "kickoff_date_et": "2026-10-25",
+      "slot": "Early",
+      "away": "IND",
+      "home": "MIN",
+      "actual_total": 26,
+      "t1_total": 47.33117,
+      "t2_total": 37.725806,
+      "gap": -9.605364,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 20.833333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-7",
+      "corpus_verification": "Final score read from the official Week 7 schedule page",
+      "t1_error_abs": 21.33117,
+      "t2_error_abs": 11.725806451612904,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 7,
+      "kickoff_date_et": "2026-10-25",
+      "slot": "Early",
+      "away": "MIA",
+      "home": "NYJ",
+      "actual_total": 53,
+      "t1_total": 44.416766,
+      "t2_total": 37.503584,
+      "gap": -6.913182,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 20.166667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-7",
+      "corpus_verification": "Final score read from the official Week 7 schedule page",
+      "t1_error_abs": 8.583233999999997,
+      "t2_error_abs": 15.496415770609318,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 7,
+      "kickoff_date_et": "2026-10-25",
+      "slot": "Early",
+      "away": "CLE",
+      "home": "TEN",
+      "actual_total": 51,
+      "t1_total": 44.474666,
+      "t2_total": 36.906362,
+      "gap": -7.568304,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 18.375,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-7",
+      "corpus_verification": "Final score read from the official Week 7 schedule page",
+      "t1_error_abs": 6.525334000000001,
+      "t2_error_abs": 14.093637992831539,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 7,
+      "kickoff_date_et": "2026-10-25",
+      "slot": "Late",
+      "away": "DEN",
+      "home": "AZ",
+      "actual_total": 46,
+      "t1_total": 44.930472,
+      "t2_total": 38.323029,
+      "gap": -6.607443,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.625,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-7",
+      "corpus_verification": "Final score read from the official Week 7 schedule page",
+      "t1_error_abs": 1.0695279999999983,
+      "t2_error_abs": 7.676971326164875,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 7,
+      "kickoff_date_et": "2026-10-25",
+      "slot": "Late",
+      "away": "GB",
+      "home": "DET",
+      "actual_total": 37,
+      "t1_total": 48.786532,
+      "t2_total": 39.100806,
+      "gap": -9.685726,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 24.958333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-7",
+      "corpus_verification": "Final score read from the official Week 7 schedule page",
+      "t1_error_abs": 11.786532000000001,
+      "t2_error_abs": 2.100806451612904,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 7,
+      "kickoff_date_et": "2026-10-25",
+      "slot": "Late",
+      "away": "LA",
+      "home": "LV",
+      "actual_total": 56,
+      "t1_total": 45.614963,
+      "t2_total": 39.073029,
+      "gap": -6.541934,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 24.875,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-7",
+      "corpus_verification": "Final score read from the official Week 7 schedule page",
+      "t1_error_abs": 10.385036999999997,
+      "t2_error_abs": 16.926971326164875,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 7,
+      "kickoff_date_et": "2026-10-25",
+      "slot": "SNF",
+      "away": "KC",
+      "home": "SEA",
+      "actual_total": 23,
+      "t1_total": 45.968697,
+      "t2_total": 37.989695,
+      "gap": -7.979002,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 21.625,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-7",
+      "corpus_verification": "Final score read from the official Week 7 schedule page",
+      "t1_error_abs": 22.968697,
+      "t2_error_abs": 14.989695340501797,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 7,
+      "kickoff_date_et": "2026-10-26",
+      "slot": "MNF",
+      "away": "DAL",
+      "home": "PHI",
+      "actual_total": 59,
+      "t1_total": 48.967389,
+      "t2_total": 38.461918,
+      "gap": -10.505471,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 23.041667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-7",
+      "corpus_verification": "Final score read from the official Week 7 schedule page",
+      "t1_error_abs": 10.032611000000003,
+      "t2_error_abs": 20.53808243727599,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 8,
+      "kickoff_date_et": "2026-10-29",
+      "slot": "TNF",
+      "away": "CAR",
+      "home": "GB",
+      "actual_total": 46,
+      "t1_total": 44.9874,
+      "t2_total": 38.461918,
+      "gap": -6.525482,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 23.041667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-8",
+      "corpus_verification": "Final score read from the official Week 8 schedule page",
+      "t1_error_abs": 1.012599999999999,
+      "t2_error_abs": 7.538082437275989,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 8,
+      "kickoff_date_et": "2026-11-01",
+      "slot": "Early",
+      "away": "BAL",
+      "home": "BUF",
+      "actual_total": 46,
+      "t1_total": 47.948087,
+      "t2_total": 39.670251,
+      "gap": -8.277836,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 26.666667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-8",
+      "corpus_verification": "Final score read from the official Week 8 schedule page",
+      "t1_error_abs": 1.948087000000001,
+      "t2_error_abs": 6.329749103942653,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 8,
+      "kickoff_date_et": "2026-11-01",
+      "slot": "Early",
+      "away": "TEN",
+      "home": "CIN",
+      "actual_total": 79,
+      "t1_total": 47.11399,
+      "t2_total": 37.948029,
+      "gap": -9.165961,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 21.5,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-8",
+      "corpus_verification": "Final score read from the official Week 8 schedule page",
+      "t1_error_abs": 31.88601,
+      "t2_error_abs": 41.051971326164875,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 8,
+      "kickoff_date_et": "2026-11-01",
+      "slot": "Early",
+      "away": "AZ",
+      "home": "DAL",
+      "actual_total": 63,
+      "t1_total": 49.22217,
+      "t2_total": 39.545251,
+      "gap": -9.676919,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 26.291667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-8",
+      "corpus_verification": "Final score read from the official Week 8 schedule page",
+      "t1_error_abs": 13.777830000000002,
+      "t2_error_abs": 23.454749103942653,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 8,
+      "kickoff_date_et": "2026-11-01",
+      "slot": "Early",
+      "away": "MIN",
+      "home": "DET",
+      "actual_total": 34,
+      "t1_total": 48.820266,
+      "t2_total": 38.392473,
+      "gap": -10.427793,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.833333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-8",
+      "corpus_verification": "Final score read from the official Week 8 schedule page",
+      "t1_error_abs": 14.820265999999997,
+      "t2_error_abs": 4.392473118279568,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 8,
+      "kickoff_date_et": "2026-11-01",
+      "slot": "Early",
+      "away": "IND",
+      "home": "JAX",
+      "actual_total": 49,
+      "t1_total": 46.731609,
+      "t2_total": 38.114695,
+      "gap": -8.616914,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.0,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-8",
+      "corpus_verification": "Final score read from the official Week 8 schedule page",
+      "t1_error_abs": 2.268391000000001,
+      "t2_error_abs": 10.885304659498203,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 8,
+      "kickoff_date_et": "2026-11-01",
+      "slot": "Early",
+      "away": "LV",
+      "home": "NYJ",
+      "actual_total": 71,
+      "t1_total": 44.488447,
+      "t2_total": 39.031362,
+      "gap": -5.457085,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 24.75,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-8",
+      "corpus_verification": "Final score read from the official Week 8 schedule page",
+      "t1_error_abs": 26.511553,
+      "t2_error_abs": 31.96863799283154,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 8,
+      "kickoff_date_et": "2026-11-01",
+      "slot": "Early",
+      "away": "CLE",
+      "home": "PIT",
+      "actual_total": 33,
+      "t1_total": 42.934916,
+      "t2_total": 37.628584,
+      "gap": -5.306332,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 20.541667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-8",
+      "corpus_verification": "Final score read from the official Week 8 schedule page",
+      "t1_error_abs": 9.934916000000001,
+      "t2_error_abs": 4.6285842293906825,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 8,
+      "kickoff_date_et": "2026-11-01",
+      "slot": "Early",
+      "away": "ATL",
+      "home": "TB",
+      "actual_total": 16,
+      "t1_total": 46.358519,
+      "t2_total": 38.614695,
+      "gap": -7.743824,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 23.5,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-8",
+      "corpus_verification": "Final score read from the official Week 8 schedule page",
+      "t1_error_abs": 30.358519,
+      "t2_error_abs": 22.61469534050179,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 8,
+      "kickoff_date_et": "2026-11-01",
+      "slot": "Late",
+      "away": "LAC",
+      "home": "LA",
+      "actual_total": 33,
+      "t1_total": 45.81166,
+      "t2_total": 38.225806,
+      "gap": -7.585854,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.333333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-8",
+      "corpus_verification": "Final score read from the official Week 8 schedule page",
+      "t1_error_abs": 12.811660000000003,
+      "t2_error_abs": 5.225806451612904,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 8,
+      "kickoff_date_et": "2026-11-01",
+      "slot": "Late",
+      "away": "KC",
+      "home": "DEN",
+      "actual_total": 52,
+      "t1_total": 44.164099,
+      "t2_total": 37.586918,
+      "gap": -6.577181,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 20.416667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-8",
+      "corpus_verification": "Final score read from the official Week 8 schedule page",
+      "t1_error_abs": 7.835901,
+      "t2_error_abs": 14.413082437275989,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 8,
+      "kickoff_date_et": "2026-11-01",
+      "slot": "Late",
+      "away": "NE",
+      "home": "MIA",
+      "actual_total": 43,
+      "t1_total": 44.247797,
+      "t2_total": 38.211918,
+      "gap": -6.035879,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.291667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-8",
+      "corpus_verification": "Final score read from the official Week 8 schedule page",
+      "t1_error_abs": 1.2477969999999985,
+      "t2_error_abs": 4.788082437275989,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 8,
+      "kickoff_date_et": "2026-11-01",
+      "slot": "SNF",
+      "away": "PHI",
+      "home": "WAS",
+      "actual_total": 37,
+      "t1_total": 46.100695,
+      "t2_total": 38.55914,
+      "gap": -7.541555,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 23.333333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-8",
+      "corpus_verification": "Final score read from the official Week 8 schedule page",
+      "t1_error_abs": 9.100695000000002,
+      "t2_error_abs": 1.5591397849462396,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 8,
+      "kickoff_date_et": "2026-11-02",
+      "slot": "MNF",
+      "away": "CHI",
+      "home": "SEA",
+      "actual_total": 51,
+      "t1_total": 45.318266,
+      "t2_total": 37.68414,
+      "gap": -7.634126,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 20.708333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-8",
+      "corpus_verification": "Final score read from the official Week 8 schedule page",
+      "t1_error_abs": 5.681733999999999,
+      "t2_error_abs": 13.31586021505376,
+      "block": "validation"
+    },
+    {
+      "season": 2026,
+      "week": 9,
+      "kickoff_date_et": "2026-11-05",
+      "slot": "TNF",
+      "away": "JAX",
+      "home": "BAL",
+      "actual_total": 43,
+      "t1_total": 45.865301,
+      "t2_total": 38.281362,
+      "gap": -7.583939,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.5,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-9",
+      "corpus_verification": "Final score read from the official Week 9 schedule page",
+      "t1_error_abs": 2.8653010000000023,
+      "t2_error_abs": 4.718637992831539,
+      "block": "holdout"
+    },
+    {
+      "season": 2026,
+      "week": 9,
+      "kickoff_date_et": "2026-11-08",
+      "slot": "Early",
+      "away": "CIN",
+      "home": "ATL",
+      "actual_total": 51,
+      "t1_total": 47.363945,
+      "t2_total": 39.031362,
+      "gap": -8.332583,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 24.75,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-9",
+      "corpus_verification": "Final score read from the official Week 9 schedule page",
+      "t1_error_abs": 3.636054999999999,
+      "t2_error_abs": 11.968637992831539,
+      "block": "holdout"
+    },
+    {
+      "season": 2026,
+      "week": 9,
+      "kickoff_date_et": "2026-11-08",
+      "slot": "Early",
+      "away": "DEN",
+      "home": "CAR",
+      "actual_total": 47,
+      "t1_total": 43.163816,
+      "t2_total": 38.253584,
+      "gap": -4.910232,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.416667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-9",
+      "corpus_verification": "Final score read from the official Week 9 schedule page",
+      "t1_error_abs": 3.836184000000003,
+      "t2_error_abs": 8.746415770609318,
+      "block": "holdout"
+    },
+    {
+      "season": 2026,
+      "week": 9,
+      "kickoff_date_et": "2026-11-08",
+      "slot": "Early",
+      "away": "DAL",
+      "home": "IND",
+      "actual_total": 50,
+      "t1_total": 49.765551,
+      "t2_total": 38.878584,
+      "gap": -10.886967,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 24.291667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-9",
+      "corpus_verification": "Final score read from the official Week 9 schedule page",
+      "t1_error_abs": 0.2344489999999979,
+      "t2_error_abs": 11.121415770609318,
+      "block": "holdout"
+    },
+    {
+      "season": 2026,
+      "week": 9,
+      "kickoff_date_et": "2026-11-08",
+      "slot": "Early",
+      "away": "NYJ",
+      "home": "KC",
+      "actual_total": 47,
+      "t1_total": 44.206363,
+      "t2_total": 38.350806,
+      "gap": -5.855557,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.708333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-9",
+      "corpus_verification": "Final score read from the official Week 9 schedule page",
+      "t1_error_abs": 2.793636999999997,
+      "t2_error_abs": 8.649193548387096,
+      "block": "holdout"
+    },
+    {
+      "season": 2026,
+      "week": 9,
+      "kickoff_date_et": "2026-11-08",
+      "slot": "Early",
+      "away": "DET",
+      "home": "MIA",
+      "actual_total": 28,
+      "t1_total": 48.634389,
+      "t2_total": 38.836918,
+      "gap": -9.797471,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 24.166667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-9",
+      "corpus_verification": "Final score read from the official Week 9 schedule page",
+      "t1_error_abs": 20.634389,
+      "t2_error_abs": 10.836917562724011,
+      "block": "holdout"
+    },
+    {
+      "season": 2026,
+      "week": 9,
+      "kickoff_date_et": "2026-11-08",
+      "slot": "Early",
+      "away": "CLE",
+      "home": "NO",
+      "actual_total": 45,
+      "t1_total": 43.570513,
+      "t2_total": 38.017473,
+      "gap": -5.55304,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 21.708333,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-9",
+      "corpus_verification": "Final score read from the official Week 9 schedule page",
+      "t1_error_abs": 1.4294870000000017,
+      "t2_error_abs": 6.982526881720432,
+      "block": "holdout"
+    },
+    {
+      "season": 2026,
+      "week": 9,
+      "kickoff_date_et": "2026-11-08",
+      "slot": "Early",
+      "away": "NYG",
+      "home": "PHI",
+      "actual_total": 30,
+      "t1_total": 44.084328,
+      "t2_total": 38.073029,
+      "gap": -6.011299,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 21.875,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-9",
+      "corpus_verification": "Final score read from the official Week 9 schedule page",
+      "t1_error_abs": 14.084328,
+      "t2_error_abs": 8.073028673835125,
+      "block": "holdout"
+    },
+    {
+      "season": 2026,
+      "week": 9,
+      "kickoff_date_et": "2026-11-08",
+      "slot": "Early",
+      "away": "LA",
+      "home": "WAS",
+      "actual_total": 33,
+      "t1_total": 45.296846,
+      "t2_total": 38.961918,
+      "gap": -6.334928,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 24.541667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-9",
+      "corpus_verification": "Final score read from the official Week 9 schedule page",
+      "t1_error_abs": 12.296846000000002,
+      "t2_error_abs": 5.961917562724011,
+      "block": "holdout"
+    },
+    {
+      "season": 2026,
+      "week": 9,
+      "kickoff_date_et": "2026-11-08",
+      "slot": "Late",
+      "away": "HOU",
+      "home": "LAC",
+      "actual_total": 66,
+      "t1_total": 45.36379,
+      "t2_total": 37.753584,
+      "gap": -7.610206,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 20.916667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-9",
+      "corpus_verification": "Final score read from the official Week 9 schedule page",
+      "t1_error_abs": 20.63621,
+      "t2_error_abs": 28.246415770609318,
+      "block": "holdout"
+    },
+    {
+      "season": 2026,
+      "week": 9,
+      "kickoff_date_et": "2026-11-08",
+      "slot": "Late",
+      "away": "LV",
+      "home": "SF",
+      "actual_total": 55,
+      "t1_total": 46.28896,
+      "t2_total": 40.128584,
+      "gap": -6.160376,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 28.041667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-9",
+      "corpus_verification": "Final score read from the official Week 9 schedule page",
+      "t1_error_abs": 8.711039999999997,
+      "t2_error_abs": 14.871415770609318,
+      "block": "holdout"
+    },
+    {
+      "season": 2026,
+      "week": 9,
+      "kickoff_date_et": "2026-11-08",
+      "slot": "Late",
+      "away": "GB",
+      "home": "NE",
+      "actual_total": 72,
+      "t1_total": 44.399939,
+      "t2_total": 38.239695,
+      "gap": -6.160244,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 22.375,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-9",
+      "corpus_verification": "Final score read from the official Week 9 schedule page",
+      "t1_error_abs": 27.600060999999997,
+      "t2_error_abs": 33.76030465949821,
+      "block": "holdout"
+    },
+    {
+      "season": 2026,
+      "week": 9,
+      "kickoff_date_et": "2026-11-08",
+      "slot": "Late",
+      "away": "AZ",
+      "home": "SEA",
+      "actual_total": 20,
+      "t1_total": 46.73507,
+      "t2_total": 39.364695,
+      "gap": -7.370375,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 25.75,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-9",
+      "corpus_verification": "Final score read from the official Week 9 schedule page",
+      "t1_error_abs": 26.73507,
+      "t2_error_abs": 19.36469534050179,
+      "block": "holdout"
+    },
+    {
+      "season": 2026,
+      "week": 9,
+      "kickoff_date_et": "2026-11-08",
+      "slot": "SNF",
+      "away": "TB",
+      "home": "CHI",
+      "actual_total": 51,
+      "t1_total": 45.680163,
+      "t2_total": 37.628584,
+      "gap": -8.051579,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 20.541667,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-9",
+      "corpus_verification": "Final score read from the official Week 9 schedule page",
+      "t1_error_abs": 5.319837,
+      "t2_error_abs": 13.371415770609318,
+      "block": "holdout"
+    },
+    {
+      "season": 2026,
+      "week": 9,
+      "kickoff_date_et": "2026-11-09",
+      "slot": "MNF",
+      "away": "BUF",
+      "home": "MIN",
+      "actual_total": 29,
+      "t1_total": 47.900921,
+      "t2_total": 37.989695,
+      "gap": -9.911226,
+      "t2_inputs": {
+        "home_obs": 6,
+        "away_obs": 6,
+        "form_mean_points": 21.625,
+        "league_level": 46.172043,
+        "shrink": 0.333333
+      },
+      "t1_inputs": {
+        "n_train": 1615,
+        "hfa": 1.744683,
+        "estimator": "ridge pace fit on six prior seasons"
+      },
+      "blank_reason": null,
+      "official": "https://www.nfl.com/schedules/2026/by-week/week-9",
+      "corpus_verification": "Final score read from the official Week 9 schedule page",
+      "t1_error_abs": 18.900920999999997,
+      "t2_error_abs": 8.989695340501797,
+      "block": "holdout"
+    }
+  ]
+}
