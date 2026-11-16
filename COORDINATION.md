@@ -2934,7 +2934,6 @@ Two things the second rebase and a self-review turned up, both fixed on this bra
   rather than overwritten, CI runs the ledger, the aggregates and the pages but **never** the fit, and
   `forward-ledger/prospects.html` now prints the policy in its reproducibility table.
 
-
 ### Amendment 3 — `arena/5600e7eb-nfl3`, 2026-11-16 UTC (CI result, and a correction to what this session claimed)
 
 - **PR [#111](https://github.com/kanlerxz87-cyber/NFL3/pull/111)** → `main`. First run failed at
@@ -3094,3 +3093,52 @@ and the official Saturday roundup disagree about six players. This session does 
 **Scope restated after the rebase.** `matchup/**` only, plus one nav entry, one site-guide row and one
 card on `index.html`, one row and three commands in `README.md`, one paragraph in `EXECUTIVE_SUMMARY.md`,
 two steps in `.github/workflows/pages.yml`, and appended entries in this board.
+
+### Publication record — `arena/5600e7eb-nfl3`, 2026-11-16 UTC
+
+- **Pull request [#111](https://github.com/kanlerxz87-cyber/NFL3/pull/111)** (`arena/5600e7eb-nfl3` → `main`) —
+  **MERGED** with a merge commit at `2026-11-16T15:34:24Z`; main head after merge included `0608629`. Merged without
+  waiting for user review, per the standing instruction; the pre-merge gate was CI, not a person.
+- **Pipeline for the PR head:** `Validate and deploy GitHub Pages` run
+  [43897563984](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43897563984) — **success**, `validate` job only
+  (`deploy` is skipped for pull requests). Both steps added here ran green in CI: *Forward ledger — verified results
+  feed, cross-checks, pre-registration order, row citations* and *Root questions and suggestions pages match the
+  merged register*. The first run of this PR
+  ([43896627892](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43896627892)) failed on
+  *Price-store policy, ingestion tests, deterministic page build and integrity check* — a step this branch does not
+  touch, red because `pricing.html` and `corpus.html` were stale against a rebuild on `main`; fixed here by
+  regenerating both (FL-18), which is what unblocked every PR after it, not only this one.
+- **Pipeline on `main`:** run
+  [43897788890](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43897788890) — **success**, `validate` and
+  `deploy` both green.
+- **Pages deployment:** the deploy job published to `github.com/kanlerxz87-cyber/NFL3` Pages (source branch `main`,
+  legacy build). `GET /repos/…/pages/builds` shows successive builds for `6d7a243d8` and `0d5ae495c` (main tip at the
+  time of checking) with `status: building` and no error, following the built state that carried this merge.
+- **Live verification (read through the fetch tool after the merge, not from the local tree):**
+  `https://kanlerxz87-cyber.github.io/NFL3/forward-ledger/index.html` renders 150 fixtures / 149 graded / 1 unplayed,
+  160 of 160 standings field checks, 39 originated rows, 0 rows eligible for ranking, and the eight-row page guide
+  whose "Committed source" links resolve under `forward-ledger/data/`.
+  `https://kanlerxz87-cyber.github.io/NFL3/questions.html` renders the heading badge "65 blocking questions
+  unanswered", the four count tiles (100 / 67 / 86 / 55), and the blocking table with each row's official link —
+  Q-01 to the 2026 rulebook on operations.nfl.com, Q-02 to the Week 10 league report, Q-03 to a club depth chart,
+  Q-07 to `nfl.com/standings/`, and the register-only rows to the register itself, labelled as such rather than
+  dressed up as an official source.
+- **Pre-registration ordering as published on `main`:** the deployed overview page names
+  `2727781274be708135cfc4186dc640516323b884` (15:27:25Z) as the registration commit, and on `main` the first commit
+  touching `scripts/model.py`, `data/fit_diagnostics.json` and `data/prospects_2026_w11.csv` is `c212d3444`, which is
+  later. The gate asserts this from `git log` at build time in CI, where the checkout has full history.
+- **Final task status:** F1 done · F2 done · F3 done · F4 done (18 findings, 6 fixed in this pass) · F5 done. Claims on
+  `forward-ledger/**`, `suggestions.html`, `questions.html`, `questions/**`, `assets/site.js`,
+  `scripts/validate_site.py`, `index.html`, `pricing.html`, `corpus.html`, `EXECUTIVE_SUMMARY.md`,
+  `.github/workflows/pages.yml` and `COORDINATION.md` are **released**.
+- **Handed to other owners, not edited here:** the shared sidebar in `origination/scripts/common.py` still omits
+  `shadow-board/index.html` (FL-18 — the landing-page link was restored, the nav list is theirs); `corpus/**` owner
+  to decide whether the Washington at Dallas row re-registers the frozen corpus (FL-02); `results-verification/**`
+  owner to decide whether Week 10 belongs inside the pinned feed (its verifier hard-codes weeks 1–9);
+  `README.md` gains no row from this session because `arena/d37d5907-nfl3` has PR #105 open on that file —
+  `forward-ledger/index.html` deserves a nav row whenever their change lands.
+- **Conflicts during this pass:** `main` moved four times while this work was in flight (42, then 3, 15 and more
+  commits), so the branch was rebased each time. Every conflict was in `COORDINATION.md` and every one was resolved by
+  keeping both sides; one replayed commit became empty after its blank-line fix was already present and was dropped. No
+  other session's file was rewritten, and the only files outside this session's scope that changed are the two
+  generated pages in FL-18, regenerated by their own builders with no value altered.
