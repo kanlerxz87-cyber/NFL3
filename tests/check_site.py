@@ -164,8 +164,13 @@ for flag, required_links in required_flag_links.items():
         if phrase not in text:
             errors.append(f'review.html: {flag} row is missing the qualification {phrase!r}')
 
-if 'No strategy has passed eligibility gates or been approved for wagering.' in review:
-    errors.append('review.html: superseded no-results callout remains')
+for stale_callout in (
+    'No strategy has passed eligibility gates or been approved for wagering.',
+    'No current lines, injury assignments, projections, correlations, strategy returns or leaderboard winners are published.',
+    'This repository contains no collected market dataset, model, or verified strategy results.',
+):
+    if stale_callout in review:
+        errors.append(f'review.html: superseded no-results callout remains: {stale_callout}')
 for phrase in (
     'No strategy has demonstrated all prospective eligibility gates for live use',
     'Retrospective probabilities and scores are published for research',
@@ -180,6 +185,7 @@ for phrase in (
         errors.append(f'README.md: missing retrospective-origination caveat {phrase!r}')
 for phrase in (
     'one 2026 Week 10 injury/inactives pair', '15 designations uncovered',
+    'descriptive sample fractions', 'not forecasts of whether players will play',
     'raw_bytes_retained: false', 'reconstructed markup', 'not byte-exact NFL captures',
 ):
     if phrase not in readme:
