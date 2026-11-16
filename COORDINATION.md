@@ -2506,3 +2506,16 @@ Done in PR #92 (all append-only or inside `shadow-board/`, no other workspace's 
   *Fetch and verify release digests*, which also failed on PR #85 before this session began — a transient fetch of
   community release assets, unrelated to `shadow-board/`. `Validate and deploy GitHub Pages` is green for #88, #89
   and #92.
+
+## Claim — `arena/46fe1baa-nfl3` (session 46fe1baa), 2026-11-16 UTC
+
+Branch fixed by Arena: `arena/46fe1baa-nfl3` (base `main` at `e8877e0`). Scope is deliberately narrow; the rest of the open backlog is not claimed here.
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| V1 Week 11 venue register: all 13 fixtures, venue transcribed from the official NFL game-centre "Game Info" block, with the dated schedule announcement beside it (readiness F-2, F-3 partial) | in progress | `arena/46fe1baa-nfl3` | `venues/**` (new workspace) |
+| V2 Correct the three Week 10 Lions rows (Joseph, Mays, Reed) against the official injury report (readiness A17) | in progress | `arena/46fe1baa-nfl3` | `dashboard/data/injuries_2026_w10.csv`, regenerated `dashboard/*.html` |
+| V3 Readiness rows A17, F-2, F-3 status, and the readiness rebuild/test | in progress | `arena/46fe1baa-nfl3` | `readiness/data/readiness.csv`, generated `readiness.html`, `tests/test_readiness.py` |
+| V4 Integration: README workspace row, pages.yml validation steps for `venues/`, `COORDINATION.md` log | in progress | `arena/46fe1baa-nfl3` | `README.md` (one row), `.github/workflows/pages.yml` (two steps), this board |
+
+Not claimed (out of scope, logged as open): the 32-team roster/IR sweep (A24), the injury-report daily capture (A5/L9), the roster-copy mismatch and the origination determinism gate (see the flag entry this session), the per-team view (L12), the matchup matrix (A25), the public/private split (L11), the announced-starter field (A14).
