@@ -79,7 +79,15 @@ jobs:
       - name: Origination artifacts match a rebuild from committed inputs (drift alarm)
         run: |
           if [ -n "$(git status --porcelain -- origination/)" ]; then
+            echo "::group::git status (origination/)"
             git status --short -- origination/
+            echo "::endgroup::"
+            echo "::group::git diff --stat"
+            git diff --stat -- origination/ | tail -20
+            echo "::endgroup::"
+            echo "::group::first diff hunks"
+            git diff -- origination/ | head -120
+            echo "::endgroup::"
             echo "::error::origination/ differs from a rebuild of the committed inputs (or has an uncommitted snapshot). Run origination/scripts/build.py and commit the result."
             exit 1
           fi
