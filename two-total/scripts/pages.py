@@ -228,6 +228,9 @@ moves the number by a point; the interval spans zero comfortably.</p>
 <h2>What the gap column exposed</h2>
 {diagnosis_section()}
 
+<h2>Would closing the one blank row change the verdict?</h2>
+{sensitivity_section()}
+
 <h2>What this cannot tell you</h2>
 <div class="tw"><table><caption>Honest limits, stated before anyone reads a number as an edge.</caption>
 <thead><tr><th scope="col">Limit</th><th scope="col">Why it matters here</th><th scope="col">Source</th></tr></thead>
@@ -260,6 +263,39 @@ irregularity and every question that blocks a stronger answer is on
     page("index.html", "Every model total, twice", body,
          "One corpus, two total estimators, a gap column and a pre-registered collapse rule. "
          "Scored against official final totals only.")
+
+
+def sensitivity_section() -> str:
+    s = D.get("closure_sensitivity")
+    if not s:
+        return "<p class='para'>No corpus row is withheld, so there is nothing to close.</p>"
+    rows = []
+    for name in ("train", "validation", "holdout"):
+        b = s["per_block"][name]
+        rows.append(
+            f"<tr><td><b>{esc(name.title())}</b></td>"
+            f"<td class='num'>{b['n_before']} → {b['n_after']}</td>"
+            f"<td class='num'>{num(b['mae_t1_before'])} → {num(b['mae_t1_after'])}</td>"
+            f"<td class='num'>{num(b['mae_t2_before'])} → {num(b['mae_t2_after'])}</td>"
+            f"<td>{'no — this block decides nothing' if name == 'train' else 'no — the row is not in this block'}</td>"
+            f"<td><a class='source' href='{esc(s['official_source'])}' target='_blank' "
+            f"rel='noopener noreferrer'>official game centre &#8599;</a></td></tr>")
+    return f"""<div class="notice"><b>The one blank row is not a mystery any more, and this workspace still
+does not fill it.</b> The frozen corpus records WAS at DAL (week 2) as “Hidden Score”. On
+{s['read_first_hand']} this session read the official game centre and it publishes
+<b>{s['row']['away']} {s['official_total'] - 37} – {s['row']['home']} 37</b>, total
+<b>{s['official_total']}</b>, with quarter splits that sum to the published totals. The repository's own
+2026-11-15 capture already agreed. Filling the cell here would be a retrospective edit made after seeing
+both estimators' errors, which the pre-registration forbids — so the row stays excluded and the
+correction is requested of the corpus owner (question 2T-Q6). What the arithmetic shows is that the
+question is not load-bearing for the decision:</div>
+<div class="tw"><table><caption>What-if the withheld row were closed, computed from the published
+columns. Nothing here is written into a published estimator column.</caption>
+<thead><tr><th scope="col">Block</th><th class="num" scope="col">n before → after</th>
+<th class="num" scope="col">MAE T1 before → after</th><th class="num" scope="col">MAE T2 before → after</th>
+<th scope="col">Can it move the verdict?</th><th scope="col">Source</th></tr></thead>
+<tbody>{''.join(rows)}</tbody></table></div>
+<p class="para">{esc(s['reading'])} {esc(s['action'])}</p>"""
 
 
 def _mean_gap():

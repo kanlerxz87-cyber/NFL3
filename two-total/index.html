@@ -98,6 +98,24 @@ prediction, which is a diagnostic only — it is not a new published estimator.<
 <tbody><tr><td><b>T1</b></td><td class='num'>-0.11</td><td class='num'>14.14</td><td class='num'>1.69</td><td class='num'>0.1724</td><td class='num'>11.46</td><td class='num'>11.46</td><td><a class='source' href='https://www.nfl.com/schedules/2026/by-week/week-9' target='_blank' rel='noopener noreferrer'>official Week 9 schedule page &#8599;</a></td></tr><tr><td><b>T2</b></td><td class='num'>-7.46</td><td class='num'>14.31</td><td class='num'>0.67</td><td class='num'>0.0550</td><td class='num'>12.67</td><td class='num'>11.59</td><td><a class='source' href='https://www.nfl.com/schedules/2026/by-week/week-9' target='_blank' rel='noopener noreferrer'>official Week 9 schedule page &#8599;</a></td></tr></tbody></table></div>
 <p class="para">T2 prices 7.46 points below the realised total on average, while T1&#x27;s bias is -0.11. Subtracting that constant only takes T2 from MAE 12.67 to 11.59, so the bias is not the whole story: T2&#x27;s prediction spread is 0.67 points against a realised spread of 14.33, and its correlation with the realised total is 0.055 against 0.172 for T1. An estimator that varies by under a point cannot track a target that varies by fourteen. The cause is mechanical and is stated in the flagged table rather than repaired here: the registered T2 rule shrinks a mean of points-for and points-allowed toward a league level, and that mean sits near the league level by construction. Repairing it would be a new estimator, which the registration forbids after the fact.</p>
 
+<h2>Would closing the one blank row change the verdict?</h2>
+<div class="notice"><b>The one blank row is not a mystery any more, and this workspace still
+does not fill it.</b> The frozen corpus records WAS at DAL (week 2) as “Hidden Score”. On
+2026-11-16 this session read the official game centre and it publishes
+<b>WAS 20 – DAL 37</b>, total
+<b>57</b>, with quarter splits that sum to the published totals. The repository's own
+2026-11-15 capture already agreed. Filling the cell here would be a retrospective edit made after seeing
+both estimators' errors, which the pre-registration forbids — so the row stays excluded and the
+correction is requested of the corpus owner (question 2T-Q6). What the arithmetic shows is that the
+question is not load-bearing for the decision:</div>
+<div class="tw"><table><caption>What-if the withheld row were closed, computed from the published
+columns. Nothing here is written into a published estimator column.</caption>
+<thead><tr><th scope="col">Block</th><th class="num" scope="col">n before → after</th>
+<th class="num" scope="col">MAE T1 before → after</th><th class="num" scope="col">MAE T2 before → after</th>
+<th scope="col">Can it move the verdict?</th><th scope="col">Source</th></tr></thead>
+<tbody><tr><td><b>Train</b></td><td class='num'>92 → 93</td><td class='num'>11.62 → 11.58</td><td class='num'>12.43 → 12.49</td><td>no — this block decides nothing</td><td><a class='source' href='https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2' target='_blank' rel='noopener noreferrer'>official game centre &#8599;</a></td></tr><tr><td><b>Validation</b></td><td class='num'>28 → 28</td><td class='num'>11.01 → 11.01</td><td class='num'>13.26 → 13.26</td><td>no — the row is not in this block</td><td><a class='source' href='https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2' target='_blank' rel='noopener noreferrer'>official game centre &#8599;</a></td></tr><tr><td><b>Holdout</b></td><td class='num'>15 → 15</td><td class='num'>11.31 → 11.31</td><td class='num'>13.04 → 13.04</td><td>no — the row is not in this block</td><td><a class='source' href='https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2' target='_blank' rel='noopener noreferrer'>official game centre &#8599;</a></td></tr></tbody></table></div>
+<p class="para">The withheld row is in the train block, which the collapse rule does not use, so closing it cannot change the verdict; the arithmetic above shows the effect it would have had. NOT applied here: the pre-registration says the blank stays blank and is excluded, and filling it after seeing the estimators&#x27; errors would be the retrospective edit that rule forbids. Requested of the corpus owner as question 2T-Q6.</p>
+
 <h2>What this cannot tell you</h2>
 <div class="tw"><table><caption>Honest limits, stated before anyone reads a number as an edge.</caption>
 <thead><tr><th scope="col">Limit</th><th scope="col">Why it matters here</th><th scope="col">Source</th></tr></thead>
