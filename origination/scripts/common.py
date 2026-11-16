@@ -120,11 +120,34 @@ def _json_default(value):
     raise TypeError(f"not serialisable: {type(value).__name__}")
 
 
+CANON_DECIMALS = 9
+
+
+def _canonical(obj):
+    """Round floats to CANON_DECIMALS before writing.
+
+    Floating-point sums and powers can differ in the last one or two bits between platforms (a CI
+    runner and a developer machine produced 1.7178225370738218 and 1.7178225370738216 for the same
+    quantity). Written raw, that makes the committed artifact drift on a rebuild elsewhere. Rounding
+    only the written form to 9 decimals removes the platform noise and leaves every published value
+    at a precision far finer than any reported figure. In-memory arithmetic is not changed.
+    """
+    if isinstance(obj, float):
+        if obj != obj or obj in (float("inf"), float("-inf")):
+            return obj
+        return round(obj, CANON_DECIMALS)
+    if isinstance(obj, dict):
+        return {k: _canonical(v) for k, v in obj.items()}
+    if isinstance(obj, (list, tuple)):
+        return [_canonical(v) for v in obj]
+    return obj
+
+
 def write_json(name: str, payload) -> Path:
     DATA.mkdir(parents=True, exist_ok=True)
     path = DATA / name
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(payload, indent=1, sort_keys=False, default=_json_default) + "\n",
+    path.write_text(json.dumps(_canonical(payload), indent=1, sort_keys=False, default=_json_default) + "\n",
                     encoding="utf-8")
     return path
 
