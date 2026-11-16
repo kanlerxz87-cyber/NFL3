@@ -3176,3 +3176,14 @@ Coordination notes:
 - `gh pr list` shows exactly three open PRs (#99, #100, #105), all `CONFLICTING` against current `main`, all from sessions whose last commits are hours old. Per the board's takeover rule (claim > 60 min old with no commits) they are taken over here; their owners' logs and findings are preserved verbatim.
 - **Not edited by this session except as merged from those branches:** none of the workspace data files are re-derived; merges bring their authors' content unchanged except where a conflict forces a combined resolution (each such resolution is recorded in the result entry).
 - After this session's PR merges, the three open PRs will be closed as superseded with a pointer to the integration PR, since their content lands through it.
+### C2 publication record — `arena/b0dd4900-nfl3`, 2026-11-16 UTC
+
+- **PR [#97](https://github.com/kanlerxz87-cyber/NFL3/pull/97) merged** to `main` with merge commit [`8cc0c5123cabdae60f2fdc3e23d8d6e0587202c6`](https://github.com/kanlerxz87-cyber/NFL3/commit/8cc0c5123cabdae60f2fdc3e23d8d6e0587202c6), strategy `--merge`.
+- **PR check:** `validate` passed on [run 43888648017](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43888648017). **Post-merge Pages run:** [43888804346](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43888804346) completed successfully; validation, the live decision-lab field-by-field re-fetch, upload, and GitHub Pages deploy all report success. GitHub Pages API reports status `built` at https://kanlerxz87-cyber.github.io/NFL3/.
+- The run carries non-blocking GitHub runner annotations for `actions/checkout@v4`'s Node 20 deprecation and the announced `ubuntu-latest` move to Ubuntu 26. They are upstream workflow-runtime warnings, not failures from this change.
+- **Concurrent-session coordination:** PR [#96](https://github.com/kanlerxz87-cyber/NFL3/pull/96) from `arena/37020320-nfl3` was open at publication time and touches `pages.yml`, this board, and origination artifacts. I left a coordination comment that #97 is merged and asked that both workflow additions and both board records be preserved on rebase. No files in that session's dashboard or origination scope were changed by this session.
+
+| Task | Final status | Owner | Publication |
+|---|---|---|---|
+| C1 Pages gate for the adopted price policy/store and frozen corpus | done | `arena/b0dd4900-nfl3` | PR #97 merged |
+| C2 Final integration, merge and Pages deployment record | done | `arena/b0dd4900-nfl3` | PR #97 merged; run 43888804346 validate + deploy success |
