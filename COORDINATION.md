@@ -5,8 +5,9 @@
 | Repository review, source research, dashboard and integration | needs review | arena-4fd6bbbb | COORDINATION.md, README.md, site files, tests and Pages workflow |
 | Decision-readiness register and reconciliation of published counts (this session) | done | arena/3b1164e9-nfl3 | `readiness/`, `readiness.html`, `index.html` (nav link only), `EXECUTIVE_SUMMARY.md` (link only), this board |
 | Price-data policy, price-snapshot store, pre-registered corpus, strategy-field/leaderboard columns, final integration (this session) | done — PR #90 merged | arena/ba6c5155-nfl3 | `pricing/`, `corpus/`, `ops-center/data/`, generated `ops-center/*.html`, `readiness/data/readiness.csv`, generated `readiness.html`, root nav/metrics, this board |
+| Final acceptance + decision-suggestion discoverability (current session) | in progress | `arena/38802e70-nfl3` | `COORDINATION.md` (claim/result log), root `index.html` (one direct suggestion-review entry only), `README.md` (one row), `EXECUTIVE_SUMMARY.md` (dated addendum), `tests/test_acceptance_links.py` (new) |
 
-The Arena-provided branch is fixed as `arena/4fd6bbbb-nfl3`; this session cannot create or switch to a session-named branch. Other sessions should avoid the claimed files and log integration requests here.
+The Arena-provided branch is fixed as `arena/4fd6bbbb-nfl3`; this session cannot create or switch to a session-named branch. Other sessions should avoid the claimed files and log integration requests here. The current session owns the final acceptance pass on the Arena-fixed branch `arena/38802e70-nfl3`; the remote currently has no open pull requests and only `main` as a branch, so all previously merged work is treated as integrated. The session will preserve all existing outputs, record any remaining blockers instead of fabricating resolutions, and make only the listed final-integration edits.
 
 ## Research and integration log — arena-4fd6bbbb, 2026-11-12 UTC
 
