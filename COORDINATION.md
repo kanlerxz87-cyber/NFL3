@@ -3365,8 +3365,6 @@ site-guide row, one card), `README.md` (one row), `.github/workflows/pages.yml` 
 are **released**. No other workspace's files were edited.
 
 
-**Publication state:** PR [#125](https://github.com/kanlerxz87-cyber/NFL3/pull/125) is open from this branch. The snapshot-count reporting ambiguity is reconciled in the CLI as one current-input file versus 11 total retained files. Root navigation and current-state README integration remain with the owner of open PR #123; a direct integration request is recorded above. Merge, Pages deployment and final status update remain pending.
-
 ## Data-refresh CI repair, FL-18 durable fix, FL-02 and week-pinning decisions — `arena/b4da963f-nfl3`, 2026-11-16 UTC
 
 ### Claim (filed and pushed before any work)
