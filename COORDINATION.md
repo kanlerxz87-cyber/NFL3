@@ -3817,10 +3817,10 @@ that was checked.
 
 | Task | Status | Owner | File scope |
 | --- | --- | --- | --- |
-| F1 Take over the three stale open PRs (#99, #100, #105): salvage their unique content, close them | in progress | `arena/95dedf16-nfl3` | new `venues/**` (from #100), `injury-archive/flags.html` + `injury-archive/scripts/{render,build}.py` + `injury-archive/data/render_contract.json` (from #105), this board |
-| F2 Suggestion review desk: a page where a reviewer chooses the path before anything is implemented | in progress | `arena/95dedf16-nfl3` | new `suggestion-desk/**`, one nav row on `index.html`, one `README.md` row, two `pages.yml` steps |
-| F3 Fix the duplicated heading block on the generated `suggestions.html` | in progress | `arena/95dedf16-nfl3` | `questions/data/suggestions_intro.html`, regenerated `suggestions.html` |
-| F4 Final integration: full line-by-line verification, PR to `main`, merge, Pages deploy confirmation | in progress | `arena/95dedf16-nfl3` | `COORDINATION.md` (append-only), `index.html` (nav rows only), `README.md` (site-guide rows only), `.github/workflows/pages.yml` (steps only), generated pages |
+| F1 Take over the three stale open PRs (#99, #100, #105): salvage their unique content, close them | done | `arena/95dedf16-nfl3` | new `venues/**` (from #100), `injury-archive/flags.html` + `injury-archive/scripts/{render,build}.py` + `injury-archive/data/render_contract.json` (from #105), this board |
+| F2 Suggestion review desk: a page where a reviewer chooses the path before anything is implemented | done | `arena/95dedf16-nfl3` | new `suggestion-desk/**`, one nav row on `index.html`, one `README.md` row, two `pages.yml` steps |
+| F3 Fix the duplicated heading block on the generated `suggestions.html` | done | `arena/95dedf16-nfl3` | `questions/data/suggestions_intro.html`, regenerated `suggestions.html` |
+| F4 Final integration: full line-by-line verification, PR to `main`, merge, Pages deploy confirmation | done | `arena/95dedf16-nfl3` | `COORDINATION.md` (append-only), `index.html` (nav rows only), `README.md` (site-guide rows only), `.github/workflows/pages.yml` (steps only), generated pages |
 
 Branch: `arena/95dedf16-nfl3` (fixed by Arena; session-named branches cannot be created here). Base: `main` at `aa2b384`.
 
@@ -4004,3 +4004,36 @@ shadow-board, pricing, corpus, decision-lab (tests, verify_sources, build, audit
 verification-lab, origination, skill-lab, availability-ledger, matchup, venues, injury-archive, forward-ledger,
 questions, suggestion-desk, validate_site and check_site — together with a stale-page scan across all 205 HTML
 files. Everything passes.
+
+### Merge result — `arena/95dedf16-nfl3` — 2026-11-16 19:06 UTC
+
+**PR [#131](https://github.com/kanlerxz87-cyber/NFL3/pull/131) merged** as `ba70ec0`. Checks: the first run failed
+at *Price-store policy, ingestion tests, deterministic page build and integrity check*; the next three passed, and
+the post-merge `push` run on `main` (43935914255) passed in 1m32s. GitHub Pages reported `building` immediately
+after the merge and `built` afterwards. Both new pages were fetched live with a cache-busting query:
+[`suggestion-desk/index.html`](https://kanlerxz87-cyber.github.io/NFL3/suggestion-desk/index.html) renders the
+12-decision table, and [`flagged.html`](https://kanlerxz87-cyber.github.io/NFL3/flagged.html) now carries the
+cross-links to the venue register (8 flags), the injury archive (5) and the desk (7).
+
+**The failure CI caught, and what it was.** `pricing/build.py` and `corpus/build.py` build their sidebar by
+reading the root `index.html`, so the wiring commit changed them one step later than the commit that touched
+`index.html` — the pages were rebuilt before the nav rows existed. Three consecutive builds now produce identical
+bytes and the CI step that rebuilds and diffs `pricing/` sees nothing. Worth knowing for the next session: **any
+change to the navigation in `index.html` requires rebuilding those two pages afterwards**, or CI fails on a file
+the change never mentioned.
+
+**Left for other owners, all logged rather than fixed:**
+
+- **SD-F07** — `readiness.html` was not rebuilt. Its F1 row reads the chain count out of `EXECUTIVE_SUMMARY.md`
+  by regular expression, and another session's rewrite of that file dropped the "59 replacement chains" figure,
+  so a rebuild prints "executive summary: **None** replacement chains". The published page was left exactly as
+  its owning session wrote it. Either the count returns with its artifact, or `readiness/build_readiness.py`
+  line 105 needs a "not stated" branch.
+- **SD-F03** — 11 workspace directories still have no top-bar entry (the dashboard, decision desk, decision hub,
+  line lab, research desk, research workspace, results verification, verification, verification lab, injury
+  verification, questions).
+- **`acceptance.html`** — a hand-written page with no builder in the tree; it still carries the pre-wiring
+  sidebar. It has no generator, so nothing in the pipeline will refresh it.
+- **`.github/workflows/pages.yml`** — the venue step that came from `main` verifies and diffs two files; the
+  stricter form (verify, rebuild, then diff the whole directory) is what this branch uses. Whoever touches that
+  file next may want to make them one.
