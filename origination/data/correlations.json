@@ -8,11 +8,11 @@
    "label": "Spread (home margin) x total points",
    "market": "side-total",
    "scope": "2026 played games, official final scores reconciled to standings",
-   "n": 137,
-   "r": -0.16065480820902153,
-   "lo": -0.319757521950339,
-   "hi": 0.007259303689007924,
-   "p_two_sided": 0.05859688889448034,
+   "n": 149,
+   "r": -0.14081493006003182,
+   "lo": -0.2949393439662499,
+   "hi": 0.020451007267138006,
+   "p_two_sided": 0.08462247963165792,
    "estimable": true,
    "source_a": "https://www.nfl.com/standings/",
    "source_b": "https://www.nfl.com/standings/",
@@ -25,11 +25,11 @@
    "label": "Market win-probability imbalance x total points",
    "market": "moneyline-total",
    "scope": "2026 played games with a stored community price; excluded from official-only gates",
-   "n": 137,
-   "r": -0.040886960151614374,
-   "lo": -0.20718470255242585,
-   "hi": 0.1277073042181622,
-   "p_two_sided": 0.6344583263722563,
+   "n": 149,
+   "r": -0.031880780862822984,
+   "lo": -0.1917008784680248,
+   "hi": 0.12958640261307633,
+   "p_two_sided": 0.698955727293441,
    "estimable": true,
    "source_a": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
    "source_b": "https://www.nfl.com/standings/",
@@ -67,6 +67,6 @@
  "counts": {
   "published": 2,
   "withheld": 4,
-  "games_in_corpus": 137
+  "games_in_corpus": 149
  }
 }

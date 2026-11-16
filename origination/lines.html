@@ -24,8 +24,8 @@ every row. Prices are labelled <b>COMMUNITY</b>; standings and injury reports ar
 <h2>Our fair line, the market line, and the difference — as three separate columns</h2></div>
 <p>Walk-forward: the model pricing a game was fitted on strictly earlier games. Parameters are
 pre-registered and not tuned: {&#x27;prior_seasons&#x27;: 6, &#x27;ridge&#x27;: 4.0, &#x27;hfa_prior_points&#x27;: 2.0, &#x27;min_train_games&#x27;: 700, &#x27;fit&#x27;: &#x27;ridge-regularised least squares on standardised margins, closed form&#x27;, &#x27;target_side&#x27;: &#x27;home margin of victory&#x27;, &#x27;target_total&#x27;: &#x27;combined points&#x27;, &#x27;elo&#x27;: &#x27;not used in this model (a second estimator is published separately, see below)&#x27;}.</p></div>
-<div class="notice"><b>Price class.</b> 0 of
-137 games have a price that was observed <b>before kickoff</b>; the rest are
+<div class="notice"><b>Price class.</b> 12 of
+149 games have a price that was observed <b>before kickoff</b>; the rest are
 <b>post-hoc</b> — recorded after the game had started, so they can be shown but never counted as an
 opening or a closing line. Policy P02 in the price store makes this a hard rule.</div>
 <div class="table-wrap"><table><caption>Every played game with a stored price. Model
@@ -1265,6 +1265,114 @@ spread is positive when the home side is favoured, matching the stored spread's 
 <td>40.5</td>
 <td>3.0</td>
 <td>24–21</td><td><span class='pill warn'>post_hoc</span></td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>official result ↗</a><br><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>10</td>
+<td>Buffalo Bills @ New York Jets</td>
+<td>-13.0</td><td>-8.5</td>
+<td>-4.5</td>
+<td>46.1</td>
+<td>50.5</td>
+<td>-4.4</td>
+<td>31–12</td><td><span class='pill ok'>pre-kickoff</span></td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>official result ↗</a><br><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>10</td>
+<td>Carolina Panthers @ New Orleans Saints</td>
+<td>8.0</td><td>1.5</td>
+<td>6.5</td>
+<td>43.5</td>
+<td>48.5</td>
+<td>-5.0</td>
+<td>20–17</td><td><span class='pill ok'>pre-kickoff</span></td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>official result ↗</a><br><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>10</td>
+<td>Houston Texans @ Cleveland Browns</td>
+<td>2.1</td><td>-4.5</td>
+<td>6.6</td>
+<td>44.0</td>
+<td>40.5</td>
+<td>3.5</td>
+<td>24–27</td><td><span class='pill ok'>pre-kickoff</span></td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>official result ↗</a><br><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>10</td>
+<td>Jacksonville Jaguars @ Tennessee Titans</td>
+<td>1.6</td><td>-10.5</td>
+<td>12.1</td>
+<td>45.2</td>
+<td>45.5</td>
+<td>-0.3</td>
+<td>40–23</td><td><span class='pill ok'>pre-kickoff</span></td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>official result ↗</a><br><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>10</td>
+<td>Kansas City Chiefs @ Atlanta Falcons</td>
+<td>-6.2</td><td>-3.0</td>
+<td>-3.2</td>
+<td>45.7</td>
+<td>47.5</td>
+<td>-1.8</td>
+<td>35–13</td><td><span class='pill ok'>pre-kickoff</span></td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>official result ↗</a><br><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>10</td>
+<td>Los Angeles Rams @ Arizona Cardinals</td>
+<td>-2.8</td><td>-10.0</td>
+<td>7.2</td>
+<td>46.1</td>
+<td>38.5</td>
+<td>7.6</td>
+<td>34–6</td><td><span class='pill ok'>pre-kickoff</span></td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>official result ↗</a><br><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>10</td>
+<td>Miami Dolphins @ Indianapolis Colts</td>
+<td>0.5</td><td>4.5</td>
+<td>-4.0</td>
+<td>47.1</td>
+<td>37.5</td>
+<td>9.6</td>
+<td>22–24</td><td><span class='pill ok'>pre-kickoff</span></td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>official result ↗</a><br><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>10</td>
+<td>Minnesota Vikings @ Green Bay Packers</td>
+<td>4.9</td><td>2.5</td>
+<td>2.4</td>
+<td>46.4</td>
+<td>42.5</td>
+<td>3.9</td>
+<td>30–10</td><td><span class='pill ok'>pre-kickoff</span></td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>official result ↗</a><br><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>10</td>
+<td>New England Patriots @ Detroit Lions</td>
+<td>2.5</td><td>2.5</td>
+<td>-0.0</td>
+<td>46.8</td>
+<td>50.5</td>
+<td>-3.7</td>
+<td>10–35</td><td><span class='pill ok'>pre-kickoff</span></td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>official result ↗</a><br><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>10</td>
+<td>Pittsburgh Steelers @ Cincinnati Bengals</td>
+<td>1.4</td><td>4.5</td>
+<td>-3.1</td>
+<td>45.6</td>
+<td>49.5</td>
+<td>-3.9</td>
+<td>18–38</td><td><span class='pill ok'>pre-kickoff</span></td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>official result ↗</a><br><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>10</td>
+<td>Seattle Seahawks @ Las Vegas Raiders</td>
+<td>-5.2</td><td>-6.5</td>
+<td>1.3</td>
+<td>46.3</td>
+<td>40.5</td>
+<td>5.8</td>
+<td>21–13</td><td><span class='pill ok'>pre-kickoff</span></td>
+<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>official result ↗</a><br><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
+<tr><td>10</td>
+<td>San Francisco 49ers @ Dallas Cowboys</td>
+<td>-0.8</td><td>-3.5</td>
+<td>2.7</td>
+<td>48.8</td>
+<td>55.5</td>
+<td>-6.7</td>
+<td>46–40</td><td><span class='pill ok'>pre-kickoff</span></td>
 <td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>official result ↗</a><br><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>price ↗</a></td></tr>
 </tbody></table></div>
 <div class="section-head"><div><div class="section-label">SECOND ESTIMATOR</div>
