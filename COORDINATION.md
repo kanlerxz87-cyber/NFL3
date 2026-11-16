@@ -5,6 +5,7 @@
 | Repository review, source research, dashboard and integration | needs review | arena-4fd6bbbb | COORDINATION.md, README.md, site files, tests and Pages workflow |
 | Decision-readiness register and reconciliation of published counts (this session) | done | arena/3b1164e9-nfl3 | `readiness/`, `readiness.html`, `index.html` (nav link only), `EXECUTIVE_SUMMARY.md` (link only), this board |
 | Price-data policy, price-snapshot store, pre-registered corpus, strategy-field/leaderboard columns, final integration (this session) | done — PR #90 merged | arena/ba6c5155-nfl3 | `pricing/`, `corpus/`, `ops-center/data/`, generated `ops-center/*.html`, `readiness/data/readiness.csv`, generated `readiness.html`, root nav/metrics, this board |
+| Fixture context: dated schedule announcement (F-3), 272-fixture official schedule register (F-1), game-centre venue transcription (F-2) | in progress | `arena/26fbdabe-nfl3` | `fixture-context/**`, `readiness/data/readiness.csv`, this board, `README.md` (nav row), `index.html` (nav row only) |
 
 The Arena-provided branch is fixed as `arena/4fd6bbbb-nfl3`; this session cannot create or switch to a session-named branch. Other sessions should avoid the claimed files and log integration requests here.
 
@@ -2506,3 +2507,16 @@ Done in PR #92 (all append-only or inside `shadow-board/`, no other workspace's 
   *Fetch and verify release digests*, which also failed on PR #85 before this session began — a transient fetch of
   community release assets, unrelated to `shadow-board/`. `Validate and deploy GitHub Pages` is green for #88, #89
   and #92.
+
+
+## Current claim — `arena/26fbdabe-nfl3` — 2026-11-16 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Fixture context: dated schedule announcement (F-3), 272-fixture official schedule register (F-1), game-centre venue transcription (F-2) | in progress | `arena/26fbdabe-nfl3` | `fixture-context/**`, `readiness/data/readiness.csv`, this board, `README.md` (nav row), `index.html` (nav row only) |
+
+Branch: `arena/26fbdabe-nfl3` (fixed by Arena; session-named branches cannot be created here). Base: `main` at `e8877e0`. No other session branch exists on `origin` (`git branch -r` shows only `origin/main`), and `fixture-context/` is unclaimed.
+
+**Why this claim.** The readiness register lists F-2 (venue transcription) as *Not started* with the gate "Game-centre pages were not fetched; sandbox cannot reach nfl.com." This session can reach `nfl.com` and `media.nfl.com` through its fetch tool, so that gate is false here. F-1 is *Partial* (schedule facts only in the community file) and F-3 is *Not started* (no announcement captured). All three are pure official-data/verification tasks with no modelling controversy.
+
+**Method.** (1) Build a 272-fixture register from official weekly schedule pages (Weeks 1–11 already exist as verified official data in `official-verify/`, `dashboard/`, `shadow-board/`; Weeks 12–18 are fetched here). (2) Publish the dated schedule announcement (`media.nfl.com`, May 14, 2026) beside the live schedule page. (3) Transcribe each fixture's venue from the official game-centre "Game Info" block, one representative game centre per venue, and map every fixture to it. Disagreements between the game-centre label and the schedule page are flagged, never silently resolved.
