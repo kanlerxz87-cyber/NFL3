@@ -3958,3 +3958,36 @@ excludes zero and the pre-registered block's does not, and the desk says so.**
 **Post-rebase verification.** `scripts/validate_site.py`, `tests/check_site.py`,
 `questions/build.py --check`, `suggestion-desk/scripts/check.py`, `venues/scripts/verify.py`,
 `injury-archive/scripts/verify.py` (2,187 checks) — all pass.
+
+### Integration pass, second half — `arena/95dedf16-nfl3` — 2026-11-16
+
+**PR [#131](https://github.com/kanlerxz87-cyber/NFL3/pull/131)** — suggestion review desk, Week 11 venue register,
+`injury-archive/flags.html`, and three defects.
+
+**D11 rewritten against `two-total/`.** While this session worked, `main` gained the two-total workspace, so the
+desk's eleventh decision would have described as unbuilt something the repository now publishes. All of D11's
+numbers were re-read from `two-total/data/two_total.json`: T1 prior-season pace fit and T2 league mean plus one
+third of the form gap; 136 rows carrying both estimators, 135 scored, 1 excluded with a blank actual total; the
+five pre-registered collapse conditions with only C5 true (28 scored validation games against a floor of 20) and
+C1–C4 false, `collapsed = false`; corpus-wide MAE 11.457 vs 12.672 with a bootstrap difference of −1.215
+(n=135, 10 000 resamples, 95% −2.374 to −0.050) against a validation-block cluster bound of −4.8055 that
+includes zero; and the published diagnosis that T2's 7.46-point bias is not the whole story, since its prediction
+spread is 0.67 points against a realised spread of 14.33. **The two intervals disagree and the desk publishes
+both** rather than picking whichever is convenient.
+
+**Side effect of the navigation fix, and one page left alone.** Raising `assets/site.js` from 18 to 24 entries
+re-added six workspace links to the sidebar of every generated page. Rebuilding the generated pages showed
+`corpus.html` and `pricing.html` were carrying the old 18-entry sidebar; both were rebuilt. `readiness.html`
+was also stale, but rebuilding it does more than fix the sidebar: its F1 row reads a chain count out of
+`EXECUTIVE_SUMMARY.md` by regular expression, and another session's 2026-11-16 rewrite of that file dropped the
+phrase "59 replacement chains", so a rebuild renders the row as **"executive summary: None replacement chains"** —
+a Python `None` in published prose. The committed page was left untouched rather than silently changed, and the
+drift is published as **SD-F07** on the desk's flagged page with a link to the builder line responsible. Logged
+here as a request to the executive-summary and readiness owners: either the count returns with its artifact, or
+`readiness/build_readiness.py` line 105 needs a "not stated" branch that does not print `None`.
+
+**Verification.** The full `pages.yml` validate job was replayed locally against the rebased tree — decision-desk,
+shadow-board, pricing, corpus, decision-lab (tests, verify_sources, build, audit, availability), injury-capture,
+verification-lab, origination, skill-lab, availability-ledger, matchup, venues, injury-archive, forward-ledger,
+questions, suggestion-desk, validate_site and check_site — together with a stale-page scan across all 205 HTML
+files. Everything passes.

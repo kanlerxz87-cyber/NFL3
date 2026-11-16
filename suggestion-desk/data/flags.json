@@ -52,5 +52,14 @@
   "impact": "A schedule change cannot be detected against a hash, only by re-reading the page. The venue feature set is therefore 5% complete and unverifiable as a series.",
   "action": "Published as decision D7 with the clearing number stated (272 of 272 with a hashed capture). Not fixed here: transcription of 259 fixtures is a decision, not an incidental fix.",
   "source": "https://www.nfl.com/schedules/2026/by-week/week-11"
+ },
+ {
+  "id": "SD-F07",
+  "severity": "warn",
+  "title": "A figure the decision-readiness page cites was removed from the executive summary by another session",
+  "detail": "readiness/build_readiness.py reads the chain count out of EXECUTIVE_SUMMARY.md with a regular expression (build_readiness.py line 105) and uses it in the F1 flag row. Another session rewrote EXECUTIVE_SUMMARY.md as a shorter current-state summary on 2026-11-16 and the phrase '59 replacement chains' went with the old structure, so a rebuild of readiness.html now renders the row as 'executive summary: None replacement chains' - a Python None leaking into published prose.",
+  "impact": "The decision-readiness page is one of two pages the brief's landing-page requirement names, and its F1 row exists precisely to record that three published chain counts (decision-lab availability 117 replacement leads, executive summary 59 chains, ops-centre derived 280 chains) do not reconcile. Rebuilding it during integration would have overwritten the number with 'None' rather than fixing the disagreement.",
+  "action": "Not rebuilt. The committed readiness.html was left exactly as its owning session published it, so no published number was changed by this pass, and the drift is logged here instead. The fix belongs to whoever owns the executive summary or the readiness builder: either the chain count returns to the summary with its artifact, or build_readiness.py line 105 is given a graceful 'not stated' branch that does not print None.",
+  "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/readiness/build_readiness.py"
  }
 ]

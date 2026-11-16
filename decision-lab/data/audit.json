@@ -1,6 +1,6 @@
 {
-  "html_pages": 201,
-  "table_rows": 11652,
+  "html_pages": 205,
+  "table_rows": 11951,
   "rows_missing_official_source": 895,
   "rows_community_only": 316,
   "rows_with_internal_audit_source": 7,
@@ -1530,6 +1530,38 @@
     {
       "path": "strategies.html",
       "rows": 15,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "suggestion-desk/discovery.html",
+      "rows": 83,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "suggestion-desk/flagged.html",
+      "rows": 40,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "suggestion-desk/index.html",
+      "rows": 68,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "suggestion-desk/paths.html",
+      "rows": 108,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
