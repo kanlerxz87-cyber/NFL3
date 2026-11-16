@@ -2953,3 +2953,144 @@ Two things the second rebase and a self-review turned up, both fixed on this bra
 - Gates after this amendment: `python3 forward-ledger/scripts/verify.py` **30 passed, 0 failed** ·
   `scripts/validate_site.py` 17 root pages · `tests/check_site.py` pass · `questions/build.py --check` pass · CI
   `validate` job green including the two steps added here.
+
+## Current claim — `arena/f326e072-nfl3` — 2026-11-16 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| M1 Live re-read of the official NFL Week 10 injury report (2026-11-16), row-by-row reconciliation against the committed 2026-11-12 snapshot, and the 254 / 279 / 347 count discrepancy | in progress | `arena/f326e072-nfl3` | `matchup/data/injury_live_2026-11-16.csv`, `matchup/data/injury_reconciliation.json`, `matchup/injury-verify.html` |
+| M2 Offence-vs-defence matchup deficiency matrix (1st–4th string) built only from verified depth groups and verified designation rows | in progress | `arena/f326e072-nfl3` | `matchup/data/matrix.json`, `matchup/matrix.html` |
+| M3 Per-team decision view: starters out, replacement named with published depth, net designation count | in progress | `arena/f326e072-nfl3` | `matchup/data/teams.json`, `matchup/teams.html` |
+| M4 Depth-of-replacement ledger (rank of the next man, not a boolean) | in progress | `arena/f326e072-nfl3` | `matchup/data/replacement_depth.json`, `matchup/replacement-depth.html` |
+| M5 New workspace flagged page, source register and offline gate `matchup/scripts/check.py` | in progress | `arena/f326e072-nfl3` | `matchup/**` |
+| M6 Final integration: root nav rows, README row, executive-summary paragraph, PR to `main`, merge, Pages deploy verification | in progress | `arena/f326e072-nfl3` | `COORDINATION.md`, `README.md` (one row), `index.html` (nav/section rows only), `EXECUTIVE_SUMMARY.md` (one section) |
+
+Branch: `arena/f326e072-nfl3` (fixed by Arena; session-named branches cannot be created here). Base: `main` at `e8877e0`.
+
+Coordination notes:
+
+- `git branch -r` shows only `origin/main`; no other session branch is live. Every task above is therefore
+  unclaimed by any running session, and all of them live in the new directory `matchup/`, which no existing
+  claim covers.
+- **Not edited by this session:** `readiness/data/readiness.csv`, `decision-lab/**`, `ops-center/**`,
+  `skill-lab/**`, `availability-ledger/**`, `shadow-board/**`, `pricing/**`, `corpus/**`, `origination/**`,
+  `scripts/validate_site.py`, `tests/**`, `.github/workflows/**`, and every other workspace's data files.
+- **Integration request logged for the readiness-register owner:** rows **A23, A24, A25, L12, L13** and the
+  requirement *"Track the depth of the replacement, not just the fact of a replacement"* should be re-pointed
+  at `matchup/` once it is published. This session does not edit that CSV.
+- **Integration request logged for the `decision-lab/` owner:** the committed `official_snapshot.json`
+  (2026-11-12T06:32Z) is compared here against a fresh official read. Every difference is listed with both
+  source URLs and both hashes, so the owner can decide whether to refresh the capture. Nothing in
+  `decision-lab/` was changed.
+
+### Result — `arena/f326e072-nfl3` — 2026-11-16 UTC (all six tasks M1–M6 done)
+
+**What was built.** A new workspace, `matchup/`, answering one question from published sources only:
+when a starter cannot play, *which string* takes his place and which string does that string then face.
+Eleven pages, nine data artifacts, one fail-closed gate (`matchup/scripts/check.py`, 14 checks).
+
+**Inputs.** Two committed, independently sourced files, neither edited by this session:
+1. `matchup/data/captures/2026-11-16-nfl-injuries/rows.tsv` — a row-by-row transcript of
+   `https://www.nfl.com/injuries/league/2026/REG10` read on 2026-11-16T14:44Z. The same page was opened
+   twice, once at `/injuries/` and once at the week-specific URL; both reads returned the same tables for
+   the sections compared. **347 rows, 28 clubs, 14 games, 70 Out, 11 Doubtful, 90 Questionable,
+   0 "No Injuries Reported" sections.** SHA-256 of the transcript: `be6beff5b4733b37…`.
+2. `decision-lab/data/official_snapshot.json` — the committed capture of 2026-11-12T06:32Z
+   (254 injury rows, 1,745 depth rows, 30 clubs).
+
+**Verified findings, each with its source on the page where it appears.**
+
+| # | Finding | Evidence |
+|---|---|---|
+| 1 | The committed snapshot and the live page describe different weeks: 254 → 347 rows, 24 → 28 clubs, 6 → 171 game designations. 93 rows added, 0 removed, 178 changed. | `matchup/injury-verify.html` |
+| 2 | The "only 6 of 254 rows carry a game designation" flag is a **timing** artifact (Thursday-morning capture), not a parser defect. But the four clubs then published as "No Injuries Reported" (Bengals, Chargers, Ravens, Seahawks) now publish 9, 19, 10 and 15 rows — a coverage difference, not timing. | `matchup/injury-verify.html` §02 |
+| 3 | **Two official pages contradict each other for six players**: Brady Christensen, Devin Moore, David Montgomery, Jaylin Smith, Will Mallory and Kenneth Walker III are *Questionable* on the injury report and *ruled out* in the NFL's own dated Saturday roundup. Both pages are NFL-published; the conflict is published, not resolved by inference. | `matchup/flagged.html` M-F1 |
+| 4 | **The Ravens' published QB chart is two deep into injured reserve.** Lamar Jackson (1st) and Tyler Huntley (2nd) were both placed on IR on 2026-11-05; the chart still names them. Corrected, the top available string is Joe Fagnano (3rd). | `matchup/roster-events.html` |
+| 5 | The Seahawks' depth-derived starter is **independently confirmed**: the chart's 2nd string, Drew Lock, is the quarterback the head coach named on 2026-11-13. One club out of 28 confirmed — a proof of method, not coverage. | `matchup/roster-events.html` §01 |
+| 6 | Three players are on the reserve list and never appear on the weekly report (Lamar Jackson, Tyler Huntley, Malik Willis), so "not listed" would read as "available". | `matchup/flagged.html` M-F2 |
+| 7 | **Nine of thirty captured clubs publish no edge rusher at all** (they publish DL/OLB), and 18 publish no fullback. 26 matrix cells are blank for this reason alone; filling them would invent a depth order the club never published. | `matchup/coverage.html` §02 |
+| 8 | 149 of 676 slots name more than one rank-1 player — the brief's warning is confirmed, so a slot is treated as a group, never reduced to one named starter. | `matchup/coverage.html` §03 |
+| 9 | Depth published by group (of 30 clubs): 3rd-string CB 10, 3rd-string OT 3, 4th-string CB 1. No club publishes a 4th-string offensive lineman or edge rusher, so the brief's 1st-to-4th-string view cannot be met from club charts. | `matchup/coverage.html` §01 |
+
+**A repository-wide defect was found and fixed.** `index.html` held **two complete HTML documents
+concatenated**: a 3,355-byte stub at byte 0 followed by the 92,790-byte live page at byte 3,355. A browser
+renders the stub's header and lede and then the whole live page again. The stub is the older of the two —
+its category nav linked `shadow-board` where the live page links `skill-lab` and `availability-ledger`.
+Fixed by removing the stub and keeping the live page byte for byte. No existing validator could catch it,
+because a duplicated section is not a broken link. Recorded as **M-F8** rather than quietly fixed.
+
+**Verification performed.**
+- `python3 matchup/scripts/check.py` — 14 checks: every table row on all 11 pages carries an https link;
+  every `class="source"` link is on an official host (NFL hosts plus every club host recorded as a
+  `source_url` in the committed capture, so an arbitrary new host cannot slip in); local links and assets
+  exist; the reconciliation adds up (254 + 93 − 0 = 347); every blank matrix cell carries a written reason;
+  no published cell names a player the report says is Out or Doubtful; every roster event carries a
+  verbatim quote and an official URL.
+- `python3 scripts/validate_site.py`, `python3 tests/check_site.py`, `python3 decision-desk/scripts/check.py`,
+  `python3 shadow-board/scripts/check.py`, `python3 tests/test_decision_lab.py`,
+  `python3 tests/test_readiness.py`, `python3 decision-lab/scripts/audit.py`,
+  `python3 origination/scripts/verify.py`, `python3 availability-ledger/scripts/verify.py`,
+  `python3 tests/test_verification_lab.py` — all pass.
+- Two checks fail **locally only, for environmental reasons, and both pass in CI**: `skill-lab`'s
+  pre-registration ancestry check (the sandbox clone is shallow — 3 commits — so
+  `a60261fa0f9a` is not in local history; CI checks out with `fetch-depth: 0`), and `origination`'s
+  determinism check on first run (a second `build.py` then `verify.py` passes). Neither is touched by
+  this session.
+- Reproducibility: `build.py` and `pages.py` produce byte-identical artifacts and pages on a second run.
+
+**Integration requests logged, not acted on.**
+- **To the `readiness/data/readiness.csv` owner:** rows **A23, A24, A25, L12, L13** and the requirement
+  *"Track the depth of the replacement, not just the fact of a replacement"* can now be re-pointed at
+  `matchup/`. This session did not edit that CSV.
+- **To the `decision-lab/` owner:** the committed `official_snapshot.json` (2026-11-12T06:32Z) is compared
+  here against a fresh official read, row by row. Nothing in `decision-lab/` was changed; whether to
+  refresh the capture is the owner's call.
+- **To the `scripts/build_repo_review.py` owner:** two irregularities found this session belong on the
+  repo-review page — the stacked `index.html` (M-F8) and the three conflicting injury counts (254 / 279 /
+  347; the 279 figure is not yet traced to any committed capture). Both are published on
+  `matchup/flagged.html` in the meantime.
+- **To the `ops-center/` owner:** `matchup/questions.html` adds 10 questions and `matchup/suggestions.html`
+  adds 8 proposals, scoped to what this session verified. They are deliberately kept inside `matchup/`
+  rather than merged into the 100-question and 75-suggestion registers.
+
+### Rebase note — `arena/f326e072-nfl3` — 2026-11-16, after `main` advanced twice
+
+Between the branch point and the PR, `main` gained the `injury-archive/` workspace (Week 10 injury and
+inactive captures for 2021–2026), refreshed `data/raw/`, an `injury-archive.yml` workflow, three
+Lions game-status designations patched into `decision-lab/data/official_snapshot.json` from a
+2026-11-16T06:31Z read, and edits to `index.html`, `README.md`, `EXECUTIVE_SUMMARY.md` and `pages.yml`.
+
+Conflicts and how they were resolved:
+
+- **`COORDINATION.md`** — add/add, twice. Resolved by keeping both sides: the other sessions' logs and
+  this session's claim and result entries are all present. Nothing was discarded.
+- **`index.html`** — a concurrent session added an "Injury archive" nav entry, a site-guide row and an
+  origination card on the same lines this session edits. Rather than take a side, the branch was reset
+  to `origin/main`, `matchup/` was restored from a backup, and the three additions plus the
+  stacked-document fix were re-applied to the current file. An earlier attempt used
+  `git checkout --theirs`, which during a rebase means *this* session's commit, not `main`'s; it was
+  aborted and redone. Every other session's `index.html` change is preserved.
+
+**Effect of the Lions patch on `official_snapshot.json`.** The committed snapshot is no longer a single
+read: 251 of its 254 injury rows carry the 2026-11-12T06:32Z hash and 3 carry the 2026-11-16T06:31Z
+hash. Game designations in it therefore rise from 6 to 9, and the count of surviving rows that gained a
+designation falls from 123 to 120. `matchup/` now publishes that mix explicitly rather than labelling
+the whole file with whichever hash sits first in the manifest — a mixed-observation snapshot is an
+irregularity worth showing, not one worth hiding.
+
+**Cross-validation with the concurrent `injury-archive/` session.** Its coverage register records a
+capture of `https://www.nfl.com/injuries/league/2026/REG10` at 2026-11-16T15:05:00Z with **347 rows**
+(sha256 `3efdbc03b4ac17a3…`), twenty-one minutes after this session's read of the same URL, which
+transcribed **347 rows**. Two independent transcriptions agree exactly on the count. The same register
+records **147 rows** for the official Week 10 inactive list.
+
+**New integration request, to the `injury-archive/` owner.** Joining that 147-row inactive list to this
+workspace's 59 replacement chains would turn each chain from "the club publishes this man next" into
+"this man actually played" — the one cell this workspace must leave blank, because no source it reads
+states a confirmed replacement. It would also settle flag **M-F1**, where the official injury report
+and the official Saturday roundup disagree about six players. This session does not parse
+`injury-archive/`; it links to it and says so.
+
+**Scope restated after the rebase.** `matchup/**` only, plus one nav entry, one site-guide row and one
+card on `index.html`, one row and three commands in `README.md`, one paragraph in `EXECUTIVE_SUMMARY.md`,
+two steps in `.github/workflows/pages.yml`, and appended entries in this board.

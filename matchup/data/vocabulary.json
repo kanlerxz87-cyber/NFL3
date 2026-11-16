@@ -1,0 +1,377 @@
+{
+ "CB": {
+  "label": "Cornerback",
+  "clubs_with_no_player_in_group": [],
+  "count": 0,
+  "labels_those_clubs_publish": {}
+ },
+ "EDGE": {
+  "label": "Edge rusher",
+  "clubs_with_no_player_in_group": [
+   "Bills",
+   "Cardinals",
+   "Chicago Bears",
+   "Commanders",
+   "Cowboys",
+   "Panthers",
+   "Patriots",
+   "Tampa Bay Buccaneers",
+   "Vikings"
+  ],
+  "count": 9,
+  "labels_those_clubs_publish": {
+   "Bills": [
+    "CB",
+    "DL",
+    "ILB",
+    "NCB",
+    "OLB",
+    "S"
+   ],
+   "Cardinals": [
+    "CB",
+    "DT",
+    "ILB",
+    "NT",
+    "OLB",
+    "S"
+   ],
+   "Chicago Bears": [
+    "CB",
+    "DB",
+    "DL",
+    "LB",
+    "S"
+   ],
+   "Commanders": [
+    "CB",
+    "DL",
+    "FS",
+    "LB",
+    "OLB",
+    "SS"
+   ],
+   "Cowboys": [
+    "CB",
+    "DB",
+    "DT",
+    "LB",
+    "OLB",
+    "S"
+   ],
+   "Panthers": [
+    "CB",
+    "DL",
+    "LB",
+    "OLB",
+    "S"
+   ],
+   "Patriots": [
+    "CB",
+    "DT",
+    "LB",
+    "OLB",
+    "S"
+   ],
+   "Tampa Bay Buccaneers": [
+    "CB",
+    "DL",
+    "ILB",
+    "NT",
+    "OLB",
+    "S"
+   ],
+   "Vikings": [
+    "CB",
+    "DL",
+    "LB",
+    "OLB",
+    "S"
+   ]
+  }
+ },
+ "FB": {
+  "label": "Fullback",
+  "clubs_with_no_player_in_group": [
+   "Bengals",
+   "Bills",
+   "Browns",
+   "Cardinals",
+   "Chicago Bears",
+   "Colts",
+   "Commanders",
+   "Falcons",
+   "Jaguars",
+   "Lions",
+   "Panthers",
+   "Patriots",
+   "Philadelphia Eagles",
+   "Rams",
+   "Ravens",
+   "Saints",
+   "Tampa Bay Buccaneers",
+   "Titans"
+  ],
+  "count": 18,
+  "labels_those_clubs_publish": {
+   "Bengals": [
+    "C",
+    "HB",
+    "LG",
+    "LOT",
+    "QB",
+    "RG",
+    "ROT",
+    "TE",
+    "WR"
+   ],
+   "Bills": [
+    "C",
+    "LG",
+    "LT",
+    "QB",
+    "RB",
+    "RG",
+    "RT",
+    "TE",
+    "WR"
+   ],
+   "Browns": [
+    "C",
+    "LG",
+    "LT",
+    "QB",
+    "RB",
+    "RG",
+    "RT",
+    "TE",
+    "WR"
+   ],
+   "Cardinals": [
+    "C",
+    "LG",
+    "LT",
+    "QB",
+    "RB",
+    "RG",
+    "RT",
+    "TE",
+    "WR"
+   ],
+   "Chicago Bears": [
+    "C",
+    "LG",
+    "LT",
+    "QB",
+    "RB",
+    "RG",
+    "RT",
+    "TE",
+    "WR"
+   ],
+   "Colts": [
+    "C",
+    "LG",
+    "LT",
+    "QB",
+    "RB",
+    "RG",
+    "RT",
+    "TE",
+    "WR"
+   ],
+   "Commanders": [
+    "C",
+    "LG",
+    "LT",
+    "QB",
+    "RB",
+    "RG",
+    "RT",
+    "TE",
+    "WR"
+   ],
+   "Falcons": [
+    "C",
+    "LG",
+    "LT",
+    "QB",
+    "RB",
+    "RG",
+    "RT",
+    "TE",
+    "WR"
+   ],
+   "Jaguars": [
+    "C",
+    "LG",
+    "LT",
+    "QB",
+    "RB",
+    "RG",
+    "RT",
+    "TE",
+    "WR"
+   ],
+   "Lions": [
+    "C",
+    "LG",
+    "LT",
+    "QB",
+    "RB",
+    "RG",
+    "RT",
+    "TE",
+    "WR"
+   ],
+   "Panthers": [
+    "C",
+    "LG",
+    "LT",
+    "QB",
+    "RB",
+    "RG",
+    "RT",
+    "TE",
+    "WR"
+   ],
+   "Patriots": [
+    "C",
+    "LG",
+    "LT",
+    "QB",
+    "RB",
+    "RG",
+    "RT",
+    "TE",
+    "WR"
+   ],
+   "Philadelphia Eagles": [
+    "C",
+    "LG",
+    "LT",
+    "QB",
+    "RB",
+    "RG",
+    "RT",
+    "TE",
+    "WR"
+   ],
+   "Rams": [
+    "C",
+    "LG",
+    "LT",
+    "QB",
+    "RB",
+    "RG",
+    "RT",
+    "TE",
+    "WR"
+   ],
+   "Ravens": [
+    "C",
+    "LG",
+    "LT",
+    "QB",
+    "RB",
+    "RG",
+    "RT",
+    "TE",
+    "WR"
+   ],
+   "Saints": [
+    "C",
+    "LG",
+    "LT",
+    "QB",
+    "RB",
+    "RG",
+    "RT",
+    "TE",
+    "WR"
+   ],
+   "Tampa Bay Buccaneers": [
+    "C",
+    "LG",
+    "LT",
+    "QB",
+    "RB",
+    "RG",
+    "RT",
+    "TE",
+    "WR"
+   ],
+   "Titans": [
+    "C",
+    "LG",
+    "LT",
+    "QB",
+    "RB",
+    "RG",
+    "RT",
+    "TE",
+    "WR"
+   ]
+  }
+ },
+ "IDL": {
+  "label": "Interior defensive line",
+  "clubs_with_no_player_in_group": [],
+  "count": 0,
+  "labels_those_clubs_publish": {}
+ },
+ "LB": {
+  "label": "Linebacker",
+  "clubs_with_no_player_in_group": [],
+  "count": 0,
+  "labels_those_clubs_publish": {}
+ },
+ "OC": {
+  "label": "Centre",
+  "clubs_with_no_player_in_group": [],
+  "count": 0,
+  "labels_those_clubs_publish": {}
+ },
+ "OG": {
+  "label": "Offensive guard",
+  "clubs_with_no_player_in_group": [],
+  "count": 0,
+  "labels_those_clubs_publish": {}
+ },
+ "OT": {
+  "label": "Offensive tackle",
+  "clubs_with_no_player_in_group": [],
+  "count": 0,
+  "labels_those_clubs_publish": {}
+ },
+ "QB": {
+  "label": "Quarterback",
+  "clubs_with_no_player_in_group": [],
+  "count": 0,
+  "labels_those_clubs_publish": {}
+ },
+ "RB": {
+  "label": "Running back",
+  "clubs_with_no_player_in_group": [],
+  "count": 0,
+  "labels_those_clubs_publish": {}
+ },
+ "S": {
+  "label": "Safety",
+  "clubs_with_no_player_in_group": [],
+  "count": 0,
+  "labels_those_clubs_publish": {}
+ },
+ "TE": {
+  "label": "Tight end",
+  "clubs_with_no_player_in_group": [],
+  "count": 0,
+  "labels_those_clubs_publish": {}
+ },
+ "WR": {
+  "label": "Wide receiver",
+  "clubs_with_no_player_in_group": [],
+  "count": 0,
+  "labels_those_clubs_publish": {}
+ }
+}
