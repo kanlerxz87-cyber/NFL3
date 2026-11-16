@@ -1,0 +1,97 @@
+{
+  "schema": "nfl3-forward-ledger-live-reads/v1",
+  "read_date_utc": "2026-11-16",
+  "read_window_utc": "2026-11-16T14:36Z/2026-11-16T15:05Z",
+  "read_method": "agent page-fetch tool (markdown rendering of the live official page); each value below was copied by hand from that rendering, never from a community file",
+  "egress_note": "The build sandbox has no outbound access to nfl.com (GitHub, npm and PyPI only), so a live read from inside a plain shell command is impossible. These reads were taken through the agent's fetch tool, which is why they carry a read window instead of a capture hash. The scripted capture path in scripts/capture_results.py records raw bytes and SHA-256 when it runs in GitHub Actions, which does have egress.",
+  "pages": [
+    {
+      "url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+      "read_utc": "2026-11-16T14:36Z",
+      "yielded": "13 final scores with club record chips, plus the 14th fixture; used for the score cross-check against the scoreboard page",
+      "chunks_read": 1
+    },
+    {
+      "url": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10",
+      "read_utc": "2026-11-16T14:38Z",
+      "yielded": "quarter-by-quarter scoring, final 10-35, Game Info (MUNICH / FC BAYERN MUNICH STADIUM), the NFC East/AFC East standings panel, and a dated Game Book PDF link",
+      "chunks_read": 1
+    },
+    {
+      "url": "https://www.nfl.com/scores/2026/week-10",
+      "read_utc": "2026-11-16T14:52Z",
+      "yielded": "the authoritative Week 10 scoreboard transcribed into data/official_scores_2026/week_10.json, including the Teams on Bye block with four club records",
+      "chunks_read": 2
+    },
+    {
+      "url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+      "read_utc": "2026-11-16T14:55Z",
+      "yielded": "13 Week 11 fixtures with slot, kickoff, network, club records and the schedule page's club travel-link stadium name",
+      "chunks_read": 2
+    },
+    {
+      "url": "https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2",
+      "read_utc": "2026-11-16T15:02Z",
+      "yielded": "the Week 2 result the frozen corpus records as Hidden Score: the game centre now publishes WAS 20, DAL 37 with a quarter split of 0/10/3/7 against 10/7/10/10, plus Game Info (ARLINGTON, TX / AT&T STADIUM), the NFC East standings panel and a dated Game Book PDF link",
+      "chunks_read": 1
+    }
+  ],
+  "club_record_chips_read": {
+    "note": "Each value is the win-loss-tie chip the official page printed beside the club on 2026-11-16. The ledger's computed record through Week 10 is compared with it by scripts/build_ledger.py; a chip is never used to fill a score and a score is never used to fill a chip.",
+    "sources": {
+      "week10_schedule": "https://www.nfl.com/schedules/2026/by-week/week-10",
+      "week10_scores": "https://www.nfl.com/scores/2026/week-10",
+      "week11_schedule": "https://www.nfl.com/schedules/2026/by-week/week-11",
+      "week2_game_centre": "https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2"
+    },
+    "chips": {
+      "ATL": {"record": "3-7", "pages": ["week10_schedule"]},
+      "AZ": {"record": "3-7", "pages": ["week10_schedule"]},
+      "BAL": {"record": "4-5", "pages": ["week10_scores"]},
+      "BUF": {"record": "8-1", "pages": ["week10_schedule"]},
+      "CAR": {"record": "4-5", "pages": ["week10_schedule"]},
+      "CHI": {"record": "7-2", "pages": ["week10_scores", "week11_schedule"]},
+      "CIN": {"record": "", "pages": []},
+      "CLE": {"record": "6-4", "pages": ["week10_schedule"]},
+      "DAL": {"record": "4-6", "pages": ["week11_schedule", "week2_game_centre"]},
+      "DEN": {"record": "7-2", "pages": ["week10_scores"]},
+      "DET": {"record": "7-2", "pages": ["week10_schedule", "week11_schedule"]},
+      "GB": {"record": "6-4", "pages": ["week10_schedule"]},
+      "HOU": {"record": "3-6", "pages": ["week10_schedule", "week11_schedule"]},
+      "IND": {"record": "3-7", "pages": ["week10_schedule", "week11_schedule"]},
+      "JAX": {"record": "7-2", "pages": ["week10_schedule", "week11_schedule"]},
+      "KC": {"record": "7-2", "pages": ["week10_schedule", "week11_schedule"]},
+      "LA": {"record": "6-4", "pages": ["week10_schedule"]},
+      "LAC": {"record": "0-8", "pages": ["week10_scores", "week11_schedule"]},
+      "LV": {"record": "4-6", "pages": ["week10_schedule", "week11_schedule"]},
+      "MIA": {"record": "1-8", "pages": ["week10_schedule", "week11_schedule"]},
+      "MIN": {"record": "7-2", "pages": ["week10_schedule", "week11_schedule"]},
+      "NE": {"record": "5-5", "pages": ["week10_schedule"]},
+      "NO": {"record": "3-6", "pages": ["week10_schedule", "week11_schedule"]},
+      "NYG": {"record": "5-3-1", "pages": ["week10_schedule", "week11_schedule", "week2_game_centre"]},
+      "NYJ": {"record": "2-8", "pages": ["week10_schedule", "week11_schedule"]},
+      "PHI": {"record": "2-7", "pages": ["week10_scores", "week11_schedule", "week2_game_centre"]},
+      "PIT": {"record": "6-3", "pages": ["week11_schedule"]},
+      "SEA": {"record": "6-4", "pages": ["week10_schedule"]},
+      "SF": {"record": "8-1", "pages": ["week10_schedule"]},
+      "TB": {"record": "3-6", "pages": ["week10_scores", "week11_schedule"]},
+      "TEN": {"record": "1-8", "pages": ["week10_schedule", "week11_schedule"]},
+      "WAS": {"record": "3-5-1", "pages": ["week10_schedule", "week2_game_centre"]}
+    },
+    "unread": [
+      {
+        "team": "CIN",
+        "reason": "The club's record chip appears on the Week 11 Monday-night fixture row and in the tail of the Week 10 schedule page, neither of which was inside the chunks read on 2026-11-16. The cell is left blank rather than filled from the arithmetic, because a self-computed record is not an official reading and the cross-check would then compare the ledger with itself.",
+        "action": "Re-read https://www.nfl.com/schedules/2026/by-week/week-11 tail or the standings page in the next pass."
+      }
+    ]
+  },
+  "week2_hidden_score_read": {
+    "fixture": "WAS at DAL, 2026 REG week 2",
+    "frozen_corpus_record": "corpus/games_2026_w1_9.csv row 30 carries blank scores with the note 'UNVERIFIED: the official schedule page and the official game center page both render this game as Hidden Score'",
+    "live_read_2026_11_16": {"away_score": 20, "home_score": 37, "quarter_split": {"WAS": [0, 10, 3, 7], "DAL": [10, 7, 10, 10]}, "internal_check": "quarter sums 20 and 37 equal the published totals"},
+    "official_scores_bundle_week_02": {"away_score": 20, "home_score": 37, "observed_at": "2026-11-15T13:05:00Z", "url": "https://www.nfl.com/scores/2026/week-2"},
+    "conclusion": "The result is now published on the game centre as well as the scoreboard. The frozen corpus still excludes it, so any evaluation keyed to that corpus grades 135 of 136 games while 136 are officially available.",
+    "action_owner": "the corpus and shadow-board owners: close the row with a new registration (a frozen corpus is annotated, never re-worded)"
+  }
+}

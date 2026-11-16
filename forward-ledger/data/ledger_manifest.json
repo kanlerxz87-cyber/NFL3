@@ -1,0 +1,154 @@
+{
+  "schema": "nfl3-forward-ledger/v1",
+  "built_from_read_date": "2026-11-16",
+  "authority": "official NFL.com pages only; no community file is used for any value in this ledger",
+  "inputs": {
+    "results-verification/data/official_scores_2026/week_01.json": {
+      "sha256": "86568d48d5d23895f7ab672ac5b2ab21512a409d5ea2f04f7698c46af9300e9a",
+      "games": 16,
+      "observed": "2026-11-15T12:59:59Z"
+    },
+    "results-verification/data/official_scores_2026/week_02.json": {
+      "sha256": "121cc0da7af03b5bca83ac471e16e94e701b0ab57c327ddf4656d02900468bb6",
+      "games": 16,
+      "observed": "2026-11-15T13:05:00Z"
+    },
+    "results-verification/data/official_scores_2026/week_03.json": {
+      "sha256": "d934581b84602b1c01a5d6eeefaa582574607f654e84b73d05a3a9ac9ff10b27",
+      "games": 16,
+      "observed": "2026-11-15T13:11:00Z"
+    },
+    "results-verification/data/official_scores_2026/week_04.json": {
+      "sha256": "dbe9143339c70938ddea11637ae86bc18ca2d07edf7a6b269211e9b0fad2c759",
+      "games": 16,
+      "observed": "2026-11-15T13:16:00Z"
+    },
+    "results-verification/data/official_scores_2026/week_05.json": {
+      "sha256": "aaddaadce7802f3ac236f9e9322e2903df887ec52659736623458c191b787e46",
+      "games": 15,
+      "observed": "2026-11-15T13:22:00Z"
+    },
+    "results-verification/data/official_scores_2026/week_06.json": {
+      "sha256": "d221e4fdabeee7f61afc50e6f50be3e76e6e127469736f9e2511c5b8bd6ef1d5",
+      "games": 14,
+      "observed": "2026-11-15T13:28:00Z"
+    },
+    "results-verification/data/official_scores_2026/week_07.json": {
+      "sha256": "02403ce4b92045cc2dbd4e51a0ff874aeca0bf92ed809c1397a45017e206b256",
+      "games": 14,
+      "observed": "2026-11-15T13:34:00Z"
+    },
+    "results-verification/data/official_scores_2026/week_08.json": {
+      "sha256": "99a5f6f72fe0f28429202a368828c2acb5c79b3af412cb80f8ee2bc9b2b69fe1",
+      "games": 14,
+      "observed": "2026-11-15T13:40:00Z"
+    },
+    "results-verification/data/official_scores_2026/week_09.json": {
+      "sha256": "5927f0d7fa2f519ecb27a314ee18e905ac745fbdb9e647b09e0afe301ef6e610",
+      "games": 15,
+      "observed": "2026-11-15T13:46:00Z"
+    },
+    "forward-ledger/data/official_scores_2026/week_10.json": {
+      "sha256": "ba48890a3e788775a54d31c4831c8b7c1b3cca68b2ca2d25b65fb90c56d555c0",
+      "games": 14,
+      "observed": "2026-11-16T14:44Z/2026-11-16T14:52Z"
+    },
+    "forward-ledger/data/live_reads_2026-11-16.json": {
+      "sha256": "2328873b7027f7cf6f4eb7fa31227a080b88c223b57400ab7a1bc862c1808bac"
+    }
+  },
+  "fixtures": 150,
+  "graded": 149,
+  "scheduled_unplayed": 1,
+  "weeks": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "clubs": 32,
+  "standings_crosscheck": {
+    "clubs_checked_against_official_chips": 31,
+    "clubs_not_read_in_this_pass": [
+      "CIN"
+    ],
+    "mismatches": 0,
+    "chip_timing_note": "The chips were read at 14:36Z-15:02Z on 2026-11-16, before the last Week 10 fixture (Los Angeles Chargers at Baltimore Ravens, 8:15 PM ET the same evening) had been played. Both clubs' chips therefore match a ledger that deliberately excludes that fixture, and the fixture is excluded from every count here rather than back-filled later.",
+    "method": "record computed from the ledger's graded games compared with the record chip each official page printed on 2026-11-16"
+  },
+  "official_page_label_consistency": {
+    "labels_checked": 150,
+    "labels_not_comparable": 0,
+    "anomalies": [
+      {
+        "game_id": "2026_01_NE_SEA",
+        "fixture": "NE at SEA",
+        "week": 1,
+        "context": "Sunday Night Football, September 9th",
+        "date_et": "2026-09-09",
+        "actual_weekday": "Wednesday",
+        "kind": "the official page names a weekday that its own printed date does not fall on",
+        "source_url": "https://www.nfl.com/scores/2026/week-1"
+      }
+    ],
+    "note": "Checked mechanically over every graded and scheduled fixture in the ledger; an anomaly never removes a row, it adds a review item."
+  },
+  "frozen_corpus_agreement": {
+    "corpus_rows": 136,
+    "graded_ledger_rows_weeks_1_9": 136,
+    "exact_score_matches": 135,
+    "blank_in_frozen_corpus": 1,
+    "score_mismatches": 0,
+    "fixtures_absent_from_corpus": 0,
+    "details": [
+      {
+        "week": 2,
+        "fixture": "WAS at DAL",
+        "kind": "frozen corpus carries no score; the official pages do",
+        "ledger_score": "20-37",
+        "corpus_note": "UNVERIFIED: the official schedule page and the official game center page (https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2) both render this game as \"Hidden Score\". Final score left blank; n"
+      }
+    ]
+  },
+  "club_records_through_week_10": {
+    "ATL": "3-7",
+    "AZ": "3-7",
+    "BAL": "4-5",
+    "BUF": "8-1",
+    "CAR": "4-5",
+    "CHI": "7-2",
+    "CIN": "7-2",
+    "CLE": "6-4",
+    "DAL": "4-6",
+    "DEN": "7-2",
+    "DET": "7-2",
+    "GB": "6-4",
+    "HOU": "3-6",
+    "IND": "3-7",
+    "JAX": "7-2",
+    "KC": "7-2",
+    "LA": "6-4",
+    "LAC": "0-8",
+    "LV": "4-6",
+    "MIA": "1-8",
+    "MIN": "7-2",
+    "NE": "5-5",
+    "NO": "3-6",
+    "NYG": "5-3-1",
+    "NYJ": "2-8",
+    "PHI": "2-7",
+    "PIT": "6-3",
+    "SEA": "6-4",
+    "SF": "8-1",
+    "TB": "3-6",
+    "TEN": "1-8",
+    "WAS": "3-5-1"
+  },
+  "counts_note": "Every count on the published pages is computed by scripts/build_site.py from these files."
+}

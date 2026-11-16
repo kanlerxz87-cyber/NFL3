@@ -1,0 +1,44 @@
+{
+  "week": 10,
+  "season": 2026,
+  "url": "https://www.nfl.com/scores/2026/week-10",
+  "title": "NFL 2026 Week 10 Scores and Highlights: Live Updates, Results & Recaps",
+  "publisher": "NFL.com (official NFL publisher)",
+  "authority": "official HTTPS publisher",
+  "read_window_utc": "2026-11-16T14:44Z/2026-11-16T14:52Z",
+  "read_window_note": "The scoreboard page was read in two sequential chunks through the agent page-fetch tool on 2026-11-16; window bounds are approximate to the minute and are the times recorded in the session log, not page-declared times. The Week 10 schedule page (https://www.nfl.com/schedules/2026/by-week/week-10) and one game centre were read in the same session at 14:36Z and 14:38Z for the cross-checks named below.",
+  "transcription_method": "hand read from the fetched page text; no community file was used for any value in this file",
+  "game_centre_crosscheck": {
+    "url": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10",
+    "read_utc": "2026-11-16T14:38Z",
+    "final": "NE 10, DET 35",
+    "quarter_split_away": [3, 0, 0, 7],
+    "quarter_split_home": [7, 14, 7, 7],
+    "location": "MUNICH",
+    "stadium": "FC BAYERN MUNICH STADIUM",
+    "game_book_pdf": "https://static.www.nfl.com/image/upload/v1794829721/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf",
+    "agrees_with_scoreboard": true
+  },
+  "teams_on_bye": [
+    {"team": "CHI", "record": "7-2"},
+    {"team": "DEN", "record": "7-2"},
+    {"team": "PHI", "record": "2-7"},
+    {"team": "TB", "record": "3-6"}
+  ],
+  "games": [
+    {"away_team": "WAS", "away_score": 24, "home_team": "NYG", "home_score": 21, "context": "Thursday Night Football, November 12th", "date": "2026-11-12", "slug": "commanders-at-giants", "status": "final"},
+    {"away_team": "NE", "away_score": 10, "home_team": "DET", "home_score": 35, "context": "Sunday, November 15th, International Game (Munich)", "date": "2026-11-15", "slug": "patriots-at-lions", "status": "final"},
+    {"away_team": "KC", "away_score": 35, "home_team": "ATL", "home_score": 13, "context": "Sunday, November 15th", "date": "2026-11-15", "slug": "chiefs-at-falcons", "status": "final"},
+    {"away_team": "HOU", "away_score": 24, "home_team": "CLE", "home_score": 27, "context": "Sunday, November 15th", "date": "2026-11-15", "slug": "texans-at-browns", "status": "final"},
+    {"away_team": "MIN", "away_score": 30, "home_team": "GB", "home_score": 10, "context": "Sunday, November 15th", "date": "2026-11-15", "slug": "vikings-at-packers", "status": "final"},
+    {"away_team": "MIA", "away_score": 22, "home_team": "IND", "home_score": 24, "context": "Sunday, November 15th", "date": "2026-11-15", "slug": "dolphins-at-colts", "status": "final"},
+    {"away_team": "CAR", "away_score": 20, "home_team": "NO", "home_score": 17, "context": "Sunday, November 15th", "date": "2026-11-15", "slug": "panthers-at-saints", "status": "final"},
+    {"away_team": "BUF", "away_score": 31, "home_team": "NYJ", "home_score": 12, "context": "Sunday, November 15th", "date": "2026-11-15", "slug": "bills-at-jets", "status": "final"},
+    {"away_team": "JAX", "away_score": 40, "home_team": "TEN", "home_score": 23, "context": "Sunday, November 15th", "date": "2026-11-15", "slug": "jaguars-at-titans", "status": "final"},
+    {"away_team": "LA", "away_score": 34, "home_team": "AZ", "home_score": 6, "context": "Sunday, November 15th", "date": "2026-11-15", "slug": "rams-at-cardinals", "status": "final"},
+    {"away_team": "SEA", "away_score": 21, "home_team": "LV", "home_score": 13, "context": "Sunday, November 15th", "date": "2026-11-15", "slug": "seahawks-at-raiders", "status": "final"},
+    {"away_team": "SF", "away_score": 46, "home_team": "DAL", "home_score": 40, "context": "Sunday, November 15th", "date": "2026-11-15", "slug": "49ers-at-cowboys", "status": "final"},
+    {"away_team": "PIT", "away_score": 18, "home_team": "CIN", "home_score": 38, "context": "Sunday Night Football, November 15th", "date": "2026-11-15", "slug": "steelers-at-bengals", "status": "final"},
+    {"away_team": "LAC", "away_score": null, "home_team": "BAL", "home_score": null, "context": "Monday Night Football, November 16th", "date": "2026-11-16", "slug": "chargers-at-ravens", "status": "scheduled", "status_note": "Listed on the same page as Nov 16 8:15 PM with club records beside it (LAC 0-8, BAL 4-5) and no score. Not graded, not imputed, and excluded from every count on this site."}
+  ]
+}
