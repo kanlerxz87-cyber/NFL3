@@ -5,7 +5,7 @@
    "id": "F01",
    "severity": "high",
    "title": "Community price history is sparse and not licensed",
-   "issue": "Weeks 1-9 had kicked off before the first observation, so those prices are post-hoc and cannot define opening or closing lines. The current research ledger records 9 captures, with 78 of 816 event-market cells having a pre-kickoff observation and 49 marked as moved. These are community inputs; they do not satisfy the separate licensed-price policy or establish CLV.",
+   "issue": "Weeks 1-9 had kicked off before the first observation, so those prices are post-hoc and cannot define opening or closing lines. The current research ledger records 11 captures, with 78 of 816 event-market cells having a pre-kickoff observation and 52 marked as moved. These are community inputs; they do not satisfy the separate licensed-price policy or establish CLV.",
    "resolve": "Obtain a permitted timestamped source and maintain an opening-to-close series for every originated market before publishing price-dependent performance.",
    "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
    "source_label": "nflverse schedules (COMMUNITY)"
