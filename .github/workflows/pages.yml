@@ -86,6 +86,10 @@ jobs:
         run: python3 tests/test_availability_ledger.py
       - name: Availability-ledger fail-closed verification
         run: python3 availability-ledger/scripts/verify.py
+      - name: Venue register fail-closed verification (fixture set, game-centre and schedule matches, source links, reproducible pages)
+        run: python3 venues/scripts/verify.py
+      - name: Venue register committed pages match the build
+        run: git diff --exit-code -- venues/index.html venues/flagged.html
 
   deploy:
     if: github.event_name != 'pull_request'
