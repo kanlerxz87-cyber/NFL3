@@ -2614,3 +2614,13 @@ The 2026-11-16 brief lists about 80 items. Most already have a page somewhere in
 - **Post-merge `data-refresh`** `ab3bd94` committed the manifest only; a rebuild of origination on top of it is byte-identical, so the drift alarm holds on `main`.
 - **Task status:** T-L **done**; T-R **done** (with the G10 governed-outcome flag for review; no gate edited).
 - **Still open (not claimed in this session, flagged for review):** every item in the 2026-11-16 brief that needs data this sandbox cannot reach (licensed odds, official snap counts and game-book starters, per-club depth source for 32 clubs, NWS grids, a prospective window), and the irregularities listed above. None of them is marked verified on the board.
+
+## Current claim — `arena/8b6eb5b0-nfl3` — 2026-11-16 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Official Week 11 game-centre venue transcription: verify all 13 fixture venues against their NFL Game Centre pages; preserve and flag any official-page conflict; rebuild and gate the published fixture table | in progress | `arena/8b6eb5b0-nfl3` | `shadow-board/data/fixtures_2026_w11.csv`, `shadow-board/scripts/build.py`, `shadow-board/scripts/check.py`, generated `shadow-board/forecasts.html` / `shadow-board/sources.html`, this board |
+
+- The existing fixture register had two venues marked verified and eleven blank with an explicit reason that the game-centre page had not been opened. This task reads each linked official Game Centre `Game Info` field; a schedule-page/club-link mismatch is recorded as a conflict, not silently substituted.
+- **Overlap check:** the only open PR observed at claim time is #96, touching `.github/workflows/pages.yml`, `dashboard/`, and `origination/`; those files are outside this claim and will not be edited. No open PR touched `shadow-board/` at claim time. This session remains on the Arena-fixed `arena/8b6eb5b0-nfl3` branch rather than creating/switching to a session-named branch.
+- **Build hygiene:** the existing origination builder was run as an offline acceptance check and generated working-tree diffs from committed inputs; those generated diffs were restored before the claim, because `origination/` overlaps open PR #96. No pre-existing working changes were present.
