@@ -54,7 +54,7 @@ def main() -> None:
     assert rows["F-2"]["status"] == "Partial" and "13 of 272" in rows["F-2"]["current"], "F-2 must record 13 of 272 venues, not 272"
     assert rows["F-3"]["status"] == "Partial" and "May 14, 2026" in rows["F-3"]["current"], "F-3 must record the dated announcement"
     assert rows["F-3"]["official"].startswith("https://media.nfl.com/"), "F-3 must link the official announcement"
-    assert "162 of 272" in rows["P1"]["current"], "P1 must show the flagged 162 count (was 163 before the games refresh)"
+    assert "163 of 272" in rows["P1"]["current"], "P1 must show 163 odds rows, matching the refreshed games file on main"
     for rid in ("P3", "P10", "P11", "A13", "A16", "A19", "L2", "L3", "L4", "L5", "L6", "L7", "L8"):
         assert rows[rid]["status"] in ("Partial", "Done"), f"{rid} must record the skill-lab or ledger outcome"
     assert rows["L6"]["status"] == "Done", "L6 is complete: both control baselines run in every leaderboard run"
