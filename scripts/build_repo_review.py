@@ -39,6 +39,7 @@ OFFICIAL = {
     "stats": ("NFL stats", "https://www.nfl.com/stats/", False),
     "ops": ("NFL operations site", "https://operations.nfl.com/", False),
     "week11_schedule": ("NFL 2026 Week 11 schedule page", "https://www.nfl.com/schedules/2026/by-week/week-11", True),
+    "schedules_index": ("NFL 2026 weekly schedule index", "https://www.nfl.com/schedules/2026/by-week/", False),
     "scores_w11": ("NFL 2026 Week 11 scores page", "https://www.nfl.com/scores/2026/week-11", True),
     "gamecentre_w11": ("NFL game centre: Colts at Texans, 2026 Week 11", "https://www.nfl.com/games/colts-at-texans-2026-reg-11", True),
     "gamecentre_w2": ("NFL game centre: Commanders at Cowboys, 2026 Week 2", "https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2", True),
@@ -168,6 +169,78 @@ def esc(value: str) -> str:
     return html.escape(value, quote=True)
 
 
+# Final integration verification: checks re-run against live official pages on 2026-11-16
+# by session arena/dd2f5cf1-nfl3. (check, detail, result, official key, repo path or None, opened_today)
+VERIFIED_INT = [
+    ("VI-01", "Standings reproduction",
+     "Recomputed W-L-T, PF and PA for all 32 clubs from the transcribed 2026-11-12 standings snapshot plus the 13 Week 10 results read from the official schedule (the Monday LAC @ BAL fixture was not yet played and was excluded). Every club and field matches the live official standings page.",
+     "160 of 160 club x field values reproduce exactly", "standings", "line-lab/data/standings_2026.json", True),
+    ("VI-02", "Week 10 results feed",
+     "The 13 played Week 10 finals (Thu WAS 24 @ NYG 21; Sun NE 10 @ DET 35, KC 35 @ ATL 13, HOU 24 @ CLE 27, MIN 30 @ GB 10, MIA 22 @ IND 24, CAR 20 @ NO 17, BUF 31 @ NYJ 12, JAX 40 @ TEN 23, LA 34 @ AZ 6, SEA 21 @ LV 13, SF 46 @ DAL 40, PIT 18 @ CIN 38) were read from the official schedule page and used only to carry the standings check forward; they are not written into any committed table.",
+     "All 13 read; no disagreement with the published Week 10 slate", "schedule", None, True),
+    ("VI-03", "Transactions claims",
+     "Read the live official transactions log: Keenan Allen (Colts to 49ers) and Josh Downs (Colts to Chiefs), both dated 11/10, and Jacoby Brissett (Cardinals to Ravens) dated 11/06.",
+     "Matches the recorded claims (V-02)", "transactions", None, True),
+    ("VI-04", "Injury-report designations",
+     "Read the live official injury report (Week 10): Lions Kerby Joseph (Knee, Did Not Participate, Out), Cade Mays (Ankle, Did Not Participate, Out), D.J. Reed (Hip, Did Not Participate, Out); Patriots Rhamondre Stevenson (Knee, Limited, Questionable) and TreVeyon Henderson (Illness, Did Not Participate, Out).",
+     "Matches the corrected archive and the published worked example", "injuries", "captures/nfl-injuries/index.jsonl", True),
+    ("VI-05", "Injury-designation policy",
+     "Read the official competition-committee article on the injury-report policy: Questionable means uncertain whether the player will play, Doubtful means unlikely to participate, Out means will not play; the practice report uses DNP / Limited / Full; no percentage defines any game-status label.",
+     "Confirms V-03; no percentage exists to calibrate", "injury_policy", None, True),
+    ("VI-06", "Week 11 fixture set",
+     "Read the official Week 11 schedule: 13 fixtures (1 Thursday, 8 Sunday, 1 Sunday night, 1 Monday) and six byes (ATL, CLE, GB, LA, NE, SEA).",
+     "Matches the pre-registered shadow-board slate exactly", "week11_schedule", "shadow-board/data/fixtures_2026_w11.csv", True),
+    ("VI-07", "Venue conflict flags",
+     "Opened both official game-centre pages for the flagged fixtures: Indianapolis at Houston reads Location HOUSTON, TX / Stadium RELIANT STADIUM while the schedule page's travel link says NRG Stadium (conflict stands, venue left blank); Minnesota at San Francisco reads Location MEXICO CITY / Stadium ESTADIO BANORTE.",
+     "Both flags confirmed against the official pages; nothing inferred", "gamecentre_w11", "shadow-board/data/fixtures_2026_w11.csv", True),
+    ("VI-08", "Injury-capture archive integrity",
+     "Decompressed the latest hashed capture (2026-11-16T06:31Z, 347 rows, SHA-256 991825b70aeeb6a8...) and confirmed it carries the three Lions 'Out' designations, so the committed archive and the live official page agree.",
+     "Archive agrees with the live page", "injuries", "captures/nfl-injuries/index.jsonl", True),
+    ("VI-09", "Corpus freeze pin",
+     "Recomputed the SHA-256 of corpus/games_2026_w1_9.csv and compared it with corpus/manifest.json and the shadow-board pin. The corpus rows themselves carry the official schedule pages as their source.",
+     "All three hash to 4632744b44d59ff2...; forecasts stay pinned to the frozen bytes", "schedules_index", "corpus/manifest.json", False),
+    ("VI-10", "Price-store firewall",
+     "Inspected the price ledger and the adopted policy: 0 stored price rows and 0 residual rows because no source carries a named licence and both timestamps. The policy's domain is the official market-price pages, which it deliberately does not treat as a licensed source.",
+     "Market and residual columns remain blank by rule", "odds", "pricing/PRICE_DATA_POLICY.md", False),
+    ("VI-11", "Strategy governance fields",
+     "Recounted the merged strategy register: 34 strategies, 34 of 34 carry both two-sided fields (what would confirm it / what would change our mind), 0 validated, both control baselines present. The strategies' evidence domain is the official NFL pages they cite.",
+     "Register consistent with the published leaderboard", "standings", "ops-center/data/derived.json", False),
+    ("VI-12", "Register scope reconciliation",
+     "Counted the two decision registers: the 26-row decision-lab catalogue (R-series, snapshot 2026-11-12, presented on the landing page) and the 64-row readiness register (P/R/A/F/L series). The landing page names its own source and links the full register; no count from one is mixed into the other.",
+     "Scopes stated and linked; no mixed counts", "injuries", "readiness/data/readiness.csv", False),
+]
+
+
+def official_link_now(key: str) -> str:
+    label, url, _ = OFFICIAL[key]
+    return f'<a class="source" href="{esc(url)}" target="_blank" rel="noopener noreferrer">{esc(label)} (opened 2026-11-16) ↗</a>'
+
+
+def render_integration_section() -> str:
+    rows = []
+    for cid, check, detail, result, key, path, opened in VERIFIED_INT:
+        source = official_link_now(key) if opened else official_link(key)
+        if path:
+            source += "<br>" + repo_link(path)
+        rows.append(
+            "<tr>"
+            f"<td>{esc(cid)}</td>"
+            f"<td>{esc(check)}</td>"
+            f"<td>{esc(detail)}</td>"
+            f"<td>{esc(result)}</td>"
+            f"<td>{source}</td>"
+            "</tr>"
+        )
+    return f'''<section class="section"><h2>Final integration verification — 2026-11-16</h2>
+<p class="small">Re-run of the combined data against live official pages by the final integration session
+(arena/dd2f5cf1-nfl3). Every value below was read from the linked official page on 2026-11-16; repo paths
+point at the artifact each check concerns. A pass means the stated fact matched its source, not that the
+underlying data is complete.</p>
+<div class="tablewrap"><table><thead><tr><th>ID</th><th>Check</th><th>What was done</th><th>Result</th><th>Source</th></tr></thead><tbody>
+{''.join(rows)}
+</tbody></table></div></section>'''
+
+
 def official_link(key: str, css_source: bool = True) -> str:
     label, url, opened = OFFICIAL[key]
     cls = ' class="source"' if css_source else ""
@@ -200,16 +273,18 @@ def render_repo_review() -> str:
     verified_rows = []
     for vid, text, key in VERIFIED:
         verified_rows.append(f"<tr><td>{esc(vid)}</td><td>{esc(text)}</td><td>{official_link(key)}</td></tr>")
+    integration_section = render_integration_section()
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Repo review | NFL3</title><link rel="stylesheet" href="assets/site.css"></head><body><header id="site-header"></header><main class="wrap">
 <div class="hrow"><div><p class="eyebrow">Line-by-line review</p><h1>Repo review</h1></div><span class="badge danger">Irregularities open</span></div>
 <p class="intro">Every irregularity below was checked against the repository in this session, and against the official NFL page where the fact is public. Each row has a repo path and a link. Blank cells mean not verified. Nothing here changes a published value; the owner of each file decides the fix.</p>
-<div class="callout"><strong>How this review was done.</strong> The official injury report, the transactions log and the injury-policy article were opened with a fetch on 2026-11-15. Other official links are cited from the repository and were not re-opened. Git history was read with a full clone (unshallowed) so commit claims could be checked.</div>
+<div class="callout"><strong>How this review was done.</strong> The official injury report, the transactions log and the injury-policy article were opened with a fetch on 2026-11-15. The final integration session re-opened the official standings, the Week 10 and Week 11 schedule pages, both flagged game-centre pages, the transactions log, the injury report and the injury-policy article on 2026-11-16 and recorded the results in the section below. Other official links are cited from the repository and were not re-opened. Git history was read with a full clone (unshallowed) so commit claims could be checked.</div>
 <section class="section"><h2>Irregularities</h2><p class="small">Severity is the reviewer's view of the impact on a decision, not a legal finding.</p><div class="tablewrap"><table><thead><tr><th>ID</th><th>Severity</th><th>Finding</th><th>Evidence</th><th>Action</th><th>Source and file</th></tr></thead><tbody>
 {''.join(review_rows)}
 </tbody></table></div></section>
 <section class="section"><h2>Checked and found consistent</h2><p class="small">These checks passed in this session. A pass does not make a value complete; it means the stated fact matched its source.</p><div class="tablewrap"><table><thead><tr><th>ID</th><th>Check</th><th>Source</th></tr></thead><tbody>
 {''.join(verified_rows)}
 </tbody></table></div></section>
+{integration_section}
 <section class="section"><h2>Commands to repeat the checks</h2><div class="tablewrap"><table><thead><tr><th>Check</th><th>Command</th><th>Result this session</th><th>Source</th></tr></thead><tbody>
 <tr><td>Site links and table citations</td><td><code>python3 scripts/validate_site.py</code></td><td>Pass</td><td><a href="https://github.com/kanlerxz87-cyber/NFL3/blob/main/scripts/validate_site.py">scripts/validate_site.py ↗</a></td></tr>
 <tr><td>Readiness table and review are current</td><td><code>python3 scripts/build_readiness.py --check</code></td><td>Pass after build</td><td><a href="https://github.com/kanlerxz87-cyber/NFL3/blob/main/scripts/build_readiness.py">scripts/build_readiness.py ↗</a></td></tr>
@@ -260,6 +335,11 @@ def validate() -> None:
             raise SystemExit(f"{rid}: unknown official key {key}")
         if path not in GENERATED and not (ROOT / path).exists():
             raise SystemExit(f"{rid}: evidence path missing {path}")
+    for cid, check, detail, result, key, path, opened in VERIFIED_INT:
+        if key is not None and key not in OFFICIAL:
+            raise SystemExit(f"{cid}: unknown official key {key}")
+        if path is not None and path not in GENERATED and not (ROOT / path).exists():
+            raise SystemExit(f"{cid}: evidence path missing {path}")
 
 
 def main() -> int:

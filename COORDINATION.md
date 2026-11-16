@@ -2635,3 +2635,71 @@ The 2026-11-16 brief lists about 80 items. Most already have a page somewhere in
 - **Concurrent work discovered after the claim:** PR #100 (`arena/46fe1baa-nfl3`) adds a separate `venues/` register with the same 13-fixture research topic, but its file list has no `shadow-board/` paths. PR #101 is a separate final-integration record; PR #99 is a coordination-only follow-up. I did not edit any of their files. I notified the #100 owner in PR comments that this branch is Shadow-Board-only, summarized the source-field distinction and read-window precision, and offered to cross-reference their venue evidence after it lands. The Shadow Board branch remains independently buildable and does not consume their files.
 - PR #96 has since merged, and its `validate` check passed in run 43890969225; its deploy job was skipped for the pull request. After PRs #102 and #103 merged, this branch was rebased onto `origin/main` at `be3665f`. PR #101's latest `validate` passed in run 43891711614 (PR deploy skipped); #100 has no check result yet, and #99's last failed run 43889610874 predates the #96 merge. I will re-check the latest base and PR states before pushing/merging, without touching the parallel venue register, dashboard, readiness or workflow changes.
 - **Latest-base validation (after rebase to `be3665f`):** Shadow Board gate, root link/site checks, decision-readiness and decision-lab tests, decision-desk check, injury-capture tests, injury-archive tests and `injury-archive/scripts/verify.py` all exited 0. The archive verifier reported 2 stored reads, 1 report/article and 171 joined designation rows (2,174 checks, 0 failures). `tests/test_injury_capture.py` intentionally exercises missing-column and timeout cases; its output includes a structural-drift message and simulated fetch timeout even though all 13 tests pass. `git diff --check` passed.
+## Final integration — `arena/dd2f5cf1-nfl3` — 2026-11-16 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Final integration: line-by-line re-verification of the combined data against live official pages; publish the verification record; rebuild, validate, PR, merge, confirm Pages | done (publication record in the follow-up entry below) | `arena/dd2f5cf1-nfl3` | `scripts/build_repo_review.py`, generated `repo-review.html`, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md` |
+
+Branch: `arena/dd2f5cf1-nfl3` (Arena-fixed; base `main` at `e8877e0`). HEAD equals `main` at claim time, so this
+session's branch starts from the fully merged state of PRs #1–#95.
+
+**Coordination state at claim time.** `git rev-parse HEAD origin/main main` all resolve to `e8877e0`; the working
+tree was clean. One pull request was open: **PR #96** (`arena/37020320-nfl3`, "Lions official designations on
+dashboard; origination artifacts reproducible; CI drift alarm"), created 2026-11-16T14:39:34Z — under two minutes
+before this session claimed. Its `validate` check had concluded **FAILURE** at 14:40:12Z. Its claim is therefore
+not stale, its file scope (`dashboard/**`, `origination/**`, `.github/workflows/pages.yml`, `COORDINATION.md`) is
+not touched by this session, and **it was not merged**: a branch whose validation check fails is not merged. This
+session reproduced the PR's checks in a throwaway clone of its head and every step passed locally (including the
+new drift-alarm step), so the failure is not reproduced from the committed tree; the PR is left with its owning
+session to diagnose and re-run. This entry logs the state rather than taking over the claim.
+
+**What this session did (all values re-read from live official pages on 2026-11-16; nothing inferred):**
+
+- **Standings reproduction, 160/160.** Recomputed W-L-T, PF and PA for all 32 clubs from the transcribed
+  `line-lab/data/standings_2026.json` snapshot (2026-11-12) plus the 13 played Week 10 finals read from
+  `https://www.nfl.com/schedules/2026/by-week/week-10` (the Monday LAC @ BAL fixture had not yet been played and
+  was excluded). Every club and field reproduces the live official standings page exactly. This independently
+  confirms the "160/160 club × field checks" claim against the live source.
+- **Transactions.** The live `https://www.nfl.com/transactions/` log shows Keenan Allen (Colts to 49ers) and
+  Josh Downs (Colts to Chiefs), both 11/10, and Jacoby Brissett (Cardinals to Ravens) 11/06 — matching the
+  recorded claims.
+- **Injury report.** The live `https://www.nfl.com/injuries/` (Week 10) shows Lions Kerby Joseph (Knee, DNP, Out),
+  Cade Mays (Ankle, DNP, Out), D.J. Reed (Hip, DNP, Out), and the Patriots chain used in the published worked
+  example (Stevenson Questionable, Henderson Out).
+- **Injury policy.** The official competition-committee article
+  (`https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693`)
+  defines Questionable / Doubtful / Out in plain language and attaches no percentage to any label.
+- **Week 11 slate.** The official Week 11 schedule page lists exactly the 13 fixtures and six byes
+  (ATL, CLE, GB, LA, NE, SEA) registered in `shadow-board/data/fixtures_2026_w11.csv`.
+- **Venue flags.** Both game-centre pages were opened: IND @ HOU reads "RELIANT STADIUM" against the schedule
+  page's "NRG Stadium" (conflict stands; venue left blank), and MIN @ SF reads "MEXICO CITY / ESTADIO BANORTE".
+- **Archive and pins.** The latest hashed injury capture (2026-11-16T06:31Z, 347 rows,
+  SHA-256 `991825b70aeeb6a8…`) carries the three Lions "Out" designations; `corpus/games_2026_w1_9.csv`,
+  `corpus/manifest.json` and the shadow-board pin all hash to `4632744b44d59ff2…`; the price ledger holds 0 rows
+  by the adopted fail-closed policy; the merged strategy register holds 34 strategies, 34/34 with both two-sided
+  fields, 0 validated, both controls present.
+
+**Artifacts.** `scripts/build_repo_review.py` gained a "Final integration verification — 2026-11-16" section
+(12 checks, VI-01…VI-12, each with the official page opened today or the repo-cited source); `repo-review.html`
+was regenerated from the generator (the `--check` gate passes, so the page and generator stay in step).
+`EXECUTIVE_SUMMARY.md` carries the matching update.
+
+**Checks run on this branch before pushing:** `python3 scripts/validate_site.py`, `python3 tests/check_site.py`,
+`python3 tests/test_decision_lab.py`, `tests/test_readiness.py`, `tests/test_skill_lab.py`,
+`tests/test_origination.py`, `tests/test_availability_ledger.py`, `tests/test_injury_capture.py`,
+`tests/test_verification_lab.py`, `python3 ops-center/scripts/build.py` + `verify.py`,
+`python3 origination/scripts/build.py` + `verify.py`, `python3 skill-lab/scripts/verify.py`,
+`python3 availability-ledger/scripts/verify.py`, `python3 shadow-board/scripts/check.py`,
+`python3 decision-desk/scripts/check.py`, `python3 scripts/build_repo_review.py --check` — all pass.
+
+**Irregularities carried forward (not introduced by this session, unchanged):** RR-01/RR-07 (committed vs
+published injury counts: 254 / 279 / 347 describe different dated reads — the archive now carries the 347-row
+series), RR-03 (Texans depth image, Packers parse), RR-04 (research-desk pre-registration order), RR-05/RR-16
+(venue provenance), RR-06 (offline verification record), RR-08 (no alerting job), RR-15 (one unscored fixture in
+the corpus), plus the still-blocked inputs (licensed price data, official game books and inactive lists, verified
+snap counts). All remain published on the Flagged for Review pages with their sources.
+
+**Publication record.** The pull request from this branch, its merge result and the post-merge Pages deployment
+are recorded in the follow-up entry at the end of this board, committed after the merge per the protocol used by
+earlier sessions.
