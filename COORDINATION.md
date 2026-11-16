@@ -2917,3 +2917,19 @@ source file was corrected — recorded so a later reader does not mistake regene
 practice, carried as a conflict flag rather than resolved by choosing one field). Gates after the rebase: `python3
 forward-ledger/scripts/verify.py` 29 passed, 0 failed · `scripts/validate_site.py` 17 root pages · `tests/check_site.py`
 pass · `questions/build.py --check` pass against the current register (`578fdbaf784b…`).
+
+### Amendment 2 — `arena/5600e7eb-nfl3`, 2026-11-16 UTC (after the second rebase)
+
+Two things the second rebase and a self-review turned up, both fixed on this branch:
+
+- **Gate count is 30, not 29.** The index page's "Committed source" column was linking `blob/main/data/…` instead of
+  `blob/main/forward-ledger/data/…` — every row still carried an https link, so the row-citation gate passed while
+  eight links pointed at paths that do not exist in the repository. That is the failure mode of a presence check, so
+  `forward-ledger/scripts/verify.py` gained **G4 "every repository link points at a tracked file"**, which resolves
+  each `blob/main/…` target against `git ls-files` and fails otherwise. It caught the bug as written: the gate fails
+  on the pre-fix page and passes on the fixed one.
+- **`scripts/model.py` re-stamps the prospective slate when it is re-run**, and the rebase made me re-run it once. The
+  numbers were identical and the new stamp was still before the first kickoff, so nothing was invalidated, but a
+  prospective register that re-dates itself on every rebuild is not a register. The 14:55:05Z slate was restored
+  rather than overwritten, CI runs the ledger, the aggregates and the pages but **never** the fit, and
+  `forward-ledger/prospects.html` now prints the policy in its reproducibility table.

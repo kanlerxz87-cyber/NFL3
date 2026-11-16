@@ -270,7 +270,7 @@ def main() -> int:
             L.errors.append(f"index guide names {src_file}, which does not exist")
         guide_rows.append([f'<td><a href="{href}">{esc(label)}</a></td>', cell(descriptions[href]),
                            "<td><code>" + esc(built_from[href]) + "</code></td>",
-                           link(repo + src_file, "the file it reads")])
+                           link(repo + "forward-ledger/" + src_file, "the file it reads")])
     guide = table(["Page", "What it holds", "Built from", "Committed source"], guide_rows)
     intro_card = ('<div class="card notice"><strong>What this workspace is.</strong> Two things the rest of the site '
                   "kept running out of: a <em>point-in-time verified results feed</em> - every 2026 fixture with its "
@@ -602,7 +602,10 @@ def main() -> int:
                          ("league mean points per club per game", constants.get("mu")),
                          ("input ledger sha256 (first 16)",
                           hashlib.sha256((DATA / "results_ledger.csv").read_bytes()).hexdigest()[:16]),
-                         ("rows per fixture", "3 (side, total, moneyline)")):
+                         ("rows per fixture", "3 (side, total, moneyline)"),
+                         ("issue stamp policy", "a slate is stamped once: re-running scripts/model.py "
+                          "re-stamps it, so CI rebuilds the ledger and the pages but never the fit, and the "
+                          "committed slate is the record")):
         repro_rows.append([cell(label), "<td><code>" + esc(value) + "</code></td>",
                             link(repo + "forward-ledger/PREREGISTRATION.md", "registration")])
     repro_table = table(["Field", "Value", "Reference"], repro_rows)

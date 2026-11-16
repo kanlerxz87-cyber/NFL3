@@ -141,6 +141,13 @@ def main() -> int:
             if not path.exists():
                 broken.append(f"{name} -> {target}")
     gate(not broken, "G4 no broken relative link in any page", ", ".join(broken[:4]) or f"{len(PAGES)} pages checked")
+    tracked = set(run("git", "ls-files").splitlines())
+    blob = re.compile(r'href="https://github\.com/kanlerxz87-cyber/NFL3/blob/main/([^"#]+)"')
+    ghost = [f"{name} -> {m.group(1)}" for name, text in pages.items() for m in blob.finditer(text)
+             if m.group(1) not in tracked]
+    blob_links = sum(len(blob.findall(text)) for text in pages.values())
+    gate(not ghost, "G4 every repository link points at a tracked file",
+         "not in the tree: " + ", ".join(ghost[:4]) if ghost else f"{blob_links} blob links resolve")
     abs_site = [f"{name}: {m}" for name, text in pages.items() for m in re.findall(r'href="/[^"]*"', text)]
     gate(not abs_site, "G4 no site-absolute URL (GitHub Pages serves under /NFL3/)", ", ".join(abs_site[:3]))
 
