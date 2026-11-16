@@ -3178,3 +3178,28 @@ step's own message is unrecorded here; what is recorded is the observable state 
 - Every official-source refresh (injury report, depth pages, game books, inactives, snap counts, transactions, venues) needs a run from an environment with nfl.com access. The scheduled workflows are the route; their output needs checking in CI.
 - Items marked "Flagged for Review" on the live site remain flagged and unverified; this audit did not clear any of them.
 - Model, backtest and leaderboard numbers are not re-derived in this session.
+## Claim and result — `arena/8f5b2a6e-nfl3` — 2026-11-16 UTC
+
+Branch is fixed by Arena as `arena/8f5b2a6e-nfl3`, branched from `main` at `aa2b384` (PR #116). `HEAD`, `origin/main` and `main` all equal `aa2b384` at claim time; the working tree was clean. Open PRs at claim time: #105, #100, #99 (all owned by other sessions; not touched).
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Acceptance re-check of the 2026-11-16 brief against the committed repo and one live official read; publish the result | done (this entry) | `arena/8f5b2a6e-nfl3` | this append-only board only |
+
+**Scope decision.** The brief is large and most of its items are already built in other workspaces or are blocked by inputs that no source in this repo supplies. Those workspaces are owned by other open claims (`injury-archive/`, `readiness/`, root docs under `arena/d37d5907-nfl3`, `matchup/` and `pricing/` under their owners), so this session edits none of them. It changes no data, no published page and no model.
+
+**Verification performed (2026-11-16 UTC):**
+- Repo state: `scripts/validate_site.py` passed (17 root pages, every table row cited; decision-readiness register: 26 canonical rows). `tests/check_site.py` passed (local links, row citations, readiness and ops metrics, decision-review routes). `decision-desk/scripts/check.py` passed (14 pages, 647 table rows checked, standings reproduce the official page).
+- Live official read: [NFL injury report, 2026 Week 10](https://www.nfl.com/injuries/league/2026/REG10) opened through the page-fetch tool. The Week 10 header and the Sunday NE @ DET section are present. Kerby Joseph (S, Knee, DNP, **Out**), Cade Mays (C, Ankle, DNP, **Out**) and D.J. Reed (CB, Hip, DNP, **Out**) match the committed Lions correction. The page is 8 chunks long; this session did **not** re-tally the full row count, so the 347-row figure remains as recorded by the `injury-archive/` owner, not as a fresh count here.
+
+**What the brief asks for that this repo cannot yet support (carried forward, unchanged, published on the existing readiness and flagged pages):**
+- Licensed or verified price data for originated-line backtests (`pricing/PRICE_DATA_POLICY.md`: 0 licensed price rows).
+- Official NFL Game Books for actual starters, game-day status and inactives as a starter source; verified snap counts; a verified per-club depth chart for all 32 clubs (the Texans depth image and the Packers jersey-prefix case are still open).
+- NWS hourly grids and official stadium roof designations for the weather and totals overlay.
+- A prospective Week 11+ record and a passing pre-registration gate for any strategy; no strategy is validated (0 of 34 in the merged register).
+- A reserve-list capture as a standing series (only the Week 10 reserve/trade captures in `availability-ledger/` are on file).
+- Automated multi-day snapshot and drift alerting: the existing workflows exist, but RR-08 (no alerting job) remains open.
+
+**Irregularities carried forward (not introduced here):** the 254 / 279 / 347 injury-count conflict (RR-01 / RR-07); the Texans depth-image source (RR-03); RR-04 (pre-registration order in the research desk); RR-05 / RR-16 (venue provenance); RR-06 (offline verification record); RR-15 (one unscored fixture in the frozen corpus). Pages: `repo-review.html`, `flagged.html`, `questions.html`.
+
+**Publication.** A docs-only PR from this branch to `main` will carry this entry. Its merge result and the Pages run are recorded in the publication entry below, committed after the merge.
