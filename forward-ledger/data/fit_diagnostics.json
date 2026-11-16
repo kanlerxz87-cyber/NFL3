@@ -1,0 +1,177 @@
+{
+  "schema": "nfl3-forward-ledger-fit/v1",
+  "protocol": "forward-ledger/PREREGISTRATION.md",
+  "fitted_on": {
+    "graded_games": 149,
+    "weeks": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "source": "data/results_ledger.csv (official score pages, 2026-11-15 and 2026-11-16 reads)"
+  },
+  "constants": {
+    "mu": 23.0872,
+    "hfa": -0.255,
+    "iterations": 400,
+    "line_round_sided": 0.5,
+    "line_round_total": 1.0,
+    "sigma_floor": 6.0,
+    "config_hash": "0f30928f51ca8cde"
+  },
+  "in_sample": {
+    "n": 149,
+    "sigma_margin": 10.3791,
+    "sigma_total": 12.1935,
+    "var_margin_actual": 182.6392,
+    "var_margin_predicted": 74.9294,
+    "margin_r2": 0.4102,
+    "total_r2": 0.2605,
+    "mean_abs_margin_error": 8.298,
+    "mean_abs_total_error": 9.8235
+  },
+  "chronological_holdout": {
+    "train_weeks": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "eval_weeks": [
+      9,
+      10
+    ],
+    "n_train": 121,
+    "n_eval": 28,
+    "n": 28,
+    "sigma_margin": 11.5274,
+    "sigma_total": 16.1683,
+    "var_margin_actual": 216.7181,
+    "var_margin_predicted": 44.6307,
+    "margin_r2": 0.4266,
+    "total_r2": 0.0002,
+    "mean_abs_margin_error": 8.7505,
+    "mean_abs_total_error": 12.7834,
+    "brier_home_win_model": 0.14782,
+    "brier_home_win_base_rate": 0.21811,
+    "brier_home_win_coin": 0.25,
+    "brier_skill_vs_base_rate": 0.3223,
+    "brier_skill_vs_coin": 0.4087,
+    "base_rate_home_win": 0.3214,
+    "margin_r2_holdout": 0.4266,
+    "luck_split": {
+      "variance_of_actual_margin": 216.7181,
+      "variance_of_expectation": 44.6307,
+      "share_of_variance_inside_the_expectation": 0.2059,
+      "reading": "this is the removal-of-luck number the panel publishes: the share of game-margin variance an expectation can address, everything else is luck by construction"
+    }
+  },
+  "correlation_register": {
+    "n_games": 149,
+    "n_clubs": 32,
+    "margin_vs_total": {
+      "pearson_r": -0.1408,
+      "n": 149,
+      "reading": "the dependence a same-game side-and-total parlay assumes away"
+    },
+    "joint_over_product_same_game": {
+      "joint_p_home_win_and_over_league_mean_total": 0.1946,
+      "independent_product": 0.2143,
+      "ratio": 0.9083,
+      "n": 149
+    },
+    "same_week_cross_game_margin": {
+      "pearson_r": 0.0192,
+      "n_pairs": 1041,
+      "reading": "the dependence a multi-game parlay assumes away"
+    },
+    "club_win_pct_vs_point_differential": {
+      "pearson_r": 0.8845,
+      "n": 32,
+      "reading": "how much of a record is the margin it came from"
+    },
+    "margin_mean_bootstrap_ci": [
+      -2.7718,
+      1.7047
+    ],
+    "ties_observed": 1,
+    "caveat": "Pearson r on eight-plus seasons of nothing: this register uses 2026 Weeks 1-10 only. It is not a correlation of model errors against the market, which no licensed price row in this repository would allow yet."
+  },
+  "backtest_only_values_for_the_firewall_check": [
+    0.14782,
+    0.21811,
+    0.25,
+    0.3223,
+    23.0872,
+    -0.255
+  ],
+  "leaderboard_divisions": [
+    {
+      "division": "Singles \u00b7 side",
+      "registered_rows": 1,
+      "eligible_for_ranking": 0,
+      "why_not": "no prospective graded fixture yet: the first registered window opens with the 2026-11-19 20:15 ET kickoff",
+      "grading_basis": "benchmark-relative Brier skill with a game-cluster lower bound and Benjamini-Hochberg control",
+      "signal_column": "blank until the first graded fixture",
+      "staking_column": "blank by price-data policy (no licensed two-sided source)"
+    },
+    {
+      "division": "Singles \u00b7 total",
+      "registered_rows": 1,
+      "eligible_for_ranking": 0,
+      "why_not": "no prospective graded fixture yet: the first registered window opens with the 2026-11-19 20:15 ET kickoff",
+      "grading_basis": "benchmark-relative Brier skill with a game-cluster lower bound and Benjamini-Hochberg control",
+      "signal_column": "blank until the first graded fixture",
+      "staking_column": "blank by price-data policy (no licensed two-sided source)"
+    },
+    {
+      "division": "Singles \u00b7 moneyline",
+      "registered_rows": 1,
+      "eligible_for_ranking": 0,
+      "why_not": "no prospective graded fixture yet: the first registered window opens with the 2026-11-19 20:15 ET kickoff",
+      "grading_basis": "benchmark-relative Brier skill with a game-cluster lower bound and Benjamini-Hochberg control",
+      "signal_column": "blank until the first graded fixture",
+      "staking_column": "blank by price-data policy (no licensed two-sided source)"
+    },
+    {
+      "division": "Game parlay (two legs, two games)",
+      "registered_rows": 0,
+      "eligible_for_ranking": 0,
+      "why_not": "no row may be registered in this division until a directly validated joint probability and the operator's void/push rules both exist (joint-evidence gate)",
+      "grading_basis": "not gradeable",
+      "signal_column": "blank until the first graded fixture",
+      "staking_column": "blank by price-data policy (no licensed two-sided source)"
+    },
+    {
+      "division": "Same-game parlay (two legs, one game)",
+      "registered_rows": 0,
+      "eligible_for_ranking": 0,
+      "why_not": "no row may be registered in this division until a directly validated joint probability and the operator's void/push rules both exist (joint-evidence gate)",
+      "grading_basis": "not gradeable",
+      "signal_column": "blank until the first graded fixture",
+      "staking_column": "blank by price-data policy (no licensed two-sided source)"
+    },
+    {
+      "division": "Player-prop combo",
+      "registered_rows": 0,
+      "eligible_for_ranking": 0,
+      "why_not": "no row may be registered in this division until a directly validated joint probability and the operator's void/push rules both exist (joint-evidence gate)",
+      "grading_basis": "not gradeable",
+      "signal_column": "blank until the first graded fixture",
+      "staking_column": "blank by price-data policy (no licensed two-sided source)"
+    }
+  ],
+  "issue_stamp_utc": "2026-11-16T14:55:05+00:00",
+  "price_firewall": "no ROI, CLV or residual is computed anywhere in this workspace; the columns exist and are empty"
+}

@@ -1,0 +1,88 @@
+{
+  "schema": "nfl3-forward-ledger-leaderboard/v1",
+  "graded_fixtures_in_window": 0,
+  "window_opens_utc": "2026-11-19T20:15-05:00",
+  "divisions": [
+    {
+      "division": "Singles \u00b7 side",
+      "registered_rows": 1,
+      "eligible_for_ranking": 0,
+      "why_not": "no prospective graded fixture yet: the first registered window opens with the 2026-11-19 20:15 ET kickoff",
+      "grading_basis": "benchmark-relative Brier skill with a game-cluster lower bound and Benjamini-Hochberg control",
+      "signal_column": "blank until the first graded fixture",
+      "staking_column": "blank by price-data policy (no licensed two-sided source)"
+    },
+    {
+      "division": "Singles \u00b7 total",
+      "registered_rows": 1,
+      "eligible_for_ranking": 0,
+      "why_not": "no prospective graded fixture yet: the first registered window opens with the 2026-11-19 20:15 ET kickoff",
+      "grading_basis": "benchmark-relative Brier skill with a game-cluster lower bound and Benjamini-Hochberg control",
+      "signal_column": "blank until the first graded fixture",
+      "staking_column": "blank by price-data policy (no licensed two-sided source)"
+    },
+    {
+      "division": "Singles \u00b7 moneyline",
+      "registered_rows": 1,
+      "eligible_for_ranking": 0,
+      "why_not": "no prospective graded fixture yet: the first registered window opens with the 2026-11-19 20:15 ET kickoff",
+      "grading_basis": "benchmark-relative Brier skill with a game-cluster lower bound and Benjamini-Hochberg control",
+      "signal_column": "blank until the first graded fixture",
+      "staking_column": "blank by price-data policy (no licensed two-sided source)"
+    },
+    {
+      "division": "Game parlay (two legs, two games)",
+      "registered_rows": 0,
+      "eligible_for_ranking": 0,
+      "why_not": "no row may be registered in this division until a directly validated joint probability and the operator's void/push rules both exist (joint-evidence gate)",
+      "grading_basis": "not gradeable",
+      "signal_column": "blank until the first graded fixture",
+      "staking_column": "blank by price-data policy (no licensed two-sided source)"
+    },
+    {
+      "division": "Same-game parlay (two legs, one game)",
+      "registered_rows": 0,
+      "eligible_for_ranking": 0,
+      "why_not": "no row may be registered in this division until a directly validated joint probability and the operator's void/push rules both exist (joint-evidence gate)",
+      "grading_basis": "not gradeable",
+      "signal_column": "blank until the first graded fixture",
+      "staking_column": "blank by price-data policy (no licensed two-sided source)"
+    },
+    {
+      "division": "Player-prop combo",
+      "registered_rows": 0,
+      "eligible_for_ranking": 0,
+      "why_not": "no row may be registered in this division until a directly validated joint probability and the operator's void/push rules both exist (joint-evidence gate)",
+      "grading_basis": "not gradeable",
+      "signal_column": "blank until the first graded fixture",
+      "staking_column": "blank by price-data policy (no licensed two-sided source)"
+    }
+  ],
+  "controls": [
+    {
+      "control": "coin flip",
+      "definition": "0.5 on the home side, always",
+      "registered": true
+    },
+    {
+      "control": "base rate",
+      "definition": "the fitted home-win rate on the evaluation window",
+      "registered": true
+    },
+    {
+      "control": "favourites only",
+      "definition": "back the side our own line prefers, at our own line",
+      "registered": true,
+      "note": "not gradeable without a price row; the row exists so the run will include it the day a licensed source does"
+    },
+    {
+      "control": "random side",
+      "definition": "uniform coin on side selection with a recorded seed",
+      "registered": true
+    }
+  ],
+  "reward": {
+    "funded": false,
+    "note": "no reward pool is defined by any owner decision; the field stays blank"
+  }
+}

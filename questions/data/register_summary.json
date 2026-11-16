@@ -1,0 +1,17 @@
+{
+ "register": "ops-center/data/derived.json",
+ "register_sha256": "69b0c33d1bb0e3c8eaf79d48c181d16f9e253e3a521940e28c04b53e68108343",
+ "register_observation_date": "2026-11-12",
+ "questions": 100,
+ "questions_blocking": 67,
+ "questions_with_an_answer": 14,
+ "questions_blocking_and_unanswered": 65,
+ "proposals": 75,
+ "proposals_without_priority": 40,
+ "proposals_without_path": 54,
+ "proposals_with_a_sentence_in_the_status_field": 13,
+ "area_labels_as_recorded": 55,
+ "groups_after_rules": 10,
+ "gates": 31,
+ "flags": 10
+}

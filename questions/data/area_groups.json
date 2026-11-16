@@ -1,0 +1,210 @@
+{
+ "rules": [
+  {
+   "group": "Rights & licensing",
+   "keywords": [
+    "licens",
+    "rights",
+    "jurisdiction",
+    "legal",
+    "authority",
+    "vendor"
+   ]
+  },
+  {
+   "group": "Injuries, depth & availability",
+   "keywords": [
+    "injur",
+    "depth",
+    "availab",
+    "lineup",
+    "backup",
+    "string",
+    "starter",
+    "roster",
+    "personnel",
+    "elevation",
+    "inactive",
+    "snap"
+   ]
+  },
+  {
+   "group": "Correlation & combinations",
+   "keywords": [
+    "correlat",
+    "parlay",
+    "prop",
+    "combina",
+    "multiplication"
+   ]
+  },
+  {
+   "group": "Markets & pricing",
+   "keywords": [
+    "odds",
+    "market",
+    "pric",
+    "line origination",
+    "staking",
+    "vig",
+    "settle",
+    "residual"
+   ]
+  },
+  {
+   "group": "Leaderboard & rewards",
+   "keywords": [
+    "leaderboard",
+    "reward",
+    "competition",
+    "rank",
+    "division"
+   ]
+  },
+  {
+   "group": "Models & measurement",
+   "keywords": [
+    "model",
+    "measurement",
+    "calibr",
+    "multiple testing",
+    "luck",
+    "threshold",
+    "grading",
+    "score",
+    "skill",
+    "baseline",
+    "corpus",
+    "backtest",
+    "pre-regist"
+   ]
+  },
+  {
+   "group": "Verification & review",
+   "keywords": [
+    "verif",
+    "review",
+    "source",
+    "discrepan",
+    "hygien",
+    "quality",
+    "audit",
+    "flag",
+    "conflict"
+   ]
+  },
+  {
+   "group": "Capture & timing",
+   "keywords": [
+    "capture",
+    "snapshot",
+    "timing",
+    "point-in-time",
+    "automat",
+    "schedule",
+    "operations",
+    "frequency",
+    "drift",
+    "freshness",
+    "archive"
+   ]
+  },
+  {
+   "group": "Rules & game context",
+   "keywords": [
+    "rule",
+    "weather",
+    "venue",
+    "roof",
+    "surface",
+    "kickoff",
+    "comeback"
+   ]
+  },
+  {
+   "group": "Product & site",
+   "keywords": [
+    "dashboard",
+    "site",
+    " ui",
+    "product",
+    "scope",
+    "privacy",
+    "security",
+    "ux",
+    "roadmap"
+   ]
+  }
+ ],
+ "ungrouped": "fallback",
+ "groups": {
+  "Capture & timing": 8,
+  "Correlation & combinations": 6,
+  "Injuries, depth & availability": 18,
+  "Leaderboard & rewards": 6,
+  "Markets & pricing": 9,
+  "Models & measurement": 12,
+  "Product & site": 21,
+  "Rights & licensing": 9,
+  "Rules & game context": 2,
+  "Ungrouped": 2,
+  "Verification & review": 7
+ },
+ "areas_as_recorded": {
+  "Dashboard": 18,
+  "Model": 6,
+  "Injuries & depth": 5,
+  "Personnel": 5,
+  "Data & licensing": 4,
+  "Data capture": 4,
+  "Competition & rewards": 3,
+  "Market & odds": 3,
+  "Verification": 3,
+  "Correlation & parlays": 2,
+  "Depth extraction": 2,
+  "Market": 2,
+  "2026 Rule Changes Impact": 1,
+  "Automation": 1,
+  "Availability semantics": 1,
+  "Backup & String Order": 1,
+  "Backup deficiency": 1,
+  "Correlation": 1,
+  "Correlation Stability": 1,
+  "Cross-Source Discrepancies": 1,
+  "Data Licensing": 1,
+  "Data authority": 1,
+  "Depth authority": 1,
+  "Depth staleness": 1,
+  "Grading": 1,
+  "Injury semantics": 1,
+  "Leaderboard Rewards": 1,
+  "Leaderboard score": 1,
+  "Legal & Jurisdiction": 1,
+  "Line origination": 1,
+  "Luck vs skill": 1,
+  "Market Pricing & Settlement": 1,
+  "Market taxonomy": 1,
+  "Measurement": 1,
+  "Multiple testing": 1,
+  "Odds rights": 1,
+  "Official outcomes": 1,
+  "Operations": 1,
+  "Parlay pricing": 1,
+  "Player props": 1,
+  "Point-in-time data": 1,
+  "Practice Squad Elevations": 1,
+  "Pregame Timing Cutoff": 1,
+  "Product": 1,
+  "Product scope": 1,
+  "Review workflow": 1,
+  "Rewards": 1,
+  "Risk & staking": 1,
+  "Scheduling context": 1,
+  "Security/privacy": 1,
+  "Source conflicts": 1,
+  "Validation Thresholds": 1,
+  "Validation thresholds": 1,
+  "Verification semantics": 1,
+  "Weather & International Venues": 1
+ }
+}
