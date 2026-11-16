@@ -3203,3 +3203,12 @@ Branch is fixed by Arena as `arena/8f5b2a6e-nfl3`, branched from `main` at `aa2b
 **Irregularities carried forward (not introduced here):** the 254 / 279 / 347 injury-count conflict (RR-01 / RR-07); the Texans depth-image source (RR-03); RR-04 (pre-registration order in the research desk); RR-05 / RR-16 (venue provenance); RR-06 (offline verification record); RR-15 (one unscored fixture in the frozen corpus). Pages: `repo-review.html`, `flagged.html`, `questions.html`.
 
 **Publication.** A docs-only PR from this branch to `main` will carry this entry. Its merge result and the Pages run are recorded in the publication entry below, committed after the merge.
+
+
+## Current session claim — `arena/e17fe695-nfl3` — 2026-11-16 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Current-state executive summary and final acceptance audit | in progress | arena/e17fe695-nfl3 | `EXECUTIVE_SUMMARY.md`, `COORDINATION.md` (claim/result only) |
+
+Scope: inspect the already-integrated site and its verification gates, run the relevant offline checks, and replace stale/conflicting summary assertions with a compact current-state decision brief. No strategy result, live feed, official fact, deployment, or PR outcome will be claimed without evidence. Existing site/data files are read-only. The fixed Arena branch is `arena/e17fe695-nfl3` (not a separately named worktree).
