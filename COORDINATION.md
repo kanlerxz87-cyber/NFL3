@@ -2551,7 +2551,34 @@ Branch is fixed by Arena as `arena/37020320-nfl3` (session-named branches cannot
 
 | Task | Status | Owner | File scope |
 |---|---|---|---|
-| T-L Populate the three Lions game-status cells (Joseph, Mays, Reed) on the dashboard from the official report, with read time; remove the "Verified" label they carried while blank | in progress | `arena/37020320-nfl3` | `dashboard/data/injuries_2026_w10.csv`, generated `dashboard/*.html` |
-| T-R Reproducibility: commit the third price snapshot the committed manifest already produces, and make CI fail if origination artifacts drift from a rebuild | in progress | `arena/37020320-nfl3` | `origination/data/**` (generated), `.github/workflows/pages.yml` (one added step), this board |
+| T-L Populate the three Lions game-status cells (Joseph, Mays, Reed) on the dashboard from the official report, with read time; remove the "Verified" label they carried while blank | done | `arena/37020320-nfl3` | `dashboard/data/injuries_2026_w10.csv`, generated `dashboard/*.html` |
+| T-R Reproducibility: commit the third price snapshot the committed manifest already produces, and make CI fail if origination artifacts drift from a rebuild | done | `arena/37020320-nfl3` | `origination/data/**` (generated), `.github/workflows/pages.yml` (one added step), this board |
 
 Out of scope for this claim (not started, recorded as open): the full requirement list in the 2026-11-16 brief. Most items already exist in some form in other workspaces (see `readiness.html`); items that need licensed odds, official snap counts, a per-club depth source for all 32 clubs, NWS grids, or a prospective window that has not yet occurred remain blank and flagged.
+
+### Result log — `arena/37020320-nfl3`, 2026-11-16 UTC
+
+**T-L · Lions game-status cells (VR-08 / VR-12 class).**
+- Sources: [NFL injury report](https://www.nfl.com/injuries/), read live through the page-fetch tool on 2026-11-16 (Week 10 section, DET vs NE, Sun 15 Nov); and the committed capture [`results-verification/data/captures/2026-11-15-nfl-injuries/`](results-verification/data/captures/2026-11-15-nfl-injuries/nfl-injuries-2026-11-15.md) (observed 2026-11-15T14:05Z, sha256 `ecd2573e…6e01d6b` per its manifest). Both reads agree.
+- Values written to `dashboard/data/injuries_2026_w10.csv`: Kerby Joseph (S, Knee, Did Not Participate in Practice, **Out**); Cade Mays (C, Ankle, Did Not Participate in Practice, **Out**); D.J. Reed (CB, Hip, Did Not Participate in Practice, **Out**). Joseph's practice status moved from "Limited" (11-12 read) to "DNP" (latest read). Injury text was blank on all three and is now filled from the same official row.
+- The three rows carried a "Verified nfl.com Week 10 report" label while their game-status cells were blank. The label now names the read time and capture path.
+- Rebuilt `dashboard/` (`node scripts/build.mjs`, `node scripts/check.mjs`: OK, 10 pages, no broken links). Dashboard starters/backups Lions row changes from `4 (DNP 1)` to `4 (DNP 2)` with the three Out designations listed, because the page derives its counts from the CSV.
+- **Still open, not edited (other owners):** `decision-lab/data/verification_baseline.json` still holds the 11-12 transcription, so `verify_sources.py` reports SOURCE-UPDATED for these rows; `decision-lab/`, `line-lab/`, `ops-center/` and `decision-hub/` still show the blank cells; `dashboard/data/injuries_2026_w10.csv` still holds the 11-12 read of 254 rows, while the 11-15 read holds 347 rows across 28 clubs (`injury-capture/index.html` IC-6). Those rows are unchanged here and go to Flagged for Review.
+
+**T-R · Origination reproducibility.**
+- `origination/scripts/verify.py` passed at HEAD, but a rebuild from committed inputs changed 10 committed artifacts and wrote an uncommitted third price snapshot `origination/data/prices/snapshots/20261115T170649Z.json` (observed 2026-11-15T17:06:49Z, games release sha256 `3f71bc90…`). The committed origination artifacts had been built against the older games sha `57c2f1b0…`. The committed manifest was already ahead of them. CI did not notice, because it built origination and never compared the result with git.
+- Committed the regenerated artifacts. Gate outcomes are unchanged: pass 7, fail 1, blocked 2; demoted S01, S03. Verifier: 13 pages, 463 rows, 0 missing a source, determinism pass. Snapshot count moves 2→3 and cells that moved between captures move 7→13 (reflected in the readiness rows, which the build regenerates).
+- `.github/workflows/pages.yml`: added the step "Origination artifacts match a rebuild from committed inputs (drift alarm)". It fails if `git status --porcelain -- origination/` is non-empty after the build. YAML parsed with PyYAML; the step sits after the origination build.
+- Second rebuild after the commit leaves `origination/` clean (checked).
+
+**Irregularity recorded (not committed, not fixed).** `decision-lab/data/audit.json` is not reproducible from a clean tree: the committed file records 9,651 table rows; a run at the start of this session on the unchanged base produced 9,635; a run after the dashboard change produced 9,642. The file was reverted to the committed version. CI regenerates the audit but does not diff it, so this drift is silent. Owner: decision-lab.
+
+### Verification performed (this session, offline re-runs at the final tree)
+
+`scripts/validate_site.py` · `tests/check_site.py` · `node dashboard/scripts/check.mjs` · `decision-desk/scripts/check.py` · `shadow-board/scripts/check.py` · `tests/test_decision_lab.py` · `tests/test_injury_capture.py` · `tests/test_readiness.py` · `decision-lab/scripts/audit.py` · `tests/test_verification_lab.py` · `verification-lab/scripts/build.py` · `tests/test_origination.py` · `origination/scripts/verify.py` · `tests/test_skill_lab.py` · `skill-lab/scripts/verify.py` · `tests/test_availability_ledger.py` · `availability-ledger/scripts/verify.py`. All exit 0 (excluding the audit.json revert above).
+
+Not run here: live network verification (`decision-lab/scripts/verify_live.py` without `--offline`) because outbound hosts are limited to GitHub, npm and PyPI; nfl.com was read only through the page-fetch tool.
+
+### Scope left open after this session (not claimed, not started)
+
+The 2026-11-16 brief lists about 80 items. Most already have a page somewhere in this repo (see `readiness.html`). Items that depend on data this sandbox cannot obtain or that need a prospective window remain open and are blank by policy: licensed odds and CLV, official snap counts and game-book starters, a per-club depth source verified for all 32 clubs, NWS grids, and the Week 11+ prospective leaderboard. The Pages workflow, not this session, decides what publishes.
