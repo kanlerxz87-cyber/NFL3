@@ -2851,3 +2851,54 @@ Coordination notes for this claim:
   and `shadow-board/scripts/check.py` pin by SHA-256 — appending to it would break the frozen-corpus equality),
   `corpus/**`, `pricing/**`, `shadow-board/**`, `skill-lab/**`, `availability-ledger/**`, `origination/**`,
   `official-verify/**`, `decision-lab/**`, `ops-center/**` (read-only), `readiness/**` (read-only), `repo-review.html`.
+
+### Result log — `arena/5600e7eb-nfl3`, 2026-11-16 UTC
+
+F1–F5 are done on `arena/5600e7eb-nfl3` and the claim is released below. Commits: `dbbf5b1` (blank line between
+adjacent claim sections after the rebase), `8e10b76` (the forward ledger site, its gates, the root questions page),
+plus the merge commit recorded in the publication note.
+
+| Task | Status | What landed |
+|---|---|---|
+| F1 Verified results feed to Week 10 | done | `forward-ledger/scripts/build_ledger.py` → `data/results_ledger.csv` (150 fixtures, 149 graded, 1 left scheduled), `data/standings_crosscheck.csv`, `data/source_anomalies.csv`, `data/ledger_manifest.json`. Three cross-checks, not assertions: 31 of 32 clubs against official record chips (0 mismatches, CIN deliberately not self-compared), 160 of 160 field checks against the same-day standings read, 135 of 136 scores identical with the frozen corpus (0 mismatches). |
+| F2 Pre-registered forecast ledger, Week 11 | done | `forward-ledger/PREREGISTRATION.md` §1–§8 registered at `e2f97c5`; `scripts/model.py` (`fl1.0.0`, config `0f30928f51ca8cde`) → ratings, diagnostics, 39 prospect rows over 13 fixtures issued `2026-11-16T14:55:05Z` (before the Thursday kickoff), `scripts/crosscheck_standings.py`, `data/leaderboard.json` as an eligibility table with 0 rankable rows. |
+| F3 Root decision surface | done | new root `questions.html` and regenerated `suggestions.html`, both rendered from `ops-center/data/derived.json` by `questions/build.py` (curated Path A–D narrative spliced in verbatim, every row linked); `assets/site.js` nav + footer fixed; `scripts/validate_site.py` expected-page set extended; `index.html` site-guide rows added. |
+| F4 Repo review pass | done | `forward-ledger/data/review_findings.csv`, 15 findings (3 High, 8 Medium, 4 Low; 5 fixed in this pass), each with evidence, action, owner and a source link, rendered at `forward-ledger/review.html`. |
+| F5 Executive summary + integration | done | `EXECUTIVE_SUMMARY.md` §8 appended with today's numbers and the FL-08 count reconciliation; `.github/workflows/pages.yml` runs the forward-ledger rebuild, the 29 gates and `git diff --exit-code -- forward-ledger`. |
+
+Handoffs and requests logged for other owners (nothing here was applied outside this session's scope):
+
+- **request to the `results-verification/**` owner.** This pass extended the feed to Week 10 inside `forward-ledger/`
+  rather than editing `results-verification/`, whose `scripts/verify.py` hard-codes the `range(1, 10)` week invariant
+  and whose `CORPUS_FREEZE.md` pins the Weeks 1–9 hashes. If week 10 belongs inside that feed, both need to move
+  together: the invariant, the freeze note and the published counts. `forward-ledger/data/official_scores_2026/week_10.json`
+  carries the 14 transcribed fixtures with their read windows if you want the input as-is.
+- **request to the `corpus/**` owner (FL-02).** The frozen corpus grades 135 of 136 because the Washington at Dallas
+  row is blank, while the official game centre now publishes 20–37 with a quarter split that sums. Re-registering the
+  corpus is your decision, not a wording fix here.
+- **request to the shared-root owner (FL-13, filed with its cause).** `scripts/validate_site.py` prints that sub-sites
+  "with their own checker are validated by that checker" while setting `imported = True` and `continue`-ing — it never
+  runs one. Run by hand on this branch: `skill-lab/scripts/verify.py` fails (its pre-registration commit `a60261fa0f9a`
+  is not in the repository history), `origination/scripts/verify.py` fails on determinism, and
+  `dashboard/scripts/check.mjs` is a Node module the candidate list would hand to `python3`. This session did **not**
+  repair the delegation, because doing so today would break Pages for every workspace; the forward-ledger gate is wired
+  into `pages.yml` explicitly instead.
+- **collateral, already reverted.** Checking those gates is how `origination/scripts/verify.py` got run, and that
+  verifier is not read-only: it appended `origination/data/prices/snapshots/20261116T144650Z.json`, rewrote
+  `data/prices/ledger.json`, `origination/prices.html` and the community sha256 in `data/results.json`
+  (`c051b14c…` → `c29862ac…`). None of it was committed here — the paths were restored to `main` before the commit.
+  The nflverse `schedules` release did change under us, which is worth knowing before anyone quotes "163 of 272
+  games carry a line" again.
+- **`index.html` was carrying two concatenated documents** (FL-14): a 3,355-byte truncated copy of an older build
+  ahead of the current page. The stale copy was removed and its one unique link (`shadow-board/index.html`, absent
+  from the current page's guide and sidebar) was restored as a site-guide row, so no page became unreachable. Anyone
+  with an open `index.html` edit should rebase: the leading bytes moved.
+- **The 279-vs-254 injury-row narrative is correct** and was left alone; this pass added the third number as a dated,
+  hash-pinned aggregate (347 rows, capture `991825b7`) with the delta published beside it, which is what the "publish
+  the delta, not the level" requirement asks for.
+
+Release of claim: `arena/5600e7eb-nfl3` **releases** `forward-ledger/**`, `suggestions.html`, `questions.html`,
+`questions/**`, `assets/site.js`, `scripts/validate_site.py`, `index.html`, `EXECUTIVE_SUMMARY.md`,
+`COORDINATION.md` and `.github/workflows/pages.yml` on merge. Shared outputs were edited only by this session during
+this pass, and `git pull --rebase origin main` was run before every push; the one rebase conflict (`COORDINATION.md`)
+was resolved by keeping both sides.
