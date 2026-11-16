@@ -313,6 +313,50 @@
       "note": "computed from the published per-game columns on rows.html; no new estimator is introduced"
     }
   },
+  "closure_sensitivity": {
+    "row": {
+      "week": 2,
+      "away": "WAS",
+      "home": "DAL",
+      "block": "train",
+      "t1_total": 48.419764,
+      "t2_total": 39.18414
+    },
+    "official_total": 57,
+    "official_source": "https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2",
+    "read_first_hand": "2026-11-16",
+    "error_t1": 8.580236,
+    "error_t2": 17.81586,
+    "per_block": {
+      "train": {
+        "n_before": 92,
+        "n_after": 93,
+        "mae_t1_before": 11.61702179347826,
+        "mae_t1_after": 11.584368182795698,
+        "mae_t2_before": 12.433233987844787,
+        "mae_t2_after": 12.49111168690022
+      },
+      "validation": {
+        "n_before": 28,
+        "n_after": 28,
+        "mae_t1_before": 11.008968857142857,
+        "mae_t1_after": 11.008968857142857,
+        "mae_t2_before": 13.257648489503328,
+        "mae_t2_after": 13.257648489503328
+      },
+      "holdout": {
+        "n_before": 15,
+        "n_after": 15,
+        "mae_t1_before": 11.314254333333333,
+        "mae_t1_after": 11.314254333333333,
+        "mae_t2_before": 13.044175627240143,
+        "mae_t2_after": 13.044175627240143
+      }
+    },
+    "verdict_affected": false,
+    "reading": "The withheld row is in the train block, which the collapse rule does not use, so closing it cannot change the verdict; the arithmetic above shows the effect it would have had.",
+    "action": "NOT applied here: the pre-registration says the blank stays blank and is excluded, and filling it after seeing the estimators' errors would be the retrospective edit that rule forbids. Requested of the corpus owner as question 2T-Q6."
+  },
   "flags": [
     {
       "id": "2T-01",
@@ -376,6 +420,24 @@
       "tone": "ok",
       "source": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL",
       "source_label": "NFL odds-widget boundary"
+    },
+    {
+      "id": "2T-08",
+      "title": "The corpus's 'hidden score' row is no longer hidden \u2014 verified first-hand",
+      "detail": "The frozen corpus row for WAS at DAL (week 2) carries blank scores and the note 'Hidden Score'. On 2026-11-16 this session read the official game centre at https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2 through the fetch tool and it publishes WAS 20, DAL 37, with quarter splits 0/10/3/7 and 10/7/10/10 that sum to the published totals, and Game Info naming AT&T STADIUM, ARLINGTON, TX. The repository's own dated capture results-verification/data/official_scores_2026/week_02.json (observed 2026-11-15T13:05:00Z, same 20-37) already contradicted the corpus note, and the forward-ledger workspace recorded the same result on 2026-11-16T15:02Z. Three independent observations therefore agree the game is settled. This workspace does NOT fill the cell: its pre-registration says the blank stays blank and is excluded from every score, and filling it after seeing the estimators' errors would be exactly the retrospective edit that rule forbids. The row stays excluded (135 of 136 scored) and the correction is requested of the corpus owner.",
+      "state": "verified, correction requested",
+      "tone": "bad",
+      "source": "https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2",
+      "source_label": "official game centre, WAS at DAL"
+    },
+    {
+      "id": "2T-09",
+      "title": "Readiness R1 '136/136' and the corpus 'settled 135' cannot both be right",
+      "detail": "readiness/data/readiness.csv row R1 states '136/136 scores and 136/136 dates agree ... 0 mismatches', and results-verification/data/verification_report.json reports score_matches 136 with 0 mismatches. corpus/manifest.json records settled 135 and unsettled_hidden_score 1, and corpus/PRE_REGISTRATION.md says one game's cells are 'blank and never inferred'. Both cannot describe the same 136 games. The most likely reading is that the verified feed compares against the community file, which carries a filled score, while the corpus deliberately blanks it \u2014 but neither document says so. Published as a contradiction; not resolved here, because resolving it means amending a frozen corpus or a readiness row this session does not own.",
+      "state": "contradiction, needs owner",
+      "tone": "bad",
+      "source": "https://www.nfl.com/scores/2026/week-2",
+      "source_label": "official Week 2 scores"
     }
   ],
   "questions": [
@@ -414,6 +476,15 @@
       "route": "Satisfy pricing/PRICE_DATA_POLICY.md \u00a74; until then the market column stays blank.",
       "source": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL",
       "source_label": "NFL odds-widget boundary"
+    },
+    {
+      "id": "2T-Q6",
+      "question": "Should the week-2 WAS at DAL row be closed by a new corpus annotation, and does closing it change the collapse verdict?",
+      "known": "The official game centre publishes WAS 20, DAL 37 (verified first-hand 2026-11-16), the repository's 2026-11-15 capture agrees, and the 2026-11-16 forward-ledger read agrees. The row would add one scored game, taking n from 135 to 136.",
+      "missing": "A corpus amendment registered by its owner \u2014 the corpus rule says annotate, never re-word.",
+      "route": "The owner adds a dated section to corpus/PRE_REGISTRATION.md plus a manifest entry, then this build is re-run unchanged; the collapse verdict is computed by the build, so the answer appears without anyone editing a number.",
+      "source": "https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2",
+      "source_label": "official game centre, WAS at DAL"
     },
     {
       "id": "2T-Q5",

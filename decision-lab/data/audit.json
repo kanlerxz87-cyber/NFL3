@@ -1,8 +1,8 @@
 {
-  "html_pages": 201,
-  "table_rows": 11645,
-  "rows_missing_official_source": 894,
-  "rows_community_only": 315,
+  "html_pages": 198,
+  "table_rows": 11619,
+  "rows_missing_official_source": 893,
+  "rows_community_only": 314,
   "rows_with_internal_audit_source": 7,
   "conflict_files": [],
   "authority_claim_files": [],
@@ -12,7 +12,7 @@
       "id": "AUD-03",
       "severity": "High",
       "title": "Table rows without an official-source link",
-      "detail": "894 row(s) across the repository lack an official HTTPS source; 315 cite only community sources.",
+      "detail": "893 row(s) across the repository lack an official HTTPS source; 314 cite only community sources.",
       "files": [
         "dashboard/flagged.html",
         "dashboard/questions.html",
@@ -608,14 +608,6 @@
       "local_errors": []
     },
     {
-      "path": "injury-archive/flags.html",
-      "rows": 5,
-      "rows_missing_official_source": 0,
-      "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
-      "local_errors": []
-    },
-    {
       "path": "injury-archive/inactives.html",
       "rows": 1,
       "rows_missing_official_source": 0,
@@ -1201,7 +1193,7 @@
     },
     {
       "path": "readiness.html",
-      "rows": 76,
+      "rows": 75,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -1377,7 +1369,7 @@
     },
     {
       "path": "review.html",
-      "rows": 33,
+      "rows": 28,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -1545,7 +1537,7 @@
     },
     {
       "path": "two-total/flagged.html",
-      "rows": 13,
+      "rows": 16,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -1553,7 +1545,7 @@
     },
     {
       "path": "two-total/index.html",
-      "rows": 20,
+      "rows": 23,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -1578,22 +1570,6 @@
     {
       "path": "validation.html",
       "rows": 15,
-      "rows_missing_official_source": 0,
-      "rows_community_only": 0,
-      "rows_with_internal_audit_source": 0,
-      "local_errors": []
-    },
-    {
-      "path": "venues/flagged.html",
-      "rows": 8,
-      "rows_missing_official_source": 1,
-      "rows_community_only": 1,
-      "rows_with_internal_audit_source": 0,
-      "local_errors": []
-    },
-    {
-      "path": "venues/index.html",
-      "rows": 13,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
