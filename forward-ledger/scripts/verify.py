@@ -111,8 +111,11 @@ def main() -> int:
          "leaked: " + ", ".join(echoed) if echoed else f"{len(forbidden)} diagnostics withheld")
     gate("no performance numbers" in board or "none exists yet" in board,
          "G3 the leaderboard states why it is empty")
-    gate(bool(re.search(r"rows eligible", board)) and 'class="pill blank"' in board or "0 rows eligible" in board,
-         "G3 the leaderboard shows its own eligibility count")
+    eligibility = re.search(r"eligible rows.{0,120}>0<", board, re.S)
+    gate(bool(eligibility) and "0 rows eligible" in board,
+         "G3 the leaderboard states its eligibility count as zero, in both the tile and the header badge",
+         "the page no longer prints the structure this gate pins - update the gate and the page together"
+         if not eligibility else "tile and badge both read 0")
 
     # G4 every rendered data row carries a link, and the pages link nothing but https sources
     row_pat = re.compile(r"<tr>(.*?)</tr>", re.S)
@@ -154,7 +157,7 @@ def main() -> int:
     # G5 placeholders and unrendered template output
     placeholder = re.compile(r"\b(TBD|TODO|FIXME|lorem ipsum|None|nan)\b")
     hits = [f"{name}: {m.group(0)}" for name, text in pages.items()
-            for m in placeholder.finditer(re.sub(r"<[^>]+>", " ", text)) if "None" != "nan"]
+            for m in placeholder.finditer(re.sub(r"<[^>]+>", " ", text))]
     gate(not hits, "G5 no placeholder or unrendered value reaches a page", "; ".join(hits[:4]))
 
     # G6 blanks are marked, not silently empty
