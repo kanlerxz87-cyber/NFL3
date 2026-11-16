@@ -2507,7 +2507,6 @@ Done in PR #92 (all append-only or inside `shadow-board/`, no other workspace's 
   community release assets, unrelated to `shadow-board/`. `Validate and deploy GitHub Pages` is green for #88, #89
   and #92.
 
-<<<<<<< HEAD
 ## Current claim — `arena/b0dd4900-nfl3` (fixed Arena branch), 2026-11-16 UTC
 
 | Task | Status | Owner | File scope |
@@ -2528,7 +2527,7 @@ Done in PR #92 (all append-only or inside `shadow-board/`, no other workspace's 
 |---|---|---|---|
 | C1 Pages gate for the adopted price policy/store and frozen corpus | done | `arena/b0dd4900-nfl3` | PR #97; validation passed |
 | C2 Final integration, merge and Pages deployment record | in progress | `arena/b0dd4900-nfl3` | awaiting merge and post-merge Pages run |
-=======
+
 ## Claim — `arena/d37d5907-nfl3` (session d37d5907) — 2026-11-16 UTC
 
 Base: `main` at `e8877e0` (branch was created at this commit and `git rev-list --left-right --count HEAD...origin/main` was `0 0` when claimed). No other session branch exists on `origin` (`git branch -r` shows `origin/main` only).
@@ -2545,4 +2544,3 @@ Scope notes recorded before work started, so a later reader can check them:
 - `decision-lab/**` (including `data/official_snapshot.json` and the RR-01/RR-02 chain), `origination/**`, `skill-lab/**`, `corpus/**`, `pricing/**`, `ops-center/**`, `dashboard/**`, `line-lab/**`, `decision-hub/**` and `shadow-board/**` are **not** edited by this session. Where this session's findings bear on them, the request is logged here instead of applied.
 - `open this claim` was checked against the previous board: the most recent entries (`arena/e9629801-nfl3`, `arena/745d100d-nfl3`, `arena/ba6c5155-nfl3`) are all recorded merged, and their file scopes do not include `injury-archive/`, which does not yet exist.
 - Environment fact established at claim time and used throughout: **bash in this sandbox has no nfl.com egress** (curl to `nfl.com` returns `000`), but the **session fetch tool reaches nfl.com** and **GitHub Actions runners reach it** (the 6-hourly `injury-capture` run [43817257379](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43817257379) succeeded). Prior readiness rows that say "sandbox cannot reach nfl.com" were written under a different tool assumption; this session re-tested rather than inheriting the claim.
->>>>>>> 400b235 (chore(coordination): claim T1-T4 for session d37d5907)

@@ -140,7 +140,22 @@ def main() -> int:
     contract = load(DATA / "render_contract.json") if (DATA / "render_contract.json").exists() else {"pages": []}
     for name in contract["pages"]:
         check((SITE / name).exists(), f"contract: page {name} is missing")
-    check(bool(index), "index: the capture index is empty")
+    # An archive that has not been filled yet must say so, and must not publish a rate. This is a
+    # pass only when the page carries the explicit "not yet captured" banner; an empty archive that
+    # silently rendered as a measured result would be the failure this gate exists to prevent.
+    overview = (SITE / "index.html").read_text(encoding="utf-8") if (SITE / "index.html").exists() else ""
+    if not index:
+        check("No injury report is captured yet" in (SITE / "injuries.html").read_text(encoding="utf-8")
+              if (SITE / "injuries.html").exists() else False,
+              "empty archive: injuries.html does not carry the explicit 'not yet captured' banner")
+        check("No joined observation exists yet" in (SITE / "designations.html").read_text(encoding="utf-8")
+              if (SITE / "designations.html").exists() else False,
+              "empty archive: designations.html publishes a rate without the explicit banner")
+        for row in designations["by_label"]:
+            check(row["n"] == 0 and row["inactive_rate"] is None,
+                  "empty archive: a rate is published with no joined observation")
+        print("injury-archive verify: archive is empty by design; every page carries the "
+              "'not yet captured' banner and no rate is published")
 
     print(f"injury-archive verify: {checks} checks, {len(failures)} failure(s), "
           f"{successes} stored ok read(s), {len(injuries)} report(s), {len(inactives)} article(s), "
