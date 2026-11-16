@@ -45,7 +45,7 @@ and is reproducible on this build.</caption>
 <td>Leaderboard ranks on Brier skill with an interval; win rate appears in its own columns with a Wilson interval; no ROI column exists anywhere.</td><td>G09 multiplicity</td><td>0 ROI rankings published; all ranks are proper-score based.</td>
 <td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>NFL standings (OFFICIAL) ↗</a></td></tr>
 <tr><td><b>R06</b></td><td>Track the depth of the replacement, not just the fact of a replacement.</td><td><span class='pill warn'>partial</span></td>
-<td>149 rank-1 slots hold ≥2 players; the graph keeps the published group and measures playing time, but no official source names an assignment.</td><td>G07 joint evidence (not applicable) / missing official assignment</td><td>Clear when an official source names the starter for a slot; today 6 of 254 report rows even carry a game designation.</td>
+<td>149 rank-1 slots hold ≥2 players; the graph keeps the published group and measures playing time, but no official source names an assignment.</td><td>G07 joint evidence (not applicable) / missing official assignment</td><td>Clear when an official source names the starter for a slot; today 9 of 254 report rows even carry a game designation.</td>
 <td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>NFL injury report (OFFICIAL) ↗</a></td></tr>
 <tr><td><b>R07</b></td><td>Compute correlations only from officially sourced numbers and publish n with each value.</td><td><span class='pill warn'>implemented</span></td>
 <td>2 official-input correlations published with n and a Fisher-z interval; 4 withheld with a written reason.</td><td>G07 joint evidence for combos</td><td>Every published value has n and a 95% interval.</td>
@@ -99,7 +99,7 @@ and is reproducible on this build.</caption>
 <td>Ratings are fitted on margins, so strength of schedule is implicit; the Elo estimator makes the opponent adjustment explicit and is published beside the ridge fit.</td><td>G06 sample size</td><td>Two estimators, both opponent-aware, both published with their residuals.</td>
 <td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>NFL standings (OFFICIAL) ↗</a></td></tr>
 <tr><td><b>R24</b></td><td>Injury and personnel ablations instead of fixed penalties.</td><td><span class='pill warn'>implemented</span></td>
-<td>Ablation with and without the personnel term on a chronological holdout: MAE improvement -0.031 [-0.109, 0.174].</td><td>G06 sample size</td><td>Interval published; no fixed penalty is used anywhere.</td>
+<td>Ablation with and without the personnel term on a chronological holdout: MAE improvement 0.04 [-0.185, 0.102].</td><td>G06 sample size</td><td>Interval published; no fixed penalty is used anywhere.</td>
 <td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>NFL injury report (OFFICIAL) ↗</a></td></tr>
 <tr><td><b>R25</b></td><td>Capture official inactive lists and snap counts.</td><td><span class='pill warn'>partial</span></td>
 <td>Snap counts are held and used (community). Official inactive lists are not held: the report publishes 6 game designations in total, so an active list cannot be reconstructed.</td><td>G01 provenance</td><td>Clear when official inactive lists are captured for every played game of the evaluation window.</td>
@@ -141,7 +141,7 @@ and is reproducible on this build.</caption>
 <td>1,386 depth rows, each carrying its club URL, capture hash and observation timestamp.</td><td>G01 provenance</td><td>Every row has date + source; 30/32 clubs covered.</td>
 <td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>NFL injury report (OFFICIAL); capture: decision-lab/data/official_snapshot.json ↗</a></td></tr>
 <tr><td><b>R38</b></td><td>Calibrate what &#x27;Questionable&#x27; means empirically instead of using old percentages.</td><td><span class='pill warn'>blocked</span></td>
-<td>The captured report carries 6 game designations in total across 254 rows; there is no inactive list to join against.</td><td>G01 provenance + missing inactive lists</td><td>Clear when designations are joined to official inactive lists over several seasons with CIs.</td>
+<td>The captured report carries 9 game designations in total across 254 rows; there is no inactive list to join against.</td><td>G01 provenance + missing inactive lists</td><td>Clear when designations are joined to official inactive lists over several seasons with CIs.</td>
 <td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>NFL injury report (OFFICIAL) ↗</a></td></tr>
 <tr><td><b>R39</b></td><td>Interactive offense/defense deficiency matrix (1st-4th string) on one screen.</td><td><span class='pill warn'>partial</span></td>
 <td>The deficiency view lists each Week 10 rank-1 slot with an official Out/Doubtful designation and the club&#x27;s next published name. &#x27;4th string&#x27; is usually unpublished — 500 of 676 position groups in the repository&#x27;s earlier count have no third string.</td><td>G01 provenance</td><td>Clear when a defender-side join and a published 3rd string exist for the matchup.</td>

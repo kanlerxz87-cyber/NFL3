@@ -41,7 +41,7 @@
       "why": "Kerby Joseph, Cade Mays and D.J. Reed are published with a blank game-status cell while the official article lists all three as Out (VR-08, VR-12).",
       "fixes": "VR-08, VR-12",
       "how": "Capture the Week 10 injury article alongside the report page and reconcile designations by player and club, flagging conflicts instead of choosing silently.",
-      "acceptance": "Every player listed Out/Questionable/Doubtful in the official article shows that designation, with a citation to the article.",
+      "acceptance": "Every player listed Out/Questionable/Doubtful in the official article shows that designation, with a citation to the article. [DONE 2026-11-16, arena/f5f99ff0-nfl3] All three Lions rows show Out on the published pages, each traceable to the official Week 10 article and the 2026-11-16T06:31Z hash-backed capture of the official report; the acceptance test passes.",
       "risk": "Article and report can disagree. Resolve by showing both with timestamps, never by averaging.",
       "effort": "Low",
       "source_url": "https://www.nfl.com/news/nfl-week-10-injury-report-2026-season",

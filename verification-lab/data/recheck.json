@@ -111,7 +111,7 @@
       "published": "6 designations",
       "observed": "The official Week 10 article designates 9 players: Commanders OUT Colson Yankoff (knee), Lucas Patrick (concussion); Giants QUESTIONABLE Malik Harrison (groin); Patriots OUT Ben Brown (knee), Carlton Davis (knee), TreVeyon Henderson (illness); Lions OUT Kerby Joseph (knee), Cade Mays (ankle), D.J. Reed (hip).",
       "status": "discrepancy",
-      "action": "The 6 published designations match the Commanders/Giants/Patriots entries exactly; the 3 Lions designations are missing.",
+      "action": "The 6 published designations match the Commanders/Giants/Patriots entries exactly; the 3 Lions designations were missing. RESOLVED 2026-11-16: the three Lions rows now carry Out in the published snapshot, populated from the official report as captured at 2026-11-16T06:31Z (sha256 991825b70aeeb6a83167732ab8440dea913ea86dbeac7797391c1ba599600d0d, held in captures/nfl-injuries/) and the official Week 10 article. Published designations are now 9, matching the article.",
       "source_url": "https://www.nfl.com/news/nfl-week-10-injury-report-2026-season",
       "source_label": "NFL Week 10 injury report article",
       "source_type": "official NFL publisher"
@@ -159,7 +159,7 @@
       "published": "Kerby Joseph, Cade Mays, D.J. Reed rows present with blank game status",
       "observed": "Article: 'OUT: S Kerby Joseph (knee), C Cade Mays (ankle), CB D.J. Reed (hip)'.",
       "status": "discrepancy",
-      "action": "A blank game-status cell is being displayed where the official article states Out. Either populate the designation or mark the cell 'not captured'.",
+      "action": "A blank game-status cell was displayed where the official article states Out. RESOLVED 2026-11-16: all three cells are populated with Out (evidence: https://www.nfl.com/news/nfl-week-10-injury-report-2026-season and the 2026-11-16T06:31Z capture of https://www.nfl.com/injuries/, sha256 991825b7...). The 2026-11-12 capture record was preserved: the row-level observed_at and source_sha256 now point at the later capture that carries the designation.",
       "source_url": "https://www.nfl.com/news/nfl-week-10-injury-report-2026-season",
       "source_label": "NFL Week 10 injury report article",
       "source_type": "official NFL publisher"
