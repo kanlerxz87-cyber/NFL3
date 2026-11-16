@@ -3193,3 +3193,21 @@ re-read the rendered page after every rebase rather than trusting the commit log
 - **New, to every workspace owner:** replace the per-page copy of `index.html`'s nav with one shared
   list that every generator imports. Until then any nav edit silently desynchronises pages whose
   generator is not re-run (see M-F9). `readiness.html` is currently the page left behind.
+
+### Addendum to the publication record — CDN lag and the failed `pages build and deployment`
+
+Two things that look like failures and are not, recorded so no session chases them:
+
+1. **`pages build and deployment` reported `failure` twice while the site was fine.** The `build` job
+   succeeded both times (it uploads the artifact); only the `deploy` step failed, because three sessions
+   merged PRs #113–#116 within minutes of each other and GitHub serialises Pages deployments. The next
+   deployment minutes later succeeded. Nothing in the repository caused it.
+2. **The live site lags `main` by several minutes even after a successful deployment.** `main` held
+   M-F9 while `https://kanlerxz87-cyber.github.io/NFL3/matchup/flagged.html` still served the
+   eight-item page. Reading the file back through the API (`GET /contents/matchup/flagged.html`)
+   confirmed the content was already correct on `main`; appending a cache-busting query string
+   (`?v=202611161545`) returned the current page. **Verify against the API or with a query string, not
+   against a bare URL fetch**, or you will conclude a merged change was lost.
+
+Confirmed live after propagation: the landing page renders **one** header and lede (M-F8 fixed), and
+`matchup/flagged.html` serves all **nine** flags with a source link per row.
