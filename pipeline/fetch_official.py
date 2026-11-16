@@ -53,10 +53,65 @@ HISTORY = {
 }
 
 
+# --- transient-failure retry -------------------------------------------------
+# The data-refresh failed on 2026-11-16 (run 43900887096) when release-asset
+# downloads were dropped mid-TLS ("TLS/SSL connection has been closed (EOF)").
+# Those drops are transient: the same fetch succeeded twenty minutes earlier and
+# every asset still exists in its release. A single dropped connection must not
+# turn the daily refresh red, so every network call retries a fixed number of
+# times with a deterministic backoff. Integrity verification stays fail-closed:
+# a digest or size mismatch is never retried and never tolerated.
+
+RETRY_ATTEMPTS = 4
+RETRY_BACKOFF_SECONDS = (5, 15, 45)
+# statuses a short wait usually fixes (throttling, worker recycling); a 404 is
+# deterministic - the asset or tag is gone - and must raise through at once
+RETRYABLE_HTTP = {403, 408, 429, 500, 502, 503, 504}
+
+
+def _is_retryable(exc: BaseException) -> bool:
+    if isinstance(exc, urllib.error.HTTPError):
+        return exc.code in RETRYABLE_HTTP
+    if isinstance(exc, urllib.error.URLError):
+        # TLS EOF, connection reset, DNS hiccup and timeouts all surface here
+        return True
+    if isinstance(exc, (TimeoutError, ConnectionError)):
+        return True
+    return False
+
+
+def _sleep_backoff(attempt: int) -> None:
+    """Deterministic backoff so a rerun is reproducible; tests patch the tuple."""
+    seconds = RETRY_BACKOFF_SECONDS[min(attempt, len(RETRY_BACKOFF_SECONDS)) - 1]
+    time.sleep(seconds)
+
+
+def _retry(action, what: str, attempts: int = RETRY_ATTEMPTS):
+    """Run ``action()`` retrying transient network failures with a fixed backoff.
+
+    Deterministic failures (HTTP 404) and integrity failures (SystemExit, which
+    is a BaseException and therefore never caught here) raise through
+    immediately: waiting cannot recover them and the manifest must record the
+    real reason.
+    """
+    for attempt in range(1, attempts + 1):
+        try:
+            return action()
+        except Exception as exc:
+            if attempt == attempts or not _is_retryable(exc):
+                raise
+            print(f"  .. {what}: attempt {attempt}/{attempts} failed ({exc}); retrying")
+            _sleep_backoff(attempt)
+    raise AssertionError("unreachable: retry loop must return or raise")
+
+
 def api_json(url: str) -> dict:
-    req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "application/vnd.github+json"})
-    with urllib.request.urlopen(req, timeout=60) as r:
-        return json.loads(r.read())
+    def call() -> dict:
+        req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "application/vnd.github+json"})
+        with urllib.request.urlopen(req, timeout=60) as r:
+            return json.loads(r.read())
+
+    return _retry(call, f"release lookup {url.rsplit('/', 1)[-1]}")
 
 
 def release_assets(tag: str) -> dict:
@@ -67,18 +122,30 @@ def release_assets(tag: str) -> dict:
 def download(url: str, dest: str, expected_sha: str | None, expected_size: int | None) -> dict:
     os.makedirs(os.path.dirname(dest), exist_ok=True)
     tmp = dest + ".part"
-    req = urllib.request.Request(url, headers={"User-Agent": UA})
-    h = hashlib.sha256()
-    size = 0
-    with urllib.request.urlopen(req, timeout=300) as r, open(tmp, "wb") as f:
-        while True:
-            chunk = r.read(1 << 20)
-            if not chunk:
-                break
-            h.update(chunk)
-            size += len(chunk)
-            f.write(chunk)
-    digest = "sha256:" + h.hexdigest()
+
+    def fetch_once() -> tuple[int, str]:
+        req = urllib.request.Request(url, headers={"User-Agent": UA})
+        h = hashlib.sha256()
+        size = 0
+        with urllib.request.urlopen(req, timeout=300) as r, open(tmp, "wb") as f:
+            while True:
+                chunk = r.read(1 << 20)
+                if not chunk:
+                    break
+                h.update(chunk)
+                size += len(chunk)
+                f.write(chunk)
+        return size, h.hexdigest()
+
+    try:
+        size, hexdigest = _retry(fetch_once, f"download {url.rsplit('/', 1)[-1]}")
+    except BaseException:
+        # a dropped attempt must not leave a half-written .part behind
+        if os.path.exists(tmp):
+            os.unlink(tmp)
+        raise
+
+    digest = "sha256:" + hexdigest
     ok = True
     if expected_size is not None and size != expected_size:
         ok = False

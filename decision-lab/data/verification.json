@@ -1,6 +1,6 @@
 {
   "schema": "nfl3-verification/v2",
-  "run_at": "2026-11-16T15:07:38.996140+00:00",
+  "run_at": "2026-11-16T18:12:22.241722+00:00",
   "snapshot_observed_at": "2026-11-12T06:32:36.211205+00:00",
   "status": "drift",
   "checks_run": 3,
