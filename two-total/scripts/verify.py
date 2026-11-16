@@ -210,6 +210,37 @@ def main() -> int:
     if all(recomputed_checks.values()) != D["decision"]["collapsed"]:
         errors.append("decision: the collapse verdict does not follow from its own conditions")
 
+    # flags and questions must be uniquely identified and ordered, so a reader can cite one
+    ids = [f["id"] for f in D["flags"]]
+    if ids != sorted(ids) or len(ids) != len(set(ids)):
+        errors.append(f"flags: ids are not unique and ordered: {ids}")
+    qids = [q["id"] for q in D["questions"]]
+    if len(qids) != len(set(qids)):
+        errors.append(f"questions: duplicate ids: {qids}")
+    # the closure sensitivity must agree with the rows it is derived from
+    cs = D.get("closure_sensitivity")
+    if cs:
+        row = next((r for r in rows if r["actual_total"] is None), None)
+        if row is None:
+            errors.append("sensitivity: a sensitivity is published but no row is withheld")
+        else:
+            if (cs["row"]["week"], cs["row"]["away"], cs["row"]["home"]) != \
+                    (row["week"], row["away"], row["home"]):
+                errors.append("sensitivity: the witnessed row is not the withheld row")
+            if abs(cs["error_t1"] - abs(row["t1_total"] - cs["official_total"])) > 1e-6:
+                errors.append("sensitivity: T1 error does not recompute against the official total")
+            if abs(cs["error_t2"] - abs(row["t2_total"] - cs["official_total"])) > 1e-6:
+                errors.append("sensitivity: T2 error does not recompute against the official total")
+            for name, (lo, hi) in (("train", (1, 6)), ("validation", (7, 8)), ("holdout", (9, 9))):
+                b = cs["per_block"][name]
+                sub = [r for r in scored if lo <= r["week"] <= hi]
+                if b["n_before"] != len(sub):
+                    errors.append(f"sensitivity: {name} n_before {b['n_before']} != {len(sub)}")
+            if cs["verdict_affected"] != (cs["row"]["block"] in ("validation", "holdout")):
+                errors.append("sensitivity: verdict_affected does not follow from the row's block")
+        if not cs["official_source"].startswith("https://www.nfl.com/"):
+            errors.append("sensitivity: the witnessed result does not cite an official nfl.com URL")
+
     # ---------------------------------------------------------------- 4/5/9. pages
     for name in PAGES:
         p = OUT / name

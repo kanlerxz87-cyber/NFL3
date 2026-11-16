@@ -3744,3 +3744,59 @@ unchanged: it lists only its own pages, and a foreign workspace entry there woul
 - Handover notes for the next session: `results-verification/verify.py` still pins weeks 1–9 **by decision**
   (see §3); the `arena/38802e70-nfl3` and `e5e2b753` T13 board rows remain stale-in-progress and should be marked
   done or taken over by their owners; open PRs #123-era scopes (two-total) and #119-era docs are separate owners.
+### Follow-up — `arena/ca175be6-nfl3`, 2026-11-16 UTC (the hidden score is not hidden)
+
+While verifying the published pages I re-read the official game centre for the one corpus row the frozen
+corpus records as **"Hidden Score"** and found the row is settled.
+
+**First-hand read, this session, through the fetch tool:** `https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2`
+publishes **WAS 20 – DAL 37**, quarter splits `0/10/3/7` and `10/7/10/10` (each summing to its published
+total), and Game Info naming **AT&T STADIUM, ARLINGTON, TX**. This is a read of the official page, not a
+citation of another workspace.
+
+**Three observations now agree, and the fourth disagrees.**
+1. `corpus/games_2026_w1_9.csv` row 30 — **blank**, note: *"the official schedule page and the official game
+   center page both render this game as Hidden Score"*.
+2. `results-verification/data/official_scores_2026/week_02.json` — observed **2026-11-15T13:05:00Z** from
+   `https://www.nfl.com/scores/2026/week-2` — **WAS 20, DAL 37**.
+3. `forward-ledger/data/live_reads_2026-11-16.json` — read **2026-11-16T15:02Z** — **WAS 20, DAL 37**.
+4. This session, 2026-11-16 — **WAS 20, DAL 37**.
+
+So the corpus note is **stale, not wrong when written**. Nothing is fabricated; the *blank* is now the
+thing that is out of date.
+
+**A second, independent contradiction found while checking it.** `readiness` row **R1** states *"136/136
+scores and 136/136 dates agree … 0 mismatches"* and `results-verification/data/verification_report.json`
+reports `score_matches: 136, score_mismatches: 0` — while `corpus/manifest.json` records `settled: 135,
+unsettled_hidden_score: 1`. Both cannot describe the same 136 games. Most likely the verified feed compares
+against the community file, which carries a filled score, while the corpus deliberately blanks it, but
+**neither document says so**. Published as contradiction **2T-09**; not resolved here, because resolving it
+means amending a frozen corpus or a readiness row this session does not own.
+
+**What this session did *not* do, and why.** It did not fill the cell. Its own pre-registration
+(`two-total/PRE_REGISTRATION.md` §4) says the blank score *"stays blank"* and is excluded, and the corpus
+rule says a frozen corpus is *annotated, never re-worded*. Filling it **after** seeing both estimators'
+errors would be exactly the retrospective edit those rules forbid, and it would silently move a published
+MAE. The row stays excluded at **135 of 136 scored**, and the correction is requested of the corpus owner
+as question **2T-Q6**.
+
+**What it did instead — the load-bearing question, answered by arithmetic.** The withheld row is week 2, so
+it sits in the **train** block, which the collapse rule never reads. The build now computes and publishes a
+what-if:
+
+| Block | n before → after | MAE T1 | MAE T2 | Can it move the verdict? |
+|---|---|---|---|---|
+| Train | 92 → 93 | 11.617 → 11.584 | 12.433 → 12.491 | no — this block decides nothing |
+| Validation | 28 → 28 | 11.009 → 11.009 | 13.258 → 13.258 | no — the row is not in this block |
+| Holdout | 15 → 15 | 11.314 → 11.314 | 13.044 → 13.044 | no — the row is not in this block |
+
+The verdict is therefore **robust to the correction**: closing the row would move the overall MAE T2 from
+12.672 to 12.710 and the difference from −1.215 to −1.274, and change nothing about which conditions pass.
+
+**New gates.** `two-total/scripts/verify.py` now also fails if flag or question ids are duplicated or out of
+order, if the published sensitivity does not recompute against the rows it derives from, if the witnessed
+row is not the withheld row, or if the witnessed result stops citing an official `nfl.com` URL. It passes.
+
+**Flag and question count after this pass:** nine flags (`2T-01` … `2T-09`) and six questions
+(`2T-Q1` … `2T-Q6`), all published at `two-total/flagged.html` and on the summary page with the source link
+that was checked.

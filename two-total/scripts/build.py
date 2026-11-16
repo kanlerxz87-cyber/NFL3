@@ -508,6 +508,36 @@ def main() -> int:
          "source": ("https://support.nfl.com/hc/en-us/articles/35869698780564-"
                     "If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL"),
          "source_label": "NFL odds-widget boundary"},
+        {"id": "2T-08", "title": "The corpus's 'hidden score' row is no longer hidden — verified first-hand",
+         "detail": ("The frozen corpus row for WAS at DAL (week 2) carries blank scores and the note "
+                    "'Hidden Score'. On 2026-11-16 this session read the official game centre at "
+                    "https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2 through the fetch tool and it "
+                    "publishes WAS 20, DAL 37, with quarter splits 0/10/3/7 and 10/7/10/10 that sum to the "
+                    "published totals, and Game Info naming AT&T STADIUM, ARLINGTON, TX. The repository's own "
+                    "dated capture " 'results-verification/data/official_scores_2026/week_02.json' " "
+                    "(observed 2026-11-15T13:05:00Z, same 20-37) already contradicted the corpus note, and the "
+                    "forward-ledger workspace recorded the same result on 2026-11-16T15:02Z. Three independent "
+                    "observations therefore agree the game is settled. This workspace does NOT fill the cell: "
+                    "its pre-registration says the blank stays blank and is excluded from every score, and "
+                    "filling it after seeing the estimators' errors would be exactly the retrospective edit "
+                    "that rule forbids. The row stays excluded (135 of 136 scored) and the correction is "
+                    "requested of the corpus owner."),
+         "state": "verified, correction requested", "tone": "bad",
+         "source": "https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2",
+         "source_label": "official game centre, WAS at DAL"},
+        {"id": "2T-09", "title": "Readiness R1 '136/136' and the corpus 'settled 135' cannot both be right",
+         "detail": ("readiness/data/readiness.csv row R1 states '136/136 scores and 136/136 dates agree ... 0 "
+                    "mismatches', and results-verification/data/verification_report.json reports "
+                    "score_matches 136 with 0 mismatches. corpus/manifest.json records "
+                    "settled 135 and unsettled_hidden_score 1, and corpus/PRE_REGISTRATION.md says one game's "
+                    "cells are 'blank and never inferred'. Both cannot describe the same 136 games. The most "
+                    "likely reading is that the verified feed compares against the community file, which "
+                    "carries a filled score, while the corpus deliberately blanks it — but neither document "
+                    "says so. Published as a contradiction; not resolved here, because resolving it means "
+                    "amending a frozen corpus or a readiness row this session does not own."),
+         "state": "contradiction, needs owner", "tone": "bad",
+         "source": "https://www.nfl.com/scores/2026/week-2",
+         "source_label": "official Week 2 scores"},
     ]
 
     questions = [
@@ -538,6 +568,17 @@ def main() -> int:
          "source": ("https://support.nfl.com/hc/en-us/articles/35869698780564-"
                     "If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL"),
          "source_label": "NFL odds-widget boundary"},
+        {"id": "2T-Q6",
+         "question": "Should the week-2 WAS at DAL row be closed by a new corpus annotation, and does closing it change the collapse verdict?",
+         "known": ("The official game centre publishes WAS 20, DAL 37 (verified first-hand 2026-11-16), the "
+                   "repository's 2026-11-15 capture agrees, and the 2026-11-16 forward-ledger read agrees. The "
+                   "row would add one scored game, taking n from 135 to 136."),
+         "missing": "A corpus amendment registered by its owner — the corpus rule says annotate, never re-word.",
+         "route": ("The owner adds a dated section to corpus/PRE_REGISTRATION.md plus a manifest entry, then "
+                   "this build is re-run unchanged; the collapse verdict is computed by the build, so the "
+                   "answer appears without anyone editing a number."),
+         "source": "https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2",
+         "source_label": "official game centre, WAS at DAL"},
         {"id": "2T-Q5",
          "question": "Is the club-code join ('AZ' → 'ARI') the only alias this corpus needs?",
          "known": ("The repository's audited cross-check matched 136/136 official finals using exactly this one "
@@ -547,6 +588,51 @@ def main() -> int:
          "source": "https://www.nfl.com/schedules/2026/by-week/week-1",
          "source_label": "official Week 1 schedule page"},
     ]
+
+    # ---------------------------------------------------------------- closure sensitivity
+    # The withheld row is week 2, so it sits in the TRAIN block. That makes the question "would closing it
+    # change the verdict?" answerable by arithmetic rather than by opinion — and the answer is published
+    # instead of assumed. Nothing here is written into a published estimator column; it is a what-if.
+    OFFICIAL_WAS_DAL = {"away": 20, "home": 37,
+                        "source": "https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2",
+                        "read_first_hand": "2026-11-16"}
+    sensitivity = None
+    if hidden:
+        hr = hidden[0]
+        truth = OFFICIAL_WAS_DAL["away"] + OFFICIAL_WAS_DAL["home"]
+        e1 = abs(hr["t1_total"] - truth)
+        e2 = abs(hr["t2_total"] - truth)
+        per_block = {}
+        for name, (lo, hi) in (("train", (1, 6)), ("validation", (7, 8)), ("holdout", (9, 9))):
+            sub = [(r["t1_error_abs"], r["t2_error_abs"]) for r in scored_rows
+                   if lo <= r["week"] <= hi]
+            base = (mae([a for a, _ in sub]), mae([b for _, b in sub]), len(sub)) if sub else (None, None, 0)
+            ext = sub + ([(e1, e2)] if lo <= hr["week"] <= hi else [])
+            grown = (mae([a for a, _ in ext]), mae([b for _, b in ext]), len(ext)) if ext else base
+            per_block[name] = {
+                "n_before": base[2], "n_after": grown[2],
+                "mae_t1_before": base[0], "mae_t1_after": grown[0],
+                "mae_t2_before": base[1], "mae_t2_after": grown[1],
+            }
+        sensitivity = {
+            "row": {"week": hr["week"], "away": hr["away"], "home": hr["home"],
+                    "block": hr["block"], "t1_total": hr["t1_total"], "t2_total": hr["t2_total"]},
+            "official_total": truth,
+            "official_source": OFFICIAL_WAS_DAL["source"],
+            "read_first_hand": OFFICIAL_WAS_DAL["read_first_hand"],
+            "error_t1": round(e1, 6), "error_t2": round(e2, 6),
+            "per_block": per_block,
+            "verdict_affected": hr["block"] in ("validation", "holdout"),
+            "reading": ("The withheld row is in the " + hr["block"] +
+                        " block, which the collapse rule does not use, so closing it cannot change the "
+                        "verdict; the arithmetic above shows the effect it would have had."
+                        if hr["block"] not in ("validation", "holdout") else
+                        "The withheld row is in a block the collapse rule uses, so closing it could change "
+                        "the verdict. That is why the corpus owner, not this session, must close it."),
+            "action": ("NOT applied here: the pre-registration says the blank stays blank and is excluded, "
+                       "and filling it after seeing the estimators' errors would be the retrospective edit "
+                       "that rule forbids. Requested of the corpus owner as question 2T-Q6."),
+        }
 
     # ---------------------------------------------------------------- manifest + registration
     reg = subprocess.run(["git", "-C", str(ROOT), "log", "--diff-filter=A", "--format=%H",
@@ -604,6 +690,7 @@ def main() -> int:
                    "week7": wk7, "week8": wk8},
         "decision": decision,
         "diagnosis": diagnosis,
+        "closure_sensitivity": sensitivity,
         "flags": flags,
         "questions": questions,
         "leakage": leak_report,
