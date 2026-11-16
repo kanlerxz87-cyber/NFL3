@@ -1,0 +1,56 @@
+[
+ {
+  "id": "SD-F01",
+  "severity": "danger",
+  "title": "Three open pull requests could not be merged in the direction they were written",
+  "detail": "PRs #99, #100 and #105 were cut from an old main. Against the current main their diffs are dominated by deletions of other sessions' work: for #99 alone, git diff --stat reports 189 files changed with 26,602 insertions and 147,539 deletions, and git merge-base --is-ancestor origin/main <branch> is false for all three. Merging any of them would have removed the forward ledger, the matchup desk, the injury archive, the skill lab and five further workspaces.",
+  "impact": "Three sessions' output sat unmerged for two hours and would have been silently reverted by a well-meaning merge. It also means the site was missing a Week 11 venue register and an injury-archive flags page that had already been written.",
+  "action": "Salvaged file by file instead of merged: venues/** (9 files) and injury-archive/flags.html with the four-line render/build/contract change that renders it, plus EXECUTIVE_SUMMARY.md section 9. The three PRs were closed with a comment recording where their content went. The lesson for the next session is a rule, not a fix: check --is-ancestor before merging a branch whose base is old.",
+  "source": "https://github.com/kanlerxz87-cyber/NFL3/pull/100"
+ },
+ {
+  "id": "SD-F02",
+  "severity": "danger",
+  "title": "The generated suggestions page rendered its heading block twice",
+  "detail": "questions/data/suggestions_intro.html begins with a <div class=\"hrow\"> carrying the eyebrow 'Review before implementation' and the h1 'Suggestions & decision shortlist'. questions/build.py's page() helper emits its own hrow with the eyebrow 'Review before implementing' one line above where the fragment is spliced in, so the published page opened with two near-identical headers in sequence. No existing validator could catch it, because a duplicated section is not a broken link.",
+  "impact": "The page a reader reaches from the landing page opened by repeating itself. It is also the page the brief's suggestion-review requirement points at.",
+  "action": "Fixed in this pass: the duplicated header was removed from the preserved fragment and the generator's shape assertion was retightened to require the fragment to begin with the intro paragraph instead of the header, so the two cannot drift back together.",
+  "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/questions/data/suggestions_intro.html"
+ },
+ {
+  "id": "SD-F03",
+  "severity": "warn",
+  "title": "The top navigation did not list every workspace",
+  "detail": "assets/site.js carried 18 navigation entries while 23 workspace directories publish HTML. This pass raised it to 24 by adding the injury archive, the matchup desk, the ops centre, the origination workspace, the venue register and this desk; 11 workspace directories still have no entry in the top bar (the dashboard, decision desk, decision hub, line lab, research desk, research workspace, results verification, verification, verification lab, injury verification and the questions build folder).",
+  "impact": "A reader using the top bar could not see seven of the most recent workspaces. It is a discoverability defect, not a data defect: nothing was unreachable, because the landing page's site-guide table lists every published page with its category.",
+  "action": "Six entries added here; the count is printed on this page so the next session can see what changed. The remaining 11 are left deliberately: a 36-item top bar is harder to use than a 24-item one, and the landing page's site-guide table already lists every published page with its category.",
+  "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/assets/site.js"
+ },
+ {
+  "id": "SD-F04",
+  "severity": "warn",
+  "title": "The merged register is dated four days before the captures other workspaces read",
+  "detail": "ops-center/data/derived.json records observation_date 2026-11-12 and injury_rows_current 279. Two independent readings of the same official report on 2026-11-16, twenty-one minutes apart, both transcribed 347 rows (matchup/data/captures/2026-11-16-nfl-injuries/rows.tsv and the injury-archive coverage register). The register's own chains also carry the days 'THURSDAY, NOVEMBER 12TH' and 'SUNDAY, NOVEMBER 15TH' in the same list.",
+  "impact": "The two root pages rendered from this register, questions.html and suggestions.html, describe the league as of 2026-11-12 while the injury archive, the matchup desk and the forward ledger describe it as of 2026-11-16. A reader comparing counts across pages sees 279 and 347 and no explanation.",
+  "action": "Not fixed here: ops-center/data/derived.json belongs to the session that owns it. Recorded so the mismatch is visible rather than looking like an error in one of the two pages.",
+  "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/ops-center/data/derived.json"
+ },
+ {
+  "id": "SD-F05",
+  "severity": "warn",
+  "title": "Decisions in the register are recorded in a free-text field",
+  "detail": "The register records a proposal's status by typing into a text field, so the same state arrives under many spellings and, in several rows, a sentence of acceptance criteria has been written where a status belongs (for example SG-30, SG-38, SG-40, SG-42, SG-52). The root suggestions.html already publishes this vocabulary; this desk works around it by grouping on decision rather than on that field.",
+  "impact": "Sorting or filtering the register on its status field sorts on spelling. A review board that counts 'Approve' rows will undercount approvals that were written as 'Adopt now'.",
+  "action": "Not fixed here. The desk's own grouping does not read that field, and the flagged page publishes the vocabulary so the next owner can normalise it with the evidence in front of them.",
+  "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/ops-center/data/derived.json"
+ },
+ {
+  "id": "SD-F06",
+  "severity": "warn",
+  "title": "The venue register has 13 of 272 fixtures and no hashed raw capture",
+  "detail": "venues/data/week11_venues.csv covers the 13 Week 11 fixtures. The remaining 259 fixtures of the 272-game regular season are not transcribed, and neither the schedule page nor the dated league announcement has a retained raw capture: the announcement record stores a URL and a quote, not bytes with a hash.",
+  "impact": "A schedule change cannot be detected against a hash, only by re-reading the page. The venue feature set is therefore 5% complete and unverifiable as a series.",
+  "action": "Published as decision D7 with the clearing number stated (272 of 272 with a hashed capture). Not fixed here: transcription of 259 fixtures is a decision, not an incidental fix.",
+  "source": "https://www.nfl.com/schedules/2026/by-week/week-11"
+ }
+]

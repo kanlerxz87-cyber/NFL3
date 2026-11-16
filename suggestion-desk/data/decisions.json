@@ -1,0 +1,1295 @@
+{
+ "schema": "nfl3-suggestion-desk/v1",
+ "authority": "Curated review layer over the merged register at ops-center/data/derived.json. It adds no new NFL fact: every number below is read from a committed artifact, and every claim links to either an official page or the committed file it came from.",
+ "built_by": "suggestion-desk/scripts/build.py",
+ "register": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/ops-center/data/derived.json",
+ "counts": {
+  "proposals_in_register": 75,
+  "questions_in_register": 100,
+  "blocking_questions_unanswered": 65,
+  "strategies_registered": 34,
+  "strategies_validated": 0,
+  "decisions": 12
+ },
+ "decisions": [
+  {
+   "id": "D1",
+   "title": "Where will market price data come from?",
+   "question": "Do we obtain a licensed, timestamped, two-sided price archive - or do we keep publishing originated fair lines with no market comparison at all?",
+   "why_first": "Every downstream number - residual, closing line value, backtest, ROI, rank, reward - is a function of a price we do not have. Ten other decisions cannot be judged until this one is answered, which is why the merged register's own recommendation (SG-02) is to buy the archive before building anything else.",
+   "have": [
+    {
+     "fact": "The price store, its schema and its fail-closed ingest already exist, so nothing has to be built to receive a feed.",
+     "artifact": "pricing/",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/pricing/PRICE_DATA_POLICY.md"
+    },
+    {
+     "fact": "0 licensed price sources are registered. The adopted policy bars any price-dependent number until a source carries a named licence, a named source, and both the price's as-of time and the capture clock time.",
+     "artifact": "pricing/PRICE_DATA_POLICY.md section 1-2",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/pricing/PRICE_DATA_POLICY.md"
+    },
+    {
+     "fact": "163 of 272 2026 games carry one undated community moneyline in data/raw/games.csv. The policy excludes it: no opening/closing pair, no as-of time, no licence grant.",
+     "artifact": "readiness/data/readiness.csv row P1",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/readiness/data/readiness.csv"
+    },
+    {
+     "fact": "Odds visible on NFL surfaces are supplied by partner bookmakers and redirect to them, with no reuse grant located. That is not an NFL-authored, machine-readable historical archive.",
+     "artifact": "NFL Support odds FAQ",
+     "source": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL"
+    }
+   ],
+   "missing": [
+    "The name of a feed that permits storage, derived models and redistribution - no such provider has been recorded.",
+    "Whether both opening and closing quotes are available from that feed, or only closing.",
+    "What a two-sided timestamped quote costs per season, and what historical depth the price buys."
+   ],
+   "proposals": [
+    "SG-02",
+    "SG-05",
+    "SG-39",
+    "SG-66",
+    "SG-75"
+   ],
+   "paths": [
+    {
+     "id": "D1-A",
+     "label": "Buy one licensed feed, then open the leaderboard",
+     "does": "Obtain one signed agreement for a timestamped two-sided price source, enter it in the source register with its terms, and only then let residual, CLV and ranking numbers be published.",
+     "adopts": [
+      "SG-02",
+      "SG-05",
+      "SG-39",
+      "SG-66",
+      "SG-75"
+     ],
+     "buys": "The residual against the market, closing line value, a real backtest, and a leaderboard that can be ranked at all.",
+     "leaves_open": "Nothing on the price side. Jurisdiction (D8) and ranking rules (D5) still have to be settled before a reward is paid.",
+     "cost": "Money, a legal review, and an unknown lead time. Until it lands, every other path below is what actually happens.",
+     "risk": "The contract terms may forbid redistribution, which would still bar publishing the derived numbers even though they can be computed."
+    },
+    {
+     "id": "D1-B",
+     "label": "Self-capture one operator's public odds under written terms",
+     "does": "Pick a single book, obtain written permission for machine capture and retention, and capture its prices on a schedule.",
+     "adopts": [
+      "SG-39"
+     ],
+     "buys": "A price series sooner and cheaper than a vendor contract, if permission is granted.",
+     "leaves_open": "One-book prices are not a market consensus, so a residual against them partly measures that book's margin.",
+     "cost": "Engineering time to build and police the capture; legal time to get terms in writing.",
+     "risk": "If written terms are not obtained, the adopted policy bars the rows outright, so the work buys nothing. Scraping without terms is explicitly excluded by the policy."
+    },
+    {
+     "id": "D1-C",
+     "label": "Publish fair lines only - never rank, never compute CLV",
+     "does": "Keep originating our own side, total and moneyline and publishing the residual column empty, with no backtest, no ROI and no leaderboard ranking.",
+     "adopts": [
+      "SG-66"
+     ],
+     "buys": "Zero legal exposure and no chance of publishing a number that a licence does not cover. This is what the site does today.",
+     "leaves_open": "The whole competition layer. The brief's leaderboard, rewards and validation gates cannot be exercised.",
+     "cost": "No direct cost. The cost is that nothing can ever be shown to be skillful.",
+     "risk": "A permanently unranked leaderboard is a research diary, not a competition. It also makes the 'removal of luck' panel unfalsifiable."
+    }
+   ],
+   "recommended": "D1-A",
+   "recommendation_reason": "It is the only path that unblocks anything downstream. D1-C is not a rival - it is the state that holds until D1-A or D1-B lands, and the site already implements it honestly by leaving every price column empty rather than filling it from the community file.",
+   "clearing_number": "One signed agreement naming the feed, the three markets (side, total, moneyline), the fields (opening and closing with their own timestamps) and the publication rights - recorded in the source register and accepted by the fail-closed ingest. Proposed scope on the readiness register: 3 markets x 272 games = 816 quotes. Today: 0.",
+   "discovery": [
+    {
+     "ref": "Q-49",
+     "question": "Which provider permits historical and live odds retention, derived models and redistribution?",
+     "do": "Ask three named vendors for their terms in writing, and record each answer in pricing/PRICE_DATA_POLICY.md section 2 before any row is stored.",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/pricing/PRICE_DATA_POLICY.md",
+     "changes_path_if": "Every provider refuses redistribution - then D1-B and D1-A both stall and D1-C is forced regardless of preference."
+    },
+    {
+     "ref": "Q-38",
+     "question": "Where does a historical archive of closing lines and prices come from?",
+     "do": "Establish whether the chosen feed carries back-history at all, or only forward from the contract date. A forward-only feed cannot backtest the frozen 136-game corpus.",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/pricing/PRICE_DATA_POLICY.md",
+     "changes_path_if": "History is forward-only from the contract date - then no backtest can ever be published on the 2026 corpus and the corpus stays a prospective-only register."
+    },
+    {
+     "ref": "Q-37",
+     "question": "What is the true cost of a bet - the achievable price, not the advertised one?",
+     "do": "Require the feed to carry both sides of the quote so the overround can be removed before a residual is computed.",
+     "source": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL",
+     "changes_path_if": "Only one-sided prices are available - then a vig-free consensus (SG-75) cannot be computed and every residual is partly vig."
+    }
+   ]
+  },
+  {
+   "id": "D2",
+   "title": "What is the source of truth for depth order?",
+   "question": "Do we build the backup-deficiency feature from published club depth charts, from snap counts, or not at all until one of the two is verified for all 32 clubs?",
+   "why_first": "The brief asks for a 1st-to-4th string mismatch view. Before that can exist, something has to establish who is the 1st string. Two routes were proposed and the register itself says: do not build until one is verified for all 32 clubs (SG-64).",
+   "have": [
+    {
+     "fact": "A published-depth census over 30 clubs: 1,745 depth rows, 676 club/unit/position slots, of which 149 name more than one rank-1 player. A slot is a group, not a starter.",
+     "artifact": "matchup/data/census.json",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/matchup/data/census.json"
+    },
+    {
+     "fact": "Depth published by group, of 30 clubs: 3rd-string CB at 13 clubs, 3rd-string OT at 3, 4th-string CB at 1. No club publishes a 4th-string offensive lineman or edge rusher, so a 1st-to-4th-string view cannot be met from club charts.",
+     "artifact": "matchup/data/census.json group_rank_depth",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/matchup/data/census.json"
+    },
+    {
+     "fact": "Two named parsing failures: the Texans publish depth as an image and the Packers prepend jersey numbers. Number stripping plus storing the raw string recovers the Packers rows; the Texans need an authorised structured source.",
+     "artifact": "SG-14, matchup/flagged.html",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/matchup/data/census.json"
+    },
+    {
+     "fact": "59 replacement chains and a 224-cell offence-versus-defence matrix (166 published, 58 blank with a written reason each) already exist, built from the charts that do publish text.",
+     "artifact": "matchup/data/replacement_depth.json, matchup/data/matrix.json",
+     "source": "https://www.nfl.com/injuries/league/2026/REG10"
+    },
+    {
+     "fact": "Deriving depth order from jersey number, experience or salary is explicitly rejected in the register (SG-61).",
+     "artifact": "ops-center/data/derived.json SG-61",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/ops-center/data/derived.json"
+    }
+   ],
+   "missing": [
+    "A verified depth order for the two clubs on the report with no chart at all, and for the nine that publish no edge rusher in any form.",
+    "An official snap-count or participation source. The 2026 snap file in the repository is community nflverse data, which is not an official source.",
+    "Any official confirmation that a named backup actually took the starter's snaps - the one cell every chain leaves blank."
+   ],
+   "proposals": [
+    "SG-14",
+    "SG-16",
+    "SG-31",
+    "SG-40",
+    "SG-61",
+    "SG-63",
+    "SG-64",
+    "SG-74"
+   ],
+   "paths": [
+    {
+     "id": "D2-A",
+     "label": "Club charts only, verified club by club",
+     "does": "Build the feature from the 30 captured club depth charts, publish only the strings the club actually publishes, and leave the 4th-string cells blank with a reason.",
+     "adopts": [
+      "SG-14",
+      "SG-16",
+      "SG-31",
+      "SG-40",
+      "SG-63"
+     ],
+     "buys": "A defensible depth order for 30 of 32 clubs today, with every blank carrying a written reason.",
+     "leaves_open": "4th-string coverage on offence, and the two clubs with no chart. The brief's 1st-to-4th-string view is not fully met.",
+     "cost": "Ongoing re-capture: 9 stale depth rows were already found against the transactions log, so the charts have to be re-read on a schedule.",
+     "risk": "A club chart is guidance, not a confirmed lineup. Treating rank 1 as 'the starter' would fabricate a starter the club never named - which is why 149 multi-player slots are grouped."
+    },
+    {
+     "id": "D2-B",
+     "label": "Snap counts as the starter proxy, charts as the label",
+     "does": "Use official participation where it exists to decide who actually played, and use the chart only to name the string.",
+     "adopts": [
+      "SG-74"
+     ],
+     "buys": "A measurable starter/backup split rather than a published intention, which is what the feature is trying to measure.",
+     "leaves_open": "It cannot be built at all until an official snap source is verified. Today there is none.",
+     "cost": "Dependent on D3 and on finding an official source that does not yet exist in the repository.",
+     "risk": "The register warns that inactive is not the same as unavailable, and active is not the same as playing."
+    },
+    {
+     "id": "D2-C",
+     "label": "Do not build the feature yet",
+     "does": "Keep publishing the matrix and the chains as evidence, and refuse to feed a depth order into any model until one route is verified for all 32 clubs.",
+     "adopts": [
+      "SG-64",
+      "SG-61"
+     ],
+     "buys": "No model is trained on a depth order that a club never published.",
+     "leaves_open": "The interactive mismatch view and the backup-deficiency feature stay unbuilt.",
+     "cost": "The headline product feature is delayed indefinitely.",
+     "risk": "Delay is the safe failure mode here; a wrong depth order silently corrupts every personnel ablation downstream."
+    }
+   ],
+   "recommended": "D2-A, with D2-C as the guard",
+   "recommendation_reason": "Publish the chart-derived order for the clubs that publish one, and hold the feature out of the model until the 32-club check in D2-C passes. D2-B is the better signal but cannot be started, because no official snap source is verified.",
+   "clearing_number": "A verified depth order for 32 of 32 clubs, or a written 32-club census showing which clubs publish no chart and why. Today: 30 of 32 clubs have a captured chart; 2 clubs on the report have none.",
+   "discovery": [
+    {
+     "ref": "Q-30",
+     "question": "Where does the official depth order (1st / 2nd / 3rd string) come from?",
+     "do": "Read each club's own depth-chart page and record the URL, the date and the exact string labels in a register row per club - not a screenshot and not a transcription by eye.",
+     "source": "https://www.nfl.com/teams/",
+     "changes_path_if": "Fewer than 32 clubs publish a text chart - then the feature can only ever cover the clubs that do, and the coverage gap must be published as a permanent limitation."
+    },
+    {
+     "ref": "Q-15",
+     "question": "Which official source is authoritative for player-level performance (snaps, routes, targets, carries)?",
+     "do": "Probe the official Game Books and the official stats pages for a participation or snap-count table, and record the address and its HTTP status either way.",
+     "source": "https://www.nfl.com/stats/player-stats/",
+     "changes_path_if": "No official snap source exists - then D2-B is closed permanently and D2-A is the only route."
+    },
+    {
+     "ref": "Q-23",
+     "question": "Should the Texans image-based depth chart be transcribed by eye?",
+     "do": "Look for an authorised structured equivalent before transcribing. A transcription by eye is unverifiable and the register's own proposal says no.",
+     "source": "https://www.houstontexans.com/team/depth-chart",
+     "changes_path_if": "No structured source exists - then Houston stays blank and the coverage count drops, published as a blank rather than filled."
+    }
+   ]
+  },
+  {
+   "id": "D3",
+   "title": "How is availability captured, and how far back does the history go?",
+   "question": "Do we trust the current once-a-week capture, move to an immutable multi-day snapshot ledger, or stay where we are and label everything provisional?",
+   "why_first": "Three separate sessions independently found the same defect: one capture of one week cannot support a backtest, because it cannot show what was known before kickoff. This is the point-in-time ledger the brief asks for.",
+   "have": [
+    {
+     "fact": "Two independent transcriptions of the same official page agree exactly: 347 rows, 28 clubs, 14 games, read 21 minutes apart on 2026-11-16.",
+     "artifact": "matchup/data/captures/2026-11-16-nfl-injuries/rows.tsv and injury-archive coverage register",
+     "source": "https://www.nfl.com/injuries/league/2026/REG10"
+    },
+    {
+     "fact": "The committed snapshot and the live page describe different weeks: 254 rows to 347, 24 clubs to 28, and 6 game designations to 171. That gap is a capture-timing artefact, not a parser defect.",
+     "artifact": "matchup/data/injury_reconciliation.json",
+     "source": "https://www.nfl.com/injuries/league/2026/REG10"
+    },
+    {
+     "fact": "The archive holds one 2026 Week 10 injury/inactives pair: 347 injury-report rows, 147 inactive entries, 171 joined game-status designations, with 15 designations uncovered. Its index lines carry raw_bytes_retained: false, so the digests cover reconstructed markup, not nfl.com's bytes.",
+     "artifact": "injury-archive/data/index.jsonl, injury-archive/data/designations.json",
+     "source": "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season"
+    },
+    {
+     "fact": "The official inactive list is not at nfl.com/inactives/, which in November 2026 read 'Please check back soon for NFL Inactive Reports for this Season'. It is published as a weekly article.",
+     "artifact": "injury-archive coverage register",
+     "source": "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season"
+    },
+    {
+     "fact": "50 reserve-list entries and 12 trade events are captured with hashes and joined to the depth rows: 9 stale depth rows and 3 reserve-listed players who never appear on the weekly report at all.",
+     "artifact": "availability-ledger/data/ledger.json",
+     "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11"
+    }
+   ],
+   "missing": [
+    "Any capture taken before kickoff. The Week 10 report was read after several clubs had played, which is why all 32 'designated but active' rows practised fully.",
+    "Past-season coverage: every 2021-2025 inactives address probed so far is a 404.",
+    "A byte-exact raw capture for the transcriptions, which the scheduled workflow is meant to replace."
+   ],
+   "proposals": [
+    "SG-09",
+    "SG-11",
+    "SG-12",
+    "SG-33",
+    "SG-38",
+    "SG-42",
+    "SG-48",
+    "SG-51",
+    "SG-52",
+    "SG-60",
+    "SG-67",
+    "SG-71"
+   ],
+   "paths": [
+    {
+     "id": "D3-A",
+     "label": "Immutable dated snapshot ledger, captured Wednesday to kickoff",
+     "does": "Capture the official injury report, the club depth pages and the inactive evidence at least daily from Wednesday, retain raw bytes with a hash and a clock time, and keep every version rather than overwriting.",
+     "adopts": [
+      "SG-09",
+      "SG-11",
+      "SG-12",
+      "SG-33",
+      "SG-51",
+      "SG-67",
+      "SG-71",
+      "SG-48",
+      "SG-52",
+      "SG-60",
+      "SG-38",
+      "SG-42"
+     ],
+     "buys": "Practice-designation trends (DNP to LP to FP), Questionable to Out moves, and - the point - the ability to replay any feature exactly as it was known before kickoff.",
+     "leaves_open": "Past seasons. A ledger started in Week 11 of 2026 has no 2025 behind it.",
+     "cost": "Storage outside the static site, plus the durable-store decision in D8.",
+     "risk": "More captures mean more chances for a source conflict to surface. The register already holds one: six players are Questionable on the report and ruled out in the NFL's own Saturday roundup."
+    },
+    {
+     "id": "D3-B",
+     "label": "Single weekly capture, honestly labelled provisional",
+     "does": "Keep one capture per week, publish every rate with its n and its interval, and refuse to use designations as model features until the capture precedes kickoff.",
+     "adopts": [
+      "SG-33"
+     ],
+     "buys": "Cheap, and it already produced the first measured designation rate in the project's history.",
+     "leaves_open": "Every point-in-time question. A backtest over it is look-ahead biased by construction.",
+     "cost": "Nothing additional. The cost is that the answer to 'what did we know on Friday' stays 'we do not know'.",
+     "risk": "A reader who treats a post-kickoff capture as pre-kickoff knowledge will overstate every injury signal."
+    },
+    {
+     "id": "D3-C",
+     "label": "Backfill past seasons first",
+     "does": "Spend the effort finding archived reports for 2021-2025 before adding capture frequency to 2026.",
+     "adopts": [
+      "SG-33"
+     ],
+     "buys": "The multi-season sample that the designation-calibration gate actually requires (n >= 100 per label, per season).",
+     "leaves_open": "It may be impossible: every address probed so far is a 404.",
+     "cost": "Open-ended search with a real chance of zero return.",
+     "risk": "A 404 is evidence about an address, not proof the league never published the document elsewhere. Reporting 'not published' as 'does not exist' would be an inference."
+    }
+   ],
+   "recommended": "D3-A, and start it now",
+   "recommendation_reason": "It is the only path that makes any future backtest honest, and it costs engineering time rather than a legal agreement. D3-B's rates are already published as provisional, which is the right holding position. D3-C should run as a background probe, not as the plan.",
+   "clearing_number": "A capture stored before kickoff for every fixture, with a retained hash and a clock time, for one full week - and the rate recalculated on it. Today: 1 capture pair, taken after several clubs had played, raw_bytes_retained: false.",
+   "discovery": [
+    {
+     "ref": "Q-26",
+     "question": "Can the final inactive list be captured before kickoff?",
+     "do": "Schedule the inactive-article fetch for 90 minutes before the earliest kickoff and record whether the article exists at that time.",
+     "source": "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season",
+     "changes_path_if": "The article is not published until after kickoff - then no pre-kickoff inactive evidence exists and every replacement stays unconfirmed."
+    },
+    {
+     "ref": "Q-29",
+     "question": "When in the week is the game status actually knowable?",
+     "do": "Read the report each day from Wednesday to Sunday for one week and record, per player, the first day a game-status cell is non-empty.",
+     "source": "https://www.nfl.com/injuries/league/2026/REG10",
+     "changes_path_if": "Game status only appears on Saturday - then a Wednesday capture adds practice trends but no status, and the capture schedule should be weighted to Friday and Saturday."
+    },
+    {
+     "ref": "Q-54",
+     "question": "Is absence from the weekly injury report evidence that a player is available?",
+     "do": "Join the reserve list to the report each week and count the reserve-listed players the report never mentions.",
+     "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+     "changes_path_if": "The count is non-zero every week - then 'not listed' must never be encoded as available, and the availability graph needs a fourth state."
+    }
+   ]
+  },
+  {
+   "id": "D4",
+   "title": "How does personnel enter the model?",
+   "question": "Do we test the same model with and without verified availability features, or do we subtract a fixed number of points for a missing starter?",
+   "why_first": "The brief rejects fixed penalties twice over and asks for ablations instead. It also asks for the injury signal to be a surprise, never a level - which is a different model design, not a different coefficient.",
+   "have": [
+    {
+     "fact": "The first measured designation rate exists: Out 75.0% inactive (n=64, 95% Wilson 63.2-84.0%), Doubtful 40.0% (n=10, 16.8-68.7%), Questionable 18.3% (n=82, 11.4-28.0%). 171 designated rows are fully accounted for: 67 inactive, 89 active, 15 uncovered, 0 ambiguous.",
+     "artifact": "injury-archive/data/designations.json",
+     "source": "https://www.nfl.com/injuries/league/2026/REG10"
+    },
+    {
+     "fact": "The uncovered rows are excluded from every rate and never counted as active. All 32 'designated but active' rows practised fully - the signature of a post-kickoff read, not of a bad label.",
+     "artifact": "injury-archive/PREREGISTRATION.md amendment A1",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/injury-archive/data/designations.json"
+    },
+    {
+     "fact": "An ablation harness already exists in the origination workspace, so the with/without comparison is a run, not a build.",
+     "artifact": "origination/data/ablation.json",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/origination/data/ablation.json"
+    },
+    {
+     "fact": "The register holds an explicit rejection: do not derive depth order from jersey number, experience or salary (SG-61), and do not use fixed penalties (SG-06, SG-07).",
+     "artifact": "ops-center/data/derived.json",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/ops-center/data/derived.json"
+    }
+   ],
+   "missing": [
+    "A personnel sample large enough to threshold. The register asks what the minimum honest sample for a personnel-dropoff signal is and has not answered it.",
+    "Confirmed replacements rather than published next-men. No source read so far states that a named backup actually took the snaps.",
+    "Multi-season designations, which is what the calibration gate (n >= 100 per label with per-season separation) demands."
+   ],
+   "proposals": [
+    "SG-06",
+    "SG-07",
+    "SG-30",
+    "SG-36",
+    "SG-37",
+    "SG-55",
+    "SG-65"
+   ],
+   "paths": [
+    {
+     "id": "D4-A",
+     "label": "Ablation only, pre-registered, with uncertainty published",
+     "does": "Run identical models with and without the verified availability features on chronological holdouts, and publish the difference with its interval. No fixed point penalty anywhere.",
+     "adopts": [
+      "SG-06",
+      "SG-07",
+      "SG-55"
+     ],
+     "buys": "A defensible answer to 'does this feature help', and - if it does not - a published negative, which is the outcome the register expects at this sample size.",
+     "leaves_open": "It cannot say which player matters, only whether the feature block pays for itself.",
+     "cost": "Compute and, more importantly, the discipline to pre-register the ablation before seeing the result (D12).",
+     "risk": "At n=130 graded games the interval will probably straddle zero. That is a result to publish, not a reason to tune."
+    },
+    {
+     "id": "D4-B",
+     "label": "Encode the designation as a measured prior, not a coefficient",
+     "does": "Use the measured per-label inactive rates as priors and let the model update them, rather than hard-coding a points penalty.",
+     "adopts": [
+      "SG-36",
+      "SG-65"
+     ],
+     "buys": "Empirical calibration instead of an imported percentage, which is what SG-36 asks for.",
+     "leaves_open": "The priors are one week of one season and are explicitly provisional until D3-A lands.",
+     "cost": "Requires the designation reliability study to be scored first (SG-65), with confidence intervals.",
+     "risk": "A provisional prior treated as a stable one will look like signal in-sample and vanish out-of-sample."
+    },
+    {
+     "id": "D4-C",
+     "label": "Model the surprise, not the level",
+     "does": "Feed the change in designation since the last capture into the model rather than the designation itself, so a player who has been Questionable for a month is not new information.",
+     "adopts": [
+      "SG-30",
+      "SG-37"
+     ],
+     "buys": "Matches the brief directly: 'Make the injury signal a surprise, never a level.'",
+     "leaves_open": "It is strictly harder than D4-A and needs the multi-day ledger from D3-A to exist at all.",
+     "cost": "Blocked on D3-A. Cannot start today.",
+     "risk": "Without dated captures, 'surprise' collapses back into 'level' with a different sign."
+    }
+   ],
+   "recommended": "D4-A now, D4-C once D3-A lands",
+   "recommendation_reason": "The ablation is the only path that can be run today and the only one that produces a publishable negative. D4-C is the design the brief asks for, but it is downstream of the capture ledger, and building it on a single weekly snapshot would silently turn it back into a level.",
+   "clearing_number": "A pre-registered with/without comparison on chronological holdouts whose difference interval excludes zero - or, equally useful, one that includes zero and is published as a negative. Today: 0 ablations have been run against a verified pre-kickoff availability set.",
+   "discovery": [
+    {
+     "ref": "Q-46",
+     "question": "What is the minimum honest sample for a personnel-dropoff signal?",
+     "do": "Compute the sample needed to detect the smallest effect the business cares about at 80% power, using the game-cluster variance already measured in the skill lab rather than a binomial approximation.",
+     "source": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm",
+     "changes_path_if": "The required n exceeds a full season of 272 games - then personnel features cannot be validated at all at this scale and the honest answer is to stop modelling them."
+    },
+    {
+     "ref": "Q-27",
+     "question": "How much is a missing starter actually worth in points, by position?",
+     "do": "Do not answer it by assumption. Run the ablation in D4-A and read the number off the held-out games, with the interval.",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/origination/data/ablation.json",
+     "changes_path_if": "The interval includes zero for every position - then position-value weights (SG-37) should be capped at zero, not tuned."
+    },
+    {
+     "ref": "Q-53",
+     "question": "How is a replacement confirmed rather than inferred from a depth rank?",
+     "do": "Join the inactive list to the depth chain and, where an official Game Book or participation table exists, mark the chain confirmed instead of published.",
+     "source": "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season",
+     "changes_path_if": "No source confirms a replacement - then the 'confirmed' column stays blank forever and every chain is explicitly a published intention."
+    }
+   ]
+  },
+  {
+   "id": "D5",
+   "title": "What ranks a strategy, and what does the winner get?",
+   "question": "Rank on proper scores with uncertainty, or on realised return? And are rewards recognition-only until something qualifies?",
+   "why_first": "This is the decision the brief is most emphatic about: separate signal from staking, rank with proper scores and uncertainty rather than win rate, and never let a lucky staking run mask a bad signal.",
+   "have": [
+    {
+     "fact": "A pre-registered proper-score evaluation already ran and produced a negative: 6 rows over 130-136 graded games each (spread 130, moneyline 135, total 136), every one scoring worse than the market's own de-vigged price. The best Brier skill was -0.029 (spread, full variant), 95% game-cluster interval -0.096 to +0.035; the worst was -0.303 (total, shrunk). No row is positive.",
+     "artifact": "skill-lab/data/results.json",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/skill-lab/data/results.json"
+    },
+    {
+     "fact": "The machinery the brief asks for is live: Brier and log-loss skill, 10,000-resample game-cluster intervals, Benjamini-Hochberg multiplicity control, four control baselines (random, favourites only, base rate, market), and a separate retrospective staking table that cannot promote a row.",
+     "artifact": "skill-lab/",
+     "source": "https://scikit-learn.org/stable/modules/cross_validation.html"
+    },
+    {
+     "fact": "34 strategies are registered. 0 are validated. Edge, closing line value, rank and reward are blank on every row by construction, not by omission.",
+     "artifact": "ops-center/data/derived.json strategies",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/ops-center/data/derived.json"
+    },
+    {
+     "fact": "The register contains two explicit rejections: ranking by season-long ROI (SG-62), and letting a retrospective staking result promote a row.",
+     "artifact": "ops-center/data/derived.json SG-62",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/ops-center/data/derived.json"
+    }
+   ],
+   "missing": [
+    "Any prospective sample. Everything scored so far is retrospective, and retrospective scoring cannot rank under the stated policy.",
+    "The reward structure itself: who funds it, in what denomination, and how a multi-entry or correlated submission is handled.",
+    "The multiplicity budget: how many strategies were tried in total, which is the denominator the false-discovery control needs."
+   ],
+   "proposals": [
+    "SG-04",
+    "SG-22",
+    "SG-23",
+    "SG-26",
+    "SG-50",
+    "SG-53",
+    "SG-54",
+    "SG-62",
+    "SG-72"
+   ],
+   "paths": [
+    {
+     "id": "D5-A",
+     "label": "Two-stage: proper-score qualification, then prospective escrow",
+     "does": "A strategy must first beat the de-vigged market on a proper score with a game-cluster lower bound above zero and a multiplicity-adjusted p-value, and only then enter a prospective sample where closing line value is recorded before the result is known.",
+     "adopts": [
+      "SG-22",
+      "SG-23",
+      "SG-26",
+      "SG-50",
+      "SG-53",
+      "SG-54",
+      "SG-72",
+      "SG-04",
+      "SG-62"
+     ],
+     "buys": "Luck cannot buy a rank, because nothing is ranked until the prospective sample closes. This is the two-stage board the register proposes in SG-72.",
+     "leaves_open": "It requires a prospective window, which takes weeks of calendar time and a price source (D1) to record CLV against.",
+     "cost": "Patience. The first honest ranking is months away.",
+     "risk": "If the qualification stage is set too tight, the board stays empty and the competition never starts. Set too loose, it is a lottery with extra steps."
+    },
+    {
+     "id": "D5-B",
+     "label": "Recognition-only leaderboard, no reward at all",
+     "does": "Publish the proper scores and the intervals, rank nothing, and pay nothing until a strategy clears the prospective gate.",
+     "adopts": [
+      "SG-04"
+     ],
+     "buys": "No incentive to chase variance, and no legal question about paying a reward (see D8).",
+     "leaves_open": "The brief asks for a competition with rewards. This is a research register wearing the leaderboard's clothes.",
+     "cost": "None financially.",
+     "risk": "It may not hold the attention the competition is meant to create."
+    },
+    {
+     "id": "D5-C",
+     "label": "Rank on realised return",
+     "does": "Order the board by season-long ROI.",
+     "adopts": [],
+     "buys": "Simplicity, and a number that moves every week.",
+     "leaves_open": "Everything the brief asks to avoid. At 130 games the difference between skill and variance is not resolvable by a return series.",
+     "cost": "Credibility.",
+     "risk": "The register already rejected this (SG-62). It is listed here only so the rejection is visible next to the alternative."
+    }
+   ],
+   "recommended": "D5-A, with D5-B in force until the first prospective window closes",
+   "recommendation_reason": "D5-A is the only construction under which a reward means anything. Until a strategy clears it, D5-B is what the site already does: the board shows six rows, all negative, none ranked, no reward columns. D5-C is recorded as rejected by a previous session and is not a live option.",
+   "clearing_number": "One strategy whose benchmark-relative Brier skill has a game-cluster lower bound above zero after multiplicity adjustment, reproduced prospectively on a sample recorded before kickoff. Today: 6 rows scored over 130-136 games, 0 qualified, best point estimate -0.029 with an interval that includes zero.",
+   "discovery": [
+    {
+     "ref": "Q-65",
+     "question": "What exact sample size (N), Brier/Log-Loss improvement margin, and False Discovery Rate (alpha) define a pass?",
+     "do": "Write the numbers into the protocol before the next evaluation window opens, and commit them. A threshold chosen after seeing the scores is not a threshold.",
+     "source": "https://scikit-learn.org/stable/modules/cross_validation.html",
+     "changes_path_if": "Honest thresholds imply more than one season - then the competition cannot award anything in 2026 and D5-B becomes the standing answer."
+    },
+    {
+     "ref": "Q-48",
+     "question": "How many strategies and feature variants were tried?",
+     "do": "Maintain a counter that increments on every registered variant, including the ones that were abandoned, and publish it as the multiplicity denominator.",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/ops-center/data/derived.json",
+     "changes_path_if": "The true count is far above 34 - then the multiplicity penalty is severe and the qualification bar rises accordingly."
+    },
+    {
+     "ref": "Q-69",
+     "question": "How large a sample is needed before a strategy is allowed to claim an edge?",
+     "do": "Publish the power calculation on the leaderboard page next to the empty result columns, so a blank cell reads as arithmetic rather than absence.",
+     "source": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm",
+     "changes_path_if": "The number is larger than a season's worth of our own originated lines - then no claim is possible and the board's purpose changes to ranking forecast skill alone."
+    }
+   ]
+  },
+  {
+   "id": "D6",
+   "title": "When may parlays and prop combinations be ranked?",
+   "question": "Keep every multi-leg structure behind a joint-evidence gate, or price them by multiplying marginals?",
+   "why_first": "Multiplying marginal probabilities is invalid under dependence, and the register's own proposals say the same thing in four different phrasings. The question is whether to hold the gate or to relax it for coverage.",
+   "have": [
+    {
+     "fact": "The gate exists and is closed: a combination may be ranked only when a directly validated joint probability and the operator's void/push rules are both available. Neither is available.",
+     "artifact": "ops-center/data/derived.json SG-15",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/ops-center/data/derived.json"
+    },
+    {
+     "fact": "No leg-level correlation has been estimated from data. The register lists correlation (Q-06, Q-07, Q-08) as unanswered and blocking.",
+     "artifact": "ops-center/data/derived.json questions",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/ops-center/data/derived.json"
+    },
+    {
+     "fact": "The singles-only baseline is the registered starting point, and it is the only thing currently allowed to be scored prospectively.",
+     "artifact": "shadow-board/, SG-18",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/shadow-board/data/fair_lines_2026_w11.csv"
+    }
+   ],
+   "missing": [
+    "Any measured joint distribution. Prop lines, participation and settlement at the decision timestamp are all unanswered (Q-56).",
+    "The operator's void, push and DNP rules, which change the payout of every combination.",
+    "Whether the dependence between legs is stable across schemes, weather and weeks (Q-08)."
+   ],
+   "proposals": [
+    "SG-13",
+    "SG-15",
+    "SG-21",
+    "SG-41",
+    "SG-45"
+   ],
+   "paths": [
+    {
+     "id": "D6-A",
+     "label": "Hold the joint-evidence gate",
+     "does": "Keep singles-only ranking. Show parlays and prop combinations in the register with their gate unfilled, and rank nothing multi-leg until a joint probability is validated and the void rules are in hand.",
+     "adopts": [
+      "SG-13",
+      "SG-15",
+      "SG-21",
+      "SG-41",
+      "SG-45"
+     ],
+     "buys": "No published number is arithmetically wrong. A multiplied marginal is not a cautious estimate, it is a different quantity.",
+     "leaves_open": "The most commercially interesting market stays unpriced.",
+     "cost": "The combination product does not exist.",
+     "risk": "Impatience. The pressure to relax the gate will be largest exactly when a singles run looks good."
+    },
+    {
+     "id": "D6-B",
+     "label": "Price combinations by simulation with published intervals",
+     "does": "Build a joint simulator and publish each combination's probability with a confidence interval, still without ranking until the gate clears.",
+     "adopts": [
+      "SG-45"
+     ],
+     "buys": "A number where there is now a blank, with the uncertainty attached.",
+     "leaves_open": "A simulated joint distribution is still a model, not a validated one, so the ranking gate stays closed.",
+     "cost": "Substantial modelling work on top of a singles model that has not yet beaten the market.",
+     "risk": "A simulation with an interval looks more authoritative than it is, and the interval will not include the model's own structural error."
+    }
+   ],
+   "recommended": "D6-A",
+   "recommendation_reason": "The gate is closed for a reason the register states in four places, and nothing has changed that would justify opening it. D6-B is worth building as research, but it must not be allowed to promote a row.",
+   "clearing_number": "A directly validated joint probability for the legs in question plus the operator's void/push/DNP rules in writing. Today: 0 leg pairs have a measured correlation, and 0 operators have supplied settlement rules.",
+   "discovery": [
+    {
+     "ref": "Q-07",
+     "question": "What are the real correlations between legs, rather than assumed ones?",
+     "do": "Estimate leg-pair correlations from official results and publish each with its n, computed only from officially sourced numbers.",
+     "source": "https://www.nfl.com/scores/2026/week-10",
+     "changes_path_if": "Correlations are large and unstable - then even a validated simulator cannot be trusted out of sample and D6-A is permanent."
+    },
+    {
+     "ref": "Q-56",
+     "question": "Are prop lines, participation and settlement available at the decision timestamp?",
+     "do": "Check whether any official page publishes a prop line, and record the answer. Player props are an operator product, not an NFL statistic.",
+     "source": "https://www.nfl.com/stats/player-stats/",
+     "changes_path_if": "No official prop source exists - then prop research depends entirely on the operator data from D1, and cannot start before it."
+    },
+    {
+     "ref": "Q-52",
+     "question": "Can joint probability and payout be verified without an independence shortcut?",
+     "do": "Write the void and push rules for one operator into the register before pricing anything against them.",
+     "source": "https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL",
+     "changes_path_if": "Operators will not publish void rules in a machine-readable form - then combination payouts cannot be verified at all and the gate cannot clear."
+    }
+   ]
+  },
+  {
+   "id": "D7",
+   "title": "How much schedule, venue and weather context is worth capturing?",
+   "question": "Transcribe the venue of all 272 fixtures and overlay an NWS weather grid, or stop at the 13 already done?",
+   "why_first": "The brief asks for both, and the first is now partly built. The question is whether the remaining 259 fixtures are worth the effort before the price blocker (D1) is cleared.",
+   "have": [
+    {
+     "fact": "13 of 272 fixtures are transcribed: the stadium and city of every 2026 Week 11 fixture read from the official game-centre Game Info block, with kickoff and network matched to the official Week 11 schedule page. 8 flags are published with them.",
+     "artifact": "venues/data/week11_venues.csv",
+     "source": "https://www.nfl.com/schedules/2026/by-week/week-11"
+    },
+    {
+     "fact": "The league's dated schedule announcement (May 14, 2026; 18-week, 272-game regular season) is captured and published beside the live schedule, so a schedule change is visible against the announced baseline.",
+     "artifact": "venues/data/announcement.json",
+     "source": "https://media.nfl.com/football-information/2026/news/2026-nfl-schedule-announced"
+    },
+    {
+     "fact": "Week 11 includes an international game: Vikings at 49ers at Estadio Banorte, Mexico City - and the official game-centre block is the only place the venue string is published for it.",
+     "artifact": "venues/data/week11_venues.csv",
+     "source": "https://www.nfl.com/games/vikings-at-49ers-2026-reg-11"
+    },
+    {
+     "fact": "A roof/surface and wind/precipitation overlay was proposed (SG-70) and is not implemented. No NWS capture exists in the repository.",
+     "artifact": "ops-center/data/derived.json SG-70",
+     "source": "https://www.weather.gov/documentation/services-web-api"
+    }
+   ],
+   "missing": [
+    "259 of 272 fixtures have no transcribed venue.",
+    "No hashed raw capture of the announcement page or the schedule page.",
+    "Any weather capture, and any ruling on whether the 90-minute-before-kickoff roof designation is published officially."
+   ],
+   "proposals": [
+    "SG-24",
+    "SG-70"
+   ],
+   "paths": [
+    {
+     "id": "D7-A",
+     "label": "Finish the venue register, then add weather",
+     "does": "Transcribe all 272 fixtures from the game-centre Game Info block with a hashed capture, then overlay NWS hourly grids and the 90-minute roof designation.",
+     "adopts": [
+      "SG-70"
+     ],
+     "buys": "A complete fixture-context feature set built only from published schedule facts, which is what the brief asks for, and the end of the totals and passing-prop mispricing the proposal names.",
+     "leaves_open": "It is a feature set with no price to test it against until D1 clears.",
+     "cost": "Mechanical transcription work - 259 fixtures - plus a weather pipeline.",
+     "risk": "Large effort for a feature whose value cannot be measured until there is a market price. The 8 flags on 13 fixtures suggest roughly one irregularity per two games."
+    },
+    {
+     "id": "D7-B",
+     "label": "Keep it at Week 11 and wait",
+     "does": "Leave the register at 13 fixtures, publish the 259 gap explicitly, and return to it after D1 is settled.",
+     "adopts": [],
+     "buys": "Proof of method is published, and the remaining work is deferred until its value can be measured.",
+     "leaves_open": "Any totals model run before then is missing a venue feature it may need.",
+     "cost": "Lower now, higher later if venue turns out to matter.",
+     "risk": "If venue matters, every model run in the interim is misspecified and its ablation will have to be redone."
+    },
+    {
+     "id": "D7-C",
+     "label": "Rules regime first",
+     "does": "Model the 2026 kickoff and declared-onside-kick regime as priors before capturing more venues.",
+     "adopts": [
+      "SG-24"
+     ],
+     "buys": "Removes a systematic bias in originated totals and fourth-quarter comeback curves, which the proposal identifies.",
+     "leaves_open": "It is a rule change, so it needs a multi-season sample to calibrate that does not yet exist.",
+     "cost": "Needs the 2026 rulebook read against prior seasons.",
+     "risk": "A regime prior fitted on one season of a new rule is likely to be fitting the rule, not the teams."
+    }
+   ],
+   "recommended": "D7-A for venues, D7-C as a separate pre-registration",
+   "recommendation_reason": "Venue transcription is mechanical, verifiable and cheap to check, and the 13-fixture pilot already proved the method and surfaced 8 flags. The weather half should wait for the durable-store decision in D8. D7-C is a modelling question, not a capture question, and belongs in the pre-registration queue (D12) rather than here.",
+   "clearing_number": "272 of 272 fixtures transcribed with a hashed capture and a source URL per row. Today: 13 of 272, no raw hashes retained.",
+   "discovery": [
+    {
+     "ref": "Q-67",
+     "question": "How will weather observations be captured identically for US outdoor stadiums and NFL international venues?",
+     "do": "Test the NWS grid API against the international venue coordinates in the register before building a pipeline on it.",
+     "source": "https://www.weather.gov/documentation/services-web-api",
+     "changes_path_if": "The grid does not cover Mexico City - then international fixtures have no weather feature and the feature set is structurally incomplete."
+    },
+    {
+     "ref": "Q-64",
+     "question": "How should the International Game designation be modelled in team-strength and availability models?",
+     "do": "Record which fixtures carry the designation from the official schedule page and treat neutral-site as its own home-field value rather than inferring one.",
+     "source": "https://www.nfl.com/schedules/2026/by-week/week-11",
+     "changes_path_if": "The designation is not published per fixture - then neutral-site games must be treated as unknown rather than as home games."
+    },
+    {
+     "ref": "Q-01",
+     "question": "How much have the 2026 kickoff and declared-onside-kick rule changes moved scoring?",
+     "do": "Read the 2026 rulebook, then compare scoring distributions against prior seasons once a multi-season official results set exists.",
+     "source": "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook/",
+     "changes_path_if": "The shift is large - then any model trained across the rule boundary is biased and the split policy in D11 must respect the rule year."
+    }
+   ]
+  },
+  {
+   "id": "D8",
+   "title": "What is public, what is private, and under whose terms?",
+   "question": "Do we keep raw row-level data in a private store until the terms are read, and split the site into a public analysis layer and a private data layer?",
+   "why_first": "Two proposals (SG-25, SG-69) and five blocking questions (Q-14, Q-16, Q-32, Q-36, Q-61) converge here. The repository currently publishes captured NFL rows on a public GitHub Pages site without a recorded licence position.",
+   "have": [
+    {
+     "fact": "The site publishes derived analysis and, in several workspaces, verbatim row-level captures of NFL pages with their hashes and clock times.",
+     "artifact": "injury-archive/, matchup/, decision-lab/",
+     "source": "https://www.nfl.com/injuries/league/2026/REG10"
+    },
+    {
+     "fact": "No licence position is recorded for storing and displaying NFL data on a public GitHub Pages site. The question is registered and unanswered (Q-14, Q-16).",
+     "artifact": "ops-center/data/derived.json",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/ops-center/data/derived.json"
+    },
+    {
+     "fact": "Jurisdiction is unconfirmed: one register row records the operator's jurisdiction as unconfirmed, so whether player props and same-game parlays are even lawful is not established (Q-32, Q-36).",
+     "artifact": "ops-center/data/derived.json Q-32",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/ops-center/data/derived.json"
+    },
+    {
+     "fact": "A durable snapshot store outside the static site has been proposed with freshness monitoring and alerts on source or schema change, and is not built (SG-20).",
+     "artifact": "ops-center/data/derived.json SG-20",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/ops-center/data/derived.json"
+    }
+   ],
+   "missing": [
+    "A written position on the terms under which NFL data may be stored and displayed.",
+    "The operator's jurisdiction, and therefore whether the intended markets are lawful at all.",
+    "Any retention policy for the immutable snapshots the other decisions would start producing."
+   ],
+   "proposals": [
+    "SG-20",
+    "SG-25",
+    "SG-47",
+    "SG-69"
+   ],
+   "paths": [
+    {
+     "id": "D8-A",
+     "label": "Split now: public analysis, private rows",
+     "does": "Move raw row-level captures out of the published tree into a private store, keep the public site to derived analysis, indices, ratios, model output and links to the official page, and add a compliance page stating the position.",
+     "adopts": [
+      "SG-20",
+      "SG-25",
+      "SG-69"
+     ],
+     "buys": "The site stops publishing verbatim rows on an unlicensed basis before anyone has to ask whether it may.",
+     "leaves_open": "It makes several existing pages thinner, because their tables are row-level transcriptions.",
+     "cost": "A private store, a retention policy, and a rework of the pages that currently publish rows.",
+     "risk": "Some pages exist precisely to show the rows, so this decision has to be made together with D9."
+    },
+    {
+     "id": "D8-B",
+     "label": "Keep publishing links and derived numbers only, from here on",
+     "does": "Leave committed history alone, but require every new page to link to the official source rather than republishing its rows.",
+     "adopts": [
+      "SG-47",
+      "SG-69"
+     ],
+     "buys": "A forward-looking rule with no rework, and no loss of the verification record already built.",
+     "leaves_open": "The existing row-level pages stay public.",
+     "cost": "Low.",
+     "risk": "It reads as inconsistent: the same row is public on one page and link-only on another."
+    },
+    {
+     "id": "D8-C",
+     "label": "Leave it and decide later",
+     "does": "Continue as now and revisit when someone asks.",
+     "adopts": [],
+     "buys": "Nothing is disrupted.",
+     "leaves_open": "The exposure grows with every capture. D3-A alone would multiply it by five captures a week.",
+     "cost": "Deferred, and larger later.",
+     "risk": "The decision gets made for us by the volume of data, at the worst possible moment."
+    }
+   ],
+   "recommended": "D8-A, scoped with D9",
+   "recommendation_reason": "It is the only path that survives contact with the capture cadence in D3-A. Doing it after the ledger is running means migrating five captures a week instead of one. It must be scoped together with D9, because the row-level pages are also the verification surface.",
+   "clearing_number": "A written terms position recorded on a compliance page, plus a private store holding every raw capture with a retention policy. Today: 0 raw captures are held outside the public tree; no licence position is recorded.",
+   "discovery": [
+    {
+     "ref": "Q-14",
+     "question": "Under what terms may this project store and display NFL data, and does a public GitHub Pages site change that?",
+     "do": "Read the NFL's terms of service and its media site's terms, and record the answer with the URL. Do not answer it from memory.",
+     "source": "https://www.nfl.com/",
+     "changes_path_if": "Display is not permitted - then every row-level page has to be withdrawn and D8-A becomes mandatory, not optional."
+    },
+    {
+     "ref": "Q-32",
+     "question": "In which legal jurisdiction(s) will originated lines be used, and are player props and same-game parlays lawful there?",
+     "do": "Record the operator's jurisdiction, then check each market class against it. The register currently lists the jurisdiction as unconfirmed.",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/ops-center/data/derived.json",
+     "changes_path_if": "Props are not lawful in the recorded jurisdiction - then D6 is moot for that market and the whole prop workstream closes."
+    },
+    {
+     "ref": "Q-61",
+     "question": "Is this private research, public analytics, paid recommendations or wagering operations?",
+     "do": "Answer it in one sentence on the landing page. Four different sessions' pages read as four different answers, which is itself a risk.",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/ops-center/data/derived.json",
+     "changes_path_if": "It is wagering operations - then the compliance and licensing work is not a side task, it is the main task."
+    }
+   ]
+  },
+  {
+   "id": "D9",
+   "title": "What should the site itself look like?",
+   "question": "Consolidate the workspaces behind one navigation and one decision surface, or keep each workspace self-contained?",
+   "why_first": "Thirteen sessions each built a complete sub-site. The result is 193 HTML pages, five different suggestions pages, four different questions pages, and a landing page that duplicates its own header. A user cannot currently tell which one is authoritative.",
+   "have": [
+    {
+     "fact": "200 HTML pages are published: 17 root pages plus 24 workspace directories, several of which carry their own questions, suggestions and flagged pages with overlapping but non-identical content.",
+     "artifact": "repository tree",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3"
+    },
+    {
+     "fact": "The merged register at ops-center/data/derived.json holds 100 questions, 75 proposals, 34 strategies, 31 gates and 10 flags, and is the only place all of them are in one file. Only the root questions.html and suggestions.html render from it.",
+     "artifact": "ops-center/data/derived.json",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/ops-center/data/derived.json"
+    },
+    {
+     "fact": "Two duplicated-block defects were found: the landing page rendered two complete header blocks in sequence (M-F9, matchup/flagged.html) and the generated suggestions page rendered its heading twice (SD-F02). Neither could be caught by a link checker, because a duplicated section is not a broken link.",
+     "artifact": "matchup/flagged.html",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/matchup/flagged.html"
+    },
+    {
+     "fact": "A weekly 'what changed' diff was proposed and deferred (SG-57), and a per-team decision view was proposed and is partly built as matchup/teams.html.",
+     "artifact": "ops-center/data/derived.json SG-57, matchup/teams.html",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/ops-center/data/derived.json"
+    }
+   ],
+   "missing": [
+    "A ruling on which questions page and which suggestions page is authoritative.",
+    "Search and filter on the table pages, which the register has proposed and only the injuries page implements.",
+    "A decision on whether the site may publish recommendations at all - the register carries it as blocking and unanswered (Q-10)."
+   ],
+   "proposals": [
+    "SG-17",
+    "SG-28",
+    "SG-29",
+    "SG-32",
+    "SG-44",
+    "SG-56",
+    "SG-57",
+    "SG-59",
+    "SG-73"
+   ],
+   "paths": [
+    {
+     "id": "D9-A",
+     "label": "One navigation, one register, one flagged page",
+     "does": "Make the merged register the only source of questions and suggestions, keep the per-workspace pages as evidence views that link back to it, and fix the navigation so every workspace is reachable from the top bar.",
+     "adopts": [
+      "SG-29",
+      "SG-56",
+      "SG-59",
+      "SG-73",
+      "SG-17"
+     ],
+     "buys": "A reader can tell which list is authoritative. Today they cannot, and five suggestions pages with different counts is a decision-making hazard, not a feature.",
+     "leaves_open": "It does not by itself add the interactive views the brief asks for.",
+     "cost": "Editing pages other sessions own, which is exactly what the coordination board exists to sequence.",
+     "risk": "Consolidation can silently drop a workspace's own flags. Each page's flagged items must be merged, not overwritten."
+    },
+    {
+     "id": "D9-B",
+     "label": "Add the decision surfaces the brief names",
+     "does": "Build the interactive offence-versus-defence mismatch matrix, the per-team decision view, and a weekly what-changed diff column.",
+     "adopts": [
+      "SG-28",
+      "SG-32",
+      "SG-44",
+      "SG-57"
+     ],
+     "buys": "The screens the brief actually describes: one screen showing that a WR1 is facing a promoted third-string corner.",
+     "leaves_open": "The matrix cannot show 4th-string offensive linemen, because no club publishes one (see D2).",
+     "cost": "Front-end work on a static site with no build step beyond the generators.",
+     "risk": "An interactive view is easier to trust than a table, so every blank in it needs a visible reason - which the matchup matrix already does and this must not lose."
+    },
+    {
+     "id": "D9-C",
+     "label": "Leave the structure alone",
+     "does": "Keep every workspace self-contained and add nothing.",
+     "adopts": [],
+     "buys": "No session's work is disturbed, and no coordination overhead.",
+     "leaves_open": "The duplication grows. The next session adds a fourteenth sub-site.",
+     "cost": "Each new reader pays the orientation cost again.",
+     "risk": "A site nobody can navigate does not improve decision-making, which is the stated purpose of this whole section."
+    }
+   ],
+   "recommended": "D9-A now, then D9-B",
+   "recommendation_reason": "Consolidation is cheap and removes an active hazard - a reader acting on a stale suggestions page. The interactive views are worth building, but building them on top of five competing registers would multiply the problem. This desk itself is a D9-A artefact: it renders the one merged register rather than adding a sixth list.",
+   "clearing_number": "One questions page, one suggestions page and one flagged page sourced from ops-center/data/derived.json, with every other instance labelled as a workspace-scoped view. Today: 11 suggestions pages and 11 questions pages are published across the workspaces, of which 2 (the root questions.html and suggestions.html) render from the merged register.",
+   "discovery": [
+    {
+     "ref": "Q-10",
+     "question": "Should the site publish betting recommendations or only analysis?",
+     "do": "Answer it on the landing page in one sentence. The brief says analysis; several pages drift toward recommendations.",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/ops-center/data/derived.json",
+     "changes_path_if": "Recommendations are in scope - then the compliance work in D8 is a precondition, not a parallel task."
+    },
+    {
+     "ref": "Q-94",
+     "question": "How are suggestions approved without accidental deployment?",
+     "do": "Keep the review control browser-local, as this desk does, and require a committed file change for anything that reaches the site.",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/ops-center/data/derived.json",
+     "changes_path_if": "Approval should write to the repository - then the review desk needs a write path, an audit trail and a merge gate, which is a much larger build."
+    },
+    {
+     "ref": "Q-99",
+     "question": "How does a value get into a table, and what stops an unverified value from being published?",
+     "do": "Keep the rule that every table row carries an https link and every blank a written reason, enforced by a build-time gate that fails closed.",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/scripts/validate_site.py",
+     "changes_path_if": "A row ever ships without a citation - then the whole citation promise on the landing page becomes false and the landing page has to be corrected."
+    }
+   ]
+  },
+  {
+   "id": "D10",
+   "title": "How loud should a broken source be?",
+   "question": "Fail the build loudly when a field goes missing, or publish a blank and carry on?",
+   "why_first": "The brief asks for a drift alarm on every scraper that pins expected row counts and required fields. The repository has already been saved by one such alarm: it caught a standings mismatch that would otherwise have shipped as a wrong number.",
+   "have": [
+    {
+     "fact": "The drift alarm works: a scheduled data refresh pulled in the Week 10 finals while the official standings snapshot still described the pre-Week-10 league, the origination build correctly refused to reconcile and failed, and the failure was fixed by re-transcribing 32 official standings rows (24 had moved), not by relaxing the check.",
+     "artifact": "origination/data/official_standings_2026.json, COORDINATION.md",
+     "source": "https://www.nfl.com/standings/"
+    },
+    {
+     "fact": "Every workspace carries its own fail-closed gate, and the Pages workflow runs 20-odd verification steps before it will deploy.",
+     "artifact": ".github/workflows/pages.yml",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/.github/workflows/pages.yml"
+    },
+    {
+     "fact": "The build already scans tracked text files for unresolved merge-conflict markers, because the home page shipped with them once when no gate looked.",
+     "artifact": "scripts/validate_site.py",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/scripts/validate_site.py"
+    },
+    {
+     "fact": "A doman-allowlist and empty-cell integrity pre-commit check is proposed and not implemented (SG-34).",
+     "artifact": "ops-center/data/derived.json SG-34",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/ops-center/data/derived.json"
+    }
+   ],
+   "missing": [
+    "A pin on expected row counts and required fields for every scraper, not only the ones that already have one.",
+    "A distinction, in the build output, between a failed parse and a clean zero - one proposal (SG-49) exists precisely because a club with no injuries and a club whose parse broke currently look identical.",
+    "Alerts on source or schema change, which are proposed (SG-20) and not built."
+   ],
+   "proposals": [
+    "SG-08",
+    "SG-10",
+    "SG-27",
+    "SG-34",
+    "SG-35",
+    "SG-49"
+   ],
+   "paths": [
+    {
+     "id": "D10-A",
+     "label": "Fail closed everywhere, with alerts",
+     "does": "Pin every parser to expected row counts and required fields, make a failed parse look different from a clean zero-row result, and alert on freshness and schema change.",
+     "adopts": [
+      "SG-08",
+      "SG-10",
+      "SG-27",
+      "SG-34",
+      "SG-35",
+      "SG-49"
+     ],
+     "buys": "A broken source cannot publish a plausible wrong number. This has already prevented one.",
+     "leaves_open": "A loud build is a build that stops, so a stale source can halt publication entirely.",
+     "cost": "Maintenance every time a source legitimately changes shape.",
+     "risk": "Alert fatigue. If the alarm fires weekly for benign reasons, it will be muted, and then it is worse than no alarm."
+    },
+    {
+     "id": "D10-B",
+     "label": "Fail closed on data, warn on schema",
+     "does": "Keep the hard gate for values that reach a published table, but downgrade a schema change to a visible warning with a dated note.",
+     "adopts": [
+      "SG-27",
+      "SG-35"
+     ],
+     "buys": "Publication keeps running during a benign source redesign.",
+     "leaves_open": "A warning is easier to ignore than a red build, and a schema change is exactly how a wrong value sneaks in.",
+     "cost": "Someone has to read the warnings.",
+     "risk": "The one time it matters is the one time nobody reads it."
+    }
+   ],
+   "recommended": "D10-A",
+   "recommendation_reason": "The alarm has already paid for itself once, and the failure mode it prevents - a silently wrong published number - is the one failure this project cannot afford. Alert fatigue is a real risk and should be managed by tuning the pins, not by weakening the gate.",
+   "clearing_number": "Every scraper pinned to an expected row count and a required-field list, with a build step that fails on a count outside tolerance. Today: the pins exist for the workspaces that built their own gates; there is no single register of them.",
+   "discovery": [
+    {
+     "ref": "Q-19",
+     "question": "How do we detect a silently truncated scrape before it is published?",
+     "do": "Assert the row count against the number of club sections the page renders, and fail when they disagree.",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/scripts/validate_site.py",
+     "changes_path_if": "The count is not stable week to week - then a fixed pin is impossible and the tolerance has to be a range, published as such."
+    },
+    {
+     "ref": "Q-18",
+     "question": "Does the capture pipeline distinguish 'no injuries reported' from 'no rows parsed'?",
+     "do": "Require the page's own marker text to be present before a zero-row club is recorded as clean.",
+     "source": "https://www.nfl.com/injuries/league/2026/REG10",
+     "changes_path_if": "The marker text is not machine-readable - then four clubs a week will keep showing as injury-free whether or not they are."
+    },
+    {
+     "ref": "Q-51",
+     "question": "Can the site be rebuilt and verified without a human in the loop?",
+     "do": "Run the whole Pages workflow from a clean checkout and confirm it passes end to end with no manual step.",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/.github/workflows/pages.yml",
+     "changes_path_if": "Any step needs a human - then the daily capture cadence in D3-A is not achievable and D3-A has to be rescoped."
+    }
+   ]
+  },
+  {
+   "id": "D11",
+   "title": "Which model, and how is it split?",
+   "question": "One estimator or two published side by side? Chronological splits inside one season, or wait for multiple seasons?",
+   "why_first": "The brief asks for every model total to be published twice until one wins, and for train/validation/holdout splits. With only one verified season, the split policy is doing more work than usual.",
+   "have": [
+    {
+     "fact": "A frozen pre-registered corpus exists: 136 games, 2026 Weeks 1-9, with 135 exact score matches against the official pages. One Week 2 game (Washington at Dallas) is published as 'Hidden Score' on both the official schedule and game-centre pages; its score cells are blank and never inferred.",
+     "artifact": "corpus/games_2026_w1_9.csv, corpus/PRE_REGISTRATION.md",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/corpus/PRE_REGISTRATION.md"
+    },
+    {
+     "fact": "The forward ledger extends the verified feed to 2026 Week 10: 150 fixtures, 149 graded, 1 unplayed, 32 clubs, 160 of 160 standings field checks, 0 mismatches against the official record chips for the 31 clubs read in that pass.",
+     "artifact": "forward-ledger/data/ledger_manifest.json",
+     "source": "https://www.nfl.com/scores/2026/week-10"
+    },
+    {
+     "fact": "A pre-registered singles-only baseline is running prospectively and its Week 11 forecasts are recorded, kept separate from anything rankable.",
+     "artifact": "shadow-board/data/fair_lines_2026_w11.csv",
+     "source": "https://www.nfl.com/schedules/2026/by-week/week-11"
+    },
+    {
+     "fact": "Every model output is stored as a probability plus its inputs, not just a pick, and the origination workspace publishes the fair line, the market line and the difference as separate columns.",
+     "artifact": "shadow-board/, origination/",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/shadow-board/data/fair_lines_2026_w11.csv"
+    }
+   ],
+   "missing": [
+    "More than one season of official results. The corpus is one season, so a holdout is a slice of it, not an independent year.",
+    "An opponent-aware rating. Game-level results ingestion was proposed (SG-03) and the ratings are not yet opponent-aware in a published run.",
+    "A second published total estimator, so the walk-forward comparison the brief asks for has nothing to compare against yet."
+   ],
+   "proposals": [
+    "SG-01",
+    "SG-03",
+    "SG-18",
+    "SG-19",
+    "SG-58",
+    "SG-68"
+   ],
+   "paths": [
+    {
+     "id": "D11-A",
+     "label": "Publish both estimators, collapse after a walk-forward",
+     "does": "Keep two total estimators visible with the gap between them as its own column, and only collapse to one after a pre-registered walk-forward comparison says which is better.",
+     "adopts": [
+      "SG-58",
+      "SG-03",
+      "SG-01",
+      "SG-18"
+     ],
+     "buys": "Exactly what the brief asks for, and it makes estimator uncertainty visible instead of hiding it behind one number.",
+     "leaves_open": "Two published totals are harder to read, and a reader will ask which to use.",
+     "cost": "One extra model to maintain until the comparison closes.",
+     "risk": "If the walk-forward is run on the same single season, the comparison will be within noise and will not close the question."
+    },
+    {
+     "id": "D11-B",
+     "label": "Chronological splits inside the one verified season",
+     "does": "Split the 136-game corpus into train, validation and a final holdout by week order, and accept that the holdout is a slice of one season.",
+     "adopts": [
+      "SG-68",
+      "SG-19"
+     ],
+     "buys": "An honest out-of-sample test that can be run today, and it is already written into the frozen pre-registration.",
+     "leaves_open": "A single-season holdout cannot separate a model difference from a season-specific effect.",
+     "cost": "Fewer games to train on.",
+     "risk": "Reading a within-season holdout as if it were a multi-season result, which the pre-registration explicitly warns against."
+    },
+    {
+     "id": "D11-C",
+     "label": "Wait for multiple seasons",
+     "does": "Do not fit anything until several seasons of official results are captured.",
+     "adopts": [],
+     "buys": "A genuine out-of-sample test when it happens.",
+     "leaves_open": "Everything, for an indefinite period. The 2026 season would pass unmodelled.",
+     "cost": "The whole origination programme stalls.",
+     "risk": "The corpus and the shadow baseline already exist and are producing prospective records; discarding them loses the only walk-forward evidence being accumulated."
+    }
+   ],
+   "recommended": "D11-A and D11-B together",
+   "recommendation_reason": "They are not exclusive: publish both estimators and evaluate them on chronological splits of the frozen corpus, with the single-season caveat printed next to every number. D11-C would throw away the only prospective record the project has.",
+   "clearing_number": "A walk-forward comparison between the two total estimators whose difference interval excludes zero on a chronological holdout. Today: 1 baseline is running, 0 head-to-head comparisons have been published.",
+   "discovery": [
+    {
+     "ref": "Q-42",
+     "question": "Does the baseline rating beat a naive benchmark out of sample?",
+     "do": "Run it. Six rows already scored worse than the market's own de-vigged price on proper scores, so the prior should be that it does not.",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/skill-lab/data/results.json",
+     "changes_path_if": "It does not beat the market - then the honest product is the forecast register, not the leaderboard, and D5-B is confirmed."
+    },
+    {
+     "ref": "Q-45",
+     "question": "Is the fitted Pythagorean exponent stable, or is it fitting noise at n=32?",
+     "do": "Refit it on each chronological fold and publish the spread. A point estimate at n=32 without a spread is not a finding.",
+     "source": "https://www.nfl.com/standings/",
+     "changes_path_if": "The spread is wide - then any model using that exponent inherits the instability and its own intervals must widen."
+    },
+    {
+     "ref": "Q-57",
+     "question": "Can every feature be reconstructed as it was known before kickoff?",
+     "do": "Audit each feature against the capture ledger from D3-A and mark any feature that is computed from post-kickoff data.",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/corpus/PRE_REGISTRATION.md",
+     "changes_path_if": "Any feature cannot be reconstructed - then the backtest is contaminated and its results cannot be published, whatever they say."
+    }
+   ]
+  },
+  {
+   "id": "D12",
+   "title": "What has to be written down before the data arrives?",
+   "question": "Freeze every rule in git before its evaluation window opens, or write the rule down as it is used?",
+   "why_first": "Pre-registration is the mechanism that separates a finding from a story. The project has already used it correctly three times - the price policy, the corpus, and the skill-lab protocol - and it is the cheapest discipline on this page.",
+   "have": [
+    {
+     "fact": "Three pre-registrations are in force and each one's creating commit is its registration: the price-data policy (2026-11-15), the frozen corpus and split policy (2026-11-15), and the skill-lab evaluation protocol.",
+     "artifact": "pricing/PRICE_DATA_POLICY.md, corpus/PRE_REGISTRATION.md, skill-lab/",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/corpus/PRE_REGISTRATION.md"
+    },
+    {
+     "fact": "The skill-lab pre-registration is enforced mechanically: the workflow checks out full history and asserts the registration commit predates the commit that added the results artifact.",
+     "artifact": ".github/workflows/pages.yml, tests/test_skill_lab.py",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/.github/workflows/pages.yml"
+    },
+    {
+     "fact": "The forward ledger publishes its registration commit hash on the overview page, and on main the first commit touching the model and its diagnostics is provably later.",
+     "artifact": "forward-ledger/PREREGISTRATION.md",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/forward-ledger/PREREGISTRATION.md"
+    },
+    {
+     "fact": "A two-sided 'what would change our mind' field already exists on every strategy entry in the register.",
+     "artifact": "ops-center/data/derived.json strategies mind_confirms",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/ops-center/data/derived.json"
+    }
+   ],
+   "missing": [
+    "A single index of every pre-registration, so a reader can see what is frozen and what is not.",
+    "A pre-registration for the personnel ablation (SG-55) and for the venue/weather feature set (D7).",
+    "A count of every abandoned variant, which the multiplicity control needs and which only a written record can supply."
+   ],
+   "proposals": [
+    "SG-43",
+    "SG-46"
+   ],
+   "paths": [
+    {
+     "id": "D12-A",
+     "label": "Freeze before data, mechanically enforced",
+     "does": "Commit rule text, sample window and gates before the window opens, make the commit hash the registration, and add a CI check that asserts the ordering from git history.",
+     "adopts": [
+      "SG-43",
+      "SG-46"
+     ],
+     "buys": "A threshold chosen before the scores exist. It is the difference between a test and a description.",
+     "leaves_open": "Nothing, except that it makes the project slower to publish a number.",
+     "cost": "Discipline, and a full-history checkout in CI.",
+     "risk": "A pre-registration written loosely can be satisfied in spirit while being violated in letter. The crime is not the loophole, it is not recording that the loophole was used."
+    },
+    {
+     "id": "D12-B",
+     "label": "Freeze the big ones only",
+     "does": "Pre-register the corpus, the split and the headline metric, and leave feature-level choices documented after the fact.",
+     "adopts": [
+      "SG-43"
+     ],
+     "buys": "Less ceremony per experiment.",
+     "leaves_open": "Feature-level choices are where the degrees of freedom actually are, so the multiplicity problem survives.",
+     "cost": "Nothing directly.",
+     "risk": "A hundred small unrecorded choices invalidate the one big recorded one."
+    }
+   ],
+   "recommended": "D12-A",
+   "recommendation_reason": "It is already working three times over, and the mechanical check costs one CI step. The register's own proposal is to keep a written record of every rejected idea and every trial count, which only works if the record is complete.",
+   "clearing_number": "One index page listing every pre-registration with its commit hash and its window, plus a counter of registered variants including the abandoned ones. Today: 3 pre-registrations are in force, no index exists, and the abandoned-variant count is not recorded.",
+   "discovery": [
+    {
+     "ref": "Q-97",
+     "question": "What minimum evidence is required before a strategy is eligible?",
+     "do": "Write the eligibility criteria into the protocol file before the next window, not into the leaderboard page after it.",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/corpus/PRE_REGISTRATION.md",
+     "changes_path_if": "The criteria cannot be agreed - then no strategy can ever be declared eligible and D5-B, recognition-only, is the permanent answer."
+    },
+    {
+     "ref": "Q-70",
+     "question": "What stops a strategy from being overfitted to the leaderboard itself?",
+     "do": "Pre-register the strategy definition, then hold the leaderboard's own ranking rule fixed for a whole season.",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/ops-center/data/derived.json",
+     "changes_path_if": "The ranking rule changes mid-season - then any cross-season comparison is invalid and the season restarts as a new competition."
+    },
+    {
+     "ref": "Q-94",
+     "question": "How are suggestions approved without accidental deployment?",
+     "do": "Keep the choice in the browser and the change in a commit, with the review desk linking to the register row it would alter.",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/ops-center/data/derived.json",
+     "changes_path_if": "A review choice must write to the repository - then it needs an audit trail and a merge gate, and D9-A has to sequence it."
+    }
+   ]
+  }
+ ]
+}

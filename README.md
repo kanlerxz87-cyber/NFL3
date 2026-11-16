@@ -7,7 +7,7 @@ Nothing here is betting advice, a sportsbook, or an approved wagering system.
 
 **Executive summary:** [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMMARY.md)
 
-**Review suggestions before implementation:** [Suggestions & decision review](ops-center/suggestions.html) — 75 proposals, approve/defer/reject controls, and a browser-local JSON export; no choice silently changes repository files.
+**Review suggestions before implementation:** [Suggestion review desk](suggestion-desk/index.html) — all 75 registered proposals grouped into the 12 decisions they depend on, each with the paths on offer, the number that would clear it and the questions still blocking it; choose a path in the browser and export it as JSON. The [register view](ops-center/suggestions.html) is the same 75 proposals with approve/defer/reject controls. No choice silently changes repository files.
 
 ## Start here
 
@@ -27,6 +27,7 @@ Nothing here is betting advice, a sportsbook, or an approved wagering system.
 | **Skill lab** | Pre-registered proper-score evaluation of our own line against the market's own de-vigged price: Brier and log-loss skill, a 10,000-resample game-cluster interval, Benjamini–Hochberg multiplicity control, four control baselines (random pick, favourites only, base rate, market), and a retrospective staking table that cannot promote a row. | [`skill-lab/index.html`](skill-lab/index.html) |
 | **Injury archive** | Scheduled capture of the two official availability documents — the weekly injury report and the weekly inactive list — for 2021–2026, each read stored content-addressed with the SHA-256 of the raw bytes and the clock time of the read. Publishes the measured inactive rate for every game-status designation with n and a Wilson interval, under a protocol pre-registered before the first run. Every exclusion is counted; a rate with no interval is not published; the not-published addresses are recorded rather than back-filled. Gate: `python3 injury-archive/scripts/verify.py`. | [`injury-archive/index.html`](injury-archive/index.html) |
 | **Matchup desk** | Which published string of the defence each offensive string actually faces. The official Week 10 injury report re-read line by line on 2026-11-16 (347 rows, 28 clubs, 14 games) and reconciled against the committed 2026-11-12 capture (254 rows, 24 clubs): 59 replacement chains with the *string* of the next man, a 224-cell offence-versus-defence matrix (166 published, 58 blank each with its reason), a per-team decision view, a dated official roster-event ledger with 56 verbatim events, and 18 stale depth rows. Blanks stay blank. | [`matchup/index.html`](matchup/index.html) |
+| **Suggestion review desk** | All 75 proposals in the merged register grouped into the 12 decisions they depend on, each with the paths that were proposed for it, the number that would clear it, and the register questions still blocking it. A reviewer picks a path per decision in the browser; the choice is stored locally and exported as JSON, and nothing is implemented until someone commits a change to `ops-center/data/derived.json`. Fail-closed gate: `python3 suggestion-desk/scripts/check.py`. | [`suggestion-desk/index.html`](suggestion-desk/index.html) &middot; [`suggestion-desk/paths.html`](suggestion-desk/paths.html) &middot; [`suggestion-desk/discovery.html`](suggestion-desk/discovery.html) |
 | **Venue register** | The stadium and city of every 2026 Week 11 fixture transcribed from the official NFL game-centre &ldquo;Game Info&rdquo; block, with kickoff and network matched to the official Week 11 schedule page, and the league&rsquo;s dated schedule announcement (May 14, 2026 &mdash; 18-week, 272-game regular season) published beside the live schedule. 13 fixtures, 8 flags; 259 of 272 fixtures are still not transcribed. Gate: `python3 venues/scripts/verify.py`. | [`venues/index.html`](venues/index.html) &middot; [`venues/flagged.html`](venues/flagged.html) |
 | **Availability ledger** | Official reserve-list and league-trade captures with source URL, retrieval time and SHA-256, joined to the committed club depth capture: stale depth rows flagged, same-day rows left unresolved, and reserve-listed players the weekly report never lists. | [`availability-ledger/index.html`](availability-ledger/index.html) |
 | Overview | Root landing page and links to preserved concurrent workspaces | [`index.html`](index.html) |
@@ -106,6 +107,8 @@ python3 matchup/scripts/pages.py       # re-render the eleven matchup pages
 python3 matchup/scripts/check.py       # fail-closed gate for the matchup workspace
 python3 venues/scripts/build.py        # re-render the venue register pages
 python3 venues/scripts/verify.py       # fail-closed gate for the venue register
+python3 suggestion-desk/scripts/build.py  # re-render the review desk from the merged register
+python3 suggestion-desk/scripts/check.py  # fail-closed gate for the review desk
 ```
 
 See `COORDINATION.md` for parallel-session claims, conflict logs, verification records and publication results.
