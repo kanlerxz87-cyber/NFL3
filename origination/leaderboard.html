@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Leaderboard | NFL3 origination workspace</title>
+<title>Prospective leaderboard | NFL3 origination workspace</title>
 <link rel="stylesheet" href="assets/origination.css"></head>
 <body>
 <header class="top"><div class="wrap">
@@ -10,92 +10,36 @@
 <a href='index.html'>Overview</a><a href='requirements.html'>Requirements</a><a href='decisions.html'>Decisions &amp; questions</a><a href='strategies.html'>Strategy registry</a><a href='leaderboard.html'>Leaderboard</a><a href='lines.html'>Originated lines</a><a href='prices.html'>Price store</a><a href='availability.html'>Availability &amp; depth</a><a href='correlations.html'>Correlations</a><a href='luck.html'>Luck removal</a><a href='suggestions.html'>Suggestions</a><a href='flagged.html'>Flagged for review</a><a href='sources.html'>Sources</a>
 </nav></div></header>
 <main class="wrap">
-<div class="hrow"><div><p class="eyebrow">Proper scores, controls and uncertainty</p><h1>Leaderboard</h1></div>
+<div class="hrow"><div><p class="eyebrow">No backtest values are ranked</p><h1>Prospective leaderboard</h1></div>
 <span class="badge warn">Research · not betting advice</span></div>
 
 <div class="notice"><b>Read this first.</b> This workspace originates its own numbers and grades them
-against a reconciled official results feed. It holds <b>one</b> community price observation, so no
-opening-line edge, closing-line value or validated strategy exists yet — and the leaderboard says so on
-every row. Prices are labelled <b>COMMUNITY</b>; standings and injury reports are labelled
+against a reconciled official results feed. It contains community-sourced price snapshots but no
+licensed price source, so no price-dependent edge, closing-line value or validated strategy is eligible.
+The prospective leaderboard remains empty until its frozen gates clear. Prices are labelled <b>COMMUNITY</b>;
+standings and injury reports are labelled
 <b>OFFICIAL</b>; anything that could not be confirmed is blank and sits on
 <a href="flagged.html">Flagged for review</a>. Nothing here is betting advice.</div>
 
-<div class="section-head"><div><div class="section-label">PROPER SCORES</div>
-<h2>Ranked by benchmark-relative Brier skill, with an interval and a control on every row</h2></div>
-<p>Benchmark: de-vigged market moneyline where available; 0.5 otherwise. Multiplicity: 10 strategies, family-wise α=0.05,
-so a per-test level of 0.00500. <b>No row is validated</b>: promotion needs n ≥
-200 and an interval above zero.</p></div>
-<div class="table-wrap"><table><caption>Brier skill score (BSS): positive means the
-strategy beat the benchmark on the same rows. The interval is a paired game-cluster bootstrap. A control
-arm's BSS is exactly zero by construction, which is what makes it a control.</caption>
-<thead><tr><th>#</th><th>Strategy</th><th>Family</th><th>Market</th><th>n</th><th>Brier skill</th>
-<th>95% interval</th><th>Win rate</th><th>Wilson 95%</th><th>Verdict</th><th>Source</th></tr></thead><tbody>
-<tr><td>1</td><td><b>S03</b> Model total vs market total</td>
-<td>singles</td><td>total</td><td>124</td>
-<td>-0.107</td><td>[-0.19, -0.02]</td><td>46.0%</td>
-<td>[37.4%, 54.7%]</td><td><span class='pill warn'>worse than benchmark</span>
-<br><small>worse than benchmark: interval below zero</small></td>
-<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>NFL standings ↗</a></td></tr>
-<tr><td>2</td><td><b>S01</b> Model spread vs market spread (no threshold)</td>
-<td>singles</td><td>side</td><td>143</td>
-<td>-0.116</td><td>[-0.22, -0.02]</td><td>49.0%</td>
-<td>[40.9%, 57.1%]</td><td><span class='pill warn'>worse than benchmark</span>
-<br><small>worse than benchmark: interval below zero</small></td>
-<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>NFL standings ↗</a></td></tr>
-<tr><td>3</td><td><b>S02</b> Model spread vs market spread (Δ ≥ 1.5)</td>
-<td>singles</td><td>side</td><td>115</td>
-<td>-0.139</td><td>[-0.26, -0.02]</td><td>49.6%</td>
-<td>[40.6%, 58.6%]</td><td><span class='pill warn'>worse than benchmark</span>
-<br><small>worse than benchmark: interval below zero</small></td>
-<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>NFL standings ↗</a></td></tr>
-<tr><td>4</td><td><b>S04</b> Model win probability vs de-vigged moneyline</td>
-<td>singles</td><td>moneyline</td><td>125</td>
-<td>-0.146</td><td>[-0.32, 0.00]</td><td>36.0%</td>
-<td>[28.1%, 44.7%]</td><td><span class='pill warn'>no distinguishable signal</span>
-<br><small>no distinguishable signal: interval includes zero</small></td>
-<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>NFL standings ↗</a></td></tr>
-<tr><td>5</td><td><b>S05</b> Control: always take the home side</td>
-<td>controls</td><td>side</td><td>143</td>
-<td>0.000</td><td>[0.00, 0.00]</td><td>41.3%</td>
-<td>[33.5%, 49.5%]</td><td><span class='pill warn'>no distinguishable signal</span>
-<br><small>no distinguishable signal: interval includes zero</small></td>
-<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>NFL standings ↗</a></td></tr>
-<tr><td>6</td><td><b>S06</b> Control: always take the favourite</td>
-<td>controls</td><td>side</td><td>143</td>
-<td>0.000</td><td>[0.00, 0.00]</td><td>47.6%</td>
-<td>[39.5%, 55.7%]</td><td><span class='pill warn'>no distinguishable signal</span>
-<br><small>no distinguishable signal: interval includes zero</small></td>
-<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>NFL standings ↗</a></td></tr>
-<tr><td>7</td><td><b>S07</b> Control: always take the underdog</td>
-<td>controls</td><td>side</td><td>143</td>
-<td>0.000</td><td>[0.00, 0.00]</td><td>52.4%</td>
-<td>[44.3%, 60.5%]</td><td><span class='pill warn'>no distinguishable signal</span>
-<br><small>no distinguishable signal: interval includes zero</small></td>
-<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>NFL standings ↗</a></td></tr>
-<tr><td>8</td><td><b>S08</b> Control: always take the over</td>
-<td>controls</td><td>total</td><td>149</td>
-<td>0.000</td><td>[0.00, 0.00]</td><td>52.3%</td>
-<td>[44.4%, 60.2%]</td><td><span class='pill warn'>no distinguishable signal</span>
-<br><small>no distinguishable signal: interval includes zero</small></td>
-<td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>NFL standings ↗</a></td></tr>
-</tbody></table></div>
-<div class="notice"><b>Why there is no 'ranking by ROI' anywhere on this page.</b>
-Return over a season is a single draw from a very wide distribution. At 149
-played games, an 11-9 record is unremarkable for a coin. Ranking on realised return would let one good
-week outrank twenty weeks of calibrated work, which is the exact failure the brief asks us to prevent.
-<a href="luck.html">See the arithmetic →</a></div>
-<div class="section-head"><div><div class="section-label">BLOCKED</div>
-<h2>What cannot be ranked, and why</h2></div></div>
-<div class="table-wrap"><table><caption>A blocked strategy stays visible with its blocking condition. It
-is not 'promising'; it has no evidence path yet.</caption>
-<thead><tr><th>ID</th><th>Strategy</th><th>Family</th><th>Blocked by</th><th>Source</th></tr></thead><tbody>
-<tr><td><b>S09</b></td><td>Two-leg same-week parlay (joint-evidence gate)</td>
-<td>parlays</td><td>G07 joint-evidence gate: no validated joint probability is available.</td>
-<td><a class='source' href='https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL' target='_blank' rel='noopener noreferrer'>NFL betting FAQ ↗</a></td></tr>
-<tr><td><b>S10</b></td><td>Player-prop combination (joint-evidence gate)</td>
-<td>player-props</td><td>G07 + G08: no validated joint probability and no prop settlement feed.</td>
-<td><a class='source' href='https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL' target='_blank' rel='noopener noreferrer'>NFL betting FAQ ↗</a></td></tr>
-</tbody></table></div>
+<div class="section-head"><div><div class="section-label">PROSPECTIVE ONLY</div>
+<h2>No backtest result is eligible for this leaderboard</h2></div>
+<p>Historical scores, win rates and ROI are not rankings. The prospective ledger is the only source
+for eligible rows; until a strategy clears its frozen gates, this page publishes no rank or score.</p></div>
+<div class="notice"><b>Current state: zero eligible strategies.</b> The canonical prospective board carries
+one row per division, controls, the separate signal/staking columns, promotion and demotion rules, and
+its recorded eligibility count. It currently has no settled prospective sample to rank. A retrospective
+score cannot fill that blank.
+<a href="../forward-ledger/leaderboard.html">Open the prospective-only leaderboard →</a></div>
+<div class="section-head"><div><div class="section-label">ANALYSIS, NOT RANKING</div>
+<h2>Where retrospective diagnostics live</h2></div>
+<p>These pages explain model performance and the removal-of-luck analysis. They are not leaderboard
+entries and cannot promote a strategy.</p></div>
+<ul><li><a href="lines.html">Originated line diagnostics</a></li>
+<li><a href="luck.html">Sample-size and removal-of-luck panel</a></li>
+<li><a href="../forward-ledger/backtest.html">Frozen backtest corpus (research only; never ranked)</a></li></ul>
+<div class="notice"><b>Promotion is not automatic from historical performance.</b> A strategy must be
+pre-registered and scored prospectively against its frozen controls, with uncertainty and multiplicity
+adjustment. Staking/ROI remains blank until the price-data policy admits a licensed source.</div>
 </main>
 <footer class="wrap foot"><span><strong>NFL3 origination workspace</strong> · every row links to its source ·
 a value that could not be confirmed stays blank.</span>

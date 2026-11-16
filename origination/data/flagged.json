@@ -4,9 +4,9 @@
   {
    "id": "F01",
    "severity": "high",
-   "title": "Price history is two captures deep, not a series",
-   "issue": "Weeks 1-9 had kicked off before the first observation, so their stored numbers are post-hoc and cannot define an opening, a close or closing-line value. Two captures now exist and 7 of the 78 pre-kickoff market cells moved between them, so a real opening-to-latest interval exists for those cells only. The remaining 71 pre-kickoff cells still have a single observation.",
-   "resolve": "A scheduled capture at T-60 before every kickoff, so every graded cell has its own interval. Policy P04 sets the schedule.",
+   "title": "Community price history is sparse and not licensed",
+   "issue": "Weeks 1-9 had kicked off before the first observation, so those prices are post-hoc and cannot define opening or closing lines. The current research ledger records 9 captures, with 78 of 816 event-market cells having a pre-kickoff observation and 49 marked as moved. These are community inputs; they do not satisfy the separate licensed-price policy or establish CLV.",
+   "resolve": "Obtain a permitted timestamped source and maintain an opening-to-close series for every originated market before publishing price-dependent performance.",
    "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
    "source_label": "nflverse schedules (COMMUNITY)"
   },
@@ -22,17 +22,17 @@
   {
    "id": "F03",
    "severity": "high",
-   "title": "No official inactive list is held",
-   "issue": "The captured report carries 6 game designations across 254 rows. Without inactive lists, a listed player's participation cannot be confirmed and a replacement cannot be established.",
-   "resolve": "Capture official inactive lists per game with a timestamp before kickoff.",
-   "source": "https://www.nfl.com/injuries/",
-   "source_label": "NFL injury report (OFFICIAL)"
+   "title": "Only one official inactive-list read is archived",
+   "issue": "The dated 2026-11-16 Week 10 capture includes one NFL inactive article with 147 entries across 24 clubs. That single read does not establish a multi-week history or confirm snap participation for every player.",
+   "resolve": "Retain dated inactive evidence for every game and join it to official game books or snap evidence without inference.",
+   "source": "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season",
+   "source_label": "NFL Week 10 inactive list (OFFICIAL); archive capture: injury-archive/data/index.jsonl"
   },
   {
    "id": "F04",
    "severity": "high",
    "title": "The personnel ablation cannot resolve an effect",
-   "issue": "The holdout interval spans zero for every \u03bb in the published grid. This is a finding about the sample, not a claim that injuries do not matter.",
+   "issue": "At the published \u03bb=1.0 setting, the Week 7-10 holdout MAE improvement is +0.040 points with interval [-0.185, +0.102]. The interval includes zero; this sample does not establish an injury effect.",
    "resolve": "More pre-kickoff games and dated availability captures before re-testing.",
    "source": "https://www.nfl.com/injuries/",
    "source_label": "NFL injury report (OFFICIAL)"
@@ -58,8 +58,8 @@
   {
    "id": "F07",
    "severity": "medium",
-   "title": "Two strategies already failed their kill rule",
-   "issue": "G10 demoted two scored rules whose Brier-skill interval sits entirely below zero. They remain on the leaderboard, labelled, with their numbers intact.",
+   "title": "Retrospective diagnostics include demoted strategies",
+   "issue": "The current G10 artifact demotes 3 rules (S01, S02, S03) whose Brier-skill upper interval is below zero. These remain historical diagnostics, not prospective leaderboard entries; a new registration is required before any future evaluation.",
    "resolve": "Require a new registration hash before a demoted rule can return.",
    "source": "https://www.nfl.com/standings/",
    "source_label": "NFL standings (OFFICIAL); gate artifact: origination/data/gates.json"
@@ -76,11 +76,11 @@
   {
    "id": "F09",
    "severity": "medium",
-   "title": "A club with no report section is not injury-free",
-   "issue": "4 clubs had no section on the captured report. Treating that as 'no injuries' is the failure mode flagged earlier in this repository.",
-   "resolve": "Join each no-section club to its inactive list and its next published report.",
-   "source": "https://www.nfl.com/injuries/",
-   "source_label": "NFL injury report (OFFICIAL)"
+   "title": "A historical no-injury section is not a current availability statement",
+   "issue": "The 2026-11-12 snapshot had 4 clubs without an injury section; the later 2026-11-16 Week 10 read records zero such sections. These are distinct dated observations. An absent section must never be interpreted as 'available'.",
+   "resolve": "Keep both dated observations and compare each club with the next report and inactive evidence.",
+   "source": "https://www.nfl.com/injuries/league/2026/REG10",
+   "source_label": "NFL Week 10 injury report (OFFICIAL); later read: matchup capture 2026-11-16"
   },
   {
    "id": "F10",
@@ -94,9 +94,9 @@
   {
    "id": "F11",
    "severity": "low",
-   "title": "41 report rows could not be joined to a depth slot",
-   "issue": "4 correlation families and a set of report rows have no join target: a player can be on the report without appearing on his club's published chart.",
-   "resolve": "Publish the unmatched count beside the joined count so the join rate is never implied as 100%.",
+   "title": "Injury-report rows do not all join to a depth slot",
+   "issue": "The 2026-11-12 snapshot joined 185 of 254 report rows to a captured club depth slot; 69 did not join. This is a dated join result, not a claim about the later Week 10 injury capture. A player can be on the report without appearing on the captured club chart.",
+   "resolve": "Publish matched and unmatched counts with the snapshot date and reason for every unmatched row.",
    "source": "https://www.nfl.com/injuries/",
    "source_label": "NFL injury report (OFFICIAL); capture: decision-lab/data/official_snapshot.json"
   },
