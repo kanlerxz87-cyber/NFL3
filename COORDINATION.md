@@ -3187,3 +3187,48 @@ Coordination notes:
 |---|---|---|---|
 | C1 Pages gate for the adopted price policy/store and frozen corpus | done | `arena/b0dd4900-nfl3` | PR #97 merged |
 | C2 Final integration, merge and Pages deployment record | done | `arena/b0dd4900-nfl3` | PR #97 merged; run 43888804346 validate + deploy success |
+
+## Result log — `arena/d37d5907-nfl3` (session d37d5907), 2026-11-16 UTC
+
+**Base:** `main` at `e8877e0` (branch began level with `origin/main`; `git rev-list --left-right --count HEAD...origin/main` was `0 0` at claim time). Arena fixes this session's branch, so all work is on `arena/d37d5907-nfl3`.
+
+| Task | Final status | Owner | Result |
+|---|---|---|---|
+| T1 Official injury-report history archive (R6) | done — mechanism + first capture | `arena/d37d5907-nfl3` | `injury-archive/`, scheduled workflow |
+| T2 Official inactives monitor (A6) | done — mechanism + first capture; snap half stays blocked | `arena/d37d5907-nfl3` | `injury-archive/` |
+| T3 Readiness evidence for R6 / A6 / A20 / A21 | done | `arena/d37d5907-nfl3` | `readiness/data/readiness.csv`, `readiness.html` |
+| T4 Final integration, PR, merge, deploy | done | `arena/d37d5907-nfl3` | PRs #98, #102 + this record |
+
+### What was built and what it measures
+
+- **`injury-archive/`** — a scheduled, content-addressed archive of the two official availability documents, a pre-registered calibration protocol (IA-PRE-01, `injury-archive/PREREGISTRATION.md`, committed by `a4fe9f3` **before** the first result), eight published pages, 18 library tests, 3 end-to-end pipeline tests and a fail-closed verifier now at **2,174 checks / 0 failures**.
+- **First measured result (2026 Week 10, published live):** Out 48/64 = **75.0%** (95% CI 63.2–84.0); Doubtful 4/10 = **40.0%** (16.8–68.7); Questionable 15/82 = **18.3%** (11.4–28.0). 171 designated rows = 67 inactive + 89 active + 15 uncovered + 0 ambiguous. Not a finding yet: the pre-registered confirmation gate is `n ≥ 100` per label with per-season separation, and one week is 1/18 of a season.
+- **Cross-check on the capture:** the transcribed Week 10 report is **347 rows / 28 club sections**, the same 347 the repository's independently captured byte-exact read records (`captures/nfl-injuries/index.jsonl`). The `--expect` gate makes a dropped table or a mistyped label fail the step.
+
+### Source findings recorded, not assumed
+
+1. `https://www.nfl.com/inactives/` publishes **no 2026 rows** — it reads *"Please check back soon for NFL Inactive Reports for this Season"* (opened 2026-11-16). The league publishes inactive lists in a **weekly article** instead; that article is the source used.
+2. Past-season inactives articles **404** at the same URL pattern (`…-2025-season`, `…-2021-season`), as does `/inactives/league/2021/REG1`. Recorded as `not_published` in the coverage grid; never back-filled.
+3. **A main-branch build defect was found and fixed** (`2b84260`): the scheduled `data-refresh` commit `1309041` pulled in a community schedule release containing the Week 10 finals while `origination/data/official_standings_2026.json` still described the league as of `2026-11-15T13:05Z`. `origination/scripts/build.py` correctly refused to reconcile and **failed**, so no change could pass CI. Fixed by re-transcribing all 32 rows from the official standings page on 2026-11-16 (**24 rows moved**; every before/after pair is recorded in the artifact under `moved_rows`), not by reverting the refresh or loosening the check. Reconciliation is now 160/160; the check that caught it is unchanged.
+
+### Irregularities flagged for owner review (do not block the merge)
+
+| ID | Flag | Evidence | Where it is published |
+|---|---|---|---|
+| IA-F01 | The Week 10 rate is **provisional**: the report was read after several clubs had played, so its pairing with the pre-game inactive list is not point-in-time consistent. All 32 "designated but active" rows practised fully, the signature of that timing problem. | `injury-archive/data/designations.json` → `anomaly`; protocol amendment A1.3 | `injury-archive/limits.html`, `designations.html` |
+| IA-F02 | The Week 10 captures are **transcriptions**, not byte-exact HTTP reads: this session's shell has no nfl.com egress, so rows were transcribed from the session fetch tool's rendered text. `raw_bytes_retained: false` is set on every such index line. The scheduled workflow replaces them with byte-exact captures. | `injury-archive/data/index.jsonl` | `injury-archive/coverage.html`, `method.html` |
+| IA-F03 | A6's **snap-count half remains blocked**: no official snap-count or participation source is verified, and the 13,913-row 2026 snap file is community nflverse data. Being inactive ≠ unavailable for the whole game; being active ≠ playing. | `data/raw/snap_counts_2026.csv` (community) | `readiness.html` row A6, `injury-archive/limits.html` |
+| IA-F04 | Past-season coverage is **not** established. Only 2026 Week 10 is captured; every 2021–2025 address probed so far is a 404 at the pattern tried. Absence at one address is not proof the league never published it. | `injury-archive/data/coverage.json` | `injury-archive/coverage.html` |
+
+### Verification performed (2026-11-16, all pass locally and in CI)
+
+`scripts/validate_site.py` (16 root pages) · `tests/check_site.py` · `tests/test_readiness.py` · `tests/test_injury_archive.py` (18) · `tests/test_injury_archive_pipeline.py` (3) · `tests/test_injury_capture.py` · `injury-archive/scripts/verify.py` (2,174 checks) · `tests/test_decision_lab.py` · `ops-center/scripts/verify.py` · `decision-lab/scripts/audit.py` · `origination/scripts/build.py` → `verify.py` (160/160 reconciliation, deterministic rebuild) · `skill-lab/scripts/verify.py` · `availability-ledger/scripts/verify.py` · `pricing/verify.py` · `corpus/verify.py` · `git diff --check`. Every injury-archive page was read after deploy, not just the CI status.
+
+### Publication record
+
+- **PR [#98](https://github.com/kanlerxz87-cyber/NFL3/pull/98)** — **MERGED** as `6f54f057a67ec026806af596048b9bef7edffd4d` (2026-11-16T14:52Z), merge strategy `--merge`, no auto-merge. PR checks: `validate` **pass** on both workflows ([43889964919](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43889964919/job/133378177864)); post-merge `Validate and deploy GitHub Pages` [43890276534](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43890276534) **success** (`validate` **success**, `deploy` **success**).
+- **PR [#102](https://github.com/kanlerxz87-cyber/NFL3/pull/102)** — **MERGED** as `950e2316bca6470a1eb21972442597624ca6e52f` (2026-11-16T15:00Z), `--merge`, no auto-merge. `validate` **pass** ([43891369254](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43891369254/job/133383341666)); post-merge Pages [43891818830](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43891818830) **success** (`validate` **success**, `deploy` **success**).
+- **Live verification (fetch tool, cache-busting query):** `https://kanlerxz87-cyber.github.io/NFL3/injury-archive/designations.html` renders the pooled table (Out 64 / Doubtful 10 / Questionable 82), the per-season and practice-status cuts, all six gates **pass**, the two-sided falsification statement, and **every joined row with both official source links**. `.../injury-archive/index.html` renders the four headline cards and the limits notice.
+- **Merge conflicts and how they were resolved.** `main` advanced twice during this work (PR #96, then PR #97 by session `arena/b0dd4900-nfl3`). The `COORDINATION.md` conflict was resolved **additively** — that session's merged log and this session's claim are both preserved verbatim, and no other session's work was discarded. Two of this session's own commits were rewritten by a rebase onto that new `main`, so the branch was force-updated with `--force-with-lease`; the previously pushed commits are all contained in the new history.
+- **Environment facts worth carrying forward:** bash in this sandbox has **no nfl.com egress** (curl returns `000`), but the **session fetch tool reaches nfl.com** and **GitHub Actions runners do** (the 6-hourly `injury-capture` run and the new `injury-archive` workflow). Readiness rows that say "sandbox cannot reach nfl.com" were written under a different tool assumption and were re-tested rather than inherited.
+- **Automation left in place:** `.github/workflows/injury-archive.yml` runs every six hours (`41 */6 * * *`), probes the 2021–2026 × 1–18 grid, captures only pairs that are not settled, rebuilds, verifies, commits the reads, and fails the run on a drift or fetch failure after the evidence is committed. Scheduled workflows run only from the default branch, so this begins filling automatically now that the workflow is on `main`.

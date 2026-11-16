@@ -278,10 +278,10 @@ def main() -> int:
     SITE.mkdir(parents=True, exist_ok=True)
     data = build_artifacts()
     import render  # noqa: PLC0415 - render imports build's page shell
-    render.render_all(data)
+    pages = render.render_all(data)
     print(f"injury-archive: {len(data['injuries'])} injury reports, {len(data['inactives'])} inactives "
           f"articles, {data['designations']['totals']['designations']} joined designations, "
-          f"{len(PAGES)} pages")
+          f"{pages} pages")
     return 0
 
 
