@@ -3852,7 +3852,7 @@ inherited):** all 13 Week 11 kickoff times and networks re-read from
 [nfl.com/schedules/2026/by-week/week-11](https://www.nfl.com/schedules/2026/by-week/week-11) and matched; the
 Game Info block of three game centres re-read individually —
 [colts-at-texans](https://www.nfl.com/games/colts-at-texans-2026-reg-11) (`HOUSTON, TX` / `RELIANT STADIUM`),
-[cardinals-at-chiefs](https://www.nfl.com/games/cardinals-at-chiefs-2026-reg-11) (`KANSASAS CITY, MO` /
+[cardinals-at-chiefs](https://www.nfl.com/games/cardinals-at-chiefs-2026-reg-11) (`KANSAS CITY, MO` /
 `ARROWHEAD STADIUM`),
 [vikings-at-49ers](https://www.nfl.com/games/vikings-at-49ers-2026-reg-11) (`MEXICO CITY` / `ESTADIO BANORTE`).
 The venue strings are transcribed as the official page publishes them, which is why "RELIANT STADIUM" and
