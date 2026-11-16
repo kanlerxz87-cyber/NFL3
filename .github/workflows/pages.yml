@@ -35,6 +35,18 @@ jobs:
         run: python3 decision-desk/scripts/check.py
       - name: Shadow board gate (pre-registration order, price firewall, reproducibility)
         run: python3 shadow-board/scripts/check.py
+      - name: Price-store policy, ingestion tests, deterministic page build and integrity check
+        run: |
+          python3 pricing/test_pricing.py
+          python3 pricing/build.py
+          python3 pricing/verify.py
+          git diff --exit-code -- pricing pricing.html
+      - name: Frozen-corpus tests, deterministic page build and preregistration check
+        run: |
+          python3 corpus/test_corpus.py
+          python3 corpus/build.py
+          python3 corpus/verify.py
+          git diff --exit-code -- corpus corpus.html
       - name: Decision lab offline tests
         run: python3 tests/test_decision_lab.py
       - name: Independent line-by-line source verification
