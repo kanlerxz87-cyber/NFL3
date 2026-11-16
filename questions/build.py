@@ -149,9 +149,14 @@ def main() -> int:
         raise SystemExit("questions/build.py: questions/data/suggestions_intro.html is missing, so the curated "
                          "narrative on suggestions.html cannot be preserved verbatim")
     fragment_html = FRAGMENT.read_text(encoding="utf-8").strip()
-    if not fragment_html.startswith('<div class="hrow">') or not fragment_html.endswith("</section>"):
+    # The fragment used to begin with its own <div class="hrow"> header, which page() also emits, so the
+    # published suggestions page opened with two near-identical headers in sequence (SD-F02 on
+    # suggestion-desk/flagged.html). The header lives in page() only; the fragment starts at the intro
+    # paragraph, and this assertion now says so.
+    if not fragment_html.startswith('<p class="intro">') or not fragment_html.endswith("</section>"):
         raise SystemExit("questions/build.py: the preserved narrative fragment has been edited into an unrecognised "
-                         "shape; the generator refuses to splice it")
+                         "shape (expected it to start with the intro paragraph and end with a closing section tag); "
+                         "the generator refuses to splice it")
     digest = hashlib.sha256(DERIVED.read_bytes()).hexdigest()
 
     for item in questions + suggestions:

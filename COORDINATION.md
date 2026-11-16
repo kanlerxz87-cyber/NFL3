@@ -3813,3 +3813,194 @@ row is not the withheld row, or if the witnessed result stops citing an official
 **Flag and question count after this pass:** nine flags (`2T-01` … `2T-09`) and six questions
 (`2T-Q1` … `2T-Q6`), all published at `two-total/flagged.html` and on the summary page with the source link
 that was checked.
+## Final integration session — `arena/95dedf16-nfl3` — 2026-11-16 UTC (claim)
+
+| Task | Status | Owner | File scope |
+| --- | --- | --- | --- |
+| F1 Take over the three stale open PRs (#99, #100, #105): salvage their unique content, close them | in progress | `arena/95dedf16-nfl3` | new `venues/**` (from #100), `injury-archive/flags.html` + `injury-archive/scripts/{render,build}.py` + `injury-archive/data/render_contract.json` (from #105), this board |
+| F2 Suggestion review desk: a page where a reviewer chooses the path before anything is implemented | in progress | `arena/95dedf16-nfl3` | new `suggestion-desk/**`, one nav row on `index.html`, one `README.md` row, two `pages.yml` steps |
+| F3 Fix the duplicated heading block on the generated `suggestions.html` | in progress | `arena/95dedf16-nfl3` | `questions/data/suggestions_intro.html`, regenerated `suggestions.html` |
+| F4 Final integration: full line-by-line verification, PR to `main`, merge, Pages deploy confirmation | in progress | `arena/95dedf16-nfl3` | `COORDINATION.md` (append-only), `index.html` (nav rows only), `README.md` (site-guide rows only), `.github/workflows/pages.yml` (steps only), generated pages |
+
+Branch: `arena/95dedf16-nfl3` (fixed by Arena; session-named branches cannot be created here). Base: `main` at `aa2b384`.
+
+Coordination notes:
+
+- **Why the three open PRs are being salvaged rather than merged.** `git merge-base --is-ancestor origin/main <branch>`
+  is false for all three, and `git diff --stat origin/main origin/arena/b0dd4900-nfl3` reports
+  **189 files changed, 26,602 insertions, 147,539 deletions**. Their branches were cut from a much older `main`, and
+  `main` has since gained the forward ledger, the matchup desk, the injury archive, the skill lab and five more
+  workspaces. Merging any of them would delete that work. The branches are therefore **stale in the dangerous
+  direction**: the diff is dominated by deletions of other sessions' commits, not by their own additions.
+- Their **unique** content is small and is carried forward file by file:
+  - `#100` → `venues/**` (9 files: a Week 11 venue register read from the official NFL game-centre "Game Info"
+    block, plus the dated league announcement). Nothing named `venues/` exists on `main`.
+  - `#105` → `injury-archive/flags.html` and the four-line change that renders it
+    (`render.py` gains `flags_page()`, `render_all()` returns a page count, `build.py` prints that count instead of a
+    hard-coded one, `render_contract.json` lists the new page). `injury-archive/flags.html` does not exist on `main`.
+  - `#99` → a documentation-only `COORDINATION.md` append whose content is superseded by the board's own later
+    entries. It carries no unique artifact and will be closed without salvage.
+- **Not edited by this session:** every other workspace's data files, `ops-center/data/derived.json`,
+  `readiness/data/readiness.csv`, `decision-lab/**`, `forward-ledger/**`, `matchup/**`, `skill-lab/**`,
+  `origination/**`, `pricing/**`, `corpus/**`, `shadow-board/**`, `availability-ledger/**`, `injury-archive/data/*`
+  apart from the one contract file listed above.
+
+### Result — `arena/95dedf16-nfl3` — 2026-11-16 UTC (final integration pass)
+
+**F1 · The three stale open PRs are closed; their unique content is published.** Verified before acting:
+`git merge-base --is-ancestor origin/main <branch>` is **false** for all three, and
+`git diff --stat origin/main origin/arena/b0dd4900-nfl3` reports **189 files changed, 26,602 insertions,
+147,539 deletions**. Those branches were cut from an old `main`, so the diff is dominated by *deletions of
+work other sessions have since merged*. Merging any of them would have removed the forward ledger, the
+matchup desk, the injury archive, the skill lab and five more workspaces.
+
+| PR | Unique content | Where it went |
+|---|---|---|
+| [#99](https://github.com/kanlerxz87-cyber/NFL3/pull/99) | none — a `COORDINATION.md` append superseded by the board's own later entries | closed without salvage |
+| [#100](https://github.com/kanlerxz87-cyber/NFL3/pull/100) | `venues/**` (9 files) | carried across verbatim; verify passes, pages reproduce |
+| [#105](https://github.com/kanlerxz87-cyber/NFL3/pull/105) | `injury-archive/flags.html` + the 4-line render/build/contract change; `EXECUTIVE_SUMMARY.md` §9 | carried across; rebuild produces 9 pages, 2,187 checks, 0 failures |
+
+**Independent re-verification of the venues register against the official pages (2026-11-16, this session, not
+inherited):** all 13 Week 11 kickoff times and networks re-read from
+[nfl.com/schedules/2026/by-week/week-11](https://www.nfl.com/schedules/2026/by-week/week-11) and matched; the
+Game Info block of three game centres re-read individually —
+[colts-at-texans](https://www.nfl.com/games/colts-at-texans-2026-reg-11) (`HOUSTON, TX` / `RELIANT STADIUM`),
+[cardinals-at-chiefs](https://www.nfl.com/games/cardinals-at-chiefs-2026-reg-11) (`KANSAS CITY, MO` /
+`ARROWHEAD STADIUM`),
+[vikings-at-49ers](https://www.nfl.com/games/vikings-at-49ers-2026-reg-11) (`MEXICO CITY` / `ESTADIO BANORTE`).
+The venue strings are transcribed as the official page publishes them, which is why "RELIANT STADIUM" and
+"ARROWHEAD STADIUM" appear where a reader might expect the current commercial names. The dated announcement
+[media.nfl.com, 2026 NFL Schedule Announced](https://media.nfl.com/football-information/2026/news/2026-nfl-schedule-announced)
+was re-read: *Football Communications, May 14, 2026*, "Complete 18-Week, 272-Game Regular-Season Schedule", and it
+names the Week 11 Mexico City game — consistent with the register row.
+
+**F2 · Suggestion review desk (`suggestion-desk/**`, new).** Four pages, one curated data file, one fail-closed
+gate. All 75 register proposals assigned to exactly one of twelve decisions, no overlaps, none left over — the
+generator refuses to run otherwise. Each decision: what is verified (with its committed artifact), what is missing,
+the 2–3 paths proposed for it with buys/leaves-open/cost/risk, the number that would clear it, and the register
+questions it depends on. `paths.html` flattens all 33 paths and lists every proposal with the path that would adopt
+it (or a note that none does). `discovery.html` lists 35 cited register questions with what to do, where to look,
+and what the answer would change. Reviewer choices are browser-local by design: an approval that silently edited
+files is the failure mode register question Q-94 asks about.
+
+**Numbers re-derived from their artifacts while writing the desk, not copied from prose:** 163 of 272 community
+lines recomputed from `data/raw/games.csv`; corpus 136 games / 135 exact matches / 1 blank ("Hidden Score");
+forward ledger 150 fixtures / 149 graded / 160-of-160 standings checks / 31 clubs; injury archive 347 rows,
+147 inactives, 171 designations with Wilson intervals re-derived from `designations.json` (Out n=64 75.0%
+63.2–84.0%, Doubtful n=10 40.0% 16.8–68.7%, Questionable n=82 18.3% 11.4–28.0%: 67 inactive + 89 active +
+15 uncovered + 0 ambiguous); matrix 224 cells / 166 published / 58 blank (29 no chart captured, 26 group not
+published, 3 both); skill lab 6 rows over 130–136 games, **all negative**, best −0.029 (CI −0.096 to +0.035),
+worst −0.303; availability ledger 50 reserve entries, 12 trades, 9 stale depth rows; 200 HTML pages across 17 root
+pages and 24 workspace directories.
+
+**F3 · SD-F02 fixed.** The generated `suggestions.html` rendered its heading block **twice**:
+`questions/data/suggestions_intro.html` began with a `<div class="hrow">` that `questions/build.py`'s `page()`
+helper also emits, so the page opened with two near-identical headers in sequence. No link checker could catch it,
+because a duplicated section is not a broken link. The fragment now starts at the intro paragraph and the
+generator's shape assertion was retightened to require that.
+
+**F6 · Six irregularities published, not buried.** `suggestion-desk/flagged.html`: SD-F01 (stale PRs), SD-F02
+(duplicated header, fixed), SD-F03 (top nav omits 11 workspace directories — this pass added 6, deliberately not
+all, because a 36-item top bar is worse than a 24-item one and the landing page's site-guide table lists every
+page), SD-F04 (register `observation_date` 2026-11-12 and `injury_rows_current` 279 against two independent
+2026-11-16 transcriptions of 347), SD-F05 (register status is a free-text field), SD-F06 (13 of 272 venues, no
+hashed raw capture).
+
+**Verification run.** `scripts/validate_site.py`, `tests/check_site.py`, `questions/build.py --check`,
+`suggestion-desk/scripts/check.py`, `venues/scripts/verify.py`, `injury-archive/scripts/verify.py` (2,187 checks,
+0 failures, byte-identical second build), `decision-desk/scripts/check.py`, `shadow-board/scripts/check.py`,
+`tests/test_readiness.py`, `tests/test_decision_lab.py`, `decision-lab/scripts/audit.py`,
+`matchup/scripts/check.py`, `availability-ledger/scripts/verify.py`, `skill-lab/scripts/verify.py`,
+`origination/scripts/verify.py` — all pass. Two known environment-only local failures, both green in CI:
+skill-lab's pre-registration ancestry check (the sandbox clone is shallow) and origination's determinism check on
+first run (a second `build.py` then `verify.py` passes).
+
+**Files touched.** New: `suggestion-desk/**`, `venues/**` (from #100), `injury-archive/flags.html`.
+Edited: `injury-archive/scripts/{render,build}.py`, `injury-archive/data/render_contract.json` (4 lines total, from
+#105), `questions/data/suggestions_intro.html` (header removed), `questions/build.py` (assertion retightened),
+`index.html` (2 site-guide rows, 1 sidebar entry), `README.md` (2 rows, 4 commands, the opening shortcut),
+`assets/site.js` (6 nav entries), `EXECUTIVE_SUMMARY.md` (§9 recovered from #105, §10 new),
+`.github/workflows/pages.yml` (4 steps), this board, and the regenerated `suggestions.html`.
+**Not edited:** `ops-center/data/derived.json`, `readiness/data/readiness.csv`, `decision-lab/**`,
+`forward-ledger/**`, `matchup/**`, `skill-lab/**`, `origination/**`, `pricing/**`, `corpus/**`, `shadow-board/**`,
+`availability-ledger/**`, `decision-desk/**`, and `injury-archive/data/*` apart from the one contract file.
+
+**Integration requests logged, not acted on.**
+- **To the `ops-center/data/derived.json` owner:** SD-F04 — the register is dated 2026-11-12 and counts 279
+  injury rows while two independent 2026-11-16 readings of the same page agree on 347. The two root pages built
+  from it therefore describe a different week from the injury archive, the matchup desk and the forward ledger.
+- **To the `assets/site.js` owner:** SD-F03 — 11 workspace directories still have no top-bar entry
+  (dashboard, decision desk, decision hub, line lab, research desk, research workspace, results verification,
+  verification, verification lab, injury verification, questions).
+- **To the `injury-archive/` owner:** the Week 11 report is now the live one; `injury-archive/data/index.jsonl`
+  still holds one 2026 Week 10 pair with `raw_bytes_retained: false` on every line.
+- **To the `venues/` owner (absent):** 259 of 272 fixtures are untranscribed and neither the schedule page nor the
+  announcement has a retained raw capture. Published as decision D7 with its clearing number.
+
+### Rebase note — `arena/95dedf16-nfl3` — 2026-11-16, after `main` advanced 38 commits
+
+While this session was building the review desk, `main` gained the **`two-total/` workspace** (PR #123,
+commits `433e508` pre-registration and `91836c6` publication) and a **rewritten `EXECUTIVE_SUMMARY.md`**
+(`77d8833`, by another session, which replaced the numbered-sections document with a shorter current-state
+summary). The branch was rebased onto `origin/main` at `5676d8f`.
+
+Conflicts, all resolved by keeping every side:
+
+- **`COORDINATION.md`** — add/add. Resolved by preserving 202 lines from `main` and 31 from this session.
+- **`index.html`** — twice, because the file is one long line so git treats the whole document as a single
+  hunk. Both times resolved by taking `main`'s version and re-applying this session's insertions
+  programmatically: two site-guide rows (venue register, suggestion desk) and two sidebar entries. Verified
+  afterwards that `main`'s own `two-total/index.html` entries survive (4 occurrences) alongside them.
+- **`EXECUTIVE_SUMMARY.md`** — the other session's rewrite versus this session's appended sections. Resolved
+  in favour of the rewrite, because it is the better document and a second numbered section would have fought
+  it. This session's contribution was re-expressed in the new file's own style: a `## Suggestion review desk`
+  section with the twelve-decision table, two lines in *Primary public pages*, three lines in *Verification
+  performed*, and the section recovered from PR #105 kept verbatim as **Appendix A** with a note explaining
+  why it is an appendix.
+
+**Effect on decision D11.** `main` now publishes both total estimators with the gap column and a pre-registered
+collapse rule, so the desk's D11 was rewritten against it rather than describing the plan as unbuilt. All numbers
+were re-read from `two-total/data/two_total.json`: T1 prior-season pace fit and T2 league mean plus one third of
+the form gap; 136 rows with both estimators, 135 scored, 1 excluded; the five collapse conditions with only C5
+true (28 scored validation games against a floor of 20) and C1–C4 false, `collapsed = false`; corpus-wide MAE
+11.457 vs 12.672 with a bootstrap difference of −1.215 (n=135, 10,000 resamples, 95% −2.374 to −0.050) against a
+validation-block cluster bound of −4.8055 that includes zero; and the published diagnosis that T2's 7.46-point
+bias is not the whole story. The interesting part is published rather than resolved: **the corpus-wide interval
+excludes zero and the pre-registered block's does not, and the desk says so.**
+
+**Post-rebase verification.** `scripts/validate_site.py`, `tests/check_site.py`,
+`questions/build.py --check`, `suggestion-desk/scripts/check.py`, `venues/scripts/verify.py`,
+`injury-archive/scripts/verify.py` (2,187 checks) — all pass.
+
+### Integration pass, second half — `arena/95dedf16-nfl3` — 2026-11-16
+
+**PR [#131](https://github.com/kanlerxz87-cyber/NFL3/pull/131)** — suggestion review desk, Week 11 venue register,
+`injury-archive/flags.html`, and three defects.
+
+**D11 rewritten against `two-total/`.** While this session worked, `main` gained the two-total workspace, so the
+desk's eleventh decision would have described as unbuilt something the repository now publishes. All of D11's
+numbers were re-read from `two-total/data/two_total.json`: T1 prior-season pace fit and T2 league mean plus one
+third of the form gap; 136 rows carrying both estimators, 135 scored, 1 excluded with a blank actual total; the
+five pre-registered collapse conditions with only C5 true (28 scored validation games against a floor of 20) and
+C1–C4 false, `collapsed = false`; corpus-wide MAE 11.457 vs 12.672 with a bootstrap difference of −1.215
+(n=135, 10 000 resamples, 95% −2.374 to −0.050) against a validation-block cluster bound of −4.8055 that
+includes zero; and the published diagnosis that T2's 7.46-point bias is not the whole story, since its prediction
+spread is 0.67 points against a realised spread of 14.33. **The two intervals disagree and the desk publishes
+both** rather than picking whichever is convenient.
+
+**Side effect of the navigation fix, and one page left alone.** Raising `assets/site.js` from 18 to 24 entries
+re-added six workspace links to the sidebar of every generated page. Rebuilding the generated pages showed
+`corpus.html` and `pricing.html` were carrying the old 18-entry sidebar; both were rebuilt. `readiness.html`
+was also stale, but rebuilding it does more than fix the sidebar: its F1 row reads a chain count out of
+`EXECUTIVE_SUMMARY.md` by regular expression, and another session's 2026-11-16 rewrite of that file dropped the
+phrase "59 replacement chains", so a rebuild renders the row as **"executive summary: None replacement chains"** —
+a Python `None` in published prose. The committed page was left untouched rather than silently changed, and the
+drift is published as **SD-F07** on the desk's flagged page with a link to the builder line responsible. Logged
+here as a request to the executive-summary and readiness owners: either the count returns with its artifact, or
+`readiness/build_readiness.py` line 105 needs a "not stated" branch that does not print `None`.
+
+**Verification.** The full `pages.yml` validate job was replayed locally against the rebased tree — decision-desk,
+shadow-board, pricing, corpus, decision-lab (tests, verify_sources, build, audit, availability), injury-capture,
+verification-lab, origination, skill-lab, availability-ledger, matchup, venues, injury-archive, forward-ledger,
+questions, suggestion-desk, validate_site and check_site — together with a stale-page scan across all 205 HTML
+files. Everything passes.

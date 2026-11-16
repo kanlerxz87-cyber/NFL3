@@ -1,0 +1,33 @@
+/* Suggestion review desk. Adds only what assets/site.css does not already provide:
+   the decision cards, the selectable path cards and the reviewer's summary table. */
+
+.crumb{padding:10px 0 0;font-size:13px;color:#56637b}
+.crumb a{color:#56637b}
+.crumb a:hover{color:var(--blue)}
+
+.decision{border-top:2px solid var(--line,#e6eaf2);padding-top:22px;margin-top:26px}
+.decision h2{font-size:20px;margin:0 0 8px}
+.decision .question{font-size:15px;font-weight:600;color:#1c2536;margin:0 0 14px}
+.decision h3{font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:#56637b;margin:18px 0 8px}
+.decision .why{font-size:14px;color:#42506b;margin:8px 0}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media(max-width:900px){.split{grid-template-columns:1fr}}
+
+.paths{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-top:6px}
+.path{display:block;position:relative;border:1px solid var(--line,#e6eaf2);border-radius:12px;
+      padding:14px 16px 14px 40px;background:#fff;cursor:pointer}
+.path:hover{border-color:var(--blue);background:var(--blue2,#f2f6ff)}
+.path input{position:absolute;left:14px;top:16px;margin:0}
+.path:has(input:checked){border-color:var(--blue);box-shadow:0 0 0 2px var(--blue2,#f2f6ff);background:var(--blue2,#f2f6ff)}
+.path-head{display:block;font-weight:700;font-size:14px;margin-bottom:8px;color:#1c2536}
+.kv{margin:0;font-size:13px;color:#42506b}
+.kv dt{font-weight:700;color:#56637b;margin-top:7px}
+.kv dd{margin:2px 0 0}
+
+#choices .empty td{color:#7a879e;font-style:italic}
+.pillrow{margin-top:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.btn{border:1px solid var(--line,#e6eaf2);background:#fff;border-radius:9px;padding:8px 14px;
+     font-size:13px;font-weight:600;color:#1c2536;cursor:pointer}
+.btn:hover{border-color:var(--blue);color:var(--blue)}
+.small{font-size:12px;color:#7a879e}
