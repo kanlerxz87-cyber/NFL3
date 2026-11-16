@@ -1,0 +1,91 @@
+name: injury-archive
+
+# Scheduled capture of the two official availability documents:
+#   * the weekly injury report  https://www.nfl.com/injuries/league/{season}/REG{week}
+#   * the weekly inactives list https://www.nfl.com/news/nfl-week-{week}-inactives-...-{season}-season
+# Every read is stored with a SHA-256 and a clock time in injury-archive/data/index.jsonl, so a
+# practice designation or an inactive list can be replayed exactly as it was published.
+#
+# The first run of a season (or after a code change) walks the whole 2021-2026 grid. Later runs
+# only read pairs that are not yet settled, so a 404 is not re-requested every six hours.
+# A structural drift or a transport failure is recorded and then fails the run, so the failure is
+# visible; it is never silently published as a valid read.
+on:
+  schedule:
+    - cron: '41 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      seasons:
+        description: 'Season range to probe (e.g. 2021-2026)'
+        required: false
+        default: '2021-2026'
+      weeks:
+        description: 'Week range to probe (e.g. 1-18)'
+        required: false
+        default: '1-18'
+      force:
+        description: 'Re-read pairs already settled (true/false)'
+        required: false
+        default: 'false'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: injury-archive-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Offline tests (synthetic fixtures, no network)
+        run: |
+          python3 tests/test_injury_archive.py
+          python3 tests/test_injury_archive_pipeline.py
+      - name: Official club directory
+        run: python3 injury-archive/scripts/capture.py clubs
+      - name: Capture the season x week grid
+        id: probe
+        continue-on-error: true
+        run: |
+          python3 injury-archive/scripts/capture.py probe \
+            --seasons "${{ github.event.inputs.seasons || '2021-2026' }}" \
+            --weeks "${{ github.event.inputs.weeks || '1-18' }}" \
+            ${{ github.event.inputs.force == 'true' && '--force' || '' }}
+      - name: Build artifacts and pages from the committed captures only
+        run: python3 injury-archive/scripts/build.py
+      - name: Fail-closed verification
+        run: python3 injury-archive/scripts/verify.py
+      - name: Commit the archive reads
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add injury-archive/data injury-archive/*.html
+          if git diff --cached --quiet; then
+            echo "No archive change to commit."
+            exit 0
+          fi
+          git commit -m "chore(injury-archive): official availability captures $(date -u +%Y-%m-%dT%H:%MZ) [skip ci]"
+          for attempt in 1 2 3; do
+            if git pull --rebase -q origin "$GITHUB_REF_NAME" && git push -q origin "HEAD:$GITHUB_REF_NAME"; then
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::error::Could not push the archive reads after 3 attempts."
+          exit 1
+      - name: Surface a capture failure after the evidence is committed
+        if: steps.probe.outcome == 'failure'
+        run: |
+          echo "::error::At least one official document drifted or could not be fetched. The read is committed and published as drifted; see injury-archive/coverage.html."
+          exit 1

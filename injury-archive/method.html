@@ -1,0 +1,174 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Method and sources | Injury archive | NFL3</title>
+<meta name="description" content="Method and sources — official NFL injury-report and inactive-list history, with hashes, clock times and every exclusion counted.">
+<style>
+:root{--bg:#0b0f14;--panel:#121821;--panel2:#17202b;--line:#243040;--ink:#e8eef6;--muted:#93a4b8;
+--accent:#5eead4;--accent2:#38bdf8;--warn:#fbbf24;--bad:#fb7185;--good:#4ade80}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);
+font:15px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--accent2);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);background:linear-gradient(180deg,#0e141c,#0b0f14)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+.top .wrap{display:flex;gap:18px;align-items:center;justify-content:space-between;padding:16px 22px}
+.brand{font-weight:700;letter-spacing:.5px}.brand span{color:var(--accent)}
+nav.main{display:flex;flex-wrap:wrap;gap:14px;padding:12px 0;border-top:1px solid var(--line);
+font-size:14px}nav.main a{color:var(--muted)}nav.main a[aria-current]{color:var(--accent);font-weight:600}
+h1{font-size:30px;line-height:1.2;margin:26px 0 8px}h2{font-size:20px;margin:30px 0 10px}
+h3{font-size:16px;margin:20px 0 8px}.lede{color:var(--muted);max-width:80ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:20px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
+.card .k{font-size:12px;letter-spacing:.8px;color:var(--muted);text-transform:uppercase}
+.card .v{font-size:26px;font-weight:700;margin-top:4px}.card .n{font-size:13px;color:var(--muted)}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--panel2);font-size:12px;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
+tbody tr:hover{background:#141c26}td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.blank{color:var(--muted);font-style:italic}
+.pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;border:1px solid var(--line)}
+.pill.ok{color:var(--good);border-color:#1f4a33}.pill.warn{color:var(--warn);border-color:#4a3f1f}
+.pill.bad{color:var(--bad);border-color:#4a2830}.pill.mut{color:var(--muted)}
+.notice{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent2);
+border-radius:8px;padding:14px 16px;margin:18px 0;color:var(--muted)}
+.warnbox{border-left-color:var(--warn)}
+a.source{color:var(--accent)}a.source:after{content:"↗";margin-left:3px;font-size:11px}
+footer{border-top:1px solid var(--line);margin-top:40px;padding:24px 0 40px;color:var(--muted);font-size:13px}
+code{background:#0f1620;border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:13px}
+ul.tight{margin:8px 0;padding-left:20px}ul.tight li{margin:4px 0;color:var(--muted)}
+</style></head><body>
+<header class="top"><div class="wrap"><div class="brand">NFL<span>3</span> / INJURY ARCHIVE</div>
+<div><a href="../index.html">Site overview</a> · <a href="../readiness.html">Readiness</a></div></div>
+<nav class="main"><div class="wrap" style="display:flex;flex-wrap:wrap;gap:14px"><a href="index.html">Overview</a><a href="injuries.html">Injury-report history</a><a href="inactives.html">Inactive lists</a><a href="designations.html">Designation calibration</a><a href="coverage.html">Coverage grid</a><a href="regime.html">Rule regime by season</a><a href="limits.html">Limits and exclusions</a><a href="method.html" aria-current=page>Method and sources</a></div></nav></header>
+<main class="wrap"><h1>Method and sources</h1>
+<h2>Sources</h2><div class="table-wrap"><table><thead><tr><th scope="col">Document</th><th scope="col">Official URL pattern</th><th scope="col">Fields read</th></tr></thead><tbody><tr><td>Weekly injury report</td><td><code>https://www.nfl.com/injuries/league/{season}/REG{week}</code></td><td>player, position, injury, practice status, game status, club, scheduled day</td></tr><tr><td>Weekly inactives article</td><td><code>https://www.nfl.com/news/nfl-week-{week}-inactives-players-ruled-out-sunday-{season}-season</code></td><td>club, position, player, emergency-QB note</td></tr></tbody></table></div><h2>Capture</h2>
+<p>Each page is fetched over HTTPS from <code>www.nfl.com</code> only; a redirect to any other host
+is refused rather than followed. Bytes are stored content-addressed by SHA-256 and never
+overwritten. Every attempt — success, structural drift or transport failure — appends one line to
+<code>injury-archive/data/index.jsonl</code> with its requested and captured clock times, so the
+history is a log of reads, not a snapshot of conclusions.</p>
+<h2>Parser</h2>
+<p>The injury-report parser is imported from <code>decision-lab/scripts/capture_official.py</code>,
+the same parser that produced the 347-row Week 10 read already in this repository. Re-using it means
+the two paths cannot disagree about what the page says. The inactives parser walks the article in
+document order and refuses anything it does not recognise.</p>
+<h2>Join and estimator</h2>
+<p>Club and week are fixed; the player name is normalised (case, punctuation, parentheticals,
+whitespace) and matched exactly, then with a generational suffix ignored, then refused as
+ambiguous if two candidates remain. Rates use the Wilson score interval at 95% with
+<code>z = 1.959964</code>, and <code>n</code> is printed beside every value.</p>
+<h2>Pre-registration</h2>
+<p>The protocol was committed before the first result. Its text is reproduced from the repository
+file below; the commit that adds it is the registration.</p><div class="notice" style="white-space:pre-wrap;font-family:ui-monospace,monospace;font-size:13px;max-height:640px;overflow:auto">
+The registration commit is the commit that adds this file. `injury-archive/scripts/verify.py`
+asserts that the commit exists and precedes the commit that added `injury-archive/data/designations.json`.
+&quot;&quot;&quot;
+# Injury-designation calibration — pre-registration (ID: IA-PRE-01)
+
+**Registered by:** session `arena/d37d5907-nfl3`
+**Registration date:** 2026-11-16 UTC
+**Registration commit:** the commit that adds this file (asserted by `injury-archive/scripts/verify.py`)
+
+## 1. Question
+
+Does an official weekly game-status designation predict whether the player is on that week&#x27;s
+official inactive list? The NFL rulebook and the Competition Committee&#x27;s published revision define
+the labels but publish no percentage. This protocol measures the observed rate and its uncertainty
+rather than importing a remembered or third-party percentage.
+
+## 2. Sources (both official, both required per observation)
+
+| Field | Source |
+|---|---|
+| designation, practice status, injury, club, player | `https://www.nfl.com/injuries/league/{season}/REG{week}` |
+| inactive list membership, club, player | `https://www.nfl.com/news/nfl-week-{week}-inactives-players-ruled-out-sunday-{season}-season` |
+
+Each captured page is stored content-addressed under `injury-archive/data/raw/{sha256}.html.gz`
+and its retrieval clock time and digest are recorded in `injury-archive/data/index.jsonl`.
+
+## 3. Population
+
+Every row of a captured weekly injury report whose *Game Status* cell is one of `Out`, `Doubtful`,
+`Questionable` — the three labels the official page publishes. Rows with a blank game-status cell
+are out of scope for this measurement (they are still published on the injury pages) because there
+is no designation to calibrate. Every reported exclusion is counted and published beside the rates.
+
+## 4. Join
+
+Within one club and one week:
+
+* normalise the name by lower-casing, removing parenthetical text, removing every non-alphanumeric
+  character except spaces, and collapsing whitespace;
+* an **exact** normalised match to an inactive list entry is a match;
+* if there is no exact match, a match that ignores a trailing generational suffix (`jr`, `sr`,
+  `ii`, `iii`, `iv`, `v`) is accepted and labelled `suffix-insensitive`;
+* two or more candidate matches are `ambiguous` and are excluded, not resolved by choosing one;
+* a designation whose club does not appear in the inactives article is `uncovered` and excluded;
+* a designation with no match is `active` — the only reading the two documents support.
+
+The join key is a name and a club. It is not a player ID, and the protocol does not pretend
+otherwise: a same-club, same-week duplicate name would be ambiguous and is excluded by the rule
+above, and any residual mismatch is a bias towards *active* that the published counts expose.
+
+## 5. Estimator and uncertainty
+
+For each designation `d` over the pooled population:
+
+* `n_inactives` = number of captured inactives articles in the population
+* `n` = joined designations for `d`
+* `k` = joined designations where the player is on the inactive list
+* point estimate `p = k / n`
+* 95% interval: Wilson score interval, `z = 1.959964` (two-sided)
+* `n` is published beside every value. A cell with `n = 0` is published blank, never as zero.
+
+Secondary cuts, published with the same rule and the same `n`:
+
+* by season;
+* by practice status (`Did Not Participate In Practice`, `Limited Participation in Practice`,
+  `Full Participation in Practice`);
+* by designation rank (`Out` &lt; `Doubtful` &lt; `Questionable`);
+* emergency third quarterback entries counted separately, because the article labels them and they
+  are inactive by rule rather than by injury.
+
+## 6. Exclusion accounting (fail-closed)
+
+The page publishes, next to every rate: the number of designations with no captured inactives
+article, the number that were ambiguous, the number whose club was uncovered, and the number of
+captured inactives articles whose own parse recorded a structural failure. A rate is **not
+published** for any season × week pair whose two documents did not both parse cleanly.
+
+## 7. Gates (all must pass before any rate is called a finding)
+
+1. `G1` coverage: at least one season × week pair has both documents captured and clean.
+2. `G2` accounting: `uncovered + ambiguous + active + inactive == total designations` for every cut.
+3. `G3` interval: every published rate carries its Wilson interval and its `n`.
+4. `G4` no back-fill: no row enters the population without both official URLs and digests.
+5. `G5` stability: the rate is reported per season as well as pooled, and the page says so if the
+   per-season intervals do not overlap.
+6. `G6` no causal language: the statistic is a conditional rate on published documents, not an
+   estimate of a player&#x27;s probability of playing, which additionally depends on the game-day
+   roster and on information the report does not contain.
+
+## 8. What would change our mind (two-sided, frozen)
+
+* **Would confirm** the designation is a usable feature: for each of the three labels the lower
+  bound of the pooled Wilson interval separates it from the next label&#x27;s upper bound, with
+  `n &gt;= 100` per label, holding in the per-season cuts.
+* **Would falsify** it: overlapping intervals between adjacent labels, or a pooled ordering that
+  inverts a per-season ordering, in which case the label is a weak ordinal and may not be used as
+  a model feature; it would be replaced by the measured rate itself with its interval.
+
+## 9. What this protocol does not claim
+
+It does not measure snaps, starter status, workload or replacement quality. Being inactive is not
+the same as being unavailable for the whole game, and a player who is active may take no snaps.
+Those questions need an official snap-count or participation source, which this repository has not
+verified (see `readiness.html` row A7).
+</div><h2>Reproduce</h2>
+<pre style="background:#0f1620;border:1px solid #243040;border-radius:8px;padding:14px;overflow:auto"><code>python3 injury-archive/scripts/capture.py clubs
+python3 injury-archive/scripts/capture.py probe --seasons 2021-2026 --weeks 1-18
+python3 injury-archive/scripts/build.py
+python3 injury-archive/scripts/verify.py</code></pre></main>
+<footer class="wrap"><div class="wrap" style="padding:0">Generated by <code>injury-archive/scripts/build.py</code>
+from the committed captures only; it fetches nothing. Values that cannot be confirmed from the two
+official sources stay blank. Nothing here is betting advice.</div></footer></body></html>

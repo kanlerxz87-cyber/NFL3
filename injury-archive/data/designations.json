@@ -1,0 +1,17 @@
+{
+ "by_label": [],
+ "by_practice": [],
+ "by_season": [],
+ "generated_at_utc": "2026-11-16T14:41:50Z",
+ "observations": [],
+ "pairs_joined": [],
+ "protocol": "injury-archive/PREREGISTRATION.md (IA-PRE-01)",
+ "totals": {
+  "active": 0,
+  "ambiguous": 0,
+  "designations": 0,
+  "emergency_qb": 0,
+  "inactive": 0,
+  "uncovered": 0
+ }
+}
