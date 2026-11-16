@@ -1,0 +1,201 @@
+{
+ "source_url": "https://www.nfl.com/teams/",
+ "observed_at": "2026-11-16T15:05:00Z",
+ "retrieval_method": "session fetch tool, rendered text (not raw bytes)",
+ "raw_bytes_retained": false,
+ "note": "Transcribed from the official team directory. `capture.py clubs` re-reads this page from CI and replaces this file.",
+ "clubs": [
+  {
+   "club": "Arizona Cardinals",
+   "nickname": "CARDINALS",
+   "code": "AZ",
+   "profile_url": "https://www.nfl.com/teams/arizona-cardinals/"
+  },
+  {
+   "club": "Atlanta Falcons",
+   "nickname": "FALCONS",
+   "code": "ATL",
+   "profile_url": "https://www.nfl.com/teams/atlanta-falcons/"
+  },
+  {
+   "club": "Baltimore Ravens",
+   "nickname": "RAVENS",
+   "code": "BAL",
+   "profile_url": "https://www.nfl.com/teams/baltimore-ravens/"
+  },
+  {
+   "club": "Buffalo Bills",
+   "nickname": "BILLS",
+   "code": "BUF",
+   "profile_url": "https://www.nfl.com/teams/buffalo-bills/"
+  },
+  {
+   "club": "Carolina Panthers",
+   "nickname": "PANTHERS",
+   "code": "CAR",
+   "profile_url": "https://www.nfl.com/teams/carolina-panthers/"
+  },
+  {
+   "club": "Chicago Bears",
+   "nickname": "BEARS",
+   "code": "CHI",
+   "profile_url": "https://www.nfl.com/teams/chicago-bears/"
+  },
+  {
+   "club": "Cincinnati Bengals",
+   "nickname": "BENGALS",
+   "code": "CIN",
+   "profile_url": "https://www.nfl.com/teams/cincinnati-bengals/"
+  },
+  {
+   "club": "Cleveland Browns",
+   "nickname": "BROWNS",
+   "code": "CLE",
+   "profile_url": "https://www.nfl.com/teams/cleveland-browns/"
+  },
+  {
+   "club": "Dallas Cowboys",
+   "nickname": "COWBOYS",
+   "code": "DAL",
+   "profile_url": "https://www.nfl.com/teams/dallas-cowboys/"
+  },
+  {
+   "club": "Denver Broncos",
+   "nickname": "BRONCOS",
+   "code": "DEN",
+   "profile_url": "https://www.nfl.com/teams/denver-broncos/"
+  },
+  {
+   "club": "Detroit Lions",
+   "nickname": "LIONS",
+   "code": "DET",
+   "profile_url": "https://www.nfl.com/teams/detroit-lions/"
+  },
+  {
+   "club": "Green Bay Packers",
+   "nickname": "PACKERS",
+   "code": "GB",
+   "profile_url": "https://www.nfl.com/teams/green-bay-packers/"
+  },
+  {
+   "club": "Houston Texans",
+   "nickname": "TEXANS",
+   "code": "HOU",
+   "profile_url": "https://www.nfl.com/teams/houston-texans/"
+  },
+  {
+   "club": "Indianapolis Colts",
+   "nickname": "COLTS",
+   "code": "IND",
+   "profile_url": "https://www.nfl.com/teams/indianapolis-colts/"
+  },
+  {
+   "club": "Jacksonville Jaguars",
+   "nickname": "JAGUARS",
+   "code": "JAX",
+   "profile_url": "https://www.nfl.com/teams/jacksonville-jaguars/"
+  },
+  {
+   "club": "Kansas City Chiefs",
+   "nickname": "CHIEFS",
+   "code": "KC",
+   "profile_url": "https://www.nfl.com/teams/kansas-city-chiefs/"
+  },
+  {
+   "club": "Las Vegas Raiders",
+   "nickname": "RAIDERS",
+   "code": "LV",
+   "profile_url": "https://www.nfl.com/teams/las-vegas-raiders/"
+  },
+  {
+   "club": "Los Angeles Chargers",
+   "nickname": "CHARGERS",
+   "code": "LAC",
+   "profile_url": "https://www.nfl.com/teams/los-angeles-chargers/"
+  },
+  {
+   "club": "Los Angeles Rams",
+   "nickname": "RAMS",
+   "code": "LA",
+   "profile_url": "https://www.nfl.com/teams/los-angeles-rams/"
+  },
+  {
+   "club": "Miami Dolphins",
+   "nickname": "DOLPHINS",
+   "code": "MIA",
+   "profile_url": "https://www.nfl.com/teams/miami-dolphins/"
+  },
+  {
+   "club": "Minnesota Vikings",
+   "nickname": "VIKINGS",
+   "code": "MIN",
+   "profile_url": "https://www.nfl.com/teams/minnesota-vikings/"
+  },
+  {
+   "club": "New England Patriots",
+   "nickname": "PATRIOTS",
+   "code": "NE",
+   "profile_url": "https://www.nfl.com/teams/new-england-patriots/"
+  },
+  {
+   "club": "New Orleans Saints",
+   "nickname": "SAINTS",
+   "code": "NO",
+   "profile_url": "https://www.nfl.com/teams/new-orleans-saints/"
+  },
+  {
+   "club": "New York Giants",
+   "nickname": "GIANTS",
+   "code": "NYG",
+   "profile_url": "https://www.nfl.com/teams/new-york-giants/"
+  },
+  {
+   "club": "New York Jets",
+   "nickname": "JETS",
+   "code": "NYJ",
+   "profile_url": "https://www.nfl.com/teams/new-york-jets/"
+  },
+  {
+   "club": "Philadelphia Eagles",
+   "nickname": "EAGLES",
+   "code": "PHI",
+   "profile_url": "https://www.nfl.com/teams/philadelphia-eagles/"
+  },
+  {
+   "club": "Pittsburgh Steelers",
+   "nickname": "STEELERS",
+   "code": "PIT",
+   "profile_url": "https://www.nfl.com/teams/pittsburgh-steelers/"
+  },
+  {
+   "club": "San Francisco 49ers",
+   "nickname": "49ERS",
+   "code": "SF",
+   "profile_url": "https://www.nfl.com/teams/san-francisco-49ers/"
+  },
+  {
+   "club": "Seattle Seahawks",
+   "nickname": "SEAHAWKS",
+   "code": "SEA",
+   "profile_url": "https://www.nfl.com/teams/seattle-seahawks/"
+  },
+  {
+   "club": "Tampa Bay Buccaneers",
+   "nickname": "BUCCANEERS",
+   "code": "TB",
+   "profile_url": "https://www.nfl.com/teams/tampa-bay-buccaneers/"
+  },
+  {
+   "club": "Tennessee Titans",
+   "nickname": "TITANS",
+   "code": "TEN",
+   "profile_url": "https://www.nfl.com/teams/tennessee-titans/"
+  },
+  {
+   "club": "Washington Commanders",
+   "nickname": "COMMANDERS",
+   "code": "WAS",
+   "profile_url": "https://www.nfl.com/teams/washington-commanders/"
+  }
+ ]
+}

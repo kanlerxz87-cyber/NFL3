@@ -2600,3 +2600,250 @@ Scope notes recorded before work started, so a later reader can check them:
 - **Local run of every `validate` step in `.github/workflows/pages.yml` on the merged tree: all 27 PASS** (including origination build and verify, skill-lab, availability-ledger, venue register checks, injury-archive checks). Steps that regenerate tracked outputs were reverted before committing; no generated artifact is in this branch's commits beyond the merge.
 - **CI on the PR:** the earlier run on `355bb33` failed (origination, now fixed on main). A run on the head was cancelled by the `pages` concurrency group; a manual dispatch was refused (403), so CI needs a fresh pull_request run on the new head.
 - **Not merged by this session.** Merge is left to the integration step, as the V4 plan states. Requirement before merge: a green `validate` run on the PR head.
+
+## Claim — `arena/37020320-nfl3` (session 37020320), 2026-11-16 UTC
+
+Branch is fixed by Arena as `arena/37020320-nfl3` (session-named branches cannot be created here). Base: `main` at `e8877e0`.
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| T-L Populate the three Lions game-status cells (Joseph, Mays, Reed) on the dashboard from the official report, with read time; remove the "Verified" label they carried while blank | done | `arena/37020320-nfl3` | `dashboard/data/injuries_2026_w10.csv`, generated `dashboard/*.html` |
+| T-R Reproducibility: commit the third price snapshot the committed manifest already produces, and make CI fail if origination artifacts drift from a rebuild | done | `arena/37020320-nfl3` | `origination/data/**` (generated), `.github/workflows/pages.yml` (one added step), this board |
+
+Out of scope for this claim (not started, recorded as open): the full requirement list in the 2026-11-16 brief. Most items already exist in some form in other workspaces (see `readiness.html`); items that need licensed odds, official snap counts, a per-club depth source for all 32 clubs, NWS grids, or a prospective window that has not yet occurred remain blank and flagged.
+
+### Result log — `arena/37020320-nfl3`, 2026-11-16 UTC
+
+**T-L · Lions game-status cells (VR-08 / VR-12 class).**
+- Sources: [NFL injury report](https://www.nfl.com/injuries/), read live through the page-fetch tool on 2026-11-16 (Week 10 section, DET vs NE, Sun 15 Nov); and the committed capture [`results-verification/data/captures/2026-11-15-nfl-injuries/`](results-verification/data/captures/2026-11-15-nfl-injuries/nfl-injuries-2026-11-15.md) (observed 2026-11-15T14:05Z, sha256 `ecd2573e…6e01d6b` per its manifest). Both reads agree.
+- Values written to `dashboard/data/injuries_2026_w10.csv`: Kerby Joseph (S, Knee, Did Not Participate in Practice, **Out**); Cade Mays (C, Ankle, Did Not Participate in Practice, **Out**); D.J. Reed (CB, Hip, Did Not Participate in Practice, **Out**). Joseph's practice status moved from "Limited" (11-12 read) to "DNP" (latest read). Injury text was blank on all three and is now filled from the same official row.
+- The three rows carried a "Verified nfl.com Week 10 report" label while their game-status cells were blank. The label now names the read time and capture path.
+- Rebuilt `dashboard/` (`node scripts/build.mjs`, `node scripts/check.mjs`: OK, 10 pages, no broken links). Dashboard starters/backups Lions row changes from `4 (DNP 1)` to `4 (DNP 2)` with the three Out designations listed, because the page derives its counts from the CSV.
+- **Still open, not edited (other owners):** `decision-lab/data/verification_baseline.json` still holds the 11-12 transcription, so `verify_sources.py` reports SOURCE-UPDATED for these rows; `decision-lab/`, `line-lab/`, `ops-center/` and `decision-hub/` still show the blank cells; `dashboard/data/injuries_2026_w10.csv` still holds the 11-12 read of 254 rows, while the 11-15 read holds 347 rows across 28 clubs (`injury-capture/index.html` IC-6). Those rows are unchanged here and go to Flagged for Review.
+
+**T-R · Origination reproducibility.**
+- `origination/scripts/verify.py` passed at HEAD, but a rebuild from committed inputs changed 10 committed artifacts and wrote an uncommitted third price snapshot `origination/data/prices/snapshots/20261115T170649Z.json` (observed 2026-11-15T17:06:49Z, games release sha256 `3f71bc90…`). The committed origination artifacts had been built against the older games sha `57c2f1b0…`. The committed manifest was already ahead of them. CI did not notice, because it built origination and never compared the result with git.
+- Committed the regenerated artifacts. Gate outcomes are unchanged: pass 7, fail 1, blocked 2; demoted S01, S03. Verifier: 13 pages, 463 rows, 0 missing a source, determinism pass. Snapshot count moves 2→3 and cells that moved between captures move 7→13 (reflected in the readiness rows, which the build regenerates).
+- `.github/workflows/pages.yml`: added the step "Origination artifacts match a rebuild from committed inputs (drift alarm)". It fails if `git status --porcelain -- origination/` is non-empty after the build. YAML parsed with PyYAML; the step sits after the origination build.
+- Second rebuild after the commit leaves `origination/` clean (checked).
+
+**Irregularity recorded (not committed, not fixed).** `decision-lab/data/audit.json` is not reproducible from a clean tree: the committed file records 9,651 table rows; a run at the start of this session on the unchanged base produced 9,635; a run after the dashboard change produced 9,642. The file was reverted to the committed version. CI regenerates the audit but does not diff it, so this drift is silent. Owner: decision-lab.
+
+### Verification performed (this session, offline re-runs at the final tree)
+
+`scripts/validate_site.py` · `tests/check_site.py` · `node dashboard/scripts/check.mjs` · `decision-desk/scripts/check.py` · `shadow-board/scripts/check.py` · `tests/test_decision_lab.py` · `tests/test_injury_capture.py` · `tests/test_readiness.py` · `decision-lab/scripts/audit.py` · `tests/test_verification_lab.py` · `verification-lab/scripts/build.py` · `tests/test_origination.py` · `origination/scripts/verify.py` · `tests/test_skill_lab.py` · `skill-lab/scripts/verify.py` · `tests/test_availability_ledger.py` · `availability-ledger/scripts/verify.py`. All exit 0 (excluding the audit.json revert above).
+
+Not run here: live network verification (`decision-lab/scripts/verify_live.py` without `--offline`) because outbound hosts are limited to GitHub, npm and PyPI; nfl.com was read only through the page-fetch tool.
+
+### Scope left open after this session (not claimed, not started)
+
+The 2026-11-16 brief lists about 80 items. Most already have a page somewhere in this repo (see `readiness.html`). Items that depend on data this sandbox cannot obtain or that need a prospective window remain open and are blank by policy: licensed odds and CLV, official snap counts and game-book starters, a per-club depth source verified for all 32 clubs, NWS grids, and the Week 11+ prospective leaderboard. The Pages workflow, not this session, decides what publishes.
+
+### T-R addendum — arena/37020320-nfl3, 2026-11-16 UTC (main moved underneath this branch)
+
+- **`main` was red for the origination build after commit `1309041` ("chore(data): refresh verified snapshot and rebuild site [skip ci]").** That commit replaced `data/raw/games.csv` and `data/raw/manifest.json`. The feed then held 149 played games, while `origination/data/official_standings_2026.json` (observed 2026-11-15T13:05Z) predated 24 clubs' results. `results.py` reconciliation failed (88/160). `[skip ci]` meant no workflow ran on that commit, so the failure was not reported. This explains the CI-only drift failure on PR #96: its merge ref was built against the newer `main`.
+- **Fix:** transcribed all 32 clubs from the official standings page, <https://www.nfl.com/standings/> (2026 REG, fetched 2026-11-16 ~14:46Z, two page chunks; W, L, T, PF, PA), into `origination/data/official_standings_2026.json`. Values were not inferred. The reconciliation is itself the check: the rebuilt feed matches the official page on **160/160 club × field checks**, and league PF is 6,880 on both sides.
+- **Rebuild:** `origination/scripts/build.py` and `verify.py` pass. Determinism holds. Pages: 13; table rows: 526; 0 rows missing a source.
+- **Governed outcome that moved — flagged, not overridden:** with 149 graded legs (was 137), gate G10 reports 3 of 8 strategies with an upper bound below zero: **S01, S02, S03** (was S01, S03). S02 is newly demoted to paper. Two issues for review:
+  1. The implemented G10 rule is a *generic* kill (`Brier-skill interval entirely below zero`, `origination/scripts/gates.py` lines 126–131). Each registered strategy carries its own kill text in `origination/scripts/leaderboard.py`. S02's registered kill is "BSS at Δ=1.5 is not better than Δ=0 after the multiplicity adjustment"; S01's is "interval straddles 0 after 400 graded legs". The generic rule therefore does not implement the pre-registered per-strategy kill conditions. This was already true on `main` (S01, S03). It is recorded as an irregularity, and no gate was edited in this session.
+  2. Demotion is labelled on the leaderboard; scores are retained, as the gate text says.
+- **Board lesson:** a `[skip ci]` data refresh that changes origination inputs must also rebuild origination. Otherwise the drift alarm (now in `pages.yml`) fails the next PR, and the scheduled validate run fails on `main`.
+
+### T-R second addendum — drift-alarm root cause, arena/37020320-nfl3, 2026-11-16 UTC
+
+- With the standings refreshed, the origination build passed locally and in a fresh clone, but the new drift step still failed in CI. The check-run annotation (readable through the API, because the log archive was unavailable from the sandbox) showed the cause: **floating-point last-digit differences between platforms**, not data. Example: `ablation.json` `base_bias` 1.7178225370738218 (local) vs 1.7178225370738216 (CI); `mae_improvement` differed at the 17th significant digit.
+- Fix in `origination/scripts/common.py`: the one JSON writer rounds floats to 9 decimal places in the written form only. In-memory arithmetic is unchanged. Rebuild: pass; second build byte-identical; verify: pass; gate outcomes unchanged (S01, S02, S03 demoted under G10, as above). The regenerated files are committed.
+- The drift step now also prints an input-hash notice (`manifest`, `official_snapshot`, `games`) and a flattened diff in the error annotation, so the next CI difference is visible without a log archive.
+
+### T-R third addendum — the recurring drift was the daily refresh, arena/37020320-nfl3, 2026-11-16 UTC
+
+- **Root cause found in `.github/workflows/data-and-site.yml`:** the daily `data-refresh` job (cron 10:23 UTC) fetches the community release, commits `data/`, `lab/results` and `research-desk/` with `[skip ci]`, and never rebuilds `origination/`. Origination reads `data/raw/games.csv`, `data/raw/manifest.json` and `decision-lab/data/official_snapshot.json`. So every refresh leaves origination stale, and the drift alarm fails every later pull request and the scheduled validate run. Observed on `main` at `1309041` and again at `fe89cf9`.
+- **Fix (claimed here for this file):** the refresh job now runs `python3 origination/scripts/build.py` before its commit step, and the commit stages `origination/` alongside the existing paths. The regenerated artifacts land in the same commit as the new data.
+- **Standings cross-check:** PR #98 (`arena/d37d5907-nfl3`) independently re-transcribed the same nfl.com standings page. Its 32 rows were compared with this branch's transcription: identical on all 32 clubs and all five fields, so the official values are confirmed twice.
+- **Conflict handling log:** this branch was rebased three times while `main` moved (`1309041`, `6a4b258`/PR #98, `fe89cf9`). Conflicts were confined to `COORDINATION.md` (resolved by keeping `main`'s text and re-appending this branch's append-only sections) and to origination artifacts (resolved by taking `main`'s version and regenerating). After the last rebase the branch was force-pushed with `--force-with-lease` to its own PR branch; no other session's commit was rewritten.
+
+### Publication record — arena/37020320-nfl3, 2026-11-16 UTC
+
+- **PR [#96](https://github.com/kanlerxz87-cyber/NFL3/pull/96) merged** into `main` as merge commit `606873d` (`--merge`, no auto-merge), 2026-11-16 14:57Z. Head before merge `5600c34`; PR `validate` run [43890969225](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43890969225) succeeded.
+- **Post-merge run** [43891191960](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43891191960) "Validate and deploy GitHub Pages": **success**; `deploy` job success; Pages build [43891331958](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43891331958) completed success.
+- **Live check:** https://kanlerxz87-cyber.github.io/NFL3/dashboard/injuries.html shows Kerby Joseph (Knee, DNP, Out), Cade Mays (Ankle, DNP, Out) and D.J. Reed (Hip, DNP, Out), with the read time in the Verification column.
+- **Post-merge `data-refresh`** `ab3bd94` committed the manifest only; a rebuild of origination on top of it is byte-identical, so the drift alarm holds on `main`.
+- **Task status:** T-L **done**; T-R **done** (with the G10 governed-outcome flag for review; no gate edited).
+- **Still open (not claimed in this session, flagged for review):** every item in the 2026-11-16 brief that needs data this sandbox cannot reach (licensed odds, official snap counts and game-book starters, per-club depth source for 32 clubs, NWS grids, a prospective window), and the irregularities listed above. None of them is marked verified on the board.
+
+## Current claim — `arena/8b6eb5b0-nfl3` — 2026-11-16 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Official Week 11 game-centre venue transcription: verify all 13 fixture venues against their NFL Game Centre pages; preserve and flag any official-page conflict; rebuild and gate the published fixture table | done | `arena/8b6eb5b0-nfl3` | `shadow-board/data/fixtures_2026_w11.csv`, `shadow-board/scripts/build.py`, `shadow-board/scripts/check.py`, generated `shadow-board/forecasts.html` / `shadow-board/sources.html`, this board |
+
+- The existing fixture register had two venues marked verified and eleven blank with an explicit reason that the game-centre page had not been opened. This task reads each linked official Game Centre `Game Info` field; a schedule-page/club-link mismatch is recorded as a conflict, not silently substituted.
+- **Overlap check:** the only open PR observed at claim time is #96, touching `.github/workflows/pages.yml`, `dashboard/`, and `origination/`; those files are outside this claim and will not be edited. No open PR touched `shadow-board/` at claim time. This session remains on the Arena-fixed `arena/8b6eb5b0-nfl3` branch rather than creating/switching to a session-named branch.
+- **Build hygiene:** the existing origination builder was run as an offline acceptance check and generated working-tree diffs from committed inputs; those generated diffs were restored before the claim, because `origination/` overlaps open PR #96. No pre-existing working changes were present.
+
+### Venue-read and publication update — 2026-11-16 UTC
+
+- The 13 official Week 11 NFL Game Centre pages were read individually at the linked `Game Info > Stadium` fields. The verbatim values now gated in `shadow-board/data/fixtures_2026_w11.csv` are: IND@HOU `RELIANT STADIUM`; MIA@BUF `HIGHMARK STADIUM`; BAL@CAR `BANK OF AMERICA STADIUM`; NO@CHI `SOLDIER FIELD`; TEN@DAL `AT&T STADIUM`; TB@DET `FORD FIELD`; ARI@KC `ARROWHEAD STADIUM`; PIT@PHI `LINCOLN FINANCIAL FIELD`; NYJ@LAC `SOFI STADIUM`; JAX@NYG `METLIFE STADIUM`; LV@DEN `EMPOWER FIELD AT MILE HIGH`; MIN@SF `ESTADIO BANORTE`; CIN@WAS `NORTHWEST STADIUM`. Each row retains its individual Game Centre and Week 11 schedule URLs.
+- The schedule page's club travel-link labels are retained separately: nine match after case normalization; IND@HOU reads `RELIANT STADIUM` vs `NRG Stadium` and CIN@WAS reads `NORTHWEST STADIUM` vs `FedEx Field`; ARI@KC reads `ARROWHEAD STADIUM` vs `GEHA Field at Arrowhead Stadium` (recorded as a naming variation, not evidence of a different venue); the Mexico City fixture's schedule entry has no travel-link venue label. SB-F03, SB-F04 and SB-F09 now state these facts and link both relevant official sources. None is silently normalized or adjudicated as physical-venue identity.
+- **Read-window correction:** Game Centre fetches are evidenced only as occurring between 14:40 and 14:41 UTC, and the schedule-page read preceded a `date -u` result of 14:42:45Z. The previously entered `14:40:02Z` start second was not independently evidenced and has been removed. The shared recorded window is `2026-11-16T14:40Z/2026-11-16T14:42:45Z`; the website and SB-F10 explicitly say that the start is minute precision and the exact second is unavailable. No HTML source captures were archived.
+- `build.py` carries both venue labels, per-row comparison notes and the window into the fair-lines CSV and fixture-context table. Its HTML table helper now wraps raw links and HTML fragments in real `<td>` cells; `check.py` rejects source links outside cells, enforces header/body column counts, gates all 13 exact names, source URLs, notes and window, and requires the updated flags in the generated pages. The 65 previously issued forecast records retain their 2026-11-15T14:09:06Z timestamp and payload; venue-source enrichment did not re-issue their probabilities.
+- **Checks after this edit:** Shadow Board build and gate passed (13 fixtures, 65 immutable records, six pages); `git diff --check` passed. Site/link/readiness checks and the test/verification suites for decision lab, origination, corpus, pricing, skill lab and availability ledger all passed. `corpus/test_corpus.py` still emits its pre-existing unclosed-file `ResourceWarning`; its tests pass. The merged PR and post-merge Pages deployment are recorded in the completion section at the end of this board.
+- **Concurrent work discovered after the claim:** PR #100 (`arena/46fe1baa-nfl3`) adds a separate `venues/` register with the same 13-fixture research topic, but its file list has no `shadow-board/` paths. PR #101 is a separate final-integration record; PR #99 is a coordination-only follow-up. I did not edit any of their files. I notified the #100 owner in PR comments that this branch is Shadow-Board-only, summarized the source-field distinction and read-window precision, and offered to cross-reference their venue evidence after it lands. The Shadow Board branch remains independently buildable and does not consume their files.
+- PR #96 has since merged, and its `validate` check passed in run 43890969225; its deploy job was skipped for the pull request. After PRs #102 and #103 merged, this branch was rebased onto `origin/main` at `be3665f`, then onto `ea987f0` before the PR push. PR #101's `validate` passed in run 43891711614 and #101 has since merged; PR #100 remains a separate `venues/` register with no `shadow-board/` path overlap, and its owner was notified. PR #99's last failed run 43889610874 predates the #96 merge. No parallel venue-register, dashboard, readiness or workflow files were changed here.
+- **Latest-base validation (after rebase to `be3665f`):** Shadow Board gate, root link/site checks, decision-readiness and decision-lab tests, decision-desk check, injury-capture tests, injury-archive tests and `injury-archive/scripts/verify.py` all exited 0. The archive verifier reported 2 stored reads, 1 report/article and 171 joined designation rows (2,174 checks, 0 failures). `tests/test_injury_capture.py` intentionally exercises missing-column and timeout cases; its output includes a structural-drift message and simulated fetch timeout even though all 13 tests pass. `git diff --check` passed.
+## Final integration — `arena/dd2f5cf1-nfl3` — 2026-11-16 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Final integration: line-by-line re-verification of the combined data against live official pages; publish the verification record; rebuild, validate, PR, merge, confirm Pages | done (publication record in the follow-up entry below) | `arena/dd2f5cf1-nfl3` | `scripts/build_repo_review.py`, generated `repo-review.html`, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md` |
+
+Branch: `arena/dd2f5cf1-nfl3` (Arena-fixed; base `main` at `e8877e0`). HEAD equals `main` at claim time, so this
+session's branch starts from the fully merged state of PRs #1–#95.
+
+**Coordination state at claim time.** `git rev-parse HEAD origin/main main` all resolve to `e8877e0`; the working
+tree was clean. One pull request was open: **PR #96** (`arena/37020320-nfl3`, "Lions official designations on
+dashboard; origination artifacts reproducible; CI drift alarm"), created 2026-11-16T14:39:34Z — under two minutes
+before this session claimed. Its `validate` check had concluded **FAILURE** at 14:40:12Z. Its claim is therefore
+not stale, its file scope (`dashboard/**`, `origination/**`, `.github/workflows/pages.yml`, `COORDINATION.md`) is
+not touched by this session, and **it was not merged**: a branch whose validation check fails is not merged. This
+session reproduced the PR's checks in a throwaway clone of its head and every step passed locally (including the
+new drift-alarm step), so the failure is not reproduced from the committed tree; the PR is left with its owning
+session to diagnose and re-run. This entry logs the state rather than taking over the claim.
+
+**What this session did (all values re-read from live official pages on 2026-11-16; nothing inferred):**
+
+- **Standings reproduction, 160/160.** Recomputed W-L-T, PF and PA for all 32 clubs from the transcribed
+  `line-lab/data/standings_2026.json` snapshot (2026-11-12) plus the 13 played Week 10 finals read from
+  `https://www.nfl.com/schedules/2026/by-week/week-10` (the Monday LAC @ BAL fixture had not yet been played and
+  was excluded). Every club and field reproduces the live official standings page exactly. This independently
+  confirms the "160/160 club × field checks" claim against the live source.
+- **Transactions.** The live `https://www.nfl.com/transactions/` log shows Keenan Allen (Colts to 49ers) and
+  Josh Downs (Colts to Chiefs), both 11/10, and Jacoby Brissett (Cardinals to Ravens) 11/06 — matching the
+  recorded claims.
+- **Injury report.** The live `https://www.nfl.com/injuries/` (Week 10) shows Lions Kerby Joseph (Knee, DNP, Out),
+  Cade Mays (Ankle, DNP, Out), D.J. Reed (Hip, DNP, Out), and the Patriots chain used in the published worked
+  example (Stevenson Questionable, Henderson Out).
+- **Injury policy.** The official competition-committee article
+  (`https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693`)
+  defines Questionable / Doubtful / Out in plain language and attaches no percentage to any label.
+- **Week 11 slate.** The official Week 11 schedule page lists exactly the 13 fixtures and six byes
+  (ATL, CLE, GB, LA, NE, SEA) registered in `shadow-board/data/fixtures_2026_w11.csv`.
+- **Venue flags.** Both game-centre pages were opened: IND @ HOU reads "RELIANT STADIUM" against the schedule
+  page's "NRG Stadium" (conflict stands; venue left blank), and MIN @ SF reads "MEXICO CITY / ESTADIO BANORTE".
+- **Archive and pins.** The latest hashed injury capture (2026-11-16T06:31Z, 347 rows,
+  SHA-256 `991825b70aeeb6a8…`) carries the three Lions "Out" designations; `corpus/games_2026_w1_9.csv`,
+  `corpus/manifest.json` and the shadow-board pin all hash to `4632744b44d59ff2…`; the price ledger holds 0 rows
+  by the adopted fail-closed policy; the merged strategy register holds 34 strategies, 34/34 with both two-sided
+  fields, 0 validated, both controls present.
+
+**Artifacts.** `scripts/build_repo_review.py` gained a "Final integration verification — 2026-11-16" section
+(12 checks, VI-01…VI-12, each with the official page opened today or the repo-cited source); `repo-review.html`
+was regenerated from the generator (the `--check` gate passes, so the page and generator stay in step).
+`EXECUTIVE_SUMMARY.md` carries the matching update.
+
+**Checks run on this branch before pushing:** `python3 scripts/validate_site.py`, `python3 tests/check_site.py`,
+`python3 tests/test_decision_lab.py`, `tests/test_readiness.py`, `tests/test_skill_lab.py`,
+`tests/test_origination.py`, `tests/test_availability_ledger.py`, `tests/test_injury_capture.py`,
+`tests/test_verification_lab.py`, `python3 ops-center/scripts/build.py` + `verify.py`,
+`python3 origination/scripts/build.py` + `verify.py`, `python3 skill-lab/scripts/verify.py`,
+`python3 availability-ledger/scripts/verify.py`, `python3 shadow-board/scripts/check.py`,
+`python3 decision-desk/scripts/check.py`, `python3 scripts/build_repo_review.py --check` — all pass.
+
+**Irregularities carried forward (not introduced by this session, unchanged):** RR-01/RR-07 (committed vs
+published injury counts: 254 / 279 / 347 describe different dated reads — the archive now carries the 347-row
+series), RR-03 (Texans depth image, Packers parse), RR-04 (research-desk pre-registration order), RR-05/RR-16
+(venue provenance), RR-06 (offline verification record), RR-08 (no alerting job), RR-15 (one unscored fixture in
+the corpus), plus the still-blocked inputs (licensed price data, official game books and inactive lists, verified
+snap counts). All remain published on the Flagged for Review pages with their sources.
+
+**Publication record.** The pull request from this branch, its merge result and the post-merge Pages deployment
+are recorded in the follow-up entry at the end of this board, committed after the merge per the protocol used by
+earlier sessions.
+
+## Completion — `arena/8b6eb5b0-nfl3` — 2026-11-16 UTC
+
+| Task | Updated status | Owner | Result |
+|---|---|---|---|
+| Official Week 11 Game Centre stadium transcription; preserve source-label differences; rebuild and gate the Shadow Board fixture context | done | `arena/8b6eb5b0-nfl3` | PR [#104](https://github.com/kanlerxz87-cyber/NFL3/pull/104), merged as `1e52bbd88fe78c6f1f0af729f226930c2e11c230` |
+
+- **Pull request verification:** PR #104's `validate` check passed (run [43892267670](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43892267670)); PR deployment was skipped by workflow design. After merge, Pages run [43892483182](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43892483182) completed successfully with both `validate` and `deploy` green.
+- **Published deployment check:** GitHub's Pages API reports `built`, with no error, for latest main commit `ea987f0783888e463ed073c7895f7dabe5f281f9`. The public site root is <https://kanlerxz87-cyber.github.io/NFL3/>; the updated pages are <https://kanlerxz87-cyber.github.io/NFL3/shadow-board/forecasts.html> and <https://kanlerxz87-cyber.github.io/NFL3/shadow-board/sources.html>. The deployment status was verified through the successful workflow and Pages API; the `github.io` host itself was not fetched from this restricted shell.
+- The local Shadow Board gate and site/link checks passed on the rebased source; the Pages validation workflow also passed its full repository checks. All 13 Game Centre stadium strings, row-level official links, the schedule-page comparisons, the minute-precision read-window start, and review flags are published. The three naming differences remain explicit; no physical-venue equivalence is inferred. No forecast probabilities or immutable forecast records were re-issued.
+- PR #100's separate `venues/` register remains a parallel, non-overlapping source-evidence workspace; no files from it were changed or required by this publication.
+## Follow-up — `arena/dd2f5cf1-nfl3` — 2026-11-16 UTC (publication record for the final-integration task)
+
+**Pull request:** [#101](https://github.com/kanlerxz87-cyber/NFL3/pull/101) — "Final integration: line-by-line
+re-verification against live official pages and the verification record".
+
+**Merge result:** **MERGED** as `2bc9b5e2d5cf63a1b5623a8c61b45bdeae48208e` at 2026-11-16T15:05:41Z (merge
+strategy `--merge`, no auto-merge). PR check `validate` **pass** (run
+[43892183505](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43892183505)).
+
+**Pages deployment:** the post-merge `Validate and deploy GitHub Pages` run
+[43892688558](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43892688558) completed **success**; the GitHub
+Pages API reports `status: built` for `https://kanlerxz87-cyber.github.io/NFL3/`. The live `repo-review.html` was
+re-fetched after the deploy and carries the new "Final integration verification — 2026-11-16" section (VI-01…VI-12)
+with its official source links; the landing page and the ops-centre leaderboard render unchanged.
+
+**Rebase history (parallel sessions).** The branch was rebased three times before merging because concurrent
+sessions kept landing on `main` while this PR was open: PR #98 (standings re-transcription), PR #96 (Lions
+designations, origination reproducibility, CI drift alarm — merged at 14:57:04Z after its owner fixed the failing
+check), PR #102 (injury-archive Week 10 capture) and PR #104 (parallel venue work). Each rebase resolved only the
+append-only `COORDINATION.md` conflict, keeping both sides' entries; no other file conflicted, and no other
+session's work was discarded. One merge attempt was rejected with "Pull Request has merge conflicts" after another
+session's merge landed mid-wait; the branch was rebased and merged on the next attempt. The `EXECUTIVE_SUMMARY.md`
+update auto-merged cleanly against every intermediate `main`.
+
+**State after merge.** The final-integration task is done. The verification record, the executive-summary update
+and this publication record are on `main` and deployed. Nothing in this pass introduced a new irregularity; the
+carried-forward items (RR-01…RR-19 and the still-blocked inputs) remain published on the Flagged for Review pages
+with their sources and do not block the deployment.
+
+
+## Claim and result — arena/f5f99ff0-nfl3 (session f5f99ff0) — 2026-11-16 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| RV1 Dated line-by-line re-verification of published values against live official sources (2026-11-16 pass) | done | `arena/f5f99ff0-nfl3` | this entry (evidence recorded below with links) |
+| RV2 Dated verification record | amended — superseded by PR #101 | `arena/f5f99ff0-nfl3` | none (see coordination note 2) |
+| RV3 Resolution of the three missing Lions game-status designations (VR-08/VR-12) in `decision-lab/`, `ops-center/`, `verification-lab/` | done | `arena/f5f99ff0-nfl3` | `decision-lab/data/official_snapshot.json` (three rows + manifest capture entry), `decision-lab/data/catalog.json` (F18 text), `verification-lab/data/recheck.json` (VR-08/VR-12 actions), `verification-lab/data/queue.json` (VQ-R03), `ops-center/data/live_recheck.json` (postscript), regenerated artifacts |
+| RV4 Final integration: full validation suite, PR to `main`, merge, GitHub Pages deploy confirmation | in progress | `arena/f5f99ff0-nfl3` | this board |
+
+Branch: `arena/f5f99ff0-nfl3` (fixed by Arena). The claim was first pushed at 14:42Z (`5e15387`), but the branch was later **rebuilt** on a newer `main` after two append-conflict resolutions against concurrent sessions (see coordination note 3); the single commit `679b9f7` carries the work.
+
+### 1. RV3 — the Lions game-status designations are populated, with evidence
+
+Kerby Joseph (S, Knee), Cade Mays (C, Ankle) and D.J. Reed (CB, Hip) now publish **Out** in `decision-lab/` (injuries, availability pages), `ops-center/` (availability, suggestions) and the `verification-lab` register. Evidence, both official:
+
+- The live official Week 10 report itself shows all three as Out (read 2026-11-16 via the page-fetch tool): https://www.nfl.com/injuries/league/2026/REG10 — rows "Kerby Joseph | S | Knee | Did Not Participate In Practice | Out", "Cade Mays | C | Ankle | Did Not Participate In Practice | Out", "D.J. Reed | CB | Hip | Did Not Participate In Practice | Out".
+- The repository's own six-hourly capture archive holds a hash-backed read of the official page at **2026-11-16T06:31:00Z** (`captures/nfl-injuries/raw/991825b70aeeb6a83167732ab8440dea913ea86dbeac7797391c1ba599600d0d.html.gz`, digest recorded in `captures/nfl-injuries/index.jsonl`). It contains the same three Out rows.
+- The official Week 10 article lists the same designations: https://www.nfl.com/news/nfl-week-10-injury-report-2026-season (this is the source the VR-08/VR-12 register rows cite).
+
+The three snapshot rows were refreshed in place from the 06:31Z capture (game_status, injury text, practice status), and their row-level `observed_at`/`source_sha256` now point at that capture, which is registered in the snapshot `manifest`. The 2026-11-12 capture values remain in the record history (VR-04..VR-12 rows, `ops-center/data/live_recheck.json` baseline). VR-08 and VR-12 actions carry the dated resolution; VQ-R03 is marked done against its own acceptance test; catalog flag F18's finding text now reads the post-population state (9 of 254 rows carry a designation). This completes the `decision-lab/`/`ops-center/` half of the fix that PR #96 explicitly left open; PR #96 had already done `dashboard/` with identical values.
+
+### 2. RV1 — dated re-verification findings (2026-11-16), and RV2 amendment
+
+Reads made this session through the page-fetch tool and the repository's capture archive (no value copied from a search result; nothing inferred):
+
+- **REG10 report state.** The official Week 10 page (https://www.nfl.com/injuries/league/2026/REG10) now carries full game-status designations for the whole slate. The 06:31Z hash-backed capture parses to **347 player rows across 28 club sections, 171 game-status designations (70 Out, 90 Questionable, 11 Doubtful), and zero "No Injuries Reported" sections.** Per-club row counts: DAL 19, LAC 19, GB 17, HOU 16, NE 15, SEA 15, ARI 15, BUF 14, IND 14, LAR 14, KC 13, MIN 13, CAR 12, CLE 12, NO 12, SF 12, ATL 11, JAX 11, MIA 11, NYG 11, BAL 10, CIN 9, DET 9, NYJ 9, WAS 9, PIT 8, LV 5, TEN 12.
+- **VR-04 family confirmed and quantified.** The published 254-row capture (2026-11-12T06:32Z) understates the current official page by 93 rows (was 25 at the 2026-11-12T22:25Z re-observation). The two no-injury sections that survived on 11-12 (LAC, BAL — the Monday game) are gone from the 11-16 read. The report is a weekly series, not a snapshot; every downstream count dated 2026-11-12 is historical.
+- **Practice-status drift on volatile fields is expected and classified as `source_updated`, not mismatch** (decision-lab/scripts/verify_sources.py): Kerby Joseph and Jared Goff practice status differ between the 11-12 capture and the hand-transcribed baseline. No identity-field mismatch exists.
+- **RV2 amendment, recorded openly.** My claim RV2 proposed a separate dated re-verification page. Session `arena/dd2f5cf1-nfl3` opened PR #101 for exactly that deliverable while this session was mid-pass (checks VI-01..VI-12 in `repo-review.html`, covering standings 160/160, transactions, designations, policy, Week 11 slate, venue flags, archive integrity and the corpus/price pins — the same ground this pass covered). Per the coordination rule "coordinate to avoid duplicate work", this session **dropped its own report page** and records its unique evidence (above) here and in the named registers. PR #101 merged as `2bc9b5e`.
+
+### 3. Overlap and conflict log (nothing discarded)
+
+- **PR #96 (`arena/37020320-nfl3`)** merged mid-session: dashboard Lions rows (same three Out values from the same official sources), origination rebuild + standings re-transcription + drift alarm + data-refresh root-cause fix. This session's first reconciliation commit was **superseded** by that PR and dropped during rebase; the regenerated origination artifacts in `679b9f7` are built on top of PR #96's state and pass its drift alarm.
+- **Two append-vs-append rebase conflicts on this file** (against `arena/b0dd4900-nfl3`'s entry and later `arena/37020320-nfl3`'s). The first resolution committed conflicted text by accident (a safety assert fired on *quoted historical* markers and aborted the write just before `git add`); it was found immediately by re-reading the file and corrected. The second attempt hit multiple conflict blocks in one file and was abandoned; the branch was rebuilt from `origin/main` with minimal, format-preserving edits (an earlier draft of the same edits had reformatted five JSON files at `indent=1` against their `indent=2` originals — that churn was discarded, not pushed as the final state). Both incidents are recorded here rather than hidden.
+- **Open parallel work at record time, untouched by this session:** PR #100 (`arena/46fe1baa-nfl3`, `venues/` Week 11 venue register + dashboard Lions corrections + readiness rows; **CONFLICTING**, needs its owner's rebase) and PR #99 (`arena/b0dd4900-nfl3`, board-only; its `validate` ran before PR #96's fixes landed and failed on the origination build step — a re-run or rebase by its owner should clear it). A further session (`arena/8b6eb5b0-nfl3`) opened a shadow-board stadium-fields PR while this record was written.
+
+### 4. Verification performed (full CI validate sequence, local, at `679b9f7`)
+
+`scripts/validate_site.py` · `tests/check_site.py` · `decision-desk/scripts/check.py` · `shadow-board/scripts/check.py` · `pricing/test_pricing.py` + `build.py` + `verify.py` + `git diff --exit-code -- pricing pricing.html` · `corpus/test_corpus.py` + `build.py` + `verify.py` + `git diff --exit-code -- corpus corpus.html` · `tests/test_decision_lab.py` (37/37) · `decision-lab/scripts/verify_sources.py` · `decision-lab/scripts/build.py` · `tests/test_injury_capture.py` · `tests/test_readiness.py` · `decision-lab/scripts/audit.py` (lab gate PASS) · availability reproducibility (`git diff --exit-code -- decision-lab/data/availability.json`) · `decision-lab/scripts/verify_live.py --offline` · `verification-lab/scripts/build.py` + `tests/test_verification_lab.py` · `tests/test_origination.py` · `origination/scripts/build.py` + **drift alarm (`git status --porcelain -- origination/` clean)** + `origination/scripts/verify.py` (160/160 reconciliation, gates pass 7 / fail 1 / blocked 2, byte-identical second build) · `tests/test_skill_lab.py` + `skill-lab/scripts/verify.py` · `tests/test_availability_ledger.py` + `availability-ledger/scripts/verify.py` · `tests/test_injury_archive.py` + `tests/test_injury_archive_pipeline.py` + `injury-archive/scripts/verify.py` (2,174 checks, 0 failures). All pass.
+
+### 5. Irregularities for review (published, not blocking)
+
+- **IRR-F5F-1 (open, pre-existing).** `decision-lab/data/audit.json` is reproducible for a fixed tree but not across tree states (it counts rows in every HTML page in the repository). PR #96 recorded the 9,651/9,635 divergence and reverted its regeneration; this session committed the regeneration matching its own tree (9,934 rows at the record above). A `git diff --exit-code` gate after `audit.py` would make this class of staleness loud; not added here (owner: decision-lab).
+- **IRR-F5F-2 (open, pre-existing).** Gate G10's generic kill rule diverges from the per-strategy registered kill text (flagged by PR #96; S02 newly demoted). Not changed by this session.
+- **IRR-F5F-3 (minor).** Origination price-snapshot filenames mix two formats (`2026-11-15T130644Z.json` vs `20261115T170649Z.json`); both are registered in the ledger with correct hashes. Cosmetic.
+- **IRR-F5F-4 (open).** The 254-row Week 10 table published in `dashboard/` and `decision-lab/` is the 2026-11-12 capture; the live page now carries 347 rows (see RV1). The stale-count flags VR-04..VR-07 stay open until a rebuilt capture is republished (VQ-R01); this session did not overwrite the dated capture.
+- **IRR-F5F-5 (process).** PR #99's failed `validate` is a stale-run artifact (its merge ref predates PR #96's origination fixes); PR #100 is conflict-blocked. Neither blocks this integration.

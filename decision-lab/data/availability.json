@@ -61,14 +61,14 @@
   },
   "report_status_counts": {
     "game_status": {
-      "Out": 5,
+      "Out": 8,
       "Questionable": 1,
-      "blank": 248
+      "blank": 245
     },
     "practice_status": {
-      "Did Not Participate In Practice": 93,
+      "Did Not Participate In Practice": 94,
       "Full Participation in Practice": 72,
-      "Limited Participation in Practice": 89
+      "Limited Participation in Practice": 88
     }
   },
   "matchups": [
@@ -438,9 +438,9 @@
       "team": "Lions",
       "player": "Cade Mays",
       "position": "C",
-      "injury": "",
+      "injury": "Ankle",
       "practice_status": "Did Not Participate In Practice",
-      "game_status": "",
+      "game_status": "Out",
       "published_slot": "Offense C #1",
       "next_player": "Juice Scruggs",
       "next_position": "C",
@@ -454,9 +454,9 @@
       "team": "Lions",
       "player": "D.J. Reed",
       "position": "CB",
-      "injury": "",
+      "injury": "Hip",
       "practice_status": "Did Not Participate In Practice",
-      "game_status": "",
+      "game_status": "Out",
       "published_slot": "Defense CB #1",
       "next_player": "Ennis Rakestraw Jr.",
       "next_position": "CB",
@@ -3850,9 +3850,9 @@
         {
           "player": "D.J. Reed",
           "rank": 1,
-          "injury": "",
+          "injury": "Hip",
           "practice_status": "Did Not Participate In Practice",
-          "game_status": ""
+          "game_status": "Out"
         }
       ],
       "top3_listed": 1,
@@ -3901,9 +3901,9 @@
         {
           "player": "Cade Mays",
           "rank": 1,
-          "injury": "",
+          "injury": "Ankle",
           "practice_status": "Did Not Participate In Practice",
-          "game_status": ""
+          "game_status": "Out"
         }
       ],
       "top3_listed": 1,
@@ -4923,9 +4923,9 @@
       "team": "Lions",
       "player": "Kerby Joseph",
       "position": "S",
-      "injury": "",
-      "practice_status": "Limited Participation in Practice",
-      "game_status": "",
+      "injury": "Knee",
+      "practice_status": "Did Not Participate In Practice",
+      "game_status": "Out",
       "matchup": "NE @ DET",
       "reason": "name not present on the captured club depth page",
       "report_url": "https://www.nfl.com/injuries/",

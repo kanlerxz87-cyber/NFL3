@@ -26,8 +26,8 @@ every row. Prices are labelled <b>COMMUNITY</b>; standings and injury reports ar
     <small>10 weeks · reconciled</small></div>
   <div><span>OFFICIAL RECONCILIATION</span><strong>160/160</strong>
     <small>club × field checks match</small></div>
-  <div><span>PRICE SNAPSHOTS</span><strong>3</strong>
-    <small>46 of 78 pre-kickoff cells moved</small></div>
+  <div><span>PRICE SNAPSHOTS</span><strong>6</strong>
+    <small>49 of 78 pre-kickoff cells moved</small></div>
   <div><span>STRATEGIES SCORED</span><strong>8</strong>
     <small>3 demoted by their own kill rule</small></div>
   <div><span>VALIDATED</span><strong>0</strong>
@@ -56,7 +56,7 @@ closing-line claim.</li>
 <li><b>No validated strategy.</b> Every scored rule has a Brier-skill interval that includes zero or sits
 below it. Two have already failed their own kill rule.</li>
 <li><b>No measured injury effect.</b> The personnel ablation's holdout interval is
--0.109 to 0.174 points of MAE — it cannot distinguish an effect from noise.</li>
+-0.185 to 0.102 points of MAE — it cannot distinguish an effect from noise.</li>
 <li><b>No replacement certainty.</b> No official source names a replacement, so that column stays blank.</li>
 </ul></div></div>
 
@@ -124,7 +124,7 @@ would need almost 4,000. This is why a 12-8 run is not evidence.</p></div>
 <div class="metrics">
   <div><span>DEPTH SLOTS</span><strong>1,386</strong><small>across 30 of 32 clubs</small></div>
   <div><span>RANK-1 SLOTS WITH ≥2 PLAYERS</span><strong>149</strong><small>a single starter would be invented</small></div>
-  <div><span>REPORT ROWS WITH A GAME STATUS</span><strong>6</strong><small>of 254 official rows</small></div>
+  <div><span>REPORT ROWS WITH A GAME STATUS</span><strong>9</strong><small>of 254 official rows</small></div>
   <div><span>RESERVE-LIST PLAYERS</span><strong>543</strong><small>absent from the report by construction</small></div>
 </div>
 <div class="notice"><b>Snap-share leader vs published rank 1:</b> they agree in
@@ -140,7 +140,7 @@ promise that the work is coming; it is a statement of what is missing.</caption>
 <thead><tr><th>Gate</th><th>Question</th><th>Status</th><th>The number that decided it</th><th>Source</th></tr></thead>
 <tbody>
 <tr><td><b>G01</b></td><td>Is every input to a scored strategy traceable to a named source and digest?</td><td><span class='pill ok'>pass</span></td>
-<td>272 events, 3 snapshot(s), 160 club checks<br><small>Scored rows may be published with a source class on each row.</small></td>
+<td>272 events, 6 snapshot(s), 160 club checks<br><small>Scored rows may be published with a source class on each row.</small></td>
 <td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>source ↗</a></td></tr>
 <tr><td><b>G02</b></td><td>Was the rule frozen before the evaluation rows were scored?</td><td><span class='pill ok'>pass</span></td>
 <td>10 registered rules, all hashed<br><small>A rule change produces a new hash; the leaderboard shows the hash it scored.</small></td>
@@ -152,7 +152,7 @@ promise that the work is coming; it is a statement of what is missing.</caption>
 <td>PF 6880 = official 6880<br><small>Settlement authority for every graded leg.</small></td>
 <td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>source ↗</a></td></tr>
 <tr><td><b>G05</b></td><td>Does a market have both a pre-kickoff opening and a pre-kickoff close?</td><td><span class='pill ok'>pass</span></td>
-<td>78 pre-kickoff market cells of 816; 3 snapshot(s); 46 cell(s) moved between captures<br><small>Blocks every closing-line-value claim. Grades on the stored number only.</small></td>
+<td>78 pre-kickoff market cells of 816; 6 snapshot(s); 49 cell(s) moved between captures<br><small>Blocks every closing-line-value claim. Grades on the stored number only.</small></td>
 <td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>source ↗</a></td></tr>
 <tr><td><b>G06</b></td><td>Is there enough settled sample to publish a score at all?</td><td><span class='pill ok'>pass</span></td>
 <td>149 graded legs on the largest strategy; 149 &lt; 200 for promotion<br><small>Scores are published with intervals. No strategy may be called validated at this n.</small></td>

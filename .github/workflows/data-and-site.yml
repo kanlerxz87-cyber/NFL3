@@ -58,11 +58,17 @@ jobs:
       - name: Verify the root site and sub-sites
         run: python3 scripts/validate_site.py
 
+      - name: Rebuild origination from the refreshed inputs
+        # The refresh changes data/raw (games release, manifest). Origination reads them, so its
+        # artifacts must be regenerated in the same commit. Without this the committed origination
+        # pages go stale and the origination drift alarm fails every later pull request.
+        run: python3 origination/scripts/build.py
+
       - name: Commit refreshed snapshot and site
         run: |
           git config user.name "nfl3-bot"
           git config user.email "nfl3-bot@users.noreply.github.com"
-          git add -A data lab/results research-desk
+          git add -A data lab/results research-desk origination
           if git diff --cached --quiet; then
             echo "no changes to commit"
           else

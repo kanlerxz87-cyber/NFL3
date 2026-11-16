@@ -227,7 +227,31 @@ def build_artifacts() -> dict:
         by_practice[-1]["practice_status"] = row[0]
         by_practice[-1]["game_status"] = row[1]
 
+    # Structural anomaly counts (protocol amendment A1.2): two official documents disagreeing,
+    # published as counts. Neither is adjusted for anywhere.
+    active_after_full_practice = [o for o in observations
+                                  if o["outcome"].startswith("active")
+                                  and o["practice_status"] == "Full Participation in Practice"]
+    inactive_entries = {(inactives[k]["season"], inactives[k]["week"], row["club"], lib.norm_name(row["player"]))
+                        for k in inactives for row in inactives[k]["rows"]}
+    report_keys = {(report["season"], report["week"], row["team"].upper(), lib.norm_name(row["player"]))
+                   for report in injuries.values() for row in report["rows"]}
+    inactive_not_on_report = sorted(inactive_entries - report_keys)
+    anomaly = {
+        "designated_active_after_full_practice": len(active_after_full_practice),
+        "designated_active_after_full_practice_rows": [
+            {k: o[k] for k in ("season", "week", "club", "player", "game_status", "practice_status",
+                               "injury_source_url", "inactives_source_url")}
+            for o in active_after_full_practice],
+        "inactive_not_on_report": len(inactive_not_on_report),
+        "inactive_not_on_report_keys": [list(map(str, k)) for k in inactive_not_on_report],
+        "note": ("Counts of two official documents disagreeing. Week 10's report was read after "
+                 "several clubs had played (protocol amendment A1.3), so these counts are not "
+                 "evidence about any player; they are the reason each rate is labelled provisional."),
+    }
+
     designations = {
+        "anomaly": anomaly,
         "generated_at_utc": data_clock(index),
         "protocol": "injury-archive/PREREGISTRATION.md (IA-PRE-01)",
         "pairs_joined": join_rows,

@@ -231,9 +231,28 @@ def parse_injuries(raw: bytes, url: str, observed_at: str) -> dict:
 # Inactive list (official weekly inactives article)
 # ---------------------------------------------------------------------------------------------
 
+# Month each regular-season week was played in, so the probe can also try the correct month word.
+# Verified for 2026 Week 10 against the live article, whose URL contains "november". For other weeks
+# it is a *candidate* address: a 404 is recorded as not_published and nothing is inferred from it.
+WEEK_MONTH = {1: "september", 2: "september", 3: "september", 4: "september", 5: "october",
+              6: "october", 7: "october", 8: "october", 9: "november", 10: "november",
+              11: "november", 12: "november", 13: "december", 14: "december", 15: "december",
+              16: "december", 17: "december", 18: "january"}
+
+
 def inactives_url(season: int, week: int) -> str:
+    """The address verified on 2026-11-16 (no month word). Other seasons 404 at this pattern."""
     return (f"https://www.nfl.com/news/nfl-week-{week}-inactives-"
             f"players-ruled-out-sunday-{season}-season")
+
+
+def inactives_url_with_month(season: int, week: int) -> str:
+    """Candidate address carrying the played month, for the probe to try when the plain one 404s."""
+    month = WEEK_MONTH.get(week, "")
+    if not month:
+        return ""
+    return (f"https://www.nfl.com/news/nfl-week-{week}-inactives-players-ruled-out-"
+            f"{month}-{season}-season")
 
 
 HEADING = re.compile(r"<h([1-6])[^>]*>(.*?)</h\1>", re.S | re.I)

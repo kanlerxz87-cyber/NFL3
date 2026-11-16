@@ -76,6 +76,15 @@ jobs:
         run: python3 tests/test_origination.py
       - name: Origination workspace build
         run: python3 origination/scripts/build.py
+      - name: Origination artifacts match a rebuild from committed inputs (drift alarm)
+        run: |
+          echo "::notice::input sha256 (manifest, official_snapshot, games): $(sha256sum data/raw/manifest.json decision-lab/data/official_snapshot.json data/raw/games.csv | awk '{print $1}' | tr '\n' ' ')"
+          if [ -n "$(git status --porcelain -- origination/)" ]; then
+            STATUS=$(git status --porcelain -- origination/ | tr '\n' ' ')
+            DIFF=$(git diff -U0 -- origination/ | head -c 1500 | tr '\n' '|')
+            echo "::error::origination/ differs from a rebuild of the committed inputs. status: ${STATUS} diff: ${DIFF}"
+            exit 1
+          fi
       - name: Origination fail-closed verification (sources, links, determinism, gates)
         run: python3 origination/scripts/verify.py
       - name: Skill-lab regression tests (protocol, scores, published pages)
