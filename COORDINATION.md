@@ -3465,3 +3465,33 @@ unchanged: it lists only its own pages, and a foreign workspace entry there woul
 - GitHub Actions API (runs/jobs for runs 43900887096, 43900886979 and successors) — CI step conclusions.
 - Repository artifacts, not external: `results-verification/data/official_scores_2026/week_02.json`,
   `results-verification/CORPUS_FREEZE.md`, `corpus/PRE_REGISTRATION.md`, `corpus/manifest.json`.
+
+### 7. Integration record — PR #128 merged, Pages verified live
+
+- **Pull request [#128](https://github.com/kanlerxz87-cyber/NFL3/pull/128)** (`arena/b4da963f-nfl3` → `main`) —
+  **MERGED** at `2026-11-16T18:32:23Z` as `fd15ee8c2c50eeada4fc5aa34c6216c6f38b63b0`, without waiting for user
+  review per the standing instruction; the pre-merge gate was CI, not a person.
+- Pre-merge checks: `Validate and deploy GitHub Pages` run
+  [43929735480](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43929735480) — **success** (`validate` pass;
+  `deploy` skipped for pull_request events by design), and the `Decision lab checks` run
+  [43929735254](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43929735254) — **success**.
+- **`data-refresh` on the merge push: SUCCESS** (run
+  [43929885245](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43929885245)) — the fetch-retry fix is live on
+  `main` and the step that went red on the PR #116 push now completes green.
+- Post-merge deployment: `Validate and deploy GitHub Pages`
+  [43929885151](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43929885151) — success, `validate` and
+  `deploy` both green (only the already-documented ubuntu-latest migration notice in the log). The Pages API
+  reports `status: built` with builds recorded for `fd15ee8…` (this merge) and the successor data-refresh bot
+  commit `bcaa775…` — the deployed artifact carries this PR's content.
+- Live read-back (fetch tool, cache-busted): `https://kanlerxz87-cyber.github.io/NFL3/` renders the current
+  landing page (decision-readiness matrix, evidence boundary) and `pricing.html` renders the current price-store
+  page; both served from the post-merge deployment. The rendered-markdown conversion omits the nav sidebar, so the
+  shadow-board sidebar entry was confirmed from the deployed tree (CI-gated) plus the Pages build record rather
+  than from the markdown text.
+- Claims on `pipeline/**`, `.github/workflows/data-and-site.yml`, the index.html sidebar entry, the regenerated
+  `pricing.html`/`corpus.html`, `forward-ledger` FL-02/FL-18 rows and the decision-lab audit artifacts are
+  **released**. This session made no change to `README.md`, `EXECUTIVE_SUMMARY.md`, `readiness/**` or
+  `injury-archive/**` (open scopes of other sessions were respected throughout).
+- Handover notes for the next session: `results-verification/verify.py` still pins weeks 1–9 **by decision**
+  (see §3); the `arena/38802e70-nfl3` and `e5e2b753` T13 board rows remain stale-in-progress and should be marked
+  done or taken over by their owners; open PRs #123-era scopes (two-total) and #119-era docs are separate owners.
