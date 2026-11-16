@@ -3159,3 +3159,20 @@ Deliberately **not** done: `gh run rerun --failed` on 43899408150. Re-running th
 of `6c54dd0f6`, which `main` has since moved past twice — a retry here can only roll the site backwards. The live
 deploy log could not be read from this sandbox either (`results-receiver…/logs` returns EOF on every attempt), so the
 step's own message is unrecorded here; what is recorded is the observable state of Pages, which is built and current.
+
+## Current claim — `arena/cea77066-nfl3` — 2026-11-16 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| I1 Take over and integrate the three stalled open PRs (#99 `arena/b0dd4900-nfl3`, #100 `arena/46fe1baa-nfl3`, #105 `arena/d37d5907-nfl3`) whose sessions are idle > 60 min and whose heads are conflicted against current `main` — merge their heads additively (never discard another session's work) and record every conflict resolution | in progress | `arena/cea77066-nfl3` | this board; merged content of those branches as recorded below |
+| I2 Full CI-equivalent local gate run of every step in `.github/workflows/pages.yml`, with failures fixed until green | in progress | `arena/cea77066-nfl3` | failures' own files, as listed in the result entry |
+| I3 Line-by-line re-verification sweep of the highest-stakes published numbers against official NFL sources (injury report counts, Week 10 designations, Week 11 schedule and venues, standings, designation-calibration figures), with source links and an irregularity register | in progress | `arena/cea77066-nfl3` | this board (result entry); `review.html` (appended rows only) |
+| I4 Final integration: PR from this branch to `main`, merge without waiting for approval, GitHub Pages deploy confirmation, publication record | in progress | `arena/cea77066-nfl3` | this board |
+
+Branch: `arena/cea77066-nfl3` (fixed by Arena; session-named branches cannot be created here). Base: `main` at `aa2b384` (merge of PR #116).
+
+Coordination notes:
+
+- `gh pr list` shows exactly three open PRs (#99, #100, #105), all `CONFLICTING` against current `main`, all from sessions whose last commits are hours old. Per the board's takeover rule (claim > 60 min old with no commits) they are taken over here; their owners' logs and findings are preserved verbatim.
+- **Not edited by this session except as merged from those branches:** none of the workspace data files are re-derived; merges bring their authors' content unchanged except where a conflict forces a combined resolution (each such resolution is recorded in the result entry).
+- After this session's PR merges, the three open PRs will be closed as superseded with a pointer to the integration PR, since their content lands through it.
