@@ -3800,3 +3800,34 @@ row is not the withheld row, or if the witnessed result stops citing an official
 **Flag and question count after this pass:** nine flags (`2T-01` … `2T-09`) and six questions
 (`2T-Q1` … `2T-Q6`), all published at `two-total/flagged.html` and on the summary page with the source link
 that was checked.
+## Final integration session — `arena/95dedf16-nfl3` — 2026-11-16 UTC (claim)
+
+| Task | Status | Owner | File scope |
+| --- | --- | --- | --- |
+| F1 Take over the three stale open PRs (#99, #100, #105): salvage their unique content, close them | in progress | `arena/95dedf16-nfl3` | new `venues/**` (from #100), `injury-archive/flags.html` + `injury-archive/scripts/{render,build}.py` + `injury-archive/data/render_contract.json` (from #105), this board |
+| F2 Suggestion review desk: a page where a reviewer chooses the path before anything is implemented | in progress | `arena/95dedf16-nfl3` | new `suggestion-desk/**`, one nav row on `index.html`, one `README.md` row, two `pages.yml` steps |
+| F3 Fix the duplicated heading block on the generated `suggestions.html` | in progress | `arena/95dedf16-nfl3` | `questions/data/suggestions_intro.html`, regenerated `suggestions.html` |
+| F4 Final integration: full line-by-line verification, PR to `main`, merge, Pages deploy confirmation | in progress | `arena/95dedf16-nfl3` | `COORDINATION.md` (append-only), `index.html` (nav rows only), `README.md` (site-guide rows only), `.github/workflows/pages.yml` (steps only), generated pages |
+
+Branch: `arena/95dedf16-nfl3` (fixed by Arena; session-named branches cannot be created here). Base: `main` at `aa2b384`.
+
+Coordination notes:
+
+- **Why the three open PRs are being salvaged rather than merged.** `git merge-base --is-ancestor origin/main <branch>`
+  is false for all three, and `git diff --stat origin/main origin/arena/b0dd4900-nfl3` reports
+  **189 files changed, 26,602 insertions, 147,539 deletions**. Their branches were cut from a much older `main`, and
+  `main` has since gained the forward ledger, the matchup desk, the injury archive, the skill lab and five more
+  workspaces. Merging any of them would delete that work. The branches are therefore **stale in the dangerous
+  direction**: the diff is dominated by deletions of other sessions' commits, not by their own additions.
+- Their **unique** content is small and is carried forward file by file:
+  - `#100` → `venues/**` (9 files: a Week 11 venue register read from the official NFL game-centre "Game Info"
+    block, plus the dated league announcement). Nothing named `venues/` exists on `main`.
+  - `#105` → `injury-archive/flags.html` and the four-line change that renders it
+    (`render.py` gains `flags_page()`, `render_all()` returns a page count, `build.py` prints that count instead of a
+    hard-coded one, `render_contract.json` lists the new page). `injury-archive/flags.html` does not exist on `main`.
+  - `#99` → a documentation-only `COORDINATION.md` append whose content is superseded by the board's own later
+    entries. It carries no unique artifact and will be closed without salvage.
+- **Not edited by this session:** every other workspace's data files, `ops-center/data/derived.json`,
+  `readiness/data/readiness.csv`, `decision-lab/**`, `forward-ledger/**`, `matchup/**`, `skill-lab/**`,
+  `origination/**`, `pricing/**`, `corpus/**`, `shadow-board/**`, `availability-ledger/**`, `injury-archive/data/*`
+  apart from the one contract file listed above.
