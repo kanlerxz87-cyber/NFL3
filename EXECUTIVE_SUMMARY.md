@@ -40,6 +40,43 @@
 5. **Only then evaluate personnel ablations and combo markets.** Use verified inactive/starter/snap evidence and directly validated joint probabilities. Publish uncertainty and sample size, including null findings.
 6. **Keep recommendations reviewable.** The [suggestion board](ops-center/suggestions.html) contains path choices and approve/defer/reject controls that save only in the viewer's browser and can be exported; choosing an option does not change repository data. The [question register](ops-center/questions.html) identifies blockers and discovery steps. No source can choose a vendor licence, spending limit or reward budget on the owner's behalf.
 
+## Suggestion review desk
+
+The brief asks for a place where suggestions can be reviewed and the best path chosen **before** anything is
+implemented. The register holds **75 proposals**; a list of 75 things to do is an inventory, not a decision. The
+[suggestion review desk](suggestion-desk/index.html) assigns every one of them to exactly one of twelve decisions,
+with no overlaps and none left over (the build fails if a proposal is claimed twice or not at all), and gives each
+decision the two or three paths that were actually proposed for it, what each buys and leaves open, and the number
+that would clear it.
+
+| Decision | Proposals | The number that would clear it | Where it stands |
+|---|---|---|---|
+| D1 Where market price data comes from | 5 | one signed feed agreement; 3 markets × 272 games = 816 quotes | **0 licensed sources**; blocks D5, D6 and every backtest |
+| D2 Source of truth for depth order | 8 | a verified order for 32 of 32 clubs | 30 of 32 charts captured; no official snap source |
+| D3 How availability is captured | 12 | one capture stored *before* kickoff, hashed and clocked | 1 capture pair, taken after several clubs had played |
+| D4 How personnel enters the model | 7 | a with/without ablation whose interval excludes zero | harness exists; 0 ablations on pre-kickoff data |
+| D5 What ranks a strategy | 9 | one row whose Brier skill lower bound clears zero, prospectively | **6 rows scored, 0 qualified, best −0.029** |
+| D6 When parlays may be ranked | 5 | a validated joint probability plus written void rules | gate closed; 0 leg pairs measured |
+| D7 Venue and weather context | 2 | 272 of 272 fixtures with a hashed capture | **13 of 272**; no weather capture |
+| D8 Public vs private, and terms | 4 | a written licence position and a private store | no position recorded; jurisdiction unconfirmed |
+| D9 What the site itself looks like | 9 | one questions page, one suggestions page, one flagged page | **11 and 11 published**, 2 render from the register |
+| D10 How loud a broken source is | 6 | every scraper pinned to a row count and required fields | pins exist workspace by workspace, no central register |
+| D11 Which total estimator wins, and when the pair may collapse | 6 | all five pre-registered collapse conditions true on the validation block | both published with the gap column; **C5 only** (28 scored games against a floor of 20), `collapsed = false` |
+| D12 What is frozen before data arrives | 2 | an index of pre-registrations plus a variant counter | 3 in force, no index, abandoned variants uncounted |
+
+D1 is first because ten of the twelve cannot be judged until a licensed, timestamped price source exists — and the
+site is correct today precisely because it publishes no residual, no closing line value, no ROI, no rank and no
+reward. Choosing a path in the desk writes to the browser only; the [register](ops-center/data/derived.json)
+remains the source of truth until someone commits a change to it. Seven irregularities found while building it are
+published on the [desk's flagged page](suggestion-desk/flagged.html).
+
+One decision deserves the disagreement it is carrying. On the whole 135-game corpus the two total estimators do
+separate — MAE 11.457 against 12.672, bootstrap difference −1.215 points with a 95% interval of −2.374 to −0.050,
+which excludes zero — while the pre-registered validation block's own cluster bound (−4.8055) includes it. The
+corpus says one thing and the rule that was written before the scores existed says another, and both are published
+rather than resolved, because picking the interval that happens to agree is how an estimator gets chosen after the
+fact. See [two-total](two-total/index.html).
+
 ## Verification performed for this update
 
 Offline checks passed in this checkout:
@@ -48,6 +85,9 @@ Offline checks passed in this checkout:
 - `python3 forward-ledger/scripts/verify.py` — 30 gates, including preregistration ordering, 39 forecasts, 0 market-price fields, 0 leaderboard statistics copied from backtests, results reconciliation and row citations.
 - `python3 matchup/scripts/check.py` — 14 checks; `python3 injury-archive/scripts/verify.py` — 2,174 checks.
 - `python3 shadow-board/scripts/check.py`, `python3 pricing/test_pricing.py`, `python3 corpus/test_corpus.py`, `python3 origination/scripts/verify.py`, `python3 tests/test_decision_lab.py`, `python3 tests/test_readiness.py`, and `python3 tests/test_skill_lab.py` — passed.
+- `python3 suggestion-desk/scripts/check.py` — 12 decisions, 33 paths, 75 proposals governed, 35 register questions cited; fails on a non-reproducible build, a row without an https link, a source link on a non-official host, a broken local link, or a proposal governed twice or not at all.
+- `python3 venues/scripts/verify.py` — 13 Week 11 fixtures matched to the game-centre and schedule records, the dated announcement, 8 flags with sources, pages reproducible.
+- `python3 injury-archive/scripts/verify.py` — 2,187 checks (was 2,174 before `injury-archive/flags.html` was added); `python3 two-total/scripts/verify.py` — both estimators, the collapse rule and the corpus hash.
 
 The ops-centre verifier reports **0 failures and 8 source-class warnings** (community/secondary sources explicitly identified); it does not mean every row is official-only. `decision-lab`/strategy tests use synthetic fixtures and are not NFL performance validation. The full-clone CI check is authoritative for gates that inspect git history; a shallow local clone cannot prove all preregistration ordering checks. The coordination log contains the previous dated report, PR/deploy records, and unresolved integration flags; those historical notes are not all current-state claims.
 
@@ -59,6 +99,8 @@ The ops-centre verifier reports **0 failures and 8 source-class warnings** (comm
 - [Price store and policy](pricing.html) · [pre-registered corpus](corpus.html)
 - [Availability and matchup analysis](injury-archive/index.html) · [Matchup desk](matchup/index.html)
 - [Questions](ops-center/questions.html) · [Suggestions](ops-center/suggestions.html) · [Flagged for Review](flagged.html)
+- [Suggestion review desk](suggestion-desk/index.html) — 75 proposals grouped into 12 decisions, each with the paths on offer and the number that would clear it · [all paths](suggestion-desk/paths.html) · [missing information](suggestion-desk/discovery.html)
+- [Venue register](venues/index.html) — 13 of 272 fixtures transcribed from the official game-centre Game Info block, with the dated league schedule announcement beside the live schedule
 
 ---
 
