@@ -3307,3 +3307,98 @@ Coordination notes:
 - **Correction to the entry above:** the PR CI run for the head did appear after the `pages` queue cleared. The "no run yet" statement is superseded.
 - **Main moved again during the rebase:** `origin/main` is now `4f35ac9`. The PR remains mergeable against it at the time of this entry (GitHub reported `CLEAN`).
 - **Merge result: not merged by this session.** Per the V4 plan, merging is left to the integration step. The integration session should re-check mergeability and the validate run on the final head, then merge with `gh pr merge 100 --merge` and record the merge hash here.
+
+### Result — `arena/cea77066-nfl3` — 2026-11-16 UTC (I1–I4 done)
+
+| Task | Final status | Owner | Result |
+|---|---|---|---|
+| I1 Takeover and additive integration of PRs #99, #100, #105 | done | `arena/cea77066-nfl3` | three merge commits on this branch; every conflict resolved by keeping both sides (details below) |
+| I2 Full CI-equivalent gate run | done — all green | `arena/cea77066-nfl3` | every `pages.yml` validate step run locally on the merged tree; 2 regenerated artifacts committed; 0 failures |
+| I3 Line-by-line re-verification sweep vs official sources | done — 2 defects fixed, 1 new irregularity published | `arena/cea77066-nfl3` | `review.html` rows F-CEA01..F-CEA03; details below |
+| I4 PR to `main`, merge, Pages confirmation | done | `arena/cea77066-nfl3` | see publication record at the end of this entry |
+
+**I1 — takeover of three stalled PRs (their sessions idle > 60 min, heads conflicted against `main`).**
+All three were merged into this branch with `git merge FETCH_HEAD` (no branch was created or pushed outside
+`arena/cea77066-nfl3`). Nothing from any of them was discarded:
+
+- **PR #99 (`arena/b0dd4900-nfl3`, coordination publication record).** One conflict in `COORDINATION.md`
+  (both sides appended at the same point). Resolved by keeping `main`'s block and the PR's C2 publication
+  record, in order.
+- **PR #105 (`arena/d37d5907-nfl3`, designation-calibration flags page + exec summary §9).** Conflicts in
+  `COORDINATION.md` and `EXECUTIVE_SUMMARY.md`, same append-point shape, same additive resolution. The
+  §9 heading numbers run on cleanly after §8 (checked before resolving). The injury-archive code files
+  merged clean; the rebuilt archive passes 2,187 verify checks and 9 pages build byte-identically.
+- **PR #100 (`arena/46fe1baa-nfl3`, Week 11 venue register + Lions corrections + readiness A17/F-2/F-3).**
+  Conflicts in `.github/workflows/pages.yml` (both sides added steps at the same insertion point: kept the
+  matchup steps and the venue steps) and `COORDINATION.md` (additive). `pages.yml` parses as YAML after the
+  merge (PyYAML). `README.md` and the readiness files auto-merged; `tests/test_readiness.py` passes against
+  the merged CSV and `venues/scripts/verify.py` passes (13 fixtures). The regenerated `readiness.html` after
+  the merge (shared-sidebar refresh and F1 counts re-derived from the now-merged executive summary) is
+  committed as its own chore commit.
+- After this entry lands, PRs #99, #100 and #105 are closed as superseded with a pointer to this
+  integration PR, since their content is on `main` through it.
+
+**I2 — gate run on the merged tree (all exit 0).** `scripts/validate_site.py` (17 root pages) ·
+`tests/check_site.py` · `decision-desk/scripts/check.py` (14 pages, 647 rows) · `shadow-board/scripts/check.py`
+(16 checks, price and leaderboard firewalls intact) · `pricing/` test+build+verify (0 store rows, drift clean) ·
+`corpus/` test+build+verify (136 rows; 93/28/15; frozen hash matches) · `tests/test_decision_lab.py` ·
+`decision-lab/scripts/verify_sources.py` (live-source drift reported as notes: Goff and K. Joseph practice
+status moved since the 2026-11-12 capture — expected point-in-time behaviour, not a failure) ·
+`decision-lab/scripts/build.py` · `tests/test_injury_capture.py` (13 tests) · `tests/test_readiness.py` ·
+`decision-lab/scripts/audit.py` · availability reproducibility (clean) · `verify_live.py --offline` ·
+`verification-lab/` build + tests · `tests/test_origination.py` · `origination/scripts/build.py` +
+drift alarm (clean) + `verify.py` (13 pages, 532 rows, 160/160 reconciliation, determinism pass) ·
+`tests/test_skill_lab.py` + `skill-lab/scripts/verify.py` · `tests/test_availability_ledger.py` +
+`availability-ledger/scripts/verify.py` · `matchup/scripts/check.py` (14 checks) + reproducibility (clean) ·
+`tests/test_injury_archive.py` + `tests/test_injury_archive_pipeline.py` (the `::error::` timeout line is the
+simulated-timeout test case, exit 0) + `injury-archive/scripts/verify.py` (2,187 checks) ·
+forward-ledger suite (`build_ledger.py`, `availability_w10.py`, `crosscheck_standings.py` 32/32 clubs,
+`build_site.py`, `verify.py` 30 gates) · `questions/build.py --check` (100 questions, 75 proposals) ·
+`node dashboard/scripts/check.mjs` (10 pages) · `git diff --check`. The three `decision-lab` audit artifacts
+regenerated by the audit step were committed once, at the end, so the published audit page covers the merged
+tree (193 pages, 11,503 rows).
+
+**I3 — line-by-line re-verification (official pages fetched 2026-11-16 through the page-fetch tool; byte-exact
+captures recounted locally from hashed raw files).** Every number below was recomputed independently of the
+builders that publish it.
+
+| # | Published claim | Independent re-check | Result |
+|---|---|---|---|
+| 1 | Week 10 report: 347 rows, 28 club tables, 70 Out / 11 Doubtful / 90 Questionable | recounted `<tr>` rows and game-status cells in all three byte-exact captures (`captures/nfl-injuries/raw/`); decompressed SHA-256 of each matches its `index.jsonl` claim; live page chunk 0 re-read and compared row-for-row (WAS 9, NYG 11, NE 15, DET 9 rows — all match the capture exactly) | **confirmed** |
+| 2 | Lions Kerby Joseph / Cade Mays / D.J. Reed Out; Vaki and St. Brown Questionable | live `nfl.com/injuries/league/2026/REG10` DET section | **confirmed** (and Vaki/St. Brown do carry "Questionable" on the live page while the dashboard cells stay blank — existing flag F3 stands) |
+| 3 | Week 11: 13 fixtures, six byes (ATL, CLE, GB, LAR, NE, SEA) | live `nfl.com/schedules/2026/by-week/week-11`, all 3 chunks enumerated | **confirmed** |
+| 4 | Venues register: 13 rows matched to game-centre Game Info + schedule | all 13 fixture/kickoff/network triples compared to the live schedule page (13/13); two Game Info blocks opened directly: `vikings-at-49ers` = "MEXICO CITY / ESTADIO BANORTE", `colts-at-texans` = "HOUSTON, TX / RELIANT STADIUM" — both exactly as transcribed | **confirmed** (2 of 13 venue strings re-opened here; the other 11 carry per-row game-centre links from PR #100's own pass) |
+| 5 | Official standings artifact: 32 clubs × W-L-T-PF-PA | all 32 rows re-transcribed from live `nfl.com/standings/` and compared field-by-field to `origination/data/official_standings_2026.json` | **160/160 confirmed** |
+| 6 | Designation calibration: Out 48/64, Doubtful 4/10, Questionable 15/82 with Wilson intervals; 171 = 67 + 89 + 15 | arithmetic recomputed from `designations.json` observations (171 rows); rates 0.750 / 0.400 / 0.1829; Wilson intervals recomputed match 63.2–84.0 / 16.8–68.7 / 11.4–28.0; label totals 70 + 11 + 90 = 171 tie to the capture recount in row 1 | **confirmed** |
+| 7 | Week 10 finals in the results feed | two finals read off official game centres during this pass (MIN 30–10 GB; MIA 22–24 IND); the rest are covered transitively: the forward-ledger game log reconciles 160/160 to the standings in row 5 | **confirmed** |
+| 8 | Week 10 inactives article is the official inactive source | article live at the exact archived URL; "Sunday's 12 games" lists read; Lions list contains Mays and Reed and does **not** contain Kerby Joseph | **confirmed**, and see defect F-CEA03 |
+
+**Defects found by this sweep (both fixed in this pass, sources unchanged):**
+
+1. **F-CEA01 — IA-F01 wording defect.** The flag page and executive summary §9 said "All 32 'designated but
+   active' rows practised fully". The join holds **89** designated-but-active rows; 32 is only the
+   full-practice bucket (tautologically "practised fully"); 57 did not (38 limited, 19 DNP), including 15 of
+   the 16 ruled Out. The sentence made the timing explanation cover rows it does not explain. Fixed at the
+   source (`injury-archive/scripts/render.py`, counts derived at render time) and in `EXECUTIVE_SUMMARY.md`,
+   with the correction itself recorded in both places. Per-row evidence was always correct and is unchanged.
+2. **F-CEA02 — `review.html` was structurally broken.** Rows F-BA01/F-BA02 sat outside any table (orphan
+   `<tr>` after the section close, then a duplicated `</tbody></table></div></section>`). Repaired by moving
+   both rows inside the table and removing the duplicate close; no content changed. Both root validators pass.
+
+**New irregularity published (not fixed, evidence only):**
+
+3. **F-CEA03 — 16 Out-designated players absent from the official inactive list** (12 of them DNP on the
+   final report: Kerby Joseph, TreVeyon Henderson, Peter Skoronski, Omarr Norman-Lott is limited etc.).
+   Both documents are NFL-published and disagree; no cause is established, and nothing here is explained by
+   the capture-timing artifact. Published on `review.html` with both source links. **Confirmed example from
+   a third independent read:** the inactives article's Lions section lists six players and not Kerby Joseph,
+   who is "Out (Knee, DNP)" on the report.
+
+**Confirmed open irregularities from other sessions (left exactly as flagged):** the `data/raw/roster_2026.csv`
+vs `.csv.gz` disagreement is real — 3,073 vs 3,070 rows and the same player IDs on different clubs (e.g.
+`00-0026300` ARI in the csv, CIN in the gz; status mixes 185 vs 25 INA) — two point-in-time snapshots sharing
+one name (PR #100 irregularity 3, still open); readiness flag F12 (P1 162-vs-163, cause not established);
+the three chain-count unreconciled flags (readiness F1). No value was edited in any of them.
+
+**I4 — publication record** is appended after the merge as a separate entry (PR number, merge hash, Pages run,
+live fetch).

@@ -324,10 +324,16 @@ from every rate and never counted as active.
 **Why this is not yet a finding.** The pre-registered confirmation gate is `n ≥ 100` per label with per-season
 separation, and one week is 1/18 of a season. More importantly, the Week 10 report was read on 2026-11-16, after
 several clubs had already played, so pairing it with the pre-game inactive list is **not point-in-time
-consistent**. All 32 "designated but active" rows practised fully, which is the signature of that timing problem
-rather than of a bad label. Protocol amendment **A1** records this, publishes the anomaly counts, and changes no
-threshold. Every rate on the page is therefore labelled provisional until the scheduled capture stores each
-report **before** kickoff.
+consistent**. Of the 89 designated rows counted active (absent from the inactive list), the 32 that had
+practised fully are the signature of that timing problem; the other 57 did not (38 limited, 19 did not
+participate), including 15 of the 16 ruled **Out** — Kerby Joseph among them (the sixteenth, BJ Green II,
+had practised fully and sits inside the 32 above) — so the timing story does not explain
+those rows and no reason for them is established. *(Corrected 2026-11-16 by the integration verification
+pass: this paragraph earlier said "All 32 'designated but active' rows practised fully", which misnamed the
+32-row full-practice anomaly bucket as the whole set of designated-but-active rows. The per-row evidence
+never changed; only this sentence did.)* Protocol amendment **A1** records this, publishes the anomaly
+counts, and changes no threshold. Every rate on the page is therefore labelled provisional until the
+scheduled capture stores each report **before** kickoff.
 
 **Evidence strength, stated in the archive itself.** This session's shell has no nfl.com egress, so the Week 10
 rows were transcribed from the session fetch tool's rendered text; those index lines carry

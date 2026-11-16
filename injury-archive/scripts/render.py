@@ -445,12 +445,27 @@ def flags_page(data: dict) -> str:
     fetched = [e for e in index if e.get("raw_bytes_retained") is not False and e.get("status") == "ok"]
     not_pub = [e for e in index if e.get("status") == "not_published"]
     anomaly = data["designations"].get("anomaly", {})
+    obs = data["designations"].get("observations", [])
+    designated_active = [o for o in obs if str(o.get("outcome", "")).startswith("active")]
+    fp_n = anomaly.get("designated_active_after_full_practice", 0)
+    nonfp = [o for o in designated_active
+             if o.get("practice_status") != "Full Participation in Practice"]
+    lim_n = sum(1 for o in nonfp
+                if o.get("practice_status") == "Limited Participation in Practice")
+    dnp_n = sum(1 for o in nonfp
+                if o.get("practice_status") == "Did Not Participate In Practice")
+    out_active = sum(1 for o in nonfp if o.get("game_status") == "Out")
     rows = [
         ["IA-F01", "The Week 10 rate is provisional",
          "The report was read after several clubs had played, so pairing it with the pre-game inactive "
-         "list is not point-in-time consistent. All "
-         f"{anomaly.get('designated_active_after_full_practice', 0)} 'designated but active' rows "
-         "practised fully, the signature of that timing problem.",
+         "list is not point-in-time consistent. "
+         f"{len(designated_active)} designated rows are absent from the inactive list in total; {fp_n} of "
+         "them practised fully, the signature of that timing problem. The remaining "
+         f"{len(nonfp)} did not ({lim_n} limited, {dnp_n} did not participate), including {out_active} "
+         "ruled Out (Kerby Joseph among them, verified against both official documents on 2026-11-16), "
+         "so the timing story does not explain those rows and no reason for them is established. "
+         "Corrected 2026-11-16: an earlier build of this page said 'All 32 designated but active rows "
+         "practised fully', which misnamed the 32-row full-practice bucket as the whole set.",
          "protocol amendment A1.3; designations.json anomaly block",
          '<a class="source" href="https://www.nfl.com/injuries/league/2026/REG10" target="_blank" rel="noopener noreferrer">report</a> · '
          '<a class="source" href="https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer">inactives</a>'],
