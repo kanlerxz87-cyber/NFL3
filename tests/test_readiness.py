@@ -46,12 +46,22 @@ def main() -> None:
     # (P3, P10, P11, A5, A13, A16, A19, L2, L3, L4, L5, L6, L7, L8). The injury archive
     # (session d37d5907, 2026-11-16) moved R6, A6, A20 and A21 from Blocked to Partial: the
     # mechanism is now scheduled and hashed, the coverage and the sample size are not yet there.
+    # Session arena/46fe1baa-nfl3 (2026-11-16): A17 Blocked -> Done (three Lions cells filled from the
+    # official article); F-2 and F-3 Not started -> Partial (Week 11 venues and announcement recorded).
     # The two-total workspace (session ca175be6, 2026-11-16) moved P4 from Not started to Partial: the
     # pair, the gap column and the pre-registered collapse rule are now published and evaluated, and the
     # rule did not fire (4 of 5 conditions fail), which is the requirement's stated interim state.
-    assert status_counts2["Done"] == 7 and status_counts2["Partial"] == 36 and status_counts2["Blocked"] == 8 \
-        and status_counts2["Not started"] == 12 and status_counts2["Decision recorded"] == 1, \
+    # Merged arithmetic after both passes (integration session arena/cea77066, 2026-11-16):
+    # 8 Done / 38 Partial / 7 Blocked / 10 Not started / 1 Decision recorded.
+    assert status_counts2["Done"] == 8 and status_counts2["Partial"] == 38 and status_counts2["Blocked"] == 7 \
+        and status_counts2["Not started"] == 10 and status_counts2["Decision recorded"] == 1, \
         f"detailed register status arithmetic drifted: {status_counts2}"
+    assert rows["A17"]["status"] == "Done" and "Joseph" in rows["A17"]["current"], "A17 must be Done with the Joseph cell evidence"
+    assert rows["A17"]["official"].startswith("https://www.nfl.com/news/"), "A17 must link the official Week 10 article"
+    assert rows["F-2"]["status"] == "Partial" and "13 of 272" in rows["F-2"]["current"], "F-2 must record 13 of 272 venues, not 272"
+    assert rows["F-3"]["status"] == "Partial" and "May 14, 2026" in rows["F-3"]["current"], "F-3 must record the dated announcement"
+    assert rows["F-3"]["official"].startswith("https://media.nfl.com/"), "F-3 must link the official announcement"
+    assert "163 of 272" in rows["P1"]["current"], "P1 must show 163 odds rows, matching the refreshed games file on main"
     # P4 must cite the artifact that answers it, and must not claim a collapse the artifact denies.
     assert rows["P4"]["status"] == "Partial", "P4 must record the published two-estimator pair"
     assert "two-total/data/two_total.json" == rows["P4"]["evidence"], "P4 must cite the two-total artifact"

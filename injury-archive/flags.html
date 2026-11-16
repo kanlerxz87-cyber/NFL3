@@ -1,0 +1,58 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Flagged for review | Injury archive | NFL3</title>
+<meta name="description" content="Flagged for review — official NFL injury-report and inactive-list history, with hashes, clock times and every exclusion counted.">
+<style>
+:root{--bg:#0b0f14;--panel:#121821;--panel2:#17202b;--line:#243040;--ink:#e8eef6;--muted:#93a4b8;
+--accent:#5eead4;--accent2:#38bdf8;--warn:#fbbf24;--bad:#fb7185;--good:#4ade80}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);
+font:15px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--accent2);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);background:linear-gradient(180deg,#0e141c,#0b0f14)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+.top .wrap{display:flex;gap:18px;align-items:center;justify-content:space-between;padding:16px 22px}
+.brand{font-weight:700;letter-spacing:.5px}.brand span{color:var(--accent)}
+nav.main{display:flex;flex-wrap:wrap;gap:14px;padding:12px 0;border-top:1px solid var(--line);
+font-size:14px}nav.main a{color:var(--muted)}nav.main a[aria-current]{color:var(--accent);font-weight:600}
+h1{font-size:30px;line-height:1.2;margin:26px 0 8px}h2{font-size:20px;margin:30px 0 10px}
+h3{font-size:16px;margin:20px 0 8px}.lede{color:var(--muted);max-width:80ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:20px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
+.card .k{font-size:12px;letter-spacing:.8px;color:var(--muted);text-transform:uppercase}
+.card .v{font-size:26px;font-weight:700;margin-top:4px}.card .n{font-size:13px;color:var(--muted)}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--panel2);font-size:12px;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
+tbody tr:hover{background:#141c26}td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.blank{color:var(--muted);font-style:italic}
+.pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;border:1px solid var(--line)}
+.pill.ok{color:var(--good);border-color:#1f4a33}.pill.warn{color:var(--warn);border-color:#4a3f1f}
+.pill.bad{color:var(--bad);border-color:#4a2830}.pill.mut{color:var(--muted)}
+.notice{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent2);
+border-radius:8px;padding:14px 16px;margin:18px 0;color:var(--muted)}
+.warnbox{border-left-color:var(--warn)}
+a.source{color:var(--accent)}a.source:after{content:"↗";margin-left:3px;font-size:11px}
+footer{border-top:1px solid var(--line);margin-top:40px;padding:24px 0 40px;color:var(--muted);font-size:13px}
+code{background:#0f1620;border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:13px}
+ul.tight{margin:8px 0;padding-left:20px}ul.tight li{margin:4px 0;color:var(--muted)}
+</style></head><body>
+<header class="top"><div class="wrap"><div class="brand">NFL<span>3</span> / INJURY ARCHIVE</div>
+<div><a href="../index.html">Site overview</a> · <a href="../readiness.html">Readiness</a></div></div>
+<nav class="main"><div class="wrap" style="display:flex;flex-wrap:wrap;gap:14px"><a href="index.html">Overview</a><a href="injuries.html">Injury-report history</a><a href="inactives.html">Inactive lists</a><a href="designations.html">Designation calibration</a><a href="coverage.html">Coverage grid</a><a href="regime.html">Rule regime by season</a><a href="limits.html">Limits and exclusions</a><a href="method.html">Method and sources</a></div></nav></header>
+<main class="wrap"><h1>Flagged for review</h1>
+<p class="lede">Every limitation this archive knows about, with the evidence and an official link. Nothing
+here is fixed silently and nothing here blocks publication — a reader is entitled to see all five before
+trusting a number.</p>
+<div class="grid">
+<div class="card"><div class="k">Transcribed captures</div><div class="v">2</div><div class="n">not byte-exact</div></div>
+<div class="card"><div class="k">Byte-exact captures</div><div class="v">0</div><div class="n">from the scheduled workflow</div></div>
+<div class="card"><div class="k">Addresses not published</div><div class="v">0</div><div class="n">recorded 404s</div></div>
+</div><div class="table-wrap"><table><thead><tr><th scope="col">ID</th><th scope="col">Flag</th><th scope="col">Why it matters</th><th scope="col">Where it is recorded</th><th scope="col">Official source</th></tr></thead><tbody><tr><td>IA-F01</td><td>The Week 10 rate is provisional</td><td>The report was read after several clubs had played, so pairing it with the pre-game inactive list is not point-in-time consistent. 89 designated rows are absent from the inactive list in total; 32 of them practised fully, the signature of that timing problem. The remaining 57 did not (38 limited, 19 did not participate), including 15 ruled Out (Kerby Joseph among them, verified against both official documents on 2026-11-16), so the timing story does not explain those rows and no reason for them is established. Corrected 2026-11-16: an earlier build of this page said 'All 32 designated but active rows practised fully', which misnamed the 32-row full-practice bucket as the whole set.</td><td>protocol amendment A1.3; designations.json anomaly block</td><td><a class="source" href="https://www.nfl.com/injuries/league/2026/REG10" target="_blank" rel="noopener noreferrer">report</a> · <a class="source" href="https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer">inactives</a></td></tr><tr><td>IA-F02</td><td>The Week 10 captures are transcriptions, not byte-exact reads</td><td>2 of 2 index lines carry raw_bytes_retained: false. The digest is of the reconstructed markup, not of nfl.com's bytes. The scheduled workflow replaces them with real captures.</td><td>index.jsonl</td><td><a class="source" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer">nfl.com</a></td></tr><tr><td>IA-F03</td><td>The snap-count half of A6 is still blocked</td><td>No official snap-count or participation source is verified; the 2026 snap file is community nflverse data. Inactive is not the same as unavailable, and active is not the same as playing.</td><td>readiness.html row A6; limits.html</td><td><a class="source" href="https://www.nfl.com/stats/player-stats/" target="_blank" rel="noopener noreferrer">NFL player stats</a></td></tr><tr><td>IA-F04</td><td>Past-season coverage is not established</td><td>0 probed addresses are recorded as not published. That is evidence about those addresses, not proof the league never published the documents elsewhere.</td><td>coverage.json</td><td><a class="source" href="https://www.nfl.com/inactives/" target="_blank" rel="noopener noreferrer">inactives hub</a></td></tr><tr><td>IA-F05</td><td>A designation with no name match is counted active</td><td>If the miss is really a mismatch rather than a genuine active status, the inactive rate is biased down. The direction is published so the number can be discounted.</td><td>protocol section 4; limits.html</td><td><a class="source" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer">report</a></td></tr></tbody></table></div><div class="notice"><b>How to read this list.</b> IA-F01 and IA-F02 concern the strength of
+the *evidence*, not the arithmetic: the counts on the calibration page are exactly what the two documents
+say. IA-F03 and IA-F04 concern *coverage*: they say what this archive does not yet hold. IA-F05 is a bias
+whose direction is known. None of them is a reason to suppress a rate — they are the reason each rate is
+published with its <code>n</code>, its interval and a pointer back to this page.</div></main>
+<footer class="wrap"><div class="wrap" style="padding:0">Generated by <code>injury-archive/scripts/build.py</code>
+from the committed captures only; it fetches nothing. Values that cannot be confirmed from the two
+official sources stay blank. Nothing here is betting advice.</div></footer></body></html>

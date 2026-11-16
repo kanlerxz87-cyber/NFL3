@@ -1,0 +1,22 @@
+{
+ "description": "Week 11 fixtures as listed on the official NFL Week 11 schedule page, read with fetch_page on 2026-11-16. Times are Eastern as printed on the page. Used to check kickoff, network and fixture count in week11_venues.csv.",
+ "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+ "fetched_utc": "2026-11-16",
+ "listed_games": 13,
+ "bye_teams": ["Atlanta Falcons", "Cleveland Browns", "Green Bay Packers", "Los Angeles Rams", "New England Patriots", "Seattle Seahawks"],
+ "games": [
+  {"game_slug": "colts-at-texans", "kickoff_et": "Thu 2026-11-19 8:15 PM ET", "network": "PRIME", "away_team": "Indianapolis Colts", "home_team": "Houston Texans"},
+  {"game_slug": "dolphins-at-bills", "kickoff_et": "Sun 2026-11-22 1:00 PM ET", "network": "CBS", "away_team": "Miami Dolphins", "home_team": "Buffalo Bills"},
+  {"game_slug": "ravens-at-panthers", "kickoff_et": "Sun 2026-11-22 1:00 PM ET", "network": "FOX", "away_team": "Baltimore Ravens", "home_team": "Carolina Panthers"},
+  {"game_slug": "saints-at-bears", "kickoff_et": "Sun 2026-11-22 1:00 PM ET", "network": "FOX", "away_team": "New Orleans Saints", "home_team": "Chicago Bears"},
+  {"game_slug": "titans-at-cowboys", "kickoff_et": "Sun 2026-11-22 1:00 PM ET", "network": "FOX", "away_team": "Tennessee Titans", "home_team": "Dallas Cowboys"},
+  {"game_slug": "buccaneers-at-lions", "kickoff_et": "Sun 2026-11-22 1:00 PM ET", "network": "FOX", "away_team": "Tampa Bay Buccaneers", "home_team": "Detroit Lions"},
+  {"game_slug": "cardinals-at-chiefs", "kickoff_et": "Sun 2026-11-22 1:00 PM ET", "network": "CBS", "away_team": "Arizona Cardinals", "home_team": "Kansas City Chiefs"},
+  {"game_slug": "steelers-at-eagles", "kickoff_et": "Sun 2026-11-22 1:00 PM ET", "network": "CBS", "away_team": "Pittsburgh Steelers", "home_team": "Philadelphia Eagles"},
+  {"game_slug": "jets-at-chargers", "kickoff_et": "Sun 2026-11-22 4:05 PM ET", "network": "FOX", "away_team": "New York Jets", "home_team": "Los Angeles Chargers"},
+  {"game_slug": "jaguars-at-giants", "kickoff_et": "Sun 2026-11-22 4:25 PM ET", "network": "CBS", "away_team": "Jacksonville Jaguars", "home_team": "New York Giants"},
+  {"game_slug": "raiders-at-broncos", "kickoff_et": "Sun 2026-11-22 4:25 PM ET", "network": "CBS", "away_team": "Las Vegas Raiders", "home_team": "Denver Broncos"},
+  {"game_slug": "vikings-at-49ers", "kickoff_et": "Sun 2026-11-22 8:20 PM ET", "network": "NBC", "away_team": "Minnesota Vikings", "home_team": "San Francisco 49ers"},
+  {"game_slug": "bengals-at-commanders", "kickoff_et": "Mon 2026-11-23 8:15 PM ET", "network": "ESPN", "away_team": "Cincinnati Bengals", "home_team": "Washington Commanders"}
+ ]
+}

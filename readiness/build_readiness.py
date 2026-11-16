@@ -34,6 +34,9 @@ NFL_RULEBOOK = "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook/"
 NFL_OPS_PREP = "https://operations.nfl.com/game-operations-logistics/preparation-safety/game-and-stadium-prep/"
 NFL_TEAMS = "https://www.nfl.com/teams/"
 NFL_NEWS_W10 = "https://www.nfl.com/news/nfl-week-10-injury-report-2026-season"
+NFL_GAMECENTRE_W11 = "https://www.nfl.com/games/colts-at-texans-2026-reg-11"
+NFL_SCHEDULE_W11 = "https://www.nfl.com/schedules/2026/by-week/week-11"
+NFL_ANNOUNCE_2026 = "https://media.nfl.com/football-information/2026/news/2026-nfl-schedule-announced"
 CLUB_PACKERS = "https://www.packers.com/team/depth-chart"
 CLUB_TEXANS = "https://www.houstontexans.com/team/depth-chart"
 CLUB_COMMANDERS = "https://www.commanders.com/team/depth-chart"
@@ -429,10 +432,10 @@ def rows(v: dict) -> list[dict]:
         "Every depth row checked against the transactions log, with the result recorded.",
         f"{v['ledger_depth_checked']} published depth rows checked; {v['ledger_stale']} stale rows flagged, {v['ledger_same_day']} same-day row left unresolved, {v['ledger_traded_removed']} traded players confirmed absent from the club they left.",
         "availability-ledger/depth-flags.html", "Availability ledger (depth flags)", NFL_TEAMS, "NFL team pages (official)")
-    add("A17", G, "Populate the three missing Lions game-status designations (Joseph, Mays, Reed)", "Blocked",
-        "The official article could not be re-fetched from this sandbox, so the three cells stay blank rather than being filled from memory.",
+    add("A17", G, "Populate the three missing Lions game-status designations (Joseph, Mays, Reed)", "Done",
+        "Each of the three cells is filled from the official Week 10 article (all three OUT), read 2026-11-16. Vaki and St. Brown (QUESTIONABLE in the same article) are outside this row; see flag F3.",
         "Three cells filled, each from the official article with its link.",
-        f"{v['lions_blank']} of {v['lions_total']} Lions game-status cells blank in dashboard/data/injuries_2026_w10.csv.",
+        f"{v['lions_blank']} of {v['lions_total']} named Lions game-status cells blank in dashboard/data/injuries_2026_w10.csv (Joseph, Mays, Reed: Out).",
         "dashboard/data/injuries_2026_w10.csv", "Dashboard Week 10 injury CSV", NFL_NEWS_W10, "NFL Week 10 injury report article (official)")
     add("A18", G, "Re-capture and republish the Week 10 injury tables (254 vs 279 rows; stale no-injury sections)", "Partial",
         "Two row counts are still published side by side (F2). The 279-row version exists in the integration verification file, but the 254-row page has not been retired.",
@@ -479,12 +482,16 @@ def rows(v: dict) -> list[dict]:
         f"Each feature traced to an official schedule row for all {v['games_2026']} 2026 fixtures.",
         f"{v['games_2026']} 2026 fixture rows in the community file; 0 verified against official pages.",
         "data/raw/games.csv", "Community game file (not official)", NFL_GAMECENTRE, "NFL game centre example (official)")
-    add("F-2", G, "Transcribe the venue of every fixture from the official game centre", "Not started",
-        "Game-centre pages were not fetched; sandbox cannot reach nfl.com.", f"{v['games_2026']} of {v['games_2026']} venues transcribed from game-centre pages.",
-        "0 venues verified.", "data/raw/games.csv", "Community game file (not official)", NFL_GAMECENTRE, "NFL game centre example (official)")
-    add("F-3", G, "Publish the league's dated schedule announcement beside the live schedule page", "Not started",
-        "No announcement is captured.", "One dated announcement and one live schedule capture, side by side.",
-        "0 announcements captured.", "data/raw/games.csv", "Community game file (not official)", NFL_SCORES, "NFL scores (official)")
+    add("F-2", G, "Transcribe the venue of every fixture from the official game centre", "Partial",
+        "Week 11 only (13 of 272 fixtures): each venue read from its official game-centre page and matched to the official schedule list. The other 259 fixtures are not transcribed.",
+        f"{v['games_2026']} of {v['games_2026']} venues transcribed from game-centre pages.",
+        "13 of 272 venues transcribed and checked (Week 11); 259 not transcribed.",
+        "venues/index.html", "Week 11 venue register", NFL_GAMECENTRE_W11, "NFL game centre, Week 11 (official)")
+    add("F-3", G, "Publish the league's dated schedule announcement beside the live schedule page", "Partial",
+        "The announcement (dated May 14, 2026) and the live Week 11 schedule page are recorded with their URLs and read dates, side by side on the venue register. Neither is stored as a hashed raw capture yet.",
+        "One dated announcement and one live schedule capture, side by side.",
+        "1 dated announcement (May 14, 2026) and 1 live schedule page recorded; 0 hashed raw captures stored.",
+        "venues/index.html", "Week 11 venue register (announcement and schedule)", NFL_ANNOUNCE_2026, "NFL schedule announcement, May 14 2026 (official)")
     add("F-4", G, "Stadium roof/surface and NWS hourly wind/precipitation overlay", "Not started",
         "No NWS forecast grid or official roof designation is captured.", "Hourly NWS series for every outdoor fixture in scope.",
         "0 hourly forecasts captured.", "data/raw/games.csv", "Community game file (not official)", NWS_API, "NWS API documentation (official)")
@@ -571,9 +578,12 @@ FLAGS = [
     ("F2", "Two Week 10 injury row counts are published.",
      "decision-lab snapshot: {snap_inj_rows} rows, 4 no-injury sections (Seahawks, Bengals, Chargers, Ravens). ops-centre: {ops_inj} rows. Integration verification file: {published_rows_279} rows. The 254-row table has not been retired.",
      "decision-lab/data/official_snapshot.json", NFL_INJ_W10),
-    ("F3", "Three Lions game-status cells are blank while the file says verified.",
-     "{lions_blank} of {lions_total} blank (Kerby Joseph, Cade Mays, D.J. Reed). The row says 'Verified nfl.com Week 10 report'. Left blank because the official article could not be re-fetched from this sandbox.",
-     "dashboard/data/injuries_2026_w10.csv", NFL_STATUS),
+    ("F3", "Lions Week 10 game status: Joseph, Mays and Reed corrected; Vaki and St. Brown still blank.",
+     "Kerby Joseph, Cade Mays and D.J. Reed were blank and are now Out, from the official Week 10 article (read 2026-11-16). The same article lists Sione Vaki (ankle) and Amon-Ra St. Brown (rib) as QUESTIONABLE; their game-status cells in dashboard/data/injuries_2026_w10.csv are still blank. They were outside this correction and need the injury-capture owner's update.",
+     "dashboard/data/injuries_2026_w10.csv", NFL_NEWS_W10),
+    ("F12", "P1 priced-row count: a rebuild from e8877e0 data gave 162, the page showed 163.",
+     "On e8877e0 the committed page showed 163 but a rebuild from that commit's games file gave 162. After main's refresh (1309041) the rebuild gives 163, matching the page on main. The cause of the earlier difference is not established. P1 is not claimed in this session.",
+     "readiness/data/readiness.csv", "https://github.com/kanlerxz87-cyber/NFL3/blob/main/readiness/data/readiness.csv"),
     ("F4", "Depth parser failures remain in the snapshot.",
      "Failed clubs: {depth_fail}. Both clubs returned 'no depth table parsed'. The brief describes the Texans depth as an image; that was not re-checked here. Parser repair is not in effect for the 2026-11-12 snapshot.",
      "decision-lab/data/official_snapshot.json", CLUB_PACKERS),
