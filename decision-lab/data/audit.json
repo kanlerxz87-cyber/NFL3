@@ -1,8 +1,8 @@
 {
-  "html_pages": 172,
-  "table_rows": 9934,
-  "rows_missing_official_source": 886,
-  "rows_community_only": 309,
+  "html_pages": 197,
+  "table_rows": 11687,
+  "rows_missing_official_source": 896,
+  "rows_community_only": 317,
   "rows_with_internal_audit_source": 7,
   "conflict_files": [],
   "authority_claim_files": [],
@@ -12,7 +12,7 @@
       "id": "AUD-03",
       "severity": "High",
       "title": "Table rows without an official-source link",
-      "detail": "886 row(s) across the repository lack an official HTTPS source; 309 cite only community sources.",
+      "detail": "896 row(s) across the repository lack an official HTTPS source; 317 cite only community sources.",
       "files": [
         "dashboard/flagged.html",
         "dashboard/questions.html",
@@ -512,8 +512,72 @@
       "local_errors": []
     },
     {
+      "path": "forward-ledger/availability.html",
+      "rows": 44,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "forward-ledger/backtest.html",
+      "rows": 53,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "forward-ledger/index.html",
+      "rows": 8,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "forward-ledger/leaderboard.html",
+      "rows": 17,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "forward-ledger/prospects.html",
+      "rows": 47,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "forward-ledger/results.html",
+      "rows": 220,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "forward-ledger/review.html",
+      "rows": 23,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "forward-ledger/sources.html",
+      "rows": 26,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
       "path": "index.html",
-      "rows": 64,
+      "rows": 69,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -752,6 +816,94 @@
       "local_errors": []
     },
     {
+      "path": "matchup/coverage.html",
+      "rows": 20,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "matchup/flagged.html",
+      "rows": 40,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "matchup/index.html",
+      "rows": 15,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "matchup/injury-verify.html",
+      "rows": 251,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "matchup/matrix.html",
+      "rows": 12,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "matchup/questions.html",
+      "rows": 10,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "matchup/replacement-depth.html",
+      "rows": 86,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "matchup/roster-events.html",
+      "rows": 78,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "matchup/sources.html",
+      "rows": 11,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "matchup/suggestions.html",
+      "rows": 8,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "matchup/teams.html",
+      "rows": 194,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
       "path": "official-verify/availability.html",
       "rows": 11,
       "rows_missing_official_source": 0,
@@ -905,7 +1057,7 @@
     },
     {
       "path": "origination/availability.html",
-      "rows": 68,
+      "rows": 69,
       "rows_missing_official_source": 60,
       "rows_community_only": 60,
       "rows_with_internal_audit_source": 0,
@@ -969,9 +1121,9 @@
     },
     {
       "path": "origination/prices.html",
-      "rows": 96,
-      "rows_missing_official_source": 96,
-      "rows_community_only": 96,
+      "rows": 103,
+      "rows_missing_official_source": 103,
+      "rows_community_only": 103,
       "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
@@ -1012,6 +1164,22 @@
       "rows": 34,
       "rows_missing_official_source": 1,
       "rows_community_only": 1,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "questions/data/suggestions_intro.html",
+      "rows": 4,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "questions.html",
+      "rows": 235,
+      "rows_missing_official_source": 1,
+      "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
@@ -1193,7 +1361,7 @@
     },
     {
       "path": "review.html",
-      "rows": 26,
+      "rows": 28,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -1353,7 +1521,39 @@
     },
     {
       "path": "suggestions.html",
-      "rows": 4,
+      "rows": 160,
+      "rows_missing_official_source": 2,
+      "rows_community_only": 1,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "two-total/flagged.html",
+      "rows": 13,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "two-total/index.html",
+      "rows": 20,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "two-total/method.html",
+      "rows": 11,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "two-total/rows.html",
+      "rows": 136,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
