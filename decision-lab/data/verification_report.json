@@ -5,10 +5,10 @@
   "transcribed_by": "arena/dc6c67cf-nfl3, read directly from the official pages linked per row",
   "transcribed_at": "2026-11-12 (re-checked after the Week 10 report was updated during the day)",
   "totals": {
-    "match": 312,
+    "match": 314,
     "mismatch": 0,
     "unverified": 265,
-    "source_updated": 4
+    "source_updated": 2
   },
   "sections": [
     {
@@ -2931,16 +2931,16 @@
         {
           "label": "Lions / Kerby Joseph",
           "field": "injury",
-          "published": "",
+          "published": "Knee",
           "reference": "Knee",
           "source": "https://www.nfl.com/injuries/",
-          "status": "source_updated",
-          "note": "The capture is blank and the official report now publishes a value. The source was updated after capture; re-capture to refresh. This is not an extraction error."
+          "status": "match",
+          "note": ""
         },
         {
           "label": "Lions / Kerby Joseph",
           "field": "practice_status",
-          "published": "Limited Participation in Practice",
+          "published": "Did Not Participate In Practice",
           "reference": "Full Participation in Practice",
           "source": "https://www.nfl.com/injuries/",
           "status": "source_updated",
@@ -2949,16 +2949,16 @@
         {
           "label": "Lions / Kerby Joseph",
           "field": "game_status",
-          "published": "",
+          "published": "Out",
           "reference": "Out",
           "source": "https://www.nfl.com/injuries/",
-          "status": "source_updated",
-          "note": "The capture is blank and the official report now publishes a value. The source was updated after capture; re-capture to refresh. This is not an extraction error."
+          "status": "match",
+          "note": ""
         },
         {
           "label": "Lions / Cade Mays",
           "field": "*",
-          "published": "",
+          "published": "Out",
           "reference": null,
           "source": "https://www.nfl.com/injuries/",
           "status": "unverified",
@@ -2967,7 +2967,7 @@
         {
           "label": "Lions / D.J. Reed",
           "field": "*",
-          "published": "",
+          "published": "Out",
           "reference": null,
           "source": "https://www.nfl.com/injuries/",
           "status": "unverified",
@@ -4928,10 +4928,10 @@
         }
       ],
       "summary": {
-        "match": 40,
+        "match": 42,
         "mismatch": 0,
         "unverified": 243,
-        "source_updated": 4
+        "source_updated": 2
       }
     },
     {

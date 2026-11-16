@@ -72,5 +72,17 @@
     {"team": "Chargers", "matchup": "LAC @ BAL", "day": "MONDAY, NOVEMBER 16TH", "text": "No Injuries Reported"},
     {"team": "Ravens", "matchup": "LAC @ BAL", "day": "MONDAY, NOVEMBER 16TH", "text": "No Injuries Reported"}
   ],
-  "implication": "A single daily capture is not a usable availability history. Questionable to Out transitions, and the Thursday to Friday practice-status changes that precede them, are only recoverable from a series of dated captures. Any feature built on one snapshot silently carries hindsight."
+  "implication": "A single daily capture is not a usable availability history. Questionable to Out transitions, and the Thursday to Friday practice-status changes that precede them, are only recoverable from a series of dated captures. Any feature built on one snapshot silently carries hindsight.",
+  "postscript_2026_11_16": {
+    "observed_at": "2026-11-16T06:31:00Z",
+    "source_url": "https://www.nfl.com/injuries/",
+    "source_sha256": "991825b70aeeb6a83167732ab8440dea913ea86dbeac7797391c1ba599600d0d",
+    "method": "Read from the repository's six-hourly capture archive (captures/nfl-injuries/raw/991825b7...html.gz), whose digest is recorded in captures/nfl-injuries/index.jsonl; the same Out designations are published in the official Week 10 article https://www.nfl.com/news/nfl-week-10-injury-report-2026-season.",
+    "game_status_changes": [
+      {"team": "Lions", "player": "Kerby Joseph", "position": "S", "baseline_game_status": "", "reobserved_game_status": "Out", "injury": "Knee", "player_url": "https://www.nfl.com/players/kerby-joseph/"},
+      {"team": "Lions", "player": "Cade Mays", "position": "C", "baseline_game_status": "", "reobserved_game_status": "Out", "injury": "Ankle", "player_url": "https://www.nfl.com/players/cade-mays/"},
+      {"team": "Lions", "player": "D.J. Reed", "position": "CB", "baseline_game_status": "", "reobserved_game_status": "Out", "injury": "Hip", "player_url": "https://www.nfl.com/players/d-j-reed/"}
+    ],
+    "note": "The published snapshot rows for these three players were refreshed in place on 2026-11-16 (game_status populated, row-level observed_at and source_sha256 pointing at this capture). This postscript records the interval and the evidence; the 2026-11-12 baseline and 22:25Z re-observation above are unchanged history. By this read the live page had grown from 279 to 347 player rows across 28 clubs (171 game-status designations: 70 Out, 90 Questionable, 11 Doubtful) and its two remaining no-injury sections were gone."
+  }
 }

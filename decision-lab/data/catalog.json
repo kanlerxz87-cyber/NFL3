@@ -1548,7 +1548,7 @@
       "id": "F18",
       "severity": "Medium",
       "title": "Injury designation is sparse at capture, so absence cannot be inferred",
-      "finding": "Only 6 of 254 published rows carry a game designation (5 Out, 1 Questionable). The NFL policy says a player certain to play is not listed in the game status report, so a blank designation is not evidence of health.",
+      "finding": "Only 6 of 254 published rows carried a game designation at the 2026-11-12 capture (5 Out, 1 Questionable). The three Lions Out designations were populated 2026-11-16 from the official Week 10 article and the hash-backed 06:31Z capture (9 of 254 after population). The NFL policy says a player certain to play is not listed in the game status report, so a blank designation is not evidence of health.",
       "action": "Never encode a blank designation as 'active'. Require the inactive list before any availability claim.",
       "source": "S03"
     },

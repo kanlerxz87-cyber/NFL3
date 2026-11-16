@@ -85,6 +85,132 @@
    "performance_delta": ""
   },
   {
+   "team": "Lions",
+   "matchup": "NE @ DET",
+   "day": "SUNDAY, NOVEMBER 15TH",
+   "player": "Cade Mays",
+   "injury_position": "C",
+   "injury": "Ankle",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": "Out",
+   "player_url": "https://www.nfl.com/players/cade-mays/",
+   "injury_source_url": "https://www.nfl.com/injuries/",
+   "depth_team": "Lions",
+   "unit": "Offense",
+   "position_group": "C",
+   "published_rank": 1,
+   "rank_shared_with": [],
+   "next_string": [
+    {
+     "player": "Juice Scruggs",
+     "rank": 2
+    }
+   ],
+   "deeper_strings": [],
+   "also_on_report": [],
+   "other_listings": [],
+   "groups_searched": [
+    "Offense/C"
+   ],
+   "chain_status": "chain-identified",
+   "depth_authority": "club depth chart",
+   "depth_source_url": "https://www.detroitlions.com/team/depth-chart",
+   "confirmed_replacement": "",
+   "expected_snaps": "",
+   "performance_delta": ""
+  },
+  {
+   "team": "Lions",
+   "matchup": "NE @ DET",
+   "day": "SUNDAY, NOVEMBER 15TH",
+   "player": "D.J. Reed",
+   "injury_position": "CB",
+   "injury": "Hip",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": "Out",
+   "player_url": "https://www.nfl.com/players/d-j-reed/",
+   "injury_source_url": "https://www.nfl.com/injuries/",
+   "depth_team": "Lions",
+   "unit": "Defense",
+   "position_group": "CB",
+   "published_rank": 1,
+   "rank_shared_with": [
+    "Roger McCreary"
+   ],
+   "next_string": [
+    {
+     "player": "Ennis Rakestraw Jr.",
+     "rank": 2
+    },
+    {
+     "player": "Rock Ya-Sin",
+     "rank": 2
+    }
+   ],
+   "deeper_strings": [
+    {
+     "player": "Keith Abney II",
+     "rank": 3
+    },
+    {
+     "player": "Khalil Dorsey",
+     "rank": 3
+    },
+    {
+     "player": "Nick Whiteside",
+     "rank": 4
+    }
+   ],
+   "also_on_report": [],
+   "other_listings": [],
+   "groups_searched": [
+    "Defense/CB"
+   ],
+   "chain_status": "chain-identified",
+   "depth_authority": "club depth chart",
+   "depth_source_url": "https://www.detroitlions.com/team/depth-chart",
+   "confirmed_replacement": "",
+   "expected_snaps": "",
+   "performance_delta": ""
+  },
+  {
+   "team": "Lions",
+   "matchup": "NE @ DET",
+   "day": "SUNDAY, NOVEMBER 15TH",
+   "player": "Kerby Joseph",
+   "injury_position": "S",
+   "injury": "Knee",
+   "practice_status": "Did Not Participate In Practice",
+   "game_status": "Out",
+   "player_url": "https://www.nfl.com/players/kerby-joseph/",
+   "injury_source_url": "https://www.nfl.com/injuries/",
+   "depth_team": "Lions",
+   "unit": "",
+   "position_group": "S",
+   "published_rank": "",
+   "rank_shared_with": [],
+   "next_string": [],
+   "deeper_strings": [],
+   "also_on_report": [
+    {
+     "player": "Brian Branch",
+     "published_rank": 1,
+     "practice_status": "Limited Participation in Practice",
+     "game_status": ""
+    }
+   ],
+   "other_listings": [],
+   "groups_searched": [
+    "Defense/S"
+   ],
+   "chain_status": "injured-player-not-on-published-chart",
+   "depth_authority": "club depth chart",
+   "depth_source_url": "https://www.detroitlions.com/team/depth-chart",
+   "confirmed_replacement": "",
+   "expected_snaps": "",
+   "performance_delta": ""
+  },
+  {
    "team": "Patriots",
    "matchup": "NE @ DET",
    "day": "SUNDAY, NOVEMBER 15TH",
@@ -2304,95 +2430,6 @@
    "chain_status": "chain-identified",
    "depth_authority": "club depth chart",
    "depth_source_url": "https://www.newyorkjets.com/team/depth-chart",
-   "confirmed_replacement": "",
-   "expected_snaps": "",
-   "performance_delta": ""
-  },
-  {
-   "team": "Lions",
-   "matchup": "NE @ DET",
-   "day": "SUNDAY, NOVEMBER 15TH",
-   "player": "Cade Mays",
-   "injury_position": "C",
-   "injury": "",
-   "practice_status": "Did Not Participate In Practice",
-   "game_status": "",
-   "player_url": "https://www.nfl.com/players/cade-mays/",
-   "injury_source_url": "https://www.nfl.com/injuries/",
-   "depth_team": "Lions",
-   "unit": "Offense",
-   "position_group": "C",
-   "published_rank": 1,
-   "rank_shared_with": [],
-   "next_string": [
-    {
-     "player": "Juice Scruggs",
-     "rank": 2
-    }
-   ],
-   "deeper_strings": [],
-   "also_on_report": [],
-   "other_listings": [],
-   "groups_searched": [
-    "Offense/C"
-   ],
-   "chain_status": "chain-identified",
-   "depth_authority": "club depth chart",
-   "depth_source_url": "https://www.detroitlions.com/team/depth-chart",
-   "confirmed_replacement": "",
-   "expected_snaps": "",
-   "performance_delta": ""
-  },
-  {
-   "team": "Lions",
-   "matchup": "NE @ DET",
-   "day": "SUNDAY, NOVEMBER 15TH",
-   "player": "D.J. Reed",
-   "injury_position": "CB",
-   "injury": "",
-   "practice_status": "Did Not Participate In Practice",
-   "game_status": "",
-   "player_url": "https://www.nfl.com/players/d-j-reed/",
-   "injury_source_url": "https://www.nfl.com/injuries/",
-   "depth_team": "Lions",
-   "unit": "Defense",
-   "position_group": "CB",
-   "published_rank": 1,
-   "rank_shared_with": [
-    "Roger McCreary"
-   ],
-   "next_string": [
-    {
-     "player": "Ennis Rakestraw Jr.",
-     "rank": 2
-    },
-    {
-     "player": "Rock Ya-Sin",
-     "rank": 2
-    }
-   ],
-   "deeper_strings": [
-    {
-     "player": "Keith Abney II",
-     "rank": 3
-    },
-    {
-     "player": "Khalil Dorsey",
-     "rank": 3
-    },
-    {
-     "player": "Nick Whiteside",
-     "rank": 4
-    }
-   ],
-   "also_on_report": [],
-   "other_listings": [],
-   "groups_searched": [
-    "Defense/CB"
-   ],
-   "chain_status": "chain-identified",
-   "depth_authority": "club depth chart",
-   "depth_source_url": "https://www.detroitlions.com/team/depth-chart",
    "confirmed_replacement": "",
    "expected_snaps": "",
    "performance_delta": ""
@@ -6025,43 +6062,6 @@
     "Offense/QB"
    ],
    "chain_status": "chain-identified",
-   "depth_authority": "club depth chart",
-   "depth_source_url": "https://www.detroitlions.com/team/depth-chart",
-   "confirmed_replacement": "",
-   "expected_snaps": "",
-   "performance_delta": ""
-  },
-  {
-   "team": "Lions",
-   "matchup": "NE @ DET",
-   "day": "SUNDAY, NOVEMBER 15TH",
-   "player": "Kerby Joseph",
-   "injury_position": "S",
-   "injury": "",
-   "practice_status": "Limited Participation in Practice",
-   "game_status": "",
-   "player_url": "https://www.nfl.com/players/kerby-joseph/",
-   "injury_source_url": "https://www.nfl.com/injuries/",
-   "depth_team": "Lions",
-   "unit": "",
-   "position_group": "S",
-   "published_rank": "",
-   "rank_shared_with": [],
-   "next_string": [],
-   "deeper_strings": [],
-   "also_on_report": [
-    {
-     "player": "Brian Branch",
-     "published_rank": 1,
-     "practice_status": "Limited Participation in Practice",
-     "game_status": ""
-    }
-   ],
-   "other_listings": [],
-   "groups_searched": [
-    "Defense/S"
-   ],
-   "chain_status": "injured-player-not-on-published-chart",
    "depth_authority": "club depth chart",
    "depth_source_url": "https://www.detroitlions.com/team/depth-chart",
    "confirmed_replacement": "",
@@ -14090,7 +14090,7 @@
    "impact": "VR-08, VR-12",
    "depends": "",
    "path": "",
-   "recommendation": "Every player listed Out/Questionable/Doubtful in the official article shows that designation, with a citation to the article.",
+   "recommendation": "Every player listed Out/Questionable/Doubtful in the official article shows that designation, with a citation to the article. [DONE 2026-11-16, arena/f5f99ff0-nfl3] All three Lions rows show Out on the published pages, each traceable to the official Week 10 article and the 2026-11-16T06:31Z hash-backed capture of the official report; the acceptance test passes.",
    "provenance": [
     "verification-lab/VQ-R03"
    ],

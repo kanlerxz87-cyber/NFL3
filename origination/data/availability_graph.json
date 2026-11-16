@@ -16,7 +16,7 @@
   "clubs_total": 32,
   "depth_slots": 1386,
   "slots_with_multiple_rank1": 149,
-  "games_on_report": 6,
+  "games_on_report": 9,
   "report_rows": 254,
   "report_teams": 24,
   "no_injury_sections": 4,
@@ -14617,7 +14617,7 @@
     {
      "player": "D.J. Reed",
      "on_report": true,
-     "game_status": "",
+     "game_status": "Out",
      "practice_status": "Did Not Participate In Practice",
      "report_source": "https://www.nfl.com/injuries/",
      "reserve_status": "INA",
@@ -14641,7 +14641,7 @@
      "snap_source": "https://github.com/nflverse/nflverse-data/releases/tag/snap_counts"
     }
    ],
-   "has_official_game_status": false,
+   "has_official_game_status": true,
    "measured_snap_leader": "Roger McCreary"
   },
   {
@@ -15178,7 +15178,7 @@
     {
      "player": "Cade Mays",
      "on_report": true,
-     "game_status": "",
+     "game_status": "Out",
      "practice_status": "Did Not Participate In Practice",
      "report_source": "https://www.nfl.com/injuries/",
      "reserve_status": "INA",
@@ -15189,7 +15189,7 @@
      "snap_source": null
     }
    ],
-   "has_official_game_status": false,
+   "has_official_game_status": true,
    "measured_snap_leader": null
   },
   {
@@ -57745,7 +57745,22 @@
      "club": "DET",
      "club_name": "Detroit Lions",
      "slots_rank1_offense": 9,
-     "deficits": [],
+     "deficits": [
+      {
+       "position": "C",
+       "slot_players": [
+        "Cade Mays"
+       ],
+       "unavailable": [
+        "Cade Mays"
+       ],
+       "designation": "Out",
+       "report_source": "https://www.nfl.com/injuries/",
+       "chart_source": "https://www.detroitlions.com/team/depth-chart",
+       "published_backup": null,
+       "backup_game_status": null
+      }
+     ],
      "chart_source": "https://www.detroitlions.com/team/depth-chart"
     },
     "away": {

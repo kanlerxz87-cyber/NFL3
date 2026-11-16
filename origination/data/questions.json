@@ -27,7 +27,7 @@
    "id": "Q03",
    "area": "Availability",
    "question": "How do we know a listed player actually missed the game?",
-   "known": "6 of 254 report rows carry a game designation; no inactive list is held.",
+   "known": "9 of 254 report rows carry a game designation; no inactive list is held.",
    "unknown": "Which listed players were inactive, and which played a reduced role.",
    "discovery": "Capture official inactive lists for each game and join them to the report rows; the play rate per designation is then measurable.",
    "blocks": "R25, R38, R45, R12",

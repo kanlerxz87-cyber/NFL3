@@ -25,10 +25,10 @@
  },
  "headline": {
   "n_all": 149,
-  "mae_improvement_all": 0.009799,
-  "mae_improvement_holdout": -0.031071,
-  "holdout_lo": -0.109286,
-  "holdout_hi": 0.173929
+  "mae_improvement_all": 0.01651,
+  "mae_improvement_holdout": 0.040357,
+  "holdout_lo": -0.185357,
+  "holdout_hi": 0.1025
  },
  "grid": [
   {
@@ -75,35 +75,35 @@
     "fit": {
      "n": 93,
      "base_mae": 9.907589,
-     "personnel_mae": 9.924793,
-     "mae_improvement": 0.017204,
-     "mae_improvement_lo": -0.074409,
-     "mae_improvement_hi": 0.04,
+     "personnel_mae": 9.908664,
+     "mae_improvement": 0.001075,
+     "mae_improvement_lo": -0.05957,
+     "mae_improvement_hi": 0.060323,
      "base_bias": 1.717823,
-     "personnel_bias": 1.717823,
-     "residual_sd": 12.586001
+     "personnel_bias": 1.723199,
+     "residual_sd": 12.588458
     },
     "holdout": {
      "n": 56,
      "base_mae": 11.922166,
-     "personnel_mae": 11.906631,
-     "mae_improvement": -0.015536,
-     "mae_improvement_lo": -0.054643,
-     "mae_improvement_hi": 0.086964,
+     "personnel_mae": 11.942345,
+     "mae_improvement": 0.020179,
+     "mae_improvement_lo": -0.092679,
+     "mae_improvement_hi": 0.05125,
      "base_bias": 2.982994,
-     "personnel_bias": 2.99853,
-     "residual_sd": 14.680716
+     "personnel_bias": 2.980673,
+     "residual_sd": 14.70844
     },
     "all": {
      "n": 149,
      "base_mae": 10.664746,
-     "personnel_mae": 10.669645,
-     "mae_improvement": 0.004899,
-     "mae_improvement_lo": -0.050403,
-     "mae_improvement_hi": 0.041074,
+     "personnel_mae": 10.673001,
+     "mae_improvement": 0.008255,
+     "mae_improvement_lo": -0.057651,
+     "mae_improvement_hi": 0.037785,
      "base_bias": 2.193323,
-     "personnel_bias": 2.199162,
-     "residual_sd": 13.37722
+     "personnel_bias": 2.195807,
+     "residual_sd": 13.389448
     }
    }
   },
@@ -113,35 +113,35 @@
     "fit": {
      "n": 93,
      "base_mae": 9.907589,
-     "personnel_mae": 9.941998,
-     "mae_improvement": 0.034409,
-     "mae_improvement_lo": -0.148817,
-     "mae_improvement_hi": 0.08,
+     "personnel_mae": 9.90974,
+     "mae_improvement": 0.002151,
+     "mae_improvement_lo": -0.11914,
+     "mae_improvement_hi": 0.120645,
      "base_bias": 1.717823,
-     "personnel_bias": 1.717823,
-     "residual_sd": 12.596419
+     "personnel_bias": 1.728575,
+     "residual_sd": 12.602405
     },
     "holdout": {
      "n": 56,
      "base_mae": 11.922166,
-     "personnel_mae": 11.891095,
-     "mae_improvement": -0.031071,
-     "mae_improvement_lo": -0.109286,
-     "mae_improvement_hi": 0.173929,
+     "personnel_mae": 11.962524,
+     "mae_improvement": 0.040357,
+     "mae_improvement_lo": -0.185357,
+     "mae_improvement_hi": 0.1025,
      "base_bias": 2.982994,
-     "personnel_bias": 3.014066,
-     "residual_sd": 14.664841
+     "personnel_bias": 2.978352,
+     "residual_sd": 14.720559
     },
     "all": {
      "n": 149,
      "base_mae": 10.664746,
-     "personnel_mae": 10.674544,
-     "mae_improvement": 0.009799,
-     "mae_improvement_lo": -0.100805,
-     "mae_improvement_hi": 0.082148,
+     "personnel_mae": 10.681256,
+     "mae_improvement": 0.01651,
+     "mae_improvement_lo": -0.115302,
+     "mae_improvement_hi": 0.07557,
      "base_bias": 2.193323,
-     "personnel_bias": 2.205001,
-     "residual_sd": 13.377198
+     "personnel_bias": 2.19829,
+     "residual_sd": 13.402377
     }
    }
   },
@@ -151,35 +151,35 @@
     "fit": {
      "n": 93,
      "base_mae": 9.907589,
-     "personnel_mae": 9.969545,
-     "mae_improvement": 0.061956,
-     "mae_improvement_lo": -0.226795,
-     "mae_improvement_hi": 0.096452,
+     "personnel_mae": 9.922537,
+     "mae_improvement": 0.014948,
+     "mae_improvement_lo": -0.187424,
+     "mae_improvement_hi": 0.160984,
      "base_bias": 1.717823,
-     "personnel_bias": 1.717823,
-     "residual_sd": 12.612896
+     "personnel_bias": 1.733952,
+     "residual_sd": 12.623472
     },
     "holdout": {
      "n": 56,
      "base_mae": 11.922166,
-     "personnel_mae": 11.875559,
-     "mae_improvement": -0.046607,
-     "mae_improvement_lo": -0.163929,
-     "mae_improvement_hi": 0.260893,
+     "personnel_mae": 11.982702,
+     "mae_improvement": 0.060536,
+     "mae_improvement_lo": -0.278036,
+     "mae_improvement_hi": 0.15375,
      "base_bias": 2.982994,
-     "personnel_bias": 3.029602,
-     "residual_sd": 14.654093
+     "personnel_bias": 2.97603,
+     "residual_sd": 14.738047
     },
     "all": {
      "n": 149,
      "base_mae": 10.664746,
-     "personnel_mae": 10.685899,
-     "mae_improvement": 0.021154,
-     "mae_improvement_lo": -0.151208,
-     "mae_improvement_hi": 0.109933,
+     "personnel_mae": 10.696827,
+     "mae_improvement": 0.032082,
+     "mae_improvement_lo": -0.174564,
+     "mae_improvement_hi": 0.108296,
      "base_bias": 2.193323,
-     "personnel_bias": 2.21084,
-     "residual_sd": 13.382828
+     "personnel_bias": 2.200773,
+     "residual_sd": 13.42166
     }
    }
   },
@@ -189,35 +189,35 @@
     "fit": {
      "n": 93,
      "base_mae": 9.907589,
-     "personnel_mae": 10.003954,
-     "mae_improvement": 0.096365,
-     "mae_improvement_lo": -0.31531,
-     "mae_improvement_hi": 0.119959,
+     "personnel_mae": 9.960159,
+     "mae_improvement": 0.05257,
+     "mae_improvement_lo": -0.27618,
+     "mae_improvement_hi": 0.174636,
      "base_bias": 1.717823,
-     "personnel_bias": 1.717823,
-     "residual_sd": 12.635406
+     "personnel_bias": 1.739328,
+     "residual_sd": 12.651624
     },
     "holdout": {
      "n": 56,
      "base_mae": 11.922166,
-     "personnel_mae": 11.871703,
-     "mae_improvement": -0.050464,
-     "mae_improvement_lo": -0.228571,
-     "mae_improvement_hi": 0.342857,
+     "personnel_mae": 12.01456,
+     "mae_improvement": 0.092393,
+     "mae_improvement_lo": -0.372857,
+     "mae_improvement_hi": 0.18807,
      "base_bias": 2.982994,
-     "personnel_bias": 3.045137,
-     "residual_sd": 14.648482
+     "personnel_bias": 2.973709,
+     "residual_sd": 14.760883
     },
     "all": {
      "n": 149,
      "base_mae": 10.664746,
-     "personnel_mae": 10.705927,
-     "mae_improvement": 0.041181,
-     "mae_improvement_lo": -0.207248,
-     "mae_improvement_hi": 0.131262,
+     "personnel_mae": 10.732283,
+     "mae_improvement": 0.067537,
+     "mae_improvement_lo": -0.252933,
+     "mae_improvement_hi": 0.114081,
      "base_bias": 2.193323,
-     "personnel_bias": 2.216679,
-     "residual_sd": 13.394102
+     "personnel_bias": 2.203256,
+     "residual_sd": 13.447271
     }
    }
   },
@@ -227,35 +227,35 @@
     "fit": {
      "n": 93,
      "base_mae": 9.907589,
-     "personnel_mae": 10.081682,
-     "mae_improvement": 0.174093,
-     "mae_improvement_lo": -0.503892,
-     "mae_improvement_hi": 0.139979,
+     "personnel_mae": 10.055831,
+     "mae_improvement": 0.148242,
+     "mae_improvement_lo": -0.488799,
+     "mae_improvement_hi": 0.171643,
      "base_bias": 1.717823,
-     "personnel_bias": 1.717823,
-     "residual_sd": 12.69839
+     "personnel_bias": 1.750081,
+     "residual_sd": 12.728981
     },
     "holdout": {
      "n": 56,
      "base_mae": 11.922166,
-     "personnel_mae": 11.892774,
-     "mae_improvement": -0.029392,
-     "mae_improvement_lo": -0.384179,
-     "mae_improvement_hi": 0.450464,
+     "personnel_mae": 12.10706,
+     "mae_improvement": 0.184893,
+     "mae_improvement_lo": -0.585,
+     "mae_improvement_hi": 0.225464,
      "base_bias": 2.982994,
-     "personnel_bias": 3.076209,
-     "residual_sd": 14.652693
+     "personnel_bias": 2.969066,
+     "residual_sd": 14.822496
     },
     "all": {
      "n": 149,
      "base_mae": 10.664746,
-     "personnel_mae": 10.762361,
-     "mae_improvement": 0.097615,
-     "mae_improvement_lo": -0.34583,
-     "mae_improvement_hi": 0.14325,
+     "personnel_mae": 10.826763,
+     "mae_improvement": 0.162017,
+     "mae_improvement_lo": -0.421052,
+     "mae_improvement_hi": 0.096006,
      "base_bias": 2.193323,
-     "personnel_bias": 2.228357,
-     "residual_sd": 13.433518
+     "personnel_bias": 2.208223,
+     "residual_sd": 13.517324
     }
    }
   },
@@ -265,35 +265,35 @@
     "fit": {
      "n": 93,
      "base_mae": 9.907589,
-     "personnel_mae": 10.282112,
-     "mae_improvement": 0.374523,
-     "mae_improvement_lo": -0.895025,
-     "mae_improvement_hi": 0.119764,
+     "personnel_mae": 10.320777,
+     "mae_improvement": 0.413188,
+     "mae_improvement_lo": -0.960197,
+     "mae_improvement_hi": 0.102542,
      "base_bias": 1.717823,
-     "personnel_bias": 1.717823,
-     "residual_sd": 12.894815
+     "personnel_bias": 1.771586,
+     "residual_sd": 12.965916
     },
     "holdout": {
      "n": 56,
      "base_mae": 11.922166,
-     "personnel_mae": 11.964655,
-     "mae_improvement": 0.042489,
-     "mae_improvement_lo": -0.719275,
-     "mae_improvement_hi": 0.621546,
+     "personnel_mae": 12.321798,
+     "mae_improvement": 0.399632,
+     "mae_improvement_lo": -1.064419,
+     "mae_improvement_hi": 0.251903,
      "base_bias": 2.982994,
-     "personnel_bias": 3.138352,
-     "residual_sd": 14.722671
+     "personnel_bias": 2.95978,
+     "residual_sd": 15.008454
     },
     "all": {
      "n": 149,
      "base_mae": 10.664746,
-     "personnel_mae": 10.914477,
-     "mae_improvement": 0.249731,
-     "mae_improvement_lo": -0.652743,
-     "mae_improvement_hi": 0.141176,
+     "personnel_mae": 11.072839,
+     "mae_improvement": 0.408093,
+     "mae_improvement_lo": -0.844889,
+     "mae_improvement_hi": -0.003113,
      "base_bias": 2.193323,
-     "personnel_bias": 2.251713,
-     "residual_sd": 13.578994
+     "personnel_bias": 2.218156,
+     "residual_sd": 13.731222
     }
    }
   }
@@ -382,9 +382,22 @@
   {
    "club": "DET",
    "club_name": "Detroit Lions",
-   "n_unavailable_with_measured_time": 0,
-   "lost_snap_share": 0.0,
-   "players": [],
+   "n_unavailable_with_measured_time": 2,
+   "lost_snap_share": 1.0,
+   "players": [
+    {
+     "player": "Cade Mays",
+     "status": "Out",
+     "snap_share": 1.0,
+     "source_url": "https://www.nfl.com/injuries/"
+    },
+    {
+     "player": "D.J. Reed",
+     "status": "Out",
+     "snap_share": 0.0,
+     "source_url": "https://www.nfl.com/injuries/"
+    }
+   ],
    "report_source": "https://www.nfl.com/injuries/"
   },
   {
