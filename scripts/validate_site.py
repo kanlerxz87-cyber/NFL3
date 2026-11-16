@@ -83,7 +83,9 @@ def main() -> int:
     # The root glob alone would silently stop validating the workspaces under dashboard/, line-lab/,
     # decision-hub/, research-workspace/ and research-desk/ as soon as one was moved into a folder.
     pages = sorted(ROOT.glob("*.html"))
-    expected = {"index.html", "requirements.html", "signals.html", "lineup.html", "validation.html", "suggestions.html", "review.html", "sources.html"}
+    # questions.html belongs to this set because the requirements register (R04) claims a questions page at the root
+    # of the site; an expected page that goes missing has previously shipped unnoticed, so the set is the gate.
+    expected = {"index.html", "requirements.html", "signals.html", "lineup.html", "validation.html", "suggestions.html", "questions.html", "review.html", "sources.html"}
     missing = expected - {page.name for page in pages}
     if missing:
         errors.append(f"missing expected pages: {', '.join(sorted(missing))}")

@@ -1,0 +1,19 @@
+{
+  "schema": "nfl3-forward-ledger-standings-crosscheck/v1",
+  "compared_with": {
+    "file": "origination/data/official_standings_2026.json",
+    "sha256": "3850532930a8a547c06893c7106242a6811f9b42caa5e742dbd599e83e201b3d",
+    "source_page": "https://www.nfl.com/standings/",
+    "observed_at": "2026-11-16T15:05:00Z",
+    "note": "recorded by the origination workspace, not by this session; cited so a reader can check it rather than take it on trust"
+  },
+  "clubs_in_standings": 32,
+  "clubs_in_ledger": 32,
+  "clubs_matching_on_all_five_fields": 32,
+  "clubs_disagreeing": 0,
+  "clubs_only_in_ledger": [],
+  "field_checks": 160,
+  "graded_games_used": 149,
+  "settles": "Cincinnati's record chip was not read by this session; the standings read supplies 7-2, which the ledger reproduces, so the club is corroborated rather than assumed.",
+  "excluded_fixture": "LAC at BAL, 2026-11-16, was unplayed at both reads, so neither side counts it"
+}

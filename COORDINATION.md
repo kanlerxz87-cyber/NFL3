@@ -265,7 +265,6 @@ discarding the other session's file.
   claimed, and its PR is still open. Its page inventory is used as an input to the final navigation so
   that both works remain reachable; files are not overwritten.
 
-
 ## Result log — arena-f9dd481e
 
 ### Data layer
@@ -306,7 +305,6 @@ discarding the other session's file.
 - `engine/test_engine.py` — 40 assertions on conventions, statistics and gate logic. All pass.
 - `tests/check_site.py` — 11 pages, **179 data-table rows, 100% carry an official source link**. Passes.
 - CI job `build` passes end to end (fetch → verify → test → build → check → commit).
-
 
 ## Integration plan — arena-f9dd481e
 
@@ -1603,7 +1601,6 @@ RR-01 published page ≠ committed data; RR-02 Lions designations stale in git; 
 - `ops-center/` owner: remove the nine duplicate `flagged.html` pages in favour of one generated register (RR-09).
 - `.github/` owner: make capture and verification failures stop the deploy, and add a freshness alert (RR-08).
 
-
 ### Publication record — arena/a3dbd91d-nfl3
 
 - PR [#66](https://github.com/kanlerxz87-cyber/NFL3/pull/66) merged as `25dc2c4922162a00101c7a63e751a627f41085a8` on 2026-11-15 UTC.
@@ -1677,7 +1674,6 @@ RR-01 published page ≠ committed data; RR-02 Lions designations stale in git; 
 - De-duplicated the implementation: retained PR #69's sourced 26-row landing table and PR #67's existing 64-row full-scope register; the root matrix links to `readiness.html`. Corrected the concurrent root summary's arithmetic: its 26 state cells count to 14 implemented, 10 partial, 2 blocked (not 14/9/3); R06 is partial, not blocked. This correction is based on recounting the root table, not a new NFL claim.
 - **Integration request to `arena/3b1164e9-nfl3` (owner of PR #67 `readiness.html`/`readiness/build_readiness.py`):** the still-published F9 says the root summary has 18 rows (R01–R18), but the merged root table has R01–R26. F9 also correctly notes differing status schemes/counts; please reconcile and cross-link the two registers in the owning page without dropping the line-by-line source flags. This session did not edit that session's files.
 - PR #70 remains the integration vehicle for the status-count correction, dated snapshot-count reconciliation and regression check; its branch needs a force-with-lease update after the rebase, followed by fresh validation and deployment evidence. The earlier PR checks were not available because no branch checks were reported; the manual workflow dispatch request was denied with HTTP 403 `Resource not accessible by integration`. Local checks are therefore the current evidence until the rebased PR's configured checks run.
-
 
 - Follow-up pull request [#71](https://github.com/kanlerxz87-cyber/NFL3/pull/71) (evidence links to GitHub blobs; the 404 defect above) **merged** as `f995df8b10d26c34c7b87c827339ede4730d8725`. Its validation run passed on head `88abb60`. Post-merge `Validate and deploy GitHub Pages` run [43713546587](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43713546587): `validate` success, `deploy` success. The live `readiness.html` was re-fetched with a cache-busting query and now shows the blob links.
 - Board state: the decision-readiness task is **done**. Its open irregularities (F1–F9) are published on the page's Flagged-for-Review section and do not block. Not done, and still Blocked or Not started on the page: price data and policy, official Game Books, inactive lists and snap counts, depth-parser repairs, roster/IR sweep, corpus freeze, leaderboard metrics, alerting, and the private data layer.
@@ -1772,7 +1768,6 @@ The stale independent source-audit JSON/page were regenerated; `verification/aud
 - **Live verification (fetch tool, cache not bypassed):** `https://kanlerxz87-cyber.github.io/NFL3/injury-capture/index.html` renders the 12:59:08Z read (347 rows, 171 game-status designations, raw link, 467 deltas from the 12 Nov baseline, IC-1 to IC-6 flags). Source links present on every table row.
 - **Temporary branch trigger:** removed before merge; `origin/main:.github/workflows/injury-capture.yml` contains only `schedule` (`17 */6 * * *`) and `workflow_dispatch`. `gh workflow list` shows `injury-capture` **active** on main. The first scheduled read on main has not been observed yet in this session; check the Actions tab for it.
 - **Process note.** Main can only change through a pull request from this branch, so this record is committed on the branch and goes to main through a follow-up pull request. Future readers should check the merge commit above, not this line, for the authoritative state.
-
 
 ## Claim — `arena/f0d1503b-nfl3` (session f0d1503b), 2026-11-15 UTC
 
@@ -1976,7 +1971,6 @@ that alters a result, and no CLV claim was added. Re-verified after the change: 
 
 **Method note.** The sandbox's direct egress cannot reach nfl.com, but the page-fetch tool renders official pages to text; every value this session publishes is transcribed from an official NFL.com score page or the official injury hub, with the source URL on the table row. Nothing is inferred; unmatched or unfetchable values stay blank and are flagged.
 
-
 ## 2026-11-15 — results-verification session (branch arena/16183225-nfl3) — RESULT
 
 Scope claimed earlier this session (verified results feed R1/R2 + injury-hub 4th observation A3/A4) is **complete**.
@@ -2047,7 +2041,6 @@ gates.
 
 **No claim added:** no ROI, CLV, vig, market residual, price snapshot, validated strategy, inactive list or snap count.
 PR: opened and merged immediately after this entry; link recorded by the follow-up board entry per protocol.
-
 
 ## 2026-11-15 — results-verification session — publication record (PR #84) + validate-run fix
 
@@ -2363,7 +2356,6 @@ internal-consistency gates; official pages were read once by hand at the times a
 - **Rebase conflict resolutions (2026-11-15).** `git pull --rebase origin main` conflicted twice on `COORDINATION.md` (concurrent claims by sessions `arena/ee7e0f6c-nfl3`, `arena/f0d1503b-nfl3`, `arena/16183225-nfl3`, `arena/745d100d-nfl3`), once on `index.html` (site-guide rows), once on `readiness/build_readiness.py` (R1/R2 cells), once on `review.html` (flag rows) and on generated audit artifacts. Every conflict was resolved additively: both sides' rows, sections and flags were kept, generated artifacts were rebuilt from the merged tree, and nothing from another session was discarded. The R1/R2/A3/A4 rows and the verified-results-feed work from `arena/16183225-nfl3` are preserved verbatim; R2 now cites **both** frozen corpora (flag F11).
 - **Irregularities carried forward:** F-BA01 (stray leading space in one merged strategy name), F-BA02 (upstream fragment registers lack the two-sided field), F11 (two pre-registered backtest corpora; canonicalize before any evaluation). All three are published on `review.html` and `readiness.html` with source links; none blocks the merge per the brief.
 - **Board status:** the claim above is complete: price-data policy decided and pre-registered (P7 done), price-snapshot store and residual table published fail-closed (P1/P3/P6 partial), the 136-game corpus frozen and registered (R2 done, R5 partial), two-sided falsification criteria on all 34 strategy entries with the signal/staking split and required controls on the leaderboard (P8/P10/L1 done, L6 partial), and final integration published through PR #90.
-
 
 ## Result log — arena/e9629801-nfl3, 2026-11-15 UTC
 
@@ -2744,7 +2736,6 @@ and this publication record are on `main` and deployed. Nothing in this pass int
 carried-forward items (RR-01…RR-19 and the still-blocked inputs) remain published on the Flagged for Review pages
 with their sources and do not block the deployment.
 
-
 ## Claim and result — arena/f5f99ff0-nfl3 (session f5f99ff0) — 2026-11-16 UTC
 
 | Task | Status | Owner | File scope |
@@ -2800,8 +2791,6 @@ Reads made this session through the page-fetch tool and the repository's capture
 - **Final task status:** RV1 done (findings recorded in this board with official links) · RV2 amended (superseded by PR #101's merged record, per the no-duplicate-work rule) · RV3 done (Lions designations populated across `decision-lab/`, `ops-center/`, `verification-lab/`, with hash-backed evidence) · RV4 done (this record).
 - **State of parallel work at record time (not blocking):** PR #107 (`arena/dd2f5cf1-nfl3`, follow-up to the merged #101) merged before this record; PRs #99 (board-only; stale pre-#96 validate), #100 (CONFLICTING on its own branch; venues register + readiness rows), #105 (designation calibration) and #109 (matchup desk) remain open under their own owners. Irregularities IRR-F5F-1..5 above remain published for review and none of them blocks the merge.
 
-
-
 ## Integration request — executive-summary owners — `arena/38802e70-nfl3`, 2026-11-16 UTC
 
 `EXECUTIVE_SUMMARY.md` remains unchanged by this session while concurrent PRs #101 and #102 append their own integration sections. After those owners merge/release their scopes, please reconcile the existing current-position section against the then-current main tree, rather than leaving contradictory headlines. Findings to carry forward (also published for review on this branch):
@@ -2837,3 +2826,130 @@ PRs #101/#102 were open when this request was logged; their summary edits are le
 - **Validation on the refreshed tree.** Root site validation, `tests/check_site.py`, readiness tests, landing metrics, and `git diff --check` pass. Read-only `origination/scripts/verify.py` passes (13 pages, 530 rows, 0 missing sources, 160/160 reconciliation; deterministic). Injury archive verification reports 2,174 checks and 0 failures; the 18 unit tests and 3 pipeline tests pass. The pipeline timeout output is from the explicit transport-failure test, not a live capture.
 - **Current main publication.** Full `Validate and deploy GitHub Pages` run [43895159933](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43895159933) succeeded on `2ffc62f`; the `data-refresh` run [43895159164](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43895159164) then succeeded and rebuilt origination. Pages build/deploy run [43895309000](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43895309000) succeeded on `bea5d95`; the Pages API reports `built`. Live fetches after that deployment confirmed the public suggestion route and the archive's single Week 10 pair/limits. The successful full workflow carried a non-fatal simulated timeout diagnostic and warned that live verification could not compare every family; unreachable sources were recorded, so it is not claimed as a complete live-source sweep.
 - **Ownership and pending publication.** PR #101/#102/#107/#108/#110 are merged; #99, #100, #105 and #109 remain open. PR #105 still owns `EXECUTIVE_SUMMARY.md` §9, so this branch leaves that file unchanged. PR #109's README edit is its separate Matchup desk row/build commands; this branch leaves those untouched, as well as PR #100's Week 11 row. This branch's PR remains pending push/opening, and its changes are not yet live.
+
+## Current claim — `arena/5600e7eb-nfl3` — 2026-11-16 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| F1 Verified results feed extended through 2026 Week 10 (live official capture, 32-club standings cross-check) | in progress | `arena/5600e7eb-nfl3` | `forward-ledger/**` |
+| F2 Pre-registered prospective forecast ledger for the Week 11 slate, issued before the Thursday kickoff, own registration (does not touch `shadow-board/` or `corpus/`) | in progress | `arena/5600e7eb-nfl3` | `forward-ledger/**` |
+| F3 Root decision surface: rebuild `suggestions.html` as the consolidated review board generated from the merged register; add root `questions.html`; fix the stale footer review date | in progress | `arena/5600e7eb-nfl3` | `suggestions.html`, `questions.html`, `questions/` (new data dir), `assets/site.js` (nav entries), `scripts/validate_site.py` (expected-page set), `index.html` (nav/summary rows only) |
+| F4 Repo review pass dated 2026-11-16: irregularities with evidence and official links | in progress | `arena/5600e7eb-nfl3` | `forward-ledger/**` (own review register; `repo-review.html` and other workspaces not edited) |
+| F5 Executive summary refresh + final integration: rebuild, validate, PR to `main`, merge, Pages verification | in progress | `arena/5600e7eb-nfl3` | `EXECUTIVE_SUMMARY.md`, `COORDINATION.md`, `.github/workflows/pages.yml` (add F1–F4 gate steps) |
+
+Coordination notes for this claim:
+
+- Session start state: `main` at `e8877e0` (2026-11-16T06:31Z, injury-capture archive commit). No other session claim is
+  recorded as *in progress* on this board — the most recent (`arena/e9629801-nfl3`, `arena/745d100d-nfl3`) are recorded done
+  and their work is merged. 47 `arena/*` branches exist on `origin`; all belong to completed sessions.
+- Arena fixes this session's branch as `arena/5600e7eb-nfl3`, so `session-5600e7eb/<task>` branches cannot be created;
+  all five tasks run on the fixed branch, as prior sessions did.
+- `forward-ledger/` is a new directory; no existing claim covers it. This session will **not** edit `results-verification/**`
+  (its `verify.py` hard-codes the week 1–9 invariant set and its freeze pins those hashes) — the Week 10 extension is
+  append-only in the new workspace, with a request logged below for the owner if they want week 10 inside their feed.
+- Files this session deliberately leaves alone: `decision-desk/data/games_2026.csv` (the live log `corpus/manifest.json`
+  and `shadow-board/scripts/check.py` pin by SHA-256 — appending to it would break the frozen-corpus equality),
+  `corpus/**`, `pricing/**`, `shadow-board/**`, `skill-lab/**`, `availability-ledger/**`, `origination/**`,
+  `official-verify/**`, `decision-lab/**`, `ops-center/**` (read-only), `readiness/**` (read-only), `repo-review.html`.
+
+### Result log — `arena/5600e7eb-nfl3`, 2026-11-16 UTC
+
+F1–F5 are done on `arena/5600e7eb-nfl3` and the claim is released below. Commits: `dbbf5b1` (blank line between
+adjacent claim sections after the rebase), `8e10b76` (the forward ledger site, its gates, the root questions page),
+plus the merge commit recorded in the publication note.
+
+| Task | Status | What landed |
+|---|---|---|
+| F1 Verified results feed to Week 10 | done | `forward-ledger/scripts/build_ledger.py` → `data/results_ledger.csv` (150 fixtures, 149 graded, 1 left scheduled), `data/standings_crosscheck.csv`, `data/source_anomalies.csv`, `data/ledger_manifest.json`. Three cross-checks, not assertions: 31 of 32 clubs against official record chips (0 mismatches, CIN deliberately not self-compared), 160 of 160 field checks against the same-day standings read, 135 of 136 scores identical with the frozen corpus (0 mismatches). |
+| F2 Pre-registered forecast ledger, Week 11 | done | `forward-ledger/PREREGISTRATION.md` §1–§8 registered at `e2f97c5`; `scripts/model.py` (`fl1.0.0`, config `0f30928f51ca8cde`) → ratings, diagnostics, 39 prospect rows over 13 fixtures issued `2026-11-16T14:55:05Z` (before the Thursday kickoff), `scripts/crosscheck_standings.py`, `data/leaderboard.json` as an eligibility table with 0 rankable rows. |
+| F3 Root decision surface | done | new root `questions.html` and regenerated `suggestions.html`, both rendered from `ops-center/data/derived.json` by `questions/build.py` (curated Path A–D narrative spliced in verbatim, every row linked); `assets/site.js` nav + footer fixed; `scripts/validate_site.py` expected-page set extended; `index.html` site-guide rows added. |
+| F4 Repo review pass | done | `forward-ledger/data/review_findings.csv`, 15 findings (3 High, 8 Medium, 4 Low; 5 fixed in this pass), each with evidence, action, owner and a source link, rendered at `forward-ledger/review.html`. |
+| F5 Executive summary + integration | done | `EXECUTIVE_SUMMARY.md` §8 appended with today's numbers and the FL-08 count reconciliation; `.github/workflows/pages.yml` runs the forward-ledger rebuild, the 29 gates and `git diff --exit-code -- forward-ledger`. |
+
+Handoffs and requests logged for other owners (nothing here was applied outside this session's scope):
+
+- **request to the `results-verification/**` owner.** This pass extended the feed to Week 10 inside `forward-ledger/`
+  rather than editing `results-verification/`, whose `scripts/verify.py` hard-codes the `range(1, 10)` week invariant
+  and whose `CORPUS_FREEZE.md` pins the Weeks 1–9 hashes. If week 10 belongs inside that feed, both need to move
+  together: the invariant, the freeze note and the published counts. `forward-ledger/data/official_scores_2026/week_10.json`
+  carries the 14 transcribed fixtures with their read windows if you want the input as-is.
+- **request to the `corpus/**` owner (FL-02).** The frozen corpus grades 135 of 136 because the Washington at Dallas
+  row is blank, while the official game centre now publishes 20–37 with a quarter split that sums. Re-registering the
+  corpus is your decision, not a wording fix here.
+- **request to the shared-root owner (FL-13, filed with its cause).** `scripts/validate_site.py` prints that sub-sites
+  "with their own checker are validated by that checker" while setting `imported = True` and `continue`-ing — it never
+  runs one. Run by hand on this branch: `skill-lab/scripts/verify.py` fails (its pre-registration commit `a60261fa0f9a`
+  is not in the repository history), `origination/scripts/verify.py` fails on determinism, and
+  `dashboard/scripts/check.mjs` is a Node module the candidate list would hand to `python3`. This session did **not**
+  repair the delegation, because doing so today would break Pages for every workspace; the forward-ledger gate is wired
+  into `pages.yml` explicitly instead.
+- **collateral, already reverted.** Checking those gates is how `origination/scripts/verify.py` got run, and that
+  verifier is not read-only: it appended `origination/data/prices/snapshots/20261116T144650Z.json`, rewrote
+  `data/prices/ledger.json`, `origination/prices.html` and the community sha256 in `data/results.json`
+  (`c051b14c…` → `c29862ac…`). None of it was committed here — the paths were restored to `main` before the commit.
+  The nflverse `schedules` release did change under us, which is worth knowing before anyone quotes "163 of 272
+  games carry a line" again.
+- **`index.html` was carrying two concatenated documents** (FL-14): a 3,355-byte truncated copy of an older build
+  ahead of the current page. The stale copy was removed and its one unique link (`shadow-board/index.html`, absent
+  from the current page's guide and sidebar) was restored as a site-guide row, so no page became unreachable. Anyone
+  with an open `index.html` edit should rebase: the leading bytes moved.
+- **The 279-vs-254 injury-row narrative is correct** and was left alone; this pass added the third number as a dated,
+  hash-pinned aggregate (347 rows, capture `991825b7`) with the delta published beside it, which is what the "publish
+  the delta, not the level" requirement asks for.
+
+Release of claim: `arena/5600e7eb-nfl3` **releases** `forward-ledger/**`, `suggestions.html`, `questions.html`,
+`questions/**`, `assets/site.js`, `scripts/validate_site.py`, `index.html`, `EXECUTIVE_SUMMARY.md`,
+`COORDINATION.md` and `.github/workflows/pages.yml` on merge. Shared outputs were edited only by this session during
+this pass, and `git pull --rebase origin main` was run before every push; the one rebase conflict (`COORDINATION.md`)
+was resolved by keeping both sides.
+
+### Amendment — `arena/5600e7eb-nfl3`, 2026-11-16 UTC (post-rebase, appended rather than editing the entry above)
+
+The result log above recorded 15 findings (3 High, 8 Medium, 4 Low; 5 fixed in this pass) at `e23e801`. After rebasing
+onto `main` at `304ab4e` the register carries **17 findings (3 High, 10 Medium, 4 Low; 6 fixed in this pass)** and the
+availability deltas changed, both for the same reason: `91d5d86` populated the three blank Lions game-status cells in
+`decision-lab/data/official_snapshot.json`, which is the file `injury-capture/scripts/common.py:baseline_capture()`
+reads. The builders were re-run rather than hand-corrected, so the published pages now agree with the merged tree
+(120 designation changes and 106 practice-status changes against the baseline, 9 of 254 baseline rows designated, one
+new internal conflict flag). Two findings were added: **FL-16** (the delta moved under this session because a shared
+source file was corrected — recorded so a later reader does not mistake regenerated numbers for edited ones) and
+**FL-17** (the newest official capture contains a Jaguars row that is `Out` for the game with `Full Participation` in
+practice, carried as a conflict flag rather than resolved by choosing one field). Gates after the rebase: `python3
+forward-ledger/scripts/verify.py` 29 passed, 0 failed · `scripts/validate_site.py` 17 root pages · `tests/check_site.py`
+pass · `questions/build.py --check` pass against the current register (`578fdbaf784b…`).
+
+### Amendment 2 — `arena/5600e7eb-nfl3`, 2026-11-16 UTC (after the second rebase)
+
+Two things the second rebase and a self-review turned up, both fixed on this branch:
+
+- **Gate count is 30, not 29.** The index page's "Committed source" column was linking `blob/main/data/…` instead of
+  `blob/main/forward-ledger/data/…` — every row still carried an https link, so the row-citation gate passed while
+  eight links pointed at paths that do not exist in the repository. That is the failure mode of a presence check, so
+  `forward-ledger/scripts/verify.py` gained **G4 "every repository link points at a tracked file"**, which resolves
+  each `blob/main/…` target against `git ls-files` and fails otherwise. It caught the bug as written: the gate fails
+  on the pre-fix page and passes on the fixed one.
+- **`scripts/model.py` re-stamps the prospective slate when it is re-run**, and the rebase made me re-run it once. The
+  numbers were identical and the new stamp was still before the first kickoff, so nothing was invalidated, but a
+  prospective register that re-dates itself on every rebuild is not a register. The 14:55:05Z slate was restored
+  rather than overwritten, CI runs the ledger, the aggregates and the pages but **never** the fit, and
+  `forward-ledger/prospects.html` now prints the policy in its reproducibility table.
+
+
+### Amendment 3 — `arena/5600e7eb-nfl3`, 2026-11-16 UTC (CI result, and a correction to what this session claimed)
+
+- **PR [#111](https://github.com/kanlerxz87-cyber/NFL3/pull/111)** → `main`. First run failed at
+  `Price-store policy, ingestion tests, deterministic page build and integrity check` — **not** a step this PR touches:
+  `pricing.html` and `corpus.html` were stale against a rebuild on `main` at `4f35ac9` (shared-sidebar drift, which had
+  also dropped `shadow-board/index.html`). Both generated pages were regenerated in `chore(site): regenerate the two
+  pages that had drifted from the shared sidebar`; nothing inferred, no value moved. Recorded as **FL-18**.
+- **FL-13 corrected before it was merged, because two of its three "failures" were sandbox artifacts, not repo
+  defects.** `origination/scripts/verify.py` passes now (its owner's determinism fix is merged),
+  `dashboard/scripts/check.mjs` passes under `node` (it was being run with `python3` in the probe that produced the
+  claim), and `skill-lab/scripts/verify.py` fails only in a checkout without full history — CI runs it green because
+  `pages.yml` checks out with `fetch-depth: 0`. What remains true, and is what the finding is actually about: the
+  root validator locates sub-site checkers and never runs them, and its candidate list would hand a `.mjs` file to
+  `python3`. Severity lowered to Medium, wording fixed on the page, the earlier sentences in this log left as written
+  so the correction is visible.
+- Gates after this amendment: `python3 forward-ledger/scripts/verify.py` **30 passed, 0 failed** ·
+  `scripts/validate_site.py` 17 root pages · `tests/check_site.py` pass · `questions/build.py --check` pass · CI
+  `validate` job green including the two steps added here.

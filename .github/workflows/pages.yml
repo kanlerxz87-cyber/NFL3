@@ -101,6 +101,16 @@ jobs:
           python3 tests/test_injury_archive_pipeline.py
       - name: Injury-archive fail-closed verification (digests, gates, pre-registration order)
         run: python3 injury-archive/scripts/verify.py
+      - name: Forward ledger - verified results feed, cross-checks, pre-registration order, row citations
+        run: |
+          python3 forward-ledger/scripts/build_ledger.py
+          python3 forward-ledger/scripts/availability_w10.py
+          python3 forward-ledger/scripts/crosscheck_standings.py
+          python3 forward-ledger/scripts/build_site.py
+          python3 forward-ledger/scripts/verify.py
+          git diff --exit-code -- forward-ledger
+      - name: Root questions and suggestions pages match the merged register
+        run: python3 questions/build.py --check
 
   deploy:
     if: github.event_name != 'pull_request'

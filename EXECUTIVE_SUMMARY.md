@@ -187,3 +187,92 @@ at all; which official field is authoritative for venue; and what a tier pays. E
 unblocking effect on [`shadow-board/registers.html`](shadow-board/registers.html), beside six suggestions with cost
 and blocker stated. The §1 sentence of the pre-registration that said the price policy was "undecided" is kept as
 written and annotated as amendment A1 in §9, because a frozen registration must be annotated, not re-worded.
+
+## 8. Update, 2026-11-16 (session `arena/5600e7eb-nfl3`): the forward ledger is published, and the root has a questions page
+
+**What moved.** [`forward-ledger/`](forward-ledger/index.html) is now a published sub-site with eight pages and its own
+fail-closed verifier, and the root of the site has a [questions page](questions.html) for the first time. Three
+numbers in this file, and in [the readiness register](readiness.html), were stale in the same way: the counts in the
+two update paragraphs at the top of this document (14 blocked / 29 not started / 18 partial, and 7 done / 19 partial /
+24 not started / 13 blocked) are what those two passes recorded on 2026-11-15. The register read today is **64 rows:
+35 partial, 13 not started, 8 blocked, 7 done, 1 with a decision recorded** ([`readiness/data/readiness.csv`](readiness/data/readiness.csv)).
+The earlier sentences are left as written because they record what was true when they were committed; the register is
+the current source, and this paragraph is the reconciliation (finding FL-08).
+
+**Verified, line by line, against official pages.** The results feed now runs to Week 10: **150 fixtures, 149
+graded, 1 left scheduled** because Los Angeles at Baltimore had not been played when the page was read
+([`forward-ledger/results.html`](forward-ledger/results.html)). Three independent cross-checks were run rather than
+asserted: club records against the record chips printed on the official pages (31 of 32 clubs read, 0 mismatches,
+Cincinnati deliberately not compared with a self-computed number), the same records plus points for and against
+against a same-day independent standings read (**160 of 160 field checks**, [`data/standings_crosscheck_origination.json`](forward-ledger/data/standings_crosscheck_origination.json)),
+and Weeks 1-9 against the frozen pre-registered corpus (**135 of 136 identical, 0 mismatches**; the 136th is the
+Washington at Dallas row the corpus still leaves blank while the official game centre publishes 20-37 - closable only
+by the corpus owner, FL-02). One official irregularity survived checking: `2026_01_NE_SEA` is labelled "Sunday Night
+Football, September 9th" on a page whose own printed date, 2026-09-09, is a Wednesday.
+
+**What the model is, and what it is not.** The registration is [`forward-ledger/PREREGISTRATION.md`](forward-ledger/PREREGISTRATION.md)
+at commit `e2f97c5`, before any Week 11 result existed; `verify.py` recomputes that ordering from git history on every
+run instead of trusting a sentence. `fl1.0.0` (config `0f30928f51ca8cde`) fits `mu` 23.087 and a home-field term of
+**-0.255**: on 2026 data as published there is no home advantage to assume, which is why the term is fitted and not
+hardcoded (FL-10). In sample over 149 games the margin R² is 0.4102 and the total R² 0.2605; on the pre-declared
+chronological holdout (Weeks 1-8 fitted, 9-10 evaluated, 28 games) margin R² is 0.4266 with Brier skill **+0.3223**
+against the in-window base rate and **+0.4087** against a coin - one window, one season, no interval claimed. The
+removal-of-luck panel puts **0.2059 of game-margin variance inside the expectation**; the rest is luck by
+construction, and the [backtest page](forward-ledger/backtest.html) is barred from the leaderboard by a gate that
+checks the two pages do not share a number.
+
+**Lines originated, prices still absent.** [`forward-ledger/prospects.html`](forward-ledger/prospects.html) prints **39
+forecast rows over 13 Week 11 fixtures** (side, total, moneyline), issued `2026-11-16T14:55:05Z`, before the Thursday
+kickoff. Fair line, market line and difference are separate columns; the market-line and difference columns are blank
+on **39 of 39** rows because [`pricing/PRICE_DATA_POLICY.md`](pricing/PRICE_DATA_POLICY.md) grants no source, and
+every total is published twice - the additive model and the sum-of-scoring-rates estimator, disagreeing by
+0.46 to 5.50 points - with neither retired until the walk-forward comparison in §3 can be evaluated. The
+[leaderboard](forward-ledger/leaderboard.html) is an eligibility table with **0 rows rankable**, signal and staking in
+separate columns, both control baselines registered, parlays and prop combos behind a joint-evidence gate, and the
+reward field unfunded.
+
+**Availability, stated as a property of the read.** [`forward-ledger/availability.html`](forward-ledger/availability.html)
+aggregates the newest hash-pinned capture (`991825b7`, 2026-11-16T06:31:00Z, **347 rows over 28 clubs**) against the
+2026-11-12 read other pages still publish: **+93 rows, 120 game-designation changes, 106 practice-status changes,
+0 removals**. Designated rows went from 9 of 254 to 171 of 347, so any "Questionable plays X% of the time" number
+computed from one read time measures the page's publication schedule, not the label (FL-04). The numbers on this
+line moved twice inside this session: they were 123 and 107 before the rebase onto `main`, and changed to 120 and
+106 because commit `91d5d86` filled the three blank Lions game-status cells that the baseline snapshot reads, which
+is the delta doing its job rather than a page being corrected by hand (FL-16). The re-parse also surfaced one row
+that contradicts itself on the official page - a Jaguars player listed Out for the game with Full Participation in
+practice - carried as a conflict flag rather than resolved by picking a half (FL-17). No player names are
+republished at root level, because the public/private layer split is still an open decision (FL-03).
+
+**Defects found in the site itself and fixed while publishing.** The landing page shipped **two concatenated HTML
+documents** - a stale truncated copy ahead of the current page, which no gate checked for (FL-14); the shared footer
+asserted a single "Source reviewed" date that had gone stale for every workspace it serves (FL-06); and
+`assets/site.js` had an unclosed array literal, so the nav threw before rendering on every root page - `node --check`
+is the only gate that catches it, and none existed. Root [`suggestions.html`](suggestions.html) was hand-written prose
+with no register rows and no questions page beside it; both pages are now generated from
+`ops-center/data/derived.json` by [`questions/build.py`](questions/build.py), which preserves the curated Path A-D
+narrative verbatim and prints **100 questions (67 blocking, 14 with an answer recorded, 65 blocking and unanswered)**
+and **75 proposals (40 with no priority, 54 with no path, 13 holding a sentence where a status belongs)** - the
+gaps are displayed, not filled (FL-07, FL-15).
+
+**The gate that is not enforcing what it says, and was not repaired.** `scripts/validate_site.py` prints "Sub-sites
+with their own checker are validated by that checker" while setting a flag and `continue`-ing without running any of
+them. Locating the checkers is the last thing it does. Probed by hand on this branch, `origination/scripts/verify.py`
+and `node dashboard/scripts/check.mjs` pass and `skill-lab/scripts/verify.py` fails here - "pre-registration commit
+`a60261fa0f9a` is not in the repository history" - while passing in CI, which checks out with `fetch-depth: 0`: a
+gate that reads git history is only reproducible in a full clone, which is a caveat for
+`forward-ledger/scripts/verify.py`'s ordering check too, and is why CI rather than a sandbox is the arbiter here. The
+candidate list also offers `.mjs` files to an interpreter that is `python3` everywhere else. Changing the shared
+validator is the root owner's call, so it is logged as **FL-13** with the cause, and the forward-ledger gate is wired
+into [`.github/workflows/pages.yml`](.github/workflows/pages.yml) directly: rebuild the ledger, the availability
+aggregates and the pages, run the 30 gates, and `git diff --exit-code -- forward-ledger` so a published page can never
+drift from committed data.
+
+**What the first CI run of this pull request caught, on somebody else's step.** It went red at "Price-store policy,
+ingestion tests, deterministic page build and integrity check" - a step this pull request does not touch. On `main`
+at `4f35ac9`, `python3 pricing/build.py` rewrote the committed `pricing.html`, and `corpus.html` was stale against its
+own builder in the same way, so the `git diff --exit-code` that ends those steps fails for whoever merges next. The
+only difference in either file is the shared sidebar those builders stamp in, which was updated without rebuilding the
+dependent pages - and in the process dropped `shadow-board/index.html`, which is also why the live landing page linked
+shadow-board nowhere (the stale duplicate document removed under FL-14 was the last place that carried it). Both
+generated pages were regenerated here so the shared gate is green for the next session, no value or claim in either
+file moved, and the nav itself is left to its owner (**FL-18**).
