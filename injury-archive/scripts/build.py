@@ -39,6 +39,16 @@ PAGES = [
 ]
 
 
+def data_clock(index: list[dict]) -> str:
+    """The archive's own clock: the latest read time recorded in the index.
+
+    Deliberately not `utc_now()`: a build that stamps wall-clock time changes its own artifacts on
+    every run, which would make the determinism gate meaningless and churn the published pages.
+    """
+    stamps = [e.get("captured_at_utc", "") for e in index if e.get("captured_at_utc")]
+    return max(stamps) if stamps else "no captures yet"
+
+
 def esc(value) -> str:
     return html.escape("" if value is None else str(value), quote=True)
 
@@ -178,7 +188,7 @@ def build_artifacts() -> dict:
         latest_status[(row["kind"], row["season"], row["week"])] = row
     coverage_rows = sorted(latest_status.values(), key=lambda r: (r["kind"], r["season"], r["week"]))
     (lib.DATA / "coverage.json").write_text(
-        json.dumps({"rows": coverage_rows, "generated_at_utc": lib.utc_now()}, indent=1, sort_keys=True) + "\n",
+        json.dumps({"rows": coverage_rows, "generated_at_utc": data_clock(index)}, indent=1, sort_keys=True) + "\n",
         encoding="utf-8")
 
     # The join: only pairs where both documents parsed cleanly.
@@ -218,7 +228,7 @@ def build_artifacts() -> dict:
         by_practice[-1]["game_status"] = row[1]
 
     designations = {
-        "generated_at_utc": lib.utc_now(),
+        "generated_at_utc": data_clock(index),
         "protocol": "injury-archive/PREREGISTRATION.md (IA-PRE-01)",
         "pairs_joined": join_rows,
         "observations": observations,

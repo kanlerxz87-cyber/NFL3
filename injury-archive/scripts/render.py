@@ -444,7 +444,7 @@ def render_all(data: dict) -> None:
     contract = {
         "pages": sorted(pages),
         "sources": [lib.injuries_url(2026, 10), lib.inactives_url(2026, 10)],
-        "generated_at_utc": lib.utc_now(),
+        "generated_at_utc": B.data_clock(lib.read_index()),
     }
     (site / "data" / "render_contract.json").write_text(json.dumps(contract, indent=1) + "\n",
                                                         encoding="utf-8")
