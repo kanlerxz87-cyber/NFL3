@@ -1,29 +1,30 @@
 {
-<<<<<<< HEAD
-  "html_pages": 196,
-  "table_rows": 11535,
+  "html_pages": 201,
+  "table_rows": 11645,
   "rows_missing_official_source": 894,
   "rows_community_only": 315,
-=======
-  "html_pages": 198,
-  "table_rows": 11613,
-  "rows_missing_official_source": 893,
-  "rows_community_only": 314,
->>>>>>> origin/main
   "rows_with_internal_audit_source": 7,
-  "conflict_files": [],
+  "conflict_files": [
+    "decision-lab/data/audit.json"
+  ],
   "authority_claim_files": [],
   "local_errors": [],
   "findings": [
     {
+      "id": "AUD-02",
+      "severity": "High",
+      "title": "Merge-conflict markers remain in repository text",
+      "detail": "1 file(s) contain conflict separators.",
+      "files": [
+        "decision-lab/data/audit.json"
+      ],
+      "source": "LOCAL_AUDIT"
+    },
+    {
       "id": "AUD-03",
       "severity": "High",
       "title": "Table rows without an official-source link",
-<<<<<<< HEAD
       "detail": "894 row(s) across the repository lack an official HTTPS source; 315 cite only community sources.",
-=======
-      "detail": "893 row(s) across the repository lack an official HTTPS source; 314 cite only community sources.",
->>>>>>> origin/main
       "files": [
         "dashboard/flagged.html",
         "dashboard/questions.html",
@@ -596,11 +597,7 @@
     },
     {
       "path": "index.html",
-<<<<<<< HEAD
-      "rows": 68,
-=======
       "rows": 69,
->>>>>>> origin/main
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -1152,15 +1149,9 @@
     },
     {
       "path": "origination/prices.html",
-<<<<<<< HEAD
-      "rows": 100,
-      "rows_missing_official_source": 100,
-      "rows_community_only": 100,
-=======
       "rows": 106,
       "rows_missing_official_source": 106,
       "rows_community_only": 106,
->>>>>>> origin/main
       "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
@@ -1398,11 +1389,7 @@
     },
     {
       "path": "review.html",
-<<<<<<< HEAD
       "rows": 33,
-=======
-      "rows": 28,
->>>>>>> origin/main
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -1565,8 +1552,6 @@
       "rows": 160,
       "rows_missing_official_source": 2,
       "rows_community_only": 1,
-<<<<<<< HEAD
-=======
       "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
@@ -1599,7 +1584,6 @@
       "rows": 136,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
->>>>>>> origin/main
       "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
