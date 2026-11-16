@@ -568,6 +568,15 @@ def main() -> int:
             "file": "two-total/PRE_REGISTRATION.md",
             "file_sha256": sha256(OUT / "PRE_REGISTRATION.md"),
             "rule": "the commit that created the file is the registration; written here by a later commit",
+            # A rebase onto main once rewrote the registration commit's identity. The rule text did not
+            # change: the file SHA-256 recorded above is the same value the pre-rebase artifact held, so
+            # the transposition is published here rather than hidden. verify.py checks the recorded commit
+            # is the commit that CREATED the file and that the file hash is unchanged; it cannot see the
+            # pre-rebase hash by itself, which is why the earlier value is written down.
+            "transposed_from": "468344acd5f4cc5cb44dbcee637a742f859999b5",
+            "transposition_note": (
+                "Registration commit identity was rewritten once by a rebase onto main. The registration "
+                "content is unchanged: the file hash is the value the pre-rebase artifact held."),
         },
         "corpus": {
             "file": "corpus/games_2026_w1_9.csv",

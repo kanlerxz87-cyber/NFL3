@@ -386,6 +386,11 @@ rel="noopener noreferrer">official Week 7 schedule page &#8599;</a></td></tr>
 <tr><td>Interval</td><td>percentile, 2.5% and 97.5% of the resampled difference</td>
 <td><a class="source" href="https://www.nfl.com/schedules/2026/by-week/week-8" target="_blank"
 rel="noopener noreferrer">official Week 8 schedule page &#8599;</a></td></tr>
+<tr><td>Registration commit transposition</td><td>identity rewritten once by a rebase onto
+<code>main</code>; recorded pre-rebase value <code>{esc(D["registration"].get("transposed_from","")[:12])}&hellip;</code>,
+rule-text SHA-256 unchanged</td>
+<td><a class="source" href="https://www.nfl.com/schedules/2026/by-week/week-7" target="_blank"
+rel="noopener noreferrer">official Week 7 schedule page &#8599;</a></td></tr>
 <tr><td>Point estimate, validation block</td><td class="num">{signed(b['point'])}</td>
 <td><a class="source" href="https://www.nfl.com/schedules/2026/by-week/week-8" target="_blank"
 rel="noopener noreferrer">official Week 8 schedule page &#8599;</a></td></tr>

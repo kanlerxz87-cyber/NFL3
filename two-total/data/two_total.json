@@ -5,10 +5,12 @@
   "requirement": "P4 publish every model total twice (two estimators, gap column) until one wins walk-forward",
   "label": "backtest corpus \u2014 not a leaderboard result",
   "registration": {
-    "commit": "468344acd5f4cc5cb44dbcee637a742f859999b5",
+    "commit": "433e50842e498e80ffa092c549d1f0765e0f31f2",
     "file": "two-total/PRE_REGISTRATION.md",
     "file_sha256": "e2a2a98ef314beb275b0d58d72191e8b4fee897190c64ed0eb3a727898929f3c",
-    "rule": "the commit that created the file is the registration; written here by a later commit"
+    "rule": "the commit that created the file is the registration; written here by a later commit",
+    "transposed_from": "468344acd5f4cc5cb44dbcee637a742f859999b5",
+    "transposition_note": "Registration commit identity was rewritten once by a rebase onto main. The registration content is unchanged: the file hash is the value the pre-rebase artifact held."
   },
   "corpus": {
     "file": "corpus/games_2026_w1_9.csv",

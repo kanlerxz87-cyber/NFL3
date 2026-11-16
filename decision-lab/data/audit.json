@@ -1,8 +1,8 @@
 {
-  "html_pages": 197,
-  "table_rows": 11687,
-  "rows_missing_official_source": 896,
-  "rows_community_only": 317,
+  "html_pages": 198,
+  "table_rows": 11613,
+  "rows_missing_official_source": 893,
+  "rows_community_only": 314,
   "rows_with_internal_audit_source": 7,
   "conflict_files": [],
   "authority_claim_files": [],
@@ -12,7 +12,7 @@
       "id": "AUD-03",
       "severity": "High",
       "title": "Table rows without an official-source link",
-      "detail": "896 row(s) across the repository lack an official HTTPS source; 317 cite only community sources.",
+      "detail": "893 row(s) across the repository lack an official HTTPS source; 314 cite only community sources.",
       "files": [
         "dashboard/flagged.html",
         "dashboard/questions.html",
@@ -39,6 +39,14 @@
     }
   ],
   "pages": [
+    {
+      "path": "acceptance.html",
+      "rows": 8,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
     {
       "path": "availability-ledger/availability.html",
       "rows": 50,
@@ -929,7 +937,7 @@
     },
     {
       "path": "official-verify/leaderboard.html",
-      "rows": 53,
+      "rows": 0,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -1097,7 +1105,7 @@
     },
     {
       "path": "origination/leaderboard.html",
-      "rows": 10,
+      "rows": 0,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -1121,9 +1129,9 @@
     },
     {
       "path": "origination/prices.html",
-      "rows": 103,
-      "rows_missing_official_source": 103,
-      "rows_community_only": 103,
+      "rows": 106,
+      "rows_missing_official_source": 106,
+      "rows_community_only": 106,
       "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
@@ -1465,9 +1473,9 @@
     },
     {
       "path": "skill-lab/leaderboard.html",
-      "rows": 23,
-      "rows_missing_official_source": 6,
-      "rows_community_only": 6,
+      "rows": 0,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
       "local_errors": []
     },
@@ -1545,7 +1553,7 @@
     },
     {
       "path": "two-total/method.html",
-      "rows": 11,
+      "rows": 12,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
