@@ -1,0 +1,18 @@
+{
+ "description": "Venue lines copied from the official NFL game-centre 'Game Info' block, read with fetch_page on 2026-11-16. The page prints each label and value together (for example 'LocationLOCATIONHOUSTON, TX'); the value after the label is recorded in location and stadium. The verifier checks every venue row in week11_venues.csv against these records.",
+ "records": [
+  {"game_slug": "colts-at-texans", "url": "https://www.nfl.com/games/colts-at-texans-2026-reg-11", "location": "HOUSTON, TX", "stadium": "RELIANT STADIUM", "raw_lines": ["LocationLOCATIONHOUSTON, TX", "StadiumSTADIUMRELIANT STADIUM"]},
+  {"game_slug": "dolphins-at-bills", "url": "https://www.nfl.com/games/dolphins-at-bills-2026-reg-11", "location": "ORCHARD PARK, NY", "stadium": "HIGHMARK STADIUM", "raw_lines": ["LocationLOCATIONORCHARD PARK, NY", "StadiumSTADIUMHIGHMARK STADIUM"]},
+  {"game_slug": "ravens-at-panthers", "url": "https://www.nfl.com/games/ravens-at-panthers-2026-reg-11", "location": "CHARLOTTE, NC", "stadium": "BANK OF AMERICA STADIUM", "raw_lines": ["LocationLOCATIONCHARLOTTE, NC", "StadiumSTADIUMBANK OF AMERICA STADIUM"]},
+  {"game_slug": "saints-at-bears", "url": "https://www.nfl.com/games/saints-at-bears-2026-reg-11", "location": "CHICAGO, IL", "stadium": "SOLDIER FIELD", "raw_lines": ["LocationLOCATIONCHICAGO, IL", "StadiumSTADIUMSOLDIER FIELD"]},
+  {"game_slug": "titans-at-cowboys", "url": "https://www.nfl.com/games/titans-at-cowboys-2026-reg-11", "location": "ARLINGTON, TX", "stadium": "AT&T STADIUM", "raw_lines": ["LocationLOCATIONARLINGTON, TX", "StadiumSTADIUMAT&T STADIUM"]},
+  {"game_slug": "buccaneers-at-lions", "url": "https://www.nfl.com/games/buccaneers-at-lions-2026-reg-11", "location": "DETROIT, MI", "stadium": "FORD FIELD", "raw_lines": ["LocationLOCATIONDETROIT, MI", "StadiumSTADIUMFORD FIELD"]},
+  {"game_slug": "cardinals-at-chiefs", "url": "https://www.nfl.com/games/cardinals-at-chiefs-2026-reg-11", "location": "KANSAS CITY, MO", "stadium": "ARROWHEAD STADIUM", "raw_lines": ["LocationLOCATIONKANSAS CITY, MO", "StadiumSTADIUMARROWHEAD STADIUM"]},
+  {"game_slug": "steelers-at-eagles", "url": "https://www.nfl.com/games/steelers-at-eagles-2026-reg-11", "location": "PHILADELPHIA, PA", "stadium": "LINCOLN FINANCIAL FIELD", "raw_lines": ["LocationLOCATIONPHILADELPHIA, PA", "StadiumSTADIUMLINCOLN FINANCIAL FIELD"]},
+  {"game_slug": "jets-at-chargers", "url": "https://www.nfl.com/games/jets-at-chargers-2026-reg-11", "location": "INGLEWOOD, CA", "stadium": "SOFI STADIUM", "raw_lines": ["LocationLOCATIONINGLEWOOD, CA", "StadiumSTADIUMSOFI STADIUM"]},
+  {"game_slug": "jaguars-at-giants", "url": "https://www.nfl.com/games/jaguars-at-giants-2026-reg-11", "location": "EAST RUTHERFORD, NJ", "stadium": "METLIFE STADIUM", "raw_lines": ["LocationLOCATIONEAST RUTHERFORD, NJ", "StadiumSTADIUMMETLIFE STADIUM"]},
+  {"game_slug": "raiders-at-broncos", "url": "https://www.nfl.com/games/raiders-at-broncos-2026-reg-11", "location": "DENVER, CO", "stadium": "EMPOWER FIELD AT MILE HIGH", "raw_lines": ["LocationLOCATIONDENVER, CO", "StadiumSTADIUMEMPOWER FIELD AT MILE HIGH"]},
+  {"game_slug": "vikings-at-49ers", "url": "https://www.nfl.com/games/vikings-at-49ers-2026-reg-11", "location": "MEXICO CITY", "stadium": "ESTADIO BANORTE", "raw_lines": ["LocationLOCATIONMEXICO CITY", "StadiumSTADIUMESTADIO BANORTE"]},
+  {"game_slug": "bengals-at-commanders", "url": "https://www.nfl.com/games/bengals-at-commanders-2026-reg-11", "location": "LANDOVER, MD", "stadium": "NORTHWEST STADIUM", "raw_lines": ["LocationLOCATIONLANDOVER, MD", "StadiumSTADIUMNORTHWEST STADIUM"]}
+ ]
+}

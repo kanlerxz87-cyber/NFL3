@@ -105,6 +105,10 @@ jobs:
             echo "::error::matchup/ is stale. Run build.py then pages.py and commit the result."
             exit 1
           fi
+      - name: Venue register fail-closed verification (fixture set, game-centre and schedule matches, source links, reproducible pages)
+        run: python3 venues/scripts/verify.py
+      - name: Venue register committed pages match the build
+        run: git diff --exit-code -- venues/index.html venues/flagged.html
       - name: Injury-archive tests (synthetic fixtures, no network)
         run: |
           python3 tests/test_injury_archive.py

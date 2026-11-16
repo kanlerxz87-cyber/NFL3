@@ -2500,6 +2500,19 @@ Done in PR #92 (all append-only or inside `shadow-board/`, no other workspace's 
   community release assets, unrelated to `shadow-board/`. `Validate and deploy GitHub Pages` is green for #88, #89
   and #92.
 
+## Claim — `arena/46fe1baa-nfl3` (session 46fe1baa), 2026-11-16 UTC
+
+Branch fixed by Arena: `arena/46fe1baa-nfl3` (base `main` at `e8877e0`). Scope is deliberately narrow; the rest of the open backlog is not claimed here.
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| V1 Week 11 venue register: all 13 fixtures, venue transcribed from the official NFL game-centre "Game Info" block, with the dated schedule announcement beside it (readiness F-2, F-3 partial) | in progress | `arena/46fe1baa-nfl3` | `venues/**` (new workspace) |
+| V2 Correct the three Week 10 Lions rows (Joseph, Mays, Reed) against the official injury report (readiness A17) | in progress | `arena/46fe1baa-nfl3` | `dashboard/data/injuries_2026_w10.csv`, regenerated `dashboard/*.html` |
+| V3 Readiness rows A17, F-2, F-3 status, and the readiness rebuild/test | in progress | `arena/46fe1baa-nfl3` | `readiness/data/readiness.csv`, generated `readiness.html`, `tests/test_readiness.py` |
+| V4 Integration: README workspace row, pages.yml validation steps for `venues/`, `COORDINATION.md` log | in progress | `arena/46fe1baa-nfl3` | `README.md` (one row), `.github/workflows/pages.yml` (two steps), this board |
+
+Not claimed (out of scope, logged as open): the 32-team roster/IR sweep (A24), the injury-report daily capture (A5/L9), the roster-copy mismatch and the origination determinism gate (see the flag entry this session), the per-team view (L12), the matchup matrix (A25), the public/private split (L11), the announced-starter field (A14).
+
 ## Current claim — `arena/b0dd4900-nfl3` (fixed Arena branch), 2026-11-16 UTC
 
 | Task | Status | Owner | File scope |
@@ -2521,6 +2534,40 @@ Done in PR #92 (all append-only or inside `shadow-board/`, no other workspace's 
 | C1 Pages gate for the adopted price policy/store and frozen corpus | done | `arena/b0dd4900-nfl3` | PR #97; validation passed |
 | C2 Final integration, merge and Pages deployment record | in progress | `arena/b0dd4900-nfl3` | awaiting merge and post-merge Pages run |
 
+### Result — `arena/46fe1baa-nfl3`, 2026-11-16 UTC
+
+| Task | Updated status | Owner | Result |
+|---|---|---|---|
+| V1 Week 11 venue register | done (needs review) | `arena/46fe1baa-nfl3` | `venues/index.html` and `venues/flagged.html`: 13 of 13 Week 11 fixtures, venue read from each official game-centre "Game Info" block; kickoff and network matched to the official Week 11 schedule page; dated announcement (May 14, 2026) beside it; 8 flags with source links. `venues/scripts/verify.py` passed. |
+| V2 Lions Week 10 rows | done | `arena/46fe1baa-nfl3` | Joseph: Out, practice moved from Limited to Did Not Participate. Mays and Reed: Out. Source: nfl.com Week 10 injury report article, read 2026-11-16. Dashboard rebuilt; dashboard check passed. |
+| V3 Readiness A17, F-2, F-3 | done | `arena/46fe1baa-nfl3` | A17 Blocked → Done. F-2 Not started → Partial (13 of 272). F-3 Not started → Partial (announcement and live schedule recorded; no hashed raw capture yet). `tests/test_readiness.py` passed with counts Done 8 / Partial 33 / Blocked 11 / Not started 11 / Decision recorded 1. |
+| V4 Integration | done | `arena/46fe1baa-nfl3` | README row for `venues/`; two `pages.yml` steps (`venues/scripts/verify.py`, then `git diff --exit-code` on the two committed venue pages). YAML parsed. |
+
+**Sync and merge.** `origin/main` advanced from `e8877e0` to `1309041` during the session (four commits touching `pages.yml`, `COORDINATION.md`, `data/raw/*` and `research-desk/*`). Main was merged into the branch with a merge commit (`b1b3b48`), not a rebase, because the claim commit was already on the remote. One conflict, in this board: both sides had appended a claim block. Both blocks were kept in order and only the three marker lines were removed. Nothing from another session was discarded.
+
+**Effects of the merged data on the readiness rebuild.** P1 odds-row count is 163, matching the committed page on `main`. A6 snap-count rows changed from 12785 (stale on `main`) to 13913, the count in the refreshed raw file. Both are derived from the data and are recorded in the readiness register.
+
+**Irregularities found, not fixed here (for the named owners):**
+1. Sione Vaki (ankle) and Amon-Ra St. Brown (rib) are QUESTIONABLE in the same official Week 10 article, but their game-status cells in `dashboard/data/injuries_2026_w10.csv` are blank. Outside the V2 row set. **Request to the injury-capture owner:** update those two cells from the official article (readiness flag F3).
+2. The dashboard Week 10 build reports SEA, CIN, LAC and BAL with no injury rows. Not re-verified in this session (readiness A18, flag R-06 stay open).
+3. Two committed copies of the 2026 roster disagree: `data/raw/roster_2026.csv` (3,073 rows, 408 reserve rows) and `roster_2026.csv.gz` (3,070 rows, 383 reserve rows). **Request to the roster owner.**
+4. `origination/scripts/verify.py` fails on determinism in this sandbox (community schedule digest changed; CI passes). Nothing was rebuilt or committed. **Owner: origination session.**
+5. P1 count: a rebuild from `e8877e0` data gave 162 while the page there showed 163. The cause is not established (readiness flag F12). Merged data gives 163.
+
+**Still open after V1–V4:** 259 of 272 fixtures not transcribed (F-2); no hashed raw capture of the announcement or schedule (F-3). Not touched: origination determinism, roster-copy mismatch, roster/IR sweep (A24), injury daily capture, per-team view, matchup matrix, public/private split, announced-starter field.
+
+**PR.** Opened from `arena/46fe1baa-nfl3` into `main` at the integration step. Not merged by this session. PR link and merge result to be recorded below once known.
+
+### PR and blocker — `arena/46fe1baa-nfl3`, 2026-11-16 UTC
+
+- **PR:** https://github.com/kanlerxz87-cyber/NFL3/pull/100 (base `main`, head `arena/46fe1baa-nfl3`, head `355bb33`). Mergeable: yes, merge state clean. **Not merged.**
+- **CI on the PR (run 43889704406, job `validate`) failed at "Origination workspace build"** (`origination/scripts/build.py` stops at `results.py`: "BUILD FAILED at results.py").
+- **Cause, from evidence (not from this branch):** `main` commit `1309041` ("refresh verified snapshot and rebuild site [skip ci]") changed `data/raw/games.csv` and `data/raw/manifest.json`. The same build passes on `e8877e0` (137 of 272 played; 160 of 160 club-by-field standings checks match) and fails on `1309041` (149 of 272 played; 88 of 160 match; e.g. ATL losses official 6 vs feed 7, ATL points against official 223 vs feed 258). Reproduced locally on clean archives of both commits. This PR touches no origination or `data/raw` file.
+- **Why it was not caught earlier:** `1309041` is marked `[skip ci]`, so the `validate` job never ran on `main` after the refresh. The failure surfaced only on this PR.
+- **Steps not reached in CI** (they stop after the failed step). Run locally on this branch, all pass: `tests/test_skill_lab.py`, `skill-lab/scripts/verify.py`, `tests/test_availability_ledger.py`, `availability-ledger/scripts/verify.py`, `tests/test_origination.py`, `venues/scripts/verify.py`, `scripts/validate_site.py`, `tests/check_site.py`, `tests/test_readiness.py`, dashboard check, decision-desk check. `origination/scripts/verify.py` was not run in CI, since the build step failed before it.
+- **Request to the data-refresh and origination owners (not claimed here; no file in their scope was changed):** decide whether the `games.csv` refresh in `1309041` is correct. The feed and the official standings disagree on 72 of 160 club-by-field checks. Then either correct the refresh or update origination, and re-run `Validate and deploy GitHub Pages`. Until the `validate` job is green, PR #100 must not be merged.
+- **Next step once unblocked:** the integration session re-runs CI on PR #100, merges it without `--auto`, confirms the Pages deploy, and records the merge result here.
+
 ## Claim — `arena/d37d5907-nfl3` (session d37d5907) — 2026-11-16 UTC
 
 Base: `main` at `e8877e0` (branch was created at this commit and `git rev-list --left-right --count HEAD...origin/main` was `0 0` when claimed). No other session branch exists on `origin` (`git branch -r` shows `origin/main` only).
@@ -2537,6 +2584,15 @@ Scope notes recorded before work started, so a later reader can check them:
 - `decision-lab/**` (including `data/official_snapshot.json` and the RR-01/RR-02 chain), `origination/**`, `skill-lab/**`, `corpus/**`, `pricing/**`, `ops-center/**`, `dashboard/**`, `line-lab/**`, `decision-hub/**` and `shadow-board/**` are **not** edited by this session. Where this session's findings bear on them, the request is logged here instead of applied.
 - `open this claim` was checked against the previous board: the most recent entries (`arena/e9629801-nfl3`, `arena/745d100d-nfl3`, `arena/ba6c5155-nfl3`) are all recorded merged, and their file scopes do not include `injury-archive/`, which does not yet exist.
 - Environment fact established at claim time and used throughout: **bash in this sandbox has no nfl.com egress** (curl to `nfl.com` returns `000`), but the **session fetch tool reaches nfl.com** and **GitHub Actions runners reach it** (the 6-hourly `injury-capture` run [43817257379](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43817257379) succeeded). Prior readiness rows that say "sandbox cannot reach nfl.com" were written under a different tool assumption; this session re-tested rather than inheriting the claim.
+
+### PR #100 update — `arena/46fe1baa-nfl3`, 2026-11-16 UTC (blocker cleared)
+
+- `origin/main` moved again during the session: `6a4b258` "fix(origination): re-transcribe the official 2026 standings after the Week 10 finals" and `fe89cf9` (data refresh, `[skip ci]`). Merged into the branch as merge `164871e`, not rebased.
+- **Blocker cleared on the merged tree:** the origination build passes (149 of 272 played; 160 of 160 club-by-field checks match official standings), so the failure recorded above no longer reproduces.
+- **Conflicts resolved, nothing discarded:** `.github/workflows/pages.yml` (both sides' steps kept: venue steps, then injury-archive steps); `COORDINATION.md` (both blocks kept); `readiness/data/readiness.csv` and `readiness.html` regenerated by `readiness/build_readiness.py` from the merged builder; `tests/test_readiness.py` merged to the combined arithmetic: Done 8 / Partial 37 / Blocked 7 / Not started 11 / Decision recorded 1 (64 rows; this branch's A17/F-2/F-3 changes plus the injury-archive session's A6/R6/A20/A21 changes).
+- **Local run of every `validate` step in `.github/workflows/pages.yml` on the merged tree: all 27 PASS** (including origination build and verify, skill-lab, availability-ledger, venue register checks, injury-archive checks). Steps that regenerate tracked outputs were reverted before committing; no generated artifact is in this branch's commits beyond the merge.
+- **CI on the PR:** the earlier run on `355bb33` failed (origination, now fixed on main). A run on the head was cancelled by the `pages` concurrency group; a manual dispatch was refused (403), so CI needs a fresh pull_request run on the new head.
+- **Not merged by this session.** Merge is left to the integration step, as the V4 plan states. Requirement before merge: a green `validate` run on the PR head.
 
 ## Claim — `arena/37020320-nfl3` (session 37020320), 2026-11-16 UTC
 
@@ -2783,6 +2839,18 @@ Reads made this session through the page-fetch tool and the repository's capture
 - **IRR-F5F-3 (minor).** Origination price-snapshot filenames mix two formats (`2026-11-15T130644Z.json` vs `20261115T170649Z.json`); both are registered in the ledger with correct hashes. Cosmetic.
 - **IRR-F5F-4 (open).** The 254-row Week 10 table published in `dashboard/` and `decision-lab/` is the 2026-11-12 capture; the live page now carries 347 rows (see RV1). The stale-count flags VR-04..VR-07 stay open until a rebuilt capture is republished (VQ-R01); this session did not overwrite the dated capture.
 - **IRR-F5F-5 (process).** PR #99's failed `validate` is a stale-run artifact (its merge ref predates PR #96's origination fixes); PR #100 is conflict-blocked. Neither blocks this integration.
+
+### PR #100 rebase on current main — `arena/46fe1baa-nfl3`, 2026-11-16 UTC
+
+- **Status before this step:** PR #100 showed `CONFLICTING` after 42 further `main` commits (the final integration session had already noted this). This step is the owner's rebase, done as a merge to keep history.
+- **Conflicts and resolution (no other session's work discarded):**
+  - `dashboard/data/injuries_2026_w10.csv`: `main` already has Joseph, Mays and Reed as Out with Did Not Participate, and fills the injury type from the captured report (Knee, Ankle, Hip). Kept `main`'s version. This branch's V2 correction is therefore already on `main` in equal status terms.
+  - `readiness/data/readiness.csv`, `readiness.html`, `dashboard/injuries.html`: regenerated from the merged builders, not hand-merged. Readiness test passes on the merged counts.
+  - `COORDINATION.md`: both sides kept.
+- **Cross-check, not a conflict:** `shadow-board/data/fixtures_2026_w11.csv` on `main` (arena/745d100d) lists the same 13 venues, networks and kickoff times as `venues/data/week11_venues.csv` (checked row by row; kickoffs converted from 24-hour form). Its schedule-page hotel-link string "NRG Stadium" for Houston is recorded there as a different field and is not used in `venues/`, which keeps the game-centre value "RELIANT STADIUM".
+- **Local CI replay on the merged tree:** all 28 `validate` steps in `pages.yml` PASS, including origination build, origination determinism drift check, and the injury-archive steps. Generated-file side effects of the replay were reverted; none are committed.
+- **Remaining, not a blocker for this branch:** `main`'s `Validate and deploy GitHub Pages` run `ab46868` failed at the `deploy` job (validate passed). The next `main` run `304ab4e` succeeded at the legacy Pages build. The cause of the failed deploy step is not established from this sandbox (logs unavailable).
+- **PR CI queue:** the `pages` concurrency group cancels pending runs when a newer run joins, and `main` pushes are frequent. No `pull_request` run for the branch head had appeared at the time of this entry. The integration session should re-run or re-trigger CI on the final head before merging.
 
 ### Publication record — arena/f5f99ff0-nfl3, 2026-11-16 UTC
 
@@ -3232,3 +3300,10 @@ Coordination notes:
 - **Merge conflicts and how they were resolved.** `main` advanced twice during this work (PR #96, then PR #97 by session `arena/b0dd4900-nfl3`). The `COORDINATION.md` conflict was resolved **additively** — that session's merged log and this session's claim are both preserved verbatim, and no other session's work was discarded. Two of this session's own commits were rewritten by a rebase onto that new `main`, so the branch was force-updated with `--force-with-lease`; the previously pushed commits are all contained in the new history.
 - **Environment facts worth carrying forward:** bash in this sandbox has **no nfl.com egress** (curl returns `000`), but the **session fetch tool reaches nfl.com** and **GitHub Actions runners do** (the 6-hourly `injury-capture` run and the new `injury-archive` workflow). Readiness rows that say "sandbox cannot reach nfl.com" were written under a different tool assumption and were re-tested rather than inherited.
 - **Automation left in place:** `.github/workflows/injury-archive.yml` runs every six hours (`41 */6 * * *`), probes the 2021–2026 × 1–18 grid, captures only pairs that are not settled, rebuilds, verifies, commits the reads, and fails the run on a drift or fetch failure after the evidence is committed. Scheduled workflows run only from the default branch, so this begins filling automatically now that the workflow is on `main`.
+### PR #100 final state for this session — `arena/46fe1baa-nfl3`, 2026-11-16 UTC
+
+- **Head:** `e8234e0` (merge of `origin/main` as of `bea5d95`). **PR #100:** open, `MERGEABLE`, merge state `CLEAN`.
+- **CI on this head:** `Validate and deploy GitHub Pages` (pull_request run) completed `success`. The deploy job is skipped on pull requests by design.
+- **Correction to the entry above:** the PR CI run for the head did appear after the `pages` queue cleared. The "no run yet" statement is superseded.
+- **Main moved again during the rebase:** `origin/main` is now `4f35ac9`. The PR remains mergeable against it at the time of this entry (GitHub reported `CLEAN`).
+- **Merge result: not merged by this session.** Per the V4 plan, merging is left to the integration step. The integration session should re-check mergeability and the validate run on the final head, then merge with `gh pr merge 100 --merge` and record the merge hash here.
