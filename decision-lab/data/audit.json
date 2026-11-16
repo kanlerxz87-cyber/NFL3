@@ -4,22 +4,10 @@
   "rows_missing_official_source": 894,
   "rows_community_only": 315,
   "rows_with_internal_audit_source": 7,
-  "conflict_files": [
-    "decision-lab/data/audit.json"
-  ],
+  "conflict_files": [],
   "authority_claim_files": [],
   "local_errors": [],
   "findings": [
-    {
-      "id": "AUD-02",
-      "severity": "High",
-      "title": "Merge-conflict markers remain in repository text",
-      "detail": "1 file(s) contain conflict separators.",
-      "files": [
-        "decision-lab/data/audit.json"
-      ],
-      "source": "LOCAL_AUDIT"
-    },
     {
       "id": "AUD-03",
       "severity": "High",
