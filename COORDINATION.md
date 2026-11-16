@@ -3923,3 +3923,38 @@ Edited: `injury-archive/scripts/{render,build}.py`, `injury-archive/data/render_
   still holds one 2026 Week 10 pair with `raw_bytes_retained: false` on every line.
 - **To the `venues/` owner (absent):** 259 of 272 fixtures are untranscribed and neither the schedule page nor the
   announcement has a retained raw capture. Published as decision D7 with its clearing number.
+
+### Rebase note — `arena/95dedf16-nfl3` — 2026-11-16, after `main` advanced 38 commits
+
+While this session was building the review desk, `main` gained the **`two-total/` workspace** (PR #123,
+commits `433e508` pre-registration and `91836c6` publication) and a **rewritten `EXECUTIVE_SUMMARY.md`**
+(`77d8833`, by another session, which replaced the numbered-sections document with a shorter current-state
+summary). The branch was rebased onto `origin/main` at `5676d8f`.
+
+Conflicts, all resolved by keeping every side:
+
+- **`COORDINATION.md`** — add/add. Resolved by preserving 202 lines from `main` and 31 from this session.
+- **`index.html`** — twice, because the file is one long line so git treats the whole document as a single
+  hunk. Both times resolved by taking `main`'s version and re-applying this session's insertions
+  programmatically: two site-guide rows (venue register, suggestion desk) and two sidebar entries. Verified
+  afterwards that `main`'s own `two-total/index.html` entries survive (4 occurrences) alongside them.
+- **`EXECUTIVE_SUMMARY.md`** — the other session's rewrite versus this session's appended sections. Resolved
+  in favour of the rewrite, because it is the better document and a second numbered section would have fought
+  it. This session's contribution was re-expressed in the new file's own style: a `## Suggestion review desk`
+  section with the twelve-decision table, two lines in *Primary public pages*, three lines in *Verification
+  performed*, and the section recovered from PR #105 kept verbatim as **Appendix A** with a note explaining
+  why it is an appendix.
+
+**Effect on decision D11.** `main` now publishes both total estimators with the gap column and a pre-registered
+collapse rule, so the desk's D11 was rewritten against it rather than describing the plan as unbuilt. All numbers
+were re-read from `two-total/data/two_total.json`: T1 prior-season pace fit and T2 league mean plus one third of
+the form gap; 136 rows with both estimators, 135 scored, 1 excluded; the five collapse conditions with only C5
+true (28 scored validation games against a floor of 20) and C1–C4 false, `collapsed = false`; corpus-wide MAE
+11.457 vs 12.672 with a bootstrap difference of −1.215 (n=135, 10,000 resamples, 95% −2.374 to −0.050) against a
+validation-block cluster bound of −4.8055 that includes zero; and the published diagnosis that T2's 7.46-point
+bias is not the whole story. The interesting part is published rather than resolved: **the corpus-wide interval
+excludes zero and the pre-registered block's does not, and the desk says so.**
+
+**Post-rebase verification.** `scripts/validate_site.py`, `tests/check_site.py`,
+`questions/build.py --check`, `suggestion-desk/scripts/check.py`, `venues/scripts/verify.py`,
+`injury-archive/scripts/verify.py` (2,187 checks) — all pass.

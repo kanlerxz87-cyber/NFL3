@@ -1096,35 +1096,40 @@
   },
   {
    "id": "D11",
-   "title": "Which model, and how is it split?",
-   "question": "One estimator or two published side by side? Chronological splits inside one season, or wait for multiple seasons?",
-   "why_first": "The brief asks for every model total to be published twice until one wins, and for train/validation/holdout splits. With only one verified season, the split policy is doing more work than usual.",
+   "title": "Which total estimator wins, and when may the pair collapse to one?",
+   "question": "Keep both total estimators published with the gap column until the pre-registered collapse rule fires, or collapse to one now and publish a single number?",
+   "why_first": "The brief asks for every model total to be published twice until one wins, and for train/validation/holdout splits. The two-total workspace now implements exactly that, pre-registered, and its collapse rule has been evaluated: four of its five conditions fail. The remaining question is what to do while it stays open.",
    "have": [
     {
-     "fact": "A frozen pre-registered corpus exists: 136 games, 2026 Weeks 1-9, with 135 exact score matches against the official pages. One Week 2 game (Washington at Dallas) is published as 'Hidden Score' on both the official schedule and game-centre pages; its score cells are blank and never inferred.",
-     "artifact": "corpus/games_2026_w1_9.csv, corpus/PRE_REGISTRATION.md",
-     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/corpus/PRE_REGISTRATION.md"
+     "fact": "Both estimators are published with a gap column on every corpus row: T1 is a prior-season pace fit (ridge least squares on six prior seasons: level, pace_home, pace_away) and T2 is the league mean plus one third of the form gap (form window 6, shrink 1/3, league level 46.17 fitted on 93 train games). 136 rows carry both estimators; 135 are scored; 1 carries a blank actual total and is excluded, never inferred.",
+     "artifact": "two-total/data/two_total.json",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/two-total/data/two_total.json"
     },
     {
-     "fact": "The forward ledger extends the verified feed to 2026 Week 10: 150 fixtures, 149 graded, 1 unplayed, 32 clubs, 160 of 160 standings field checks, 0 mismatches against the official record chips for the 31 clubs read in that pass.",
-     "artifact": "forward-ledger/data/ledger_manifest.json",
-     "source": "https://www.nfl.com/scores/2026/week-10"
+     "fact": "The collapse rule is pre-registered and evaluated. Of its five conditions only the sample floor passes: C5 (28 scored validation games against a floor of 20) is true, while C1 (challenger better: MAE T1 11.009 vs T2 13.258 on n=28), C2 (95% game-cluster lower bound -4.8055), C3 (RMSE agrees) and C4 (both halves agree) are all false. The pair therefore stays published: collapsed = false.",
+     "artifact": "two-total/PRE_REGISTRATION.md section 6, two-total/data/two_total.json decision block",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/two-total/PRE_REGISTRATION.md"
     },
     {
-     "fact": "A pre-registered singles-only baseline is running prospectively and its Week 11 forecasts are recorded, kept separate from anything rankable.",
-     "artifact": "shadow-board/data/fair_lines_2026_w11.csv",
-     "source": "https://www.nfl.com/schedules/2026/by-week/week-11"
+     "fact": "Over the whole corpus the two do separate: MAE T1 11.457 against T2 12.672, bootstrap difference -1.215 points (n=135, 10,000 resamples, 95% interval -2.374 to -0.050, which excludes zero) - while the 28-game validation block's own interval (-4.8055) includes it. The corpus-wide separation and the pre-registered block disagree, and both are published.",
+     "artifact": "two-total/data/two_total.json scores.overall and decision.numbers",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/two-total/data/two_total.json"
     },
     {
-     "fact": "Every model output is stored as a probability plus its inputs, not just a pick, and the origination workspace publishes the fair line, the market line and the difference as separate columns.",
-     "artifact": "shadow-board/, origination/",
-     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/shadow-board/data/fair_lines_2026_w11.csv"
+     "fact": "The diagnosis is published rather than patched: T2 prices 7.46 points below the realised total on average against T1's -0.11, but removing that constant only moves T2 from MAE 12.672 to 11.586, because its prediction spread is 0.67 points against a realised spread of 14.33.",
+     "artifact": "two-total/data/two_total.json diagnosis",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/two-total/data/two_total.json"
+    },
+    {
+     "fact": "The price firewall holds: 0 licensed price sources, 0 ROI rows, 0 closing-line-value rows. The artifact records no wall-clock value, so a rebuild from committed inputs is byte-identical, and all 7,116 of T2's rolling inputs were checked for look-ahead with 0 violations.",
+     "artifact": "two-total/data/two_total.json price_firewall, determinism and leakage",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/pricing/PRICE_DATA_POLICY.md"
     }
    ],
    "missing": [
-    "More than one season of official results. The corpus is one season, so a holdout is a slice of it, not an independent year.",
-    "An opponent-aware rating. Game-level results ingestion was proposed (SG-03) and the ratings are not yet opponent-aware in a published run.",
-    "A second published total estimator, so the walk-forward comparison the brief asks for has nothing to compare against yet."
+    "A larger validation block. The collapse rule's cluster interval is wide at n=28, which is why C2 fails rather than because T2 is better.",
+    "More than one season of official results, so a holdout is an independent year rather than a slice of 2026.",
+    "An opponent-aware rating in a published run: game-level results ingestion (SG-03) is still proposed, not done."
    ],
    "proposals": [
     "SG-01",
@@ -1137,67 +1142,67 @@
    "paths": [
     {
      "id": "D11-A",
-     "label": "Publish both estimators, collapse after a walk-forward",
-     "does": "Keep two total estimators visible with the gap between them as its own column, and only collapse to one after a pre-registered walk-forward comparison says which is better.",
+     "label": "Keep both published and let the rule decide",
+     "does": "Leave both estimators visible with the gap column, and collapse only when all five pre-registered conditions pass on the validation block.",
      "adopts": [
       "SG-58",
+      "SG-68",
       "SG-03",
       "SG-01",
       "SG-18"
      ],
-     "buys": "Exactly what the brief asks for, and it makes estimator uncertainty visible instead of hiding it behind one number.",
-     "leaves_open": "Two published totals are harder to read, and a reader will ask which to use.",
-     "cost": "One extra model to maintain until the comparison closes.",
-     "risk": "If the walk-forward is run on the same single season, the comparison will be within noise and will not close the question."
+     "buys": "Exactly what the brief asks for, plus a rule that cannot be bent after the fact: the collapse decision was written before the scores existed.",
+     "leaves_open": "Two published totals are harder to read, and a reader will ask which to use. Today the honest answer is 'T1 leads, but the rule has not said so yet'.",
+     "cost": "One extra estimator to maintain until the rule fires, which at 28 games per validation block may be several weeks.",
+     "risk": "If the block stays at n=28, the cluster interval may never exclude the difference and the pair never collapses - a real outcome the rule should be allowed to produce."
     },
     {
      "id": "D11-B",
-     "label": "Chronological splits inside the one verified season",
-     "does": "Split the 136-game corpus into train, validation and a final holdout by week order, and accept that the holdout is a slice of one season.",
+     "label": "Collapse to T1 now on the whole-corpus result",
+     "does": "Read the corpus-wide bootstrap interval (-2.374 to -0.050, excluding zero) as decisive and publish one total.",
      "adopts": [
-      "SG-68",
-      "SG-19"
+      "SG-58"
      ],
-     "buys": "An honest out-of-sample test that can be run today, and it is already written into the frozen pre-registration.",
-     "leaves_open": "A single-season holdout cannot separate a model difference from a season-specific effect.",
-     "cost": "Fewer games to train on.",
-     "risk": "Reading a within-season holdout as if it were a multi-season result, which the pre-registration explicitly warns against."
+     "buys": "One number, and the corpus-wide evidence does favour T1 on both MAE and RMSE.",
+     "leaves_open": "It does so by preferring the interval the rule did not name over the one it did, which is choosing the estimator after seeing the scores.",
+     "cost": "Nothing directly. The cost is that the pre-registration stops being a constraint.",
+     "risk": "The 135-game interval is not independent of the 93 games that fitted T2's league level, and the 28-game block - the one the rule names - disagrees."
     },
     {
      "id": "D11-C",
-     "label": "Wait for multiple seasons",
-     "does": "Do not fit anything until several seasons of official results are captured.",
+     "label": "Wait for multiple seasons before collapsing either way",
+     "does": "Do not fit or collapse until several seasons of official results are captured.",
      "adopts": [],
-     "buys": "A genuine out-of-sample test when it happens.",
-     "leaves_open": "Everything, for an indefinite period. The 2026 season would pass unmodelled.",
-     "cost": "The whole origination programme stalls.",
-     "risk": "The corpus and the shadow baseline already exist and are producing prospective records; discarding them loses the only walk-forward evidence being accumulated."
+     "buys": "A genuinely independent holdout when it happens.",
+     "leaves_open": "Everything, for an indefinite period; the 2026 season would pass unmodelled.",
+     "cost": "The origination programme stalls.",
+     "risk": "The corpus, the forward ledger and the two-total workspace are already producing prospective records; discarding them loses the only walk-forward evidence being accumulated."
     }
    ],
-   "recommended": "D11-A and D11-B together",
-   "recommendation_reason": "They are not exclusive: publish both estimators and evaluate them on chronological splits of the frozen corpus, with the single-season caveat printed next to every number. D11-C would throw away the only prospective record the project has.",
-   "clearing_number": "A walk-forward comparison between the two total estimators whose difference interval excludes zero on a chronological holdout. Today: 1 baseline is running, 0 head-to-head comparisons have been published.",
+   "recommended": "D11-A",
+   "recommendation_reason": "It is already implemented and pre-registered, and its rule has produced the honest answer: not yet. D11-B would read the interval the rule did not name, and D11-C would throw away the only prospective record the project has.",
+   "clearing_number": "All five pre-registered collapse conditions true on the validation block. Today: C5 true (28 scored games against a floor of 20), C1-C4 false, collapsed = false - even though the corpus-wide 95% interval excludes zero. The two disagree, and both are published.",
    "discovery": [
+    {
+     "ref": "Q-43",
+     "question": "Does the model's own total (points) estimate beat the naive average, and by how much?",
+     "do": "Score both estimators against the naive league mean on the holdout block, not only against each other; two estimators can both be poor.",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/two-total/data/two_total.json",
+     "changes_path_if": "Neither beats the naive mean - then the collapse rule answers the wrong question and the honest move is to publish neither as a forecast."
+    },
     {
      "ref": "Q-42",
      "question": "Does the baseline rating beat a naive benchmark out of sample?",
-     "do": "Run it. Six rows already scored worse than the market's own de-vigged price on proper scores, so the prior should be that it does not.",
+     "do": "Run it on the holdout block with a game-cluster interval. Six rows already scored worse than the market's de-vigged price, so the prior should be that it does not.",
      "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/skill-lab/data/results.json",
-     "changes_path_if": "It does not beat the market - then the honest product is the forecast register, not the leaderboard, and D5-B is confirmed."
-    },
-    {
-     "ref": "Q-45",
-     "question": "Is the fitted Pythagorean exponent stable, or is it fitting noise at n=32?",
-     "do": "Refit it on each chronological fold and publish the spread. A point estimate at n=32 without a spread is not a finding.",
-     "source": "https://www.nfl.com/standings/",
-     "changes_path_if": "The spread is wide - then any model using that exponent inherits the instability and its own intervals must widen."
+     "changes_path_if": "It does not - then the honest product is the forecast register, not the leaderboard, and D5-B is confirmed."
     },
     {
      "ref": "Q-57",
      "question": "Can every feature be reconstructed as it was known before kickoff?",
-     "do": "Audit each feature against the capture ledger from D3-A and mark any feature that is computed from post-kickoff data.",
-     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/corpus/PRE_REGISTRATION.md",
-     "changes_path_if": "Any feature cannot be reconstructed - then the backtest is contaminated and its results cannot be published, whatever they say."
+     "do": "Audit each estimator's inputs against the capture ledger from D3-A; the two-total artifact already checks T2's 7,116 rolling inputs for look-ahead and found 0 violations.",
+     "source": "https://github.com/kanlerxz87-cyber/NFL3/blob/main/two-total/data/two_total.json",
+     "changes_path_if": "A leak is found in either estimator - then its scores are void and the collapse rule has to be re-run from zero."
     }
    ]
   },
