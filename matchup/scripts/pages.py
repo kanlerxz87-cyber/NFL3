@@ -743,6 +743,29 @@ def page_flagged():
           srclink("https://www.nfl.com/injuries/", "NFL injury report")]],
         ["File", "What was wrong", "What was done", "When", "Source"]))
     items.append((
+        "M-F9", "Every page repeats the navigation instead of generating it, so they drift apart",
+        "index.html holds the sidebar navigation, and each page's build script copies that file's "
+        "prefix as its own navigation rather than rendering the nav from one shared list. The "
+        "consequence is that a nav edit only reaches the pages whose generator happens to be re-run. "
+        "Adding the matchup entry to index.html on 2026-11-16 left pricing.html and corpus.html "
+        "carrying a navigation that was already two edits behind: it still linked shadow-board and "
+        "had no skill lab, no availability ledger and no injury archive. Both were re-generated and "
+        "re-committed. readiness.html is still stale and is not fixed here: its generator "
+        "(readiness/build_readiness.py) refuses to run outside a full clone, and readiness.html is "
+        "not covered by any drift check in the workflow. The durable fix is one shared nav list that "
+        "every generator imports.",
+        "3 pages behind",
+        [["pricing.html", "nav linked shadow-board; no skill lab, ledger, injury archive or matchup",
+          "re-generated 2026-11-16", "fixed",
+          srclink("https://www.nfl.com/injuries/", "NFL injury report")],
+         ["corpus.html", "same two edits behind", "re-generated 2026-11-16", "fixed",
+          srclink("https://www.nfl.com/injuries/", "NFL injury report")],
+         ["readiness.html", "same, and also missing matchup; generator not run in CI, no drift check",
+          "left as-is and reported", "open",
+          srclink("https://www.nfl.com/injuries/", "NFL injury report")]],
+        ["Page", "What the navigation was missing", "What was done", "State", "Source"]))
+
+    items.append((
         "M-F7", "The depth charts are four days older than the report they are joined to",
         f"The club depth capture is dated {PREV_OBSERVED}; the injury report transcript is dated {OBSERVED}. "
         f"Between those dates the league recorded reserve-list placements, activations and trades. "
