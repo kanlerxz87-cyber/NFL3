@@ -2540,3 +2540,27 @@ Not claimed (out of scope, logged as open): the 32-team roster/IR sweep (A24), t
 |---|---|---|---|
 | C1 Pages gate for the adopted price policy/store and frozen corpus | done | `arena/b0dd4900-nfl3` | PR #97; validation passed |
 | C2 Final integration, merge and Pages deployment record | in progress | `arena/b0dd4900-nfl3` | awaiting merge and post-merge Pages run |
+
+### Result — `arena/46fe1baa-nfl3`, 2026-11-16 UTC
+
+| Task | Updated status | Owner | Result |
+|---|---|---|---|
+| V1 Week 11 venue register | done (needs review) | `arena/46fe1baa-nfl3` | `venues/index.html` and `venues/flagged.html`: 13 of 13 Week 11 fixtures, venue read from each official game-centre "Game Info" block; kickoff and network matched to the official Week 11 schedule page; dated announcement (May 14, 2026) beside it; 8 flags with source links. `venues/scripts/verify.py` passed. |
+| V2 Lions Week 10 rows | done | `arena/46fe1baa-nfl3` | Joseph: Out, practice moved from Limited to Did Not Participate. Mays and Reed: Out. Source: nfl.com Week 10 injury report article, read 2026-11-16. Dashboard rebuilt; dashboard check passed. |
+| V3 Readiness A17, F-2, F-3 | done | `arena/46fe1baa-nfl3` | A17 Blocked → Done. F-2 Not started → Partial (13 of 272). F-3 Not started → Partial (announcement and live schedule recorded; no hashed raw capture yet). `tests/test_readiness.py` passed with counts Done 8 / Partial 33 / Blocked 11 / Not started 11 / Decision recorded 1. |
+| V4 Integration | done | `arena/46fe1baa-nfl3` | README row for `venues/`; two `pages.yml` steps (`venues/scripts/verify.py`, then `git diff --exit-code` on the two committed venue pages). YAML parsed. |
+
+**Sync and merge.** `origin/main` advanced from `e8877e0` to `1309041` during the session (four commits touching `pages.yml`, `COORDINATION.md`, `data/raw/*` and `research-desk/*`). Main was merged into the branch with a merge commit (`b1b3b48`), not a rebase, because the claim commit was already on the remote. One conflict, in this board: both sides had appended a claim block. Both blocks were kept in order and only the three marker lines were removed. Nothing from another session was discarded.
+
+**Effects of the merged data on the readiness rebuild.** P1 odds-row count is 163, matching the committed page on `main`. A6 snap-count rows changed from 12785 (stale on `main`) to 13913, the count in the refreshed raw file. Both are derived from the data and are recorded in the readiness register.
+
+**Irregularities found, not fixed here (for the named owners):**
+1. Sione Vaki (ankle) and Amon-Ra St. Brown (rib) are QUESTIONABLE in the same official Week 10 article, but their game-status cells in `dashboard/data/injuries_2026_w10.csv` are blank. Outside the V2 row set. **Request to the injury-capture owner:** update those two cells from the official article (readiness flag F3).
+2. The dashboard Week 10 build reports SEA, CIN, LAC and BAL with no injury rows. Not re-verified in this session (readiness A18, flag R-06 stay open).
+3. Two committed copies of the 2026 roster disagree: `data/raw/roster_2026.csv` (3,073 rows, 408 reserve rows) and `roster_2026.csv.gz` (3,070 rows, 383 reserve rows). **Request to the roster owner.**
+4. `origination/scripts/verify.py` fails on determinism in this sandbox (community schedule digest changed; CI passes). Nothing was rebuilt or committed. **Owner: origination session.**
+5. P1 count: a rebuild from `e8877e0` data gave 162 while the page there showed 163. The cause is not established (readiness flag F12). Merged data gives 163.
+
+**Still open after V1–V4:** 259 of 272 fixtures not transcribed (F-2); no hashed raw capture of the announcement or schedule (F-3). Not touched: origination determinism, roster-copy mismatch, roster/IR sweep (A24), injury daily capture, per-team view, matchup matrix, public/private split, announced-starter field.
+
+**PR.** Opened from `arena/46fe1baa-nfl3` into `main` at the integration step. Not merged by this session. PR link and merge result to be recorded below once known.
