@@ -2506,3 +2506,20 @@ Done in PR #92 (all append-only or inside `shadow-board/`, no other workspace's 
   *Fetch and verify release digests*, which also failed on PR #85 before this session began — a transient fetch of
   community release assets, unrelated to `shadow-board/`. `Validate and deploy GitHub Pages` is green for #88, #89
   and #92.
+
+## Claim — `arena/1bf20472-nfl3` (session 1bf20472) — 2026-11-16 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| G1 Official NFL Game Books (2026 Week 10): actual starters, inactives, venue, surface/roof status, game-day weather | in progress | `arena/1bf20472-nfl3` | `game-day/**` |
+| G2 Availability graph as a first-class dataset (expected starter from the official club depth capture vs actual starter from the official game book; who replaced whom, at which depth string) | in progress | `arena/1bf20472-nfl3` | `game-day/**` |
+| G3 Per-team decision view: starters out, replacements named, net injury count | in progress | `arena/1bf20472-nfl3` | `game-day/**` |
+| G4 Announced-starter evidence field (dated starter changes from official league/club reporting, not inferred) | in progress | `arena/1bf20472-nfl3` | `game-day/**` |
+| G5 Readiness rows closed by the above, landing-page nav row, README row, executive-summary row | in progress | `arena/1bf20472-nfl3` | `readiness/build_readiness.py` (rows A1, A2, A6, A14, A23, F-1, F-2, F-4 only), `index.html` (nav + one workspace row only), `README.md` (one row only), `EXECUTIVE_SUMMARY.md` (one row only), this board |
+
+Branch: `arena/1bf20472-nfl3` (fixed by Arena). Base: `main` at `e8877e0`.
+
+Coordination notes:
+
+- **Why this scope.** The readiness register lists A2 (official Game Books), A6 (official inactive lists), A1 (availability graph), A23 (per-team replacement view), F-2 (venue from the official game centre) and F-4 (roof/surface) as *Blocked* or *Not started*, each with the recorded reason "operations.nfl.com is not reachable from this sandbox" or "sandbox cannot reach nfl.com". That reason is now partly false: the official NFL game-centre pages on `www.nfl.com` and the official game-book PDFs they link on `static.www.nfl.com` are reachable through this session's fetch tool (verified 2026-11-16), even though the shell has no direct egress. `api.weather.gov` is reachable the same way. No other session's file scope is touched: `game-day/` is new, and the readiness/nav/README edits are limited to the rows named above.
+- **Evidence rules honoured.** Every value published from these captures carries the official source URL and the retrieval time. The shell cannot download the game-book bytes, so the retained hash is the SHA-256 of the *transcribed extract as captured by the fetch tool*, not of the source PDF; this is stated on every page that uses it and is flagged as an irregularity rather than presented as a source-byte hash. Nothing is inferred: a player who is not named by the official source stays blank.
