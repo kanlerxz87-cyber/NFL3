@@ -1,1 +1,2218 @@
-{}
+{
+ "2026-10": {
+  "clubs": {
+   "49ERS": {
+    "club": "49ERS",
+    "game_section": "LATE GAMES",
+    "players": [
+     {
+      "club": "49ERS",
+      "emergency_qb": false,
+      "player": "Kurtis Rourke",
+      "position": "QB",
+      "raw": "QB Kurtis Rourke"
+     },
+     {
+      "club": "49ERS",
+      "emergency_qb": false,
+      "player": "Mike Evans",
+      "position": "WR",
+      "raw": "WR Mike Evans"
+     },
+     {
+      "club": "49ERS",
+      "emergency_qb": false,
+      "player": "Enrique Cruz Jr.",
+      "position": "OL",
+      "raw": "OL Enrique Cruz Jr."
+     },
+     {
+      "club": "49ERS",
+      "emergency_qb": false,
+      "player": "Tatum Bethune",
+      "position": "LB",
+      "raw": "LB Tatum Bethune"
+     },
+     {
+      "club": "49ERS",
+      "emergency_qb": false,
+      "player": "Brandin Cooks",
+      "position": "WR",
+      "raw": "WR Brandin Cooks"
+     }
+    ]
+   },
+   "BENGALS": {
+    "club": "BENGALS",
+    "game_section": "SUNDAY NIGHT FOOTBALL",
+    "players": [
+     {
+      "club": "BENGALS",
+      "emergency_qb": false,
+      "player": "Kyle Dugger",
+      "position": "S",
+      "raw": "S Kyle Dugger"
+     },
+     {
+      "club": "BENGALS",
+      "emergency_qb": false,
+      "player": "Connor Lew",
+      "position": "C",
+      "raw": "C Connor Lew"
+     },
+     {
+      "club": "BENGALS",
+      "emergency_qb": false,
+      "player": "Myles Hinton",
+      "position": "OT",
+      "raw": "OT Myles Hinton"
+     },
+     {
+      "club": "BENGALS",
+      "emergency_qb": false,
+      "player": "Landon Robinson",
+      "position": "DT",
+      "raw": "DT Landon Robinson"
+     }
+    ]
+   },
+   "BILLS": {
+    "club": "BILLS",
+    "game_section": "EARLY GAMES",
+    "players": [
+     {
+      "club": "BILLS",
+      "emergency_qb": false,
+      "player": "Shane Buechele",
+      "position": "QB",
+      "raw": "QB Shane Buechele"
+     },
+     {
+      "club": "BILLS",
+      "emergency_qb": false,
+      "player": "Jalon Kilgore",
+      "position": "S",
+      "raw": "S Jalon Kilgore"
+     },
+     {
+      "club": "BILLS",
+      "emergency_qb": false,
+      "player": "Mike Danna",
+      "position": "OLB",
+      "raw": "OLB Mike Danna"
+     },
+     {
+      "club": "BILLS",
+      "emergency_qb": false,
+      "player": "Ar'maj Reed- Adams",
+      "position": "G",
+      "raw": "G Ar'maj Reed- Adams"
+     },
+     {
+      "club": "BILLS",
+      "emergency_qb": false,
+      "player": "Jude Bowry",
+      "position": "OL",
+      "raw": "OL Jude Bowry"
+     },
+     {
+      "club": "BILLS",
+      "emergency_qb": false,
+      "player": "Greg Gaines",
+      "position": "DL",
+      "raw": "DL Greg Gaines"
+     }
+    ]
+   },
+   "BROWNS": {
+    "club": "BROWNS",
+    "game_section": "EARLY GAMES",
+    "players": [
+     {
+      "club": "BROWNS",
+      "emergency_qb": true,
+      "player": "Dillon Gabriel (emergency third QB)",
+      "position": "QB",
+      "raw": "QB Dillon Gabriel (emergency third QB)"
+     },
+     {
+      "club": "BROWNS",
+      "emergency_qb": false,
+      "player": "Taylen Green",
+      "position": "QB",
+      "raw": "QB Taylen Green"
+     },
+     {
+      "club": "BROWNS",
+      "emergency_qb": false,
+      "player": "Justin Jefferson",
+      "position": "LB",
+      "raw": "LB Justin Jefferson"
+     },
+     {
+      "club": "BROWNS",
+      "emergency_qb": false,
+      "player": "Noah Igbinoghene",
+      "position": "CB",
+      "raw": "CB Noah Igbinoghene"
+     },
+     {
+      "club": "BROWNS",
+      "emergency_qb": false,
+      "player": "Ronnie Hickman",
+      "position": "S",
+      "raw": "S Ronnie Hickman"
+     },
+     {
+      "club": "BROWNS",
+      "emergency_qb": false,
+      "player": "Parker Brailsford",
+      "position": "C",
+      "raw": "C Parker Brailsford"
+     }
+    ]
+   },
+   "CARDINALS": {
+    "club": "CARDINALS",
+    "game_section": "LATE GAMES",
+    "players": [
+     {
+      "club": "CARDINALS",
+      "emergency_qb": false,
+      "player": "Joey Aguilar",
+      "position": "QB",
+      "raw": "QB Joey Aguilar"
+     },
+     {
+      "club": "CARDINALS",
+      "emergency_qb": false,
+      "player": "Starling Thomas V",
+      "position": "CB",
+      "raw": "CB Starling Thomas V"
+     },
+     {
+      "club": "CARDINALS",
+      "emergency_qb": false,
+      "player": "Eku Leota",
+      "position": "LB",
+      "raw": "LB Eku Leota"
+     },
+     {
+      "club": "CARDINALS",
+      "emergency_qb": false,
+      "player": "Jayden Williams",
+      "position": "OL",
+      "raw": "OL Jayden Williams"
+     },
+     {
+      "club": "CARDINALS",
+      "emergency_qb": false,
+      "player": "Jon Gaines II",
+      "position": "OL",
+      "raw": "OL Jon Gaines II"
+     },
+     {
+      "club": "CARDINALS",
+      "emergency_qb": false,
+      "player": "Hjalte Froholdt",
+      "position": "OL",
+      "raw": "OL Hjalte Froholdt"
+     }
+    ]
+   },
+   "CHIEFS": {
+    "club": "CHIEFS",
+    "game_section": "EARLY GAMES",
+    "players": [
+     {
+      "club": "CHIEFS",
+      "emergency_qb": false,
+      "player": "Kenneth Walker",
+      "position": "RB",
+      "raw": "RB Kenneth Walker"
+     },
+     {
+      "club": "CHIEFS",
+      "emergency_qb": true,
+      "player": "Garrett Nussmeier (Emergency 3rd QB)",
+      "position": "QB",
+      "raw": "QB Garrett Nussmeier (Emergency 3rd QB)"
+     },
+     {
+      "club": "CHIEFS",
+      "emergency_qb": false,
+      "player": "Jaydn Ott",
+      "position": "RB",
+      "raw": "RB Jaydn Ott"
+     },
+     {
+      "club": "CHIEFS",
+      "emergency_qb": false,
+      "player": "Melvin Smith",
+      "position": "CB",
+      "raw": "CB Melvin Smith"
+     },
+     {
+      "club": "CHIEFS",
+      "emergency_qb": false,
+      "player": "Ben VanSumeren",
+      "position": "FB",
+      "raw": "FB Ben VanSumeren"
+     },
+     {
+      "club": "CHIEFS",
+      "emergency_qb": false,
+      "player": "Jaylon Moore",
+      "position": "OL",
+      "raw": "OL Jaylon Moore"
+     },
+     {
+      "club": "CHIEFS",
+      "emergency_qb": false,
+      "player": "Peter Woods",
+      "position": "DL",
+      "raw": "DL Peter Woods"
+     }
+    ]
+   },
+   "COLTS": {
+    "club": "COLTS",
+    "game_section": "EARLY GAMES",
+    "players": [
+     {
+      "club": "COLTS",
+      "emergency_qb": false,
+      "player": "Jaylon Carlies",
+      "position": "LB",
+      "raw": "LB Jaylon Carlies"
+     },
+     {
+      "club": "COLTS",
+      "emergency_qb": true,
+      "player": "Riley Leonard (emergency third QB)",
+      "position": "QB",
+      "raw": "QB Riley Leonard (emergency third QB)"
+     },
+     {
+      "club": "COLTS",
+      "emergency_qb": false,
+      "player": "Will Mallory",
+      "position": "TE",
+      "raw": "TE Will Mallory"
+     },
+     {
+      "club": "COLTS",
+      "emergency_qb": false,
+      "player": "Luke Rhodes",
+      "position": "LS",
+      "raw": "LS Luke Rhodes"
+     },
+     {
+      "club": "COLTS",
+      "emergency_qb": false,
+      "player": "Jerry Tillery",
+      "position": "DT",
+      "raw": "DT Jerry Tillery"
+     },
+     {
+      "club": "COLTS",
+      "emergency_qb": false,
+      "player": "Jalen Travis",
+      "position": "OT",
+      "raw": "OT Jalen Travis"
+     }
+    ]
+   },
+   "COWBOYS": {
+    "club": "COWBOYS",
+    "game_section": "LATE GAMES",
+    "players": [
+     {
+      "club": "COWBOYS",
+      "emergency_qb": false,
+      "player": "P.J. Locke III",
+      "position": "S",
+      "raw": "S P.J. Locke III"
+     },
+     {
+      "club": "COWBOYS",
+      "emergency_qb": false,
+      "player": "Donovan Ezeiruaku",
+      "position": "OLB",
+      "raw": "OLB Donovan Ezeiruaku"
+     },
+     {
+      "club": "COWBOYS",
+      "emergency_qb": false,
+      "player": "Derion Kendrick",
+      "position": "CB",
+      "raw": "CB Derion Kendrick"
+     },
+     {
+      "club": "COWBOYS",
+      "emergency_qb": false,
+      "player": "Jonathan Mingo",
+      "position": "WR",
+      "raw": "WR Jonathan Mingo"
+     },
+     {
+      "club": "COWBOYS",
+      "emergency_qb": false,
+      "player": "Juanyeh Thomas",
+      "position": "S",
+      "raw": "S Juanyeh Thomas"
+     },
+     {
+      "club": "COWBOYS",
+      "emergency_qb": false,
+      "player": "Ajani Cornelius",
+      "position": "G",
+      "raw": "G Ajani Cornelius"
+     },
+     {
+      "club": "COWBOYS",
+      "emergency_qb": false,
+      "player": "Jake Ferguson",
+      "position": "TE",
+      "raw": "TE Jake Ferguson"
+     }
+    ]
+   },
+   "DOLPHINS": {
+    "club": "DOLPHINS",
+    "game_section": "EARLY GAMES",
+    "players": [
+     {
+      "club": "DOLPHINS",
+      "emergency_qb": false,
+      "player": "Chris Bell",
+      "position": "WR",
+      "raw": "WR Chris Bell"
+     },
+     {
+      "club": "DOLPHINS",
+      "emergency_qb": false,
+      "player": "Marcellas Dial Jr.",
+      "position": "CB",
+      "raw": "CB Marcellas Dial Jr."
+     },
+     {
+      "club": "DOLPHINS",
+      "emergency_qb": false,
+      "player": "Aaron Brewer",
+      "position": "C",
+      "raw": "C Aaron Brewer"
+     },
+     {
+      "club": "DOLPHINS",
+      "emergency_qb": false,
+      "player": "Caedan Wallace",
+      "position": "G/T",
+      "raw": "G/T Caedan Wallace"
+     },
+     {
+      "club": "DOLPHINS",
+      "emergency_qb": false,
+      "player": "Justin Joly",
+      "position": "TE",
+      "raw": "TE Justin Joly"
+     },
+     {
+      "club": "DOLPHINS",
+      "emergency_qb": false,
+      "player": "Jared Wayne",
+      "position": "WR",
+      "raw": "WR Jared Wayne"
+     }
+    ]
+   },
+   "FALCONS": {
+    "club": "FALCONS",
+    "game_section": "EARLY GAMES",
+    "players": [
+     {
+      "club": "FALCONS",
+      "emergency_qb": true,
+      "player": "Andy Dalton (emergency third quarterback)",
+      "position": "QB",
+      "raw": "QB Andy Dalton (emergency third quarterback)"
+     },
+     {
+      "club": "FALCONS",
+      "emergency_qb": false,
+      "player": "Divine Deablo",
+      "position": "ILB",
+      "raw": "ILB Divine Deablo"
+     },
+     {
+      "club": "FALCONS",
+      "emergency_qb": false,
+      "player": "Avieon Terrell",
+      "position": "CB",
+      "raw": "CB Avieon Terrell"
+     },
+     {
+      "club": "FALCONS",
+      "emergency_qb": false,
+      "player": "Zachariah Branch",
+      "position": "WR",
+      "raw": "WR Zachariah Branch"
+     },
+     {
+      "club": "FALCONS",
+      "emergency_qb": false,
+      "player": "Jack Strand",
+      "position": "QB",
+      "raw": "QB Jack Strand"
+     },
+     {
+      "club": "FALCONS",
+      "emergency_qb": false,
+      "player": "Robert Longerbeam",
+      "position": "CB",
+      "raw": "CB Robert Longerbeam"
+     },
+     {
+      "club": "FALCONS",
+      "emergency_qb": false,
+      "player": "Cameron Williams",
+      "position": "OL",
+      "raw": "OL Cameron Williams"
+     }
+    ]
+   },
+   "JAGUARS": {
+    "club": "JAGUARS",
+    "game_section": "EARLY GAMES",
+    "players": [
+     {
+      "club": "JAGUARS",
+      "emergency_qb": false,
+      "player": "Jessie Bates III",
+      "position": "S",
+      "raw": "S Jessie Bates III"
+     },
+     {
+      "club": "JAGUARS",
+      "emergency_qb": false,
+      "player": "CJ Williams",
+      "position": "WR",
+      "raw": "WR CJ Williams"
+     },
+     {
+      "club": "JAGUARS",
+      "emergency_qb": false,
+      "player": "Jordan Davis",
+      "position": "DT",
+      "raw": "DT Jordan Davis"
+     },
+     {
+      "club": "JAGUARS",
+      "emergency_qb": false,
+      "player": "Wesley Williams",
+      "position": "DE",
+      "raw": "DE Wesley Williams"
+     },
+     {
+      "club": "JAGUARS",
+      "emergency_qb": false,
+      "player": "Albert Regis",
+      "position": "DT",
+      "raw": "DT Albert Regis"
+     }
+    ]
+   },
+   "JETS": {
+    "club": "JETS",
+    "game_section": "EARLY GAMES",
+    "players": [
+     {
+      "club": "JETS",
+      "emergency_qb": false,
+      "player": "Jarvis Brownlee Jr.",
+      "position": "CB",
+      "raw": "CB Jarvis Brownlee Jr."
+     },
+     {
+      "club": "JETS",
+      "emergency_qb": false,
+      "player": "Nate Lynn",
+      "position": "EDGE",
+      "raw": "Edge Nate Lynn"
+     },
+     {
+      "club": "JETS",
+      "emergency_qb": false,
+      "player": "Tim Patrick",
+      "position": "WR",
+      "raw": "WR Tim Patrick"
+     },
+     {
+      "club": "JETS",
+      "emergency_qb": false,
+      "player": "Trevin Wallace",
+      "position": "LB",
+      "raw": "LB Trevin Wallace"
+     },
+     {
+      "club": "JETS",
+      "emergency_qb": false,
+      "player": "Jelani Woods",
+      "position": "TE",
+      "raw": "TE Jelani Woods"
+     }
+    ]
+   },
+   "LIONS": {
+    "club": "LIONS",
+    "game_section": "MUNICH GAME",
+    "players": [
+     {
+      "club": "LIONS",
+      "emergency_qb": false,
+      "player": "Keith Abney II",
+      "position": "CB",
+      "raw": "CB Keith Abney II"
+     },
+     {
+      "club": "LIONS",
+      "emergency_qb": false,
+      "player": "Ahmed Hassanein",
+      "position": "EDGE",
+      "raw": "EDGE Ahmed Hassanein"
+     },
+     {
+      "club": "LIONS",
+      "emergency_qb": false,
+      "player": "Cade Mays",
+      "position": "C",
+      "raw": "C Cade Mays"
+     },
+     {
+      "club": "LIONS",
+      "emergency_qb": false,
+      "player": "Amen Ogbongbemiga",
+      "position": "LB",
+      "raw": "LB Amen Ogbongbemiga"
+     },
+     {
+      "club": "LIONS",
+      "emergency_qb": false,
+      "player": "D.J. Reed",
+      "position": "CB",
+      "raw": "CB D.J. Reed"
+     },
+     {
+      "club": "LIONS",
+      "emergency_qb": false,
+      "player": "Mekhi Wingo",
+      "position": "DL",
+      "raw": "DL Mekhi Wingo"
+     }
+    ]
+   },
+   "PACKERS": {
+    "club": "PACKERS",
+    "game_section": "EARLY GAMES",
+    "players": [
+     {
+      "club": "PACKERS",
+      "emergency_qb": false,
+      "player": "Josh Jacobs",
+      "position": "RB",
+      "raw": "RB Josh Jacobs"
+     },
+     {
+      "club": "PACKERS",
+      "emergency_qb": false,
+      "player": "Pierre Strong Jr.",
+      "position": "RB",
+      "raw": "RB Pierre Strong Jr."
+     },
+     {
+      "club": "PACKERS",
+      "emergency_qb": false,
+      "player": "Zaire Franklin",
+      "position": "LB",
+      "raw": "LB Zaire Franklin"
+     },
+     {
+      "club": "PACKERS",
+      "emergency_qb": false,
+      "player": "Donovan Jennings",
+      "position": "G/T",
+      "raw": "G/T Donovan Jennings"
+     },
+     {
+      "club": "PACKERS",
+      "emergency_qb": false,
+      "player": "Kevin Zeitler",
+      "position": "G",
+      "raw": "G Kevin Zeitler"
+     },
+     {
+      "club": "PACKERS",
+      "emergency_qb": false,
+      "player": "Sean Rhyan",
+      "position": "C",
+      "raw": "C Sean Rhyan"
+     }
+    ]
+   },
+   "PANTHERS": {
+    "club": "PANTHERS",
+    "game_section": "EARLY GAMES",
+    "players": [
+     {
+      "club": "PANTHERS",
+      "emergency_qb": false,
+      "player": "Ja'Tavion Sanders",
+      "position": "TE",
+      "raw": "TE Ja'Tavion Sanders"
+     },
+     {
+      "club": "PANTHERS",
+      "emergency_qb": true,
+      "player": "Haynes King (emergency third QB)",
+      "position": "QB",
+      "raw": "QB Haynes King (emergency third QB)"
+     },
+     {
+      "club": "PANTHERS",
+      "emergency_qb": false,
+      "player": "Will Lee",
+      "position": "CB",
+      "raw": "CB Will Lee"
+     },
+     {
+      "club": "PANTHERS",
+      "emergency_qb": false,
+      "player": "AJ Dillon",
+      "position": "RB",
+      "raw": "RB AJ Dillon"
+     },
+     {
+      "club": "PANTHERS",
+      "emergency_qb": false,
+      "player": "Bobby Okereke",
+      "position": "LB",
+      "raw": "LB Bobby Okereke"
+     },
+     {
+      "club": "PANTHERS",
+      "emergency_qb": false,
+      "player": "Sam Hecht",
+      "position": "C",
+      "raw": "C Sam Hecht"
+     },
+     {
+      "club": "PANTHERS",
+      "emergency_qb": false,
+      "player": "TeRah Edwards",
+      "position": "DT",
+      "raw": "DT TeRah Edwards"
+     }
+    ]
+   },
+   "PATRIOTS": {
+    "club": "PATRIOTS",
+    "game_section": "MUNICH GAME",
+    "players": [
+     {
+      "club": "PATRIOTS",
+      "emergency_qb": false,
+      "player": "Carlton Davis",
+      "position": "CB",
+      "raw": "CB Carlton Davis"
+     },
+     {
+      "club": "PATRIOTS",
+      "emergency_qb": false,
+      "player": "Brenden Schooler",
+      "position": "FS",
+      "raw": "FS Brenden Schooler"
+     },
+     {
+      "club": "PATRIOTS",
+      "emergency_qb": false,
+      "player": "Dametrious Crownover",
+      "position": "OT",
+      "raw": "OT Dametrious Crownover"
+     },
+     {
+      "club": "PATRIOTS",
+      "emergency_qb": false,
+      "player": "Walter Rouse",
+      "position": "OT",
+      "raw": "OT Walter Rouse"
+     },
+     {
+      "club": "PATRIOTS",
+      "emergency_qb": false,
+      "player": "Ben Brown",
+      "position": "C",
+      "raw": "C Ben Brown"
+     },
+     {
+      "club": "PATRIOTS",
+      "emergency_qb": true,
+      "player": "Behren Morton (emergency third QB)",
+      "position": "QB",
+      "raw": "QB Behren Morton (emergency third QB)"
+     }
+    ]
+   },
+   "RAIDERS": {
+    "club": "RAIDERS",
+    "game_section": "LATE GAMES",
+    "players": [
+     {
+      "club": "RAIDERS",
+      "emergency_qb": false,
+      "player": "Dont'e Thornton Jr.",
+      "position": "WR",
+      "raw": "WR Dont'e Thornton Jr."
+     },
+     {
+      "club": "RAIDERS",
+      "emergency_qb": false,
+      "player": "Malik Benson",
+      "position": "WR",
+      "raw": "WR Malik Benson"
+     },
+     {
+      "club": "RAIDERS",
+      "emergency_qb": false,
+      "player": "Tristin McCollum",
+      "position": "S",
+      "raw": "S Tristin McCollum"
+     },
+     {
+      "club": "RAIDERS",
+      "emergency_qb": false,
+      "player": "Dalton Johnson",
+      "position": "S",
+      "raw": "S Dalton Johnson"
+     },
+     {
+      "club": "RAIDERS",
+      "emergency_qb": false,
+      "player": "Bryce Cabeldue",
+      "position": "G",
+      "raw": "G Bryce Cabeldue"
+     },
+     {
+      "club": "RAIDERS",
+      "emergency_qb": false,
+      "player": "Thomas Booker IV",
+      "position": "DT",
+      "raw": "DT Thomas Booker IV"
+     }
+    ]
+   },
+   "RAMS": {
+    "club": "RAMS",
+    "game_section": "LATE GAMES",
+    "players": [
+     {
+      "club": "RAMS",
+      "emergency_qb": true,
+      "player": "Ty Simpson (emergency third QB)",
+      "position": "QB",
+      "raw": "QB Ty Simpson (emergency third QB)"
+     },
+     {
+      "club": "RAMS",
+      "emergency_qb": false,
+      "player": "Maximus Pulley",
+      "position": "S",
+      "raw": "S Maximus Pulley"
+     },
+     {
+      "club": "RAMS",
+      "emergency_qb": false,
+      "player": "Joe Cardona",
+      "position": "LS",
+      "raw": "LS Joe Cardona"
+     },
+     {
+      "club": "RAMS",
+      "emergency_qb": false,
+      "player": "Darryl Peterson III",
+      "position": "OLB",
+      "raw": "OLB Darryl Peterson III"
+     },
+     {
+      "club": "RAMS",
+      "emergency_qb": false,
+      "player": "Steve Avila",
+      "position": "OL",
+      "raw": "OL Steve Avila"
+     },
+     {
+      "club": "RAMS",
+      "emergency_qb": false,
+      "player": "Keagen Trost",
+      "position": "OL",
+      "raw": "OL Keagen Trost"
+     },
+     {
+      "club": "RAMS",
+      "emergency_qb": false,
+      "player": "Desjuan Johnson",
+      "position": "OLB",
+      "raw": "OLB Desjuan Johnson"
+     }
+    ]
+   },
+   "SAINTS": {
+    "club": "SAINTS",
+    "game_section": "EARLY GAMES",
+    "players": [
+     {
+      "club": "SAINTS",
+      "emergency_qb": true,
+      "player": "Zach Wilson (designated third QB)",
+      "position": "QB",
+      "raw": "QB Zach Wilson (designated third QB)"
+     },
+     {
+      "club": "SAINTS",
+      "emergency_qb": false,
+      "player": "Mike Reid",
+      "position": "S",
+      "raw": "S Mike Reid"
+     },
+     {
+      "club": "SAINTS",
+      "emergency_qb": false,
+      "player": "CJ Donaldson",
+      "position": "RB",
+      "raw": "RB CJ Donaldson"
+     },
+     {
+      "club": "SAINTS",
+      "emergency_qb": false,
+      "player": "Jaylan Ford",
+      "position": "LB",
+      "raw": "LB Jaylan Ford"
+     },
+     {
+      "club": "SAINTS",
+      "emergency_qb": false,
+      "player": "Taliese Fuaga",
+      "position": "OT",
+      "raw": "OT Taliese Fuaga"
+     },
+     {
+      "club": "SAINTS",
+      "emergency_qb": false,
+      "player": "Erik McCoy",
+      "position": "C",
+      "raw": "C Erik McCoy"
+     }
+    ]
+   },
+   "SEAHAWKS": {
+    "club": "SEAHAWKS",
+    "game_section": "LATE GAMES",
+    "players": [
+     {
+      "club": "SEAHAWKS",
+      "emergency_qb": false,
+      "player": "Sam Darnold",
+      "position": "QB",
+      "raw": "QB Sam Darnold"
+     },
+     {
+      "club": "SEAHAWKS",
+      "emergency_qb": false,
+      "player": "Emanuel Wilson",
+      "position": "RB",
+      "raw": "RB Emanuel Wilson"
+     },
+     {
+      "club": "SEAHAWKS",
+      "emergency_qb": false,
+      "player": "Avery Smith",
+      "position": "CB",
+      "raw": "CB Avery Smith"
+     },
+     {
+      "club": "SEAHAWKS",
+      "emergency_qb": false,
+      "player": "Quenton Nelson",
+      "position": "G",
+      "raw": "G Quenton Nelson"
+     },
+     {
+      "club": "SEAHAWKS",
+      "emergency_qb": false,
+      "player": "Charles Cross",
+      "position": "OT",
+      "raw": "OT Charles Cross"
+     },
+     {
+      "club": "SEAHAWKS",
+      "emergency_qb": false,
+      "player": "Deven Eastern",
+      "position": "NT",
+      "raw": "NT Deven Eastern"
+     },
+     {
+      "club": "SEAHAWKS",
+      "emergency_qb": false,
+      "player": "Leonard Williams",
+      "position": "DT",
+      "raw": "DT Leonard Williams"
+     }
+    ]
+   },
+   "STEELERS": {
+    "club": "STEELERS",
+    "game_section": "SUNDAY NIGHT FOOTBALL",
+    "players": [
+     {
+      "club": "STEELERS",
+      "emergency_qb": false,
+      "player": "DeShon Elliott",
+      "position": "S",
+      "raw": "S DeShon Elliott"
+     },
+     {
+      "club": "STEELERS",
+      "emergency_qb": false,
+      "player": "Drew Allar",
+      "position": "QB",
+      "raw": "QB Drew Allar"
+     },
+     {
+      "club": "STEELERS",
+      "emergency_qb": true,
+      "player": "Will Howard (emergency third QB)",
+      "position": "QB",
+      "raw": "QB Will Howard (emergency third QB)"
+     },
+     {
+      "club": "STEELERS",
+      "emergency_qb": false,
+      "player": "Sean Murphy-Bunting",
+      "position": "CB",
+      "raw": "CB Sean Murphy-Bunting"
+     },
+     {
+      "club": "STEELERS",
+      "emergency_qb": false,
+      "player": "Eli Heidenreich",
+      "position": "RB",
+      "raw": "RB Eli Heidenreich"
+     }
+    ]
+   },
+   "TEXANS": {
+    "club": "TEXANS",
+    "game_section": "EARLY GAMES",
+    "players": [
+     {
+      "club": "TEXANS",
+      "emergency_qb": false,
+      "player": "Azeez Al-Shaair",
+      "position": "LB",
+      "raw": "LB Azeez Al-Shaair"
+     },
+     {
+      "club": "TEXANS",
+      "emergency_qb": false,
+      "player": "Brevin Jordan",
+      "position": "TE",
+      "raw": "TE Brevin Jordan"
+     },
+     {
+      "club": "TEXANS",
+      "emergency_qb": false,
+      "player": "Marvin Harrison Jr.",
+      "position": "WR",
+      "raw": "WR Marvin Harrison Jr."
+     },
+     {
+      "club": "TEXANS",
+      "emergency_qb": false,
+      "player": "David Montgomery",
+      "position": "RB",
+      "raw": "RB David Montgomery"
+     },
+     {
+      "club": "TEXANS",
+      "emergency_qb": false,
+      "player": "Danielle Hunter",
+      "position": "DE",
+      "raw": "DE Danielle Hunter"
+     },
+     {
+      "club": "TEXANS",
+      "emergency_qb": false,
+      "player": "Keylan Rutledge",
+      "position": "C/G",
+      "raw": "C/G Keylan Rutledge"
+     },
+     {
+      "club": "TEXANS",
+      "emergency_qb": false,
+      "player": "Wyatt Teller",
+      "position": "G",
+      "raw": "G Wyatt Teller"
+     }
+    ]
+   },
+   "TITANS": {
+    "club": "TITANS",
+    "game_section": "EARLY GAMES",
+    "players": [
+     {
+      "club": "TITANS",
+      "emergency_qb": false,
+      "player": "Carnell Tate",
+      "position": "WR",
+      "raw": "WR Carnell Tate"
+     },
+     {
+      "club": "TITANS",
+      "emergency_qb": false,
+      "player": "Nick Singleton",
+      "position": "RB",
+      "raw": "RB Nick Singleton"
+     },
+     {
+      "club": "TITANS",
+      "emergency_qb": false,
+      "player": "Jaylon Jones",
+      "position": "CB",
+      "raw": "CB Jaylon Jones"
+     },
+     {
+      "club": "TITANS",
+      "emergency_qb": false,
+      "player": "Cody Barton",
+      "position": "LB",
+      "raw": "LB Cody Barton"
+     },
+     {
+      "club": "TITANS",
+      "emergency_qb": false,
+      "player": "Anthony Hill Jr.",
+      "position": "LB",
+      "raw": "LB Anthony Hill Jr."
+     },
+     {
+      "club": "TITANS",
+      "emergency_qb": false,
+      "player": "Brandon Crenshaw-Dickson",
+      "position": "OT",
+      "raw": "OT Brandon Crenshaw-Dickson"
+     },
+     {
+      "club": "TITANS",
+      "emergency_qb": false,
+      "player": "Jackie Marshall",
+      "position": "DT",
+      "raw": "DT Jackie Marshall"
+     }
+    ]
+   },
+   "VIKINGS": {
+    "club": "VIKINGS",
+    "game_section": "EARLY GAMES",
+    "players": [
+     {
+      "club": "VIKINGS",
+      "emergency_qb": false,
+      "player": "Kyler Murray",
+      "position": "QB",
+      "raw": "QB Kyler Murray"
+     },
+     {
+      "club": "VIKINGS",
+      "emergency_qb": false,
+      "player": "Jordan Addison",
+      "position": "WR",
+      "raw": "WR Jordan Addison"
+     },
+     {
+      "club": "VIKINGS",
+      "emergency_qb": true,
+      "player": "Max Brosmer (emergency third QB)",
+      "position": "QB",
+      "raw": "QB Max Brosmer (emergency third QB)"
+     },
+     {
+      "club": "VIKINGS",
+      "emergency_qb": false,
+      "player": "Jauan Jennings",
+      "position": "WR",
+      "raw": "WR Jauan Jennings"
+     },
+     {
+      "club": "VIKINGS",
+      "emergency_qb": false,
+      "player": "Blake Cashman",
+      "position": "LB",
+      "raw": "LB Blake Cashman"
+     },
+     {
+      "club": "VIKINGS",
+      "emergency_qb": false,
+      "player": "T.J. Hockenson",
+      "position": "TE",
+      "raw": "TE T.J. Hockenson"
+     },
+     {
+      "club": "VIKINGS",
+      "emergency_qb": false,
+      "player": "Tyroin Ingram-Dawkins",
+      "position": "DL",
+      "raw": "DL Tyroin Ingram-Dawkins"
+     }
+    ]
+   }
+  },
+  "coverage": "captured",
+  "failures": [],
+  "observed_at": "2026-11-16T15:05:00Z",
+  "raw_file": "injury-archive/data/raw/a7007be89057be0d3134d78c1adf932f9d2c4e9e60e9939643e554a5ac5180fb.html.gz",
+  "rows": [
+   {
+    "club": "PATRIOTS",
+    "emergency_qb": false,
+    "player": "Carlton Davis",
+    "position": "CB",
+    "raw": "CB Carlton Davis"
+   },
+   {
+    "club": "PATRIOTS",
+    "emergency_qb": false,
+    "player": "Brenden Schooler",
+    "position": "FS",
+    "raw": "FS Brenden Schooler"
+   },
+   {
+    "club": "PATRIOTS",
+    "emergency_qb": false,
+    "player": "Dametrious Crownover",
+    "position": "OT",
+    "raw": "OT Dametrious Crownover"
+   },
+   {
+    "club": "PATRIOTS",
+    "emergency_qb": false,
+    "player": "Walter Rouse",
+    "position": "OT",
+    "raw": "OT Walter Rouse"
+   },
+   {
+    "club": "PATRIOTS",
+    "emergency_qb": false,
+    "player": "Ben Brown",
+    "position": "C",
+    "raw": "C Ben Brown"
+   },
+   {
+    "club": "PATRIOTS",
+    "emergency_qb": true,
+    "player": "Behren Morton (emergency third QB)",
+    "position": "QB",
+    "raw": "QB Behren Morton (emergency third QB)"
+   },
+   {
+    "club": "LIONS",
+    "emergency_qb": false,
+    "player": "Keith Abney II",
+    "position": "CB",
+    "raw": "CB Keith Abney II"
+   },
+   {
+    "club": "LIONS",
+    "emergency_qb": false,
+    "player": "Ahmed Hassanein",
+    "position": "EDGE",
+    "raw": "EDGE Ahmed Hassanein"
+   },
+   {
+    "club": "LIONS",
+    "emergency_qb": false,
+    "player": "Cade Mays",
+    "position": "C",
+    "raw": "C Cade Mays"
+   },
+   {
+    "club": "LIONS",
+    "emergency_qb": false,
+    "player": "Amen Ogbongbemiga",
+    "position": "LB",
+    "raw": "LB Amen Ogbongbemiga"
+   },
+   {
+    "club": "LIONS",
+    "emergency_qb": false,
+    "player": "D.J. Reed",
+    "position": "CB",
+    "raw": "CB D.J. Reed"
+   },
+   {
+    "club": "LIONS",
+    "emergency_qb": false,
+    "player": "Mekhi Wingo",
+    "position": "DL",
+    "raw": "DL Mekhi Wingo"
+   },
+   {
+    "club": "CHIEFS",
+    "emergency_qb": false,
+    "player": "Kenneth Walker",
+    "position": "RB",
+    "raw": "RB Kenneth Walker"
+   },
+   {
+    "club": "CHIEFS",
+    "emergency_qb": true,
+    "player": "Garrett Nussmeier (Emergency 3rd QB)",
+    "position": "QB",
+    "raw": "QB Garrett Nussmeier (Emergency 3rd QB)"
+   },
+   {
+    "club": "CHIEFS",
+    "emergency_qb": false,
+    "player": "Jaydn Ott",
+    "position": "RB",
+    "raw": "RB Jaydn Ott"
+   },
+   {
+    "club": "CHIEFS",
+    "emergency_qb": false,
+    "player": "Melvin Smith",
+    "position": "CB",
+    "raw": "CB Melvin Smith"
+   },
+   {
+    "club": "CHIEFS",
+    "emergency_qb": false,
+    "player": "Ben VanSumeren",
+    "position": "FB",
+    "raw": "FB Ben VanSumeren"
+   },
+   {
+    "club": "CHIEFS",
+    "emergency_qb": false,
+    "player": "Jaylon Moore",
+    "position": "OL",
+    "raw": "OL Jaylon Moore"
+   },
+   {
+    "club": "CHIEFS",
+    "emergency_qb": false,
+    "player": "Peter Woods",
+    "position": "DL",
+    "raw": "DL Peter Woods"
+   },
+   {
+    "club": "FALCONS",
+    "emergency_qb": true,
+    "player": "Andy Dalton (emergency third quarterback)",
+    "position": "QB",
+    "raw": "QB Andy Dalton (emergency third quarterback)"
+   },
+   {
+    "club": "FALCONS",
+    "emergency_qb": false,
+    "player": "Divine Deablo",
+    "position": "ILB",
+    "raw": "ILB Divine Deablo"
+   },
+   {
+    "club": "FALCONS",
+    "emergency_qb": false,
+    "player": "Avieon Terrell",
+    "position": "CB",
+    "raw": "CB Avieon Terrell"
+   },
+   {
+    "club": "FALCONS",
+    "emergency_qb": false,
+    "player": "Zachariah Branch",
+    "position": "WR",
+    "raw": "WR Zachariah Branch"
+   },
+   {
+    "club": "FALCONS",
+    "emergency_qb": false,
+    "player": "Jack Strand",
+    "position": "QB",
+    "raw": "QB Jack Strand"
+   },
+   {
+    "club": "FALCONS",
+    "emergency_qb": false,
+    "player": "Robert Longerbeam",
+    "position": "CB",
+    "raw": "CB Robert Longerbeam"
+   },
+   {
+    "club": "FALCONS",
+    "emergency_qb": false,
+    "player": "Cameron Williams",
+    "position": "OL",
+    "raw": "OL Cameron Williams"
+   },
+   {
+    "club": "TEXANS",
+    "emergency_qb": false,
+    "player": "Azeez Al-Shaair",
+    "position": "LB",
+    "raw": "LB Azeez Al-Shaair"
+   },
+   {
+    "club": "TEXANS",
+    "emergency_qb": false,
+    "player": "Brevin Jordan",
+    "position": "TE",
+    "raw": "TE Brevin Jordan"
+   },
+   {
+    "club": "TEXANS",
+    "emergency_qb": false,
+    "player": "Marvin Harrison Jr.",
+    "position": "WR",
+    "raw": "WR Marvin Harrison Jr."
+   },
+   {
+    "club": "TEXANS",
+    "emergency_qb": false,
+    "player": "David Montgomery",
+    "position": "RB",
+    "raw": "RB David Montgomery"
+   },
+   {
+    "club": "TEXANS",
+    "emergency_qb": false,
+    "player": "Danielle Hunter",
+    "position": "DE",
+    "raw": "DE Danielle Hunter"
+   },
+   {
+    "club": "TEXANS",
+    "emergency_qb": false,
+    "player": "Keylan Rutledge",
+    "position": "C/G",
+    "raw": "C/G Keylan Rutledge"
+   },
+   {
+    "club": "TEXANS",
+    "emergency_qb": false,
+    "player": "Wyatt Teller",
+    "position": "G",
+    "raw": "G Wyatt Teller"
+   },
+   {
+    "club": "BROWNS",
+    "emergency_qb": true,
+    "player": "Dillon Gabriel (emergency third QB)",
+    "position": "QB",
+    "raw": "QB Dillon Gabriel (emergency third QB)"
+   },
+   {
+    "club": "BROWNS",
+    "emergency_qb": false,
+    "player": "Taylen Green",
+    "position": "QB",
+    "raw": "QB Taylen Green"
+   },
+   {
+    "club": "BROWNS",
+    "emergency_qb": false,
+    "player": "Justin Jefferson",
+    "position": "LB",
+    "raw": "LB Justin Jefferson"
+   },
+   {
+    "club": "BROWNS",
+    "emergency_qb": false,
+    "player": "Noah Igbinoghene",
+    "position": "CB",
+    "raw": "CB Noah Igbinoghene"
+   },
+   {
+    "club": "BROWNS",
+    "emergency_qb": false,
+    "player": "Ronnie Hickman",
+    "position": "S",
+    "raw": "S Ronnie Hickman"
+   },
+   {
+    "club": "BROWNS",
+    "emergency_qb": false,
+    "player": "Parker Brailsford",
+    "position": "C",
+    "raw": "C Parker Brailsford"
+   },
+   {
+    "club": "VIKINGS",
+    "emergency_qb": false,
+    "player": "Kyler Murray",
+    "position": "QB",
+    "raw": "QB Kyler Murray"
+   },
+   {
+    "club": "VIKINGS",
+    "emergency_qb": false,
+    "player": "Jordan Addison",
+    "position": "WR",
+    "raw": "WR Jordan Addison"
+   },
+   {
+    "club": "VIKINGS",
+    "emergency_qb": true,
+    "player": "Max Brosmer (emergency third QB)",
+    "position": "QB",
+    "raw": "QB Max Brosmer (emergency third QB)"
+   },
+   {
+    "club": "VIKINGS",
+    "emergency_qb": false,
+    "player": "Jauan Jennings",
+    "position": "WR",
+    "raw": "WR Jauan Jennings"
+   },
+   {
+    "club": "VIKINGS",
+    "emergency_qb": false,
+    "player": "Blake Cashman",
+    "position": "LB",
+    "raw": "LB Blake Cashman"
+   },
+   {
+    "club": "VIKINGS",
+    "emergency_qb": false,
+    "player": "T.J. Hockenson",
+    "position": "TE",
+    "raw": "TE T.J. Hockenson"
+   },
+   {
+    "club": "VIKINGS",
+    "emergency_qb": false,
+    "player": "Tyroin Ingram-Dawkins",
+    "position": "DL",
+    "raw": "DL Tyroin Ingram-Dawkins"
+   },
+   {
+    "club": "PACKERS",
+    "emergency_qb": false,
+    "player": "Josh Jacobs",
+    "position": "RB",
+    "raw": "RB Josh Jacobs"
+   },
+   {
+    "club": "PACKERS",
+    "emergency_qb": false,
+    "player": "Pierre Strong Jr.",
+    "position": "RB",
+    "raw": "RB Pierre Strong Jr."
+   },
+   {
+    "club": "PACKERS",
+    "emergency_qb": false,
+    "player": "Zaire Franklin",
+    "position": "LB",
+    "raw": "LB Zaire Franklin"
+   },
+   {
+    "club": "PACKERS",
+    "emergency_qb": false,
+    "player": "Donovan Jennings",
+    "position": "G/T",
+    "raw": "G/T Donovan Jennings"
+   },
+   {
+    "club": "PACKERS",
+    "emergency_qb": false,
+    "player": "Kevin Zeitler",
+    "position": "G",
+    "raw": "G Kevin Zeitler"
+   },
+   {
+    "club": "PACKERS",
+    "emergency_qb": false,
+    "player": "Sean Rhyan",
+    "position": "C",
+    "raw": "C Sean Rhyan"
+   },
+   {
+    "club": "DOLPHINS",
+    "emergency_qb": false,
+    "player": "Chris Bell",
+    "position": "WR",
+    "raw": "WR Chris Bell"
+   },
+   {
+    "club": "DOLPHINS",
+    "emergency_qb": false,
+    "player": "Marcellas Dial Jr.",
+    "position": "CB",
+    "raw": "CB Marcellas Dial Jr."
+   },
+   {
+    "club": "DOLPHINS",
+    "emergency_qb": false,
+    "player": "Aaron Brewer",
+    "position": "C",
+    "raw": "C Aaron Brewer"
+   },
+   {
+    "club": "DOLPHINS",
+    "emergency_qb": false,
+    "player": "Caedan Wallace",
+    "position": "G/T",
+    "raw": "G/T Caedan Wallace"
+   },
+   {
+    "club": "DOLPHINS",
+    "emergency_qb": false,
+    "player": "Justin Joly",
+    "position": "TE",
+    "raw": "TE Justin Joly"
+   },
+   {
+    "club": "DOLPHINS",
+    "emergency_qb": false,
+    "player": "Jared Wayne",
+    "position": "WR",
+    "raw": "WR Jared Wayne"
+   },
+   {
+    "club": "COLTS",
+    "emergency_qb": false,
+    "player": "Jaylon Carlies",
+    "position": "LB",
+    "raw": "LB Jaylon Carlies"
+   },
+   {
+    "club": "COLTS",
+    "emergency_qb": true,
+    "player": "Riley Leonard (emergency third QB)",
+    "position": "QB",
+    "raw": "QB Riley Leonard (emergency third QB)"
+   },
+   {
+    "club": "COLTS",
+    "emergency_qb": false,
+    "player": "Will Mallory",
+    "position": "TE",
+    "raw": "TE Will Mallory"
+   },
+   {
+    "club": "COLTS",
+    "emergency_qb": false,
+    "player": "Luke Rhodes",
+    "position": "LS",
+    "raw": "LS Luke Rhodes"
+   },
+   {
+    "club": "COLTS",
+    "emergency_qb": false,
+    "player": "Jerry Tillery",
+    "position": "DT",
+    "raw": "DT Jerry Tillery"
+   },
+   {
+    "club": "COLTS",
+    "emergency_qb": false,
+    "player": "Jalen Travis",
+    "position": "OT",
+    "raw": "OT Jalen Travis"
+   },
+   {
+    "club": "PANTHERS",
+    "emergency_qb": false,
+    "player": "Ja'Tavion Sanders",
+    "position": "TE",
+    "raw": "TE Ja'Tavion Sanders"
+   },
+   {
+    "club": "PANTHERS",
+    "emergency_qb": true,
+    "player": "Haynes King (emergency third QB)",
+    "position": "QB",
+    "raw": "QB Haynes King (emergency third QB)"
+   },
+   {
+    "club": "PANTHERS",
+    "emergency_qb": false,
+    "player": "Will Lee",
+    "position": "CB",
+    "raw": "CB Will Lee"
+   },
+   {
+    "club": "PANTHERS",
+    "emergency_qb": false,
+    "player": "AJ Dillon",
+    "position": "RB",
+    "raw": "RB AJ Dillon"
+   },
+   {
+    "club": "PANTHERS",
+    "emergency_qb": false,
+    "player": "Bobby Okereke",
+    "position": "LB",
+    "raw": "LB Bobby Okereke"
+   },
+   {
+    "club": "PANTHERS",
+    "emergency_qb": false,
+    "player": "Sam Hecht",
+    "position": "C",
+    "raw": "C Sam Hecht"
+   },
+   {
+    "club": "PANTHERS",
+    "emergency_qb": false,
+    "player": "TeRah Edwards",
+    "position": "DT",
+    "raw": "DT TeRah Edwards"
+   },
+   {
+    "club": "SAINTS",
+    "emergency_qb": true,
+    "player": "Zach Wilson (designated third QB)",
+    "position": "QB",
+    "raw": "QB Zach Wilson (designated third QB)"
+   },
+   {
+    "club": "SAINTS",
+    "emergency_qb": false,
+    "player": "Mike Reid",
+    "position": "S",
+    "raw": "S Mike Reid"
+   },
+   {
+    "club": "SAINTS",
+    "emergency_qb": false,
+    "player": "CJ Donaldson",
+    "position": "RB",
+    "raw": "RB CJ Donaldson"
+   },
+   {
+    "club": "SAINTS",
+    "emergency_qb": false,
+    "player": "Jaylan Ford",
+    "position": "LB",
+    "raw": "LB Jaylan Ford"
+   },
+   {
+    "club": "SAINTS",
+    "emergency_qb": false,
+    "player": "Taliese Fuaga",
+    "position": "OT",
+    "raw": "OT Taliese Fuaga"
+   },
+   {
+    "club": "SAINTS",
+    "emergency_qb": false,
+    "player": "Erik McCoy",
+    "position": "C",
+    "raw": "C Erik McCoy"
+   },
+   {
+    "club": "BILLS",
+    "emergency_qb": false,
+    "player": "Shane Buechele",
+    "position": "QB",
+    "raw": "QB Shane Buechele"
+   },
+   {
+    "club": "BILLS",
+    "emergency_qb": false,
+    "player": "Jalon Kilgore",
+    "position": "S",
+    "raw": "S Jalon Kilgore"
+   },
+   {
+    "club": "BILLS",
+    "emergency_qb": false,
+    "player": "Mike Danna",
+    "position": "OLB",
+    "raw": "OLB Mike Danna"
+   },
+   {
+    "club": "BILLS",
+    "emergency_qb": false,
+    "player": "Ar'maj Reed- Adams",
+    "position": "G",
+    "raw": "G Ar'maj Reed- Adams"
+   },
+   {
+    "club": "BILLS",
+    "emergency_qb": false,
+    "player": "Jude Bowry",
+    "position": "OL",
+    "raw": "OL Jude Bowry"
+   },
+   {
+    "club": "BILLS",
+    "emergency_qb": false,
+    "player": "Greg Gaines",
+    "position": "DL",
+    "raw": "DL Greg Gaines"
+   },
+   {
+    "club": "JETS",
+    "emergency_qb": false,
+    "player": "Jarvis Brownlee Jr.",
+    "position": "CB",
+    "raw": "CB Jarvis Brownlee Jr."
+   },
+   {
+    "club": "JETS",
+    "emergency_qb": false,
+    "player": "Nate Lynn",
+    "position": "EDGE",
+    "raw": "Edge Nate Lynn"
+   },
+   {
+    "club": "JETS",
+    "emergency_qb": false,
+    "player": "Tim Patrick",
+    "position": "WR",
+    "raw": "WR Tim Patrick"
+   },
+   {
+    "club": "JETS",
+    "emergency_qb": false,
+    "player": "Trevin Wallace",
+    "position": "LB",
+    "raw": "LB Trevin Wallace"
+   },
+   {
+    "club": "JETS",
+    "emergency_qb": false,
+    "player": "Jelani Woods",
+    "position": "TE",
+    "raw": "TE Jelani Woods"
+   },
+   {
+    "club": "JAGUARS",
+    "emergency_qb": false,
+    "player": "Jessie Bates III",
+    "position": "S",
+    "raw": "S Jessie Bates III"
+   },
+   {
+    "club": "JAGUARS",
+    "emergency_qb": false,
+    "player": "CJ Williams",
+    "position": "WR",
+    "raw": "WR CJ Williams"
+   },
+   {
+    "club": "JAGUARS",
+    "emergency_qb": false,
+    "player": "Jordan Davis",
+    "position": "DT",
+    "raw": "DT Jordan Davis"
+   },
+   {
+    "club": "JAGUARS",
+    "emergency_qb": false,
+    "player": "Wesley Williams",
+    "position": "DE",
+    "raw": "DE Wesley Williams"
+   },
+   {
+    "club": "JAGUARS",
+    "emergency_qb": false,
+    "player": "Albert Regis",
+    "position": "DT",
+    "raw": "DT Albert Regis"
+   },
+   {
+    "club": "TITANS",
+    "emergency_qb": false,
+    "player": "Carnell Tate",
+    "position": "WR",
+    "raw": "WR Carnell Tate"
+   },
+   {
+    "club": "TITANS",
+    "emergency_qb": false,
+    "player": "Nick Singleton",
+    "position": "RB",
+    "raw": "RB Nick Singleton"
+   },
+   {
+    "club": "TITANS",
+    "emergency_qb": false,
+    "player": "Jaylon Jones",
+    "position": "CB",
+    "raw": "CB Jaylon Jones"
+   },
+   {
+    "club": "TITANS",
+    "emergency_qb": false,
+    "player": "Cody Barton",
+    "position": "LB",
+    "raw": "LB Cody Barton"
+   },
+   {
+    "club": "TITANS",
+    "emergency_qb": false,
+    "player": "Anthony Hill Jr.",
+    "position": "LB",
+    "raw": "LB Anthony Hill Jr."
+   },
+   {
+    "club": "TITANS",
+    "emergency_qb": false,
+    "player": "Brandon Crenshaw-Dickson",
+    "position": "OT",
+    "raw": "OT Brandon Crenshaw-Dickson"
+   },
+   {
+    "club": "TITANS",
+    "emergency_qb": false,
+    "player": "Jackie Marshall",
+    "position": "DT",
+    "raw": "DT Jackie Marshall"
+   },
+   {
+    "club": "RAMS",
+    "emergency_qb": true,
+    "player": "Ty Simpson (emergency third QB)",
+    "position": "QB",
+    "raw": "QB Ty Simpson (emergency third QB)"
+   },
+   {
+    "club": "RAMS",
+    "emergency_qb": false,
+    "player": "Maximus Pulley",
+    "position": "S",
+    "raw": "S Maximus Pulley"
+   },
+   {
+    "club": "RAMS",
+    "emergency_qb": false,
+    "player": "Joe Cardona",
+    "position": "LS",
+    "raw": "LS Joe Cardona"
+   },
+   {
+    "club": "RAMS",
+    "emergency_qb": false,
+    "player": "Darryl Peterson III",
+    "position": "OLB",
+    "raw": "OLB Darryl Peterson III"
+   },
+   {
+    "club": "RAMS",
+    "emergency_qb": false,
+    "player": "Steve Avila",
+    "position": "OL",
+    "raw": "OL Steve Avila"
+   },
+   {
+    "club": "RAMS",
+    "emergency_qb": false,
+    "player": "Keagen Trost",
+    "position": "OL",
+    "raw": "OL Keagen Trost"
+   },
+   {
+    "club": "RAMS",
+    "emergency_qb": false,
+    "player": "Desjuan Johnson",
+    "position": "OLB",
+    "raw": "OLB Desjuan Johnson"
+   },
+   {
+    "club": "CARDINALS",
+    "emergency_qb": false,
+    "player": "Joey Aguilar",
+    "position": "QB",
+    "raw": "QB Joey Aguilar"
+   },
+   {
+    "club": "CARDINALS",
+    "emergency_qb": false,
+    "player": "Starling Thomas V",
+    "position": "CB",
+    "raw": "CB Starling Thomas V"
+   },
+   {
+    "club": "CARDINALS",
+    "emergency_qb": false,
+    "player": "Eku Leota",
+    "position": "LB",
+    "raw": "LB Eku Leota"
+   },
+   {
+    "club": "CARDINALS",
+    "emergency_qb": false,
+    "player": "Jayden Williams",
+    "position": "OL",
+    "raw": "OL Jayden Williams"
+   },
+   {
+    "club": "CARDINALS",
+    "emergency_qb": false,
+    "player": "Jon Gaines II",
+    "position": "OL",
+    "raw": "OL Jon Gaines II"
+   },
+   {
+    "club": "CARDINALS",
+    "emergency_qb": false,
+    "player": "Hjalte Froholdt",
+    "position": "OL",
+    "raw": "OL Hjalte Froholdt"
+   },
+   {
+    "club": "SEAHAWKS",
+    "emergency_qb": false,
+    "player": "Sam Darnold",
+    "position": "QB",
+    "raw": "QB Sam Darnold"
+   },
+   {
+    "club": "SEAHAWKS",
+    "emergency_qb": false,
+    "player": "Emanuel Wilson",
+    "position": "RB",
+    "raw": "RB Emanuel Wilson"
+   },
+   {
+    "club": "SEAHAWKS",
+    "emergency_qb": false,
+    "player": "Avery Smith",
+    "position": "CB",
+    "raw": "CB Avery Smith"
+   },
+   {
+    "club": "SEAHAWKS",
+    "emergency_qb": false,
+    "player": "Quenton Nelson",
+    "position": "G",
+    "raw": "G Quenton Nelson"
+   },
+   {
+    "club": "SEAHAWKS",
+    "emergency_qb": false,
+    "player": "Charles Cross",
+    "position": "OT",
+    "raw": "OT Charles Cross"
+   },
+   {
+    "club": "SEAHAWKS",
+    "emergency_qb": false,
+    "player": "Deven Eastern",
+    "position": "NT",
+    "raw": "NT Deven Eastern"
+   },
+   {
+    "club": "SEAHAWKS",
+    "emergency_qb": false,
+    "player": "Leonard Williams",
+    "position": "DT",
+    "raw": "DT Leonard Williams"
+   },
+   {
+    "club": "RAIDERS",
+    "emergency_qb": false,
+    "player": "Dont'e Thornton Jr.",
+    "position": "WR",
+    "raw": "WR Dont'e Thornton Jr."
+   },
+   {
+    "club": "RAIDERS",
+    "emergency_qb": false,
+    "player": "Malik Benson",
+    "position": "WR",
+    "raw": "WR Malik Benson"
+   },
+   {
+    "club": "RAIDERS",
+    "emergency_qb": false,
+    "player": "Tristin McCollum",
+    "position": "S",
+    "raw": "S Tristin McCollum"
+   },
+   {
+    "club": "RAIDERS",
+    "emergency_qb": false,
+    "player": "Dalton Johnson",
+    "position": "S",
+    "raw": "S Dalton Johnson"
+   },
+   {
+    "club": "RAIDERS",
+    "emergency_qb": false,
+    "player": "Bryce Cabeldue",
+    "position": "G",
+    "raw": "G Bryce Cabeldue"
+   },
+   {
+    "club": "RAIDERS",
+    "emergency_qb": false,
+    "player": "Thomas Booker IV",
+    "position": "DT",
+    "raw": "DT Thomas Booker IV"
+   },
+   {
+    "club": "49ERS",
+    "emergency_qb": false,
+    "player": "Kurtis Rourke",
+    "position": "QB",
+    "raw": "QB Kurtis Rourke"
+   },
+   {
+    "club": "49ERS",
+    "emergency_qb": false,
+    "player": "Mike Evans",
+    "position": "WR",
+    "raw": "WR Mike Evans"
+   },
+   {
+    "club": "49ERS",
+    "emergency_qb": false,
+    "player": "Enrique Cruz Jr.",
+    "position": "OL",
+    "raw": "OL Enrique Cruz Jr."
+   },
+   {
+    "club": "49ERS",
+    "emergency_qb": false,
+    "player": "Tatum Bethune",
+    "position": "LB",
+    "raw": "LB Tatum Bethune"
+   },
+   {
+    "club": "49ERS",
+    "emergency_qb": false,
+    "player": "Brandin Cooks",
+    "position": "WR",
+    "raw": "WR Brandin Cooks"
+   },
+   {
+    "club": "COWBOYS",
+    "emergency_qb": false,
+    "player": "P.J. Locke III",
+    "position": "S",
+    "raw": "S P.J. Locke III"
+   },
+   {
+    "club": "COWBOYS",
+    "emergency_qb": false,
+    "player": "Donovan Ezeiruaku",
+    "position": "OLB",
+    "raw": "OLB Donovan Ezeiruaku"
+   },
+   {
+    "club": "COWBOYS",
+    "emergency_qb": false,
+    "player": "Derion Kendrick",
+    "position": "CB",
+    "raw": "CB Derion Kendrick"
+   },
+   {
+    "club": "COWBOYS",
+    "emergency_qb": false,
+    "player": "Jonathan Mingo",
+    "position": "WR",
+    "raw": "WR Jonathan Mingo"
+   },
+   {
+    "club": "COWBOYS",
+    "emergency_qb": false,
+    "player": "Juanyeh Thomas",
+    "position": "S",
+    "raw": "S Juanyeh Thomas"
+   },
+   {
+    "club": "COWBOYS",
+    "emergency_qb": false,
+    "player": "Ajani Cornelius",
+    "position": "G",
+    "raw": "G Ajani Cornelius"
+   },
+   {
+    "club": "COWBOYS",
+    "emergency_qb": false,
+    "player": "Jake Ferguson",
+    "position": "TE",
+    "raw": "TE Jake Ferguson"
+   },
+   {
+    "club": "STEELERS",
+    "emergency_qb": false,
+    "player": "DeShon Elliott",
+    "position": "S",
+    "raw": "S DeShon Elliott"
+   },
+   {
+    "club": "STEELERS",
+    "emergency_qb": false,
+    "player": "Drew Allar",
+    "position": "QB",
+    "raw": "QB Drew Allar"
+   },
+   {
+    "club": "STEELERS",
+    "emergency_qb": true,
+    "player": "Will Howard (emergency third QB)",
+    "position": "QB",
+    "raw": "QB Will Howard (emergency third QB)"
+   },
+   {
+    "club": "STEELERS",
+    "emergency_qb": false,
+    "player": "Sean Murphy-Bunting",
+    "position": "CB",
+    "raw": "CB Sean Murphy-Bunting"
+   },
+   {
+    "club": "STEELERS",
+    "emergency_qb": false,
+    "player": "Eli Heidenreich",
+    "position": "RB",
+    "raw": "RB Eli Heidenreich"
+   },
+   {
+    "club": "BENGALS",
+    "emergency_qb": false,
+    "player": "Kyle Dugger",
+    "position": "S",
+    "raw": "S Kyle Dugger"
+   },
+   {
+    "club": "BENGALS",
+    "emergency_qb": false,
+    "player": "Connor Lew",
+    "position": "C",
+    "raw": "C Connor Lew"
+   },
+   {
+    "club": "BENGALS",
+    "emergency_qb": false,
+    "player": "Myles Hinton",
+    "position": "OT",
+    "raw": "OT Myles Hinton"
+   },
+   {
+    "club": "BENGALS",
+    "emergency_qb": false,
+    "player": "Landon Robinson",
+    "position": "DT",
+    "raw": "DT Landon Robinson"
+   }
+  ],
+  "season": 2026,
+  "sha256": "a7007be89057be0d3134d78c1adf932f9d2c4e9e60e9939643e554a5ac5180fb",
+  "source_url": "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season",
+  "week": 10
+ }
+}

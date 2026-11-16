@@ -372,6 +372,19 @@ are evidence about those addresses, not proof that no other official address exi
         ["Emergency third quarterback", B.lib.num(totals["emergency_qb"]),
          "counted separately: inactive by rule, not by injury"],
     ], numeric={1}))
+    anomaly = d.get("anomaly", {})
+    if anomaly:
+        body.append("<h2>Two official documents disagreeing, counted</h2>")
+        body.append(table(["Check (protocol amendment A1.2)", "Count", "What it is"], [
+            ["Designated on the report, practised fully, not on the inactive list",
+             B.lib.num(anomaly.get("designated_active_after_full_practice", 0)),
+             "published as a count; no rate is corrected for it"],
+            ["On the inactive list but never on that week's report",
+             B.lib.num(anomaly.get("inactive_not_on_report", 0)),
+             "a club decision or an injury outside the report; not an error either way"],
+        ], numeric={1}))
+        body.append(f'<div class="notice warnbox"><b>Why the Week 10 rate is labelled '
+                    f'provisional.</b> {esc(anomaly.get("note", ""))}</div>')
     body.append("""<h2>Known bias, stated rather than hidden</h2>
 <p>A designation whose player name does not match the article is counted <i>active</i>. If the
 mismatch is really a miss (a traded player, a spelling difference beyond the suffix rule), the
