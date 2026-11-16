@@ -12,7 +12,7 @@
    "id": "R01",
    "text": "Price-snapshot store with opening and closing numbers for every market originated.",
    "state": "partial",
-   "evidence": "Immutable snapshot store with 5 retained captures; the ledger derives opening/latest/closing/post-hoc per event \u00d7 market under a pre-registered policy, and 49 cells show a genuine opening-to-latest interval.",
+   "evidence": "Immutable snapshot store with 6 retained captures; the ledger derives opening/latest/closing/post-hoc per event \u00d7 market under a pre-registered policy, and 49 cells show a genuine opening-to-latest interval.",
    "gate": "G05 price coverage",
    "number": "78 of 816 market cells have a pre-kickoff opening and 49 have moved; clearance needs a captured interval for every cell a strategy grades.",
    "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
