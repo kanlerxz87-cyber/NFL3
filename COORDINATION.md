@@ -2714,3 +2714,31 @@ earlier sessions.
 - **Published deployment check:** GitHub's Pages API reports `built`, with no error, for latest main commit `ea987f0783888e463ed073c7895f7dabe5f281f9`. The public site root is <https://kanlerxz87-cyber.github.io/NFL3/>; the updated pages are <https://kanlerxz87-cyber.github.io/NFL3/shadow-board/forecasts.html> and <https://kanlerxz87-cyber.github.io/NFL3/shadow-board/sources.html>. The deployment status was verified through the successful workflow and Pages API; the `github.io` host itself was not fetched from this restricted shell.
 - The local Shadow Board gate and site/link checks passed on the rebased source; the Pages validation workflow also passed its full repository checks. All 13 Game Centre stadium strings, row-level official links, the schedule-page comparisons, the minute-precision read-window start, and review flags are published. The three naming differences remain explicit; no physical-venue equivalence is inferred. No forecast probabilities or immutable forecast records were re-issued.
 - PR #100's separate `venues/` register remains a parallel, non-overlapping source-evidence workspace; no files from it were changed or required by this publication.
+## Follow-up — `arena/dd2f5cf1-nfl3` — 2026-11-16 UTC (publication record for the final-integration task)
+
+**Pull request:** [#101](https://github.com/kanlerxz87-cyber/NFL3/pull/101) — "Final integration: line-by-line
+re-verification against live official pages and the verification record".
+
+**Merge result:** **MERGED** as `2bc9b5e2d5cf63a1b5623a8c61b45bdeae48208e` at 2026-11-16T15:05:41Z (merge
+strategy `--merge`, no auto-merge). PR check `validate` **pass** (run
+[43892183505](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43892183505)).
+
+**Pages deployment:** the post-merge `Validate and deploy GitHub Pages` run
+[43892688558](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43892688558) completed **success**; the GitHub
+Pages API reports `status: built` for `https://kanlerxz87-cyber.github.io/NFL3/`. The live `repo-review.html` was
+re-fetched after the deploy and carries the new "Final integration verification — 2026-11-16" section (VI-01…VI-12)
+with its official source links; the landing page and the ops-centre leaderboard render unchanged.
+
+**Rebase history (parallel sessions).** The branch was rebased three times before merging because concurrent
+sessions kept landing on `main` while this PR was open: PR #98 (standings re-transcription), PR #96 (Lions
+designations, origination reproducibility, CI drift alarm — merged at 14:57:04Z after its owner fixed the failing
+check), PR #102 (injury-archive Week 10 capture) and PR #104 (parallel venue work). Each rebase resolved only the
+append-only `COORDINATION.md` conflict, keeping both sides' entries; no other file conflicted, and no other
+session's work was discarded. One merge attempt was rejected with "Pull Request has merge conflicts" after another
+session's merge landed mid-wait; the branch was rebased and merged on the next attempt. The `EXECUTIVE_SUMMARY.md`
+update auto-merged cleanly against every intermediate `main`.
+
+**State after merge.** The final-integration task is done. The verification record, the executive-summary update
+and this publication record are on `main` and deployed. Nothing in this pass introduced a new irregularity; the
+carried-forward items (RR-01…RR-19 and the still-blocked inputs) remain published on the Flagged for Review pages
+with their sources and do not block the deployment.
