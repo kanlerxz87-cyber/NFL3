@@ -2933,3 +2933,23 @@ Two things the second rebase and a self-review turned up, both fixed on this bra
   prospective register that re-dates itself on every rebuild is not a register. The 14:55:05Z slate was restored
   rather than overwritten, CI runs the ledger, the aggregates and the pages but **never** the fit, and
   `forward-ledger/prospects.html` now prints the policy in its reproducibility table.
+
+
+### Amendment 3 — `arena/5600e7eb-nfl3`, 2026-11-16 UTC (CI result, and a correction to what this session claimed)
+
+- **PR [#111](https://github.com/kanlerxz87-cyber/NFL3/pull/111)** → `main`. First run failed at
+  `Price-store policy, ingestion tests, deterministic page build and integrity check` — **not** a step this PR touches:
+  `pricing.html` and `corpus.html` were stale against a rebuild on `main` at `4f35ac9` (shared-sidebar drift, which had
+  also dropped `shadow-board/index.html`). Both generated pages were regenerated in `chore(site): regenerate the two
+  pages that had drifted from the shared sidebar`; nothing inferred, no value moved. Recorded as **FL-18**.
+- **FL-13 corrected before it was merged, because two of its three "failures" were sandbox artifacts, not repo
+  defects.** `origination/scripts/verify.py` passes now (its owner's determinism fix is merged),
+  `dashboard/scripts/check.mjs` passes under `node` (it was being run with `python3` in the probe that produced the
+  claim), and `skill-lab/scripts/verify.py` fails only in a checkout without full history — CI runs it green because
+  `pages.yml` checks out with `fetch-depth: 0`. What remains true, and is what the finding is actually about: the
+  root validator locates sub-site checkers and never runs them, and its candidate list would hand a `.mjs` file to
+  `python3`. Severity lowered to Medium, wording fixed on the page, the earlier sentences in this log left as written
+  so the correction is visible.
+- Gates after this amendment: `python3 forward-ledger/scripts/verify.py` **30 passed, 0 failed** ·
+  `scripts/validate_site.py` 17 root pages · `tests/check_site.py` pass · `questions/build.py --check` pass · CI
+  `validate` job green including the two steps added here.

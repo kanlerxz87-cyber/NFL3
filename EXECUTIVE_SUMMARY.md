@@ -256,11 +256,23 @@ gaps are displayed, not filled (FL-07, FL-15).
 
 **The gate that is not enforcing what it says, and was not repaired.** `scripts/validate_site.py` prints "Sub-sites
 with their own checker are validated by that checker" while setting a flag and `continue`-ing without running any of
-them. Run by hand, three of those checkers fail on this branch (`skill-lab`, `origination`, and `dashboard/check.mjs`
-which is a Node module a Python candidate list would try to run), and `origination/scripts/verify.py` is not even
-read-only - running it appended a capture and dirtied its own tree, which is why its determinism check can never
-pass after a verification run. Making the root validator honest today would break Pages for the whole site, so it is
-logged as **FL-13** with the cause, and the forward-ledger gate is wired into
-[`.github/workflows/pages.yml`](.github/workflows/pages.yml) directly: rebuild the ledger, the availability
-aggregates and the pages, run the 29 gates, and `git diff --exit-code -- forward-ledger` so a published page can never
+them. Locating the checkers is the last thing it does. Probed by hand on this branch, `origination/scripts/verify.py`
+and `node dashboard/scripts/check.mjs` pass and `skill-lab/scripts/verify.py` fails here - "pre-registration commit
+`a60261fa0f9a` is not in the repository history" - while passing in CI, which checks out with `fetch-depth: 0`: a
+gate that reads git history is only reproducible in a full clone, which is a caveat for
+`forward-ledger/scripts/verify.py`'s ordering check too, and is why CI rather than a sandbox is the arbiter here. The
+candidate list also offers `.mjs` files to an interpreter that is `python3` everywhere else. Changing the shared
+validator is the root owner's call, so it is logged as **FL-13** with the cause, and the forward-ledger gate is wired
+into [`.github/workflows/pages.yml`](.github/workflows/pages.yml) directly: rebuild the ledger, the availability
+aggregates and the pages, run the 30 gates, and `git diff --exit-code -- forward-ledger` so a published page can never
 drift from committed data.
+
+**What the first CI run of this pull request caught, on somebody else's step.** It went red at "Price-store policy,
+ingestion tests, deterministic page build and integrity check" - a step this pull request does not touch. On `main`
+at `4f35ac9`, `python3 pricing/build.py` rewrote the committed `pricing.html`, and `corpus.html` was stale against its
+own builder in the same way, so the `git diff --exit-code` that ends those steps fails for whoever merges next. The
+only difference in either file is the shared sidebar those builders stamp in, which was updated without rebuilding the
+dependent pages - and in the process dropped `shadow-board/index.html`, which is also why the live landing page linked
+shadow-board nowhere (the stale duplicate document removed under FL-14 was the last place that carried it). Both
+generated pages were regenerated here so the shared gate is green for the next session, no value or claim in either
+file moved, and the nav itself is left to its owner (**FL-18**).
