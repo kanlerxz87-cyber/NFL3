@@ -157,6 +157,18 @@ def main() -> int:
         print("injury-archive verify: archive is empty by design; every page carries the "
               "'not yet captured' banner and no rate is published")
 
+    # 10: the build is deterministic. A second build must not change a tracked artifact, which is
+    # what caught the wall-clock stamp this archive originally wrote into its own JSON.
+    before = {f: (DATA / f).read_bytes() for f in
+              ("coverage.json", "designations.json", "injuries.json", "inactives.json", "render_contract.json")
+              if (DATA / f).exists()}
+    rebuild = subprocess.run([sys.executable, str(Path(__file__).resolve().parent / "build.py")],
+                             capture_output=True, text=True)
+    check(rebuild.returncode == 0, f"determinism: rebuild failed: {(rebuild.stderr or '')[-300:]}")
+    for name, original in before.items():
+        now = (DATA / name).read_bytes() if (DATA / name).exists() else b""
+        check(now == original, f"determinism: a second build changed {name}")
+
     print(f"injury-archive verify: {checks} checks, {len(failures)} failure(s), "
           f"{successes} stored ok read(s), {len(injuries)} report(s), {len(inactives)} article(s), "
           f"{totals['designations']} joined designation row(s)")
