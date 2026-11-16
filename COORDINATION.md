@@ -3159,3 +3159,22 @@ Deliberately **not** done: `gh run rerun --failed` on 43899408150. Re-running th
 of `6c54dd0f6`, which `main` has since moved past twice — a retry here can only roll the site backwards. The live
 deploy log could not be read from this sandbox either (`results-receiver…/logs` returns EOF on every attempt), so the
 step's own message is unrecorded here; what is recorded is the observable state of Pages, which is built and current.
+
+## Claim and result — `arena/9105143a-nfl3` — 2026-11-16 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Acceptance audit of the 2026-11-16 request against `main` at `aa2b384`: offline gate re-run, requirement-to-artifact coverage check, sandbox reachability check, board record | done (audit only, no data changed) | `arena/9105143a-nfl3` | this append-only entry in `COORDINATION.md` |
+
+**Why audit-only.** The request is a backlog of about 100 items. Most already have an artifact on `main` (for example readiness, shadow board, corpus, injury archive, matchup, skill lab, and suggestions and questions registers). Almost all remaining items need new official NFL captures, and this sandbox cannot reach nfl.com. The allowlist is GitHub, npm and PyPI. Checked 2026-11-16: `https://www.nfl.com/injuries/` returns no HTTP response (000), while `https://github.com` and `https://pypi.org/simple/` return 200. So no new official value can be verified here, and this session does not claim any.
+
+**Gate re-run on a branch equal to `origin/main` (`aa2b384`, 0 behind / 0 ahead).** All passed with exit 0: `scripts/validate_site.py`; `tests/check_site.py`; `decision-desk/scripts/check.py` (14 pages, 647 table rows checked); `shadow-board/scripts/check.py`; `pricing/test_pricing.py`; `corpus/test_corpus.py`; `tests/test_decision_lab.py`; `tests/test_readiness.py`; `tests/test_injury_capture.py`; `tests/test_origination.py`; `tests/test_skill_lab.py`; `tests/test_availability_ledger.py`; `tests/test_verification_lab.py`; `tests/test_injury_archive.py`; `tests/test_injury_archive_pipeline.py`; `questions/build.py --check` (100 questions, 75 proposals). Not re-run here because they need network or CI-only history: `decision-lab/scripts/verify_sources.py`, `verify_live.py`, `capture_official.py`, `skill-lab/scripts/verify.py` (shallow-clone ancestry), and `origination/scripts/verify.py` (first-run determinism). These are CI's job.
+
+**Irregularities checked.** The `::error::injury 2026 W10: TimeoutError` line in `tests/test_injury_archive_pipeline.py` is an intentional fixture (`raise TimeoutError("read timed out")` at line 147) for the failure path. It is not a defect. The earlier stacked-document defect on `index.html` (M-F8) is not present on `main`: `validate_site.py` passes.
+
+**Open PRs, not touched here:** #99 (`arena/b0dd4900-nfl3`), #100 (`arena/46fe1baa-nfl3`), #105 (`arena/d37d5907-nfl3`). Their files were not edited.
+
+**Still open, for owners and for the user's review (not resolved here):**
+- Every official-source refresh (injury report, depth pages, game books, inactives, snap counts, transactions, venues) needs a run from an environment with nfl.com access. The scheduled workflows are the route; their output needs checking in CI.
+- Items marked "Flagged for Review" on the live site remain flagged and unverified; this audit did not clear any of them.
+- Model, backtest and leaderboard numbers are not re-derived in this session.
