@@ -9,7 +9,7 @@
  },
  "community_games": {
   "url": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
-  "sha256": "sha256:4dbd042b75bcc0ce5d37e472bd1cbab77d25a3c7bf22f982b22b99cfde3b7825"
+  "sha256": "sha256:ae078b71adae7a9911feb9f22e64c8923ef30cb495a8520a4d1db4a06cc379f6"
  },
  "counts": {
   "games_scheduled": 272,
