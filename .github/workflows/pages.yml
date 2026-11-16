@@ -76,6 +76,13 @@ jobs:
         run: python3 tests/test_origination.py
       - name: Origination workspace build
         run: python3 origination/scripts/build.py
+      - name: Origination artifacts match a rebuild from committed inputs (drift alarm)
+        run: |
+          if [ -n "$(git status --porcelain -- origination/)" ]; then
+            git status --short -- origination/
+            echo "::error::origination/ differs from a rebuild of the committed inputs (or has an uncommitted snapshot). Run origination/scripts/build.py and commit the result."
+            exit 1
+          fi
       - name: Origination fail-closed verification (sources, links, determinism, gates)
         run: python3 origination/scripts/verify.py
       - name: Skill-lab regression tests (protocol, scores, published pages)
