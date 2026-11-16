@@ -115,7 +115,7 @@
    "id": "Q11",
    "area": "Leaderboard",
    "question": "What sample is enough to call a strategy validated?",
-   "known": "Floors are pre-registered at n\u226550 to publish and n\u2265200 to promote; the largest scored arm has 137.",
+   "known": "Floors are pre-registered at n\u226550 to publish and n\u2265200 to promote; the largest scored arm has 149.",
    "unknown": "Whether those floors are strict enough given the dependence between legs in the same week.",
    "discovery": "Simulate the family-wise error rate under the current floors and adjust them before the next evaluation window opens.",
    "blocks": "R32, R50, G06, G09",

@@ -86,6 +86,12 @@ jobs:
         run: python3 tests/test_availability_ledger.py
       - name: Availability-ledger fail-closed verification
         run: python3 availability-ledger/scripts/verify.py
+      - name: Injury-archive tests (synthetic fixtures, no network)
+        run: |
+          python3 tests/test_injury_archive.py
+          python3 tests/test_injury_archive_pipeline.py
+      - name: Injury-archive fail-closed verification (digests, gates, pre-registration order)
+        run: python3 injury-archive/scripts/verify.py
 
   deploy:
     if: github.event_name != 'pull_request'

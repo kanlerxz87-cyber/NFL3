@@ -1,0 +1,57 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Inactive lists | Injury archive | NFL3</title>
+<meta name="description" content="Inactive lists — official NFL injury-report and inactive-list history, with hashes, clock times and every exclusion counted.">
+<style>
+:root{--bg:#0b0f14;--panel:#121821;--panel2:#17202b;--line:#243040;--ink:#e8eef6;--muted:#93a4b8;
+--accent:#5eead4;--accent2:#38bdf8;--warn:#fbbf24;--bad:#fb7185;--good:#4ade80}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);
+font:15px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--accent2);text-decoration:none}a:hover{text-decoration:underline}
+header.top{border-bottom:1px solid var(--line);background:linear-gradient(180deg,#0e141c,#0b0f14)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+.top .wrap{display:flex;gap:18px;align-items:center;justify-content:space-between;padding:16px 22px}
+.brand{font-weight:700;letter-spacing:.5px}.brand span{color:var(--accent)}
+nav.main{display:flex;flex-wrap:wrap;gap:14px;padding:12px 0;border-top:1px solid var(--line);
+font-size:14px}nav.main a{color:var(--muted)}nav.main a[aria-current]{color:var(--accent);font-weight:600}
+h1{font-size:30px;line-height:1.2;margin:26px 0 8px}h2{font-size:20px;margin:30px 0 10px}
+h3{font-size:16px;margin:20px 0 8px}.lede{color:var(--muted);max-width:80ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:20px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
+.card .k{font-size:12px;letter-spacing:.8px;color:var(--muted);text-transform:uppercase}
+.card .v{font-size:26px;font-weight:700;margin-top:4px}.card .n{font-size:13px;color:var(--muted)}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:14px 0}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--panel2);font-size:12px;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
+tbody tr:hover{background:#141c26}td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.blank{color:var(--muted);font-style:italic}
+.pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;border:1px solid var(--line)}
+.pill.ok{color:var(--good);border-color:#1f4a33}.pill.warn{color:var(--warn);border-color:#4a3f1f}
+.pill.bad{color:var(--bad);border-color:#4a2830}.pill.mut{color:var(--muted)}
+.notice{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent2);
+border-radius:8px;padding:14px 16px;margin:18px 0;color:var(--muted)}
+.warnbox{border-left-color:var(--warn)}
+a.source{color:var(--accent)}a.source:after{content:"↗";margin-left:3px;font-size:11px}
+footer{border-top:1px solid var(--line);margin-top:40px;padding:24px 0 40px;color:var(--muted);font-size:13px}
+code{background:#0f1620;border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:13px}
+ul.tight{margin:8px 0;padding-left:20px}ul.tight li{margin:4px 0;color:var(--muted)}
+</style></head><body>
+<header class="top"><div class="wrap"><div class="brand">NFL<span>3</span> / INJURY ARCHIVE</div>
+<div><a href="../index.html">Site overview</a> · <a href="../readiness.html">Readiness</a></div></div>
+<nav class="main"><div class="wrap" style="display:flex;flex-wrap:wrap;gap:14px"><a href="index.html">Overview</a><a href="injuries.html">Injury-report history</a><a href="inactives.html" aria-current=page>Inactive lists</a><a href="designations.html">Designation calibration</a><a href="coverage.html">Coverage grid</a><a href="regime.html">Rule regime by season</a><a href="limits.html">Limits and exclusions</a><a href="method.html">Method and sources</a></div></nav></header>
+<main class="wrap"><h1>Official inactive lists</h1>
+<p class="lede">The NFL publishes a weekly article listing each club's inactive players, compiled
+from the lists clubs must submit before kickoff. It is a different document from the hub at
+<code>nfl.com/inactives/</code>, and this workspace verified on 2026-11-16 that the hub publishes no
+2026 rows while the weekly article does. The article is the source used here.</p>
+<div class="grid"><div class="card"><div class="k">Articles</div><div class="v">0</div><div class="n">weekly official articles</div></div>
+<div class="card"><div class="k">Clubs covered</div><div class="v">0</div><div class="n">distinct club headings</div></div>
+<div class="card"><div class="k">Players listed</div><div class="v">0</div><div class="n">inactive entries</div></div></div><div class="notice warnbox">No inactives article is captured yet.</div><h2>The inactive hub is not the same document</h2>
+<p>The page at <code class="src">https://www.nfl.com/inactives/</code> was opened on 2026-11-16 and
+returned the sentence <i>"Please check back soon for NFL Inactive Reports for this Season"</i> with
+no table and no player row. That is recorded as a source finding, not as an absence of inactives:
+the weekly article cited above is where the league publishes them.</p></main>
+<footer class="wrap"><div class="wrap" style="padding:0">Generated by <code>injury-archive/scripts/build.py</code>
+from the committed captures only; it fetches nothing. Values that cannot be confirmed from the two
+official sources stay blank. Nothing here is betting advice.</div></footer></body></html>

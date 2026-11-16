@@ -2527,3 +2527,20 @@ Done in PR #92 (all append-only or inside `shadow-board/`, no other workspace's 
 |---|---|---|---|
 | C1 Pages gate for the adopted price policy/store and frozen corpus | done | `arena/b0dd4900-nfl3` | PR #97; validation passed |
 | C2 Final integration, merge and Pages deployment record | in progress | `arena/b0dd4900-nfl3` | awaiting merge and post-merge Pages run |
+
+## Claim — `arena/d37d5907-nfl3` (session d37d5907) — 2026-11-16 UTC
+
+Base: `main` at `e8877e0` (branch was created at this commit and `git rev-list --left-right --count HEAD...origin/main` was `0 0` when claimed). No other session branch exists on `origin` (`git branch -r` shows `origin/main` only).
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| T1 Official injury-report history archive 2021–2025 (R6): scheduled capture with hash, clock time and drift alarm; designation-emission tables | in progress | `arena/d37d5907-nfl3` | `injury-archive/**`, `.github/workflows/injury-archive.yml`, `tests/test_injury_archive.py` |
+| T2 Official inactives monitor and the verified "not published" record (A6) | in progress | `arena/d37d5907-nfl3` | `injury-archive/**` (inactives section), same workflow |
+| T3 Readiness evidence for R6 / A6 / A20 / A21 and the flags those rows carry | in progress | `arena/d37d5907-nfl3` | `readiness/data/readiness.csv`, generated `readiness.html`, `readiness/data/readiness.csv`-driven tests |
+| T4 Final integration: rebuild, validate, PR to `main`, merge, confirm Pages deploy | in progress | `arena/d37d5907-nfl3` | `COORDINATION.md`, `README.md` (nav row), `index.html` (nav row only), `EXECUTIVE_SUMMARY.md` (section append only) |
+
+Scope notes recorded before work started, so a later reader can check them:
+
+- `decision-lab/**` (including `data/official_snapshot.json` and the RR-01/RR-02 chain), `origination/**`, `skill-lab/**`, `corpus/**`, `pricing/**`, `ops-center/**`, `dashboard/**`, `line-lab/**`, `decision-hub/**` and `shadow-board/**` are **not** edited by this session. Where this session's findings bear on them, the request is logged here instead of applied.
+- `open this claim` was checked against the previous board: the most recent entries (`arena/e9629801-nfl3`, `arena/745d100d-nfl3`, `arena/ba6c5155-nfl3`) are all recorded merged, and their file scopes do not include `injury-archive/`, which does not yet exist.
+- Environment fact established at claim time and used throughout: **bash in this sandbox has no nfl.com egress** (curl to `nfl.com` returns `000`), but the **session fetch tool reaches nfl.com** and **GitHub Actions runners reach it** (the 6-hourly `injury-capture` run [43817257379](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43817257379) succeeded). Prior readiness rows that say "sandbox cannot reach nfl.com" were written under a different tool assumption; this session re-tested rather than inheriting the claim.

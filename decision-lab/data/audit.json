@@ -1,7 +1,7 @@
 {
-  "html_pages": 164,
-  "table_rows": 9651,
-  "rows_missing_official_source": 789,
+  "html_pages": 172,
+  "table_rows": 9650,
+  "rows_missing_official_source": 803,
   "rows_community_only": 250,
   "rows_with_internal_audit_source": 7,
   "conflict_files": [],
@@ -12,7 +12,7 @@
       "id": "AUD-03",
       "severity": "High",
       "title": "Table rows without an official-source link",
-      "detail": "789 row(s) across the repository lack an official HTTPS source; 250 cite only community sources.",
+      "detail": "803 row(s) across the repository lack an official HTTPS source; 250 cite only community sources.",
       "files": [
         "dashboard/flagged.html",
         "dashboard/questions.html",
@@ -20,6 +20,9 @@
         "dashboard/sources.html",
         "dashboard/strategies.html",
         "dashboard/suggestions.html",
+        "injury-archive/index.html",
+        "injury-archive/limits.html",
+        "injury-archive/method.html",
         "line-lab/index.html",
         "line-lab/pages/coordination.html",
         "line-lab/pages/correlations.html",
@@ -30,10 +33,7 @@
         "line-lab/pages/lines.html",
         "line-lab/pages/methodology.html",
         "line-lab/pages/questions.html",
-        "line-lab/pages/rules.html",
-        "line-lab/pages/sources.html",
-        "line-lab/pages/standings.html",
-        "line-lab/pages/strategies.html"
+        "line-lab/pages/rules.html"
       ],
       "source": "LOCAL_AUDIT"
     }
@@ -513,7 +513,71 @@
     },
     {
       "path": "index.html",
-      "rows": 81,
+      "rows": 64,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "injury-archive/coverage.html",
+      "rows": 0,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "injury-archive/designations.html",
+      "rows": 0,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "injury-archive/inactives.html",
+      "rows": 0,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "injury-archive/index.html",
+      "rows": 7,
+      "rows_missing_official_source": 7,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "injury-archive/injuries.html",
+      "rows": 0,
+      "rows_missing_official_source": 0,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "injury-archive/limits.html",
+      "rows": 5,
+      "rows_missing_official_source": 5,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "injury-archive/method.html",
+      "rows": 2,
+      "rows_missing_official_source": 2,
+      "rows_community_only": 0,
+      "rows_with_internal_audit_source": 0,
+      "local_errors": []
+    },
+    {
+      "path": "injury-archive/regime.html",
+      "rows": 0,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,
@@ -521,7 +585,7 @@
     },
     {
       "path": "injury-capture/index.html",
-      "rows": 648,
+      "rows": 650,
       "rows_missing_official_source": 0,
       "rows_community_only": 0,
       "rows_with_internal_audit_source": 0,

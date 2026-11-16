@@ -10,7 +10,7 @@
    "question": "Is every input to a scored strategy traceable to a named source and digest?",
    "status": "pass",
    "decided_by": "Every price row carries a release SHA-256 in data/raw/manifest.json; every outcome row carries the reconciliation record; every availability row carries the capture hash.",
-   "number": "272 events, 2 snapshot(s), 160 club checks",
+   "number": "272 events, 3 snapshot(s), 160 club checks",
    "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
    "consequence": "Scored rows may be published with a source class on each row."
   },
@@ -37,7 +37,7 @@
    "question": "Does the results feed reproduce the official standings?",
    "status": "pass",
    "decided_by": "Wins, losses, ties, points for and points against for all 32 clubs, plus league totals.",
-   "number": "PF 6291 = official 6291",
+   "number": "PF 6880 = official 6880",
    "source": "https://www.nfl.com/standings/",
    "consequence": "Settlement authority for every graded leg."
   },
@@ -46,7 +46,7 @@
    "question": "Does a market have both a pre-kickoff opening and a pre-kickoff close?",
    "status": "pass",
    "decided_by": "A closing needs a pre-kickoff number that differs from the opening. The store now holds two captures, and some cells did move, so a genuine opening-to-latest interval exists for those. It is still far too thin for a CLV study: most cells have a single observation.",
-   "number": "78 pre-kickoff market cells of 816; 2 snapshot(s); 7 cell(s) moved between captures",
+   "number": "78 pre-kickoff market cells of 816; 3 snapshot(s); 46 cell(s) moved between captures",
    "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
    "consequence": "Blocks every closing-line-value claim. Grades on the stored number only."
   },
@@ -55,7 +55,7 @@
    "question": "Is there enough settled sample to publish a score at all?",
    "status": "pass",
    "decided_by": "Pre-registered floor n>=50 to publish; n>=200 to promote.",
-   "number": "137 graded legs on the largest strategy; 137 < 200 for promotion",
+   "number": "149 graded legs on the largest strategy; 149 < 200 for promotion",
    "source": "https://www.nfl.com/standings/",
    "consequence": "Scores are published with intervals. No strategy may be called validated at this n."
   },
@@ -91,7 +91,7 @@
    "question": "Does any live strategy trigger its own kill condition?",
    "status": "fail",
    "decided_by": "A strategy whose Brier-skill interval is entirely below zero has failed its kill rule and is demoted to paper status.",
-   "number": "2 of 8 scored strategies have an upper bound below zero: S01, S03",
+   "number": "3 of 8 scored strategies have an upper bound below zero: S01, S02, S03",
    "source": "https://www.nfl.com/standings/",
    "consequence": "Demoted strategies stay visible, labelled demoted, with their score retained."
   }
@@ -103,6 +103,7 @@
  },
  "demoted": [
   "S01",
+  "S02",
   "S03"
  ],
  "passed": false,
@@ -117,6 +118,6 @@
   "ablation_verdict": "no measurable effect",
   "depth_clubs": 30,
   "report_rows": 254,
-  "games_played": 137
+  "games_played": 149
  }
 }

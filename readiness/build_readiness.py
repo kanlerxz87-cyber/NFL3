@@ -184,7 +184,44 @@ def compute() -> dict:
     v["ledger_not_on_report"] = sum(1 for c in led["report_coverage"] if not c["on_report"])
     v["ledger_depth_checked"] = led["depth_capture"]["depth_rows"]
     v["ledger_captures"] = len(led["captures"])
+    v.update({f"ia_{k}": val for k, val in injury_archive(v).items()})
     return v
+
+
+def injury_archive(v: dict) -> dict:
+    """Counts from the committed injury-archive artifacts. Never fetched here: the register
+    reports the repository as committed, and a missing artifact reports zero rather than a guess."""
+    base = ROOT / "injury-archive" / "data"
+    out = {"reports": 0, "report_rows": 0, "seasons": [], "inactives": 0, "inactive_players": 0,
+           "joined": 0, "inactive": 0, "active": 0, "uncovered": 0, "ambiguous": 0,
+           "q_rate": "", "q_n": 0, "labels": 0, "not_published": 0, "drift": 0}
+    try:
+        injuries = json.loads((base / "injuries.json").read_text(encoding="utf-8"))
+        inactives = json.loads((base / "inactives.json").read_text(encoding="utf-8"))
+        coverage = json.loads((base / "coverage.json").read_text(encoding="utf-8"))["rows"]
+        designations = json.loads((base / "designations.json").read_text(encoding="utf-8"))
+    except (FileNotFoundError, KeyError, json.JSONDecodeError):
+        return out
+    out["reports"] = len(injuries)
+    out["report_rows"] = sum(r["injury_rows"] for r in injuries.values())
+    out["seasons"] = sorted({r["season"] for r in injuries.values() if r.get("season")})
+    out["inactives"] = len(inactives)
+    out["inactive_players"] = sum(len(a["rows"]) for a in inactives.values())
+    out["not_published"] = sum(1 for r in coverage if r["status"] == "not_published")
+    out["drift"] = sum(1 for r in coverage if r["status"] in {"drift", "fetch_failed", "http_error"})
+    totals = designations.get("totals", {})
+    out["joined"] = totals.get("designations", 0)
+    out["inactive"] = totals.get("inactive", 0)
+    out["active"] = totals.get("active", 0)
+    out["uncovered"] = totals.get("uncovered", 0)
+    out["ambiguous"] = totals.get("ambiguous", 0)
+    labels = {r["group"]: r for r in designations.get("by_label", [])}
+    out["labels"] = sum(1 for r in labels.values() if r.get("n"))
+    q = labels.get("Questionable", {})
+    if q.get("n"):
+        out["q_rate"] = f"{q['inactive_rate'] * 100:.1f}% (95% CI {q['inactive_ci_low'] * 100:.1f}-{q['inactive_ci_high'] * 100:.1f}%)"
+        out["q_n"] = q["n"]
+    return out
 
 
 def rows(v: dict) -> list[dict]:
@@ -283,11 +320,14 @@ def rows(v: dict) -> list[dict]:
         f"within-corpus split frozen: train {v['corpus_train']} / validation {v['corpus_val']} / holdout {v['corpus_hold']}; "
         f"{v['seasons']} seasons in the community game file ({v['season_span']}), 0 season blocks on official data.",
         "corpus/PRE_REGISTRATION.md", "Corpus pre-registration §2 (split frozen)", NFL_RULEBOOK, "2026 NFL rulebook (official)")
-    add("R6", G, "Archive weekly official injury reports for past seasons", "Blocked",
-        "Only the Week 10 official report has been captured in this repo; past-season reports were not fetched.",
+    add("R6", G, "Archive weekly official injury reports for past seasons", "Partial",
+        "A scheduled capture now archives the official week pages for 2021-2026 with a hash and a clock time, so what the league publishes is no longer lost. "
+        "The remaining gap is coverage, not mechanism: the 90-report target counts only weeks the scheduled probe has actually read.",
         "Every regular-season week reported for the seasons in scope (proposed: 2021–2025 × 18 weeks = 90 reports).",
-        f"1 official week held (Week 10; {v['w10_observations']} observations). Community injuries 2021–2026 files are not official.",
-        "integration/data/captures/2026-11-13-nfl-injuries/manifest.json", "Week 10 capture manifest", NFL_INJ_W10, "NFL injury report, Week 10 (official)")
+        f"{v['ia_reports']} official season-week reports captured ({v['ia_report_rows']} designation rows) for seasons "
+        f"{v['ia_seasons'][0] if v['ia_seasons'] else '—'}–{v['ia_seasons'][-1] if v['ia_seasons'] else '—'}; "
+        f"{v['ia_not_published']} official addresses recorded as not published. Target is 90 reports for 2021-2025.",
+        "injury-archive/data/injuries.json", "Injury archive: official report history", NFL_INJ, "NFL injury report (official)")
 
     G = "Availability & injuries"
     add("A1", G, "Availability graph as a dataset: who was expected to start, who actually did", "Blocked",
@@ -313,11 +353,15 @@ def rows(v: dict) -> list[dict]:
         "Daily capture of the official report and club depth pages for every game week, each with its SHA-256.",
         f"4 dated report reads with hashes plus {v['ledger_captures']} official transaction captures with SHA-256 (source URL and retrieval time retained). Scheduled captures: 0 (alerts: {v['alert_hits']}).",
         "availability-ledger/data/ledger.json", "Availability ledger (capture manifest)", NFL_INJ, "NFL injury report (official)")
-    add("A6", G, "Capture official inactive lists and snap counts", "Blocked",
-        "No official inactive list is captured. The 2026 snap-count file is community nflverse data.",
-        "Official inactive list for every game in the corpus.",
-        f"0 official inactive lists. {v['snap_rows']} community snap-count rows (2026).",
-        "data/raw/snap_counts_2026.csv", "Community snap counts (not official)", NFL_RULEBOOK, "2026 NFL rulebook (official)")
+    add("A6", G, "Capture official inactive lists and snap counts", "Partial",
+        "The official weekly inactive lists are now captured with hashes and clock times (injury-archive/), so the inactive half is automated. "
+        "Snap counts have no official source: the only snap file in the repo is community nflverse data, so the snap half stays blocked.",
+        "Official inactive list for every game in the corpus, plus an official snap-count source for every club in scope.",
+        f"{v['ia_inactives']} official inactives articles captured covering {v['ia_inactive_players']} inactive entries; "
+        f"{v['ia_joined']} designations joined to them. 0 official snap-count sources; {v['snap_rows']} community snap-count rows (2026) remain community data. "
+        f"{v['ia_not_published']} official addresses recorded as not published.",
+        "injury-archive/data/inactives.json", "Injury archive: official inactive lists",
+        "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season", "NFL 2026 Week 10 inactives (official)")
     add("A7", G, "Use snap counts as the starter proxy when the depth chart is unavailable", "Blocked",
         "Snap counts used here are community data, not verified official snap counts.",
         "Official snap-count source verified for every club in scope.",
@@ -375,13 +419,19 @@ def rows(v: dict) -> list[dict]:
         "IR and reserve lists for each club, each week, with the date captured.",
         f"{v['ledger_reserve']} reserve-list placements captured (October and November 2026 pages); {v['ledger_not_on_report']} of them do not appear on the weekly report, so the report alone cannot clear them.",
         "availability-ledger/ledger.html", "Availability ledger (official ledger)", NFL_TEAMS, "NFL team pages (official)")
-    add("A20", G, "Score injury-designation reliability (play rate per designation, with confidence intervals)", "Blocked",
-        "Needs past official reports (R6) and official inactive lists (A6); neither exists.",
+    add("A20", G, "Score injury-designation reliability (play rate per designation, with confidence intervals)", "Partial",
+        "The join exists and is pre-registered (injury-archive/PREREGISTRATION.md, IA-PRE-01), so the estimator, the exclusions and the gates are fixed before the data. "
+        "The remaining gap is sample size: the gate asks for n >= 100 per label and the archive has to reach it before the label may become a feature.",
         "Play rate per designation over several seasons, with intervals, before the label becomes a feature.",
-        "0 designations joined to official inactive lists.", "decision-lab/data/availability.json", "Availability join (decision lab)", NFL_STATUS, "Competition Committee injury-report revisions (official)")
-    add("A21", G, "Calibrate what 'Questionable' means empirically (official text gives no percentages)", "Blocked",
-        "Depends on A20; the official definition gives no percentage.", "Empirical rate with a confidence interval from joined outcomes.",
-        "0 joined outcomes.", "dashboard/data/injuries_2026_w10.csv", "Dashboard Week 10 injury CSV", NFL_STATUS, "Competition Committee injury-report revisions (official)")
+        f"{v['ia_joined']} designations joined to official inactive lists ({v['ia_labels']} label(s) with n > 0). "
+        f"Excluded and counted: {v['ia_uncovered']} uncovered club, {v['ia_ambiguous']} ambiguous name.",
+        "injury-archive/data/designations.json", "Injury archive: joined designation observations", NFL_STATUS, "Competition Committee injury-report revisions (official)")
+    add("A21", G, "Calibrate what 'Questionable' means empirically (official text gives no percentages)", "Partial",
+        "The measured rate replaces the missing published percentage, with n and a Wilson interval; it stays provisional until the A20 sample-size gate clears.",
+        "Empirical rate with a confidence interval from joined outcomes.",
+        (f"Questionable: {v['ia_q_rate']} on n = {v['ia_q_n']} joined designations." if v['ia_q_n']
+         else "0 joined Questionable outcomes; the cell stays blank rather than importing a percentage from elsewhere."),
+        "injury-archive/designations.html", "Injury archive: designation calibration", NFL_STATUS, "Competition Committee injury-report revisions (official)")
     add("A22", G, "Injury and depth ablations: same model with and without verified availability features, chronological holdouts", "Not started",
         "Needs verified availability features (A1, A8) and holdout seasons (R5).", "Paired model runs with a reported difference and uncertainty.",
         "0 ablation runs.", "docs/PRE_REGISTRATION.md", "Pre-registration file", NFL_STATS, "NFL player stats (official)")
