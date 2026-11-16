@@ -39,6 +39,9 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Fetch-retry regression tests (offline, no network)
+        run: python3 pipeline/test_fetch_retry.py
+
       - name: Fetch and verify release digests
         if: github.event_name != 'push' || !contains(github.event.head_commit.message, '[skip-fetch]')
         run: |
