@@ -110,7 +110,8 @@ def read_fixtures() -> list[dict]:
     with FIXTURES.open(newline="", encoding="utf-8") as handle:
         rows = list(csv.DictReader(handle))
     required = ("week", "slot", "date_et", "kickoff_et", "away", "home", "game_centre_url",
-                "schedule_page_url", "read_window_utc", "venue_status")
+                "schedule_page_url", "read_window_utc", "venue_status", "venue_game_centre",
+                "venue_source_note", "notes")
     for row in rows:
         row["away"] = model.canon(row["away"])
         row["home"] = model.canon(row["home"])
@@ -308,9 +309,17 @@ def esc(v) -> str:
 
 
 def table(headers: list[str], rows: list[list[str]], caption: str = "", cls: str = "") -> str:
+    for index, row in enumerate(rows, start=1):
+        if len(row) != len(headers):
+            raise ValueError(f"table row {index} has {len(row)} cells; expected {len(headers)}")
     head = "".join(f"<th scope='col'>{esc(h)}</th>" for h in headers)
-    body = "".join("<tr>" + "".join(cell if cell.startswith("<") else f"<td>{cell}</td>" for cell in row) + "</tr>"
-                   for row in rows)
+    def td(cell: str) -> str:
+        # Callers may pass prebuilt <td> cells or raw HTML fragments such as links and blank markers.
+        # Only a real <td> wrapper is passed through; <a>, <span> and <code> still need a cell.
+        prefix = cell.lstrip().lower()
+        is_td = prefix.startswith("<td>") or prefix.startswith("<td ") or prefix.startswith("<td\n")
+        return cell if is_td else f"<td>{cell}</td>"
+    body = "".join("<tr>" + "".join(td(cell) for cell in row) + "</tr>" for row in rows)
     cap = f"<caption>{esc(caption)}</caption>" if caption else ""
     return (f"<div class='tw'><table class='{cls}'>{cap}<thead><tr>{head}</tr></thead>"
             f"<tbody>{body}</tbody></table></div>")
@@ -361,6 +370,37 @@ def now_stamp() -> str:
 
 
 # --------------------------------------------------------------------------- build
+def reconcile_immutable_records(proposed: list[dict]) -> list[dict]:
+    """Keep issued forecasts append-only; fail if a rebuild would rewrite a registered forecast."""
+    path = DATA / "forecast_records.jsonl"
+    if not path.is_file():
+        return proposed
+    existing = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    by_id = {}
+    for row in existing:
+        forecast_id = row.get("forecast_id", "")
+        if not forecast_id or forecast_id in by_id:
+            raise SystemExit(f"immutable forecast ledger has a missing or duplicate forecast_id: {forecast_id!r}")
+        by_id[forecast_id] = row
+    merged = list(existing)
+    seen_proposed = set()
+    for row in proposed:
+        forecast_id = row.get("forecast_id", "")
+        if not forecast_id or forecast_id in seen_proposed:
+            raise SystemExit(f"proposed forecasts have a missing or duplicate forecast_id: {forecast_id!r}")
+        seen_proposed.add(forecast_id)
+        old = by_id.get(forecast_id)
+        if old is None:
+            merged.append(row)
+            continue
+        old_payload = {k: v for k, v in old.items() if k != "issued_at_utc"}
+        new_payload = {k: v for k, v in row.items() if k != "issued_at_utc"}
+        if old_payload != new_payload:
+            raise SystemExit(f"refusing to rewrite immutable forecast {forecast_id}; register a new forecast_id "
+                             "and retain the prior record")
+    return merged
+
+
 def build(write: bool = True) -> dict:
     global STAMP
     STAMP["v"] = now_utc()
@@ -486,6 +526,8 @@ def build(write: bool = True) -> dict:
             "fair_price_home": round(f["fair_price_home"], 3), "fair_price_away": round(f["fair_price_away"], 3),
             "corpus_gap_days": (dt.date.fromisoformat(fx["date_et"]) - dt.date.fromisoformat(as_of_last)).days,
             "venue_verified": fx["venue_game_centre"], "venue_status": fx["venue_status"],
+            "venue_schedule_page": fx["venue_schedule_page"], "venue_source_note": fx["venue_source_note"],
+            "venue_read_window_utc": fx["read_window_utc"],
             "neutral_site": fx["neutral_site"], "network": fx["network"],
             "issued_at_utc": issued, "as_of_data": f"2026 week {weeks[-1]} (through {as_of_last})",
             "model_version": MODEL_VERSION, "config_hash": cfg_fwd,
@@ -496,8 +538,9 @@ def build(write: bool = True) -> dict:
         for sid, div in (("SB1-ML", "Singles · moneyline"), ("SB1-ML-S", "Singles · moneyline (selective)"),
                          ("SB1-TOT", "Singles · total"), ("CT-HOME", "control"), ("CT-RAND", "control")):
             records.append({
-                "forecast_id": f"W11-{fx['away']}-{fx['home']}-{sid}", "strategy": sid, "division": div,
-                "issued_at_utc": issued, "as_of_data": row["as_of_data"], "season": 2026, "week": 11,
+                "forecast_id": f"W{fx['week']}-{fx['away']}-{fx['home']}-{sid}", "strategy": sid, "division": div,
+                "issued_at_utc": issued, "as_of_data": row["as_of_data"], "season": 2026,
+                "week": int(fx["week"]),
                 "slot": fx["slot"], "away": fx["away"], "home": fx["home"],
                 "p_home": round(f["p_home"], 4), "p_away": round(f["p_away"], 4),
                 "fair_spread_home": f["fair_spread_home"], "fair_total_primary": row["fair_total_primary"],
@@ -513,9 +556,24 @@ def build(write: bool = True) -> dict:
                 "source_urls": [fx["game_centre_url"], fx["schedule_page_url"]],
                 "registration": "PREREGISTRATION.md §1-§8 (frozen)", "supersedes": "",
             })
+    records = reconcile_immutable_records(records)
+    records_by_id = {r["forecast_id"]: r for r in records}
+    active_records = []
+    for fx in fixtures:
+        for sid in ("SB1-ML", "SB1-ML-S", "SB1-TOT", "CT-HOME", "CT-RAND"):
+            forecast_id = f"W{fx['week']}-{fx['away']}-{fx['home']}-{sid}"
+            if forecast_id not in records_by_id:
+                raise SystemExit(f"immutable forecast ledger is missing current record {forecast_id}")
+            active_records.append(records_by_id[forecast_id])
+    issue_rows = [r["issued_at_utc"] for r in active_records]
+    issued = max(issue_rows, key=lambda value: dt.datetime.fromisoformat(value)) if issue_rows else STAMP["v"]
+    for row in forecasts:
+        row["issued_at_utc"] = records_by_id[
+            f"W{row['week']}-{row['away']}-{row['home']}-SB1-ML"]["issued_at_utc"]
+
     first_kickoff = dt.datetime.fromisoformat(
         min(f"{fx['date_et']}T{fx['kickoff_et']}:00" for fx in fixtures) + "-05:00")
-    issued_before_first = dt.datetime.fromisoformat(issued) < first_kickoff
+    issued_before_first = all(dt.datetime.fromisoformat(r["issued_at_utc"]) < first_kickoff for r in active_records)
     kickoff_iso = first_kickoff.isoformat()
 
     # 7. prospective leaderboard: only games forecast before kickoff may ever appear here
@@ -550,8 +608,9 @@ def build(write: bool = True) -> dict:
                   ["week", "slot", "date_et", "kickoff_et", "away", "home", "p_home", "p_away",
                    "fair_spread_home", "fair_total_primary", "fair_total_secondary", "gap", "market_line",
                    "residual", "fair_price_home", "fair_price_away", "corpus_gap_days", "venue_verified",
-                   "venue_status", "neutral_site", "network", "issued_at_utc", "as_of_data", "model_version",
-                   "config_hash", "source_url", "schedule_url"])
+                   "venue_status", "venue_schedule_page", "venue_source_note", "venue_read_window_utc",
+                   "neutral_site", "network", "issued_at_utc", "as_of_data", "model_version", "config_hash",
+                   "source_url", "schedule_url"])
         write_jsonl(DATA / "forecast_records.jsonl", result["records"])
         write_csv(DATA / "backtest_ledger.csv", ledger,
                   ["week", "date", "slot", "away", "home", "away_score", "home_score", "p_home",
@@ -569,6 +628,7 @@ def build(write: bool = True) -> dict:
                             "(requirement A5/L10) is still not in place.",
                     "now": rank_now, "previous": rank_prev, "league": snap_now["league"],
                     "league_previous": snap_prev["league"]})
+    if write:
         pages = render(result, fixtures, readings, ledger, graded, graded_ml)
         for name, html_text in pages.items():
             (BOARD / name).write_text(html_text)
@@ -704,7 +764,8 @@ def render(res: dict, fixtures, readings, ledger, graded, graded_ml) -> dict[str
                 f"<td class='num'>{fmt(r['fair_price_home'], 2)}</td>",
                 f"<td class='num'>{fmt(r['corpus_gap_days'], 0)}</td>",
                 venue_cell(r),
-                f"<td>{link(r['source_url'], 'game centre')}</td>"] for r in res["fair_lines"]]
+                f"<td>{link(r['source_url'], 'game centre')} &#183; "
+                f"{link(r['schedule_url'], 'Week 11 schedule')}</td>"] for r in res["fair_lines"]]
     fair = table(["Wk", "Slot", "Date / kickoff (ET)", "Fixture", "P(home)", "P(away)", "Fair side (home)",
                   "Fair total (primary)", "Fair total (secondary)", "Gap between estimators", "Market line",
                   "Residual vs market", "Fair price home (vig-free)", "Corpus staleness (days)", "Venue (game centre)",
@@ -726,19 +787,33 @@ def render(res: dict, fixtures, readings, ledger, graded, graded_ml) -> dict[str
         ["Model version", esc(MODEL_VERSION), "frozen by PREREGISTRATION.md; a change is an amendment, not a tweak",
          link("https://www.nfl.com/standings/", "official standings")],
     ])
+    venue_window = fixtures[0]["read_window_utc"] if fixtures else "unavailable"
+    venue_intro = (
+        "<p>All 13 Week 11 NFL Game Centre <code>Game Info &gt; Stadium</code> fields were transcribed verbatim. "
+        f"The shared read window was <code>{esc(venue_window)}</code> UTC; its start is recorded to minute precision "
+        "because the exact start second is unavailable. The other venue label, when present, is the destination of "
+        "the schedule page's club travel link, not a second Game Info field. Both raw strings are retained without "
+        "inferring whether differently named labels refer to different physical venues.</p>"
+    )
     pages["forecasts.html"] = page("forecasts.html", "Originated lines - Week 11 slate",
                                    "Every row is a probability plus the inputs that produced it, stored in "
                                    "<code>data/forecast_records.jsonl</code> as an immutable record. Picks are not "
                                    "published: a pick without a probability cannot be scored properly.",
                                    "<h2>Fair lines</h2>" + neg + fair +
-                                   "<h2>Fixture context, from published schedule facts only</h2>" +
-                                   table(["Fixture", "Slot", "Neutral / international", "Venue at game centre",
-                                          "Venue named on the schedule page", "Status", "Source"],
+                                   "<h2>Fixture context, from published schedule facts only</h2>" + venue_intro +
+                                   table(["Fixture", "Slot", "Neutral / international", "Game Centre Game Info > Stadium",
+                                          "Schedule-page travel-link venue", "Verification", "Venue-source comparison",
+                                          "Fixture note", "Official sources"],
                                          [[f"{esc(f['away'])} at {esc(f['home'])}", esc(f["slot"]),
                                            esc(f["neutral_site"]),
                                            esc(f["venue_game_centre"]) or "<span class='blank'>blank</span>",
-                                           esc(f["venue_schedule_page"]) or "<span class='blank'>blank</span>",
-                                           esc(f["venue_status"]), link(f["game_centre_url"], "game centre")]
+                                           esc(f["venue_schedule_page"]) or "<span class='blank' title='no hotel-link venue label on the schedule page'>blank</span>",
+                                           esc(f["venue_status"]), esc(f["venue_source_note"]),
+                                           esc(f["notes"].replace(
+                                               "Read-window start is recorded to minute precision; the exact start second is unavailable.",
+                                               "").strip()),
+                                           link(f["game_centre_url"], "game centre") + " &#183; " +
+                                           link(f["schedule_page_url"], "Week 11 schedule")]
                                           for f in fixtures]))
 
     # ---- backtest page
@@ -965,10 +1040,18 @@ def render(res: dict, fixtures, readings, ledger, graded, graded_ml) -> dict[str
                  "Source", "Read window (UTC)"], v_rows,
                 "Line-by-line verification of the corpus against a second official page, with the clock window the "
                 "read was taken in.")
+    game_centre_links = " &#183; ".join(
+        link(f["game_centre_url"], f"{f['away']} at {f['home']}") for f in fixtures)
     src_rows = [
-        ["2026 Week 11 schedule page (slate, kickoff slots, published records)", link(OFFICIAL_SCHEDULE, "nfl.com"),
-         "fixture list, times, bye list", "records printed beside fixtures include Week 10 for some clubs and not "
-         "others; not used as a model input"],
+        ["Week 11 Game Centre Game Info > Stadium (all 13 fixture pages)", game_centre_links,
+         "the exact stadium strings shown in each game's Game Info > Stadium field; transcribed in the stated UTC "
+         "window and linked row by row in the fixture-context table",
+         "does not adjudicate a label difference in the schedule page's separate club travel link"],
+        ["2026 Week 11 schedule page (slate, kickoff slots, published records, travel-link labels)",
+         link(OFFICIAL_SCHEDULE, "nfl.com"),
+         "fixture list, times, bye list, and the displayed club travel-link destinations where present",
+         "the travel link is not the Game Info > Stadium field; a different label alone does not establish a "
+         "different physical venue"],
         ["2026 Week 11 scores page (same slate, second official view)", link(OFFICIAL_SCORES, "nfl.com"),
          "independent confirmation of the 13-game slate", "shows no venues"],
         ["Week 2 game centre, Washington at Dallas", link("https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2", "nfl.com"),
@@ -1003,13 +1086,19 @@ def render(res: dict, fixtures, readings, ledger, graded, graded_ml) -> dict[str
         ["SB-F02", "The log covers Weeks 1-9, so a Week 11 forecast is 12-14 days stale and every club's Week 10 "
          "result is missing.", "rest-day and form features are unavailable, and staleness is printed per fixture "
          "instead of being silently ignored.", link(OFFICIAL_SCHEDULE, "schedule page")],
-        ["SB-F03", "For Indianapolis at Houston the game centre says RELIANT STADIUM while the schedule page's club "
-         "travel link says NRG Stadium.", "venue provenance is contested between two official pages, so the venue "
-         "field for the other 11 fixtures stays blank rather than being guessed from either.",
-         link("https://www.nfl.com/games/colts-at-texans-2026-reg-11", "game centre")],
-        ["SB-F04", "The Cincinnati at Washington fixture shows FedEx Field on the schedule page's travel link and no "
-         "game-centre read this pass.", "an unverified venue name would be exactly the kind of inferred value this "
-         "project forbids; the cell is blank and the check is queued.", link(OFFICIAL_SCORES, "scores page")],
+        ["SB-F03", "Indianapolis at Houston: Game Centre Game Info > Stadium reads RELIANT STADIUM; the Week 11 "
+         "schedule page's club travel-link destination reads NRG Stadium. Both fields are transcribed and linked in "
+         "the fixture-context table.", "the two raw labels remain distinct and neither is silently substituted for "
+         "the other; this does not establish whether they denote different physical venues.",
+         link("https://www.nfl.com/games/colts-at-texans-2026-reg-11", "game centre") + " &#183; " +
+         link(OFFICIAL_SCHEDULE, "Week 11 schedule")],
+        ["SB-F04", "Cincinnati at Washington: Game Centre Game Info > Stadium reads NORTHWEST STADIUM; the Week 11 "
+         "schedule page's club travel-link destination reads FedEx Field. This fixture was previously blank because "
+         "its Game Centre field had not been read; it is now verified against the linked page.",
+         "the previously unverified blank is resolved; the difference between two official page labels remains "
+         "visible, without an unsupported physical-venue or authority conclusion.",
+         link("https://www.nfl.com/games/bengals-at-commanders-2026-reg-11", "game centre") + " &#183; " +
+         link(OFFICIAL_SCHEDULE, "Week 11 schedule")],
         ["SB-F05", "nfl.com/injuries/league/{season}/REG{week} renders past seasons, but the win-loss records "
          "printed beside those tables are end-of-season values.", "the archive exists and would let the "
          "designation-reliability study run, but its point-in-time integrity is unproven; a backtest on it must be "
@@ -1031,6 +1120,17 @@ def render(res: dict, fixtures, readings, ledger, graded, graded_ml) -> dict[str
          "failure instead of a quietly different number.",
          link("https://www.nfl.com/schedules/2026/by-week/week-1", "official Week 1 schedule page")
          + " &#183; <a href='../corpus/manifest.json'>corpus manifest</a>"],
+        ["SB-F09", "Arizona at Kansas City: Game Centre Game Info > Stadium reads ARROWHEAD STADIUM; the schedule "
+         "page's club travel-link destination reads GEHA Field at Arrowhead Stadium. This is recorded as a naming "
+         "variation, not evidence of a different venue.", "the exact Game Centre string is retained without adding "
+         "the sponsor qualifier; the pages alone do not set a normalization or venue-authority rule.",
+         link("https://www.nfl.com/games/cardinals-at-chiefs-2026-reg-11", "game centre") + " &#183; " +
+         link(OFFICIAL_SCHEDULE, "Week 11 schedule")],
+        ["SB-F10", "The saved read window starts at 2026-11-16T14:40Z to minute precision; the exact start second "
+         "was not retained. The window ends at 2026-11-16T14:42:45Z, recorded after the schedule-page read.",
+         "the reads are time-bounded, but the start must not be presented as an independently verified second-level "
+         "timestamp; no HTML captures were archived.",
+         game_centre_links + " &#183; " + link(OFFICIAL_SCHEDULE, "Week 11 schedule")],
     ])
     w10 = res.get("week10", [])
     if w10:

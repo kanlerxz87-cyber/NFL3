@@ -11,6 +11,7 @@ the parsers depend on have not drifted.
 from __future__ import annotations
 
 import csv
+import datetime as dt
 import hashlib
 import json
 import re
@@ -32,6 +33,23 @@ PAGES = ["index.html", "forecasts.html", "backtest.html", "method.html", "source
 FORBIDDEN = ("TBD", "TODO", "FIXME", "lorem", "???", "XXXX", "<N/A>", "NaN", "None")
 PLACEHOLDER_CELLS = {"n/a", "na", "-", "pending"}
 ALLOWED_VENUE_STATUS = {"verified at game centre", "venue not transcribed at game centre"}
+EXPECTED_VENUE_WINDOW = "2026-11-16T14:40Z/2026-11-16T14:42:45Z"
+# Each value is (verbatim Game Centre Game Info > Stadium, schedule travel-link destination, Game Centre slug).
+EXPECTED_WEEK_11_VENUES = {
+    ("IND", "HOU"): ("RELIANT STADIUM", "NRG Stadium", "colts-at-texans"),
+    ("MIA", "BUF"): ("HIGHMARK STADIUM", "Highmark Stadium", "dolphins-at-bills"),
+    ("BAL", "CAR"): ("BANK OF AMERICA STADIUM", "Bank of America Stadium", "ravens-at-panthers"),
+    ("NO", "CHI"): ("SOLDIER FIELD", "Soldier Field", "saints-at-bears"),
+    ("TEN", "DAL"): ("AT&T STADIUM", "AT&T Stadium", "titans-at-cowboys"),
+    ("TB", "DET"): ("FORD FIELD", "Ford Field", "buccaneers-at-lions"),
+    ("ARI", "KC"): ("ARROWHEAD STADIUM", "GEHA Field at Arrowhead Stadium", "cardinals-at-chiefs"),
+    ("PIT", "PHI"): ("LINCOLN FINANCIAL FIELD", "Lincoln Financial Field", "steelers-at-eagles"),
+    ("NYJ", "LAC"): ("SOFI STADIUM", "SoFi Stadium", "jets-at-chargers"),
+    ("JAX", "NYG"): ("METLIFE STADIUM", "MetLife Stadium", "jaguars-at-giants"),
+    ("LV", "DEN"): ("EMPOWER FIELD AT MILE HIGH", "Empower Field at Mile High", "raiders-at-broncos"),
+    ("MIN", "SF"): ("ESTADIO BANORTE", "", "vikings-at-49ers"),
+    ("CIN", "WAS"): ("NORTHWEST STADIUM", "FedEx Field", "bengals-at-commanders"),
+}
 OFFICIAL_HOSTS = {"nfl.com", "www.nfl.com", "operations.nfl.com", "support.nfl.com", "media.nfl.com",
                   "static.www.nfl.com", "nextgenstats.nfl.com", "docs.github.com", "itl.nist.gov",
                   "www.itl.nist.gov", "scikit-learn.org"}
@@ -48,10 +66,13 @@ class RowParser(HTMLParser):
     def __init__(self, path: Path):
         super().__init__(convert_charrefs=True)
         self.path = path
-        self.in_tbody = self.in_row = 0
+        self.in_tbody = self.in_row = self.in_thead = 0
         self.row_links: list[str] = []
         self.row_cells: list[str] = []
         self.in_td = False
+        self.row_has_https = False
+        self.header_cells = 0
+        self.expected_columns = None
         self.rows = 0
         self.https_rows = 0
         self.links: list[str] = []
@@ -65,10 +86,17 @@ class RowParser(HTMLParser):
             if a["id"] in self.ids:
                 self.dupes.append(a["id"])
             self.ids.add(a["id"])
-        if tag == "tbody":
+        if tag == "table":
+            self.expected_columns = None
+        elif tag == "thead":
+            self.in_thead += 1
+            self.header_cells = 0
+        elif tag == "th" and self.in_thead:
+            self.header_cells += 1
+        elif tag == "tbody":
             self.in_tbody += 1
         elif tag == "tr" and self.in_tbody:
-            self.in_row, self.row_links, self.row_cells = 1, [], []
+            self.in_row, self.row_links, self.row_cells, self.row_has_https = 1, [], [], False
         elif tag == "td" and self.in_row:
             self.in_td = True
             self.row_cells.append("")
@@ -79,9 +107,11 @@ class RowParser(HTMLParser):
                 return
             self.links.append(href)
             if self.in_row and tag == "a":
+                if not self.in_td:
+                    fail(f"{self.path.name}: table source link is outside a td cell")
                 self.row_links.append(href)
                 if href.startswith("https://"):
-                    self.https_rows += 1
+                    self.row_has_https = True
             if href.startswith(("http://", "https://")):
                 if not href.startswith("https://"):
                     fail(f"{self.path.name}: non-HTTPS link {href}")
@@ -104,11 +134,19 @@ class RowParser(HTMLParser):
             self.rows += 1
             if not any(u.startswith("https://") for u in self.row_links):
                 fail(f"{self.path.name}: table row without an https source link")
+            if self.row_has_https:
+                self.https_rows += 1
+            if self.expected_columns is not None and len(self.row_cells) != self.expected_columns:
+                fail(f"{self.path.name}: table row has {len(self.row_cells)} cells, expected "
+                     f"{self.expected_columns} from its header")
             for cell in self.row_cells:
                 text = cell.strip()
                 if text.lower() in PLACEHOLDER_CELLS:
                     fail(f"{self.path.name}: placeholder cell {text!r}; use a blank plus a flag instead")
             self.in_row = 0
+        elif tag == "thead":
+            self.in_thead = max(0, self.in_thead - 1)
+            self.expected_columns = self.header_cells
         elif tag == "tbody":
             self.in_tbody = max(0, self.in_tbody - 1)
 
@@ -182,6 +220,15 @@ def check_fixtures() -> None:
     if len(rows) != 13:
         fail(f"fixtures: expected 13 Week 11 fixtures from the official page, found {len(rows)}")
     seen = set()
+    windows = set()
+    source_diff = {("IND", "HOU"), ("ARI", "KC"), ("CIN", "WAS")}
+    source_note_tokens = {
+        ("IND", "HOU"): ("RELIANT STADIUM", "NRG Stadium", "different label"),
+        ("ARI", "KC"): ("ARROWHEAD STADIUM", "GEHA Field at Arrowhead Stadium", "Both source strings are retained"),
+        ("CIN", "WAS"): ("NORTHWEST STADIUM", "FedEx Field", "different label"),
+        ("MIN", "SF"): ("Mexico City", "no hotel-link destination"),
+    }
+    expected_keys = set(EXPECTED_WEEK_11_VENUES)
     for r in rows:
         for side in ("away", "home"):
             if r[side] not in model.TEAMS:
@@ -192,14 +239,84 @@ def check_fixtures() -> None:
         seen.add(key)
         if r["venue_status"] not in ALLOWED_VENUE_STATUS:
             fail(f"fixtures: unexpected venue_status {r['venue_status']!r}")
-        if r["venue_status"] == "verified at game centre" and not r["venue_game_centre"].strip():
-            fail(f"fixtures: {r['away']}@{r['home']} claims a game-centre read with an empty venue")
-        if r["venue_status"] != "verified at game centre" and r["venue_game_centre"].strip():
-            fail(f"fixtures: {r['away']}@{r['home']} carries a venue that its status does not support")
-        if not r["game_centre_url"].startswith("https://www.nfl.com/games/"):
-            fail(f"fixtures: {r['away']}@{r['home']} lacks an official game-centre URL")
+        if r["venue_status"] != "verified at game centre":
+            fail(f"fixtures: {r['away']}@{r['home']} must be verified before this claimed 13-page read can pass")
+        expected = EXPECTED_WEEK_11_VENUES.get(key)
+        if expected is None:
+            fail(f"fixtures: unexpected Week 11 matchup {key}")
+            continue
+        expected_game_centre, expected_schedule, slug = expected
+        if r["venue_game_centre"] != expected_game_centre:
+            fail(f"fixtures: {r['away']}@{r['home']} Game Centre field {r['venue_game_centre']!r} does not match "
+                 f"the verified transcription {expected_game_centre!r}")
+        if r["venue_schedule_page"] != expected_schedule:
+            fail(f"fixtures: {r['away']}@{r['home']} schedule-page label {r['venue_schedule_page']!r} does not match "
+                 f"the checked schedule page {expected_schedule!r}")
+        expected_game_url = f"https://www.nfl.com/games/{slug}-2026-reg-11"
+        if r["game_centre_url"] != expected_game_url:
+            fail(f"fixtures: {r['away']}@{r['home']} has the wrong official Game Centre source URL")
+        if r["schedule_page_url"] != build.OFFICIAL_SCHEDULE:
+            fail(f"fixtures: {r['away']}@{r['home']} has the wrong official schedule source URL")
+        windows.add(r["read_window_utc"])
+        if not r["venue_source_note"].strip():
+            fail(f"fixtures: {r['away']}@{r['home']} is missing venue source comparison provenance")
+        if key in source_note_tokens:
+            for token in source_note_tokens[key]:
+                if token not in r["venue_source_note"]:
+                    fail(f"fixtures: {r['away']}@{r['home']} source note is missing {token!r}")
+        elif key not in source_diff and key != ("MIN", "SF"):
+            if "match after case normalization" not in r["venue_source_note"]:
+                fail(f"fixtures: {r['away']}@{r['home']} needs an explicit Game Centre/schedule comparison")
+        if "exact start second is unavailable" not in r["notes"].lower():
+            fail(f"fixtures: {r['away']}@{r['home']} must disclose minute-only read-window start precision")
+    if seen != expected_keys:
+        fail(f"fixtures: matchup set differs from the 13 expected official Week 11 fixtures: {sorted(seen ^ expected_keys)}")
+    if windows != {EXPECTED_VENUE_WINDOW}:
+        fail(f"fixtures: all 13 rows must share the audited read window {EXPECTED_VENUE_WINDOW!r}; found {sorted(windows)}")
+    try:
+        start, end = (dt.datetime.fromisoformat(v.replace("Z", "+00:00"))
+                      for v in EXPECTED_VENUE_WINDOW.split("/", 1))
+        if start >= end:
+            fail("fixtures: read-window start must precede its end")
+    except (TypeError, ValueError):
+        fail("fixtures: read window is not a valid UTC interval")
     verified = sum(1 for r in rows if r["venue_status"] == "verified at game centre")
-    notes.append(f"fixtures: 13 rows, {verified} venues transcribed from the game centre, {13 - verified} left blank")
+    labels_differ = sum(1 for r in rows if (r["away"], r["home"]) in source_diff)
+    notes.append(f"fixtures: {verified}/13 exact Game Centre stadium transcriptions gated; {labels_differ} schedule-label "
+                 "differences retained (2 differing labels, 1 naming variation); shared read window and both source "
+                 "links checked")
+
+
+def check_venue_publication() -> None:
+    forecast_path = BOARD / "forecasts.html"
+    source_path = BOARD / "sources.html"
+    forecast = forecast_path.read_text(encoding="utf-8")
+    sources = source_path.read_text(encoding="utf-8")
+    for (away, home), (game_venue, schedule_venue, slug) in EXPECTED_WEEK_11_VENUES.items():
+        game_url = f"https://www.nfl.com/games/{slug}-2026-reg-11"
+        if build.esc(game_venue) not in forecast:
+            fail(f"forecasts.html: missing verified Game Centre venue {game_venue!r} for {away}@{home}")
+        if schedule_venue and build.esc(schedule_venue) not in forecast:
+            fail(f"forecasts.html: missing schedule-page venue {schedule_venue!r} for {away}@{home}")
+        if game_url not in forecast or build.OFFICIAL_SCHEDULE not in forecast:
+            fail(f"forecasts.html: fixture context must link both official sources for {away}@{home}")
+    for row in build.read_fixtures():
+        if build.esc(row["venue_source_note"]) not in forecast:
+            fail(f"forecasts.html: missing source comparison note for {row['away']}@{row['home']}")
+    for required in ("2026-11-16T14:40Z/2026-11-16T14:42:45Z", "minute precision",
+                     "exact start second is unavailable", "Game Info &gt; Stadium"):
+        if required not in forecast:
+            fail(f"forecasts.html: missing venue provenance disclosure {required!r}")
+    for flag in ("SB-F03", "SB-F04", "SB-F09", "SB-F10", "RELIANT STADIUM", "NORTHWEST STADIUM",
+                 "ARROWHEAD STADIUM", "GEHA Field at Arrowhead Stadium", "FedEx Field", "NRG Stadium"):
+        if build.esc(flag) not in sources:
+            fail(f"sources.html: missing updated venue review item {flag!r}")
+    for stale in ("the venue field for the other 11 fixtures stays blank", "no game-centre read this pass",
+                  "the cell is blank and the check is queued"):
+        if stale in sources:
+            fail(f"sources.html: stale venue flag copy remains: {stale!r}")
+    notes.append("venue publication: all 13 exact values, source links, read-window precision and updated review flags "
+                 "appear on the generated pages")
 
 
 def check_corpus_pin() -> None:
@@ -349,6 +466,7 @@ def main() -> int:
         check_pages()
         check_prereg()
         check_fixtures()
+        check_venue_publication()
         check_corpus_pin()
         check_price_firewall()
         check_ledger_and_repro()
