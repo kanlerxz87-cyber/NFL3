@@ -3245,3 +3245,11 @@ Scope: inspect the already-integrated site and its verification gates, run the r
 - On `main`, the full validation/deploy run [43925964153](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43925964153) passed both jobs. The same-minute GitHub Pages workflow first had one failed deploy run [43925695811](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43925695811); the later deploy succeeded, and dynamic Pages build/deploy [43925964350](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43925964350) passed. GitHub Pages API reports `status: built` on `main`.
 - Live root and executive summary fetched after deploy. One initial fetch without a cache-busting query returned an older cached copy; a cache-busted re-fetch returned the current summary including the successful-deployment note. This is recorded as a cache observation, not evidence of a source-data update.
 - **Final integration status for this session:** both PRs #120 and #122 merged; the site is live and the summary's current deployment statement was read back from the public host. NFL source-currentness gaps and flagged findings remain as stated; no new NFL values were inferred.
+
+## Current-session claim — `arena/de64f162-nfl3` — 2026-11-16 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Final acceptance audit: consolidate current decision state, independently run offline site/workspace gates, and publish remaining blockers with links to the evidence | in progress | `arena/de64f162-nfl3` | `ACCEPTANCE_AUDIT.md` (new), `acceptance.html` (new), `index.html` (one direct link), this append-only claim/result |
+
+**Branch constraint:** Arena fixed this session to `arena/de64f162-nfl3`; no session-named branch/worktree is created. This claim is isolated to new acceptance outputs and one landing-page link. Existing source data and model workspaces remain read-only. No official fact will be added from an unverified or inferred value.
