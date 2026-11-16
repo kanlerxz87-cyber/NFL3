@@ -120,7 +120,7 @@ def _json_default(value):
     raise TypeError(f"not serialisable: {type(value).__name__}")
 
 
-CANON_DECIMALS = 9
+CANON_DECIMALS = 6
 
 
 def _canonical(obj):
@@ -129,7 +129,7 @@ def _canonical(obj):
     Floating-point sums and powers can differ in the last one or two bits between platforms (a CI
     runner and a developer machine produced 1.7178225370738218 and 1.7178225370738216 for the same
     quantity). Written raw, that makes the committed artifact drift on a rebuild elsewhere. Rounding
-    only the written form to 9 decimals removes the platform noise and leaves every published value
+    only the written form to 6 decimals removes the platform noise and leaves every published value
     at a precision far finer than any reported figure. In-memory arithmetic is not changed.
     """
     if isinstance(obj, float):
