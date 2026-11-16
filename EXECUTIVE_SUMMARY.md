@@ -185,3 +185,63 @@ at all; which official field is authoritative for venue; and what a tier pays. E
 unblocking effect on [`shadow-board/registers.html`](shadow-board/registers.html), beside six suggestions with cost
 and blocker stated. The §1 sentence of the pre-registration that said the price policy was "undecided" is kept as
 written and annotated as amendment A1 in §9, because a frozen registration must be annotated, not re-worded.
+
+## 9. Injury-designation calibration: what "Questionable" is actually worth (session d37d5907, 2026-11-16)
+
+**Status: measured, published, and explicitly provisional.** This section reports the first time this project
+has been able to put a number on an injury designation instead of importing one from memory or a third party.
+
+**The blocker, and how it was cleared.** Two readiness requirements had been blocked for the same reason: the
+repository held one day's capture of the official injury report (R6) and **no** official inactive list at all
+(A6), so there was nothing to join a designation to. Both now have a scheduled, content-addressed mechanism in
+[`injury-archive/`](injury-archive/index.html), and a pre-registered protocol
+([`injury-archive/PREREGISTRATION.md`](injury-archive/PREREGISTRATION.md), IA-PRE-01) that fixed the population,
+the join, the estimator, the exclusions and the gates **before the first result existed**.
+
+**The two official documents.** The NFL publishes inactive lists not at `nfl.com/inactives/` — which on
+2026-11-16 read *"Please check back soon for NFL Inactive Reports for this Season"* and listed no player — but in
+a weekly article, `nfl.com/news/nfl-week-{week}-inactives-players-ruled-out-sunday-{season}-season`. That finding
+is the reason A6 was cleared; it is recorded on the site rather than assumed.
+
+**The first measurement (2026 Week 10, both documents joined by club and player name):**
+
+| Designation | n joined | Inactive | Rate | 95% Wilson interval |
+|---|---|---|---|---|
+| Out | 64 | 48 | **75.0%** | 63.2–84.0% |
+| Doubtful | 10 | 4 | **40.0%** | 16.8–68.7% |
+| Questionable | 82 | 15 | **18.3%** | 11.4–28.0% |
+
+171 designated rows are fully accounted for: 67 inactive + 89 active + 15 uncovered + 0 ambiguous. The 15
+uncovered rows are four clubs whose game had not been played when the article was written; they are **excluded**
+from every rate and never counted as active.
+
+**Why this is not yet a finding.** The pre-registered confirmation gate is `n ≥ 100` per label with per-season
+separation, and one week is 1/18 of a season. More importantly, the Week 10 report was read on 2026-11-16, after
+several clubs had already played, so pairing it with the pre-game inactive list is **not point-in-time
+consistent**. All 32 "designated but active" rows practised fully, which is the signature of that timing problem
+rather than of a bad label. Protocol amendment **A1** records this, publishes the anomaly counts, and changes no
+threshold. Every rate on the page is therefore labelled provisional until the scheduled capture stores each
+report **before** kickoff.
+
+**Evidence strength, stated in the archive itself.** This session's shell has no nfl.com egress, so the Week 10
+rows were transcribed from the session fetch tool's rendered text; those index lines carry
+`raw_bytes_retained: false` and say so. The transcription is machine-checked against the verified parser with
+`--expect 347 --expect-clubs 28`, and it returns **the same 347 rows the repository's independent byte-exact
+capture of that page records**. The scheduled workflow replaces every such capture with a real byte capture.
+
+**What a reader should do with the numbers today.** Use them as a measured prior for direction and rough
+magnitude, with the intervals attached, and do not use the labels as model features until the gate clears. The
+practice-status cut is the more actionable result even at this sample size: a designated player who practised
+fully is inactive far less often than one who did not.
+
+**What is still blocked.** The snap-count half of A6 (no official snap or participation source is verified), the
+official Game Books behind A1/A2, and past-season coverage (every 2021–2025 inactives address probed so far is a
+404). Each is listed with its evidence on [`injury-archive/flags.html`](injury-archive/flags.html) and on the
+Flagged for Review page.
+
+**One main-branch defect found and fixed in passing.** A scheduled `data-refresh` commit had pulled in a community
+schedule release containing the Week 10 finals while the official standings snapshot still described the
+pre-Week-10 league, so `origination/scripts/build.py` correctly refused to reconcile and **failed** — which meant
+no change could pass CI. It was fixed by re-transcribing all 32 official standings rows on 2026-11-16 (24 rows
+had moved; every before/after pair is recorded in the artifact), not by reverting the refresh or relaxing the
+check. Reconciliation is now 160/160.

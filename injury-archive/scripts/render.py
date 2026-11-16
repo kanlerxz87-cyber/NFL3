@@ -438,7 +438,58 @@ python3 injury-archive/scripts/verify.py</code></pre>""")
     return "".join(body)
 
 
-def render_all(data: dict) -> None:
+
+def flags_page(data: dict) -> str:
+    index = lib.read_index()
+    transcribed = [e for e in index if e.get("raw_bytes_retained") is False]
+    fetched = [e for e in index if e.get("raw_bytes_retained") is not False and e.get("status") == "ok"]
+    not_pub = [e for e in index if e.get("status") == "not_published"]
+    anomaly = data["designations"].get("anomaly", {})
+    rows = [
+        ["IA-F01", "The Week 10 rate is provisional",
+         "The report was read after several clubs had played, so pairing it with the pre-game inactive "
+         "list is not point-in-time consistent. All "
+         f"{anomaly.get('designated_active_after_full_practice', 0)} 'designated but active' rows "
+         "practised fully, the signature of that timing problem.",
+         "protocol amendment A1.3; designations.json anomaly block",
+         '<a class="source" href="https://www.nfl.com/injuries/league/2026/REG10" target="_blank" rel="noopener noreferrer">report</a> · '
+         '<a class="source" href="https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer">inactives</a>'],
+        ["IA-F02", "The Week 10 captures are transcriptions, not byte-exact reads",
+         f"{len(transcribed)} of {len(index)} index lines carry raw_bytes_retained: false. The digest is of the "
+         "reconstructed markup, not of nfl.com's bytes. The scheduled workflow replaces them with real captures.",
+         "index.jsonl", '<a class="source" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer">nfl.com</a>'],
+        ["IA-F03", "The snap-count half of A6 is still blocked",
+         "No official snap-count or participation source is verified; the 2026 snap file is community "
+         "nflverse data. Inactive is not the same as unavailable, and active is not the same as playing.",
+         "readiness.html row A6; limits.html", '<a class="source" href="https://www.nfl.com/stats/player-stats/" target="_blank" rel="noopener noreferrer">NFL player stats</a>'],
+        ["IA-F04", "Past-season coverage is not established",
+         f"{len(not_pub)} probed addresses are recorded as not published. That is evidence about those addresses, "
+         "not proof the league never published the documents elsewhere.",
+         "coverage.json", '<a class="source" href="https://www.nfl.com/inactives/" target="_blank" rel="noopener noreferrer">inactives hub</a>'],
+        ["IA-F05", "A designation with no name match is counted active",
+         "If the miss is really a mismatch rather than a genuine active status, the inactive rate is biased "
+         "down. The direction is published so the number can be discounted.",
+         "protocol section 4; limits.html", '<a class="source" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer">report</a>'],
+    ]
+    body = [f"""<h1>Flagged for review</h1>
+<p class="lede">Every limitation this archive knows about, with the evidence and an official link. Nothing
+here is fixed silently and nothing here blocks publication — a reader is entitled to see all five before
+trusting a number.</p>
+<div class="grid">
+{card("Transcribed captures", B.lib.num(len(transcribed)), "not byte-exact")}
+{card("Byte-exact captures", B.lib.num(len(fetched)), "from the scheduled workflow")}
+{card("Addresses not published", B.lib.num(len(not_pub)), "recorded 404s")}
+</div>"""]
+    body.append(table(["ID", "Flag", "Why it matters", "Where it is recorded", "Official source"], rows))
+    body.append("""<div class="notice"><b>How to read this list.</b> IA-F01 and IA-F02 concern the strength of
+the *evidence*, not the arithmetic: the counts on the calibration page are exactly what the two documents
+say. IA-F03 and IA-F04 concern *coverage*: they say what this archive does not yet hold. IA-F05 is a bias
+whose direction is known. None of them is a reason to suppress a rate — they are the reason each rate is
+published with its <code>n</code>, its interval and a pointer back to this page.</div>""")
+    return "".join(body)
+
+def render_all(data: dict) -> int:
+    """Render every page and return how many were written, so the caller cannot misreport it."""
     site = lib.ROOT / "injury-archive"
     site.mkdir(parents=True, exist_ok=True)
     pages = {
@@ -450,6 +501,7 @@ def render_all(data: dict) -> None:
         "regime.html": ("Rule regime by season", regime_page(data)),
         "limits.html": ("Limits and exclusions", limits_page(data)),
         "method.html": ("Method and sources", method_page(data)),
+        "flags.html": ("Flagged for review", flags_page(data)),
     }
     for name, (title, body) in pages.items():
         B.page(name, title, body)
@@ -461,3 +513,4 @@ def render_all(data: dict) -> None:
     }
     (site / "data" / "render_contract.json").write_text(json.dumps(contract, indent=1) + "\n",
                                                         encoding="utf-8")
+    return len(pages)
