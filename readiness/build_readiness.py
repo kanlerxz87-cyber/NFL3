@@ -155,6 +155,22 @@ def compute() -> dict:
     v["originated_markets"] = len(read_csv("pricing/originated_markets.csv"))
     v["residual_rows"] = len(read_csv("pricing/residuals.csv"))
     v["policy_records"] = 1 if (ROOT / "pricing" / "PRICE_DATA_POLICY.md").is_file() else 0
+    # Two-total workspace (this session): the pair of total estimators, the gap column and the
+    # pre-registered collapse evaluation. Read from the artifact, so the register cannot claim a number
+    # the artifact does not contain.
+    tt = load_json("two-total/data/two_total.json")
+    v["tt_registration"] = tt["registration"]["commit"][:12]
+    v["tt_scored"] = tt["scores"]["overall"]["scored"]
+    v["tt_corpus_rows"] = tt["counts"]["corpus_rows"]
+    v["tt_mae_t1"] = tt["scores"]["overall"]["mae_t1"]
+    v["tt_mae_t2"] = tt["scores"]["overall"]["mae_t2"]
+    v["tt_val_n"] = tt["scores"]["by_block"]["validation"]["scored"]
+    v["tt_checks_passed"] = sum(1 for ok in tt["decision"]["checks"].values() if ok)
+    v["tt_checks_total"] = len(tt["decision"]["checks"])
+    v["tt_collapsed"] = tt["decision"]["collapsed"]
+    v["tt_holdout_n"] = tt["scores"]["by_block"]["holdout"]["scored"]
+    v["tt_sd_pred_t2"] = tt["diagnosis"]["bias"]["t2"]["sd_prediction"]
+
     man = load_json("corpus/manifest.json")
     v["corpus_games"] = man["window"]["games"]
     v["corpus_settled"] = man["window"]["settled"]
@@ -250,10 +266,19 @@ def rows(v: dict) -> list[dict]:
         "Every published row has all three columns with a source link; difference is blank where the market line is.",
         f"{v['residual_rows']} residual rows and {v['skill_graded_rows']} graded skill-lab rows, each with our line, the market line and the gap as separate columns.",
         "pricing/residuals.csv", "Residual register (three separate columns)", NFL_ODDS, "NFL odds-widget boundary (support.nfl.com)")
-    add("P4", G, "Publish every model total twice (two estimators, gap column) until one wins walk-forward", "Not started",
-        "No second estimator and no walk-forward comparison has been run.",
+    add("P4", G, "Publish every model total twice (two estimators, gap column) until one wins walk-forward", "Partial",
+        "The pair, the gap column and the pre-registered collapse rule are published and evaluated (two-total/). "
+        "The rule did not fire: 4 of 5 conditions fail, so both totals stay visible, which is the requirement's "
+        "stated interim state. What remains open is the decision the rule exposes, not the publication: the "
+        "registered T2 definition loses on every condition, and replacing it needs a new registration.",
         "Two estimators with a gap column over the same walk-forward window, then one collapsed by a pre-registered rule.",
-        "0 estimators compared.", "docs/PRE_REGISTRATION.md", "Pre-registration file", NFL_STATS, "NFL player stats (official inputs)")
+        f"{v['tt_scored']} of {v['tt_corpus_rows']} corpus games carry both totals, the gap and an official final total. "
+        f"MAE T1 {v['tt_mae_t1']:.3f} vs T2 {v['tt_mae_t2']:.3f}. Collapse conditions passed: "
+        f"{v['tt_checks_passed']} of {v['tt_checks_total']} on {v['tt_val_n']} validation games; verdict "
+        f"{'collapsed' if v['tt_collapsed'] else 'not collapsed'}; holdout reported once "
+        f"(n={v['tt_holdout_n']}). No price, ROI or CLV number exists in the workspace.",
+        "two-total/data/two_total.json", "Two-total artifact (registration " + v["tt_registration"] + "\u2026)",
+        "https://www.nfl.com/schedules/2026/by-week/week-9", "NFL schedule pages, 2026 weeks 1-9 (official)")
     add("P5", G, "Vig-free market consensus vs. originated fair-line decomposition", "Not started",
         "Needs two-sided market prices (P1).", "Consensus from at least two sourced books, de-vigged, next to our line.",
         "0 books with sourced two-sided prices.", "decision-lab/data/catalog.json", "Decision-lab catalogue", NFL_ODDS, "NFL odds-widget boundary (support.nfl.com)")
