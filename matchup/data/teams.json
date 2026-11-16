@@ -1,0 +1,1727 @@
+[
+ {
+  "team": "49ers",
+  "matchup": "SF @ DAL",
+  "rows_on_report": 12,
+  "out": 1,
+  "doubtful": 0,
+  "questionable": 7,
+  "net_designation_count": 1,
+  "depth_chart_captured": "yes",
+  "starters_out": [
+   {
+    "player": "Mike Evans",
+    "position": "WR",
+    "club_slot": "Offense WR",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/mike-evans/",
+    "depth_source_url": "https://www.49ers.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "replacements_named": [
+   {
+    "out_player": "Mike Evans",
+    "club_slot": "Offense WR",
+    "replacement_player": "Demarcus Robinson",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.49ers.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "not_on_depth_chart": [],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Bengals",
+  "matchup": "PIT @ CIN",
+  "rows_on_report": 9,
+  "out": 1,
+  "doubtful": 3,
+  "questionable": 0,
+  "net_designation_count": 4,
+  "depth_chart_captured": "yes",
+  "starters_out": [
+   {
+    "player": "Kyle Dugger",
+    "position": "S",
+    "club_slot": "Defense S",
+    "published_rank": 2,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/kyle-dugger/",
+    "depth_source_url": "https://www.bengals.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "replacements_named": [
+   {
+    "out_player": "Kyle Dugger",
+    "club_slot": "Defense S",
+    "replacement_player": "Russ Yeast",
+    "replacement_rank": 3,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.bengals.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "not_on_depth_chart": [
+   {
+    "player": "Jalen Davis",
+    "position": "CB",
+    "game_status": "Doubtful",
+    "player_url": "https://www.nfl.com/players/jalen-davis/",
+    "reason": "player does not appear on the club's published depth chart",
+    "source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Andrei Iosivas",
+    "position": "WR",
+    "game_status": "Doubtful",
+    "player_url": "https://www.nfl.com/players/andrei-iosivas/",
+    "reason": "player does not appear on the club's published depth chart",
+    "source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Brian Parker II",
+    "position": "G",
+    "game_status": "Doubtful",
+    "player_url": "https://www.nfl.com/players/brian-parker-ii/",
+    "reason": "player does not appear on the club's published depth chart",
+    "source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Bills",
+  "matchup": "BUF @ NYJ",
+  "rows_on_report": 14,
+  "out": 0,
+  "doubtful": 1,
+  "questionable": 4,
+  "net_designation_count": 1,
+  "depth_chart_captured": "yes",
+  "starters_out": [
+   {
+    "player": "Spencer Brown",
+    "position": "T",
+    "club_slot": "Offense RT",
+    "published_rank": 1,
+    "game_status": "Doubtful",
+    "player_url": "https://www.nfl.com/players/spencer-brown/",
+    "depth_source_url": "https://www.buffalobills.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "replacements_named": [
+   {
+    "out_player": "Spencer Brown",
+    "club_slot": "Offense RT",
+    "replacement_player": "Jude Bowry",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.buffalobills.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "not_on_depth_chart": [],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Browns",
+  "matchup": "HOU @ CLE",
+  "rows_on_report": 12,
+  "out": 2,
+  "doubtful": 0,
+  "questionable": 1,
+  "net_designation_count": 2,
+  "depth_chart_captured": "yes",
+  "starters_out": [
+   {
+    "player": "Michael Burton",
+    "position": "FB",
+    "club_slot": "Offense RB",
+    "published_rank": 3,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/michael-burton/",
+    "depth_source_url": "https://www.clevelandbrowns.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Ronnie Hickman Jr.",
+    "position": "S",
+    "club_slot": "Defense FS",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/ronnie-hickman-jr/",
+    "depth_source_url": "https://www.clevelandbrowns.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "replacements_named": [
+   {
+    "out_player": "Michael Burton",
+    "club_slot": "Offense RB",
+    "replacement_player": "Jaleel McLaughlin",
+    "replacement_rank": 4,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.clevelandbrowns.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Ronnie Hickman Jr.",
+    "club_slot": "Defense FS",
+    "replacement_player": "Donovan McMillon",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.clevelandbrowns.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "not_on_depth_chart": [],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Cardinals",
+  "matchup": "LAR @ AZ",
+  "rows_on_report": 15,
+  "out": 3,
+  "doubtful": 0,
+  "questionable": 6,
+  "net_designation_count": 3,
+  "depth_chart_captured": "yes",
+  "starters_out": [
+   {
+    "player": "Hjalte Froholdt",
+    "position": "C",
+    "club_slot": "Offense C",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/hjalte-froholdt/",
+    "depth_source_url": "https://www.azcardinals.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Jon Gaines II",
+    "position": "G",
+    "club_slot": "Offense RG",
+    "published_rank": 2,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/jon-gaines-ii/",
+    "depth_source_url": "https://www.azcardinals.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "replacements_named": [
+   {
+    "out_player": "Hjalte Froholdt",
+    "club_slot": "Offense C",
+    "replacement_player": "Kingsley Eguakun",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.azcardinals.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Jon Gaines II",
+    "club_slot": "Offense RG",
+    "replacement_player": "",
+    "replacement_rank": "",
+    "replacement_game_status": "",
+    "depth_source_url": "https://www.azcardinals.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "not_on_depth_chart": [
+   {
+    "player": "Zachary Carter",
+    "position": "DT",
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/zachary-carter-x9168/",
+    "reason": "player does not appear on the club's published depth chart",
+    "source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Chargers",
+  "matchup": "LAC @ BAL",
+  "rows_on_report": 19,
+  "out": 3,
+  "doubtful": 1,
+  "questionable": 6,
+  "net_designation_count": 4,
+  "depth_chart_captured": "yes",
+  "starters_out": [
+   {
+    "player": "Branson Taylor",
+    "position": "G",
+    "club_slot": "Offense LT",
+    "published_rank": 2,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/branson-taylor/",
+    "depth_source_url": "https://www.chargers.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Kendall Williamson",
+    "position": "S",
+    "club_slot": "Defense S",
+    "published_rank": 3,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/kendall-williamson/",
+    "depth_source_url": "https://www.chargers.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Brenen Thompson",
+    "position": "WR",
+    "club_slot": "Offense WR",
+    "published_rank": 2,
+    "game_status": "Doubtful",
+    "player_url": "https://www.nfl.com/players/brenen-thompson/",
+    "depth_source_url": "https://www.chargers.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "replacements_named": [
+   {
+    "out_player": "Branson Taylor",
+    "club_slot": "Offense LT",
+    "replacement_player": "",
+    "replacement_rank": "",
+    "replacement_game_status": "",
+    "depth_source_url": "https://www.chargers.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Kendall Williamson",
+    "club_slot": "Defense S",
+    "replacement_player": "",
+    "replacement_rank": "",
+    "replacement_game_status": "",
+    "depth_source_url": "https://www.chargers.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Brenen Thompson",
+    "club_slot": "Offense WR",
+    "replacement_player": "Derius Davis Theo Wease Jr.",
+    "replacement_rank": 3,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.chargers.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "not_on_depth_chart": [
+   {
+    "player": "Isas Waxter",
+    "position": "CB",
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/isas-waxter/",
+    "reason": "player does not appear on the club's published depth chart",
+    "source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Chiefs",
+  "matchup": "KC @ ATL",
+  "rows_on_report": 13,
+  "out": 3,
+  "doubtful": 0,
+  "questionable": 3,
+  "net_designation_count": 3,
+  "depth_chart_captured": "yes",
+  "starters_out": [
+   {
+    "player": "Jaylon Moore",
+    "position": "T",
+    "club_slot": "Offense RT",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/jaylon-moore-2/",
+    "depth_source_url": "https://www.chiefs.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Peter Woods",
+    "position": "DT",
+    "club_slot": "Defense DT",
+    "published_rank": 2,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/peter-woods/",
+    "depth_source_url": "https://www.chiefs.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "replacements_named": [
+   {
+    "out_player": "Jaylon Moore",
+    "club_slot": "Offense RT",
+    "replacement_player": "Diego Pounds",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.chiefs.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Peter Woods",
+    "club_slot": "Defense DT",
+    "replacement_player": "",
+    "replacement_rank": "",
+    "replacement_game_status": "",
+    "depth_source_url": "https://www.chiefs.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "not_on_depth_chart": [
+   {
+    "player": "Omarr Norman-Lott",
+    "position": "DT",
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/omarr-norman-lott/",
+    "reason": "player does not appear on the club's published depth chart",
+    "source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Colts",
+  "matchup": "MIA @ IND",
+  "rows_on_report": 14,
+  "out": 6,
+  "doubtful": 0,
+  "questionable": 1,
+  "net_designation_count": 6,
+  "depth_chart_captured": "yes",
+  "starters_out": [
+   {
+    "player": "Mo Alie-Cox",
+    "position": "TE",
+    "club_slot": "Offense TE",
+    "published_rank": 2,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/mo-alie-cox/",
+    "depth_source_url": "https://www.colts.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Jaylon Carlies",
+    "position": "LB",
+    "club_slot": "Defense WLB",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/jaylon-carlies/",
+    "depth_source_url": "https://www.colts.com/news/colts-release-unofficial-depth-chart-for-week-10",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Akeem Davis-Gaither",
+    "position": "LB",
+    "club_slot": "Defense MLB",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/akeem-davis-gaither/",
+    "depth_source_url": "https://www.colts.com/news/colts-release-unofficial-depth-chart-for-week-10",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Luke Rhodes",
+    "position": "LS",
+    "club_slot": "Special Teams LS",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/luke-rhodes/",
+    "depth_source_url": "https://www.colts.com/news/colts-release-unofficial-depth-chart-for-week-10",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Jerry Tillery",
+    "position": "DT",
+    "club_slot": "Defense NT",
+    "published_rank": 2,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/jerry-tillery/",
+    "depth_source_url": "https://www.colts.com/news/colts-release-unofficial-depth-chart-for-week-10",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Jalen Travis",
+    "position": "T",
+    "club_slot": "Offense RT",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/jalen-travis/",
+    "depth_source_url": "https://www.colts.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "replacements_named": [
+   {
+    "out_player": "Mo Alie-Cox",
+    "club_slot": "Offense TE",
+    "replacement_player": "Drew Ogletree",
+    "replacement_rank": 3,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.colts.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Jaylon Carlies",
+    "club_slot": "Defense WLB",
+    "replacement_player": "Bryce Boettcher",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.colts.com/news/colts-release-unofficial-depth-chart-for-week-10",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Akeem Davis-Gaither",
+    "club_slot": "Defense MLB",
+    "replacement_player": "Bryce Boettcher",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.colts.com/news/colts-release-unofficial-depth-chart-for-week-10",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Luke Rhodes",
+    "club_slot": "Special Teams LS",
+    "replacement_player": "",
+    "replacement_rank": "",
+    "replacement_game_status": "",
+    "depth_source_url": "https://www.colts.com/news/colts-release-unofficial-depth-chart-for-week-10",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Jerry Tillery",
+    "club_slot": "Defense NT",
+    "replacement_player": "Tim Smith",
+    "replacement_rank": 3,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.colts.com/news/colts-release-unofficial-depth-chart-for-week-10",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Jalen Travis",
+    "club_slot": "Offense RT",
+    "replacement_player": "Charlie Heck",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.colts.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "not_on_depth_chart": [],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Commanders",
+  "matchup": "WAS @ NYG",
+  "rows_on_report": 9,
+  "out": 2,
+  "doubtful": 0,
+  "questionable": 0,
+  "net_designation_count": 2,
+  "depth_chart_captured": "yes",
+  "starters_out": [
+   {
+    "player": "Colson Yankoff",
+    "position": "TE",
+    "club_slot": "Offense TE",
+    "published_rank": 2,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/colson-yankoff/",
+    "depth_source_url": "https://www.commanders.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "replacements_named": [
+   {
+    "out_player": "Colson Yankoff",
+    "club_slot": "Offense TE",
+    "replacement_player": "",
+    "replacement_rank": "",
+    "replacement_game_status": "",
+    "depth_source_url": "https://www.commanders.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "not_on_depth_chart": [
+   {
+    "player": "Lucas Patrick",
+    "position": "C",
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/lucas-patrick/",
+    "reason": "player does not appear on the club's published depth chart",
+    "source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Cowboys",
+  "matchup": "SF @ DAL",
+  "rows_on_report": 19,
+  "out": 5,
+  "doubtful": 1,
+  "questionable": 5,
+  "net_designation_count": 6,
+  "depth_chart_captured": "yes",
+  "starters_out": [
+   {
+    "player": "Donovan Ezeiruaku",
+    "position": "LB",
+    "club_slot": "Defense OLB",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/donovan-ezeiruaku/",
+    "depth_source_url": "https://www.dallascowboys.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Tyler Goodson",
+    "position": "RB",
+    "club_slot": "Offense RB",
+    "published_rank": 2,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/tyler-goodson/",
+    "depth_source_url": "https://www.dallascowboys.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Jonathan Mingo",
+    "position": "WR",
+    "club_slot": "Offense WR",
+    "published_rank": 2,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/jonathan-mingo/",
+    "depth_source_url": "https://www.dallascowboys.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Juanyeh Thomas",
+    "position": "S",
+    "club_slot": "Defense S",
+    "published_rank": 2,
+    "game_status": "Doubtful",
+    "player_url": "https://www.nfl.com/players/juanyeh-thomas/",
+    "depth_source_url": "https://www.dallascowboys.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "replacements_named": [
+   {
+    "out_player": "Donovan Ezeiruaku",
+    "club_slot": "Defense OLB",
+    "replacement_player": "Dee Winters",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.dallascowboys.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Tyler Goodson",
+    "club_slot": "Offense RB",
+    "replacement_player": "",
+    "replacement_rank": "",
+    "replacement_game_status": "",
+    "depth_source_url": "https://www.dallascowboys.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Jonathan Mingo",
+    "club_slot": "Offense WR",
+    "replacement_player": "",
+    "replacement_rank": "",
+    "replacement_game_status": "",
+    "depth_source_url": "https://www.dallascowboys.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Juanyeh Thomas",
+    "club_slot": "Defense S",
+    "replacement_player": "",
+    "replacement_rank": "",
+    "replacement_game_status": "",
+    "depth_source_url": "https://www.dallascowboys.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "not_on_depth_chart": [
+   {
+    "player": "Jake Ferguson",
+    "position": "TE",
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/jake-ferguson/",
+    "reason": "player does not appear on the club's published depth chart",
+    "source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "P.J. Locke",
+    "position": "S",
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/p-j-locke/",
+    "reason": "player does not appear on the club's published depth chart",
+    "source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Dolphins",
+  "matchup": "MIA @ IND",
+  "rows_on_report": 11,
+  "out": 2,
+  "doubtful": 1,
+  "questionable": 1,
+  "net_designation_count": 3,
+  "depth_chart_captured": "yes",
+  "starters_out": [
+   {
+    "player": "Aaron Brewer",
+    "position": "C",
+    "club_slot": "Offense C",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/aaron-brewer-2/",
+    "depth_source_url": "https://www.miamidolphins.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Jared Wayne",
+    "position": "WR",
+    "club_slot": "Offense WR",
+    "published_rank": 2,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/jared-wayne/",
+    "depth_source_url": "https://www.miamidolphins.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Chris Bell",
+    "position": "WR",
+    "club_slot": "Offense WR",
+    "published_rank": 1,
+    "game_status": "Doubtful",
+    "player_url": "https://www.nfl.com/players/chris-bell-2/",
+    "depth_source_url": "https://www.miamidolphins.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "replacements_named": [
+   {
+    "out_player": "Aaron Brewer",
+    "club_slot": "Offense C",
+    "replacement_player": "Andrew Meyer",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.miamidolphins.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Jared Wayne",
+    "club_slot": "Offense WR",
+    "replacement_player": "",
+    "replacement_rank": "",
+    "replacement_game_status": "",
+    "depth_source_url": "https://www.miamidolphins.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Chris Bell",
+    "club_slot": "Offense WR",
+    "replacement_player": "Jalen Tolbert",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.miamidolphins.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "not_on_depth_chart": [],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Falcons",
+  "matchup": "KC @ ATL",
+  "rows_on_report": 11,
+  "out": 1,
+  "doubtful": 1,
+  "questionable": 3,
+  "net_designation_count": 2,
+  "depth_chart_captured": "yes",
+  "starters_out": [
+   {
+    "player": "Zachariah Branch",
+    "position": "WR",
+    "club_slot": "Offense WR",
+    "published_rank": 2,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/zachariah-branch/",
+    "depth_source_url": "https://www.atlantafalcons.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Divine Deablo",
+    "position": "LB",
+    "club_slot": "Defense ILB",
+    "published_rank": 1,
+    "game_status": "Doubtful",
+    "player_url": "https://www.nfl.com/players/divine-deablo/",
+    "depth_source_url": "https://www.atlantafalcons.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "replacements_named": [
+   {
+    "out_player": "Zachariah Branch",
+    "club_slot": "Offense WR",
+    "replacement_player": "",
+    "replacement_rank": "",
+    "replacement_game_status": "",
+    "depth_source_url": "https://www.atlantafalcons.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Divine Deablo",
+    "club_slot": "Defense ILB",
+    "replacement_player": "Christian Harris",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.atlantafalcons.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "not_on_depth_chart": [],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Giants",
+  "matchup": "WAS @ NYG",
+  "rows_on_report": 11,
+  "out": 0,
+  "doubtful": 0,
+  "questionable": 1,
+  "net_designation_count": 0,
+  "depth_chart_captured": "yes",
+  "starters_out": [],
+  "replacements_named": [],
+  "not_on_depth_chart": [],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Jaguars",
+  "matchup": "JAX @ TEN",
+  "rows_on_report": 11,
+  "out": 3,
+  "doubtful": 0,
+  "questionable": 1,
+  "net_designation_count": 3,
+  "depth_chart_captured": "yes",
+  "starters_out": [
+   {
+    "player": "Jessie Bates",
+    "position": "S",
+    "club_slot": "Defense S",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/jessie-bates/",
+    "depth_source_url": "https://www.jaguars.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Jordan Davis",
+    "position": "DT",
+    "club_slot": "Defense NT",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/jordan-davis/",
+    "depth_source_url": "https://www.jaguars.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "replacements_named": [
+   {
+    "out_player": "Jessie Bates",
+    "club_slot": "Defense S",
+    "replacement_player": "Jalen Huskey",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.jaguars.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Jordan Davis",
+    "club_slot": "Defense NT",
+    "replacement_player": "Davon Godchaux",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.jaguars.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "not_on_depth_chart": [
+   {
+    "player": "BJ Green II",
+    "position": "DE",
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/bj-green-ii/",
+    "reason": "player does not appear on the club's published depth chart",
+    "source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Jets",
+  "matchup": "BUF @ NYJ",
+  "rows_on_report": 9,
+  "out": 1,
+  "doubtful": 0,
+  "questionable": 8,
+  "net_designation_count": 1,
+  "depth_chart_captured": "yes",
+  "starters_out": [
+   {
+    "player": "Trevin Wallace",
+    "position": "LB",
+    "club_slot": "Defense LB",
+    "published_rank": 2,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/trevin-wallace/",
+    "depth_source_url": "https://www.newyorkjets.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "replacements_named": [
+   {
+    "out_player": "Trevin Wallace",
+    "club_slot": "Defense LB",
+    "replacement_player": "",
+    "replacement_rank": "",
+    "replacement_game_status": "",
+    "depth_source_url": "https://www.newyorkjets.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "not_on_depth_chart": [],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Lions",
+  "matchup": "NE @ DET",
+  "rows_on_report": 9,
+  "out": 3,
+  "doubtful": 0,
+  "questionable": 2,
+  "net_designation_count": 3,
+  "depth_chart_captured": "yes",
+  "starters_out": [
+   {
+    "player": "Cade Mays",
+    "position": "C",
+    "club_slot": "Offense C",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/cade-mays/",
+    "depth_source_url": "https://www.detroitlions.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "D.J. Reed",
+    "position": "CB",
+    "club_slot": "Defense CB",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/d-j-reed/",
+    "depth_source_url": "https://www.detroitlions.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "replacements_named": [
+   {
+    "out_player": "Cade Mays",
+    "club_slot": "Offense C",
+    "replacement_player": "Juice Scruggs",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.detroitlions.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "D.J. Reed",
+    "club_slot": "Defense CB",
+    "replacement_player": "Ennis Rakestraw Jr.",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.detroitlions.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "not_on_depth_chart": [
+   {
+    "player": "Kerby Joseph",
+    "position": "S",
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/kerby-joseph/",
+    "reason": "player does not appear on the club's published depth chart",
+    "source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Packers",
+  "matchup": "MIN @ GB",
+  "rows_on_report": 17,
+  "out": 4,
+  "doubtful": 1,
+  "questionable": 7,
+  "net_designation_count": 5,
+  "depth_chart_captured": "no",
+  "starters_out": [],
+  "replacements_named": [],
+  "not_on_depth_chart": [
+   {
+    "player": "Josh Jacobs",
+    "position": "RB",
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/josh-jacobs-x3315/",
+    "reason": "no captured depth chart for this club",
+    "source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Micah Parsons",
+    "position": "LB",
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/micah-parsons/",
+    "reason": "no captured depth chart for this club",
+    "source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Sean Rhyan",
+    "position": "C",
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/sean-rhyan/",
+    "reason": "no captured depth chart for this club",
+    "source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Josh Whyle",
+    "position": "TE",
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/josh-whyle/",
+    "reason": "no captured depth chart for this club",
+    "source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Zaire Franklin",
+    "position": "LB",
+    "game_status": "Doubtful",
+    "player_url": "https://www.nfl.com/players/zaire-franklin/",
+    "reason": "no captured depth chart for this club",
+    "source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Panthers",
+  "matchup": "CAR @ NO",
+  "rows_on_report": 12,
+  "out": 1,
+  "doubtful": 2,
+  "questionable": 4,
+  "net_designation_count": 3,
+  "depth_chart_captured": "yes",
+  "starters_out": [
+   {
+    "player": "Bobby Okereke",
+    "position": "LB",
+    "club_slot": "Defense LB",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/bobby-okereke/",
+    "depth_source_url": "https://www.panthers.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "replacements_named": [
+   {
+    "out_player": "Bobby Okereke",
+    "club_slot": "Defense LB",
+    "replacement_player": "Jackson Kuwatch",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.panthers.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "not_on_depth_chart": [
+   {
+    "player": "Jonathon Brooks",
+    "position": "RB",
+    "game_status": "Doubtful",
+    "player_url": "https://www.nfl.com/players/jonathon-brooks/",
+    "reason": "player does not appear on the club's published depth chart",
+    "source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Mike Jackson",
+    "position": "CB",
+    "game_status": "Doubtful",
+    "player_url": "https://www.nfl.com/players/mike-jackson/",
+    "reason": "player does not appear on the club's published depth chart",
+    "source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Patriots",
+  "matchup": "NE @ DET",
+  "rows_on_report": 15,
+  "out": 3,
+  "doubtful": 0,
+  "questionable": 9,
+  "net_designation_count": 3,
+  "depth_chart_captured": "yes",
+  "starters_out": [
+   {
+    "player": "Ben Brown",
+    "position": "C",
+    "club_slot": "Offense LG",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/ben-brown-2/",
+    "depth_source_url": "https://www.patriots.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Carlton Davis III",
+    "position": "CB",
+    "club_slot": "Defense CB",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/carlton-davis/",
+    "depth_source_url": "https://www.patriots.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "TreVeyon Henderson",
+    "position": "RB",
+    "club_slot": "Offense RB",
+    "published_rank": 2,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/treveyon-henderson/",
+    "depth_source_url": "https://www.patriots.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "replacements_named": [
+   {
+    "out_player": "Ben Brown",
+    "club_slot": "Offense LG",
+    "replacement_player": "Walter Rouse",
+    "replacement_rank": 2,
+    "replacement_game_status": "Questionable",
+    "depth_source_url": "https://www.patriots.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Carlton Davis III",
+    "club_slot": "Defense CB",
+    "replacement_player": "Channing Canada",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.patriots.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "TreVeyon Henderson",
+    "club_slot": "Offense RB",
+    "replacement_player": "Corey Kiner",
+    "replacement_rank": 3,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.patriots.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "not_on_depth_chart": [],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Raiders",
+  "matchup": "SEA @ LV",
+  "rows_on_report": 5,
+  "out": 0,
+  "doubtful": 0,
+  "questionable": 2,
+  "net_designation_count": 0,
+  "depth_chart_captured": "yes",
+  "starters_out": [],
+  "replacements_named": [],
+  "not_on_depth_chart": [],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Rams",
+  "matchup": "LAR @ AZ",
+  "rows_on_report": 14,
+  "out": 2,
+  "doubtful": 0,
+  "questionable": 5,
+  "net_designation_count": 2,
+  "depth_chart_captured": "yes",
+  "starters_out": [
+   {
+    "player": "Steve Avila",
+    "position": "G",
+    "club_slot": "Offense LG",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/steve-avila/",
+    "depth_source_url": "https://www.therams.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "replacements_named": [
+   {
+    "out_player": "Steve Avila",
+    "club_slot": "Offense LG",
+    "replacement_player": "Beaux Limmer",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.therams.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "not_on_depth_chart": [
+   {
+    "player": "Terrance Ferguson",
+    "position": "TE",
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/terrance-ferguson-2/",
+    "reason": "player does not appear on the club's published depth chart",
+    "source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Ravens",
+  "matchup": "LAC @ BAL",
+  "rows_on_report": 10,
+  "out": 1,
+  "doubtful": 0,
+  "questionable": 1,
+  "net_designation_count": 1,
+  "depth_chart_captured": "yes",
+  "starters_out": [
+   {
+    "player": "Jaylinn Hawkins",
+    "position": "S",
+    "club_slot": "Defense SS",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/jaylinn-hawkins/",
+    "depth_source_url": "https://www.baltimoreravens.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "replacements_named": [
+   {
+    "out_player": "Jaylinn Hawkins",
+    "club_slot": "Defense SS",
+    "replacement_player": "K'Von Wallace",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.baltimoreravens.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "not_on_depth_chart": [],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Saints",
+  "matchup": "CAR @ NO",
+  "rows_on_report": 12,
+  "out": 4,
+  "doubtful": 0,
+  "questionable": 2,
+  "net_designation_count": 4,
+  "depth_chart_captured": "yes",
+  "starters_out": [
+   {
+    "player": "CJ Donaldson",
+    "position": "RB",
+    "club_slot": "Offense RB",
+    "published_rank": 3,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/cj-donaldson/",
+    "depth_source_url": "https://www.neworleanssaints.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Taliese Fuaga",
+    "position": "T",
+    "club_slot": "Offense RT",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/taliese-fuaga/",
+    "depth_source_url": "https://www.neworleanssaints.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Erik McCoy",
+    "position": "C",
+    "club_slot": "Offense C",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/erik-mccoy/",
+    "depth_source_url": "https://www.neworleanssaints.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Christen Miller",
+    "position": "DT",
+    "club_slot": "Defense DL",
+    "published_rank": 2,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/christen-miller/",
+    "depth_source_url": "https://www.neworleanssaints.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "replacements_named": [
+   {
+    "out_player": "CJ Donaldson",
+    "club_slot": "Offense RB",
+    "replacement_player": "",
+    "replacement_rank": "",
+    "replacement_game_status": "",
+    "depth_source_url": "https://www.neworleanssaints.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Taliese Fuaga",
+    "club_slot": "Offense RT",
+    "replacement_player": "Asim Richards",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.neworleanssaints.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Erik McCoy",
+    "club_slot": "Offense C",
+    "replacement_player": "William Sherman",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.neworleanssaints.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Christen Miller",
+    "club_slot": "Defense DL",
+    "replacement_player": "",
+    "replacement_rank": "",
+    "replacement_game_status": "",
+    "depth_source_url": "https://www.neworleanssaints.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "not_on_depth_chart": [],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Seahawks",
+  "matchup": "SEA @ LV",
+  "rows_on_report": 15,
+  "out": 4,
+  "doubtful": 0,
+  "questionable": 0,
+  "net_designation_count": 4,
+  "depth_chart_captured": "yes",
+  "starters_out": [
+   {
+    "player": "Charles Cross",
+    "position": "T",
+    "club_slot": "Offense LT",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/charles-cross-2/",
+    "depth_source_url": "https://www.seahawks.com/team/depth-chart/",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Sam Darnold",
+    "position": "QB",
+    "club_slot": "Offense QB",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/sam-darnold/",
+    "depth_source_url": "https://www.seahawks.com/team/depth-chart/",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Quenton Nelson",
+    "position": "G",
+    "club_slot": "Offense LG",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/quenton-nelson/",
+    "depth_source_url": "https://www.seahawks.com/team/depth-chart/",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Leonard Williams",
+    "position": "DT",
+    "club_slot": "Defense DT",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/leonard-williams/",
+    "depth_source_url": "https://www.seahawks.com/team/depth-chart/",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "replacements_named": [
+   {
+    "out_player": "Charles Cross",
+    "club_slot": "Offense LT",
+    "replacement_player": "Josh Jones",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.seahawks.com/team/depth-chart/",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Sam Darnold",
+    "club_slot": "Offense QB",
+    "replacement_player": "Drew Lock",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.seahawks.com/team/depth-chart/",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Quenton Nelson",
+    "club_slot": "Offense LG",
+    "replacement_player": "Anthony Bradford",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.seahawks.com/team/depth-chart/",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Leonard Williams",
+    "club_slot": "Defense DT",
+    "replacement_player": "Brandon Pili",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.seahawks.com/team/depth-chart/",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "not_on_depth_chart": [],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Steelers",
+  "matchup": "PIT @ CIN",
+  "rows_on_report": 8,
+  "out": 0,
+  "doubtful": 0,
+  "questionable": 1,
+  "net_designation_count": 0,
+  "depth_chart_captured": "yes",
+  "starters_out": [],
+  "replacements_named": [],
+  "not_on_depth_chart": [],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Texans",
+  "matchup": "HOU @ CLE",
+  "rows_on_report": 16,
+  "out": 5,
+  "doubtful": 0,
+  "questionable": 6,
+  "net_designation_count": 5,
+  "depth_chart_captured": "no",
+  "starters_out": [],
+  "replacements_named": [],
+  "not_on_depth_chart": [
+   {
+    "player": "Azeez Al-Shaair",
+    "position": "LB",
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/azeez-al-shaair/",
+    "reason": "no captured depth chart for this club",
+    "source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Marvin Harrison Jr.",
+    "position": "WR",
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/marvin-harrison-jr/",
+    "reason": "no captured depth chart for this club",
+    "source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Danielle Hunter",
+    "position": "DE",
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/danielle-hunter/",
+    "reason": "no captured depth chart for this club",
+    "source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Brevin Jordan",
+    "position": "TE",
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/brevin-jordan/",
+    "reason": "no captured depth chart for this club",
+    "source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Keylan Rutledge",
+    "position": "G",
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/keylan-rutledge/",
+    "reason": "no captured depth chart for this club",
+    "source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Titans",
+  "matchup": "JAX @ TEN",
+  "rows_on_report": 12,
+  "out": 5,
+  "doubtful": 0,
+  "questionable": 1,
+  "net_designation_count": 5,
+  "depth_chart_captured": "yes",
+  "starters_out": [
+   {
+    "player": "Cody Barton",
+    "position": "LB",
+    "club_slot": "Defense LB",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/cody-barton/",
+    "depth_source_url": "https://www.tennesseetitans.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Anthony Hill Jr.",
+    "position": "LB",
+    "club_slot": "Defense LB",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/anthony-hill-jr/",
+    "depth_source_url": "https://www.tennesseetitans.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Peter Skoronski",
+    "position": "G",
+    "club_slot": "Offense LG",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/peter-skoronski/",
+    "depth_source_url": "https://www.tennesseetitans.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Carnell Tate",
+    "position": "WR",
+    "club_slot": "Offense WR",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/carnell-tate/",
+    "depth_source_url": "https://www.tennesseetitans.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Tommy Townsend",
+    "position": "P",
+    "club_slot": "Special Teams K",
+    "published_rank": 2,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/tommy-townsend/",
+    "depth_source_url": "https://www.tennesseetitans.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "replacements_named": [
+   {
+    "out_player": "Cody Barton",
+    "club_slot": "Defense LB",
+    "replacement_player": "Dorian Mausi",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.tennesseetitans.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Anthony Hill Jr.",
+    "club_slot": "Defense LB",
+    "replacement_player": "Dorian Mausi",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.tennesseetitans.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Peter Skoronski",
+    "club_slot": "Offense LG",
+    "replacement_player": "Garrett Dellinger",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.tennesseetitans.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Carnell Tate",
+    "club_slot": "Offense WR",
+    "replacement_player": "Chimere Dike",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.tennesseetitans.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Tommy Townsend",
+    "club_slot": "Special Teams K",
+    "replacement_player": "",
+    "replacement_rank": "",
+    "replacement_game_status": "",
+    "depth_source_url": "https://www.tennesseetitans.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "not_on_depth_chart": [],
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "team": "Vikings",
+  "matchup": "MIN @ GB",
+  "rows_on_report": 13,
+  "out": 5,
+  "doubtful": 0,
+  "questionable": 3,
+  "net_designation_count": 5,
+  "depth_chart_captured": "yes",
+  "starters_out": [
+   {
+    "player": "Blake Cashman",
+    "position": "LB",
+    "club_slot": "Defense LB",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/blake-cashman/",
+    "depth_source_url": "https://www.vikings.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "T.J. Hockenson",
+    "position": "TE",
+    "club_slot": "Offense TE",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/t-j-hockenson/",
+    "depth_source_url": "https://www.vikings.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Tyrion Ingram-Dawkins",
+    "position": "DT",
+    "club_slot": "Defense DL",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/tyrion-ingram-dawkins/",
+    "depth_source_url": "https://www.vikings.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Jauan Jennings",
+    "position": "WR",
+    "club_slot": "Offense WR",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/jauan-jennings/",
+    "depth_source_url": "https://www.vikings.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "player": "Kyler Murray",
+    "position": "QB",
+    "club_slot": "Offense QB",
+    "published_rank": 1,
+    "game_status": "Out",
+    "player_url": "https://www.nfl.com/players/kyler-murray/",
+    "depth_source_url": "https://www.vikings.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "replacements_named": [
+   {
+    "out_player": "Blake Cashman",
+    "club_slot": "Defense LB",
+    "replacement_player": "Bo Richter",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.vikings.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "T.J. Hockenson",
+    "club_slot": "Offense TE",
+    "replacement_player": "Gavin Bartholomew",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.vikings.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Tyrion Ingram-Dawkins",
+    "club_slot": "Defense DL",
+    "replacement_player": "Caleb Banks",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.vikings.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Jauan Jennings",
+    "club_slot": "Offense WR",
+    "replacement_player": "Myles Price",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.vikings.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   },
+   {
+    "out_player": "Kyler Murray",
+    "club_slot": "Offense QB",
+    "replacement_player": "Carson Wentz",
+    "replacement_rank": 2,
+    "replacement_game_status": "(not on report)",
+    "depth_source_url": "https://www.vikings.com/team/depth-chart",
+    "report_source_url": "https://www.nfl.com/injuries/"
+   }
+  ],
+  "not_on_depth_chart": [],
+  "source_url": "https://www.nfl.com/injuries/"
+ }
+]

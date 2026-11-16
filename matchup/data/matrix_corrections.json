@@ -1,0 +1,24 @@
+[
+ {
+  "matchup": "KC @ ATL",
+  "offence_team": "Chiefs",
+  "defence_team": "Falcons",
+  "group": "Running back vs Linebacker",
+  "before_offence": "Kenneth Walker (string 1)",
+  "after_offence": "Emmett Johnson (string 2)",
+  "before_defence": "Kendal Daniels (string 1)",
+  "after_defence": "Kendal Daniels (string 1)",
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ {
+  "matchup": "LAC @ BAL",
+  "offence_team": "Ravens",
+  "defence_team": "Chargers",
+  "group": "Quarterback vs Edge rusher",
+  "before_offence": "Lamar Jackson (string 1)",
+  "after_offence": "Joe Fagnano (string 3)",
+  "before_defence": "Khalil Mack (string 1)",
+  "after_defence": "Khalil Mack (string 1)",
+  "source_url": "https://www.nfl.com/injuries/"
+ }
+]

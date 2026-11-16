@@ -30,6 +30,22 @@ reward is funded.** Everything below is traced to an official page or is an expl
 
 **What is still blocked, and by what:** price data and a price-data policy (R01, R08); official game books and inactive lists (R35, R45); a verified snap-count source (R48); the Texans depth source (R57). No strategy is validated. No correlation, edge, ROI or leaderboard position is published.
 
+**Update, 2026-11-16 (session f326e072):** a [matchup desk](matchup/index.html) now answers the
+"which string is really on the field" question from published sources only. The official Week 10 injury
+report was re-read line by line on 2026-11-16: **347 rows, 28 clubs, 14 games, 70 Out, 11 Doubtful,
+90 Questionable**. The committed capture of 2026-11-12T06:32Z held **254 rows and 24 clubs** — 93 rows
+were added, none removed, and 120 surviving rows gained a game designation that was blank on Thursday
+morning. So the long-standing "only 6 of 254 rows carry a game designation" flag is a *timing* artifact
+of when the capture was taken, not a parser defect — but the four clubs then published as
+"No Injuries Reported" (Bengals, Chargers, Ravens, Seahawks) now publish 9, 19, 10 and 15 rows, which is
+a coverage difference and is not explained by timing. Joining that transcript to the 1,745 published club
+depth rows gives **59 replacement chains** with the string of the next man, a **224-cell
+offence-versus-defence matrix** (166 published, 58 blank with a written reason), a per-team view, and
+**18 published depth rows that a dated official roster event contradicts** — including the Ravens, whose
+chart is two deep into quarterbacks on injured reserve. Six players the official Saturday roundup rules
+out are still published as Questionable on the official report; both pages are NFL-published and the
+disagreement is flagged, not resolved by inference.
+
 ---
 
 ## 1. What the brief asked for, and where it stands

@@ -95,6 +95,16 @@ jobs:
         run: python3 tests/test_availability_ledger.py
       - name: Availability-ledger fail-closed verification
         run: python3 availability-ledger/scripts/verify.py
+      - name: Matchup workspace gate (provenance, recomputed arithmetic, blank-cell reasons)
+        run: python3 matchup/scripts/check.py
+      - name: Matchup workspace artifacts are reproducible from the committed inputs
+        run: |
+          python3 matchup/scripts/build.py
+          python3 matchup/scripts/pages.py
+          if ! git diff --exit-code -- matchup/; then
+            echo "::error::matchup/ is stale. Run build.py then pages.py and commit the result."
+            exit 1
+          fi
       - name: Injury-archive tests (synthetic fixtures, no network)
         run: |
           python3 tests/test_injury_archive.py
