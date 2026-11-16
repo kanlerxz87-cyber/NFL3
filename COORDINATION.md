@@ -2544,3 +2544,14 @@ Scope notes recorded before work started, so a later reader can check them:
 - `decision-lab/**` (including `data/official_snapshot.json` and the RR-01/RR-02 chain), `origination/**`, `skill-lab/**`, `corpus/**`, `pricing/**`, `ops-center/**`, `dashboard/**`, `line-lab/**`, `decision-hub/**` and `shadow-board/**` are **not** edited by this session. Where this session's findings bear on them, the request is logged here instead of applied.
 - `open this claim` was checked against the previous board: the most recent entries (`arena/e9629801-nfl3`, `arena/745d100d-nfl3`, `arena/ba6c5155-nfl3`) are all recorded merged, and their file scopes do not include `injury-archive/`, which does not yet exist.
 - Environment fact established at claim time and used throughout: **bash in this sandbox has no nfl.com egress** (curl to `nfl.com` returns `000`), but the **session fetch tool reaches nfl.com** and **GitHub Actions runners reach it** (the 6-hourly `injury-capture` run [43817257379](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43817257379) succeeded). Prior readiness rows that say "sandbox cannot reach nfl.com" were written under a different tool assumption; this session re-tested rather than inheriting the claim.
+
+## Claim — `arena/37020320-nfl3` (session 37020320), 2026-11-16 UTC
+
+Branch is fixed by Arena as `arena/37020320-nfl3` (session-named branches cannot be created here). Base: `main` at `e8877e0`.
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| T-L Populate the three Lions game-status cells (Joseph, Mays, Reed) on the dashboard from the official report, with read time; remove the "Verified" label they carried while blank | in progress | `arena/37020320-nfl3` | `dashboard/data/injuries_2026_w10.csv`, generated `dashboard/*.html` |
+| T-R Reproducibility: commit the third price snapshot the committed manifest already produces, and make CI fail if origination artifacts drift from a rebuild | in progress | `arena/37020320-nfl3` | `origination/data/**` (generated), `.github/workflows/pages.yml` (one added step), this board |
+
+Out of scope for this claim (not started, recorded as open): the full requirement list in the 2026-11-16 brief. Most items already exist in some form in other workspaces (see `readiness.html`); items that need licensed odds, official snap counts, a per-club depth source for all 32 clubs, NWS grids, or a prospective window that has not yet occurred remain blank and flagged.
