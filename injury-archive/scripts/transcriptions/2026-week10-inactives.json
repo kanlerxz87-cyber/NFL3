@@ -1,0 +1,587 @@
+[
+ {
+  "group": "MUNICH",
+  "club": "PATRIOTS",
+  "players": [
+   {
+    "raw": "CB Carlton Davis"
+   },
+   {
+    "raw": "FS Brenden Schooler"
+   },
+   {
+    "raw": "OT Dametrious Crownover"
+   },
+   {
+    "raw": "OT Walter Rouse"
+   },
+   {
+    "raw": "C Ben Brown"
+   },
+   {
+    "raw": "QB Behren Morton (emergency third QB)"
+   }
+  ]
+ },
+ {
+  "group": "MUNICH",
+  "club": "LIONS",
+  "players": [
+   {
+    "raw": "CB Keith Abney II"
+   },
+   {
+    "raw": "EDGE Ahmed Hassanein"
+   },
+   {
+    "raw": "C Cade Mays"
+   },
+   {
+    "raw": "LB Amen Ogbongbemiga"
+   },
+   {
+    "raw": "CB D.J. Reed"
+   },
+   {
+    "raw": "DL Mekhi Wingo"
+   }
+  ]
+ },
+ {
+  "group": "EARLY",
+  "club": "CHIEFS",
+  "players": [
+   {
+    "raw": "RB Kenneth Walker"
+   },
+   {
+    "raw": "QB Garrett Nussmeier (Emergency 3rd QB)"
+   },
+   {
+    "raw": "RB Jaydn Ott"
+   },
+   {
+    "raw": "CB Melvin Smith"
+   },
+   {
+    "raw": "FB Ben VanSumeren"
+   },
+   {
+    "raw": "OL Jaylon Moore"
+   },
+   {
+    "raw": "DL Peter Woods"
+   }
+  ]
+ },
+ {
+  "group": "EARLY",
+  "club": "FALCONS",
+  "players": [
+   {
+    "raw": "QB Andy Dalton (emergency third quarterback)"
+   },
+   {
+    "raw": "ILB Divine Deablo"
+   },
+   {
+    "raw": "CB Avieon Terrell"
+   },
+   {
+    "raw": "WR Zachariah Branch"
+   },
+   {
+    "raw": "QB Jack Strand"
+   },
+   {
+    "raw": "CB Robert Longerbeam"
+   },
+   {
+    "raw": "OL Cameron Williams"
+   }
+  ]
+ },
+ {
+  "group": "EARLY",
+  "club": "TEXANS",
+  "players": [
+   {
+    "raw": "LB Azeez Al-Shaair"
+   },
+   {
+    "raw": "TE Brevin Jordan"
+   },
+   {
+    "raw": "WR Marvin Harrison Jr."
+   },
+   {
+    "raw": "RB David Montgomery"
+   },
+   {
+    "raw": "DE Danielle Hunter"
+   },
+   {
+    "raw": "C/G Keylan Rutledge"
+   },
+   {
+    "raw": "G Wyatt Teller"
+   }
+  ]
+ },
+ {
+  "group": "EARLY",
+  "club": "BROWNS",
+  "players": [
+   {
+    "raw": "QB Dillon Gabriel (emergency third QB)"
+   },
+   {
+    "raw": "QB Taylen Green"
+   },
+   {
+    "raw": "LB Justin Jefferson"
+   },
+   {
+    "raw": "CB Noah Igbinoghene"
+   },
+   {
+    "raw": "S Ronnie Hickman"
+   },
+   {
+    "raw": "C Parker Brailsford"
+   }
+  ]
+ },
+ {
+  "group": "EARLY",
+  "club": "VIKINGS",
+  "players": [
+   {
+    "raw": "QB Kyler Murray"
+   },
+   {
+    "raw": "WR Jordan Addison"
+   },
+   {
+    "raw": "QB Max Brosmer (emergency third QB)"
+   },
+   {
+    "raw": "WR Jauan Jennings"
+   },
+   {
+    "raw": "LB Blake Cashman"
+   },
+   {
+    "raw": "TE T.J. Hockenson"
+   },
+   {
+    "raw": "DL Tyroin Ingram-Dawkins"
+   }
+  ]
+ },
+ {
+  "group": "EARLY",
+  "club": "PACKERS",
+  "players": [
+   {
+    "raw": "RB Josh Jacobs"
+   },
+   {
+    "raw": "RB Pierre Strong Jr."
+   },
+   {
+    "raw": "LB Zaire Franklin"
+   },
+   {
+    "raw": "G/T Donovan Jennings"
+   },
+   {
+    "raw": "G Kevin Zeitler"
+   },
+   {
+    "raw": "C Sean Rhyan"
+   }
+  ]
+ },
+ {
+  "group": "EARLY",
+  "club": "DOLPHINS",
+  "players": [
+   {
+    "raw": "WR Chris Bell"
+   },
+   {
+    "raw": "CB Marcellas Dial Jr."
+   },
+   {
+    "raw": "C Aaron Brewer"
+   },
+   {
+    "raw": "G/T Caedan Wallace"
+   },
+   {
+    "raw": "TE Justin Joly"
+   },
+   {
+    "raw": "WR Jared Wayne"
+   }
+  ]
+ },
+ {
+  "group": "EARLY",
+  "club": "COLTS",
+  "players": [
+   {
+    "raw": "LB Jaylon Carlies"
+   },
+   {
+    "raw": "QB Riley Leonard (emergency third QB)"
+   },
+   {
+    "raw": "TE Will Mallory"
+   },
+   {
+    "raw": "LS Luke Rhodes"
+   },
+   {
+    "raw": "DT Jerry Tillery"
+   },
+   {
+    "raw": "OT Jalen Travis"
+   }
+  ]
+ },
+ {
+  "group": "EARLY",
+  "club": "PANTHERS",
+  "players": [
+   {
+    "raw": "TE Ja'Tavion Sanders"
+   },
+   {
+    "raw": "QB Haynes King (emergency third QB)"
+   },
+   {
+    "raw": "CB Will Lee"
+   },
+   {
+    "raw": "RB AJ Dillon"
+   },
+   {
+    "raw": "LB Bobby Okereke"
+   },
+   {
+    "raw": "C Sam Hecht"
+   },
+   {
+    "raw": "DT TeRah Edwards"
+   }
+  ]
+ },
+ {
+  "group": "EARLY",
+  "club": "SAINTS",
+  "players": [
+   {
+    "raw": "QB Zach Wilson (designated third QB)"
+   },
+   {
+    "raw": "S Mike Reid"
+   },
+   {
+    "raw": "RB CJ Donaldson"
+   },
+   {
+    "raw": "LB Jaylan Ford"
+   },
+   {
+    "raw": "OT Taliese Fuaga"
+   },
+   {
+    "raw": "C Erik McCoy"
+   }
+  ]
+ },
+ {
+  "group": "EARLY",
+  "club": "BILLS",
+  "players": [
+   {
+    "raw": "QB Shane Buechele"
+   },
+   {
+    "raw": "S Jalon Kilgore"
+   },
+   {
+    "raw": "OLB Mike Danna"
+   },
+   {
+    "raw": "G Ar'maj Reed- Adams"
+   },
+   {
+    "raw": "OL Jude Bowry"
+   },
+   {
+    "raw": "DL Greg Gaines"
+   }
+  ]
+ },
+ {
+  "group": "EARLY",
+  "club": "JETS",
+  "players": [
+   {
+    "raw": "CB Jarvis Brownlee Jr."
+   },
+   {
+    "raw": "Edge Nate Lynn"
+   },
+   {
+    "raw": "WR Tim Patrick"
+   },
+   {
+    "raw": "LB Trevin Wallace"
+   },
+   {
+    "raw": "TE Jelani Woods"
+   }
+  ]
+ },
+ {
+  "group": "EARLY",
+  "club": "JAGUARS",
+  "players": [
+   {
+    "raw": "S Jessie Bates III"
+   },
+   {
+    "raw": "WR CJ Williams"
+   },
+   {
+    "raw": "DT Jordan Davis"
+   },
+   {
+    "raw": "DE Wesley Williams"
+   },
+   {
+    "raw": "DT Albert Regis"
+   }
+  ]
+ },
+ {
+  "group": "EARLY",
+  "club": "TITANS",
+  "players": [
+   {
+    "raw": "WR Carnell Tate"
+   },
+   {
+    "raw": "RB Nick Singleton"
+   },
+   {
+    "raw": "CB Jaylon Jones"
+   },
+   {
+    "raw": "LB Cody Barton"
+   },
+   {
+    "raw": "LB Anthony Hill Jr."
+   },
+   {
+    "raw": "OT Brandon Crenshaw-Dickson"
+   },
+   {
+    "raw": "DT Jackie Marshall"
+   }
+  ]
+ },
+ {
+  "group": "LATE",
+  "club": "RAMS",
+  "players": [
+   {
+    "raw": "QB Ty Simpson (emergency third QB)"
+   },
+   {
+    "raw": "S Maximus Pulley"
+   },
+   {
+    "raw": "LS Joe Cardona"
+   },
+   {
+    "raw": "OLB Darryl Peterson III"
+   },
+   {
+    "raw": "OL Steve Avila"
+   },
+   {
+    "raw": "OL Keagen Trost"
+   },
+   {
+    "raw": "OLB Desjuan Johnson"
+   }
+  ]
+ },
+ {
+  "group": "LATE",
+  "club": "CARDINALS",
+  "players": [
+   {
+    "raw": "QB Joey Aguilar"
+   },
+   {
+    "raw": "CB Starling Thomas V"
+   },
+   {
+    "raw": "LB Eku Leota"
+   },
+   {
+    "raw": "OL Jayden Williams"
+   },
+   {
+    "raw": "OL Jon Gaines II"
+   },
+   {
+    "raw": "OL Hjalte Froholdt"
+   }
+  ]
+ },
+ {
+  "group": "LATE",
+  "club": "SEAHAWKS",
+  "players": [
+   {
+    "raw": "QB Sam Darnold"
+   },
+   {
+    "raw": "RB Emanuel Wilson"
+   },
+   {
+    "raw": "CB Avery Smith"
+   },
+   {
+    "raw": "G Quenton Nelson"
+   },
+   {
+    "raw": "OT Charles Cross"
+   },
+   {
+    "raw": "NT Deven Eastern"
+   },
+   {
+    "raw": "DT Leonard Williams"
+   }
+  ]
+ },
+ {
+  "group": "LATE",
+  "club": "RAIDERS",
+  "players": [
+   {
+    "raw": "WR Dont'e Thornton Jr."
+   },
+   {
+    "raw": "WR Malik Benson"
+   },
+   {
+    "raw": "S Tristin McCollum"
+   },
+   {
+    "raw": "S Dalton Johnson"
+   },
+   {
+    "raw": "G Bryce Cabeldue"
+   },
+   {
+    "raw": "DT Thomas Booker IV"
+   }
+  ]
+ },
+ {
+  "group": "LATE",
+  "club": "49ERS",
+  "players": [
+   {
+    "raw": "QB Kurtis Rourke"
+   },
+   {
+    "raw": "WR Mike Evans"
+   },
+   {
+    "raw": "OL Enrique Cruz Jr."
+   },
+   {
+    "raw": "LB Tatum Bethune"
+   },
+   {
+    "raw": "WR Brandin Cooks"
+   }
+  ]
+ },
+ {
+  "group": "LATE",
+  "club": "COWBOYS",
+  "players": [
+   {
+    "raw": "S P.J. Locke III"
+   },
+   {
+    "raw": "OLB Donovan Ezeiruaku"
+   },
+   {
+    "raw": "CB Derion Kendrick"
+   },
+   {
+    "raw": "WR Jonathan Mingo"
+   },
+   {
+    "raw": "S Juanyeh Thomas"
+   },
+   {
+    "raw": "G Ajani Cornelius"
+   },
+   {
+    "raw": "TE Jake Ferguson"
+   }
+  ]
+ },
+ {
+  "group": "SNF",
+  "club": "STEELERS",
+  "players": [
+   {
+    "raw": "S DeShon Elliott"
+   },
+   {
+    "raw": "QB Drew Allar"
+   },
+   {
+    "raw": "QB Will Howard (emergency third QB)"
+   },
+   {
+    "raw": "CB Sean Murphy-Bunting"
+   },
+   {
+    "raw": "RB Eli Heidenreich"
+   }
+  ]
+ },
+ {
+  "group": "SNF",
+  "club": "BENGALS",
+  "players": [
+   {
+    "raw": "S Kyle Dugger"
+   },
+   {
+    "raw": "C Connor Lew"
+   },
+   {
+    "raw": "OT Myles Hinton"
+   },
+   {
+    "raw": "DT Landon Robinson"
+   }
+  ]
+ }
+]

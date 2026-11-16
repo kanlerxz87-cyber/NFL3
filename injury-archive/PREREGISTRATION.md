@@ -112,3 +112,37 @@ It does not measure snaps, starter status, workload or replacement quality. Bein
 the same as being unavailable for the whole game, and a player who is active may take no snaps.
 Those questions need an official snap-count or participation source, which this repository has not
 verified (see `readiness.html` row A7).
+
+---
+
+## 10. Amendment A1 — practice-status cut and the structural anomaly check
+
+*Appended 2026-11-16, **after** the Week 10 capture existed but **before** any cross-season rate was
+computed. It adds a diagnostic and changes no threshold, constant, gate or population rule from
+§1–§9.*
+
+**A1.1 Practice-status cut (already declared in §5.2; specified here).** The rate is published for
+every observed combination of practice status and designation, because the two cells come from the
+same document and a designation made after a full week of practice is expected to behave differently
+from one made after no practice. No cell is suppressed for being small; every cell carries its `n`
+and, when `n > 0`, its Wilson interval.
+
+**A1.2 Structural anomaly check.** For every season × week pair, the archive publishes
+(i) the count of designated players whose practice status was *Full Participation in Practice* but
+who are absent from the inactive list, and (ii) the count of players on the inactive list who do not
+appear on the injury report at all. Both are counts of two official documents disagreeing, not
+inferences about a player.
+
+**A1.3 What the first pair showed, and what it does not mean.** For 2026 Week 10 the joined set has
+32 rows of type (i), and every one of them practised fully. The most likely explanation is that the
+page read is dated *after* the games: several of those clubs had already played when the page was
+read on 2026-11-16, so a player listed on the report who did play may not appear on the pre-game
+article's list for an unrelated reason. That explanation is a hypothesis, it is not tested here, and
+no rate on this site is corrected for it. A reader must therefore treat the Week 10 rate as
+*provisional* until the scheduled capture stores each report **before** kickoff, which is what
+makes the pair point-in-time consistent.
+
+**A1.4 The consequence for the gates.** §7's G1 still requires one clean pair, which now exists, so
+the rates are published. §8's confirmation threshold is unchanged: no label may become a model
+feature until `n ≥ 100` per label and the per-season cuts separate. Week 10 alone is 1/18 of one
+season, and it is published to show the machinery works, not to claim a finding.

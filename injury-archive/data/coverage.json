@@ -1,4 +1,31 @@
 {
- "generated_at_utc": "no captures yet",
- "rows": []
+ "generated_at_utc": "2026-11-16T15:05:00Z",
+ "rows": [
+  {
+   "captured_at_utc": "2026-11-16T15:05:00Z",
+   "failures": 0,
+   "http_status": "",
+   "kind": "inactives",
+   "raw_file": "injury-archive/data/raw/a7007be89057be0d3134d78c1adf932f9d2c4e9e60e9939643e554a5ac5180fb.html.gz",
+   "rows": 147,
+   "season": 2026,
+   "sha256": "a7007be89057be0d3134d78c1adf932f9d2c4e9e60e9939643e554a5ac5180fb",
+   "source_url": "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season",
+   "status": "ok",
+   "week": 10
+  },
+  {
+   "captured_at_utc": "2026-11-16T15:05:00Z",
+   "failures": 0,
+   "http_status": "",
+   "kind": "injury",
+   "raw_file": "injury-archive/data/raw/3efdbc03b4ac17a3b693b538076319b4c0d0a181834e51bfdbb9993231c4cae0.html.gz",
+   "rows": 347,
+   "season": 2026,
+   "sha256": "3efdbc03b4ac17a3b693b538076319b4c0d0a181834e51bfdbb9993231c4cae0",
+   "source_url": "https://www.nfl.com/injuries/league/2026/REG10",
+   "status": "ok",
+   "week": 10
+  }
+ ]
 }

@@ -144,9 +144,24 @@ def capture_inactives(season: int, week: int, quiet: bool = False) -> int:
     except urllib.error.HTTPError as exc:
         record(kind="inactives", season=season, week=week, source_url=url, requested_at_utc=requested,
                http_status=exc.code, status="not_published" if exc.code == 404 else "http_error")
+        if exc.code != 404:
+            return 4
+        candidate = lib.inactives_url_with_month(season, week)
+        if not candidate:
+            return 0
+        try:
+            raw, final_url, status = lib.fetch(candidate, lib.INJURY_HOSTS)
+        except Exception as candidate_exc:  # noqa: BLE001 - recorded, never guessed around
+            record(kind="inactives", season=season, week=week, source_url=candidate,
+                   requested_at_utc=lib.utc_now(), status="not_published",
+                   http_status=getattr(candidate_exc, "code", ""),
+                   note="candidate address carrying the played month")
+            if not quiet:
+                print(f"inactives {season} W{week}: not published at either address")
+            return 0
+        url = candidate
         if not quiet:
-            print(f"inactives {season} W{week}: HTTP {exc.code} at {url}")
-        return 0 if exc.code == 404 else 4
+            print(f"inactives {season} W{week}: found at the month-carrying address")
     except Exception as exc:  # noqa: BLE001
         record(kind="inactives", season=season, week=week, source_url=url,
                requested_at_utc=requested, status="fetch_failed", error=describe_failure(exc))
