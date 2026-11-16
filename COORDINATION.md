@@ -2574,3 +2574,20 @@ Not claimed (out of scope, logged as open): the 32-team roster/IR sweep (A24), t
 - **Steps not reached in CI** (they stop after the failed step). Run locally on this branch, all pass: `tests/test_skill_lab.py`, `skill-lab/scripts/verify.py`, `tests/test_availability_ledger.py`, `availability-ledger/scripts/verify.py`, `tests/test_origination.py`, `venues/scripts/verify.py`, `scripts/validate_site.py`, `tests/check_site.py`, `tests/test_readiness.py`, dashboard check, decision-desk check. `origination/scripts/verify.py` was not run in CI, since the build step failed before it.
 - **Request to the data-refresh and origination owners (not claimed here; no file in their scope was changed):** decide whether the `games.csv` refresh in `1309041` is correct. The feed and the official standings disagree on 72 of 160 club-by-field checks. Then either correct the refresh or update origination, and re-run `Validate and deploy GitHub Pages`. Until the `validate` job is green, PR #100 must not be merged.
 - **Next step once unblocked:** the integration session re-runs CI on PR #100, merges it without `--auto`, confirms the Pages deploy, and records the merge result here.
+
+## Claim — `arena/d37d5907-nfl3` (session d37d5907) — 2026-11-16 UTC
+
+Base: `main` at `e8877e0` (branch was created at this commit and `git rev-list --left-right --count HEAD...origin/main` was `0 0` when claimed). No other session branch exists on `origin` (`git branch -r` shows `origin/main` only).
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| T1 Official injury-report history archive 2021–2025 (R6): scheduled capture with hash, clock time and drift alarm; designation-emission tables | in progress | `arena/d37d5907-nfl3` | `injury-archive/**`, `.github/workflows/injury-archive.yml`, `tests/test_injury_archive.py` |
+| T2 Official inactives monitor and the verified "not published" record (A6) | in progress | `arena/d37d5907-nfl3` | `injury-archive/**` (inactives section), same workflow |
+| T3 Readiness evidence for R6 / A6 / A20 / A21 and the flags those rows carry | in progress | `arena/d37d5907-nfl3` | `readiness/data/readiness.csv`, generated `readiness.html`, `readiness/data/readiness.csv`-driven tests |
+| T4 Final integration: rebuild, validate, PR to `main`, merge, confirm Pages deploy | in progress | `arena/d37d5907-nfl3` | `COORDINATION.md`, `README.md` (nav row), `index.html` (nav row only), `EXECUTIVE_SUMMARY.md` (section append only) |
+
+Scope notes recorded before work started, so a later reader can check them:
+
+- `decision-lab/**` (including `data/official_snapshot.json` and the RR-01/RR-02 chain), `origination/**`, `skill-lab/**`, `corpus/**`, `pricing/**`, `ops-center/**`, `dashboard/**`, `line-lab/**`, `decision-hub/**` and `shadow-board/**` are **not** edited by this session. Where this session's findings bear on them, the request is logged here instead of applied.
+- `open this claim` was checked against the previous board: the most recent entries (`arena/e9629801-nfl3`, `arena/745d100d-nfl3`, `arena/ba6c5155-nfl3`) are all recorded merged, and their file scopes do not include `injury-archive/`, which does not yet exist.
+- Environment fact established at claim time and used throughout: **bash in this sandbox has no nfl.com egress** (curl to `nfl.com` returns `000`), but the **session fetch tool reaches nfl.com** and **GitHub Actions runners reach it** (the 6-hourly `injury-capture` run [43817257379](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43817257379) succeeded). Prior readiness rows that say "sandbox cannot reach nfl.com" were written under a different tool assumption; this session re-tested rather than inheriting the claim.

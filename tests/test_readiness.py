@@ -43,10 +43,13 @@ def main() -> None:
     status_counts2 = collections.Counter(r["status"] for r in rows.values())
     # 8 Done / 20 Partial / 13 Blocked / 22 Not started / 1 Decision recorded after the
     # pricing-corpus pass; the skill lab and the availability ledger moved 11 further rows
-    # (P3, P10, P11, A5, A13, A16, A19, L2, L3, L4, L5, L6, L7, L8).
+    # (P3, P10, P11, A5, A13, A16, A19, L2, L3, L4, L5, L6, L7, L8). The injury archive
+    # (session d37d5907, 2026-11-16) moved R6, A6, A20 and A21 from Blocked to Partial: the
+    # mechanism is now scheduled and hashed, the coverage and the sample size are not yet there.
     # Session arena/46fe1baa-nfl3 (2026-11-16): A17 Blocked -> Done (three Lions cells filled from the
     # official article); F-2 and F-3 Not started -> Partial (Week 11 venues and announcement recorded).
-    assert status_counts2["Done"] == 8 and status_counts2["Partial"] == 33 and status_counts2["Blocked"] == 11 \
+    # Merged arithmetic: 8 Done / 37 Partial / 7 Blocked / 11 Not started / 1 Decision recorded.
+    assert status_counts2["Done"] == 8 and status_counts2["Partial"] == 37 and status_counts2["Blocked"] == 7 \
         and status_counts2["Not started"] == 11 and status_counts2["Decision recorded"] == 1, \
         f"detailed register status arithmetic drifted: {status_counts2}"
     assert rows["A17"]["status"] == "Done" and "Joseph" in rows["A17"]["current"], "A17 must be Done with the Joseph cell evidence"
@@ -59,6 +62,15 @@ def main() -> None:
         assert rows[rid]["status"] in ("Partial", "Done"), f"{rid} must record the skill-lab or ledger outcome"
     assert rows["L6"]["status"] == "Done", "L6 is complete: both control baselines run in every leaderboard run"
     assert "reserve" in rows["A19"]["current"], "A19 must record the captured reserve list"
+    # Injury archive (session d37d5907): the mechanism is published and the counts are computed
+    # from the committed artifacts, so the register cannot claim a number the artifact lacks.
+    for rid in ("R6", "A6", "A20", "A21"):
+        assert rows[rid]["status"] == "Partial", f"{rid} must record the injury-archive mechanism"
+        assert "injury-archive" in rows[rid]["evidence"], f"{rid} must cite the injury-archive artifact"
+    assert rows["A6"]["official"].startswith("https://www.nfl.com/news/"), \
+        "A6 must cite the official inactives article, not the rulebook"
+    assert "snap" in rows["A6"]["gate"].lower() and "official" in rows["A6"]["gate"].lower(), \
+        "A6 must keep the snap-count half open, because no official snap source exists"
     for rid in ("R1", "R2", "A3", "A4"):
         assert rows[rid]["official"].startswith("http"), f"{rid} must keep an official source link"
     print("Readiness checks passed: 26 canonical requirement rows, correct status arithmetic, detailed-register link, dated snapshot counts, verified-results/corpus-freeze/injury-delta rows.")

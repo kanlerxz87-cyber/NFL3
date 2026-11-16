@@ -21,10 +21,10 @@ every row. Prices are labelled <b>COMMUNITY</b>; standings and injury reports ar
 <a href="flagged.html">Flagged for review</a>. Nothing here is betting advice.</div>
 
 <div class="section-head"><div><div class="section-label">REMOVAL OF LUCK</div>
-<h2>Separating signal from staking, on 137 played games</h2></div>
+<h2>Separating signal from staking, on 149 played games</h2></div>
 <p>Sample size first, score second, money never. With 137 played games in the corpus, a 11-9 record and a 19-1 record are both ordinary outcomes for a coin. Only a proper score with an interval can tell them apart — and at this n, even that cannot resolve an edge smaller than the intervals below.</p></div>
 <div class="metrics">
-<div><span>GAMES IN CORPUS</span><strong>137</strong><small>weeks 1–10</small></div>
+<div><span>GAMES IN CORPUS</span><strong>149</strong><small>weeks 1–10</small></div>
 <div><span>SETTLEMENT</span><strong>official</strong><small>160/160 club x field checks match official standings</small></div>
 <div><span>STRATEGIES SEPARATED</span><strong>8</strong><small>each with an interval</small></div>
 <div><span>WITH AN INTERVAL ABOVE ZERO</span><strong>0</strong>
@@ -38,15 +38,15 @@ The 'still needed' column is the honest distance between this corpus and a decis
 <th>n held</th><th>Still needed</th><th>Source</th></tr></thead><tbody>
 <tr><td>2%</td><td>0.52</td>
 <td>3,863</td><td>5,349</td>
-<td>137</td><td>3,726</td>
+<td>149</td><td>3,714</td>
 <td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>results feed ↗</a></td></tr>
 <tr><td>5%</td><td>0.55</td>
 <td>617</td><td>853</td>
-<td>137</td><td>480</td>
+<td>149</td><td>468</td>
 <td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>results feed ↗</a></td></tr>
 <tr><td>10%</td><td>0.60</td>
 <td>153</td><td>211</td>
-<td>137</td><td>16</td>
+<td>149</td><td>4</td>
 <td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>results feed ↗</a></td></tr>
 </tbody></table></div>
 <div class="section-head"><div><div class="section-label">SIGNAL vs STAKING</div>
@@ -56,43 +56,43 @@ wide while the Brier-skill interval is decisive, or the reverse. Neither one is 
 <thead><tr><th>Strategy</th><th>Family</th><th>n</th><th>Wins</th><th>Win rate</th><th>Wilson 95%</th>
 <th>Brier skill</th><th>Skill 95%</th><th>Verdict</th><th>Source</th></tr></thead><tbody>
 <tr><td><b>S01</b> Model spread vs market spread (no threshold)</td>
-<td>singles</td><td>131</td><td>66</td>
-<td>50.4%</td><td>[41.9%, 58.8%]</td>
-<td>-0.106</td><td>[-0.214, -0.002]</td>
+<td>singles</td><td>143</td><td>70</td>
+<td>49.0%</td><td>[40.9%, 57.1%]</td>
+<td>-0.116</td><td>[-0.222, -0.017]</td>
 <td>worse than benchmark: interval below zero</td><td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>official results ↗</a></td></tr>
 <tr><td><b>S02</b> Model spread vs market spread (Δ ≥ 1.5)</td>
-<td>singles</td><td>105</td><td>53</td>
-<td>50.5%</td><td>[41.1%, 59.9%]</td>
-<td>-0.128</td><td>[-0.267, 0.003]</td>
-<td>no distinguishable signal: interval includes zero</td><td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>official results ↗</a></td></tr>
+<td>singles</td><td>115</td><td>57</td>
+<td>49.6%</td><td>[40.6%, 58.6%]</td>
+<td>-0.139</td><td>[-0.261, -0.016]</td>
+<td>worse than benchmark: interval below zero</td><td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>official results ↗</a></td></tr>
 <tr><td><b>S03</b> Model total vs market total</td>
-<td>singles</td><td>113</td><td>51</td>
-<td>45.1%</td><td>[36.3%, 54.3%]</td>
-<td>-0.119</td><td>[-0.206, -0.030]</td>
+<td>singles</td><td>124</td><td>57</td>
+<td>46.0%</td><td>[37.4%, 54.7%]</td>
+<td>-0.107</td><td>[-0.188, -0.021]</td>
 <td>worse than benchmark: interval below zero</td><td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>official results ↗</a></td></tr>
 <tr><td><b>S04</b> Model win probability vs de-vigged moneyline</td>
-<td>singles</td><td>113</td><td>42</td>
-<td>37.2%</td><td>[28.8%, 46.4%]</td>
-<td>-0.129</td><td>[-0.309, 0.013]</td>
+<td>singles</td><td>125</td><td>45</td>
+<td>36.0%</td><td>[28.1%, 44.7%]</td>
+<td>-0.146</td><td>[-0.317, 0.000]</td>
 <td>no distinguishable signal: interval includes zero</td><td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>official results ↗</a></td></tr>
 <tr><td><b>S05</b> Control: always take the home side</td>
-<td>controls</td><td>131</td><td>56</td>
-<td>42.7%</td><td>[34.6%, 51.3%]</td>
+<td>controls</td><td>143</td><td>59</td>
+<td>41.3%</td><td>[33.5%, 49.5%]</td>
 <td>0.000</td><td>[0.000, 0.000]</td>
 <td>no distinguishable signal: interval includes zero</td><td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>official results ↗</a></td></tr>
 <tr><td><b>S06</b> Control: always take the favourite</td>
-<td>controls</td><td>131</td><td>64</td>
-<td>48.9%</td><td>[40.5%, 57.3%]</td>
+<td>controls</td><td>143</td><td>68</td>
+<td>47.6%</td><td>[39.5%, 55.7%]</td>
 <td>0.000</td><td>[0.000, 0.000]</td>
 <td>no distinguishable signal: interval includes zero</td><td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>official results ↗</a></td></tr>
 <tr><td><b>S07</b> Control: always take the underdog</td>
-<td>controls</td><td>131</td><td>67</td>
-<td>51.1%</td><td>[42.7%, 59.5%]</td>
+<td>controls</td><td>143</td><td>75</td>
+<td>52.4%</td><td>[44.3%, 60.5%]</td>
 <td>0.000</td><td>[0.000, 0.000]</td>
 <td>no distinguishable signal: interval includes zero</td><td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>official results ↗</a></td></tr>
 <tr><td><b>S08</b> Control: always take the over</td>
-<td>controls</td><td>137</td><td>71</td>
-<td>51.8%</td><td>[43.5%, 60.0%]</td>
+<td>controls</td><td>149</td><td>78</td>
+<td>52.3%</td><td>[44.4%, 60.2%]</td>
 <td>0.000</td><td>[0.000, 0.000]</td>
 <td>no distinguishable signal: interval includes zero</td><td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>official results ↗</a></td></tr>
 </tbody></table></div>
@@ -102,29 +102,29 @@ wide while the Brier-skill interval is decisive, or the reverse. Neither one is 
 n under p=0.5. Look at the largest win rate on the page and compare it with the sample it was earned on.
 </caption><thead><tr><th>Strategy</th><th>n</th><th>Wins</th><th>P(at least this many by chance)</th>
 <th>Source</th></tr></thead><tbody>
-<tr><td><b>S01</b></td><td>131</td><td>66</td>
-<td>0.500</td>
+<tr><td><b>S01</b></td><td>143</td><td>70</td>
+<td>0.631</td>
 <td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>results ↗</a></td></tr>
-<tr><td><b>S02</b></td><td>105</td><td>53</td>
-<td>0.500</td>
+<tr><td><b>S02</b></td><td>115</td><td>57</td>
+<td>0.574</td>
 <td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>results ↗</a></td></tr>
-<tr><td><b>S03</b></td><td>113</td><td>51</td>
-<td>0.871</td>
+<tr><td><b>S03</b></td><td>124</td><td>57</td>
+<td>0.838</td>
 <td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>results ↗</a></td></tr>
-<tr><td><b>S04</b></td><td>113</td><td>42</td>
-<td>0.998</td>
+<tr><td><b>S04</b></td><td>125</td><td>45</td>
+<td>0.999</td>
 <td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>results ↗</a></td></tr>
-<tr><td><b>S05</b></td><td>131</td><td>56</td>
-<td>0.960</td>
+<tr><td><b>S05</b></td><td>143</td><td>59</td>
+<td>0.985</td>
 <td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>results ↗</a></td></tr>
-<tr><td><b>S06</b></td><td>131</td><td>64</td>
-<td>0.637</td>
+<tr><td><b>S06</b></td><td>143</td><td>68</td>
+<td>0.748</td>
 <td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>results ↗</a></td></tr>
-<tr><td><b>S07</b></td><td>131</td><td>67</td>
-<td>0.431</td>
+<tr><td><b>S07</b></td><td>143</td><td>75</td>
+<td>0.308</td>
 <td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>results ↗</a></td></tr>
-<tr><td><b>S08</b></td><td>137</td><td>71</td>
-<td>0.366</td>
+<tr><td><b>S08</b></td><td>149</td><td>78</td>
+<td>0.312</td>
 <td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>results ↗</a></td></tr>
 </tbody></table></div>
 <div class="notice"><b>The rule this page exists to enforce.</b> A strategy is never
