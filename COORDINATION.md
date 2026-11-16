@@ -2847,3 +2847,15 @@ Reads made this session through the page-fetch tool and the repository's capture
 - **IRR-F5F-3 (minor).** Origination price-snapshot filenames mix two formats (`2026-11-15T130644Z.json` vs `20261115T170649Z.json`); both are registered in the ledger with correct hashes. Cosmetic.
 - **IRR-F5F-4 (open).** The 254-row Week 10 table published in `dashboard/` and `decision-lab/` is the 2026-11-12 capture; the live page now carries 347 rows (see RV1). The stale-count flags VR-04..VR-07 stay open until a rebuilt capture is republished (VQ-R01); this session did not overwrite the dated capture.
 - **IRR-F5F-5 (process).** PR #99's failed `validate` is a stale-run artifact (its merge ref predates PR #96's origination fixes); PR #100 is conflict-blocked. Neither blocks this integration.
+
+### PR #100 rebase on current main — `arena/46fe1baa-nfl3`, 2026-11-16 UTC
+
+- **Status before this step:** PR #100 showed `CONFLICTING` after 42 further `main` commits (the final integration session had already noted this). This step is the owner's rebase, done as a merge to keep history.
+- **Conflicts and resolution (no other session's work discarded):**
+  - `dashboard/data/injuries_2026_w10.csv`: `main` already has Joseph, Mays and Reed as Out with Did Not Participate, and fills the injury type from the captured report (Knee, Ankle, Hip). Kept `main`'s version. This branch's V2 correction is therefore already on `main` in equal status terms.
+  - `readiness/data/readiness.csv`, `readiness.html`, `dashboard/injuries.html`: regenerated from the merged builders, not hand-merged. Readiness test passes on the merged counts.
+  - `COORDINATION.md`: both sides kept.
+- **Cross-check, not a conflict:** `shadow-board/data/fixtures_2026_w11.csv` on `main` (arena/745d100d) lists the same 13 venues, networks and kickoff times as `venues/data/week11_venues.csv` (checked row by row; kickoffs converted from 24-hour form). Its schedule-page hotel-link string "NRG Stadium" for Houston is recorded there as a different field and is not used in `venues/`, which keeps the game-centre value "RELIANT STADIUM".
+- **Local CI replay on the merged tree:** all 28 `validate` steps in `pages.yml` PASS, including origination build, origination determinism drift check, and the injury-archive steps. Generated-file side effects of the replay were reverted; none are committed.
+- **Remaining, not a blocker for this branch:** `main`'s `Validate and deploy GitHub Pages` run `ab46868` failed at the `deploy` job (validate passed). The next `main` run `304ab4e` succeeded at the legacy Pages build. The cause of the failed deploy step is not established from this sandbox (logs unavailable).
+- **PR CI queue:** the `pages` concurrency group cancels pending runs when a newer run joins, and `main` pushes are frequent. No `pull_request` run for the branch head had appeared at the time of this entry. The integration session should re-run or re-trigger CI on the final head before merging.
