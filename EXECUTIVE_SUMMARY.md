@@ -233,9 +233,14 @@ reward field unfunded.
 
 **Availability, stated as a property of the read.** [`forward-ledger/availability.html`](forward-ledger/availability.html)
 aggregates the newest hash-pinned capture (`991825b7`, 2026-11-16T06:31:00Z, **347 rows over 28 clubs**) against the
-2026-11-12 read other pages still publish: **+93 rows, 123 game-designation changes, 107 practice-status changes,
-0 removals**. Designated rows went from 6 of 254 to 171 of 347, so any "Questionable plays X% of the time" number
-computed from one read time measures the page's publication schedule, not the label (FL-04). No player names are
+2026-11-12 read other pages still publish: **+93 rows, 120 game-designation changes, 106 practice-status changes,
+0 removals**. Designated rows went from 9 of 254 to 171 of 347, so any "Questionable plays X% of the time" number
+computed from one read time measures the page's publication schedule, not the label (FL-04). The numbers on this
+line moved twice inside this session: they were 123 and 107 before the rebase onto `main`, and changed to 120 and
+106 because commit `91d5d86` filled the three blank Lions game-status cells that the baseline snapshot reads, which
+is the delta doing its job rather than a page being corrected by hand (FL-16). The re-parse also surfaced one row
+that contradicts itself on the official page - a Jaguars player listed Out for the game with Full Participation in
+practice - carried as a conflict flag rather than resolved by picking a half (FL-17). No player names are
 republished at root level, because the public/private layer split is still an open decision (FL-03).
 
 **Defects found in the site itself and fixed while publishing.** The landing page shipped **two concatenated HTML

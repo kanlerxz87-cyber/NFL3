@@ -37,16 +37,16 @@
     "baseline_captured_at_utc": "2026-11-12T06:32:36.211205+00:00",
     "baseline_rows": 254,
     "baseline_game_status_counts": {
-      "Out": 5,
+      "Out": 8,
       "Doubtful": 0,
       "Questionable": 1,
-      "": 248
+      "": 245
     },
-    "baseline_rows_with_designation": 6,
+    "baseline_rows_with_designation": 9,
     "rows_added": 93,
     "rows_removed": 0,
-    "game_designation_changes": 123,
-    "practice_status_changes": 107,
+    "game_designation_changes": 120,
+    "practice_status_changes": 106,
     "clubs_present_now_but_not_then": [
       "Bengals",
       "Chargers",

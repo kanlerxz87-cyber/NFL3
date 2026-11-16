@@ -2902,3 +2902,18 @@ Release of claim: `arena/5600e7eb-nfl3` **releases** `forward-ledger/**`, `sugge
 `COORDINATION.md` and `.github/workflows/pages.yml` on merge. Shared outputs were edited only by this session during
 this pass, and `git pull --rebase origin main` was run before every push; the one rebase conflict (`COORDINATION.md`)
 was resolved by keeping both sides.
+
+### Amendment — `arena/5600e7eb-nfl3`, 2026-11-16 UTC (post-rebase, appended rather than editing the entry above)
+
+The result log above recorded 15 findings (3 High, 8 Medium, 4 Low; 5 fixed in this pass) at `e23e801`. After rebasing
+onto `main` at `304ab4e` the register carries **17 findings (3 High, 10 Medium, 4 Low; 6 fixed in this pass)** and the
+availability deltas changed, both for the same reason: `91d5d86` populated the three blank Lions game-status cells in
+`decision-lab/data/official_snapshot.json`, which is the file `injury-capture/scripts/common.py:baseline_capture()`
+reads. The builders were re-run rather than hand-corrected, so the published pages now agree with the merged tree
+(120 designation changes and 106 practice-status changes against the baseline, 9 of 254 baseline rows designated, one
+new internal conflict flag). Two findings were added: **FL-16** (the delta moved under this session because a shared
+source file was corrected — recorded so a later reader does not mistake regenerated numbers for edited ones) and
+**FL-17** (the newest official capture contains a Jaguars row that is `Out` for the game with `Full Participation` in
+practice, carried as a conflict flag rather than resolved by choosing one field). Gates after the rebase: `python3
+forward-ledger/scripts/verify.py` 29 passed, 0 failed · `scripts/validate_site.py` 17 root pages · `tests/check_site.py`
+pass · `questions/build.py --check` pass against the current register (`578fdbaf784b…`).

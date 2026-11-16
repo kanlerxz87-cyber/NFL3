@@ -1,6 +1,6 @@
 {
  "register": "ops-center/data/derived.json",
- "register_sha256": "69b0c33d1bb0e3c8eaf79d48c181d16f9e253e3a521940e28c04b53e68108343",
+ "register_sha256": "578fdbaf784b544da6a408564efb7073f4f4c728ee2575f98348a0c92ba9f112",
  "register_observation_date": "2026-11-12",
  "questions": 100,
  "questions_blocking": 67,
