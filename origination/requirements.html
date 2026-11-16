@@ -30,7 +30,7 @@ and is reproducible on this build.</caption>
 <thead><tr><th>ID</th><th>Requirement</th><th>State</th><th>What exists (evidence)</th>
 <th>Gate that blocks it</th><th>The number that would clear it</th><th>Source</th></tr></thead><tbody>
 <tr><td><b>R01</b></td><td>Price-snapshot store with opening and closing numbers for every market originated.</td><td><span class='pill warn'>partial</span></td>
-<td>Immutable snapshot store with 8 retained captures; the ledger derives opening/latest/closing/post-hoc per event × market under a pre-registered policy, and 49 cells show a genuine opening-to-latest interval.</td><td>G05 price coverage</td><td>78 of 816 market cells have a pre-kickoff opening and 49 have moved; clearance needs a captured interval for every cell a strategy grades.</td>
+<td>Immutable snapshot store with 9 retained captures; the ledger derives opening/latest/closing/post-hoc per event × market under a pre-registered policy, and 49 cells show a genuine opening-to-latest interval.</td><td>G05 price coverage</td><td>78 of 816 market cells have a pre-kickoff opening and 49 have moved; clearance needs a captured interval for every cell a strategy grades.</td>
 <td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>nflverse schedules (COMMUNITY), two captures ↗</a></td></tr>
 <tr><td><b>R02</b></td><td>Verified results feed so backtests and ROI can be computed at all.</td><td><span class='pill warn'>implemented</span></td>
 <td>Results feed reconciles to official standings on 160/160 club × field checks over 149 played games.</td><td>G04 settlement</td><td>160 of 160 checks must match — currently met.</td>
