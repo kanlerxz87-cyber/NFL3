@@ -14,9 +14,10 @@
 <span class="badge warn">Research · not betting advice</span></div>
 
 <div class="notice"><b>Read this first.</b> This workspace originates its own numbers and grades them
-against a reconciled official results feed. It holds <b>one</b> community price observation, so no
-opening-line edge, closing-line value or validated strategy exists yet — and the leaderboard says so on
-every row. Prices are labelled <b>COMMUNITY</b>; standings and injury reports are labelled
+against a reconciled official results feed. It contains community-sourced price snapshots but no
+licensed price source, so no price-dependent edge, closing-line value or validated strategy is eligible.
+The prospective leaderboard remains empty until its frozen gates clear. Prices are labelled <b>COMMUNITY</b>;
+standings and injury reports are labelled
 <b>OFFICIAL</b>; anything that could not be confirmed is blank and sits on
 <a href="flagged.html">Flagged for review</a>. Nothing here is betting advice.</div>
 
@@ -29,16 +30,16 @@ about effort. Every row carries the source that shows the issue.</caption>
 <thead><tr><th>ID</th><th>Severity</th><th>Item</th><th>What is irregular</th><th>What would resolve it</th>
 <th>Source</th></tr></thead><tbody>
 <tr><td><b>F01</b></td><td><span class='pill warn'>high</span></td>
-<td>Price history is two captures deep, not a series</td><td>Weeks 1-9 had kicked off before the first observation, so their stored numbers are post-hoc and cannot define an opening, a close or closing-line value. Two captures now exist and 7 of the 78 pre-kickoff market cells moved between them, so a real opening-to-latest interval exists for those cells only. The remaining 71 pre-kickoff cells still have a single observation.</td>
-<td>A scheduled capture at T-60 before every kickoff, so every graded cell has its own interval. Policy P04 sets the schedule.</td><td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>nflverse schedules (COMMUNITY) ↗</a></td></tr>
+<td>Community price history is sparse and not licensed</td><td>Weeks 1-9 had kicked off before the first observation, so those prices are post-hoc and cannot define opening or closing lines. The current research ledger records 11 captures, with 78 of 816 event-market cells having a pre-kickoff observation and 52 marked as moved. These are community inputs; they do not satisfy the separate licensed-price policy or establish CLV.</td>
+<td>Obtain a permitted timestamped source and maintain an opening-to-close series for every originated market before publishing price-dependent performance.</td><td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>nflverse schedules (COMMUNITY) ↗</a></td></tr>
 <tr><td><b>F02</b></td><td><span class='pill warn'>high</span></td>
 <td>Two clubs publish no parseable depth chart</td><td>30 of 32 clubs yielded depth rows. The Packers prepend jersey numbers to names and the Texans publish the chart as an image. Both are recorded as failures rather than transcribed by eye.</td>
 <td>An authorised structured export per club, or a documented decision to accept the gap.</td><td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>NFL injury report (OFFICIAL); capture: decision-lab/data/official_snapshot.json ↗</a></td></tr>
 <tr><td><b>F03</b></td><td><span class='pill warn'>high</span></td>
-<td>No official inactive list is held</td><td>The captured report carries 6 game designations across 254 rows. Without inactive lists, a listed player&#x27;s participation cannot be confirmed and a replacement cannot be established.</td>
-<td>Capture official inactive lists per game with a timestamp before kickoff.</td><td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>NFL injury report (OFFICIAL) ↗</a></td></tr>
+<td>Only one official inactive-list read is archived</td><td>The dated 2026-11-16 Week 10 capture includes one NFL inactive article with 147 entries across 24 clubs. That single read does not establish a multi-week history or confirm snap participation for every player.</td>
+<td>Retain dated inactive evidence for every game and join it to official game books or snap evidence without inference.</td><td><a class='source' href='https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season' target='_blank' rel='noopener noreferrer'>NFL Week 10 inactive list (OFFICIAL); archive capture: injury-archive/data/index.jsonl ↗</a></td></tr>
 <tr><td><b>F04</b></td><td><span class='pill warn'>high</span></td>
-<td>The personnel ablation cannot resolve an effect</td><td>The holdout interval spans zero for every λ in the published grid. This is a finding about the sample, not a claim that injuries do not matter.</td>
+<td>The personnel ablation cannot resolve an effect</td><td>At the published λ=1.0 setting, the Week 7-10 holdout MAE improvement is +0.040 points with interval [-0.185, +0.102]. The interval includes zero; this sample does not establish an injury effect.</td>
 <td>More pre-kickoff games and dated availability captures before re-testing.</td><td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>NFL injury report (OFFICIAL) ↗</a></td></tr>
 <tr><td><b>F05</b></td><td><span class='pill warn'>medium</span></td>
 <td>Team-code aliases differ between sources</td><td>nfl.com&#x27;s 2026 standings publish AZ for Arizona; the community schedule publishes ARI. Los Angeles is LA on both. The feed maps the alias explicitly and the reconciliation would fail if it did not.</td>
@@ -47,20 +48,20 @@ about effort. Every row carries the source that shows the issue.</caption>
 <td>Kickoff times carry no time zone</td><td>The schedule publishes kickoff in US Eastern but the field has no zone. The price store converts at a fixed UTC-4, which is up to 60 minutes wrong once Eastern Standard Time begins.</td>
 <td>Capture an explicit UTC kickoff, or store the observation as &#x27;pre-kickoff by minutes&#x27; instead of a boolean.</td><td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>nflverse schedules (COMMUNITY) ↗</a></td></tr>
 <tr><td><b>F07</b></td><td><span class='pill warn'>medium</span></td>
-<td>Two strategies already failed their kill rule</td><td>G10 demoted two scored rules whose Brier-skill interval sits entirely below zero. They remain on the leaderboard, labelled, with their numbers intact.</td>
+<td>Retrospective diagnostics include demoted strategies</td><td>The current G10 artifact demotes 3 rules (S01, S02, S03) whose Brier-skill upper interval is below zero. These remain historical diagnostics, not prospective leaderboard entries; a new registration is required before any future evaluation.</td>
 <td>Require a new registration hash before a demoted rule can return.</td><td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>NFL standings (OFFICIAL); gate artifact: origination/data/gates.json ↗</a></td></tr>
 <tr><td><b>F08</b></td><td><span class='pill warn'>medium</span></td>
 <td>No reward pool, rule set or funding source exists</td><td>The brief asks for a leaderboard competition with rewards for top performers. No funding source, jurisdiction or payout rule exists, so no reward is described as available.</td>
 <td>Decide jurisdiction and funding before any reward is announced.</td><td><a class='source' href='https://support.nfl.com/hc/en-us/articles/35869698780564-If-I-place-a-bet-on-NFL-com-or-the-NFL-app-am-I-betting-with-the-NFL' target='_blank' rel='noopener noreferrer'>NFL betting FAQ (OFFICIAL) ↗</a></td></tr>
 <tr><td><b>F09</b></td><td><span class='pill warn'>medium</span></td>
-<td>A club with no report section is not injury-free</td><td>4 clubs had no section on the captured report. Treating that as &#x27;no injuries&#x27; is the failure mode flagged earlier in this repository.</td>
-<td>Join each no-section club to its inactive list and its next published report.</td><td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>NFL injury report (OFFICIAL) ↗</a></td></tr>
+<td>A historical no-injury section is not a current availability statement</td><td>The 2026-11-12 snapshot had 4 clubs without an injury section; the later 2026-11-16 Week 10 read records zero such sections. These are distinct dated observations. An absent section must never be interpreted as &#x27;available&#x27;.</td>
+<td>Keep both dated observations and compare each club with the next report and inactive evidence.</td><td><a class='source' href='https://www.nfl.com/injuries/league/2026/REG10' target='_blank' rel='noopener noreferrer'>NFL Week 10 injury report (OFFICIAL); later read: matchup capture 2026-11-16 ↗</a></td></tr>
 <tr><td><b>F10</b></td><td><span class='pill warn'>low</span></td>
 <td>Correlation C02 mixes a community price with an official score</td><td>It is published for transparency and excluded from every official-only gate. A reader who skims the table could mistake it for an official-input correlation.</td>
 <td>Keep the source-class badges on the row and the note in the caption.</td><td><a class='source' href='https://github.com/nflverse/nflverse-data/releases/tag/schedules' target='_blank' rel='noopener noreferrer'>nflverse schedules (COMMUNITY) ↗</a></td></tr>
 <tr><td><b>F11</b></td><td><span class='pill warn'>low</span></td>
-<td>41 report rows could not be joined to a depth slot</td><td>4 correlation families and a set of report rows have no join target: a player can be on the report without appearing on his club&#x27;s published chart.</td>
-<td>Publish the unmatched count beside the joined count so the join rate is never implied as 100%.</td><td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>NFL injury report (OFFICIAL); capture: decision-lab/data/official_snapshot.json ↗</a></td></tr>
+<td>Injury-report rows do not all join to a depth slot</td><td>The 2026-11-12 snapshot joined 185 of 254 report rows to a captured club depth slot; 69 did not join. This is a dated join result, not a claim about the later Week 10 injury capture. A player can be on the report without appearing on the captured club chart.</td>
+<td>Publish matched and unmatched counts with the snapshot date and reason for every unmatched row.</td><td><a class='source' href='https://www.nfl.com/injuries/' target='_blank' rel='noopener noreferrer'>NFL injury report (OFFICIAL); capture: decision-lab/data/official_snapshot.json ↗</a></td></tr>
 <tr><td><b>F12</b></td><td><span class='pill warn'>low</span></td>
 <td>The site&#x27;s own model trails the market it compares against</td><td>The ridge side model&#x27;s MAE is worse than the stored market spread&#x27;s on the same games. It is published as a benchmark, and no strategy above it claims otherwise.</td>
 <td>Nothing to fix; it is the honest baseline. Any future model must beat this before claiming skill.</td><td><a class='source' href='https://www.nfl.com/standings/' target='_blank' rel='noopener noreferrer'>NFL standings (OFFICIAL) ↗</a></td></tr>

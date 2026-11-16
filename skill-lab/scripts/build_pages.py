@@ -202,8 +202,8 @@ def build_overview(res: dict) -> str:
             + '<div class="cards">' + cards + "</div>"
             + '<h2>How to read this</h2>'
             + '<ul class="tight">'
-              '<li><b>Leaderboard</b> — the six registered rows with their Brier and log-loss scores, the '
-              'game-cluster interval, the multiplicity-adjusted value and every gate outcome.</li>'
+              '<li><b>Leaderboard</b> — the prospective-only ranking surface; it is empty until frozen gates clear. '
+              'Backtest diagnostics do not appear there.</li>'
               '<li><b>Controls &amp; luck</b> — the market benchmark, the random-pick control, the base-rate '
               'control and the favourites-only control, with the luck floor each row had to clear.</li>'
               '<li><b>Staking view</b> — the retrospective return at the published closing price, kept in a '
@@ -222,94 +222,16 @@ def build_overview(res: dict) -> str:
 
 
 def build_leaderboard(res: dict) -> str:
-    meta = res["meta"]
-    out = []
-    for run_key, heading, note in [
-        ("primary", "Primary corpus — 2026 regular season, weeks 1–9",
-         f'Frozen corpus: {meta["primary_corpus"]["observed_games"]} games with both scores published '
-         f'(expected {meta["primary_corpus"]["expected_games"]}).'),
-        ("supporting", "Supporting panel — every earlier regular season, walk-forward",
-         "Same protocol, same gates, fitted on earlier seasons only. Published separately; never pooled "
-         "into the primary corpus headline."),
-    ]:
-        run = res["runs"][run_key]
-        rows = []
-        for r in run["rows"]:
-            if "bootstrap" not in r:
-                rows.append([esc(r["strategy"]), esc(r["name"]), "0", "—", "—", "—", "—", "—", "—",
-                             tag("no forecasts", "na"), "—"])
-                continue
-            b = r["bootstrap"]
-            ci = b["ci95"]
-            gates = r["gates"]
-            failed = [k for k, (ok, _) in gates.items() if not ok]
-            rows.append([
-                esc(r["strategy"]),
-                esc(r["name"]),
-                f'{r["n_games"]}',
-                fmt(r["brier_model"], 4),
-                fmt(r["brier_market"], 4),
-                f'<span class="{sign_class(r["skill_brier"])}">{fmt(r["skill_brier"], 4, signed=True)}</span>',
-                f'[{fmt(ci[0], 4, signed=True)}, {fmt(ci[1], 4, signed=True)}]',
-                f'<span class="{sign_class(b["lower95"])}">{fmt(b["lower95"], 4, signed=True)}</span>',
-                fmt(r["bh_q"], 4),
-                tag(f'{r["gates_passed"]}/{r["gates_total"]} pass',
-                    "pass" if r["eligible_for_ranking"] else "fail"),
-                esc(", ".join(failed)) if failed else "—",
-                evidence_cell(run_key),
-            ])
-        headers = ["Strategy", "Definition", "n", "Brier (ours)", "Brier (market)", "Brier skill",
-                   "95% cluster CI", "Lower bound", "BH q", "Gates", "Gates that failed", "Evidence"]
-        classes = ["", "", "num", "num", "num", "num", "num", "num", "num", "", "", ""]
-        out.append(f'<h2>{esc(heading)}</h2><p class="footnote">{esc(note)}</p>')
-        out.append(table(headers, rows, classes))
-        out.append(f'<p class="footnote">Family size for the multiplicity control in this run: '
-                   f'{run["rows"][0].get("family_trials", "—")} registered rows, '
-                   f'Benjamini–Hochberg q = {meta["settings"]["bh_q"]}. '
-                   f'Bootstrap: {meta["settings"]["n_boot"]:,} resamples, seed {meta["settings"]["boot_seed"]}, '
-                   f'resampling <em>games</em>.</p>')
-
-    divisions = [
-        ["1 · Singles (spread, total, moneyline)", "Admissible",
-         f'{len(res["runs"]["primary"]["rows"])} rows scored with proper scores; 0 passed the gates.',
-         link(PROTOCOL_DOC, "protocol §11")],
-        ["2 · Game parlays", "Not admissible",
-         "No permissioned parlay price history and no operator void/push rule set exists in this "
-         "repository, so no directly validated joint probability can be produced.",
-         link(NFL_ODDS_TERMS, "NFL odds terms")],
-        ["3 · Same-game parlays", "Not admissible",
-         "The legs of one game are measurably dependent (see Dependence), so multiplying marginal "
-         "probabilities is invalid; no joint probability can be validated without the operator rules.",
-         link(NFL_RULEBOOK, "2026 rulebook")],
-        ["4 · Player-prop combinations", "Not admissible",
-         "No official prop line history and no official settlement record exists in this repository.",
-         link(ARTIFACT_LINK, "committed artifact")],
-    ]
-    out.append('<h2>Divisions</h2>')
-    out.append(table(["Division", "Status", "Why", "Source"], divisions, ["", "", "", ""]))
-    out.append('<div class="notice">Non-admissible divisions are published as empty with the reason. '
-               'They are not omitted and they are not scored with a number that cannot be validated.</div>')
-
-    gates = [
-        ["G1 Sample", "At least 100 graded games in the corpus for the row"],
-        ["G2 Skill", "Mean Brier skill against the market benchmark is above zero"],
-        ["G3 Uncertainty", "The 95% game-cluster bootstrap lower bound of the skill is above zero"],
-        ["G4 Multiplicity", "Survives Benjamini–Hochberg at q = 0.05 inside the family"],
-        ["G5 Control", "Beats the 95th percentile of the random control and the base-rate control"],
-        ["G6 Calibration", "Expected calibration error across five probability bins is at or below 0.05"],
-        ["G7 Price realism", "The signal verdict does not depend on a price; the staking verdict under a "
-                             "10% worse price is published separately"],
-    ]
-    out.append('<h2>What would change our mind</h2>')
-    out.append('<p class="footnote">Every row above carries a two-sided falsification field, frozen in '
-               'SL-PRE-01b for the next evaluation window: one side that would move the row towards '
-               'belief and one side that would move it towards rejection. It is published forward, so it '
-               'does not reinterpret the completed run.</p>')
-    out.append('<p><a class="link" href="mind-change.html">Read the field for every row →</a></p>')
-    out.append('<h2>Gates (fail-closed)</h2>')
-    out.append(table(["Gate", "Test", "Source"],
-                     [g + [link(PROTOCOL_DOC, "protocol §9")] for g in gates], ["", "", ""]))
-    return "\n".join(out)
+    """Keep all historical score rows off the leaderboard; only the prospective board may rank."""
+    return ("<div class=\"notice\"><b>Zero eligible strategies.</b> This page is a prospective-only "
+            "ranking surface. It intentionally contains no backtest score, win rate, ROI, or rank. "
+            "Historical research diagnostics remain outside the leaderboard and cannot qualify a row.</div>"
+            "<h2>Current prospective leaderboard</h2>"
+            "<p>The canonical board lists each market division, registered controls, signal and staking "
+            "columns, promotion/demotion rules, and the number eligible. It currently has no graded "
+            "prospective sample.</p>"
+            "<p><a class=\"link\" href=\"../forward-ledger/leaderboard.html\">Open the prospective-only "
+            "leaderboard →</a></p>")
 
 
 def build_controls(res: dict) -> str:

@@ -213,11 +213,14 @@ class TestPublishedNumbers(unittest.TestCase):
     def setUp(self):
         self.res = load()
 
-    def test_leaderboard_quotes_the_skill_of_every_row(self):
+    def test_leaderboard_is_prospective_only_and_contains_no_backtest_scores(self):
         text = (LAB / "leaderboard.html").read_text(encoding="utf-8")
+        self.assertIn("../forward-ledger/leaderboard.html", text)
+        self.assertIn("no backtest score", text.lower())
+        self.assertNotIn("<table", text.lower())
         for row in self.res["runs"]["primary"]["rows"]:
             value = f'{row["skill_brier"]:+.4f}'
-            self.assertIn(value, text, f"leaderboard does not quote {row['strategy']} skill {value}")
+            self.assertNotIn(value, text, f"backtest skill {value} leaked onto leaderboard")
 
     def test_index_quotes_the_corpus_size_and_the_eligible_count(self):
         text = (LAB / "index.html").read_text(encoding="utf-8")
