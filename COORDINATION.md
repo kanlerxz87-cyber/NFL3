@@ -2506,3 +2506,12 @@ Done in PR #92 (all append-only or inside `shadow-board/`, no other workspace's 
   *Fetch and verify release digests*, which also failed on PR #85 before this session began — a transient fetch of
   community release assets, unrelated to `shadow-board/`. `Validate and deploy GitHub Pages` is green for #88, #89
   and #92.
+
+## Current claim — `arena/b0dd4900-nfl3` (fixed Arena branch), 2026-11-16 UTC
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| C1 Add first-class Pages validation for the adopted price-data policy/store and frozen preregistered corpus, using their existing offline regression and verification gates; do not change price data or corpus claims | in progress | `arena/b0dd4900-nfl3` | `.github/workflows/pages.yml` (additive validation steps only), this append-only claim/result |
+| C2 Final integration: full relevant validation, PR to `main`, merge, Pages deployment check, and publication record | in progress | `arena/b0dd4900-nfl3` | this append-only board; `.github/workflows/pages.yml` |
+
+**Branch constraint and overlap check.** Arena fixed this session to `arena/b0dd4900-nfl3`, based at `e8877e0`; no session-named branch will be created. The existing price and corpus check scripts are already committed. Historical `pages.yml` claims have completed; this change will be a small additive integration step, with no edits to their data or model workspaces.
