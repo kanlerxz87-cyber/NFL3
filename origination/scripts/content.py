@@ -851,13 +851,16 @@ def flagged(art: dict) -> dict:
         F.append({"id": id_, "severity": severity, "title": title, "issue": issue,
                   "resolve": resolve, "source": source, "source_label": label})
 
-    add("F01", "high", "Price history is two captures deep, not a series",
-        "Weeks 1-9 had kicked off before the first observation, so their stored numbers are post-hoc and "
-        "cannot define an opening, a close or closing-line value. Two captures now exist and 7 of the 78 "
-        "pre-kickoff market cells moved between them, so a real opening-to-latest interval exists for "
-        "those cells only. The remaining 71 pre-kickoff cells still have a single observation.",
-        "A scheduled capture at T-60 before every kickoff, so every graded cell has its own interval. "
-        "Policy P04 sets the schedule.",
+    moved_cells = sum(1 for event in ledger["events"] for market in event["markets"].values()
+                      if market.get("moved_since_opening"))
+    add("F01", "high", "Community price history is sparse and not licensed",
+        f"Weeks 1-9 had kicked off before the first observation, so those prices are post-hoc and cannot "
+        f"define opening or closing lines. The current research ledger records {ledger['counts']['snapshots']} "
+        f"captures, with {ledger['counts']['with_pre_kickoff_opening']} of {ledger['counts']['market_cells']} "
+        f"event-market cells having a pre-kickoff observation and {moved_cells} marked as moved. These are "
+        f"community inputs; they do not satisfy the separate licensed-price policy or establish CLV.",
+        "Obtain a permitted timestamped source and maintain an opening-to-close series for every originated "
+        "market before publishing price-dependent performance.",
         C.G["schedules"], "nflverse schedules (COMMUNITY)")
 
     add("F02", "high", "Two clubs publish no parseable depth chart",
@@ -866,15 +869,18 @@ def flagged(art: dict) -> dict:
         "An authorised structured export per club, or a documented decision to accept the gap.",
         C.S["injuries"], "NFL injury report (OFFICIAL); capture: decision-lab/data/official_snapshot.json")
 
-    add("F03", "high", "No official inactive list is held",
-        "The captured report carries 6 game designations across 254 rows. Without inactive lists, a listed "
-        "player's participation cannot be confirmed and a replacement cannot be established.",
-        "Capture official inactive lists per game with a timestamp before kickoff.",
-        C.S["injuries"], "NFL injury report (OFFICIAL)")
+    add("F03", "high", "Only one official inactive-list read is archived",
+        "The dated 2026-11-16 Week 10 capture includes one NFL inactive article with 147 entries across 24 clubs. "
+        "That single read does not establish a multi-week history or confirm snap participation for every player.",
+        "Retain dated inactive evidence for every game and join it to official game books or snap evidence without inference.",
+        "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season",
+        "NFL Week 10 inactive list (OFFICIAL); archive capture: injury-archive/data/index.jsonl")
 
     add("F04", "high", "The personnel ablation cannot resolve an effect",
-        "The holdout interval spans zero for every λ in the published grid. This is a finding about the "
-        "sample, not a claim that injuries do not matter.",
+        f"At the published λ=1.0 setting, the Week 7-10 holdout MAE improvement is "
+        f"{art['ablation']['headline']['mae_improvement_holdout']:+.3f} points with interval "
+        f"[{art['ablation']['headline']['holdout_lo']:+.3f}, {art['ablation']['headline']['holdout_hi']:+.3f}]. "
+        f"The interval includes zero; this sample does not establish an injury effect.",
         "More pre-kickoff games and dated availability captures before re-testing.",
         C.S["injuries"], "NFL injury report (OFFICIAL)")
 
@@ -891,9 +897,11 @@ def flagged(art: dict) -> dict:
         "a boolean.",
         C.G["schedules"], "nflverse schedules (COMMUNITY)")
 
-    add("F07", "medium", "Two strategies already failed their kill rule",
-        "G10 demoted two scored rules whose Brier-skill interval sits entirely below zero. They remain on "
-        "the leaderboard, labelled, with their numbers intact.",
+    demoted = ", ".join(art["gates"].get("demoted", [])) or "none"
+    add("F07", "medium", "Retrospective diagnostics include demoted strategies",
+        f"The current G10 artifact demotes {len(art['gates'].get('demoted', []))} rules ({demoted}) whose "
+        f"Brier-skill upper interval is below zero. These remain historical diagnostics, not prospective "
+        f"leaderboard entries; a new registration is required before any future evaluation.",
         "Require a new registration hash before a demoted rule can return.",
         C.S["standings"], "NFL standings (OFFICIAL); gate artifact: origination/data/gates.json")
 
@@ -903,11 +911,12 @@ def flagged(art: dict) -> dict:
         "Decide jurisdiction and funding before any reward is announced.",
         C.S["odds_faq"], "NFL betting FAQ (OFFICIAL)")
 
-    add("F09", "medium", "A club with no report section is not injury-free",
-        f"{avail_no_injury(art)} clubs had no section on the captured report. Treating that as 'no injuries' "
-        f"is the failure mode flagged earlier in this repository.",
-        "Join each no-section club to its inactive list and its next published report.",
-        C.S["injuries"], "NFL injury report (OFFICIAL)")
+    add("F09", "medium", "A historical no-injury section is not a current availability statement",
+        f"The 2026-11-12 snapshot had {avail_no_injury(art)} clubs without an injury section; the later "
+        f"2026-11-16 Week 10 read records zero such sections. These are distinct dated observations. "
+        f"An absent section must never be interpreted as 'available'.",
+        "Keep both dated observations and compare each club with the next report and inactive evidence.",
+        "https://www.nfl.com/injuries/league/2026/REG10", "NFL Week 10 injury report (OFFICIAL); later read: matchup capture 2026-11-16")
 
     add("F10", "low", "Correlation C02 mixes a community price with an official score",
         "It is published for transparency and excluded from every official-only gate. A reader who skims "
@@ -915,10 +924,11 @@ def flagged(art: dict) -> dict:
         "Keep the source-class badges on the row and the note in the caption.",
         C.G["schedules"], "nflverse schedules (COMMUNITY)")
 
-    add("F11", "low", "41 report rows could not be joined to a depth slot",
-        f"{art['corr']['counts']['withheld']} correlation families and a set of report rows have no join "
-        f"target: a player can be on the report without appearing on his club's published chart.",
-        "Publish the unmatched count beside the joined count so the join rate is never implied as 100%.",
+    add("F11", "low", "Injury-report rows do not all join to a depth slot",
+        "The 2026-11-12 snapshot joined 185 of 254 report rows to a captured club depth slot; 69 did not join. "
+        "This is a dated join result, not a claim about the later Week 10 injury capture. A player can be on "
+        "the report without appearing on the captured club chart.",
+        "Publish matched and unmatched counts with the snapshot date and reason for every unmatched row.",
         C.S["injuries"], "NFL injury report (OFFICIAL); capture: decision-lab/data/official_snapshot.json")
 
     add("F12", "low", "The site's own model trails the market it compares against",

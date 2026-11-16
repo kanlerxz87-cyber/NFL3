@@ -61,9 +61,10 @@ def badge(status):
 
 BANNER = """
 <div class="notice"><b>Read this first.</b> This workspace originates its own numbers and grades them
-against a reconciled official results feed. It holds <b>one</b> community price observation, so no
-opening-line edge, closing-line value or validated strategy exists yet — and the leaderboard says so on
-every row. Prices are labelled <b>COMMUNITY</b>; standings and injury reports are labelled
+against a reconciled official results feed. It contains community-sourced price snapshots but no
+licensed price source, so no price-dependent edge, closing-line value or validated strategy is eligible.
+The prospective leaderboard remains empty until its frozen gates clear. Prices are labelled <b>COMMUNITY</b>;
+standings and injury reports are labelled
 <b>OFFICIAL</b>; anything that could not be confirmed is blank and sits on
 <a href="flagged.html">Flagged for review</a>. Nothing here is betting advice.</div>
 """
@@ -300,52 +301,28 @@ numbers so the demotion can be checked. <a href="leaderboard.html">See the leade
 
 
 def page_leaderboard(art):
-    board = art["board"]
-    gates = art["gates"]
-    luck = art["luck"]
+    """Expose only prospective rankings; retrospective results belong on analysis pages, never here."""
     body = [BANNER]
-    m = board["multiplicity"]
-    body.append(f"""<div class="section-head"><div><div class="section-label">PROPER SCORES</div>
-<h2>Ranked by benchmark-relative Brier skill, with an interval and a control on every row</h2></div>
-<p>Benchmark: {C.esc(board['benchmark'])}. Multiplicity: {m['trials']} strategies, family-wise α=0.05,
-so a per-test level of {m['alpha_per_test']:.5f}. <b>No row is validated</b>: promotion needs n ≥
-{gates['floors']['promote_min_n']} and an interval above zero.</p></div>""")
-    body.append("""<div class="table-wrap"><table><caption>Brier skill score (BSS): positive means the
-strategy beat the benchmark on the same rows. The interval is a paired game-cluster bootstrap. A control
-arm's BSS is exactly zero by construction, which is what makes it a control.</caption>
-<thead><tr><th>#</th><th>Strategy</th><th>Family</th><th>Market</th><th>n</th><th>Brier skill</th>
-<th>95% interval</th><th>Win rate</th><th>Wilson 95%</th><th>Verdict</th><th>Source</th></tr></thead><tbody>""")
-    ranked = sorted(board["results"], key=lambda r: (r["summary"].get("bss") is None,
-                                                     -(r["summary"].get("bss") or -9)))
-    verdict_by_id = {row["id"]: row["verdict"] for row in luck["separations"]}
-    for i, r in enumerate(ranked, 1):
-        s = r["summary"]
-        lo, hi = s.get("lo"), s.get("hi")
-        interval = f"[{f(lo)}, {f(hi)}]" if lo is not None else "—"
-        wlo, whi = s.get("wilson", (None, None))
-        body.append(f"""<tr><td>{i}</td><td><b>{C.esc(r['id'])}</b> {C.esc(r['name'])}</td>
-<td>{C.esc(r['family'])}</td><td>{C.esc(r['market'])}</td><td>{s.get('n') or 0}</td>
-<td>{f(s.get('bss'), 3)}</td><td>{interval}</td><td>{pct(s.get('accuracy'))}</td>
-<td>[{pct(wlo)}, {pct(whi)}]</td><td>{badge(verdict_by_id.get(r['id'], 'unverified').split(':')[0])}
-<br><small>{C.esc(verdict_by_id.get(r['id'], ''))}</small></td>
-<td>{link(C.S['standings'], 'NFL standings')}</td></tr>""")
-    body.append("</tbody></table></div>")
-    body.append(f"""<div class="notice"><b>Why there is no 'ranking by ROI' anywhere on this page.</b>
-Return over a season is a single draw from a very wide distribution. At {luck['corpus']['games_played']}
-played games, an 11-9 record is unremarkable for a coin. Ranking on realised return would let one good
-week outrank twenty weeks of calibrated work, which is the exact failure the brief asks us to prevent.
-<a href="luck.html">See the arithmetic →</a></div>""")
-    body.append("""<div class="section-head"><div><div class="section-label">BLOCKED</div>
-<h2>What cannot be ranked, and why</h2></div></div>
-<div class="table-wrap"><table><caption>A blocked strategy stays visible with its blocking condition. It
-is not 'promising'; it has no evidence path yet.</caption>
-<thead><tr><th>ID</th><th>Strategy</th><th>Family</th><th>Blocked by</th><th>Source</th></tr></thead><tbody>""")
-    for s in board["blocked"]:
-        body.append(f"""<tr><td><b>{C.esc(s['id'])}</b></td><td>{C.esc(s['name'])}</td>
-<td>{C.esc(s['family'])}</td><td>{C.esc(s['blocked_by'])}</td>
-<td>{link(C.S['odds_faq'], 'NFL betting FAQ')}</td></tr>""")
-    body.append("</tbody></table></div>")
-    return "\n".join(body), "Leaderboard", "Proper scores, controls and uncertainty"
+    body.append("""<div class="section-head"><div><div class="section-label">PROSPECTIVE ONLY</div>
+<h2>No backtest result is eligible for this leaderboard</h2></div>
+<p>Historical scores, win rates and ROI are not rankings. The prospective ledger is the only source
+for eligible rows; until a strategy clears its frozen gates, this page publishes no rank or score.</p></div>
+<div class="notice"><b>Current state: zero eligible strategies.</b> The canonical prospective board carries
+one row per division, controls, the separate signal/staking columns, promotion and demotion rules, and
+its recorded eligibility count. It currently has no settled prospective sample to rank. A retrospective
+score cannot fill that blank.
+<a href="../forward-ledger/leaderboard.html">Open the prospective-only leaderboard →</a></div>
+<div class="section-head"><div><div class="section-label">ANALYSIS, NOT RANKING</div>
+<h2>Where retrospective diagnostics live</h2></div>
+<p>These pages explain model performance and the removal-of-luck analysis. They are not leaderboard
+entries and cannot promote a strategy.</p></div>
+<ul><li><a href="lines.html">Originated line diagnostics</a></li>
+<li><a href="luck.html">Sample-size and removal-of-luck panel</a></li>
+<li><a href="../forward-ledger/backtest.html">Frozen backtest corpus (research only; never ranked)</a></li></ul>
+<div class="notice"><b>Promotion is not automatic from historical performance.</b> A strategy must be
+pre-registered and scored prospectively against its frozen controls, with uncertainty and multiplicity
+adjustment. Staking/ROI remains blank until the price-data policy admits a licensed source.</div>""")
+    return "\n".join(body), "Prospective leaderboard", "No backtest values are ranked"
 
 
 def page_lines(art):

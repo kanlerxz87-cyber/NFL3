@@ -27,7 +27,7 @@ NAV = [
     ("index.html", "Overview"),
     ("requirements.html", "Requirements"),
     ("origination.html", "Originated lines"),
-    ("leaderboard.html", "Leaderboard & luck"),
+    ("leaderboard.html", "Prospective leaderboard"),
     ("results.html", "Verified results"),
     ("availability.html", "Availability"),
     ("questions.html", "Questions"),
@@ -180,7 +180,7 @@ The pre-registered model scores a Brier skill of {ev['skill_vs_home_base_rate']:
 home base rate on {ev['n_games_scored']} out-of-sample games, but the 95% cluster-bootstrap interval on the
 paired per-game improvement is <span class="mono">{lo:+.4f} to {hi:+.4f}</span>. The lower bound is below
 zero, so the model <strong>{verdict}</strong>. No strategy here is validated, earns reward eligibility, or
-is claimed to be profitable. The leaderboard shows the one entry with its interval.
+is claimed to be profitable. The prospective leaderboard is empty; historical diagnostics are not ranked there.
 </div>"""
 
     what = """<div class="card"><h2>What this workspace is for</h2>
@@ -209,8 +209,8 @@ are marked blocked, with the exact number that would clear them.</li>
 <ul class="list">
 <li><a href="origination.html">Originated lines</a> — every Week 11 fixture, our number, and why the
 residual is blank.</li>
-<li><a href="leaderboard.html">Leaderboard &amp; luck</a> — the one strategy, its control rows, and the
-luck panel.</li>
+<li><a href="leaderboard.html">Prospective leaderboard</a> — empty until the prospective gates clear; historical
+backtest diagnostics are not ranked here.</li>
 <li><a href="flagged.html">Flagged for review</a> — twelve items, including four that call out problems
 in other parts of this repository.</li>
 </ul></div>
@@ -385,152 +385,18 @@ parameters used, so a reviewer can recompute it by hand.</p>""" + table(
 
 
 def build_leaderboard():
-    ev = read_json("evaluation.json")
-    an = read_json("analysis.json")
-    lo, hi = ev["cluster_bootstrap_95"]
-    passed = ev["gate_G_CLUSTER_lower_bound_above_zero"]
-    rows = [
-        [
-            esc("M1 team-strength ridge, registered"),
-            f'<span class="num">{ev["brier"]["model"]:.4f}</span>',
-            f'<span class="num">{ev["log_loss"]["model"]:.4f}</span>',
-            f'<span class="num">{ev["skill_vs_home_base_rate"]:+.4f}</span>',
-            f'<span class="num">{lo:+.4f} to {hi:+.4f}</span>',
-            f'<span class="num">{ev["accuracy"]["model_straight_up"]*100:.1f}%</span>',
-            ("<span class=\"state done\">validated</span>" if passed
-             else "<span class=\"state blocked\">unvalidated: interval includes 0</span>"),
-            src_link("PREREG-2026-OV1", "https://www.nfl.com/standings/"),
-        ],
-        [
-            esc("C-BASE home base rate (control)"),
-            f'<span class="num">{ev["brier"]["control_home_base_rate"]:.4f}</span>',
-            f'<span class="num">{ev["log_loss"]["control_home_base_rate"]:.4f}</span>',
-            '<span class="num">0.0000</span><span class="sub">benchmark</span>',
-            f'<span class="num">—</span>',
-            f'<span class="num">{ev["per_week"][-1]["base_home_rate"]*100:.1f}%</span><span class="sub">final step</span>',
-            '<span class="state partial">control</span>',
-            src_link("OV-S10", "https://www.nfl.com/standings/"),
-        ],
-        [
-            esc("C-FLIP coin flip (control)"),
-            f'<span class="num">{ev["brier"]["control_coin_flip"]:.4f}</span>',
-            f'<span class="num">{ev["log_loss"]["control_coin_flip"]:.4f}</span>',
-            f'<span class="num">{-ev["skill_vs_coin_flip"]:+.4f}</span><span class="sub">model vs this</span>',
-            '<span class="num">—</span>',
-            '<span class="num">50.0%</span>',
-            '<span class="state partial">control</span>',
-            src_link("OV-S10", "https://www.nfl.com/standings/"),
-        ],
-        [
-            esc("C-FAV favourites only (control)"),
-            f'<span class="num">{ev["brier"]["control_favourites"]:.4f}</span>',
-            f'<span class="num">{ev["log_loss"]["control_favourites"]:.4f}</span>',
-            f'<span class="num">{ev["skill_vs_favourites"]:+.4f}</span><span class="sub">model vs this</span>',
-            '<span class="num">—</span>',
-            '<span class="num">—</span><span class="sub">scored as 0/1</span>',
-            '<span class="state partial">control</span>',
-            src_link("OV-S10", "https://www.nfl.com/standings/"),
-        ],
-    ]
-
-    cal_rows = [
-        [
-            esc(b["bin"]),
-            f'<span class="num">{b["n"]}</span>',
-            f'<span class="num">{b["mean_predicted"]:.4f}</span>',
-            f'<span class="num">{b["observed_home_win_share"]:.4f}</span>',
-            ('readable' if b["readable"] else '<span class="blank">too small to read</span>'),
-            src_link("OV-S01", "https://www.nfl.com/schedules/2026/by-week/week-1"),
-        ]
-        for b in an["calibration"]["bins"]
-    ]
-
-    weekly_rows = [
-        [
-            esc(w["week_label"]),
-            f'<span class="num">{w["fit_games"]}</span>',
-            f'<span class="num">{w["test_games"]}</span>',
-            f'<span class="num">{w["brier_model"]:.4f}</span>',
-            f'<span class="num">{w["brier_base"]:.4f}</span>',
-            f'<span class="num">{1 - w["brier_model"]/w["brier_base"]:+.4f}</span>',
-            src_link("OV-S01", f"https://www.nfl.com/schedules/2026/by-week/week-{w['week']}"),
-        ]
-        for w in ev["per_week"]
-    ]
-
-    luck = an["luck"]
-    luck_rows = []
-    for c in sorted(luck["clubs"], key=lambda r: (r["luck_delta"] is None, -(r["luck_delta"] or 0))):
-        luck_rows.append([
-            f'<strong>{esc(c["team"])}</strong>',
-            f'<span class="num">{c["games"]}</span>',
-            f'<span class="num">{c["wins"]}–{c["losses"]}' + (f'–{c["ties"]}' if c["ties"] else "") + "</span>",
-            f'<span class="num">{c["observed_win_equivalent"]:.1f}</span>',
-            (f'<span class="num">{c["model_expected_wins"]:.2f}</span>' if c["model_games_scored"] else BLANK),
-            (f'<span class="num">{c["luck_delta"]:+.2f}</span>' if c["luck_delta"] is not None else BLANK),
-            src_link("OV-S10", "https://www.nfl.com/standings/"),
-        ])
-
-    corr_rows = [
-        [
-            esc(c["pair"]),
-            esc(c["a"]),
-            esc(c["b"]),
-            f'<span class="num">{c["n"]}</span>',
-            f'<span class="num">{c["r"]:+.4f}</span>',
-            f'<span class="num">{c["ci95_fisher"][0]:+.3f} to {c["ci95_fisher"][1]:+.3f}</span>',
-            esc(c["note"]),
-            src_link("OV-S10", "https://www.nfl.com/standings/"),
-        ]
-        for c in an["correlations"]
-    ]
-
-    body = f"""<div class="callout danger"><strong>The gate fails, and that is the result.</strong>
-The registered model has a better Brier score than every control, but the uncertainty interval on its
-improvement crosses zero. Under the rule frozen before the run, that makes it
-<strong>unvalidated</strong>. It is shown here with its interval rather than removed, and it earns nothing.</div>
-
-<div class="callout"><strong>Why not rank by win rate or return.</strong> A short sample of wins is mostly noise,
-and this repository holds no prices, so return cannot be computed at all. Ranking is therefore by
-benchmark-relative proper score with a clustered interval, and the two controls you asked for (random picks
-and favourites only) sit on the same board rather than in a footnote.</div>
-
-<div class="section"><h2>Divisions</h2>
-<p>Singles only. Game parlays, same-game parlays and prop combos have no entries because a joint probability
-has not been validated and the operator's void and push rules are not held.</p></div>""" + table(
-        ["Entry", "Brier ↓", "Log loss ↓", "Brier skill vs base rate", "95% interval on the improvement",
-         "Straight-up", "Status", "Source"],
-        rows,
-    ) + """<div class="section"><h2>Per-week walk-forward</h2>
-<p>The model is re-fitted before each week using only games already played. Nothing from the scored week
-enters its own fit.</p></div>""" + table(
-        ["Week", "Games in fit", "Games scored", "Brier model", "Brier base rate", "Skill", "Source"],
-        weekly_rows,
-    ) + """<div class="section"><h2>Calibration</h2>
-<p>A model can beat a control on average and still be wrong in the middle of the range. Buckets with fewer
-than ten games are published but marked unreadable rather than dropped.</p></div>""" + table(
-        ["Predicted home-win band", "n", "Mean predicted", "Observed home-win share", "Readable?", "Source"],
-        cal_rows,
-    ) + f"""<div class="section"><h2>The removal of luck</h2>
-<p>{luck['method']}</p>
-<p class="small">With these outcomes, <strong>{luck['luck_share_of_win_dispersion']*100:.1f}%</strong> of the
-observed dispersion in club win totals is consistent with the Bernoulli variance implied by the model's own
-probabilities, leaving <strong>{luck['skill_share_of_win_dispersion']*100:.1f}%</strong> unexplained by a coin
-flip. Observed variance {luck['observed_variance_of_wins']:.3f}; mean implied Bernoulli variance
-{luck['mean_implied_bernoulli_variance']:.3f}; n = {luck['n_clubs']} clubs.</p>
-<div class="callout warn"><strong>{esc(luck['caveat'])}</strong></div></div>""" + table(
-        ["Club", "Games", "W–L–T", "Win equivalent", "Model expected wins", "Luck delta", "Source"],
-        luck_rows,
-    ) + """<div class="section"><h2>Correlations, with n on every value</h2>
-<p>Only officially sourced numbers are correlated, and every row states its sample size. A correlation on
-32 clubs is a weak instrument; the interval says so.</p></div>""" + table(
-        ["Pair", "a", "b", "n", "r", "95% Fisher interval", "Reading", "Source"],
-        corr_rows,
-    )
-    return page("Leaderboard, calibration and the removal of luck",
+    """This route is prospective-only. Retrospective model diagnostics are never ranked here."""
+    body = """<div class="callout danger"><strong>Zero eligible strategies.</strong>
+This page is a prospective-only ranking surface. It intentionally contains no backtest score, win rate,
+ROI, or rank. Historical analysis cannot fill a prospective leaderboard or promote a strategy.</div>
+<div class="section"><h2>Current prospective board</h2>
+<p>The canonical board shows divisions, registered controls, separate signal and staking fields, and the
+promotion/demotion rules. It currently has no graded prospective sample.</p>
+<p><a class="source" href="../forward-ledger/leaderboard.html">Open the prospective-only leaderboard →</a></p>
+</div>"""
+    return page("Prospective leaderboard",
                 "leaderboard.html",
-                "One registered strategy, three controls, and the luck decomposition. Proper scores only; no "
-                "win-rate ranking and no return claim, because this repository holds no prices.",
+                "Zero eligible rows; backtest results are never ranked.",
                 body)
 
 

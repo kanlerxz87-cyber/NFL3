@@ -204,6 +204,19 @@ class EvaluationOutput(unittest.TestCase):
             self.assertNotIn(forbidden, blob)
 
 
+class PublishedLeaderboard(unittest.TestCase):
+    def test_no_backtest_metrics_are_rendered_on_the_leaderboard(self):
+        page = (ROOT / "official-verify" / "leaderboard.html").read_text(encoding="utf-8")
+        index = (ROOT / "official-verify" / "index.html").read_text(encoding="utf-8")
+        self.assertIn("prospective leaderboard is empty", index.lower())
+        self.assertIn("../forward-ledger/leaderboard.html", page)
+        self.assertIn("prospective-only", page.lower())
+        self.assertNotIn("<table", page.lower())
+        ev = json.loads((DATA / "evaluation.json").read_text(encoding="utf-8"))
+        for value in (ev["brier"]["model"], ev["log_loss"]["model"], ev["skill_vs_home_base_rate"]):
+            self.assertNotIn(f"{value:.4f}", page)
+
+
 class Origination(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

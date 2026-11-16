@@ -344,7 +344,8 @@ def main() -> int:
     write_policy()
     snaps = write_snapshots()
     ledger = build_ledger()
-    print(f"Price store: {len(snaps)} immutable snapshot(s); "
+    print(f"Price store: {len(snaps)} snapshot file(s) matched or written for this input; "
+          f"{ledger['counts']['snapshots']} total retained. "
           f"{ledger['counts']['events']} events, {ledger['counts']['market_cells']} event x market cells.")
     print(f"  pre-kickoff opening: {ledger['counts']['with_pre_kickoff_opening']} | "
           f"post-hoc only: {ledger['counts']['post_hoc_only']} | "

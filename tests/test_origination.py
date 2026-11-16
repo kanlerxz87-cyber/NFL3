@@ -234,6 +234,15 @@ class Demotion(unittest.TestCase):
 
 
 class Content(unittest.TestCase):
+    def test_leaderboard_never_renders_backtest_scores(self):
+        page = (ROOT / "origination" / "leaderboard.html").read_text(encoding="utf-8")
+        self.assertIn("forward-ledger/leaderboard.html", page)
+        self.assertIn("No backtest result is eligible", page)
+        self.assertNotIn("S01", page)
+        self.assertNotIn("S02", page)
+        self.assertNotIn("Brier skill score", page)
+        self.assertNotIn("<table", page.lower())
+
     def test_every_requirement_has_a_gate_and_a_number(self):
         req = json.loads((DATA / "requirements.json").read_text(encoding="utf-8"))
         for row in req["rows"]:
