@@ -2544,3 +2544,64 @@ Scope notes recorded before work started, so a later reader can check them:
 - `decision-lab/**` (including `data/official_snapshot.json` and the RR-01/RR-02 chain), `origination/**`, `skill-lab/**`, `corpus/**`, `pricing/**`, `ops-center/**`, `dashboard/**`, `line-lab/**`, `decision-hub/**` and `shadow-board/**` are **not** edited by this session. Where this session's findings bear on them, the request is logged here instead of applied.
 - `open this claim` was checked against the previous board: the most recent entries (`arena/e9629801-nfl3`, `arena/745d100d-nfl3`, `arena/ba6c5155-nfl3`) are all recorded merged, and their file scopes do not include `injury-archive/`, which does not yet exist.
 - Environment fact established at claim time and used throughout: **bash in this sandbox has no nfl.com egress** (curl to `nfl.com` returns `000`), but the **session fetch tool reaches nfl.com** and **GitHub Actions runners reach it** (the 6-hourly `injury-capture` run [43817257379](https://github.com/kanlerxz87-cyber/NFL3/actions/runs/43817257379) succeeded). Prior readiness rows that say "sandbox cannot reach nfl.com" were written under a different tool assumption; this session re-tested rather than inheriting the claim.
+
+## Claim — `arena/37020320-nfl3` (session 37020320), 2026-11-16 UTC
+
+Branch is fixed by Arena as `arena/37020320-nfl3` (session-named branches cannot be created here). Base: `main` at `e8877e0`.
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| T-L Populate the three Lions game-status cells (Joseph, Mays, Reed) on the dashboard from the official report, with read time; remove the "Verified" label they carried while blank | done | `arena/37020320-nfl3` | `dashboard/data/injuries_2026_w10.csv`, generated `dashboard/*.html` |
+| T-R Reproducibility: commit the third price snapshot the committed manifest already produces, and make CI fail if origination artifacts drift from a rebuild | done | `arena/37020320-nfl3` | `origination/data/**` (generated), `.github/workflows/pages.yml` (one added step), this board |
+
+Out of scope for this claim (not started, recorded as open): the full requirement list in the 2026-11-16 brief. Most items already exist in some form in other workspaces (see `readiness.html`); items that need licensed odds, official snap counts, a per-club depth source for all 32 clubs, NWS grids, or a prospective window that has not yet occurred remain blank and flagged.
+
+### Result log — `arena/37020320-nfl3`, 2026-11-16 UTC
+
+**T-L · Lions game-status cells (VR-08 / VR-12 class).**
+- Sources: [NFL injury report](https://www.nfl.com/injuries/), read live through the page-fetch tool on 2026-11-16 (Week 10 section, DET vs NE, Sun 15 Nov); and the committed capture [`results-verification/data/captures/2026-11-15-nfl-injuries/`](results-verification/data/captures/2026-11-15-nfl-injuries/nfl-injuries-2026-11-15.md) (observed 2026-11-15T14:05Z, sha256 `ecd2573e…6e01d6b` per its manifest). Both reads agree.
+- Values written to `dashboard/data/injuries_2026_w10.csv`: Kerby Joseph (S, Knee, Did Not Participate in Practice, **Out**); Cade Mays (C, Ankle, Did Not Participate in Practice, **Out**); D.J. Reed (CB, Hip, Did Not Participate in Practice, **Out**). Joseph's practice status moved from "Limited" (11-12 read) to "DNP" (latest read). Injury text was blank on all three and is now filled from the same official row.
+- The three rows carried a "Verified nfl.com Week 10 report" label while their game-status cells were blank. The label now names the read time and capture path.
+- Rebuilt `dashboard/` (`node scripts/build.mjs`, `node scripts/check.mjs`: OK, 10 pages, no broken links). Dashboard starters/backups Lions row changes from `4 (DNP 1)` to `4 (DNP 2)` with the three Out designations listed, because the page derives its counts from the CSV.
+- **Still open, not edited (other owners):** `decision-lab/data/verification_baseline.json` still holds the 11-12 transcription, so `verify_sources.py` reports SOURCE-UPDATED for these rows; `decision-lab/`, `line-lab/`, `ops-center/` and `decision-hub/` still show the blank cells; `dashboard/data/injuries_2026_w10.csv` still holds the 11-12 read of 254 rows, while the 11-15 read holds 347 rows across 28 clubs (`injury-capture/index.html` IC-6). Those rows are unchanged here and go to Flagged for Review.
+
+**T-R · Origination reproducibility.**
+- `origination/scripts/verify.py` passed at HEAD, but a rebuild from committed inputs changed 10 committed artifacts and wrote an uncommitted third price snapshot `origination/data/prices/snapshots/20261115T170649Z.json` (observed 2026-11-15T17:06:49Z, games release sha256 `3f71bc90…`). The committed origination artifacts had been built against the older games sha `57c2f1b0…`. The committed manifest was already ahead of them. CI did not notice, because it built origination and never compared the result with git.
+- Committed the regenerated artifacts. Gate outcomes are unchanged: pass 7, fail 1, blocked 2; demoted S01, S03. Verifier: 13 pages, 463 rows, 0 missing a source, determinism pass. Snapshot count moves 2→3 and cells that moved between captures move 7→13 (reflected in the readiness rows, which the build regenerates).
+- `.github/workflows/pages.yml`: added the step "Origination artifacts match a rebuild from committed inputs (drift alarm)". It fails if `git status --porcelain -- origination/` is non-empty after the build. YAML parsed with PyYAML; the step sits after the origination build.
+- Second rebuild after the commit leaves `origination/` clean (checked).
+
+**Irregularity recorded (not committed, not fixed).** `decision-lab/data/audit.json` is not reproducible from a clean tree: the committed file records 9,651 table rows; a run at the start of this session on the unchanged base produced 9,635; a run after the dashboard change produced 9,642. The file was reverted to the committed version. CI regenerates the audit but does not diff it, so this drift is silent. Owner: decision-lab.
+
+### Verification performed (this session, offline re-runs at the final tree)
+
+`scripts/validate_site.py` · `tests/check_site.py` · `node dashboard/scripts/check.mjs` · `decision-desk/scripts/check.py` · `shadow-board/scripts/check.py` · `tests/test_decision_lab.py` · `tests/test_injury_capture.py` · `tests/test_readiness.py` · `decision-lab/scripts/audit.py` · `tests/test_verification_lab.py` · `verification-lab/scripts/build.py` · `tests/test_origination.py` · `origination/scripts/verify.py` · `tests/test_skill_lab.py` · `skill-lab/scripts/verify.py` · `tests/test_availability_ledger.py` · `availability-ledger/scripts/verify.py`. All exit 0 (excluding the audit.json revert above).
+
+Not run here: live network verification (`decision-lab/scripts/verify_live.py` without `--offline`) because outbound hosts are limited to GitHub, npm and PyPI; nfl.com was read only through the page-fetch tool.
+
+### Scope left open after this session (not claimed, not started)
+
+The 2026-11-16 brief lists about 80 items. Most already have a page somewhere in this repo (see `readiness.html`). Items that depend on data this sandbox cannot obtain or that need a prospective window remain open and are blank by policy: licensed odds and CLV, official snap counts and game-book starters, a per-club depth source verified for all 32 clubs, NWS grids, and the Week 11+ prospective leaderboard. The Pages workflow, not this session, decides what publishes.
+
+### T-R addendum — arena/37020320-nfl3, 2026-11-16 UTC (main moved underneath this branch)
+
+- **`main` was red for the origination build after commit `1309041` ("chore(data): refresh verified snapshot and rebuild site [skip ci]").** That commit replaced `data/raw/games.csv` and `data/raw/manifest.json`. The feed then held 149 played games, while `origination/data/official_standings_2026.json` (observed 2026-11-15T13:05Z) predated 24 clubs' results. `results.py` reconciliation failed (88/160). `[skip ci]` meant no workflow ran on that commit, so the failure was not reported. This explains the CI-only drift failure on PR #96: its merge ref was built against the newer `main`.
+- **Fix:** transcribed all 32 clubs from the official standings page, <https://www.nfl.com/standings/> (2026 REG, fetched 2026-11-16 ~14:46Z, two page chunks; W, L, T, PF, PA), into `origination/data/official_standings_2026.json`. Values were not inferred. The reconciliation is itself the check: the rebuilt feed matches the official page on **160/160 club × field checks**, and league PF is 6,880 on both sides.
+- **Rebuild:** `origination/scripts/build.py` and `verify.py` pass. Determinism holds. Pages: 13; table rows: 526; 0 rows missing a source.
+- **Governed outcome that moved — flagged, not overridden:** with 149 graded legs (was 137), gate G10 reports 3 of 8 strategies with an upper bound below zero: **S01, S02, S03** (was S01, S03). S02 is newly demoted to paper. Two issues for review:
+  1. The implemented G10 rule is a *generic* kill (`Brier-skill interval entirely below zero`, `origination/scripts/gates.py` lines 126–131). Each registered strategy carries its own kill text in `origination/scripts/leaderboard.py`. S02's registered kill is "BSS at Δ=1.5 is not better than Δ=0 after the multiplicity adjustment"; S01's is "interval straddles 0 after 400 graded legs". The generic rule therefore does not implement the pre-registered per-strategy kill conditions. This was already true on `main` (S01, S03). It is recorded as an irregularity, and no gate was edited in this session.
+  2. Demotion is labelled on the leaderboard; scores are retained, as the gate text says.
+- **Board lesson:** a `[skip ci]` data refresh that changes origination inputs must also rebuild origination. Otherwise the drift alarm (now in `pages.yml`) fails the next PR, and the scheduled validate run fails on `main`.
+
+### T-R second addendum — drift-alarm root cause, arena/37020320-nfl3, 2026-11-16 UTC
+
+- With the standings refreshed, the origination build passed locally and in a fresh clone, but the new drift step still failed in CI. The check-run annotation (readable through the API, because the log archive was unavailable from the sandbox) showed the cause: **floating-point last-digit differences between platforms**, not data. Example: `ablation.json` `base_bias` 1.7178225370738218 (local) vs 1.7178225370738216 (CI); `mae_improvement` differed at the 17th significant digit.
+- Fix in `origination/scripts/common.py`: the one JSON writer rounds floats to 9 decimal places in the written form only. In-memory arithmetic is unchanged. Rebuild: pass; second build byte-identical; verify: pass; gate outcomes unchanged (S01, S02, S03 demoted under G10, as above). The regenerated files are committed.
+- The drift step now also prints an input-hash notice (`manifest`, `official_snapshot`, `games`) and a flattened diff in the error annotation, so the next CI difference is visible without a log archive.
+
+### T-R third addendum — the recurring drift was the daily refresh, arena/37020320-nfl3, 2026-11-16 UTC
+
+- **Root cause found in `.github/workflows/data-and-site.yml`:** the daily `data-refresh` job (cron 10:23 UTC) fetches the community release, commits `data/`, `lab/results` and `research-desk/` with `[skip ci]`, and never rebuilds `origination/`. Origination reads `data/raw/games.csv`, `data/raw/manifest.json` and `decision-lab/data/official_snapshot.json`. So every refresh leaves origination stale, and the drift alarm fails every later pull request and the scheduled validate run. Observed on `main` at `1309041` and again at `fe89cf9`.
+- **Fix (claimed here for this file):** the refresh job now runs `python3 origination/scripts/build.py` before its commit step, and the commit stages `origination/` alongside the existing paths. The regenerated artifacts land in the same commit as the new data.
+- **Standings cross-check:** PR #98 (`arena/d37d5907-nfl3`) independently re-transcribed the same nfl.com standings page. Its 32 rows were compared with this branch's transcription: identical on all 32 clubs and all five fields, so the official values are confirmed twice.
+- **Conflict handling log:** this branch was rebased three times while `main` moved (`1309041`, `6a4b258`/PR #98, `fe89cf9`). Conflicts were confined to `COORDINATION.md` (resolved by keeping `main`'s text and re-appending this branch's append-only sections) and to origination artifacts (resolved by taking `main`'s version and regenerating). After the last rebase the branch was force-pushed with `--force-with-lease` to its own PR branch; no other session's commit was rewritten.
