@@ -1,7 +1,7 @@
 {
   "schema": "nfl3-injury-deltas/v1",
   "source_url": "https://www.nfl.com/injuries/",
-  "reads_recorded": 6,
+  "reads_recorded": 7,
   "distinct_captures": [
     {
       "id": "baseline",
@@ -79,6 +79,17 @@
       "raw_file": "captures/nfl-injuries/raw/466701c7d3a1e8f0be3c5f876b373d5ded210327186249d2abcfc9401aa5061d.html.gz",
       "rows": 347,
       "no_injury_sections": 0
+    },
+    {
+      "id": "e46930569bd7",
+      "captured_at_utc": "2026-11-18T07:29:55Z",
+      "sha256": "e46930569bd77b95c141f58ec5800d06eea7da86d7d924d07a41d5f74bdf6f84",
+      "week": 11,
+      "season": 2026,
+      "parsed_only": false,
+      "raw_file": "captures/nfl-injuries/raw/e46930569bd77b95c141f58ec5800d06eea7da86d7d924d07a41d5f74bdf6f84.html.gz",
+      "rows": 26,
+      "no_injury_sections": 24
     }
   ],
   "deltas": [
@@ -6521,6 +6532,12 @@
       "before": "9 rows",
       "after": "13 rows",
       "player_url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "kind": "new-week",
+      "from_utc": "2026-11-17T20:56:30Z",
+      "to_utc": "2026-11-18T07:29:55Z",
+      "note": "report week changed; no delta computed"
     }
   ]
 }
