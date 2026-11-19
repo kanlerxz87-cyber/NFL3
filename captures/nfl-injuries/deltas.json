@@ -1,7 +1,7 @@
 {
   "schema": "nfl3-injury-deltas/v1",
   "source_url": "https://www.nfl.com/injuries/",
-  "reads_recorded": 9,
+  "reads_recorded": 10,
   "distinct_captures": [
     {
       "id": "baseline",
@@ -110,6 +110,17 @@
       "season": 2026,
       "parsed_only": false,
       "raw_file": "captures/nfl-injuries/raw/bf3cead2c7080b8c2f4f4f64abae91b25be97062fd2f0d1dca5a2ecf0adb36ec.html.gz",
+      "rows": 253,
+      "no_injury_sections": 2
+    },
+    {
+      "id": "e1c2d3540f01",
+      "captured_at_utc": "2026-11-19T20:38:30Z",
+      "sha256": "e1c2d3540f012ef548800ebd1c65d5c2602d17c4db9c7252a295ff4d3e121db8",
+      "week": 11,
+      "season": 2026,
+      "parsed_only": false,
+      "raw_file": "captures/nfl-injuries/raw/e1c2d3540f012ef548800ebd1c65d5c2602d17c4db9c7252a295ff4d3e121db8.html.gz",
       "rows": 253,
       "no_injury_sections": 2
     }
@@ -10536,6 +10547,34 @@
       "before": "No Injuries Reported",
       "after": "10 rows",
       "player_url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "from_utc": "2026-11-19T07:27:54Z",
+      "to_utc": "2026-11-19T20:38:30Z",
+      "from_id": "bf3cead2c708",
+      "to_id": "e1c2d3540f01",
+      "kind": "changed",
+      "team": "Colts",
+      "player": "Charlie Heck",
+      "position": "T",
+      "field": "Injury",
+      "before": "Not injury related - personal matter",
+      "after": "",
+      "player_url": "https://www.nfl.com/players/charlie-heck/"
+    },
+    {
+      "from_utc": "2026-11-19T07:27:54Z",
+      "to_utc": "2026-11-19T20:38:30Z",
+      "from_id": "bf3cead2c708",
+      "to_id": "e1c2d3540f01",
+      "kind": "changed",
+      "team": "Colts",
+      "player": "Charlie Heck",
+      "position": "T",
+      "field": "Game status",
+      "before": "Questionable",
+      "after": "",
+      "player_url": "https://www.nfl.com/players/charlie-heck/"
     }
   ]
 }
