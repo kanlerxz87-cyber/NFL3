@@ -1,7 +1,7 @@
 {
   "schema": "nfl3-injury-deltas/v1",
   "source_url": "https://www.nfl.com/injuries/",
-  "reads_recorded": 11,
+  "reads_recorded": 12,
   "distinct_captures": [
     {
       "id": "baseline",
@@ -133,6 +133,17 @@
       "parsed_only": false,
       "raw_file": "captures/nfl-injuries/raw/4caeb720e72a184efda096f02ad45d18c5351e5164ef7647991aef415aa5dbe5.html.gz",
       "rows": 291,
+      "no_injury_sections": 0
+    },
+    {
+      "id": "01f3365bedd2",
+      "captured_at_utc": "2026-11-20T20:22:02Z",
+      "sha256": "01f3365bedd2407337f88231a7fba6a59601b742d285a13e9c84e83f45029161",
+      "week": 11,
+      "season": 2026,
+      "parsed_only": false,
+      "raw_file": "captures/nfl-injuries/raw/01f3365bedd2407337f88231a7fba6a59601b742d285a13e9c84e83f45029161.html.gz",
+      "rows": 293,
       "no_injury_sections": 0
     }
   ],
@@ -12097,6 +12108,104 @@
       "field": "Report section",
       "before": "10 rows",
       "after": "11 rows",
+      "player_url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "from_utc": "2026-11-20T07:17:23Z",
+      "to_utc": "2026-11-20T20:22:02Z",
+      "from_id": "4caeb720e72a",
+      "to_id": "01f3365bedd2",
+      "kind": "added",
+      "team": "Chargers",
+      "player": "Bud Dupree",
+      "position": "LB",
+      "field": "Listed on report",
+      "before": "",
+      "after": "no injury listed · Did Not Participate In Practice · no game status",
+      "player_url": "https://www.nfl.com/players/bud-dupree/"
+    },
+    {
+      "from_utc": "2026-11-20T07:17:23Z",
+      "to_utc": "2026-11-20T20:22:02Z",
+      "from_id": "4caeb720e72a",
+      "to_id": "01f3365bedd2",
+      "kind": "added",
+      "team": "Chargers",
+      "player": "Dalvin Tomlinson",
+      "position": "DT",
+      "field": "Listed on report",
+      "before": "",
+      "after": "no injury listed · Did Not Participate In Practice · no game status",
+      "player_url": "https://www.nfl.com/players/dalvin-tomlinson/"
+    },
+    {
+      "from_utc": "2026-11-20T07:17:23Z",
+      "to_utc": "2026-11-20T20:22:02Z",
+      "from_id": "4caeb720e72a",
+      "to_id": "01f3365bedd2",
+      "kind": "changed",
+      "team": "Chargers",
+      "player": "Isas Waxter",
+      "position": "CB",
+      "field": "Practice status",
+      "before": "Did Not Participate In Practice",
+      "after": "Limited Participation in Practice",
+      "player_url": "https://www.nfl.com/players/isas-waxter/"
+    },
+    {
+      "from_utc": "2026-11-20T07:17:23Z",
+      "to_utc": "2026-11-20T20:22:02Z",
+      "from_id": "4caeb720e72a",
+      "to_id": "01f3365bedd2",
+      "kind": "changed",
+      "team": "Chargers",
+      "player": "Kendall Williamson",
+      "position": "S",
+      "field": "Practice status",
+      "before": "Limited Participation in Practice",
+      "after": "Did Not Participate In Practice",
+      "player_url": "https://www.nfl.com/players/kendall-williamson/"
+    },
+    {
+      "from_utc": "2026-11-20T07:17:23Z",
+      "to_utc": "2026-11-20T20:22:02Z",
+      "from_id": "4caeb720e72a",
+      "to_id": "01f3365bedd2",
+      "kind": "changed",
+      "team": "Chargers",
+      "player": "Khalil Mack",
+      "position": "LB",
+      "field": "Practice status",
+      "before": "Did Not Participate In Practice",
+      "after": "Full Participation in Practice",
+      "player_url": "https://www.nfl.com/players/khalil-mack/"
+    },
+    {
+      "from_utc": "2026-11-20T07:17:23Z",
+      "to_utc": "2026-11-20T20:22:02Z",
+      "from_id": "4caeb720e72a",
+      "to_id": "01f3365bedd2",
+      "kind": "changed",
+      "team": "Chargers",
+      "player": "Trey Pipkins",
+      "position": "T",
+      "field": "Practice status",
+      "before": "Limited Participation in Practice",
+      "after": "Full Participation in Practice",
+      "player_url": "https://www.nfl.com/players/trey-pipkins/"
+    },
+    {
+      "from_utc": "2026-11-20T07:17:23Z",
+      "to_utc": "2026-11-20T20:22:02Z",
+      "from_id": "4caeb720e72a",
+      "to_id": "01f3365bedd2",
+      "kind": "section",
+      "team": "Chargers",
+      "player": "(report section)",
+      "position": "",
+      "field": "Report section",
+      "before": "11 rows",
+      "after": "13 rows",
       "player_url": "https://www.nfl.com/injuries/"
     }
   ]
